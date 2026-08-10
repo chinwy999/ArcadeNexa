@@ -7,8 +7,8 @@ import InstantPlayModal from '@/components/InstantPlayModal'
 import AdBanner from '@/components/AdBanner'
 import { games, type Game } from '@/lib/games'
 
-const stats = [
-  { label: 'Games', value: '10+' },
+const stats = (n: number) => [
+  { label: 'Games', value: `${n}+` },
   { label: 'Providers', value: '1' },
   { label: 'Play Mode', value: '100%' },
 ]
@@ -44,6 +44,7 @@ export default function HomePage() {
   const [selectedGame, setSelectedGame] = useState<Game | null>(null)
   const [trailerOpen, setTrailerOpen] = useState(false)
   const featured = games.slice(0, 8)
+  const heroStats = stats(games.length)
 
   return (
     <div className="animate-fade-in">
@@ -63,7 +64,7 @@ export default function HomePage() {
             <span className="text-white">ARCADE</span><span className="gradient-text">NEXA</span>
           </h1>
           <p className="text-xl sm:text-2xl text-text-secondary font-light tracking-wide mb-4">Professional HTML5 Gaming Platform</p>
-          <p className="text-sm text-text-secondary/70 max-w-2xl mx-auto mb-10">10 GamePix games — instant browser play with official game artwork and responsive fullscreen support.</p>
+          <p className="text-sm text-text-secondary/70 max-w-2xl mx-auto mb-10">{games.length} GamePix games — instant browser play with official game artwork and responsive fullscreen support.</p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
             <Link href="/games" className="group flex items-center gap-2 bg-electric-violet hover:bg-violet-600 text-white px-8 py-4 rounded-xl text-lg font-bold transition-all duration-300 neon-glow hover:scale-105">
               <Play className="w-5 h-5 fill-white" /> PLAY NOW
@@ -73,7 +74,7 @@ export default function HomePage() {
             </button>
           </div>
           <div className="grid grid-cols-3 gap-8 max-w-2xl mx-auto">
-            {stats.map((s, i) => (
+            {heroStats.map((s, i) => (
               <Counter key={s.label} value={s.value} label={s.label} delay={i * 200} />
             ))}
           </div>

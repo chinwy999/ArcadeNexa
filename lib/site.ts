@@ -1,6 +1,6 @@
 /** ArcadeNexa site and GamePix integration helpers. */
 export function getSiteUrl(): string {
-  return (process.env.NEXT_PUBLIC_SITE_URL || 'https://bespoke-daffodil-e35130.netlify.app').replace(/\/$/, '')
+  return (process.env.NEXT_PUBLIC_SITE_URL || 'https://arcadenexa.netlify.app').replace(/\/$/, '')
 }
 export function getGameUrl(slug: string): string { return `${getSiteUrl()}/games/${slug}` }
 export const GAMEPIX_PROPERTY_ID = process.env.NEXT_PUBLIC_GAMEPIX_PROPERTY_ID || 'gpx-property-DXXR1'
