@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
-import Image from 'next/image'
+import SafeImage from '@/components/SafeImage'
 import { ArrowLeft, ExternalLink, Gamepad2 } from 'lucide-react'
 import { getGameBySlug, getRelatedGames, games } from '@/lib/games'
 import InstantPlaySection from './InstantPlaySection'
@@ -50,7 +50,7 @@ export default function GameDetailPage({ params }: Props) {
         {/* Left Info */}
         <div className="lg:col-span-1">
           <div className="h-64 rounded-2xl relative overflow-hidden border border-white/10 group">
-            <Image src={game.thumbnail} alt={game.name} fill className="object-cover group-hover:scale-105 transition-transform duration-500" sizes="(max-width: 768px) 100vw, 33vw" />
+            <SafeImage src={game.thumbnail} alt={game.name} gradient={game.gradient} initials={game.initials} className="object-cover group-hover:scale-105 transition-transform duration-500" sizes="(max-width: 768px) 100vw, 33vw" />
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
             <span className="absolute top-4 left-4 bg-blue-500/20 backdrop-blur text-blue-300 text-xs font-bold px-2.5 py-1 rounded-full border border-blue-500/30">GamePix</span>
             <span className="absolute bottom-4 right-4 bg-space-black/70 backdrop-blur px-3 py-1 rounded-full text-xs text-white border border-white/10">{game.width}x{game.height} • {game.aspectRatio}</span>
@@ -101,7 +101,7 @@ export default function GameDetailPage({ params }: Props) {
                 {related.map(g => (
                   <Link key={g.slug} href={`/games/${g.slug}`} className="group glass rounded-2xl overflow-hidden border border-white/5 hover:border-electric-violet/30 transition p-0 block">
                     <div className="h-36 relative overflow-hidden">
-                      <Image src={g.thumbnail} alt={g.name} fill className="object-cover group-hover:scale-105 transition-transform" sizes="(max-width: 768px) 100vw, 50vw" />
+                      <SafeImage src={g.thumbnail} alt={g.name} gradient={g.gradient} initials={g.initials} className="object-cover group-hover:scale-105 transition-transform" sizes="(max-width: 768px) 100vw, 50vw" />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
                       <span className="absolute bottom-2 left-3 text-white font-bold text-sm">{g.name}</span>
                       <span className="absolute top-2 right-2 text-[9px] bg-blue-500/20 text-blue-300 px-2 py-1 rounded-full border border-blue-500/20">GPX</span>

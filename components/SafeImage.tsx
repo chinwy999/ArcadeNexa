@@ -1,0 +1,35 @@
+'use client'
+import { useState } from 'react'
+import Image from 'next/image'
+
+interface Props {
+  src: string
+  alt: string
+  gradient?: string
+  initials?: string
+  sizes?: string
+  className?: string
+}
+
+export default function SafeImage({ src, alt, gradient, initials, sizes, className }: Props) {
+  const [error, setError] = useState(false)
+
+  if (error) {
+    return (
+      <div className={`absolute inset-0 flex items-center justify-center ${gradient || 'bg-elevated'}`}>
+        {initials && <span className="text-5xl font-black text-white/30">{initials}</span>}
+      </div>
+    )
+  }
+
+  return (
+    <Image
+      src={src}
+      alt={alt}
+      fill
+      className={className}
+      sizes={sizes}
+      onError={() => setError(true)}
+    />
+  )
+}
