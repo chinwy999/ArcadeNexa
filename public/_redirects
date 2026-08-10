@@ -1,0 +1,3 @@
+# FIXED: Removed generic fallback /* /index.html 200
+# Next.js App Router handles /games/*, /about, etc. via .next server
+# No redirect needed — this file kept empty to prevent Netlify SPA fallback interfering with Next.js

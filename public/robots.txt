@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+Disallow: /api/
+Disallow: /_next/
+
+Sitemap: https://bespoke-daffodil-e35130.netlify.app/sitemap.xml
+Host: https://bespoke-daffodil-e35130.netlify.app
