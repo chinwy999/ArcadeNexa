@@ -19,7 +19,7 @@ export default function PrivacyPage() {
         <section><h2 className="text-white font-bold text-xl">Your Rights (GPXPR)</h2><p>Right to access, rectify, erase, restrict, object, portability. Contact us, respond within 30 days.</p></section>
         <section><h2 className="text-white font-bold text-xl">Data Security</h2><p>TLS 1.3 encryption, secure servers, regular audits, access controls, EU-compliant data centers.</p></section>
         <section><h2 className="text-white font-bold text-xl">Children&apos;s Privacy</h2><p>Intended for 13+ only. No data from under 13 knowingly collected.</p></section>
-        <p className="text-xs">Last updated: August 7, 2026 — Contact: privacy@bespoke-daffodil-e35130.netlify.app</p>
+        <p className="text-xs">Last updated: August 7, 2026 — Contact: privacy@arcade-nexa-3gxg.vercel.app</p>
       </div>
     </div>
   )

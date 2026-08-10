@@ -20,7 +20,7 @@ export default function TermsPage() {
         <section><h2 className="text-white font-bold text-xl">Intellectual Property</h2><p>All content, logos, designs property of ArcadeNexa or licensed. User content remains yours but grants display license.</p></section>
         <section><h2 className="text-white font-bold text-xl">Termination</h2><p>May suspend/terminate for violations, fraud, inactivity. You may terminate anytime via support.</p></section>
         <section><h2 className="text-white font-bold text-xl">Governing Law</h2><p>EU laws, binding arbitration in Luxembourg unless prohibited.</p></section>
-        <p className="text-xs">Last updated: August 7, 2026 — legal@bespoke-daffodil-e35130.netlify.app</p>
+        <p className="text-xs">Last updated: August 7, 2026 — legal@arcade-nexa-3gxg.vercel.app</p>
       </div>
     </div>
   )

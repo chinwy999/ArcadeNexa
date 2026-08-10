@@ -2,7 +2,7 @@ import type { MetadataRoute } from 'next'
 import { games } from '@/lib/games'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const base = 'https://bespoke-daffodil-e35130.netlify.app'
+  const base = 'https://arcade-nexa-3gxg.vercel.app'
   const now = new Date()
 
   const staticPages = [

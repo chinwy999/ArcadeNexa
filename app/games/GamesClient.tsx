@@ -168,7 +168,7 @@ export default function GamesClient() {
           "item": {
             "@type":"VideoGame",
             "name": g.name,
-            "url": `https://bespoke-daffodil-e35130.netlify.app/games/${g.slug}`,
+            "url": `https://arcade-nexa-3gxg.vercel.app/games/${g.slug}`,
             "image": g.thumbnail,
             "genre": g.genre,
             "gamePlatform": g.platform,

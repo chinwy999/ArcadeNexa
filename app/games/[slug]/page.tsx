@@ -17,7 +17,7 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const game = getGameBySlug(params.slug)
   if (!game) return { title: 'Game Not Found' }
-  const canonicalUrl = `https://bespoke-daffodil-e35130.netlify.app/games/${game.slug}`
+  const canonicalUrl = `https://arcade-nexa-3gxg.vercel.app/games/${game.slug}`
   return {
     title: `${game.name} - Play Instantly`,
     description: game.description,
@@ -38,7 +38,7 @@ export default function GameDetailPage({ params }: Props) {
   if (!game) return notFound()
 
   const related = getRelatedGames(game.slug, game.genreFilter, 4)
-  const canonical = `https://bespoke-daffodil-e35130.netlify.app/games/${game.slug}`
+  const canonical = `https://arcade-nexa-3gxg.vercel.app/games/${game.slug}`
 
   return (
     <div className="animate-fade-in py-12 px-4 sm:px-6 max-w-7xl mx-auto">
@@ -137,8 +137,8 @@ export default function GameDetailPage({ params }: Props) {
         "@context":"https://schema.org",
         "@type":"BreadcrumbList",
         "itemListElement": [
-          {"@type":"ListItem","position":1,"name":"Home","item":"https://bespoke-daffodil-e35130.netlify.app/"},
-          {"@type":"ListItem","position":2,"name":"Games","item":"https://bespoke-daffodil-e35130.netlify.app/games"},
+          {"@type":"ListItem","position":1,"name":"Home","item":"https://arcade-nexa-3gxg.vercel.app/"},
+          {"@type":"ListItem","position":2,"name":"Games","item":"https://arcade-nexa-3gxg.vercel.app/games"},
           {"@type":"ListItem","position":3,"name":game.name,"item":canonical}
         ]
       })}} />

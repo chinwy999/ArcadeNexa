@@ -14,7 +14,7 @@ const faqs = [
   { q: 'How do I reset my password?', a: "Go to Login, click Forgot password?, enter email, receive link (expires 24h)." },
   { q: 'How are leaderboards calculated?', a: "Based on tournament performance, match wins, consistency, peak performance. Higher-tier events give more points." },
   { q: 'How do I report a bug?', a: "Contact page, select Bug Report, include details, steps, screenshots, browser info." },
-  { q: 'How do I contact support?', a: "Contact form, support@bespoke-daffodil-e35130.netlify.app, or Discord. Response within 24h." },
+  { q: 'How do I contact support?', a: "Contact form, support@arcade-nexa-3gxg.vercel.app, or Discord. Response within 24h." },
 ]
 
 export default function FAQPage() {

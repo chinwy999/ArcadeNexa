@@ -46,9 +46,9 @@ export default function ContactClient() {
         <div className="space-y-6">
           <div className="glass p-6 rounded-xl border border-white/5">
             <h3 className="text-white font-bold mb-2">Email Us</h3>
-            <p className="text-text-secondary text-sm">support@bespoke-daffodil-e35130.netlify.app</p>
-            <p className="text-text-secondary text-sm">privacy@bespoke-daffodil-e35130.netlify.app</p>
-            <p className="text-text-secondary text-sm">legal@bespoke-daffodil-e35130.netlify.app</p>
+            <p className="text-text-secondary text-sm">support@arcade-nexa-3gxg.vercel.app</p>
+            <p className="text-text-secondary text-sm">privacy@arcade-nexa-3gxg.vercel.app</p>
+            <p className="text-text-secondary text-sm">legal@arcade-nexa-3gxg.vercel.app</p>
           </div>
           <div className="glass p-6 rounded-xl border border-white/5">
             <h3 className="text-white font-bold mb-2">Join Discord</h3>

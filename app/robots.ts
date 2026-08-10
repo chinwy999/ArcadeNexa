@@ -9,7 +9,7 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ['/api/', '/_next/static/', '/private/'],
       },
     ],
-    sitemap: 'https://bespoke-daffodil-e35130.netlify.app/sitemap.xml',
-    host: 'https://bespoke-daffodil-e35130.netlify.app',
+    sitemap: 'https://arcade-nexa-3gxg.vercel.app/sitemap.xml',
+    host: 'https://arcade-nexa-3gxg.vercel.app',
   }
 }
