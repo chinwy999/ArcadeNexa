@@ -1,34 +1,22 @@
 'use client'
 import { useState } from 'react'
 import Link from 'next/link'
-import { usePathname, useRouter } from 'next/navigation'
-import { Search, LogIn, Menu, X, Sword } from 'lucide-react'
+import { usePathname } from 'next/navigation'
+import { LogIn, Menu, X, Sword } from 'lucide-react'
 
 const navLinks = [
   { href: '/games', label: 'Games' },
   { href: '/tournaments', label: 'Tournaments' },
   { href: '/leaderboard', label: 'Leaderboard' },
   { href: '/news', label: 'News' },
+  { href: '/categories', label: 'Categories' },
+  { href: '/search', label: 'Search' },
 ]
 
 export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false)
-  const [searchOpen, setSearchOpen] = useState(false)
-  const [searchQuery, setSearchQuery] = useState('')
+  const [menuOpen, setMenuOpen] = useState(false)
   const pathname = usePathname()
-  const router = useRouter()
-
-  const handleSearch = (e: React.FormEvent) => {
-    e.preventDefault()
-    if (searchQuery.trim()) {
-      router.push(`/search?q=${encodeURIComponent(searchQuery.trim())}`)
-    } else {
-      router.push('/search')
-    }
-    setSearchOpen(false)
-    setSearchQuery('')
-    setMobileOpen(false)
-  }
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 h-16 glass border-b border-white/5">
@@ -43,7 +31,7 @@ export default function Header() {
         </Link>
 
         <div className="hidden md:flex items-center gap-8">
-          {navLinks.map(link => (
+          {navLinks.slice(0, 4).map(link => (
             <Link
               key={link.href}
               href={link.href}
@@ -57,23 +45,17 @@ export default function Header() {
 
         <div className="hidden md:flex items-center gap-3">
           <div className="relative">
-            {searchOpen ? (
-              <form onSubmit={handleSearch} className="flex items-center">
-                <input
-                  autoFocus
-                  value={searchQuery}
-                  onChange={e => setSearchQuery(e.target.value)}
-                  placeholder="Search games..."
-                  className="bg-elevated border border-white/10 rounded-lg px-3 py-1.5 text-sm text-white w-56 focus:ring-2 focus:ring-electric-violet outline-none"
-                />
-                <button type="button" onClick={() => setSearchOpen(false)} className="ml-2 p-1 text-text-secondary hover:text-white" aria-label="Close search">
-                  <X className="w-4 h-4" />
-                </button>
-              </form>
-            ) : (
-              <button onClick={() => setSearchOpen(true)} className="p-2 text-text-secondary hover:text-white transition-colors" aria-label="Open search">
-                <Search className="w-5 h-5" />
-              </button>
+            <button onClick={() => setMenuOpen(!menuOpen)} className="p-2 text-text-secondary hover:text-white transition-colors" aria-label="Open menu" aria-expanded={menuOpen}>
+              {menuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            </button>
+            {menuOpen && (
+              <div className="absolute right-0 top-full mt-2 w-56 bg-space-black border border-white/10 rounded-xl shadow-xl overflow-hidden">
+                {navLinks.map(link => (
+                  <Link key={link.href} href={link.href} onClick={() => setMenuOpen(false)} className="block px-4 py-3 text-sm text-text-secondary hover:text-white hover:bg-white/5 transition-colors">
+                    {link.label}
+                  </Link>
+                ))}
+              </div>
             )}
           </div>
 
@@ -88,25 +70,14 @@ export default function Header() {
       </div>
 
       {mobileOpen && (
-        <div className="fixed inset-0 top-16 bg-space-black/95 backdrop-blur-xl z-40 p-6 md:hidden flex flex-col gap-6 animate-fade-in overflow-y-auto">
-          <form onSubmit={handleSearch} className="flex gap-2">
-            <input
-              value={searchQuery}
-              onChange={e => setSearchQuery(e.target.value)}
-              placeholder="Search games..."
-              className="flex-1 bg-elevated border border-white/10 rounded-xl px-4 py-3 text-white focus:ring-2 focus:ring-electric-violet outline-none"
-            />
-            <button type="submit" className="bg-electric-violet text-white px-4 py-3 rounded-xl"><Search className="w-5 h-5" /></button>
-          </form>
+        <div className="fixed inset-0 top-16 bg-space-black backdrop-blur-xl z-40 p-6 md:hidden flex flex-col gap-6 animate-fade-in overflow-y-auto">
           <div className="flex flex-col gap-4">
             {navLinks.map(link => (
               <Link key={link.href} href={link.href} onClick={() => setMobileOpen(false)} className={`text-lg font-bold uppercase tracking-wider ${pathname === link.href ? 'text-electric-violet' : 'text-white'}`}>
                 {link.label}
               </Link>
             ))}
-            <Link href="/categories" onClick={() => setMobileOpen(false)} className="text-lg font-bold uppercase tracking-wider text-white">Categories</Link>
             <Link href="/about" onClick={() => setMobileOpen(false)} className="text-lg font-bold uppercase tracking-wider text-white">About</Link>
-            <Link href="/search" onClick={() => setMobileOpen(false)} className="text-lg font-bold uppercase tracking-wider text-white">Search</Link>
           </div>
           <div className="pt-6 border-t border-white/10 flex flex-col gap-3">
             <Link href="/register" onClick={() => setMobileOpen(false)} className="flex items-center justify-center gap-2 bg-electric-violet text-white px-6 py-3 rounded-xl font-bold">
