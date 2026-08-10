@@ -42,7 +42,6 @@ function Counter({ value, label, delay = 0 }: { value: string, label: string, de
 
 export default function HomePage() {
   const [selectedGame, setSelectedGame] = useState<Game | null>(null)
-  const [trailerOpen, setTrailerOpen] = useState(false)
   const featured = games.slice(0, 8)
   const heroStats = stats(games.length)
 
@@ -69,9 +68,6 @@ export default function HomePage() {
             <Link href="/games" className="group flex items-center gap-2 bg-electric-violet hover:bg-violet-600 text-white px-8 py-4 rounded-xl text-lg font-bold transition-all duration-300 neon-glow hover:scale-105">
               <Play className="w-5 h-5 fill-white" /> PLAY NOW
             </Link>
-            <button onClick={() => setTrailerOpen(true)} className="group flex items-center gap-2 border-2 border-neon-green text-neon-green hover:bg-neon-green/10 px-8 py-4 rounded-xl text-lg font-bold transition-all duration-300">
-              <Play className="w-5 h-5 group-hover:scale-110 transition-transform" /> WATCH TRAILER
-            </button>
           </div>
           <div className="grid grid-cols-3 gap-8 max-w-2xl mx-auto">
             {heroStats.map((s, i) => (
@@ -126,22 +122,3 @@ export default function HomePage() {
         />
       )}
 
-      {trailerOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md" role="dialog" aria-modal="true">
-          <div className="relative w-full max-w-3xl glass rounded-2xl overflow-hidden border border-white/10">
-            <div className="flex items-center justify-between p-4 border-b border-white/10">
-              <h3 className="text-white font-bold">ArcadeNexa Official</h3>
-              <button onClick={() => setTrailerOpen(false)} className="text-text-secondary hover:text-white p-2" aria-label="Close trailer">✕</button>
-            </div>
-            <div className="aspect-video bg-black">
-              <iframe width="100%" height="100%" src="https://www.youtube.com/embed/e_E9W2vsRbQ?autoplay=0" title="ArcadeNexa Trailer" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen className="w-full h-full" />
-            </div>
-            <div className="p-4 text-sm text-text-secondary">
-              ArcadeNexa - Professional HTML5 gaming with 10 real GamePix titles. All games play instantly in same page.
-            </div>
-          </div>
-        </div>
-      )}
-    </div>
-  )
-}
