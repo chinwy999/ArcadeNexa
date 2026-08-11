@@ -1,10 +1,13 @@
-import { getAllGames } from '@/lib/gamesStore'
+import { getGames } from '@/lib/games'
 import GameCard from '@/components/GameCard'
 
 export const dynamic = 'force-dynamic'
+export const revalidate = 3600
 
 export default async function GamesPage() {
-  const games = await getAllGames()
+  const games = await getGames()
+  
+  console.log(`[GamesPage] Total games loaded: ${games.length}`)
   
   return (
     <div className="container mx-auto px-4 py-8">
@@ -16,7 +19,7 @@ export default async function GamesPage() {
       {games.length === 0 ? (
         <div className="text-center py-20 bg-elevated rounded-lg border border-white/5">
           <p className="text-6xl mb-4">Loading...</p>
-          <p className="text-xl text-gray-400">Games are being fetched from GamePix</p>
+          <p className="text-xl text-gray-400">Fetching games from GamePix API</p>
         </div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">

@@ -1,11 +1,12 @@
-import { getAllGames } from '@/lib/gamesStore'
+import { getGames } from '@/lib/games'
 import GameCard from '@/components/GameCard'
 import Link from 'next/link'
 
 export const dynamic = 'force-dynamic'
+export const revalidate = 3600
 
 export default async function HomePage() {
-  const games = await getAllGames()
+  const games = await getGames()
   const featuredGames = games.slice(0, 8)
   
   return (
@@ -18,11 +19,9 @@ export default async function HomePage() {
           <p className="text-xl text-gray-400 mb-8">
             Professional HTML5 Gaming Platform - {games.length} Games
           </p>
-          <div className="flex gap-4 justify-center flex-wrap">
-            <Link href="/games" className="bg-neon-green text-space-black px-8 py-4 rounded-lg font-bold hover:opacity-90 transition-opacity">
-              PLAY NOW
-            </Link>
-          </div>
+          <Link href="/games" className="bg-neon-green text-space-black px-8 py-4 rounded-lg font-bold hover:opacity-90 transition-opacity">
+            PLAY NOW
+          </Link>
         </div>
       </section>
       
