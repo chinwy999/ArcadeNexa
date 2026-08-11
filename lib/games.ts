@@ -180,17 +180,6 @@ export const games: Game[] = [
     providerGameId: 'commando-force-2', officialUrl: 'https://play.gamepix.com/commando-force-2/embed?sid=DXXR1'
   }),
   createGamePixGame({
-    slug: 'nitro-speed-2-underground', title: 'Nitro Speed 2 Underground', width: 800, height: 600,
-    description: 'High-speed underground racing with nitro boosts, city driving and challenging races.',
-    longDescription: 'Drive powerful sports cars through a neon city and master multiple racing modes.',
-    instructions: 'Use WASD or arrow keys to drive, Space for handbrake and R to repair.',
-    genre: ['Racing', 'Driving', '3D'], genreFilter: 'Racing', tags: ['car', 'racing', 'speed', 'nitro'],
-    rating: 8.9, platform: 'Multi', releaseYear: 2026, category: 'Racing', initials: 'NS2',
-    gradient: 'bg-gradient-to-br from-cyan-500/30 to-purple-500/30',
-    thumbnail: 'https://img.gamepix.com/7fd4526a87eb46b9844e0bedd1735772-512x384.jpg',
-    providerGameId: 'nitro-speed-2-underground', officialUrl: 'https://www.gamepix.com/play/nitro-speed-2-underground'
-  }),
-  createGamePixGame({
     slug: 'racing-in-city', title: 'Racing in City', width: 800, height: 600,
     description: 'Dodge traffic, complete challenges and build your driving career through a busy city.',
     longDescription: 'A city driving game with multiple tracks, cars, upgrades and traffic challenges.',
@@ -202,28 +191,6 @@ export const games: Game[] = [
     providerGameId: 'racing-in-city', officialUrl: 'https://www.gamepix.com/play/racing-in-city'
   }),
   createGamePixGame({
-    slug: 'boat-game-racing-simulator-3d', title: 'Boat Game: Racing Simulator 3D', width: 960, height: 600,
-    description: 'Race powerful boats and jet skis through waterways, ramps and extreme stunt courses.',
-    longDescription: 'A 3D water racing simulator featuring speed, jumps, opponents and challenging courses.',
-    instructions: 'Use W, A, S and D to control your boat and navigate the course.',
-    genre: ['Racing', 'Simulation', 'Sports'], genreFilter: 'Racing', tags: ['boat', 'water', 'racing', '3d'],
-    rating: 8.1, platform: 'Multi', releaseYear: 2025, category: 'Racing', initials: 'BRS',
-    gradient: 'bg-gradient-to-br from-sky-500/30 to-cyan-500/30',
-    thumbnail: 'https://img.gamepix.com/f4b1cfeb63274fcd9e11df58a55c72ee-512x384.jpg',
-    providerGameId: 'boat-game-racing-simulator-3d', officialUrl: 'https://www.gamepix.com/play/boat-game-racing-simulator-3d'
-  }),
-  createGamePixGame({
-    slug: 'siege-break', title: 'Siege Break', width: 800, height: 600,
-    description: 'Defend your fortress, deploy heroes and survive waves of attacking enemies.',
-    longDescription: 'A fantasy defense game where you manage heroes and stop enemies before your base falls.',
-    instructions: 'Drag heroes onto defense slots, refresh your choices and start each wave with Fight.',
-    genre: ['Strategy', 'Defense', 'Battle'], genreFilter: 'Strategy', tags: ['defense', 'tower-defense', 'heroes', 'battle'],
-    rating: 8.4, platform: 'Multi', releaseYear: 2026, category: 'Strategy', initials: 'SB',
-    gradient: 'bg-gradient-to-br from-emerald-500/30 to-amber-500/30',
-    thumbnail: 'https://img.gamepix.com/23b2fe26392247f49fb73598a5797e16-512x384.jpg',
-    providerGameId: 'siege-break', officialUrl: 'https://www.gamepix.com/play/siege-break'
-  }),
-  createGamePixGame({
     slug: 'gun-shooting-games-sniper-3d', title: 'Gun Shooting Games Sniper 3D', width: 1280, height: 720,
     description: 'Test your precision in an immersive 3D sniper challenge with missions and targets.',
     longDescription: 'A first-person sniper experience with challenging missions and precision shooting.',
@@ -233,39 +200,6 @@ export const games: Game[] = [
     gradient: 'bg-gradient-to-br from-zinc-500/30 to-blue-500/30',
     thumbnail: 'https://img.gamepix.com/c8a93a1e1e964e11b3d9803cad9e9c2c-512x384.jpg',
     providerGameId: 'gun-shooting-games-sniper-3d', officialUrl: 'https://www.gamepix.com/play/gun-shooting-games-sniper-3d'
-  }),
-  createGamePixGame({
-    slug: 'world-cup-soccer-caps', title: 'World Cup Soccer Caps', width: 1120, height: 630,
-    description: 'Flick your team, pass the ball and score goals in a fast tabletop-style soccer game.',
-    longDescription: 'A skill-based football game with strategic flick shots, passing and competitive matches.',
-    instructions: 'Tap or click a player, drag to set direction and power, then release to shoot.',
-    genre: ['Sports', 'Football', 'Skill'], genreFilter: 'Sports', tags: ['soccer', 'football', 'sport', '2players'],
-    rating: 8.3, platform: 'Multi', releaseYear: 2025, category: 'Sports', initials: 'WCS',
-    gradient: 'bg-gradient-to-br from-green-500/30 to-blue-500/30',
-    thumbnail: 'https://img.gamepix.com/040ff13a2a9f44b98009750960a523ae-512x384.jpg',
-    providerGameId: 'world-cup-soccer-caps', officialUrl: 'https://www.gamepix.com/play/world-cup-soccer-caps'
-  }),
-  createGamePixGame({
-    slug: 'meme-myth-wukong', title: 'Meme Myth: Wukong', width: 800, height: 600,
-    description: 'A colorful meme-themed puzzle adventure inspired by the legendary Wukong.',
-    longDescription: 'Solve entertaining puzzles and progress through a playful myth-inspired browser adventure.',
-    instructions: 'Use mouse or touch controls to interact with the puzzle elements.',
-    genre: ['Puzzle', 'Casual', 'Adventure'], genreFilter: 'Puzzle', tags: ['puzzle', 'meme', 'wukong', 'casual'],
-    rating: 7.9, platform: 'Multi', releaseYear: 2026, category: 'Puzzle', initials: 'MMW',
-    gradient: 'bg-gradient-to-br from-yellow-500/30 to-pink-500/30',
-    thumbnail: 'https://img.gamepix.com/e4af90c070cf499da371b44232a6aaca-512x384.jpg',
-    providerGameId: 'meme-myth-wukong', officialUrl: 'https://www.gamepix.com/play/meme-myth-wukong'
-  }),
-  createGamePixGame({
-    slug: 'hill-climb-pixel-car', title: 'Hill Climb Pixel Car', width: 900, height: 600,
-    description: 'Drive a pixel car across tricky hills, balance your vehicle and reach the finish.',
-    longDescription: 'A physics-based hill climbing game focused on acceleration, balance and careful driving.',
-    instructions: 'Use the arrow keys or WASD to accelerate, brake and balance the car.',
-    genre: ['Racing', 'Arcade', 'Driving'], genreFilter: 'Racing', tags: ['car', 'hill-climb', 'pixel', 'arcade'],
-    rating: 8.2, platform: 'Multi', releaseYear: 2026, category: 'Racing', initials: 'HPC',
-    gradient: 'bg-gradient-to-br from-lime-500/30 to-orange-500/30',
-    thumbnail: 'https://img.gamepix.com/6d493125b300434fad9be4cf8c858bbd-512x384.jpg',
-    providerGameId: 'hill-climb-pixel-car', officialUrl: 'https://www.gamepix.com/play/hill-climb-pixel-car'
   }),
 
   createGamePixGame({
@@ -783,56 +717,6 @@ export const games: Game[] = [
     thumbnail: 'https://img.gamepix.com/games/super-onion-boy/cover/super-onion-boy.png?w=500&ar=16:10', providerGameId: 'super-onion-boy', officialUrl: 'https://www.gamepix.com/play/super-onion-boy'
   }),
   createGamePixGame({
-    slug: 'fireboy-and-watergirl-forest-temple', title: 'Fireboy and Watergirl Forest Temple', width: 960, height: 600,
-    description: 'Play Fireboy and Watergirl Forest Temple, a fast adventure game with responsive controls and replayable challenges.',
-    longDescription: 'Fireboy and Watergirl Forest Temple brings a polished adventure experience with co-op gameplay, progressive challenges and quick sessions designed for desktop and mobile.',
-    instructions: 'Use the mouse, keyboard or touch controls shown in-game. Follow the on-screen prompts to master movement and actions.',
-    genre: ["Adventure", "Co-op"], genreFilter: 'Adventure', tags: ["adventure", "co-op", "gamepix", "arcade", "html5"],
-    rating: 7.8, platform: 'Multi', releaseYear: 2025, category: 'Adventure', initials: 'FAW',
-    gradient: 'bg-gradient-to-br from-cyan-500/30 to-violet-500/30',
-    thumbnail: 'https://img.gamepix.com/games/fireboy-and-watergirl-forest-temple/cover/fireboy-and-watergirl-forest-temple.png?w=500&ar=16:10', providerGameId: 'fireboy-and-watergirl-forest-temple', officialUrl: 'https://www.gamepix.com/play/fireboy-and-watergirl-forest-temple'
-  }),
-  createGamePixGame({
-    slug: 'stickman-hook', title: 'Stickman Hook', width: 800, height: 600,
-    description: 'Play Stickman Hook, a fast arcade game with responsive controls and replayable challenges.',
-    longDescription: 'Stickman Hook brings a polished arcade experience with skill gameplay, progressive challenges and quick sessions designed for desktop and mobile.',
-    instructions: 'Use the mouse, keyboard or touch controls shown in-game. Follow the on-screen prompts to master movement and actions.',
-    genre: ["Arcade", "Skill"], genreFilter: 'Arcade', tags: ["arcade", "skill", "gamepix", "arcade", "html5"],
-    rating: 7.8, platform: 'Multi', releaseYear: 2025, category: 'Arcade', initials: 'SH',
-    gradient: 'bg-gradient-to-br from-cyan-500/30 to-violet-500/30',
-    thumbnail: 'https://img.gamepix.com/games/stickman-hook/cover/stickman-hook.png?w=500&ar=16:10', providerGameId: 'stickman-hook', officialUrl: 'https://www.gamepix.com/play/stickman-hook'
-  }),
-  createGamePixGame({
-    slug: 'getaway-shootout', title: 'Getaway Shootout', width: 800, height: 600,
-    description: 'Play Getaway Shootout, a fast action game with responsive controls and replayable challenges.',
-    longDescription: 'Getaway Shootout brings a polished action experience with multiplayer gameplay, progressive challenges and quick sessions designed for desktop and mobile.',
-    instructions: 'Use the mouse, keyboard or touch controls shown in-game. Follow the on-screen prompts to master movement and actions.',
-    genre: ["Action", "Multiplayer"], genreFilter: 'Action', tags: ["action", "multiplayer", "gamepix", "arcade", "html5"],
-    rating: 7.8, platform: 'Multi', releaseYear: 2025, category: 'Action', initials: 'GS',
-    gradient: 'bg-gradient-to-br from-cyan-500/30 to-violet-500/30',
-    thumbnail: 'https://img.gamepix.com/games/getaway-shootout/cover/getaway-shootout.png?w=500&ar=16:10', providerGameId: 'getaway-shootout', officialUrl: 'https://www.gamepix.com/play/getaway-shootout'
-  }),
-  createGamePixGame({
-    slug: 'zombs-royale-io', title: 'Zombs Royale', width: 800, height: 600,
-    description: 'Play Zombs Royale, a fast action game with responsive controls and replayable challenges.',
-    longDescription: 'Zombs Royale brings a polished action experience with battle royale gameplay, progressive challenges and quick sessions designed for desktop and mobile.',
-    instructions: 'Use the mouse, keyboard or touch controls shown in-game. Follow the on-screen prompts to master movement and actions.',
-    genre: ["Action", "Battle Royale"], genreFilter: 'Action', tags: ["action", "battle royale", "gamepix", "arcade", "html5"],
-    rating: 7.8, platform: 'Multi', releaseYear: 2025, category: 'Action', initials: 'ZR',
-    gradient: 'bg-gradient-to-br from-cyan-500/30 to-violet-500/30',
-    thumbnail: 'https://img.gamepix.com/games/zombs-royale-io/cover/zombs-royale-io.png?w=500&ar=16:10', providerGameId: 'zombs-royale-io', officialUrl: 'https://www.gamepix.com/play/zombs-royale-io'
-  }),
-  createGamePixGame({
-    slug: 'gold-strike-icy-cave', title: 'Gold Strike Icy Cave', width: 800, height: 600,
-    description: 'Play Gold Strike Icy Cave, a fast puzzle game with responsive controls and replayable challenges.',
-    longDescription: 'Gold Strike Icy Cave brings a polished puzzle experience with match gameplay, progressive challenges and quick sessions designed for desktop and mobile.',
-    instructions: 'Use the mouse, keyboard or touch controls shown in-game. Follow the on-screen prompts to master movement and actions.',
-    genre: ["Puzzle", "Match"], genreFilter: 'Puzzle', tags: ["puzzle", "match", "gamepix", "arcade", "html5"],
-    rating: 7.8, platform: 'Multi', releaseYear: 2025, category: 'Puzzle', initials: 'GSI',
-    gradient: 'bg-gradient-to-br from-cyan-500/30 to-violet-500/30',
-    thumbnail: 'https://img.gamepix.com/games/gold-strike-icy-cave/cover/gold-strike-icy-cave.png?w=500&ar=16:10', providerGameId: 'gold-strike-icy-cave', officialUrl: 'https://www.gamepix.com/play/gold-strike-icy-cave'
-  }),
-  createGamePixGame({
     slug: 'cut-the-rope', title: 'Cut the Rope', width: 800, height: 600,
     description: 'Play Cut the Rope, a fast puzzle game with responsive controls and replayable challenges.',
     longDescription: 'Cut the Rope brings a polished puzzle experience with physics gameplay, progressive challenges and quick sessions designed for desktop and mobile.',
@@ -851,56 +735,6 @@ export const games: Game[] = [
     rating: 7.8, platform: 'Multi', releaseYear: 2025, category: 'Adventure', initials: 'SB8',
     gradient: 'bg-gradient-to-br from-cyan-500/30 to-violet-500/30',
     thumbnail: 'https://img.gamepix.com/games/snail-bob-8/cover/snail-bob-8.png?w=500&ar=16:10', providerGameId: 'snail-bob-8', officialUrl: 'https://www.gamepix.com/play/snail-bob-8'
-  }),
-  createGamePixGame({
-    slug: 'color-road', title: 'Color Road', width: 800, height: 600,
-    description: 'Play Color Road, a fast arcade game with responsive controls and replayable challenges.',
-    longDescription: 'Color Road brings a polished arcade experience with runner gameplay, progressive challenges and quick sessions designed for desktop and mobile.',
-    instructions: 'Use the mouse, keyboard or touch controls shown in-game. Follow the on-screen prompts to master movement and actions.',
-    genre: ["Arcade", "Runner"], genreFilter: 'Arcade', tags: ["arcade", "runner", "gamepix", "arcade", "html5"],
-    rating: 7.8, platform: 'Multi', releaseYear: 2025, category: 'Arcade', initials: 'CR',
-    gradient: 'bg-gradient-to-br from-cyan-500/30 to-violet-500/30',
-    thumbnail: 'https://img.gamepix.com/games/color-road/cover/color-road.png?w=500&ar=16:10', providerGameId: 'color-road', officialUrl: 'https://www.gamepix.com/play/color-road'
-  }),
-  createGamePixGame({
-    slug: 'highway-rider-motorbike-racing', title: 'Highway Rider', width: 800, height: 600,
-    description: 'Play Highway Rider, a fast racing game with responsive controls and replayable challenges.',
-    longDescription: 'Highway Rider brings a polished racing experience with motorcycle gameplay, progressive challenges and quick sessions designed for desktop and mobile.',
-    instructions: 'Use the mouse, keyboard or touch controls shown in-game. Follow the on-screen prompts to master movement and actions.',
-    genre: ["Racing", "Motorcycle"], genreFilter: 'Racing', tags: ["racing", "motorcycle", "gamepix", "arcade", "html5"],
-    rating: 7.8, platform: 'Multi', releaseYear: 2025, category: 'Racing', initials: 'HR',
-    gradient: 'bg-gradient-to-br from-cyan-500/30 to-violet-500/30',
-    thumbnail: 'https://img.gamepix.com/games/highway-rider-motorbike-racing/cover/highway-rider-motorbike-racing.png?w=500&ar=16:10', providerGameId: 'highway-rider-motorbike-racing', officialUrl: 'https://www.gamepix.com/play/highway-rider-motorbike-racing'
-  }),
-  createGamePixGame({
-    slug: 'drift-dudes', title: 'Drift Dudes', width: 800, height: 600,
-    description: 'Play Drift Dudes, a fast racing game with responsive controls and replayable challenges.',
-    longDescription: 'Drift Dudes brings a polished racing experience with drifting gameplay, progressive challenges and quick sessions designed for desktop and mobile.',
-    instructions: 'Use the mouse, keyboard or touch controls shown in-game. Follow the on-screen prompts to master movement and actions.',
-    genre: ["Racing", "Drifting"], genreFilter: 'Racing', tags: ["racing", "drifting", "gamepix", "arcade", "html5"],
-    rating: 7.8, platform: 'Multi', releaseYear: 2025, category: 'Racing', initials: 'DD',
-    gradient: 'bg-gradient-to-br from-cyan-500/30 to-violet-500/30',
-    thumbnail: 'https://img.gamepix.com/games/drift-dudes/cover/drift-dudes.png?w=500&ar=16:10', providerGameId: 'drift-dudes', officialUrl: 'https://www.gamepix.com/play/drift-dudes'
-  }),
-  createGamePixGame({
-    slug: 'super-bike-the-champion', title: 'Super Bike the Champion', width: 800, height: 600,
-    description: 'Play Super Bike the Champion, a fast racing game with responsive controls and replayable challenges.',
-    longDescription: 'Super Bike the Champion brings a polished racing experience with motorcycle gameplay, progressive challenges and quick sessions designed for desktop and mobile.',
-    instructions: 'Use the mouse, keyboard or touch controls shown in-game. Follow the on-screen prompts to master movement and actions.',
-    genre: ["Racing", "Motorcycle"], genreFilter: 'Racing', tags: ["racing", "motorcycle", "gamepix", "arcade", "html5"],
-    rating: 7.8, platform: 'Multi', releaseYear: 2025, category: 'Racing', initials: 'SBT',
-    gradient: 'bg-gradient-to-br from-cyan-500/30 to-violet-500/30',
-    thumbnail: 'https://img.gamepix.com/games/super-bike-the-champion/cover/super-bike-the-champion.png?w=500&ar=16:10', providerGameId: 'super-bike-the-champion', officialUrl: 'https://www.gamepix.com/play/super-bike-the-champion'
-  }),
-  createGamePixGame({
-    slug: 'super-liquid-soccer', title: 'Super Liquid Soccer', width: 800, height: 600,
-    description: 'Play Super Liquid Soccer, a fast sports game with responsive controls and replayable challenges.',
-    longDescription: 'Super Liquid Soccer brings a polished sports experience with soccer gameplay, progressive challenges and quick sessions designed for desktop and mobile.',
-    instructions: 'Use the mouse, keyboard or touch controls shown in-game. Follow the on-screen prompts to master movement and actions.',
-    genre: ["Sports", "Soccer"], genreFilter: 'Sports', tags: ["sports", "soccer", "gamepix", "arcade", "html5"],
-    rating: 7.8, platform: 'Multi', releaseYear: 2025, category: 'Sports', initials: 'SLS',
-    gradient: 'bg-gradient-to-br from-cyan-500/30 to-violet-500/30',
-    thumbnail: 'https://img.gamepix.com/games/super-liquid-soccer/cover/super-liquid-soccer.png?w=500&ar=16:10', providerGameId: 'super-liquid-soccer', officialUrl: 'https://www.gamepix.com/play/super-liquid-soccer'
   }),
   createGamePixGame({
     slug: 'football-superstars-2024', title: 'Football Superstars', width: 800, height: 600,
@@ -933,16 +767,6 @@ export const games: Game[] = [
     thumbnail: 'https://img.gamepix.com/games/soccer-free-kick/cover/soccer-free-kick.png?w=500&ar=16:10', providerGameId: 'soccer-free-kick', officialUrl: 'https://www.gamepix.com/play/soccer-free-kick'
   }),
   createGamePixGame({
-    slug: 'fireboy-and-watergirl-ice-temple', title: 'Fireboy and Watergirl Ice Temple', width: 960, height: 600,
-    description: 'Play Fireboy and Watergirl Ice Temple, a fast adventure game with responsive controls and replayable challenges.',
-    longDescription: 'Fireboy and Watergirl Ice Temple brings a polished adventure experience with co-op gameplay, progressive challenges and quick sessions designed for desktop and mobile.',
-    instructions: 'Use the mouse, keyboard or touch controls shown in-game. Follow the on-screen prompts to master movement and actions.',
-    genre: ["Adventure", "Co-op"], genreFilter: 'Adventure', tags: ["adventure", "co-op", "gamepix", "arcade", "html5"],
-    rating: 7.8, platform: 'Multi', releaseYear: 2025, category: 'Adventure', initials: 'FAW',
-    gradient: 'bg-gradient-to-br from-cyan-500/30 to-violet-500/30',
-    thumbnail: 'https://img.gamepix.com/games/fireboy-and-watergirl-ice-temple/cover/fireboy-and-watergirl-ice-temple.png?w=500&ar=16:10', providerGameId: 'fireboy-and-watergirl-ice-temple', officialUrl: 'https://www.gamepix.com/play/fireboy-and-watergirl-ice-temple'
-  }),
-  createGamePixGame({
     slug: 'money-movers-3', title: 'Money Movers 3', width: 960, height: 600,
     description: 'Play Money Movers 3, a fast adventure game with responsive controls and replayable challenges.',
     longDescription: 'Money Movers 3 brings a polished adventure experience with platformer gameplay, progressive challenges and quick sessions designed for desktop and mobile.',
@@ -951,16 +775,6 @@ export const games: Game[] = [
     rating: 7.8, platform: 'Multi', releaseYear: 2025, category: 'Adventure', initials: 'MM3',
     gradient: 'bg-gradient-to-br from-cyan-500/30 to-violet-500/30',
     thumbnail: 'https://img.gamepix.com/games/money-movers-3/cover/money-movers-3.png?w=500&ar=16:10', providerGameId: 'money-movers-3', officialUrl: 'https://www.gamepix.com/play/money-movers-3'
-  }),
-  createGamePixGame({
-    slug: 'stealth-master', title: 'Stealth Master', width: 800, height: 600,
-    description: 'Play Stealth Master, a fast action game with responsive controls and replayable challenges.',
-    longDescription: 'Stealth Master brings a polished action experience with stealth gameplay, progressive challenges and quick sessions designed for desktop and mobile.',
-    instructions: 'Use the mouse, keyboard or touch controls shown in-game. Follow the on-screen prompts to master movement and actions.',
-    genre: ["Action", "Stealth"], genreFilter: 'Action', tags: ["action", "stealth", "gamepix", "arcade", "html5"],
-    rating: 7.8, platform: 'Multi', releaseYear: 2025, category: 'Action', initials: 'SM',
-    gradient: 'bg-gradient-to-br from-cyan-500/30 to-violet-500/30',
-    thumbnail: 'https://img.gamepix.com/games/stealth-master/cover/stealth-master.png?w=500&ar=16:10', providerGameId: 'stealth-master', officialUrl: 'https://www.gamepix.com/play/stealth-master'
   }),
   createGamePixGame({
     slug: 'stickman-army-team-battle', title: 'Stickman Army Team Battle', width: 800, height: 600,
