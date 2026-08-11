@@ -7,6 +7,7 @@ const nextConfig = {
     ignoreDuringBuilds: true,
   },
   images: {
+    unoptimized: true,
     remotePatterns: [
       {
         protocol: 'https',
@@ -15,6 +16,18 @@ const nextConfig = {
       {
         protocol: 'http',
         hostname: '**',
+      },
+      {
+        protocol: 'https',
+        hostname: '*.gamepix.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'img.gamepix.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'cdn.gamepix.com',
       },
     ],
   },
