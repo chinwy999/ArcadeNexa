@@ -30,7 +30,7 @@ export default function GamesClient() {
       setLoading(true)
       try {
         const result = await fetchGamePixGames(1, 120)
-        setGames(prev => {
+        setGames(prev => { try {
           const combined = [...prev, ...result.games]
           // Deduplicate
           const seen = new Set<string>()
@@ -38,7 +38,7 @@ export default function GamesClient() {
             const key = `${g.id}|${g.slug}`
             if (seen.has(key)) return false
             seen.add(key)
-            return true
+            return true } catch (e) { console.error(e); return false }
           })
         })
         setHasMore(result.hasMore)
@@ -95,7 +95,7 @@ export default function GamesClient() {
       if (search && !g.name.toLowerCase().includes(search.toLowerCase()) && 
           !g.genre.join(' ').toLowerCase().includes(search.toLowerCase()) && 
           !g.tags.join(' ').toLowerCase().includes(search.toLowerCase())) return false
-      return true
+      return true } catch (e) { console.error(e); return false }
     })
   }, [games, genre, platform, rating, search])
 
@@ -104,14 +104,14 @@ export default function GamesClient() {
     setLoadingMore(true)
     try {
       const result = await fetchGamePixGames(currentPage, 24)
-      setGames(prev => {
+      setGames(prev => { try {
         const combined = [...prev, ...result.games]
         const seen = new Set<string>()
         return combined.filter(g => {
           const key = `${g.id}|${g.slug}`
           if (seen.has(key)) return false
           seen.add(key)
-          return true
+          return true } catch (e) { console.error(e); return false }
         })
       })
       setHasMore(result.hasMore)

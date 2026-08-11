@@ -76,3 +76,36 @@ export async function fetchGamePixGames(page = 1, limit = 24): Promise<{
     return { games: [], hasMore: false, nextPage: page }
   }
 }
+
+// Helper to ensure all required Game fields are present
+export function createSafeGame(item: any): Game {
+  const base = normalizeGamePixItem(item)
+  
+  // Fill any missing required fields with defaults
+  return {
+    id: base.id || 'unknown',
+    slug: base.slug || 'unknown',
+    title: base.title || 'Unknown Game',
+    name: base.name || base.title || 'Unknown Game',
+    initials: base.initials || 'UG',
+    gradient: base.gradient || 'from-gray-600 to-gray-800',
+    genre: base.genre.length > 0 ? base.genre : ['Other'],
+    genreFilter: base.genreFilter || 'Other',
+    rating: base.rating || 0,
+    platform: base.platform || 'Multi',
+    description: base.description || '',
+    longDescription: base.longDescription || base.description || '',
+    instructions: base.instructions || '',
+    tags: base.tags.length > 0 ? base.tags : ['game'],
+    officialUrl: base.officialUrl || '',
+    iframeUrl: base.iframeUrl || base.officialUrl || '',
+    thumbnail: base.thumbnail || '',
+    thumbnailLarge: base.thumbnailLarge || base.thumbnail || '',
+    releaseYear: base.releaseYear || new Date().getFullYear(),
+    provider: base.provider || 'gamepix',
+    providerGameId: base.providerGameId || base.id,
+    width: base.width || 800,
+    height: base.height || 600,
+    aspectRatio: base.aspectRatio || '16:9',
+  }
+}
