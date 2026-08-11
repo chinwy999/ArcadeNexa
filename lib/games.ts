@@ -94,22 +94,37 @@ function convertGame(item: GamePixItem): Game {
   }
 }
 
-export const games: Game[] = []
+let cachedGames: Game[] | null = null
+let cacheTimestamp: number = 0
+const CACHE_DURATION = 300000
+
+async function loadGames(): Promise<Game[]> {
+  const now = Date.now()
+  
+  if (cachedGames && (now - cacheTimestamp) < CACHE_DURATION) {
+    return cachedGames
+  }
+  
+  console.log('[games] Fetching from GamePix API...')
+  const items = await fetchAllGames()
+  console.log(`[games] Fetched ${items.length} games`)
+  
+  cachedGames = items.map(convertGame)
+  cacheTimestamp = now
+  return cachedGames
+}
 
 export async function getGames(): Promise<Game[]> {
-  console.log('[getGames] Fetching from GamePix API...')
-  const items = await fetchAllGames()
-  console.log(`[getGames] Fetched ${items.length} games from API`)
-  return items.map(convertGame)
+  return loadGames()
 }
 
 export async function getGameBySlug(slug: string): Promise<Game | null> {
-  const allGames = await getGames()
+  const allGames = await loadGames()
   return allGames.find(g => g.slug === slug) || null
 }
 
 export async function getAllGenreFilters(): Promise<string[]> {
-  const allGames = await getGames()
+  const allGames = await loadGames()
   const categories = new Set<string>()
   
   allGames.forEach(game => {
@@ -121,6 +136,8 @@ export async function getAllGenreFilters(): Promise<string[]> {
 }
 
 export async function getGameCount(): Promise<number> {
-  const games = await getGames()
+  const games = await loadGames()
   return games.length
 }
+
+export const games: Game[] = []

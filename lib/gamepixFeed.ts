@@ -1,7 +1,7 @@
 const API_BASE = 'https://feeds.gamepix.com/v2/json'
 const SITE_ID = 'DXXR1'
 const ITEMS_PER_PAGE = 96
-const MAX_PAGES = 4
+const MAX_PAGES = 3
 
 export interface GamePixItem {
   id: string
@@ -23,8 +23,21 @@ export interface GamePixItem {
 export async function fetchPage(page: number): Promise<GamePixItem[]> {
   try {
     const url = `${API_BASE}?sid=${SITE_ID}&pagination=${ITEMS_PER_PAGE}&page=${page}&order=quality`
-    const response = await fetch(url, { next: { revalidate: 86400 } })
-    if (!response.ok) throw new Error(`HTTP ${response.status}`)
+    const controller = new AbortController()
+    const timeout = setTimeout(() => controller.abort(), 10000)
+    
+    const response = await fetch(url, {
+      signal: controller.signal,
+      next: { revalidate: 3600 }
+    })
+    
+    clearTimeout(timeout)
+    
+    if (!response.ok) {
+      console.error(`HTTP ${response.status} on page ${page}`)
+      return []
+    }
+    
     const data = await response.json()
     return data.items || []
   } catch (error) {
@@ -40,6 +53,7 @@ export async function fetchAllGames(): Promise<GamePixItem[]> {
     const games = await fetchPage(page)
     if (games.length === 0) break
     allGames.push(...games)
+    console.log(`[fetch] Page ${page}: ${games.length} games (total: ${allGames.length})`)
   }
   
   return allGames
