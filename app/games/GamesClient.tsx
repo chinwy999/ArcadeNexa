@@ -1,11 +1,21 @@
 'use client'
 
 import { useState, useMemo, useEffect } from 'react'
-import { SlidersHorizontal, Filter, Gamepad2, Loader2 } from 'lucide-react'
+import { Filter, Gamepad2, Loader2 } from 'lucide-react'
 import GameCard from '@/components/GameCard'
 import InstantPlayModal from '@/components/InstantPlayModal'
 import { games as staticGames, type Game, getAllGenreFilters } from '@/lib/games'
 import { fetchGamePixGames } from '@/lib/gamepixFeed'
+
+function dedupeGames(list: Game[]): Game[] {
+  const seen = new Set<string>()
+  return list.filter(g => {
+    const key = `${g.id}|${g.slug}`.toLowerCase()
+    if (seen.has(key)) return false
+    seen.add(key)
+    return true
+  })
+}
 
 export default function GamesClient() {
   const [genre, setGenre] = useState('All')
@@ -14,8 +24,7 @@ export default function GamesClient() {
   const [search, setSearch] = useState('')
   const [selected, setSelected] = useState<Game | null>(null)
   const [toast, setToast] = useState<string | null>(null)
-  
-  // Pagination state
+
   const [games, setGames] = useState<Game[]>(staticGames)
   const [loading, setLoading] = useState(true)
   const [loadingMore, setLoadingMore] = useState(false)
@@ -24,35 +33,18 @@ export default function GamesClient() {
 
   const allGenres = useMemo(() => getAllGenreFilters(), [])
 
-  // Load initial games from API
   useEffect(() => {
     async function loadInitialGames() {
       setLoading(true)
-      try {
-        const result = await fetchGamePixGames(1, 120)
-        setGames(prev => { try {
-          const combined = [...prev, ...result.games]
-          // Deduplicate
-          const seen = new Set<string>()
-          return combined.filter(g => {
-            const key = `${g.id}|${g.slug}`
-            if (seen.has(key)) return false
-            seen.add(key)
-            return true } catch (e) { console.error(e); return false }
-          })
-        })
-        setHasMore(result.hasMore)
-        setCurrentPage(result.nextPage)
-      } catch (error) {
-        console.error('Failed to load games:', error)
-      } finally {
-        setLoading(false)
-      }
+      const result = await fetchGamePixGames(1, 120)
+      setGames(prev => dedupeGames([...prev, ...result.games]))
+      setHasMore(result.hasMore)
+      setCurrentPage(result.nextPage)
+      setLoading(false)
     }
     loadInitialGames()
   }, [])
 
-  // Load URL params
   useEffect(() => {
     const params = new URLSearchParams(window.location.search)
     const g = params.get('genre')
@@ -61,7 +53,6 @@ export default function GamesClient() {
     if (q) setSearch(q)
   }, [])
 
-  // Secure postMessage handling
   useEffect(() => {
     const handler = (e: MessageEvent) => {
       const trustedHosts = ['gamepix.com', 'play.gamepix.com', 'img.gamepix.com']
@@ -92,73 +83,61 @@ export default function GamesClient() {
       if (genre !== 'All' && g.genreFilter !== genre) return false
       if (platform !== 'All' && g.platform !== platform) return false
       if (rating !== 'All' && (g.rating ?? 0) < parseInt(rating, 10)) return false
-      if (search && !g.name.toLowerCase().includes(search.toLowerCase()) && 
-          !g.genre.join(' ').toLowerCase().includes(search.toLowerCase()) && 
-          !g.tags.join(' ').toLowerCase().includes(search.toLowerCase())) return false
-      return true } catch (e) { console.error(e); return false }
+      if (
+        search &&
+        !g.name.toLowerCase().includes(search.toLowerCase()) &&
+        !g.genre.join(' ').toLowerCase().includes(search.toLowerCase()) &&
+        !g.tags.join(' ').toLowerCase().includes(search.toLowerCase())
+      )
+        return false
+      return true
     })
   }, [games, genre, platform, rating, search])
 
   const loadMore = async () => {
     if (loadingMore || !hasMore) return
     setLoadingMore(true)
-    try {
-      const result = await fetchGamePixGames(currentPage, 24)
-      setGames(prev => { try {
-        const combined = [...prev, ...result.games]
-        const seen = new Set<string>()
-        return combined.filter(g => {
-          const key = `${g.id}|${g.slug}`
-          if (seen.has(key)) return false
-          seen.add(key)
-          return true } catch (e) { console.error(e); return false }
-        })
-      })
-      setHasMore(result.hasMore)
-      setCurrentPage(result.nextPage)
-    } catch (error) {
-      console.error('Failed to load more games:', error)
-    } finally {
-      setLoadingMore(false)
-    }
+    const result = await fetchGamePixGames(currentPage, 24)
+    setGames(prev => dedupeGames([...prev, ...result.games]))
+    setHasMore(result.hasMore)
+    setCurrentPage(result.nextPage)
+    setLoadingMore(false)
   }
 
   return (
     <>
       {toast && (
-        <div className="fixed top-4 right-4 z-[9999] bg-gradient-to-r from-yellow-500 to-orange-500 text-white px-6 py-3 rounded-lg shadow-lg animate-in slide-in-from-top duration-300">
-          🎮 {toast}
+        <div className="fixed top-4 right-4 z-[9999] bg-gradient-to-r from-yellow-500 to-orange-500 text-white px-6 py-3 rounded-lg shadow-lg">
+          {toast}
         </div>
       )}
 
       <div className="container mx-auto px-4 py-8">
-        {/* Header */}
         <div className="mb-8">
           <div className="flex items-center gap-3 mb-2">
             <Gamepad2 className="w-8 h-8 text-purple-500" />
             <h1 className="text-4xl font-bold">Games Arena</h1>
           </div>
           <p className="text-gray-400">
-            {games.length} professional HTML5 games powered by GamePix — instant play, no download, fullscreen support.
+            {games.length} professional HTML5 games powered by GamePix - instant play, no download, fullscreen support.
           </p>
         </div>
 
-        {/* Filters */}
         <div className="bg-gray-900/50 rounded-lg p-6 mb-8 border border-gray-800">
           <div className="flex items-center gap-2 mb-4">
             <Filter className="w-5 h-5" />
             <h2 className="text-lg font-semibold">Filters</h2>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
             <div>
               <label className="block text-sm font-medium text-gray-400 mb-2">Genre</label>
               <select
                 value={genre}
-                onChange={(e) => setGenre(e.target.value)}
-                className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-2 focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                onChange={e => setGenre(e.target.value)}
+                className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-2"
               >
-                {allGenres.map((g) => (
+                {allGenres.map(g => (
                   <option key={g} value={g}>{g}</option>
                 ))}
               </select>
@@ -168,8 +147,8 @@ export default function GamesClient() {
               <label className="block text-sm font-medium text-gray-400 mb-2">Platform</label>
               <select
                 value={platform}
-                onChange={(e) => setPlatform(e.target.value)}
-                className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-2 focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                onChange={e => setPlatform(e.target.value)}
+                className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-2"
               >
                 <option value="All">All Platforms</option>
                 <option value="PC">PC</option>
@@ -181,8 +160,8 @@ export default function GamesClient() {
               <label className="block text-sm font-medium text-gray-400 mb-2">Rating</label>
               <select
                 value={rating}
-                onChange={(e) => setRating(e.target.value)}
-                className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-2 focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                onChange={e => setRating(e.target.value)}
+                className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-2"
               >
                 <option value="All">All Ratings</option>
                 <option value="5">5 Stars</option>
@@ -196,15 +175,14 @@ export default function GamesClient() {
               <input
                 type="text"
                 value={search}
-                onChange={(e) => setSearch(e.target.value)}
+                onChange={e => setSearch(e.target.value)}
                 placeholder="Search games..."
-                className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-2 focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-2"
               />
             </div>
           </div>
         </div>
 
-        {/* Games Grid */}
         {loading ? (
           <div className="flex justify-center items-center py-20">
             <Loader2 className="w-8 h-8 animate-spin text-purple-500" />
@@ -213,7 +191,7 @@ export default function GamesClient() {
         ) : (
           <>
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 mb-8">
-              {filtered.map((game) => (
+              {filtered.map(game => (
                 <GameCard key={game.id} game={game} onClick={() => setSelected(game)} />
               ))}
             </div>
@@ -230,7 +208,7 @@ export default function GamesClient() {
                 <button
                   onClick={loadMore}
                   disabled={loadingMore}
-                  className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 disabled:opacity-50 disabled:cursor-not-allowed text-white px-8 py-3 rounded-lg font-semibold flex items-center gap-2 transition-all"
+                  className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 disabled:opacity-50 text-white px-8 py-3 rounded-lg font-semibold flex items-center gap-2"
                 >
                   {loadingMore ? (
                     <>
@@ -238,9 +216,7 @@ export default function GamesClient() {
                       Loading...
                     </>
                   ) : (
-                    <>
-                      Load More Games ({games.length} loaded)
-                    </>
+                    <>Load More Games ({games.length} loaded)</>
                   )}
                 </button>
               </div>
@@ -249,9 +225,7 @@ export default function GamesClient() {
         )}
       </div>
 
-      {selected && (
-        <InstantPlayModal game={selected} onClose={() => setSelected(null)} />
-      )}
+      {selected && <InstantPlayModal game={selected} onClose={() => setSelected(null)} />}
     </>
   )
 }
