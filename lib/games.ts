@@ -107,3 +107,20 @@ export async function getGameBySlug(slug: string): Promise<Game | null> {
   const allGames = await getGames()
   return allGames.find(g => g.slug === slug) || null
 }
+
+export async function getAllGenreFilters(): Promise<string[]> {
+  const allGames = await getGames()
+  const categories = new Set<string>()
+  
+  allGames.forEach(game => {
+    if (game.category) categories.add(game.category)
+    if (game.genreFilter) categories.add(game.genreFilter)
+  })
+  
+  return Array.from(categories).sort()
+}
+
+export async function getGameCount(): Promise<number> {
+  const games = await getGames()
+  return games.length
+}
