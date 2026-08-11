@@ -165,7 +165,7 @@ export const games: Game[] = [
     genre: ['Action', 'Shooter', 'FPS'], genreFilter: 'Action', tags: ['shooter', 'fps', '3d', 'battle'],
     rating: 8.8, platform: 'Multi', releaseYear: 2026, category: 'Action', initials: 'BSE',
     gradient: 'bg-gradient-to-br from-red-500/30 to-orange-500/30',
-    thumbnail: 'https://img.gamepix.com/941884f64e32420fb9791859d7d3fba3-512x384.jpg',
+    thumbnail: 'https://img.gamepix.com/games/battle-shot-elite/cover/battle-shot-elite.png?w=500&ar=16:10',
     providerGameId: 'battle-shot-elite', officialUrl: 'https://www.gamepix.com/play/battle-shot-elite'
   }),
   createGamePixGame({
@@ -187,7 +187,7 @@ export const games: Game[] = [
     genre: ['Racing', 'Driving', 'Cars'], genreFilter: 'Racing', tags: ['car', 'city', 'drift', 'parking'],
     rating: 8.5, platform: 'Multi', releaseYear: 2025, category: 'Racing', initials: 'RIC',
     gradient: 'bg-gradient-to-br from-blue-500/30 to-indigo-500/30',
-    thumbnail: 'https://img.gamepix.com/670fce13db0d4edbb396fa155db80f11-512x384.jpg',
+    thumbnail: 'https://img.gamepix.com/games/racing-in-city/cover/racing-in-city.png?w=500&ar=16:10',
     providerGameId: 'racing-in-city', officialUrl: 'https://www.gamepix.com/play/racing-in-city'
   }),
   createGamePixGame({
@@ -198,7 +198,7 @@ export const games: Game[] = [
     genre: ['Action', 'Shooter', 'Sniper'], genreFilter: 'Action', tags: ['sniper', 'fps', 'shooting', 'battlefield'],
     rating: 8.7, platform: 'Multi', releaseYear: 2026, category: 'Action', initials: 'S3D',
     gradient: 'bg-gradient-to-br from-zinc-500/30 to-blue-500/30',
-    thumbnail: 'https://img.gamepix.com/c8a93a1e1e964e11b3d9803cad9e9c2c-512x384.jpg',
+    thumbnail: 'https://img.gamepix.com/games/gun-shooting-games-sniper-3d/cover/gun-shooting-games-sniper-3d.png?w=500&ar=16:10',
     providerGameId: 'gun-shooting-games-sniper-3d', officialUrl: 'https://www.gamepix.com/play/gun-shooting-games-sniper-3d'
   }),
 
