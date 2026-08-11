@@ -1,10 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 
 export const dynamic = 'force-dynamic';
-export const revalidate = 3600; // 1 hour cache
 
-const CACHE_TTL_MS = 1000 * 60 * 60 * 4;
-const memCache = new Map<string, { data: any; timestamp: number }>();
+const CACHE_TTL_MS = 1000 * 60 * 60;
+const memCache = new Map<string, { data: unknown; timestamp: number }>();
 
 export async function GET(request: NextRequest) {
   try {
@@ -16,35 +15,30 @@ export async function GET(request: NextRequest) {
 
     const cacheKey = `${sid}:${order}:${page}:${pagination}`;
     const cached = memCache.get(cacheKey);
-
     if (cached && Date.now() - cached.timestamp < CACHE_TTL_MS) {
-      return NextResponse.json(cached.data, {
-        headers: { 'Cache-Control': 'public, max-age=14400' },
-      });
+      return NextResponse.json(cached.data);
     }
 
-    const url = `https://feeds.gamepix.com/v2/json?sid=${sid}&pagination=${pagination}&page=${page}&order=${order}`;
-    
+    const url = `https://feeds.gamepix.com/v2/json?sid=${encodeURIComponent(sid)}&pagination=${pagination}&page=${page}&order=${order}`;
     const response = await fetch(url, {
-      headers: { 'Accept': 'application/feed+json, application/json' },
-      next: { revalidate: 3600 },
+      headers: { Accept: 'application/feed+json, application/json' },
     });
 
     if (!response.ok) {
-      throw new Error(`GamePix feed returned ${response.status}`);
+      return NextResponse.json(
+        { ok: false, error: `Upstream error: ${response.status}` },
+        { status: 502 }
+      );
     }
 
     const data = await response.json();
     memCache.set(cacheKey, { data, timestamp: Date.now() });
 
     return NextResponse.json(data, {
-      headers: { 'Cache-Control': 'public, max-age=14400' },
+      headers: { 'Cache-Control': 'public, s-maxage=3600' },
     });
-  } catch (error: any) {
-    console.error('GamePix proxy error:', error);
-    return NextResponse.json(
-      { error: error.message, ok: false },
-      { status: 502 }
-    );
+  } catch (error) {
+    const message = error instanceof Error ? error.message : 'Unknown error';
+    return NextResponse.json({ ok: false, error: message }, { status: 502 });
   }
 }
