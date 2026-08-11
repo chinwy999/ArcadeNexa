@@ -1,111 +1,68 @@
-import type { Game } from './games'
-import { getAspectRatio } from './site'
+const API_BASE = 'https://feeds.gamepix.com/v2/json'
+const SITE_ID = 'DXXR1'
+const ITEMS_PER_PAGE = 50
 
-const CATEGORY_MAP: Record<string, string> = {
-  action: 'Action', shooting: 'Action', battle: 'Action', fight: 'Action', war: 'Action', zombie: 'Action', gun: 'Action',
-  adventure: 'Adventure', exploration: 'Adventure', rpg: 'Adventure',
-  arcade: 'Arcade', classic: 'Arcade', retro: 'Arcade', skill: 'Arcade', clicker: 'Arcade', casual: 'Arcade',
-  cards: 'Cards', solitaire: 'Cards', poker: 'Cards', blackjack: 'Cards',
-  puzzle: 'Puzzle', 'match-3': 'Puzzle', match3: 'Puzzle', brain: 'Puzzle', logic: 'Puzzle', '2048': 'Puzzle', sudoku: 'Puzzle', jigsaw: 'Puzzle', word: 'Puzzle', memory: 'Puzzle',
-  racing: 'Racing', drift: 'Racing', car: 'Racing', bike: 'Racing', offroad: 'Racing',
-  sports: 'Sports', soccer: 'Sports', football: 'Sports', basketball: 'Sports', tennis: 'Sports', golf: 'Sports',
-  strategy: 'Strategy', 'tower-defense': 'Strategy', towerdefense: 'Strategy', defense: 'Strategy', chess: 'Strategy', board: 'Strategy',
-  simulation: 'Simulation', simulator: 'Simulation', life: 'Simulation', idle: 'Simulation', cooking: 'Simulation', farming: 'Simulation',
-  kids: 'Kids', 'kids-game': 'Kids', baby: 'Kids', educational: 'Kids', girl: 'Kids', 'dress-up': 'Kids',
+export interface GamePixItem {
+  id: string
+  title: string
+  namespace: string
+  description: string
+  category: string
+  orientation: string
+  quality_score: number
+  width: number
+  height: number
+  date_modified: string
+  date_published: string
+  banner_image: string
+  image: string
+  url: string
 }
 
-function mapCategory(raw: string): string {
-  if (!raw) return 'Other'
-  return CATEGORY_MAP[raw.toLowerCase().trim()] || 'Other'
+export interface GamePixResponse {
+  version: string
+  title: string
+  items: GamePixItem[]
 }
 
-export function normalizeGamePixItem(item: any): Game {
-  const width = Number(item.width) || 800
-  const height = Number(item.height) || 600
-  const slug = item.namespace || String(item.id).toLowerCase()
-  const initials = String(item.title || '')
-    .split(' ')
-    .slice(0, 2)
-    .map((w: string) => w.charAt(0))
-    .join('')
-    .toUpperCase()
-
-  return {
-    id: String(item.id),
-    slug,
-    title: item.title,
-    name: item.title,
-    initials,
-    gradient: 'from-purple-600 to-blue-600',
-    genre: [mapCategory(item.category)],
-    genreFilter: mapCategory(item.category),
-    rating: Math.round((Number(item.quality_score) || 0) * 10),
-    platform: item.orientation === 'portrait' ? 'PC' : 'Multi',
-    description: item.description || '',
-    longDescription: item.description || '',
-    tags: [item.category, item.orientation].filter(Boolean),
-    officialUrl: item.url,
-    iframeUrl: item.url,
-    thumbnail: item.image || item.banner_image || '',
-    thumbnailLarge: item.banner_image || item.image || '',
-    releaseYear: item.date_published ? new Date(item.date_published).getFullYear() : undefined,
-    provider: 'gamepix',
-    providerGameId: String(item.id),
-    width,
-    height,
-    aspectRatio: getAspectRatio(width, height),
-  }
-}
-
-export async function fetchGamePixGames(page = 1, limit = 24): Promise<{
-  games: Game[]
-  hasMore: boolean
-  nextPage: number
-}> {
+export async function fetchPage(page: number): Promise<GamePixItem[]> {
   try {
-    const res = await fetch(`/api/gamepix-proxy?page=${page}&pagination=${limit}`)
-    if (!res.ok) throw new Error(`Feed failed: ${res.status}`)
-    const data = await res.json()
-    return {
-      games: (data.items || []).map(normalizeGamePixItem),
-      hasMore: !!data.next_url,
-      nextPage: page + 1,
+    const url = `${API_BASE}?sid=${SITE_ID}&pagination=${ITEMS_PER_PAGE}&page=${page}`
+    const response = await fetch(url, {
+      next: { revalidate: 3600 }
+    })
+    
+    if (!response.ok) {
+      throw new Error(`HTTP ${response.status}`)
     }
-  } catch (e) {
-    console.error('fetchGamePixGames error:', e)
-    return { games: [], hasMore: false, nextPage: page }
+    
+    const data: GamePixResponse = await response.json()
+    return data.items || []
+  } catch (error) {
+    console.error(`Error fetching page ${page}:`, error)
+    return []
   }
 }
 
-// Helper to ensure all required Game fields are present
-export function createSafeGame(item: any): Game {
-  const base = normalizeGamePixItem(item)
+export async function fetchAllGames(): Promise<GamePixItem[]> {
+  const allGames: GamePixItem[] = []
+  let page = 1
+  let hasMore = true
   
-  // Fill any missing required fields with defaults
-  return {
-    id: base.id || 'unknown',
-    slug: base.slug || 'unknown',
-    title: base.title || 'Unknown Game',
-    name: base.name || base.title || 'Unknown Game',
-    initials: base.initials || 'UG',
-    gradient: base.gradient || 'from-gray-600 to-gray-800',
-    genre: base.genre.length > 0 ? base.genre : ['Other'],
-    genreFilter: base.genreFilter || 'Other',
-    rating: base.rating || 0,
-    platform: base.platform || 'Multi',
-    description: base.description || '',
-    longDescription: base.longDescription || base.description || '',
-    instructions: base.instructions || '',
-    tags: base.tags.length > 0 ? base.tags : ['game'],
-    officialUrl: base.officialUrl || '',
-    iframeUrl: base.iframeUrl || base.officialUrl || '',
-    thumbnail: base.thumbnail || '',
-    thumbnailLarge: base.thumbnailLarge || base.thumbnail || '',
-    releaseYear: base.releaseYear || new Date().getFullYear(),
-    provider: base.provider || 'gamepix',
-    providerGameId: base.providerGameId || base.id,
-    width: base.width || 800,
-    height: base.height || 600,
-    aspectRatio: base.aspectRatio || '16:9',
+  console.log('Starting to fetch all games from GamePix...')
+  
+  while (hasMore && page <= 20) {
+    const games = await fetchPage(page)
+    
+    if (games.length === 0) {
+      hasMore = false
+    } else {
+      allGames.push(...games)
+      console.log(`Fetched ${allGames.length} games (page ${page})`)
+      page++
+    }
   }
+  
+  console.log(`Total games fetched: ${allGames.length}`)
+  return allGames
 }

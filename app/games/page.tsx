@@ -1,18 +1,30 @@
-export const dynamic = "force-dynamic";
-export const revalidate = 0;
-import type { Metadata } from 'next'
-import GamesClient from './GamesClient'
+import { getAllGames } from '@/lib/gamesStore'
+import GameCard from '@/components/GameCard'
 
-export const metadata: Metadata = {
-  title: 'Games Arena',
-  description: 'Browse and play ArcadeNexa trials for Valorant, CS2, LoL, Dota 2, Fortnite, Apex Legends, Rocket League, Overwatch 2. Filter by genre, platform, rating.',
-  alternates: { canonical: '/games' },
-  openGraph: {
-    title: 'Games Arena | ArcadeNexa',
-    description: 'Choose your battlefield — 8 esports titles with skill trials',
-  }
-}
+export const dynamic = 'force-dynamic'
 
-export default function GamesPage() {
-  return <GamesClient />
+export default async function GamesPage() {
+  const games = await getAllGames()
+  
+  return (
+    <div className="container mx-auto px-4 py-8">
+      <div className="mb-8">
+        <h1 className="text-4xl font-bold mb-2 text-white">Games Arena</h1>
+        <p className="text-gray-400">{games.length} HTML5 Games - Instant Play</p>
+      </div>
+      
+      {games.length === 0 ? (
+        <div className="text-center py-20 bg-elevated rounded-lg border border-white/5">
+          <p className="text-6xl mb-4">Loading...</p>
+          <p className="text-xl text-gray-400">Games are being fetched from GamePix</p>
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          {games.map((game) => (
+            <GameCard key={game.slug} game={game} />
+          ))}
+        </div>
+      )}
+    </div>
+  )
 }
