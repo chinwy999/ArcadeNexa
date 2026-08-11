@@ -1,4 +1,4 @@
-import { getGameBySlug } from '@/lib/gamesStore'
+import { getGameBySlug } from '@/lib/games'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 
@@ -62,7 +62,7 @@ export default async function GamePage({ params }: { params: { slug: string } })
             </div>
             <div className="flex justify-between">
               <span className="text-gray-400">Rating:</span>
-              <span className="text-yellow-400 font-medium">{'*'.repeat(Math.round(game.rating / 2))}</span>
+              <span className="text-yellow-400 font-medium">★ {game.rating}</span>
             </div>
           </div>
         </div>
