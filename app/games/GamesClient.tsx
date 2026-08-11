@@ -4,7 +4,8 @@ import { useState, useMemo, useEffect } from 'react'
 import { SlidersHorizontal, Filter, Gamepad2, Loader2 } from 'lucide-react'
 import GameCard from '@/components/GameCard'
 import InstantPlayModal from '@/components/InstantPlayModal'
-import { games as staticGames, type Game, getAllGenreFilters, fetchGamePixGames } from '@/lib/games'
+import { games as staticGames, type Game, getAllGenreFilters } from '@/lib/games'
+import { fetchGamePixGames } from '@/lib/gamepixFeed'
 
 export default function GamesClient() {
   const [genre, setGenre] = useState('All')
