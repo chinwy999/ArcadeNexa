@@ -1,5 +1,6 @@
 'use client'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { createPortal } from 'react-dom'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { LogIn, Menu, X, Sword } from 'lucide-react'
@@ -16,7 +17,10 @@ const navLinks = [
 export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
+  const [mounted, setMounted] = useState(false)
   const pathname = usePathname()
+
+  useEffect(() => { setMounted(true) }, [])
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 h-16 glass border-b border-white/5">
@@ -69,8 +73,8 @@ export default function Header() {
         </button>
       </div>
 
-      {mobileOpen && (
-        <div className="fixed inset-0 top-16 bg-space-black backdrop-blur-xl z-40 p-6 md:hidden flex flex-col gap-6 animate-fade-in overflow-y-auto">
+      {mounted && mobileOpen && createPortal(
+        <div className="fixed inset-0 top-16 bg-space-black z-[999] p-6 md:hidden flex flex-col gap-6 animate-fade-in overflow-y-auto">
           <div className="flex flex-col gap-4">
             {navLinks.map(link => (
               <Link key={link.href} href={link.href} onClick={() => setMobileOpen(false)} className={`text-lg font-bold uppercase tracking-wider ${pathname === link.href ? 'text-electric-violet' : 'text-white'}`}>
@@ -87,7 +91,8 @@ export default function Header() {
               <LogIn className="w-5 h-5" /> LOGIN
             </Link>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </nav>
   )
