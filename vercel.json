@@ -1,0 +1,6 @@
+{
+  "rewrites": [
+    { "source": "/api/gamepix-proxy", "destination": "https://feeds.gamepix.com/v2/json" },
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
+}
