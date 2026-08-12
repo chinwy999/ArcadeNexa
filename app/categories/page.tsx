@@ -4,7 +4,7 @@ import { getGames, getAllGenreFilters } from '@/lib/games'
 
 export const metadata: Metadata = {
   title: 'Categories',
-  description: 'Browse ArcadeNexa games by category: FPS, MOBA, Battle Royale, Sports, Racing, Puzzle',
+  description: 'Browse ArcadeNexa games by category',
   alternates: { canonical: '/categories' },
 }
 
@@ -19,27 +19,47 @@ const categoryMeta: Record<string, { desc: string, color: string }> = {
   Simulation: { desc: 'Simulation and physics games', color: 'from-sky-500/20 to-blue-500/20' },
   Battle: { desc: 'Battle and defense strategy', color: 'from-orange-500/20 to-red-500/20' },
   Casual: { desc: 'Casual, fun and quick games', color: 'from-green-500/20 to-emerald-500/20' },
+  Action: { desc: 'Fast-paced action and adventure games', color: 'from-red-500/20 to-orange-500/20' },
+  Adventure: { desc: 'Explore worlds and go on epic quests', color: 'from-teal-500/20 to-green-500/20' },
+  Strategy: { desc: 'Plan, build and conquer', color: 'from-indigo-500/20 to-blue-500/20' },
+  Sports: { desc: 'High-octane sports and athletics', color: 'from-cyan-500/20 to-blue-500/20' },
 }
 
 export default async function CategoriesPage() {
-  const [games, allFilters] = await Promise.all([
-    getGames(),
-    getAllGenreFilters(),
-  ])
+  const games = await getGames()
 
-  const filters = allFilters.filter(f => f !== 'All')
+  // استخدام فقط الفئات المعرّفة في categoryMeta
+  const definedCategories = Object.keys(categoryMeta)
+
+  // تطابق بدون حساسية لحالة الأحرف
+  const filters = definedCategories.filter(cat =>
+    games.some(g =>
+      g.genreFilter?.toLowerCase() === cat.toLowerCase() ||
+      g.category?.toLowerCase() === cat.toLowerCase()
+    )
+  )
 
   return (
     <div className="py-20 px-4 sm:px-6 max-w-6xl mx-auto animate-fade-in">
       <h1 className="text-5xl font-black text-white mb-4">Categories</h1>
-      <p className="text-text-secondary text-lg mb-10">Choose your battlefield type — {games.length} games across {filters.length} categories</p>
+      <p className="text-text-secondary text-lg mb-10">
+        Choose your battlefield type — {games.length} games across {filters.length} categories
+      </p>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
         {filters.map(filter => {
-          const meta = categoryMeta[filter] || { desc: `${filter} games`, color: 'from-violet-500/20 to-purple-500/20' }
-          const count = games.filter(g => g.genreFilter === filter).length
-          const gamePixCount = games.filter(g => g.genreFilter === filter && g.provider === 'gamepix').length
+          const meta = categoryMeta[filter]
+          const count = games.filter(g =>
+            g.genreFilter?.toLowerCase() === filter.toLowerCase() ||
+            g.category?.toLowerCase() === filter.toLowerCase()
+          ).length
+          const gamePixCount = games.filter(g =>
+            (g.genreFilter?.toLowerCase() === filter.toLowerCase() ||
+            g.category?.toLowerCase() === filter.toLowerCase()) &&
+            g.provider === 'gamepix'
+          ).length
           const selfCount = count - gamePixCount
+
           return (
             <Link key={filter} href={`/games?genre=${encodeURIComponent(filter)}`} className="group glass rounded-2xl overflow-hidden border border-white/5 hover:border-electric-violet/40 transition-all hover:scale-[1.02] block">
               <div className={`h-24 bg-gradient-to-br ${meta.color} flex items-center justify-center`}>
@@ -61,19 +81,27 @@ export default async function CategoriesPage() {
 
       <div>
         <h2 className="text-2xl font-bold text-white mb-4">All Games by Category</h2>
-        {filters.map(filter => (
-          <div key={filter} className="mb-8">
-            <h3 className="text-white font-bold mb-3 flex items-center gap-2">{filter} <span className="text-xs text-text-secondary font-normal">({games.filter(g => g.genreFilter === filter).length})</span></h3>
-            <div className="flex flex-wrap gap-2">
-              {games.filter(g => g.genreFilter === filter).map(g => (
-                <Link key={g.slug} href={`/games/${g.slug}`} className="bg-elevated border border-white/10 hover:border-electric-violet/30 text-white px-4 py-2 rounded-full text-sm transition flex items-center gap-2">
-                  {g.name}
-                  {g.provider === 'gamepix' && <span className="text-[9px] bg-blue-500/20 text-blue-300 px-1.5 py-0.5 rounded-full">GamePix</span>}
-                </Link>
-              ))}
+        {filters.map(filter => {
+          const categoryGames = games.filter(g =>
+            g.genreFilter?.toLowerCase() === filter.toLowerCase() ||
+            g.category?.toLowerCase() === filter.toLowerCase()
+          )
+          return (
+            <div key={filter} className="mb-8">
+              <h3 className="text-white font-bold mb-3 flex items-center gap-2">
+                {filter} <span className="text-xs text-text-secondary font-normal">({categoryGames.length})</span>
+              </h3>
+              <div className="flex flex-wrap gap-2">
+                {categoryGames.map(g => (
+                  <Link key={g.slug} href={`/games/${g.slug}`} className="bg-elevated border border-white/10 hover:border-electric-violet/30 text-white px-4 py-2 rounded-full text-sm transition flex items-center gap-2">
+                    {g.name}
+                    {g.provider === 'gamepix' && <span className="text-[9px] bg-blue-500/20 text-blue-300 px-1.5 py-0.5 rounded-full">GamePix</span>}
+                  </Link>
+                ))}
+              </div>
             </div>
-          </div>
-        ))}
+          )
+        })}
       </div>
     </div>
   )
