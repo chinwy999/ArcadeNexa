@@ -1,8 +1,41 @@
 import { getGameBySlug, getGames } from '@/lib/games'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
+import type { Metadata } from 'next'
 
 export const dynamic = 'force-dynamic'
+
+export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
+  const game = await getGameBySlug(params.slug)
+
+  if (!game) {
+    return {
+      title: 'Game Not Found',
+      description: 'The game you are looking for does not exist.',
+    }
+  }
+
+  return {
+    title: `${game.title} - Play Free Online | ArcadeNexa`,
+    description: game.description || `Play ${game.title} for free online on ArcadeNexa. No download required, instant play in your browser.`,
+    keywords: [game.title, game.category, 'free online game', 'HTML5 game', 'browser game', 'ArcadeNexa'],
+    openGraph: {
+      title: `${game.title} - Play Free Online`,
+      description: game.description || `Play ${game.title} for free on ArcadeNexa`,
+      images: [{ url: game.thumbnail, width: 512, height: 384, alt: game.title }],
+      type: 'website',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: `${game.title} - Play Free Online`,
+      description: game.description || `Play ${game.title} for free on ArcadeNexa`,
+      images: [game.thumbnail],
+    },
+    alternates: {
+      canonical: `/games/${game.slug}`,
+    },
+  }
+}
 
 export async function generateStaticParams() {
   return []
@@ -19,7 +52,7 @@ export default async function GamePage({ params }: { params: { slug: string } })
     <div className="container mx-auto px-4 py-8">
       <div className="mb-6">
         <Link href="/games" className="text-neon-green hover:underline mb-4 inline-block">
-          Back to Games
+          ← Back to Games
         </Link>
         <h1 className="text-4xl font-bold text-white mb-2">{game.title}</h1>
         <p className="text-gray-400 text-lg">{game.description}</p>
@@ -55,10 +88,6 @@ export default async function GamePage({ params }: { params: { slug: string } })
             <div className="flex justify-between">
               <span className="text-gray-400">Platform:</span>
               <span className="text-white font-medium">{game.platform}</span>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-gray-400">Dimensions:</span>
-              <span className="text-white font-medium">{game.width}x{game.height}</span>
             </div>
             <div className="flex justify-between">
               <span className="text-gray-400">Category:</span>
