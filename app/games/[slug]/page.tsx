@@ -1,16 +1,17 @@
-import { getGameBySlug } from '@/lib/games'
+import { getGameBySlug, getGames } from '@/lib/games'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 
 export const dynamic = 'force-dynamic'
+export const revalidate = 0
 
 export default async function GamePage({ params }: { params: { slug: string } }) {
   const game = await getGameBySlug(params.slug)
-  
+
   if (!game) {
     notFound()
   }
-  
+
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="mb-6">
@@ -20,7 +21,7 @@ export default async function GamePage({ params }: { params: { slug: string } })
         <h1 className="text-4xl font-bold text-white mb-2">{game.title}</h1>
         <p className="text-gray-400 text-lg">{game.description}</p>
       </div>
-      
+
       <div className="bg-elevated rounded-lg overflow-hidden mb-8">
         <div className="relative" style={{ aspectRatio: game.aspectRatio }}>
           <iframe
@@ -32,7 +33,7 @@ export default async function GamePage({ params }: { params: { slug: string } })
           />
         </div>
       </div>
-      
+
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         <div className="md:col-span-2">
           <h2 className="text-2xl font-bold mb-4 text-white">About</h2>
@@ -40,7 +41,7 @@ export default async function GamePage({ params }: { params: { slug: string } })
           <h3 className="text-xl font-bold mb-3 text-white">How to Play</h3>
           <p className="text-gray-400">{game.instructions}</p>
         </div>
-        
+
         <div>
           <h3 className="text-xl font-bold mb-4 text-white">Details</h3>
           <div className="bg-space-black/50 rounded-lg p-4 space-y-3">
