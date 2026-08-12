@@ -1,8 +1,8 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Privacy Policy',
-  description: 'ArcadeNexa privacy policy — your data, your control',
+  title: 'Privacy Policy - ArcadeNexa',
+  description: 'ArcadeNexa privacy policy',
   alternates: { canonical: '/privacy' },
 }
 
@@ -10,16 +10,46 @@ export default function PrivacyPage() {
   return (
     <div className="py-20 px-4 sm:px-6 max-w-4xl mx-auto animate-fade-in">
       <h1 className="text-5xl font-black text-white mb-2">Privacy Policy</h1>
-      <p className="text-text-secondary mb-8">Your data, your control</p>
-      <div className="prose prose-invert max-w-none space-y-6 text-text-secondary">
-        <section><h2 className="text-white font-bold text-xl">Information We Collect</h2><p>We collect personal information you provide directly (name, email, username), automatically collected data (IP, browser, device), and gameplay data (statistics, match history, rankings).</p></section>
-        <section><h2 className="text-white font-bold text-xl">How We Use Your Data</h2><p>Provide and improve services, process tournaments, manage prizes, personalize experience, send event notifications.</p></section>
-        <section><h2 className="text-white font-bold text-xl">Cookies & Tracking</h2><p>We use cookies to maintain sessions, remember preferences, analyze traffic, deliver targeted content. Manage in browser settings.</p></section>
-        <section><h2 className="text-white font-bold text-xl">Data Sharing</h2><p>We do not sell personal data. May share with trusted partners for tournaments, payments, analytics under confidentiality.</p></section>
-        <section><h2 className="text-white font-bold text-xl">Your Rights (GPXPR)</h2><p>Right to access, rectify, erase, restrict, object, portability. Contact us, respond within 30 days.</p></section>
-        <section><h2 className="text-white font-bold text-xl">Data Security</h2><p>TLS 1.3 encryption, secure servers, regular audits, access controls, EU-compliant data centers.</p></section>
-        <section><h2 className="text-white font-bold text-xl">Children&apos;s Privacy</h2><p>Intended for 13+ only. No data from under 13 knowingly collected.</p></section>
-        <p className="text-xs">Last updated: August 7, 2026 — Contact: privacy@arcade-nexa-3gxg.vercel.app</p>
+      <p className="text-text-secondary mb-10">Your privacy matters to us. Here is how we handle your data.</p>
+
+      <div className="space-y-6 text-text-secondary">
+
+        <section className="glass p-6 rounded-xl border border-white/5">
+          <h2 className="text-white font-bold text-xl mb-3">1. Information We Collect</h2>
+          <p>ArcadeNexa does not require registration or login. We may automatically collect basic technical data such as browser type and device type solely to improve the platform experience. We do not collect personal information unless you contact us voluntarily.</p>
+        </section>
+
+        <section className="glass p-6 rounded-xl border border-white/5">
+          <h2 className="text-white font-bold text-xl mb-3">2. Cookies</h2>
+          <p>We may use cookies to remember your preferences and analyze platform usage. You can disable cookies in your browser settings at any time without affecting your ability to play games.</p>
+        </section>
+
+        <section className="glass p-6 rounded-xl border border-white/5">
+          <h2 className="text-white font-bold text-xl mb-3">3. Third-Party Games</h2>
+          <p>Games on ArcadeNexa are provided by third-party providers such as GamePix. These providers may have their own privacy policies. We encourage you to review them when playing their games.</p>
+        </section>
+
+        <section className="glass p-6 rounded-xl border border-white/5">
+          <h2 className="text-white font-bold text-xl mb-3">4. Data Sharing</h2>
+          <p>We do not sell, trade, or share your personal data with third parties for marketing purposes. Any data shared is solely for the purpose of operating the platform.</p>
+        </section>
+
+        <section className="glass p-6 rounded-xl border border-white/5">
+          <h2 className="text-white font-bold text-xl mb-3">5. Children's Privacy</h2>
+          <p>ArcadeNexa is not directed to children under 13. We do not knowingly collect personal information from children under 13.</p>
+        </section>
+
+        <section className="glass p-6 rounded-xl border border-white/5">
+          <h2 className="text-white font-bold text-xl mb-3">6. Security</h2>
+          <p>We take reasonable measures to protect any data we handle. However, no method of transmission over the internet is 100% secure.</p>
+        </section>
+
+        <section className="glass p-6 rounded-xl border border-white/5">
+          <h2 className="text-white font-bold text-xl mb-3">7. Contact Us</h2>
+          <p>If you have questions about our privacy practices, please reach out via our <a href="/contact" className="text-electric-violet hover:underline">Contact page</a>.</p>
+        </section>
+
+        <p className="text-xs text-center">Last updated: August 2026</p>
       </div>
     </div>
   )
