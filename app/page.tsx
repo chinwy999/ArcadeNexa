@@ -48,7 +48,7 @@ export default async function HomePage() {
           <div className="inline-block bg-neon-green/10 border border-neon-green/30 text-neon-green text-sm font-bold px-4 py-2 rounded-full mb-6">
             🎮 {games.length}+ Free HTML5 Games
           </div>
-          <h1 className="text-6xl md:text-8xl font-black mb-6 bg-gradient-to-r from-neon-green via-cyan-400 to-electric-violet bg-clip-text text-transparent">
+          <h1 className="text-5xl md:text-8xl font-black mb-6 bg-gradient-to-r from-neon-green via-cyan-400 to-electric-violet bg-clip-text text-transparent">
             ARCADENEXA
           </h1>
           <p className="text-xl text-gray-400 mb-10 max-w-2xl mx-auto">
