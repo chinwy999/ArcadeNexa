@@ -3,9 +3,9 @@ import { useState, useMemo, useEffect } from 'react'
 import Link from 'next/link'
 import { useSearchParams, useRouter } from 'next/navigation'
 import { Search } from 'lucide-react'
-import { games } from '@/lib/games'
+import type { Game } from '@/lib/games'
 
-export default function SearchClient() {
+export default function SearchClient({ allGames }: { allGames: Game[] }) {
   const searchParams = useSearchParams()
   const router = useRouter()
   const initialQ = searchParams.get('q') || ''
@@ -16,59 +16,89 @@ export default function SearchClient() {
   }, [initialQ])
 
   const results = useMemo(() => {
-    if (!q.trim()) return games.slice(0, 4)
+    if (!q.trim()) return allGames.slice(0, 8)
     const lower = q.toLowerCase()
-    return games.filter(g => 
+    return allGames.filter(g =>
       g.name.toLowerCase().includes(lower) ||
       g.description.toLowerCase().includes(lower) ||
-      g.genre.join(' ').toLowerCase().includes(lower) ||
-      g.tags.join(' ').toLowerCase().includes(lower)
+      g.category.toLowerCase().includes(lower) ||
+      g.genreFilter.toLowerCase().includes(lower)
     )
-  }, [q])
+  }, [q, allGames])
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     if (q.trim()) router.push(`/search?q=${encodeURIComponent(q.trim())}`)
   }
 
+  const popularCategories = ['Action', 'Puzzle', 'Racing', 'Sports', 'Casual', 'Shooter']
+
   return (
     <div className="py-20 px-4 sm:px-6 max-w-4xl mx-auto animate-fade-in">
       <h1 className="text-4xl font-black text-white mb-2">Search Arena</h1>
-      <p className="text-text-secondary mb-8">Find your next battlefield</p>
+      <p className="text-text-secondary mb-8">Find your next game from {allGames.length}+ titles</p>
 
-      <form onSubmit={handleSubmit} className="flex gap-3 mb-10">
+      <form onSubmit={handleSubmit} className="flex gap-3 mb-6">
         <div className="relative flex-1">
           <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-text-secondary" />
           <input
             value={q}
             onChange={e => setQ(e.target.value)}
-            placeholder="Search Valorant, FPS, MOBA..."
+            placeholder="Search games, categories..."
             className="w-full bg-elevated border border-white/10 rounded-xl pl-12 pr-4 py-4 text-white placeholder:text-text-secondary focus:ring-2 focus:ring-electric-violet outline-none"
-            aria-label="Search games"
             autoFocus
           />
         </div>
-        <button type="submit" className="bg-electric-violet hover:bg-violet-600 text-white px-6 py-4 rounded-xl font-bold transition">Search</button>
+        <button type="submit" className="bg-electric-violet hover:bg-violet-600 text-white px-6 py-4 rounded-xl font-bold transition">
+          Search
+        </button>
       </form>
 
+      {/* Popular Categories */}
+      {!q && (
+        <div className="mb-8">
+          <p className="text-text-secondary text-sm mb-3">Popular categories:</p>
+          <div className="flex gap-2 flex-wrap">
+            {popularCategories.map(cat => (
+              <button key={cat} onClick={() => setQ(cat)}
+                className="px-4 py-2 rounded-full bg-white/5 border border-white/10 text-white text-sm hover:bg-electric-violet/20 hover:border-electric-violet/40 transition">
+                {cat}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
+
       <div className="space-y-3">
-        <p className="text-sm text-text-secondary mb-3">{results.length} results {q && `for "${q}"`}</p>
+        <p className="text-sm text-text-secondary mb-3">
+          {q ? `${results.length} results for "${q}"` : 'Popular games'}
+        </p>
+
         {results.map(g => (
-          <Link key={g.slug} href={`/games/${g.slug}`} className="flex items-center gap-4 glass p-4 rounded-xl border border-white/5 hover:border-electric-violet/40 transition group">
-            <div className={`w-14 h-14 rounded-xl flex items-center justify-center ${g.gradient} font-black text-white`}>{g.initials}</div>
-            <div className="flex-1">
-              <h3 className="text-white font-bold group-hover:text-electric-violet transition-colors">{g.name}</h3>
-              <p className="text-text-secondary text-sm">{g.genre.join(' • ')} — {g.platform}</p>
+          <Link key={g.slug} href={`/games/${g.slug}`}
+            className="flex items-center gap-4 glass p-4 rounded-xl border border-white/5 hover:border-electric-violet/40 transition group">
+            <div className={`w-14 h-14 rounded-xl flex items-center justify-center ${g.gradient} font-black text-white flex-shrink-0`}>
+              {g.initials}
             </div>
-            <span className="text-neon-green text-xs font-bold">{g.rating}★</span>
+            <div className="flex-1 min-w-0">
+              <h3 className="text-white font-bold group-hover:text-electric-violet transition-colors truncate">{g.name}</h3>
+              <p className="text-text-secondary text-sm">{g.category} • {g.platform}</p>
+            </div>
+            <span className="text-neon-green text-xs font-bold flex-shrink-0">{g.rating}★</span>
           </Link>
         ))}
-        {results.length === 0 && (
-          <div className="text-center py-12">
-            <p className="text-text-secondary">No results found. Try FPS, MOBA, Battle Royale, or Sports.</p>
-            <div className="flex gap-2 justify-center mt-4">
-              {['FPS','MOBA','Battle Royale','Sports'].map(cat => (
-                <button key={cat} onClick={() => setQ(cat)} className="px-3 py-1 rounded-full bg-white/5 text-text-secondary text-sm hover:bg-white/10">{cat}</button>
+
+        {results.length === 0 && q && (
+          <div className="text-center py-12 glass rounded-xl border border-white/5">
+            <p className="text-4xl mb-4">🔍</p>
+            <p className="text-white font-bold mb-2">No results found for "{q}"</p>
+            <p className="text-text-secondary text-sm mb-6">Try a different keyword or browse by category</p>
+            <div className="flex gap-2 justify-center flex-wrap">
+              {popularCategories.map(cat => (
+                <button key={cat} onClick={() => setQ(cat)}
+                  className="px-3 py-1 rounded-full bg-white/5 text-text-secondary text-sm hover:bg-white/10 transition">
+                  {cat}
+                </button>
               ))}
             </div>
           </div>
