@@ -21,31 +21,31 @@ function getTopPlayers(): LeaderboardEntry[] {
 
 export default function LeaderboardPage() {
   const [players, setPlayers] = useState<LeaderboardEntry[]>([])
-  
+
   useEffect(() => {
     setPlayers(getTopPlayers())
   }, [])
-  
+
   return (
     <div className="container mx-auto px-4 py-8 max-w-4xl">
       <h1 className="text-4xl font-bold mb-2 text-white">🏆 Global Rankings</h1>
-      <p className="text-gray-400 mb-8">أفضل اللاعبين - يتم التحديث تلقائياً من لعبك</p>
-      
+      <p className="text-gray-400 mb-8">Top players — updated automatically from your gameplay</p>
+
       {players.length === 0 ? (
         <div className="text-center py-20 bg-elevated rounded-lg border border-white/5">
           <p className="text-6xl mb-4">🎮</p>
-          <p className="text-xl text-gray-400 mb-2">لا توجد نقاط بعد</p>
-          <p className="text-gray-500">ابدأ اللعب لكسب النقاط وظهورك في القائمة!</p>
+          <p className="text-xl text-gray-400 mb-2">No scores yet</p>
+          <p className="text-gray-500">Start playing to earn points and appear on the leaderboard!</p>
         </div>
       ) : (
         <div className="bg-elevated rounded-lg overflow-hidden border border-white/5">
           <table className="w-full">
             <thead className="bg-space-black">
               <tr>
-                <th className="p-4 text-left text-gray-400 font-medium">الترتيب</th>
-                <th className="p-4 text-left text-gray-400 font-medium">اللاعب</th>
-                <th className="p-4 text-left text-gray-400 font-medium">اللعبة</th>
-                <th className="p-4 text-left text-gray-400 font-medium">النقاط</th>
+                <th className="p-4 text-left text-gray-400 font-medium">Rank</th>
+                <th className="p-4 text-left text-gray-400 font-medium">Player</th>
+                <th className="p-4 text-left text-gray-400 font-medium">Game</th>
+                <th className="p-4 text-left text-gray-400 font-medium">Score</th>
               </tr>
             </thead>
             <tbody>
