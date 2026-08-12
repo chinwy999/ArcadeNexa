@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { games, getAllGenreFilters } from '@/lib/games'
+import { getGames, getAllGenreFilters } from '@/lib/games'
 
 export const metadata: Metadata = {
   title: 'Categories',
@@ -21,16 +21,21 @@ const categoryMeta: Record<string, { desc: string, color: string }> = {
   Casual: { desc: 'Casual, fun and quick games', color: 'from-green-500/20 to-emerald-500/20' },
 }
 
-export default function CategoriesPage() {
-  const allFilters = getAllGenreFilters().filter(f => f !== 'All')
-  
+export default async function CategoriesPage() {
+  const [games, allFilters] = await Promise.all([
+    getGames(),
+    getAllGenreFilters(),
+  ])
+
+  const filters = allFilters.filter(f => f !== 'All')
+
   return (
     <div className="py-20 px-4 sm:px-6 max-w-6xl mx-auto animate-fade-in">
       <h1 className="text-5xl font-black text-white mb-4">Categories</h1>
-      <p className="text-text-secondary text-lg mb-10">Choose your battlefield type — {games.length} games across {allFilters.length} categories</p>
+      <p className="text-text-secondary text-lg mb-10">Choose your battlefield type — {games.length} games across {filters.length} categories</p>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-        {allFilters.map(filter => {
+        {filters.map(filter => {
           const meta = categoryMeta[filter] || { desc: `${filter} games`, color: 'from-violet-500/20 to-purple-500/20' }
           const count = games.filter(g => g.genreFilter === filter).length
           const gamePixCount = games.filter(g => g.genreFilter === filter && g.provider === 'gamepix').length
@@ -56,7 +61,7 @@ export default function CategoriesPage() {
 
       <div>
         <h2 className="text-2xl font-bold text-white mb-4">All Games by Category</h2>
-        {allFilters.map(filter => (
+        {filters.map(filter => (
           <div key={filter} className="mb-8">
             <h3 className="text-white font-bold mb-3 flex items-center gap-2">{filter} <span className="text-xs text-text-secondary font-normal">({games.filter(g => g.genreFilter === filter).length})</span></h3>
             <div className="flex flex-wrap gap-2">
