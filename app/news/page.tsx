@@ -1,44 +1,84 @@
 import type { Metadata } from 'next'
-import Link from 'next/link'
 
 export const metadata: Metadata = {
-  title: 'News',
-  description: 'Latest esports news — Valorant, CS2, LoL, Dota 2 updates',
+  title: 'News - ArcadeNexa',
+  description: 'Latest news and updates from ArcadeNexa gaming platform.',
   alternates: { canonical: '/news' },
 }
 
 const articles = [
-  { title: "Valorant Champions 2026: The Ultimate Showdown Begins", excerpt: "The biggest Valorant tournament kicks off with 16 teams competing for $2.5M prize pool.", cat: "ESPORTS", date: "Aug 6, 2026", featured: true },
-  { title: "CS2 Major Update: New Maps and Balance Changes", excerpt: "Valve releases massive update introducing two new competitive maps and significant weapon balancing.", cat: "PATCH NOTES", date: "Aug 5, 2026" },
-  { title: "Interview: s1mple on His Return", excerpt: "Legendary AWPer discusses comeback.", cat: "INTERVIEWS", date: "Aug 4, 2026" },
-  { title: "Rocket League Season 15: What's New?", excerpt: "New cars, decals, and revamped ranked system.", cat: "REVIEWS", date: "Aug 3, 2026" },
-  { title: "Dota 2 The International 2026: Teams to Watch", excerpt: "Team Spirit, LGPX, OG are top contenders.", cat: "ESPORTS", date: "Aug 2, 2026" },
-  { title: "Overwatch 2: New Hero Kiriko Rework Explained", excerpt: "Blizzard details rework.", cat: "PATCH NOTES", date: "Aug 1, 2026" },
+  {
+    title: "ArcadeNexa Launches with 13,000+ Free HTML5 Games",
+    excerpt: "We are excited to announce the launch of ArcadeNexa, your new home for free browser games. No download, no registration — just instant play across 10+ categories.",
+    cat: "ANNOUNCEMENT",
+    date: "Aug 2026",
+    featured: true,
+    emoji: "🚀"
+  },
+  {
+    title: "New Games Added Every Week",
+    excerpt: "Our library keeps growing! We add new HTML5 games regularly to keep the fun going. Check back often for fresh titles across all categories.",
+    cat: "UPDATE",
+    date: "Aug 2026",
+    emoji: "🎮"
+  },
+  {
+    title: "Tournaments System Coming Soon",
+    excerpt: "We are working hard on a competitive tournament system. Get ready to compete with players around the world and win epic prizes!",
+    cat: "COMING SOON",
+    date: "Aug 2026",
+    emoji: "🏆"
+  },
+  {
+    title: "Mobile Gaming Now Fully Supported",
+    excerpt: "All games on ArcadeNexa are now optimized for mobile devices. Play your favorite HTML5 games on any smartphone or tablet with touch controls.",
+    cat: "UPDATE",
+    date: "Aug 2026",
+    emoji: "📱"
+  },
+  {
+    title: "10 Categories to Explore",
+    excerpt: "From Action and Racing to Puzzle and Simulation — ArcadeNexa now features 10 curated game categories to help you find your perfect game.",
+    cat: "FEATURE",
+    date: "Aug 2026",
+    emoji: "🎯"
+  },
+  {
+    title: "Partnership with GamePix",
+    excerpt: "ArcadeNexa partners with GamePix to bring you thousands of high-quality HTML5 games from top developers around the world.",
+    cat: "ANNOUNCEMENT",
+    date: "Aug 2026",
+    emoji: "🤝"
+  },
 ]
+
+const catColors: Record<string, string> = {
+  ANNOUNCEMENT: 'bg-electric-violet/20 text-electric-violet border-electric-violet/30',
+  UPDATE: 'bg-neon-green/20 text-neon-green border-neon-green/30',
+  'COMING SOON': 'bg-amber-500/20 text-amber-400 border-amber-500/30',
+  FEATURE: 'bg-cyan-500/20 text-cyan-400 border-cyan-500/30',
+}
 
 export default function NewsPage() {
   return (
-    <div className="py-20 px-4 sm:px-6 max-w-7xl mx-auto animate-fade-in">
+    <div className="py-20 px-4 sm:px-6 max-w-6xl mx-auto animate-fade-in">
       <h1 className="text-5xl font-black text-white mb-4">Latest News</h1>
-      <p className="text-text-secondary mb-8">Stay updated with the esports world</p>
-
-      <div className="flex flex-wrap gap-2 mb-8">
-        {['ALL','ESPORTS','PATCH NOTES','REVIEWS','INTERVIEWS'].map(c => (
-          <button key={c} className={`px-4 py-2 rounded-full text-xs font-bold border ${c==='ALL'?'bg-electric-violet text-white border-electric-violet':'bg-white/5 text-text-secondary border-white/10'}`}>{c}</button>
-        ))}
-      </div>
+      <p className="text-text-secondary text-lg mb-12">Stay updated with the latest from ArcadeNexa</p>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {articles.map((a,i) => (
+        {articles.map((a, i) => (
           <article key={i} className={`glass rounded-2xl overflow-hidden border border-white/5 hover:border-electric-violet/30 hover:-translate-y-1 transition-all ${a.featured ? 'lg:col-span-2' : ''}`}>
-            {a.featured && <div className="h-48 bg-gradient-to-br from-electric-violet/20 to-neon-green/20 flex items-center justify-center"><span className="text-4xl font-black text-white/10">FEATURED</span></div>}
+            <div className={`h-32 bg-gradient-to-br from-electric-violet/20 to-neon-green/20 flex items-center justify-center`}>
+              <span className="text-6xl">{a.emoji}</span>
+            </div>
             <div className="p-5 space-y-3">
-              <span className="inline-block text-xs font-bold px-2.5 py-1 rounded-full bg-electric-violet/20 text-electric-violet border border-electric-violet/30">{a.cat}</span>
+              <span className={`inline-block text-xs font-bold px-2.5 py-1 rounded-full border ${catColors[a.cat] || 'bg-white/10 text-white border-white/20'}`}>
+                {a.cat}
+              </span>
               <h3 className="text-white font-bold text-lg line-clamp-2">{a.title}</h3>
-              <p className="text-text-secondary text-sm line-clamp-2">{a.excerpt}</p>
+              <p className="text-text-secondary text-sm line-clamp-3">{a.excerpt}</p>
               <div className="flex justify-between items-center pt-2">
                 <span className="text-xs text-text-secondary">{a.date}</span>
-                <Link href="/news" className="text-electric-violet text-sm font-medium hover:gap-2 flex items-center gap-1 transition-all">READ MORE →</Link>
               </div>
             </div>
           </article>
