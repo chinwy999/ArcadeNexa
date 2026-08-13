@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Cookie Policy',
+  title: 'Cookie Policy - ArcadeNexa',
   description: 'How we use cookies on ArcadeNexa',
   alternates: { canonical: '/cookies' },
 }
@@ -10,35 +10,57 @@ export default function CookiesPage() {
   return (
     <div className="py-20 px-4 sm:px-6 max-w-4xl mx-auto animate-fade-in">
       <h1 className="text-5xl font-black text-white mb-2">Cookie Policy</h1>
-      <p className="text-text-secondary mb-8">How we use cookies on ArcadeNexa</p>
+      <p className="text-text-secondary mb-10">How we use cookies on ArcadeNexa</p>
 
       <div className="space-y-6 text-text-secondary">
-        <section><h2 className="text-white font-bold text-xl">What Are Cookies</h2><p>Small text files stored on device to remember preferences, keep logged in, understand usage.</p></section>
-        <section>
-          <h2 className="text-white font-bold text-xl">Types We Use</h2>
-          <ul className="list-disc pl-6 space-y-2 mt-2">
-            <li><strong className="text-white">Essential (Required)</strong> — session, security, auth</li>
-            <li><strong className="text-white">Analytics</strong> — anonymized interaction data</li>
-            <li><strong className="text-white">Preferences</strong> — language, theme, notifications</li>
+
+        <section className="glass p-6 rounded-xl border border-white/5">
+          <h2 className="text-white font-bold text-xl mb-3">What Are Cookies?</h2>
+          <p>Cookies are small text files stored on your device when you visit a website. They help the website remember your preferences and improve your experience.</p>
+        </section>
+
+        <section className="glass p-6 rounded-xl border border-white/5">
+          <h2 className="text-white font-bold text-xl mb-3">How We Use Cookies</h2>
+          <p className="mb-4">ArcadeNexa uses minimal cookies to ensure the platform works correctly:</p>
+          <ul className="space-y-3">
+            <li className="flex gap-3">
+              <span className="text-neon-green font-bold">✅</span>
+              <div><strong className="text-white">Essential Cookies</strong> — Required for the platform to function properly, such as remembering your preferences.</div>
+            </li>
+            <li className="flex gap-3">
+              <span className="text-blue-400 font-bold">📊</span>
+              <div><strong className="text-white">Analytics Cookies</strong> — Help us understand how visitors use the platform so we can improve it. Data is anonymized.</div>
+            </li>
+            <li className="flex gap-3">
+              <span className="text-amber-400 font-bold">⚙️</span>
+              <div><strong className="text-white">Preference Cookies</strong> — Remember your settings such as theme or display preferences.</div>
+            </li>
           </ul>
         </section>
-        <section>
-          <h2 className="text-white font-bold text-xl">Cookie Table</h2>
-          <div className="overflow-x-auto mt-3">
-            <table className="w-full text-sm glass rounded-xl border border-white/5 overflow-hidden">
-              <thead className="bg-elevated text-left"><tr><th className="px-4 py-2">Cookie</th><th className="px-4 py-2">Type</th><th className="px-4 py-2">Duration</th><th className="px-4 py-2">Purpose</th></tr></thead>
-              <tbody className="divide-y divide-white/5">
-                <tr><td className="px-4 py-2">nex_session</td><td className="px-4 py-2">Essential</td><td className="px-4 py-2">Session</td><td className="px-4 py-2">Maintains login state</td></tr>
-                <tr><td className="px-4 py-2">nex_auth</td><td className="px-4 py-2">Essential</td><td className="px-4 py-2">30 days</td><td className="px-4 py-2">Authentication token</td></tr>
-                <tr><td className="px-4 py-2">nex_lang</td><td className="px-4 py-2">Preferences</td><td className="px-4 py-2">1 year</td><td className="px-4 py-2">Language preference</td></tr>
-                <tr><td className="px-4 py-2">_ga</td><td className="px-4 py-2">Analytics</td><td className="px-4 py-2">2 years</td><td className="px-4 py-2">Google Analytics tracking</td></tr>
-                <tr><td className="px-4 py-2">nex_consent</td><td className="px-4 py-2">Essential</td><td className="px-4 py-2">1 year</td><td className="px-4 py-2">Cookie consent status</td></tr>
-              </tbody>
-            </table>
-          </div>
+
+        <section className="glass p-6 rounded-xl border border-white/5">
+          <h2 className="text-white font-bold text-xl mb-3">Third-Party Cookies</h2>
+          <p>Games provided by third-party providers like GamePix may set their own cookies. We do not control these cookies. Please refer to the respective provider's cookie policy for more information.</p>
         </section>
-        <section><h2 className="text-white font-bold text-xl">How to Manage</h2><p>Control via browser settings. Disabling essential may prevent features.</p></section>
-        <p className="text-xs">Last updated: August 7, 2026</p>
+
+        <section className="glass p-6 rounded-xl border border-white/5">
+          <h2 className="text-white font-bold text-xl mb-3">How to Manage Cookies</h2>
+          <p className="mb-3">You can control and manage cookies through your browser settings:</p>
+          <ul className="space-y-2">
+            <li>• <strong className="text-white">Chrome:</strong> Settings → Privacy and Security → Cookies</li>
+            <li>• <strong className="text-white">Firefox:</strong> Settings → Privacy & Security → Cookies</li>
+            <li>• <strong className="text-white">Safari:</strong> Preferences → Privacy → Cookies</li>
+            <li>• <strong className="text-white">Edge:</strong> Settings → Privacy → Cookies</li>
+          </ul>
+          <p className="mt-3">Note: Disabling essential cookies may affect some platform features.</p>
+        </section>
+
+        <section className="glass p-6 rounded-xl border border-white/5">
+          <h2 className="text-white font-bold text-xl mb-3">Contact Us</h2>
+          <p>If you have questions about our cookie policy, please reach out via our <a href="/contact" className="text-electric-violet hover:underline">Contact page</a>.</p>
+        </section>
+
+        <p className="text-xs text-center">Last updated: August 2026</p>
       </div>
     </div>
   )
