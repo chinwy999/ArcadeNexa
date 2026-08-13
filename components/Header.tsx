@@ -1,99 +1,186 @@
 'use client'
-import { useState, useEffect } from 'react'
-import { createPortal } from 'react-dom'
+
+import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { LogIn, Menu, X, Sword } from 'lucide-react'
+import {
+  Gamepad2,
+  Search,
+  Menu,
+  X,
+  ChevronRight,
+} from 'lucide-react'
 
 const navLinks = [
   { href: '/games', label: 'Games' },
+  { href: '/categories', label: 'Categories' },
   { href: '/tournaments', label: 'Tournaments' },
   { href: '/leaderboard', label: 'Leaderboard' },
   { href: '/news', label: 'News' },
-  { href: '/categories', label: 'Categories' },
-  { href: '/search', label: 'Search' },
 ]
 
 export default function Header() {
-  const [mobileOpen, setMobileOpen] = useState(false)
-  const [menuOpen, setMenuOpen] = useState(false)
-  const [mounted, setMounted] = useState(false)
   const pathname = usePathname()
+  const [mobileOpen, setMobileOpen] = useState(false)
 
-  useEffect(() => { setMounted(true) }, [])
+  useEffect(() => {
+    setMobileOpen(false)
+  }, [pathname])
+
+  useEffect(() => {
+    if (!mobileOpen) {
+      document.body.style.overflow = ''
+      return
+    }
+
+    document.body.style.overflow = 'hidden'
+
+    return () => {
+      document.body.style.overflow = ''
+    }
+  }, [mobileOpen])
+
+  const isActive = (href: string) =>
+    pathname === href || pathname.startsWith(`${href}/`)
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 h-16 glass border-b border-white/5">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 h-full flex items-center justify-between">
-        <Link href="/" className="flex items-center gap-2 group" aria-label="ArcadeNexa Home">
-          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-electric-violet to-neon-green flex items-center justify-center transform rotate-45 group-hover:rotate-0 transition-transform duration-300">
-            <span className="text-space-black font-black text-sm transform -rotate-45 group-hover:rotate-0 transition-transform duration-300">N</span>
+    <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-space-black/80 backdrop-blur-xl">
+      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6">
+
+        <Link
+          href="/"
+          aria-label="ArcadeNexa Home"
+          className="group flex items-center gap-2.5"
+        >
+          <div className="relative flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-electric-violet to-neon-green shadow-lg shadow-electric-violet/20 transition-transform duration-300 group-hover:rotate-6">
+            <Gamepad2 className="h-5 w-5 text-space-black" />
           </div>
-          <span className="text-xl font-black tracking-wider">
-            <span className="text-white">ARCADE</span><span className="gradient-text">NEXA</span>
+
+          <span className="text-lg font-black tracking-tight sm:text-xl">
+            <span className="text-white">ARCADE</span>
+            <span className="gradient-text">NEXA</span>
           </span>
         </Link>
 
-        <div className="hidden md:flex items-center gap-8">
-          {navLinks.slice(0, 4).map(link => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className={`text-sm font-medium uppercase tracking-wider transition-colors duration-300 relative group ${pathname === link.href || pathname.startsWith(link.href + '/') ? 'text-white' : 'text-text-secondary hover:text-white'}`}
-            >
-              {link.label}
-              <span className={`absolute -bottom-1 left-0 h-0.5 bg-electric-violet transition-all duration-300 ${pathname === link.href ? 'w-full' : 'w-0 group-hover:w-full'}`}></span>
-            </Link>
-          ))}
-        </div>
+        <nav className="hidden items-center gap-1 lg:flex" aria-label="Main navigation">
+          {navLinks.map((link) => {
+            const active = isActive(link.href)
 
-        <div className="hidden md:flex items-center gap-3">
-          <div className="relative">
-            <button onClick={() => setMenuOpen(!menuOpen)} className="p-2 text-text-secondary hover:text-white transition-colors" aria-label="Open menu" aria-expanded={menuOpen}>
-              {menuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-            </button>
-            {menuOpen && (
-              <div className="absolute right-0 top-full mt-2 w-56 bg-space-black border border-white/10 rounded-xl shadow-xl overflow-hidden">
-                {navLinks.map(link => (
-                  <Link key={link.href} href={link.href} onClick={() => setMenuOpen(false)} className="block px-4 py-3 text-sm text-text-secondary hover:text-white hover:bg-white/5 transition-colors">
-                    {link.label}
-                  </Link>
-                ))}
-              </div>
-            )}
-          </div>
+            return (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={`rounded-lg px-3 py-2 text-xs font-bold uppercase tracking-wide transition ${
+                  active
+                    ? 'bg-white/10 text-white'
+                    : 'text-text-secondary hover:bg-white/5 hover:text-white'
+                }`}
+              >
+                {link.label}
+              </Link>
+            )
+          })}
+        </nav>
 
-          <Link href="/login" className="flex items-center gap-2 bg-electric-violet hover:bg-violet-600 text-white px-5 py-2 rounded-lg text-sm font-semibold transition-all duration-300 neon-glow hover:scale-105">
-            <LogIn className="w-4 h-4" /> LOGIN
+        <div className="hidden items-center gap-2 sm:flex">
+          <Link
+            href="/search"
+            aria-label="Search games"
+            className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-text-secondary transition hover:border-white/20 hover:bg-white/10 hover:text-white"
+          >
+            <Search className="h-4 w-4" />
+          </Link>
+
+          <Link
+            href="/games"
+            className="rounded-xl bg-neon-green px-4 py-2.5 text-xs font-black text-space-black shadow-lg shadow-neon-green/10 transition hover:-translate-y-0.5 hover:shadow-neon-green/20"
+          >
+            PLAY NOW
           </Link>
         </div>
 
-        <button onClick={() => setMobileOpen(!mobileOpen)} className="md:hidden p-2 text-text-secondary hover:text-white transition-colors" aria-label="Toggle menu" aria-expanded={mobileOpen}>
-          {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-        </button>
+        <div className="flex items-center gap-2 sm:hidden">
+          <Link
+            href="/search"
+            aria-label="Search games"
+            className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-white"
+          >
+            <Search className="h-5 w-5" />
+          </Link>
+
+          <button
+            type="button"
+            onClick={() => setMobileOpen((open) => !open)}
+            aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
+            aria-expanded={mobileOpen}
+            className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-white"
+          >
+            {mobileOpen ? (
+              <X className="h-5 w-5" />
+            ) : (
+              <Menu className="h-5 w-5" />
+            )}
+          </button>
+        </div>
       </div>
 
-      {mounted && mobileOpen && createPortal(
-        <div className="fixed inset-0 top-16 bg-space-black z-[999] p-6 md:hidden flex flex-col gap-6 animate-fade-in overflow-y-auto">
-          <div className="flex flex-col gap-4">
-            {navLinks.map(link => (
-              <Link key={link.href} href={link.href} onClick={() => setMobileOpen(false)} className={`text-lg font-bold uppercase tracking-wider ${pathname === link.href ? 'text-electric-violet' : 'text-white'}`}>
-                {link.label}
+      {mobileOpen && (
+        <div className="border-t border-white/10 bg-space-black/98 px-4 pb-6 pt-4 shadow-2xl lg:hidden">
+          <div className="mx-auto max-w-7xl">
+
+            <Link
+              href="/games"
+              className="mb-4 flex items-center justify-between rounded-2xl bg-gradient-to-r from-neon-green to-emerald-400 p-4 text-space-black"
+            >
+              <div>
+                <p className="text-lg font-black">PLAY NOW</p>
+                <p className="text-xs font-semibold opacity-70">
+                  Browse all games
+                </p>
+              </div>
+
+              <ChevronRight className="h-6 w-6" />
+            </Link>
+
+            <nav className="grid gap-1" aria-label="Mobile navigation">
+              {navLinks.map((link) => {
+                const active = isActive(link.href)
+
+                return (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    className={`flex items-center justify-between rounded-xl px-4 py-3.5 text-sm font-bold transition ${
+                      active
+                        ? 'bg-electric-violet/15 text-white'
+                        : 'text-text-secondary hover:bg-white/5 hover:text-white'
+                    }`}
+                  >
+                    <span>{link.label}</span>
+                    <ChevronRight className="h-4 w-4 opacity-50" />
+                  </Link>
+                )
+              })}
+            </nav>
+
+            <div className="mt-4 border-t border-white/10 pt-4">
+              <Link
+                href="/about"
+                className="block rounded-xl px-4 py-3 text-sm font-bold text-text-secondary hover:bg-white/5 hover:text-white"
+              >
+                About ArcadeNexa
               </Link>
-            ))}
-            <Link href="/about" onClick={() => setMobileOpen(false)} className="text-lg font-bold uppercase tracking-wider text-white">About</Link>
+
+              <Link
+                href="/contact"
+                className="block rounded-xl px-4 py-3 text-sm font-bold text-text-secondary hover:bg-white/5 hover:text-white"
+              >
+                Contact
+              </Link>
+            </div>
           </div>
-          <div className="pt-6 border-t border-white/10 flex flex-col gap-3">
-            <Link href="/register" onClick={() => setMobileOpen(false)} className="flex items-center justify-center gap-2 bg-electric-violet text-white px-6 py-3 rounded-xl font-bold">
-              <Sword className="w-5 h-5" /> JOIN NOW
-            </Link>
-            <Link href="/login" onClick={() => setMobileOpen(false)} className="flex items-center justify-center gap-2 border border-white/20 text-white px-6 py-3 rounded-xl font-bold">
-              <LogIn className="w-5 h-5" /> LOGIN
-            </Link>
-          </div>
-        </div>,
-        document.body
+        </div>
       )}
-    </nav>
+    </header>
   )
 }

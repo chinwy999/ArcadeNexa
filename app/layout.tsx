@@ -2,8 +2,9 @@ import type { Metadata } from 'next'
 import './globals.css'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
+import { getSiteUrl } from '@/lib/site'
 
-const siteUrl = 'https://arcade-nexa-3gxg.vercel.app'
+const siteUrl = getSiteUrl()
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),

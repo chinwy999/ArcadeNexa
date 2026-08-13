@@ -1,40 +1,53 @@
 import type { MetadataRoute } from 'next'
 import { getGames } from '@/lib/games'
+import { articles } from '@/lib/articles'
+import { getSiteUrl } from '@/lib/site'
+
+const base = getSiteUrl()
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const base = 'https://arcade-nexa-3gxg.vercel.app'
   const now = new Date()
 
-  const staticPages = [
-    { path: '', priority: 1.0, freq: 'daily' },
-    { path: '/games', priority: 0.9, freq: 'daily' },
-    { path: '/categories', priority: 0.8, freq: 'weekly' },
-    { path: '/search', priority: 0.8, freq: 'weekly' },
-    { path: '/news', priority: 0.7, freq: 'weekly' },
-    { path: '/tournaments', priority: 0.7, freq: 'weekly' },
-    { path: '/leaderboard', priority: 0.6, freq: 'weekly' },
-    { path: '/about', priority: 0.6, freq: 'monthly' },
-    { path: '/faq', priority: 0.6, freq: 'monthly' },
-    { path: '/contact', priority: 0.5, freq: 'monthly' },
-    { path: '/privacy', priority: 0.4, freq: 'monthly' },
-    { path: '/terms', priority: 0.4, freq: 'monthly' },
-    { path: '/cookies', priority: 0.4, freq: 'monthly' },
+  const staticPages: MetadataRoute.Sitemap = [
+    { url: `${base}/`, lastModified: now, changeFrequency: 'daily', priority: 1 },
+    { url: `${base}/games`, lastModified: now, changeFrequency: 'daily', priority: 0.9 },
+    { url: `${base}/categories`, lastModified: now, changeFrequency: 'weekly', priority: 0.8 },
+    { url: `${base}/news`, lastModified: now, changeFrequency: 'weekly', priority: 0.8 },
+    { url: `${base}/about`, lastModified: now, changeFrequency: 'monthly', priority: 0.6 },
+    { url: `${base}/faq`, lastModified: now, changeFrequency: 'monthly', priority: 0.6 },
+    { url: `${base}/contact`, lastModified: now, changeFrequency: 'monthly', priority: 0.5 },
+    { url: `${base}/privacy`, lastModified: now, changeFrequency: 'yearly', priority: 0.4 },
+    { url: `${base}/terms`, lastModified: now, changeFrequency: 'yearly', priority: 0.4 },
+    { url: `${base}/cookies`, lastModified: now, changeFrequency: 'yearly', priority: 0.4 },
   ]
 
-  const staticEntries: MetadataRoute.Sitemap = staticPages.map(p => ({
-    url: `${base}${p.path}`,
-    lastModified: now,
-    changeFrequency: p.freq as any,
-    priority: p.priority,
+  const articleEntries: MetadataRoute.Sitemap = articles.map((article) => ({
+    url: `${base}/news/${article.slug}`,
+    lastModified: new Date(article.date),
+    changeFrequency: 'monthly',
+    priority: 0.7,
   }))
 
-  const games = await getGames()
-  const gameEntries: MetadataRoute.Sitemap = games.map(g => ({
-    url: `${base}/games/${g.slug}`,
-    lastModified: now,
-    changeFrequency: 'weekly' as any,
-    priority: 0.8,
-  }))
+  let gameEntries: MetadataRoute.Sitemap = []
 
-  return [...staticEntries, ...gameEntries]
+  try {
+    const games = await getGames()
+
+    gameEntries = games
+      .filter((game) => game.slug && game.playable)
+      .map((game) => ({
+        url: `${base}/games/${game.slug}`,
+        lastModified: now,
+        changeFrequency: 'weekly' as const,
+        priority: 0.8,
+      }))
+  } catch (error) {
+    console.error('[Sitemap] Failed to load games:', error)
+  }
+
+  return [
+    ...staticPages,
+    ...articleEntries,
+    ...gameEntries,
+  ]
 }
