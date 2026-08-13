@@ -15,6 +15,7 @@ export default async function GamesPage({
   const selectedGenre = searchParams.genre || ''
   const currentPage = Math.max(1, parseInt(searchParams.page || '1'))
 
+  // تصفية حسب الفئة
   const filteredGames = selectedGenre
     ? games.filter(g =>
         g.genreFilter?.toLowerCase() === selectedGenre.toLowerCase() ||
@@ -22,8 +23,11 @@ export default async function GamesPage({
       )
     : games
 
-  const totalPages = Math.ceil(filteredGames.length / GAMES_PER_PAGE)
-  const paginatedGames = filteredGames.slice(
+  // ترتيب حسب الجودة (الأعلى تقييماً أولاً)
+  const sortedGames = [...filteredGames].sort((a, b) => b.rating - a.rating)
+
+  const totalPages = Math.ceil(sortedGames.length / GAMES_PER_PAGE)
+  const paginatedGames = sortedGames.slice(
     (currentPage - 1) * GAMES_PER_PAGE,
     currentPage * GAMES_PER_PAGE
   )
@@ -64,10 +68,8 @@ export default async function GamesPage({
             ))}
           </div>
 
-          {/* Pagination */}
           {totalPages > 1 && (
             <div className="flex items-center justify-center gap-2 flex-wrap">
-              {/* Previous */}
               {currentPage > 1 && (
                 <Link href={buildUrl(currentPage - 1)}
                   className="px-4 py-2 rounded-xl border border-white/10 text-white hover:bg-white/10 transition font-bold">
@@ -75,18 +77,16 @@ export default async function GamesPage({
                 </Link>
               )}
 
-              {/* Page Numbers */}
               {Array.from({ length: totalPages }, (_, i) => i + 1)
                 .filter(p => p === 1 || p === totalPages || Math.abs(p - currentPage) <= 2)
                 .map((page, idx, arr) => (
-                  <>
+                  <span key={page}>
                     {idx > 0 && arr[idx - 1] !== page - 1 && (
-                      <span key={`dots-${page}`} className="text-gray-500 px-2">...</span>
+                      <span className="text-gray-500 px-2">...</span>
                     )}
                     <Link
-                      key={page}
                       href={buildUrl(page)}
-                      className={`w-10 h-10 rounded-xl flex items-center justify-center font-bold transition ${
+                      className={`w-10 h-10 rounded-xl inline-flex items-center justify-center font-bold transition ${
                         page === currentPage
                           ? 'bg-electric-violet text-white'
                           : 'border border-white/10 text-white hover:bg-white/10'
@@ -94,11 +94,10 @@ export default async function GamesPage({
                     >
                       {page}
                     </Link>
-                  </>
+                  </span>
                 ))
               }
 
-              {/* Next */}
               {currentPage < totalPages && (
                 <Link href={buildUrl(currentPage + 1)}
                   className="px-4 py-2 rounded-xl border border-white/10 text-white hover:bg-white/10 transition font-bold">
