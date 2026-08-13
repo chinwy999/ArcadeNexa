@@ -5,16 +5,32 @@ export default function ContactClient() {
   const [form, setForm] = useState({ name: '', email: '', subject: 'General', message: '' })
   const [loading, setLoading] = useState(false)
   const [sent, setSent] = useState(false)
+  const [error, setError] = useState('')
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setLoading(true)
-    setTimeout(() => {
+    setError('')
+
+    try {
+      const response = await fetch('https://formspree.io/f/xbgrkdyv', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form),
+      })
+
+      if (response.ok) {
+        setSent(true)
+        setForm({ name: '', email: '', subject: 'General', message: '' })
+        setTimeout(() => setSent(false), 5000)
+      } else {
+        setError('Failed to send message. Please try again.')
+      }
+    } catch {
+      setError('Network error. Please try again.')
+    } finally {
       setLoading(false)
-      setSent(true)
-      setForm({ name: '', email: '', subject: 'General', message: '' })
-      setTimeout(() => setSent(false), 5000)
-    }, 1000)
+    }
   }
 
   return (
@@ -82,7 +98,12 @@ export default function ContactClient() {
             </button>
             {sent && (
               <div className="bg-neon-green/10 border border-neon-green/30 text-neon-green text-sm p-4 rounded-xl text-center">
-                ✅ Message sent! We will get back to you as soon as possible.
+                ✅ Message sent successfully! We will get back to you soon.
+              </div>
+            )}
+            {error && (
+              <div className="bg-red-500/10 border border-red-500/30 text-red-400 text-sm p-4 rounded-xl text-center">
+                ❌ {error}
               </div>
             )}
           </form>
@@ -96,7 +117,8 @@ export default function ContactClient() {
               <span className="text-2xl">📧</span>
               <h3 className="text-white font-bold">Email Support</h3>
             </div>
-            <p className="text-text-secondary text-sm">For general inquiries and support, email us at: mostapha.bensasi@gmail.com — We typically respond within 24 hours.</p>
+            <p className="text-text-secondary text-sm">mostapha.bensasi@gmail.com</p>
+            <p className="text-text-secondary text-sm mt-1">We typically respond within 24 hours.</p>
           </div>
 
           <div className="glass p-6 rounded-xl border border-white/5">
