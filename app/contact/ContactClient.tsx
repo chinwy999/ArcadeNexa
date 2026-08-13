@@ -96,7 +96,7 @@ export default function ContactClient() {
               <span className="text-2xl">📧</span>
               <h3 className="text-white font-bold">Email Support</h3>
             </div>
-            <p className="text-text-secondary text-sm">For general inquiries and support, reach out to us via email. We typically respond within 24 hours.</p>
+            <p className="text-text-secondary text-sm">For general inquiries and support, email us at: mostapha.bensasi@gmail.com — We typically respond within 24 hours.</p>
           </div>
 
           <div className="glass p-6 rounded-xl border border-white/5">
