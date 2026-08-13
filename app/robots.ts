@@ -6,7 +6,7 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: '*',
         allow: '/',
-        disallow: ['/api/', '/_next/static/', '/private/'],
+        disallow: ['/api/', '/_next/'],
       },
     ],
     sitemap: 'https://arcade-nexa-3gxg.vercel.app/sitemap.xml',
