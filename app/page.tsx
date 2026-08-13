@@ -43,7 +43,7 @@ export default async function HomePage() {
   const gameCountLabel =
     games.length >= 1000
       ? `${(games.length / 1000).toFixed(1)}K+`
-      : `${13000+`
+      : `13000+`
 
   return (
     <main className="min-h-screen overflow-hidden">
