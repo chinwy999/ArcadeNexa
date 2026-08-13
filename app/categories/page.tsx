@@ -8,17 +8,56 @@ export const metadata: Metadata = {
   alternates: { canonical: '/categories' },
 }
 
-const categoryMeta: Record<string, { desc: string, color: string, emoji: string, image: string }> = {
-  Action:     { desc: 'Fast-paced action and adventure games', color: 'from-red-600/40 to-orange-500/40', emoji: '⚔️', image: 'https://images.unsplash.com/photo-1552820728-8b83bb6b773f?w=400&q=80' },
-  Casual:     { desc: 'Casual, fun and quick games', color: 'from-green-500/40 to-emerald-400/40', emoji: '🎯', image: 'https://images.unsplash.com/photo-1593305841991-05c297ba4575?w=400&q=80' },
-  Puzzle:     { desc: 'Brain teasers, logic and meme puzzles', color: 'from-yellow-500/40 to-amber-400/40', emoji: '🧩', image: 'https://images.unsplash.com/photo-1611996575749-79a3a250f948?w=400&q=80' },
-  Racing:     { desc: 'High-speed racing, driving and hill climb', color: 'from-amber-500/40 to-orange-400/40', emoji: '🏎️', image: 'https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?w=400&q=80' },
-  Sports:     { desc: 'High-octane sports and athletics', color: 'from-cyan-500/40 to-blue-400/40', emoji: '⚽', image: 'https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=400&q=80' },
-  Shooter:    { desc: 'Shooter games from GamePix', color: 'from-red-500/40 to-zinc-500/40', emoji: '🔫', image: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?w=400&q=80' },
-  Simulation: { desc: 'Simulation and physics games', color: 'from-sky-500/40 to-blue-400/40', emoji: '🌍', image: 'https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?w=400&q=80' },
-  Strategy:   { desc: 'Plan, build and conquer', color: 'from-indigo-500/40 to-blue-400/40', emoji: '♟️', image: 'https://images.unsplash.com/photo-1528819622765-d6bcf132f793?w=400&q=80' },
-  Adventure:  { desc: 'Explore worlds and go on epic quests', color: 'from-teal-500/40 to-green-400/40', emoji: '🗺️', image: 'https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=400&q=80' },
-  Battle:     { desc: 'Battle and defense strategy', color: 'from-orange-500/40 to-red-400/40', emoji: '🛡️', image: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=400&q=80' },
+const categoryMeta: Record<string, { desc: string, color: string, emoji: string }> = {
+  'adventure':          { desc: 'Explore worlds and go on epic quests', color: 'from-teal-500/40 to-green-400/40', emoji: '🗺️' },
+  'action':             { desc: 'Fast-paced action games', color: 'from-red-600/40 to-orange-500/40', emoji: '⚔️' },
+  'arcade':             { desc: 'Classic arcade fun', color: 'from-pink-500/40 to-purple-500/40', emoji: '🕹️' },
+  'casual':             { desc: 'Casual, fun and quick games', color: 'from-green-500/40 to-emerald-400/40', emoji: '🎯' },
+  'puzzle':             { desc: 'Brain teasers and logic games', color: 'from-yellow-500/40 to-amber-400/40', emoji: '🧩' },
+  'racing':             { desc: 'High-speed racing and driving', color: 'from-amber-500/40 to-orange-400/40', emoji: '🏎️' },
+  'sports':             { desc: 'High-octane sports and athletics', color: 'from-cyan-500/40 to-blue-400/40', emoji: '⚽' },
+  'shooter':            { desc: 'Shoot your way to victory', color: 'from-red-500/40 to-zinc-500/40', emoji: '🔫' },
+  'simulation':         { desc: 'Simulation and physics games', color: 'from-sky-500/40 to-blue-400/40', emoji: '🌍' },
+  'strategy':           { desc: 'Plan, build and conquer', color: 'from-indigo-500/40 to-blue-400/40', emoji: '♟️' },
+  'battle':             { desc: 'Battle and defense games', color: 'from-orange-500/40 to-red-400/40', emoji: '🛡️' },
+  'platformer':         { desc: 'Jump and run platform games', color: 'from-lime-500/40 to-green-400/40', emoji: '🏃' },
+  'fighting':           { desc: 'Combat and fighting games', color: 'from-rose-500/40 to-red-400/40', emoji: '🥊' },
+  'runner':             { desc: 'Endless runner games', color: 'from-violet-500/40 to-purple-400/40', emoji: '👟' },
+  'idle':               { desc: 'Idle and clicker games', color: 'from-slate-500/40 to-gray-400/40', emoji: '💤' },
+  'clicker':            { desc: 'Click your way to success', color: 'from-orange-400/40 to-yellow-400/40', emoji: '👆' },
+  'hyper-casual':       { desc: 'Simple and addictive games', color: 'from-pink-400/40 to-rose-400/40', emoji: '⚡' },
+  'io':                 { desc: 'Multiplayer .io games', color: 'from-emerald-500/40 to-teal-400/40', emoji: '🌐' },
+  'match-3':            { desc: 'Match 3 puzzle games', color: 'from-purple-500/40 to-pink-400/40', emoji: '💎' },
+  'ball':               { desc: 'Ball and physics games', color: 'from-blue-500/40 to-cyan-400/40', emoji: '⚽' },
+  'car':                { desc: 'Car and driving games', color: 'from-gray-500/40 to-slate-400/40', emoji: '🚗' },
+  'card':               { desc: 'Card and board games', color: 'from-red-400/40 to-pink-400/40', emoji: '🃏' },
+  'board':              { desc: 'Classic board games', color: 'from-amber-600/40 to-yellow-500/40', emoji: '🎲' },
+  'brain':              { desc: 'Brain training games', color: 'from-cyan-600/40 to-blue-500/40', emoji: '🧠' },
+  'educational':        { desc: 'Learn while you play', color: 'from-green-600/40 to-teal-500/40', emoji: '📚' },
+  'math':               { desc: 'Math and number games', color: 'from-blue-600/40 to-indigo-500/40', emoji: '🔢' },
+  'memory':             { desc: 'Memory and concentration games', color: 'from-violet-600/40 to-purple-500/40', emoji: '🎭' },
+  'trivia':             { desc: 'Quiz and trivia games', color: 'from-yellow-600/40 to-amber-500/40', emoji: '❓' },
+  'hidden-object':      { desc: 'Find hidden objects games', color: 'from-teal-600/40 to-cyan-500/40', emoji: '🔍' },
+  'animal':             { desc: 'Animal themed games', color: 'from-lime-600/40 to-green-500/40', emoji: '🐾' },
+  'cats':               { desc: 'Cat themed games', color: 'from-orange-400/40 to-amber-400/40', emoji: '🐱' },
+  'monster':            { desc: 'Monster and creature games', color: 'from-purple-700/40 to-violet-500/40', emoji: '👾' },
+  'zombie':             { desc: 'Zombie survival games', color: 'from-green-800/40 to-lime-600/40', emoji: '🧟' },
+  'stickman':           { desc: 'Stickman action games', color: 'from-gray-600/40 to-slate-500/40', emoji: '🏃' },
+  'retro':              { desc: 'Classic retro games', color: 'from-amber-700/40 to-yellow-600/40', emoji: '👾' },
+  'snake':              { desc: 'Snake and worm games', color: 'from-green-700/40 to-emerald-600/40', emoji: '🐍' },
+  'airplane':           { desc: 'Flying and airplane games', color: 'from-sky-600/40 to-blue-500/40', emoji: '✈️' },
+  'basketball':         { desc: 'Basketball games', color: 'from-orange-600/40 to-red-500/40', emoji: '🏀' },
+  'golf':               { desc: 'Golf games', color: 'from-green-500/40 to-lime-400/40', emoji: '⛳' },
+  'block':              { desc: 'Block and building games', color: 'from-blue-500/40 to-indigo-400/40', emoji: '🧱' },
+  'building':           { desc: 'Building and construction games', color: 'from-yellow-700/40 to-amber-600/40', emoji: '🏗️' },
+  'farming':            { desc: 'Farming and management games', color: 'from-lime-500/40 to-green-500/40', emoji: '🌾' },
+  'drawing':            { desc: 'Drawing and creative games', color: 'from-pink-500/40 to-rose-400/40', emoji: '🎨' },
+  'robots':             { desc: 'Robot and sci-fi games', color: 'from-slate-600/40 to-gray-500/40', emoji: '🤖' },
+  'fun':                { desc: 'Fun and entertaining games', color: 'from-yellow-400/40 to-orange-400/40', emoji: '😄' },
+  'games-for-girls':    { desc: 'Games for girls', color: 'from-pink-600/40 to-rose-500/40', emoji: '👑' },
+  '2048':               { desc: '2048 and number puzzle games', color: 'from-orange-500/40 to-amber-400/40', emoji: '🔢' },
+  'first-person-shooter': { desc: 'First person shooter games', color: 'from-red-700/40 to-orange-600/40', emoji: '🎯' },
+  'christmas':          { desc: 'Christmas and holiday games', color: 'from-red-500/40 to-green-500/40', emoji: '🎄' },
 }
 
 export default async function CategoriesPage() {
@@ -35,10 +74,10 @@ export default async function CategoriesPage() {
     <div className="py-20 px-4 sm:px-6 max-w-6xl mx-auto animate-fade-in">
       <h1 className="text-5xl font-black text-white mb-4">Categories</h1>
       <p className="text-text-secondary text-lg mb-10">
-        Choose your battlefield type — {games.length} games across {filters.length} categories
+        {games.length} games across {filters.length} categories
       </p>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {filters.map(filter => {
           const meta = categoryMeta[filter]
           const count = games.filter(g =>
@@ -49,25 +88,14 @@ export default async function CategoriesPage() {
           return (
             <Link key={filter} href={`/games?genre=${encodeURIComponent(filter)}`}
               className="group rounded-2xl overflow-hidden border border-white/10 hover:border-electric-violet/50 transition-all hover:scale-[1.02] block shadow-lg">
-              <div className="relative h-36 overflow-hidden">
-                <img
-                  src={meta.image}
-                  alt={filter}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                />
-                <div className={`absolute inset-0 bg-gradient-to-br ${meta.color}`} />
-                <div className="absolute inset-0 bg-black/30" />
-                <span className="absolute top-3 left-4 text-4xl">{meta.emoji}</span>
-                <span className="absolute bottom-3 right-4 text-white/20 text-3xl font-black tracking-wider">{filter}</span>
+              <div className={`h-20 bg-gradient-to-br ${meta.color} flex items-center justify-center`}>
+                <span className="text-4xl">{meta.emoji}</span>
               </div>
-              <div className="p-5 bg-elevated">
-                <h3 className="text-xl font-black text-white group-hover:text-electric-violet transition-colors">{filter}</h3>
-                <p className="text-text-secondary text-sm mt-1 line-clamp-2">{meta.desc}</p>
-                <div className="mt-3">
-                  <span className="text-neon-green text-xs font-bold bg-neon-green/10 px-3 py-1 rounded-full border border-neon-green/20">
-                    {count} games
-                  </span>
-                </div>
+              <div className="p-4 bg-elevated">
+                <h3 className="text-white font-bold capitalize group-hover:text-electric-violet transition-colors text-sm">
+                  {filter.replace(/-/g, ' ')}
+                </h3>
+                <span className="text-neon-green text-xs font-bold">{count} games</span>
               </div>
             </Link>
           )
