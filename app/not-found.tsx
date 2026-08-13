@@ -14,7 +14,7 @@ export default function NotFound() {
         <Link href="/games" className="border border-white/20 hover:bg-white/10 text-white px-6 py-3 rounded-xl font-bold transition">Browse Games</Link>
         <Link href="/search" className="border border-neon-green text-neon-green hover:bg-neon-green/10 px-6 py-3 rounded-xl font-bold transition">Search Arena</Link>
       </div>
-      <p className="text-xs text-text-secondary mt-8">If you believe this is an error, contact support@nexarena.gg</p>
+      <p className="text-xs text-text-secondary mt-8">If you believe this is an error, contact mostapha.bensasi@gmail.com</p>
     </div>
   )
 }
