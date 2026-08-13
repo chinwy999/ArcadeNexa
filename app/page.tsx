@@ -95,7 +95,7 @@ export default async function HomePage() {
               </div>
               <div className="h-7 w-px bg-white/10" />
               <div>
-                <strong className="text-xl text-white">{47</strong>
+                <strong className="text-xl text-white">{47}</strong>
                 <span className="ml-2 text-gray-500">Categories</span>
               </div>
               <div className="h-7 w-px bg-white/10" />
