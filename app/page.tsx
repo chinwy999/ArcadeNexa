@@ -246,9 +246,6 @@ export default async function HomePage() {
           </div>
         </div>
       </section>
-
-        </div>
-      </section>
       <section className="px-4 py-14">
         <div className="mx-auto max-w-7xl">
           <div className="mb-7 flex items-end justify-between">
