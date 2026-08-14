@@ -1,5 +1,4 @@
-const GM_API = 'https://api.gamemonetize.com/gamefeed.php'
-const GM_KEY = process.env.GAMEMONETIZE_KEY || 'demo'
+const GM_API = 'https://rss.gamemonetize.com/rssfeed.php'
 const REQUEST_TIMEOUT = 15000
 
 export interface GameMonetizeItem {
@@ -13,7 +12,6 @@ export interface GameMonetizeItem {
   thumb: string
   width: string
   height: string
-  date: string
 }
 
 export interface GameMonetizePage {
@@ -24,13 +22,14 @@ export interface GameMonetizePage {
 
 export async function fetchGMGamesPage(
   page = 1,
-  amount = 50
+  amount = 100
 ): Promise<GameMonetizePage> {
   const url = new URL(GM_API)
-  url.searchParams.set('key', GM_KEY)
-  url.searchParams.set('amount', String(amount))
-  url.searchParams.set('page', String(page))
   url.searchParams.set('format', 'json')
+  url.searchParams.set('category', 'All')
+  url.searchParams.set('type', 'html5')
+  url.searchParams.set('popularity', 'newest')
+  url.searchParams.set('amount', String(amount))
 
   const controller = new AbortController()
   const timeout = setTimeout(() => controller.abort(), REQUEST_TIMEOUT)
@@ -52,7 +51,7 @@ export async function fetchGMGamesPage(
     return {
       items,
       page,
-      nextPage: items.length === amount ? page + 1 : null,
+      nextPage: null,
     }
   } finally {
     clearTimeout(timeout)

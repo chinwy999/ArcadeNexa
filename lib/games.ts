@@ -230,28 +230,13 @@ export function convertGMGame(item: GameMonetizeItem): Game {
   }
 }
 
-const GM_PAGES = 10
 
 async function loadGMGames(): Promise<Game[]> {
-  const allItems: GameMonetizeItem[] = []
-  const seen = new Set<string>()
-
-  for (let page = 1; page <= GM_PAGES; page++) {
-    try {
-      const result = await fetchGMGamesPage(page, 50)
-      for (const item of result.items) {
-        const key = String(item.id).trim()
-        if (key && !seen.has(key)) {
-          seen.add(key)
-          allItems.push(item)
-        }
-      }
-      if (!result.nextPage) break
-    } catch (error) {
-      console.error(`[ArcadeNexa] GM failed page ${page}:`, error)
-      break
-    }
+  try {
+    const result = await fetchGMGamesPage(1, 500)
+    return result.items.map(convertGMGame)
+  } catch (error) {
+    console.error("[ArcadeNexa] GameMonetize failed:", error)
+    return []
   }
-
-  return allItems.map(convertGMGame)
 }
