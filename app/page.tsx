@@ -1,5 +1,6 @@
 import { getGames } from '@/lib/games'
 import GameCard from '@/components/GameCard'
+import FeaturedGamesSlider from '@/components/FeaturedGamesSlider'
 import Link from 'next/link'
 
 export const dynamic = 'force-dynamic'
@@ -143,6 +144,12 @@ export default async function HomePage() {
               )}
             </div>
           </div>
+        </div>
+      </section>
+
+      <section className="px-4 py-6 sm:py-10">
+        <div className="mx-auto max-w-7xl">
+          <FeaturedGamesSlider games={games} />
         </div>
       </section>
 
