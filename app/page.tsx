@@ -20,18 +20,15 @@ const categoryMeta: Record<string, { emoji: string; color: string }> = {
 export default async function HomePage() {
   const games = await getGames()
 
-  const featuredGames = [...games].filter(g => g.provider === 'GameMonetize')
-    .sort((a, b) => b.rating - a.rating)
-    .slice(0, 8)
+  const gmGames = [...games].filter(g => g.provider === 'GameMonetize')
+  const gpGames = [...games].filter(g => g.provider === 'GamePix')
 
-  const newGames = [...games].filter(g => g.provider === 'GameMonetize')
-    .sort((a, b) => b.releaseYear - a.releaseYear)
-    .slice(0, 8)
+  const featuredGames = [...gmGames].sort((a, b) => b.rating - a.rating).slice(0, 8)
+  const newGames = [...gmGames].sort((a, b) => b.releaseYear - a.releaseYear).slice(8, 16)
+  const trendingGames = [...gpGames].sort((a, b) => b.rating - a.rating).slice(0, 8)
 
 
-  const trendingGames = [...games].filter(g => g.provider === 'GameMonetize')
-    .sort((a, b) => (b.rating || 0) - (a.rating || 0))
-    .slice(4, 12)
+
 
   const availableCategories = Object.keys(categoryMeta).filter((cat) =>
     games.some(
