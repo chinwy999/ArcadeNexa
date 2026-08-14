@@ -31,7 +31,7 @@ export default function TermsPage() {
 
         <section className="glass p-6 rounded-xl border border-white/5">
           <h2 className="text-white font-bold text-xl mb-3">4. Intellectual Property</h2>
-          <p>All games on ArcadeNexa are provided by third-party developers and providers such as GamePix. ArcadeNexa does not claim ownership of these games. The ArcadeNexa name, logo, and design are our intellectual property.</p>
+          <p>All games on ArcadeNexa are provided by third-party developers and providers such as GamePix and GameMonetize. ArcadeNexa does not claim ownership of these games. The ArcadeNexa name, logo, and design are our intellectual property.</p>
         </section>
 
         <section className="glass p-6 rounded-xl border border-white/5">

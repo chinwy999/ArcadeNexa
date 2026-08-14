@@ -26,7 +26,7 @@ export default function PrivacyPage() {
 
         <section className="glass p-6 rounded-xl border border-white/5">
           <h2 className="text-white font-bold text-xl mb-3">3. Third-Party Games</h2>
-          <p>Games on ArcadeNexa are provided by third-party providers such as GamePix. These providers may have their own privacy policies. We encourage you to review them when playing their games.</p>
+          <p>Games on ArcadeNexa are provided by third-party providers such as GamePix and GameMonetize. These providers may have their own privacy policies. We encourage you to review them when playing their games.</p>
         </section>
 
         <section className="glass p-6 rounded-xl border border-white/5">

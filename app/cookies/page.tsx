@@ -40,7 +40,7 @@ export default function CookiesPage() {
 
         <section className="glass p-6 rounded-xl border border-white/5">
           <h2 className="text-white font-bold text-xl mb-3">Third-Party Cookies</h2>
-          <p>Games provided by third-party providers like GamePix may set their own cookies. We do not control these cookies. Please refer to the respective provider's cookie policy for more information.</p>
+          <p>Games provided by third-party providers like GamePix and GameMonetize may set their own cookies. We do not control these cookies. Please refer to the respective provider's cookie policy for more information.</p>
         </section>
 
         <section className="glass p-6 rounded-xl border border-white/5">
