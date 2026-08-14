@@ -1,3 +1,4 @@
+import { fetchGMGamesPage, GameMonetizeItem } from './gameMonetizeFeed'
 import { fetchGamesPage, GamePixItem } from './gamepixFeed'
 
 export interface Game {
@@ -144,7 +145,17 @@ async function loadGames(): Promise<Game[]> {
       }
     }
 
-    cachedGames = allItems.map(convertGame)
+    const gmGames = await loadGMGames()
+    const gpGames = allItems.map(convertGame)
+    const seenSlugs = new Set<string>()
+    const merged: Game[] = []
+    for (const g of [...gpGames, ...gmGames]) {
+      if (!seenSlugs.has(g.slug)) {
+        seenSlugs.add(g.slug)
+        merged.push(g)
+      }
+    }
+    cachedGames = merged
     cacheTimestamp = Date.now()
     loadingPromise = null
 
@@ -180,3 +191,67 @@ export async function getGameCount(): Promise<number> {
 }
 
 export const games: Game[] = []
+
+
+export function convertGMGame(item: GameMonetizeItem): Game {
+  const slug = `gm-${item.id}`
+  const category = item.category?.toLowerCase() || 'arcade'
+  const w = Number(item.width) || 800
+  const h = Number(item.height) || 600
+
+  return {
+    id: `gamemonetize-${item.id}`,
+    slug,
+    title: item.title || 'Untitled Game',
+    name: item.title || 'Untitled Game',
+    initials: getInitials(item.title || 'Game'),
+    gradient: getGradient(slug),
+    genre: [category, 'HTML5'],
+    genreFilter: category,
+    rating: 8,
+    platform: 'Multi',
+    description: item.description || item.instructions || 'Play instantly in your browser.',
+    longDescription: item.description || item.instructions || 'Play instantly in your browser.',
+    instructions: item.instructions || 'Use mouse or touch controls to play.',
+    tags: item.tags ? item.tags.split(',').map(t => t.trim()) : [category, 'html5'],
+    officialUrl: item.url,
+    iframeUrl: item.url,
+    thumbnail: item.thumb || '',
+    thumbnailLarge: item.thumb || '',
+    thumbnailSizes: { '512x384': item.thumb || '' },
+    releaseYear: item.date ? new Date(item.date).getFullYear() : new Date().getFullYear(),
+    provider: 'GameMonetize',
+    providerGameId: item.id,
+    width: w,
+    height: h,
+    aspectRatio: getAspectRatio(w, h),
+    playable: Boolean(item.url),
+    category,
+  }
+}
+
+const GM_PAGES = 10
+
+async function loadGMGames(): Promise<Game[]> {
+  const allItems: GameMonetizeItem[] = []
+  const seen = new Set<string>()
+
+  for (let page = 1; page <= GM_PAGES; page++) {
+    try {
+      const result = await fetchGMGamesPage(page, 50)
+      for (const item of result.items) {
+        const key = String(item.id).trim()
+        if (key && !seen.has(key)) {
+          seen.add(key)
+          allItems.push(item)
+        }
+      }
+      if (!result.nextPage) break
+    } catch (error) {
+      console.error(`[ArcadeNexa] GM failed page ${page}:`, error)
+      break
+    }
+  }
+
+  return allItems.map(convertGMGame)
+}
