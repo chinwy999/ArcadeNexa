@@ -54,7 +54,7 @@ export default function Footer() {
         </div>
 
         <div className="mt-12 pt-6 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-text-secondary text-xs">© 2026 ArcadeNexa. All rights reserved. Games powered by GamePix — all trademarks belong to their respective owners.</p>
+          <p className="text-text-secondary text-xs">© 2026 ArcadeNexa. All rights reserved. Games powered by GamePix & GameMonetize — all trademarks belong to their respective owners.</p>
           <div className="flex items-center gap-2 text-xs text-text-secondary">
             <span>🎮</span><span>Instant Play • No Download • Free Forever</span>
           </div>
