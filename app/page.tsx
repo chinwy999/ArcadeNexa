@@ -28,6 +28,8 @@ export default async function HomePage() {
     .sort((a, b) => b.releaseYear - a.releaseYear)
     .slice(0, 8)
 
+  const gmGames = [...games].filter(g => g.provider === 'GameMonetize').slice(0, 8)
+
   const trendingGames = [...games]
     .sort((a, b) => (b.rating || 0) - (a.rating || 0))
     .slice(4, 12)
@@ -246,6 +248,30 @@ export default async function HomePage() {
         </div>
       </section>
 
+
+      <section className="px-4 py-14">
+        <div className="mx-auto max-w-7xl">
+          <div className="mb-7 flex items-end justify-between">
+            <div>
+              <p className="text-xs font-bold uppercase tracking-[0.25em] text-orange-400">
+                New Provider
+              </p>
+              <h2 className="mt-1 text-3xl font-black text-white">
+                🎮 GameMonetize Games
+              </h2>
+              <p className="mt-1 text-sm text-gray-500">
+                Fresh games from GameMonetize platform.
+              </p>
+            </div>
+            <Link href="/games" className="text-sm font-bold text-gray-400 hover:text-neon-green">See More →</Link>
+          </div>
+          <div className="grid grid-cols-2 gap-3 sm:grid-cols-2 sm:gap-5 lg:grid-cols-4">
+            {gmGames.map((game) => (
+              <GameCard key={game.slug} game={game} />
+            ))}
+          </div>
+        </div>
+      </section>
       <section className="px-4 py-14">
         <div className="mx-auto max-w-7xl">
           <div className="mb-7 flex items-end justify-between">
