@@ -20,17 +20,17 @@ const categoryMeta: Record<string, { emoji: string; color: string }> = {
 export default async function HomePage() {
   const games = await getGames()
 
-  const featuredGames = [...games]
+  const featuredGames = [...games].filter(g => g.provider === 'GameMonetize')
     .sort((a, b) => b.rating - a.rating)
     .slice(0, 8)
 
-  const newGames = [...games]
+  const newGames = [...games].filter(g => g.provider === 'GameMonetize')
     .sort((a, b) => b.releaseYear - a.releaseYear)
     .slice(0, 8)
 
   const gmGames = [...games].filter(g => g.provider === 'GameMonetize').slice(0, 8)
 
-  const trendingGames = [...games]
+  const trendingGames = [...games].filter(g => g.provider === 'GameMonetize')
     .sort((a, b) => (b.rating || 0) - (a.rating || 0))
     .slice(4, 12)
 
