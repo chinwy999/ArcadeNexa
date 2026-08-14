@@ -219,7 +219,7 @@ export function convertGMGame(item: GameMonetizeItem): Game {
     thumbnail: item.thumb || '',
     thumbnailLarge: item.thumb || '',
     thumbnailSizes: { '512x384': item.thumb || '' },
-    releaseYear: item.date ? new Date(item.date).getFullYear() : new Date().getFullYear(),
+    releaseYear: new Date().getFullYear(),
     provider: 'GameMonetize',
     providerGameId: item.id,
     width: w,
