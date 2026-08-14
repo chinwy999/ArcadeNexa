@@ -1,4 +1,4 @@
-const GM_API = 'https://rss.gamemonetize.com/rssfeed.php'
+const GM_API = 'https://gamemonetize.com/feed.php'
 const REQUEST_TIMEOUT = 15000
 
 export interface GameMonetizeItem {
@@ -22,14 +22,16 @@ export interface GameMonetizePage {
 
 export async function fetchGMGamesPage(
   page = 1,
-  amount = 100
+  amount = 50
 ): Promise<GameMonetizePage> {
+  const safePage = Math.max(1, Math.floor(page))
+  const safeAmount = Math.min(200, Math.max(1, Math.floor(amount)))
+
   const url = new URL(GM_API)
-  url.searchParams.set('format', 'json')
-  url.searchParams.set('category', 'All')
-  url.searchParams.set('type', 'html5')
-  url.searchParams.set('popularity', 'newest')
-  url.searchParams.set('amount', String(amount))
+
+  url.searchParams.set('format', '0')
+  url.searchParams.set('num', String(safeAmount))
+  url.searchParams.set('page', String(safePage))
 
   const controller = new AbortController()
   const timeout = setTimeout(() => controller.abort(), REQUEST_TIMEOUT)
@@ -37,8 +39,12 @@ export async function fetchGMGamesPage(
   try {
     const response = await fetch(url.toString(), {
       signal: controller.signal,
-      headers: { Accept: 'application/json' },
-      next: { revalidate: 3600 },
+      headers: {
+        Accept: 'application/json',
+      },
+      next: {
+        revalidate: 3600,
+      },
     })
 
     if (!response.ok) {
@@ -46,12 +52,17 @@ export async function fetchGMGamesPage(
     }
 
     const data = await response.json()
-    const items: GameMonetizeItem[] = Array.isArray(data) ? data : []
+
+    const items: GameMonetizeItem[] = Array.isArray(data)
+      ? data
+      : Array.isArray(data?.items)
+        ? data.items
+        : []
 
     return {
       items,
-      page,
-      nextPage: null,
+      page: safePage,
+      nextPage: items.length >= safeAmount ? safePage + 1 : null,
     }
   } finally {
     clearTimeout(timeout)

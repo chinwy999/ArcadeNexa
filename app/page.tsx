@@ -1,3 +1,4 @@
+import { Swords, Gamepad2, Puzzle, Flag, Trophy, Crosshair, Globe2, Crown, Map, Shield } from "lucide-react"
 import { getGames } from '@/lib/games'
 import GameCard from '@/components/GameCard'
 import FeaturedGamesSlider from '@/components/FeaturedGamesSlider'
@@ -5,17 +6,17 @@ import Link from 'next/link'
 
 export const dynamic = 'force-dynamic'
 
-const categoryMeta: Record<string, { emoji: string; color: string }> = {
-  Action: { emoji: '⚔️', color: 'from-red-500 to-orange-500' },
-  Casual: { emoji: '🎯', color: 'from-green-500 to-emerald-400' },
-  Puzzle: { emoji: '🧩', color: 'from-yellow-500 to-amber-400' },
-  Racing: { emoji: '🏎️', color: 'from-amber-500 to-orange-400' },
-  Sports: { emoji: '⚽', color: 'from-cyan-500 to-blue-400' },
-  Shooter: { emoji: '🎯', color: 'from-red-500 to-zinc-500' },
-  Simulation: { emoji: '🌍', color: 'from-sky-500 to-blue-400' },
-  Strategy: { emoji: '♟️', color: 'from-indigo-500 to-blue-400' },
-  Adventure: { emoji: '🗺️', color: 'from-teal-500 to-green-400' },
-  Battle: { emoji: '🛡️', color: 'from-orange-500 to-red-400' },
+const categoryMeta: Record<string, { icon: any; color: string }> = {
+  Action: { icon: Swords, color: 'from-red-500 to-orange-500' },
+  Casual: { icon: Gamepad2, color: 'from-green-500 to-emerald-400' },
+  Puzzle: { icon: Puzzle, color: 'from-yellow-500 to-amber-400' },
+  Racing: { icon: Flag, color: 'from-amber-500 to-orange-400' },
+  Sports: { icon: Trophy, color: 'from-cyan-500 to-blue-400' },
+  Shooter: { icon: Crosshair, color: 'from-red-500 to-zinc-500' },
+  Simulation: { icon: Globe2, color: 'from-sky-500 to-blue-400' },
+  Strategy: { icon: Crown, color: 'from-indigo-500 to-blue-400' },
+  Adventure: { icon: Map, color: 'from-teal-500 to-green-400' },
+  Battle: { icon: Shield, color: 'from-orange-500 to-red-400' },
 }
 
 export default async function HomePage() {
@@ -173,18 +174,49 @@ export default async function HomePage() {
             </Link>
           </div>
 
-          <div className="scrollbar-hide flex gap-3 overflow-x-auto pb-3">
+          <div className="scrollbar-hide grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
             {availableCategories.map((category) => {
               const meta = categoryMeta[category]
+              const Icon = meta.icon
+
+              const categoryGameCount = games.filter(
+                (game) =>
+                  game.genreFilter?.toLowerCase() === category.toLowerCase() ||
+                  game.category?.toLowerCase() === category.toLowerCase()
+              ).length
 
               return (
                 <Link
                   key={category}
                   href={`/games?genre=${encodeURIComponent(category)}`}
-                  className={`flex min-w-max items-center gap-2 rounded-xl bg-gradient-to-r ${meta.color} px-5 py-3 text-sm font-black text-white shadow-lg transition hover:-translate-y-1`}
+                  className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] p-4 shadow-xl backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:border-white/20 hover:bg-white/[0.07] active:scale-[0.97]"
                 >
-                  <span>{meta.emoji}</span>
-                  {category}
+                  <div
+                    className={`absolute -right-8 -top-8 h-24 w-24 rounded-full bg-gradient-to-br ${meta.color} opacity-20 blur-2xl transition-opacity duration-300 group-hover:opacity-40`}
+                  />
+
+                  <div
+                    className={`relative mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br ${meta.color} shadow-lg transition-transform duration-300 group-hover:scale-110`}
+                  >
+                    <Icon
+                      className="h-7 w-7 text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.7)]"
+                      strokeWidth={2.4}
+                    />
+                  </div>
+
+                  <div className="relative">
+                    <h3 className="text-sm font-black uppercase tracking-wide text-white">
+                      {category}
+                    </h3>
+
+                    <p className="mt-1 text-xs font-medium text-gray-500">
+                      {categoryGameCount} {categoryGameCount === 1 ? 'Game' : 'Games'}
+                    </p>
+                  </div>
+
+                  <div className="absolute bottom-4 right-4 text-xs font-bold text-white/30 transition-colors group-hover:text-white/80">
+                    →
+                  </div>
                 </Link>
               )
             })}
