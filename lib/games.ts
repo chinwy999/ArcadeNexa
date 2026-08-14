@@ -149,7 +149,7 @@ async function loadGames(): Promise<Game[]> {
     const gpGames = allItems.map(convertGame)
     const seenSlugs = new Set<string>()
     const merged: Game[] = []
-    for (const g of [...gpGames, ...gmGames]) {
+    for (const g of [...gmGames, ...gpGames]) {
       if (!seenSlugs.has(g.slug)) {
         seenSlugs.add(g.slug)
         merged.push(g)
