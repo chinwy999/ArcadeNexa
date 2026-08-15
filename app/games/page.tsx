@@ -34,7 +34,7 @@ export default async function GamesPage({
    * كل صفحة تطلب فقط 48 لعبة من API.
    */
   const apiUrl =
-    `http://127.0.0.1:3001/api/games?page=${currentPage}` +
+    `/api/games?page=${currentPage}` +
     `&pagination=${GAMES_PER_PAGE}` +
     (selectedGenre
       ? `&genre=${encodeURIComponent(selectedGenre)}`
