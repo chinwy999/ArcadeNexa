@@ -1,0 +1,34 @@
+import { NextRequest, NextResponse } from 'next/server'
+import { getGames } from '@/lib/games'
+
+export const dynamic = 'force-dynamic'
+
+export async function GET(request: NextRequest) {
+  try {
+    const { searchParams } = new URL(request.url)
+    const page = Math.max(1, Number(searchParams.get('page') || '1'))
+    const pagination = Math.min(48, Math.max(1, Number(searchParams.get('pagination') || '24')))
+    const genre = searchParams.get('genre') || ''
+
+    const allGames = await getGames()
+
+    const filtered = genre
+      ? allGames.filter(g =>
+          g.category?.toLowerCase() === genre.toLowerCase() ||
+          g.genreFilter?.toLowerCase() === genre.toLowerCase()
+        )
+      : allGames
+
+    const start = (page - 1) * pagination
+    const games = filtered.slice(start, start + pagination)
+
+    return NextResponse.json(games, {
+      headers: {
+        'Cache-Control': 'public, s-maxage=3600, stale-while-revalidate=86400',
+      },
+    })
+  } catch (error) {
+    console.error('[API /games]', error)
+    return NextResponse.json({ ok: false, error: 'Unable to load games', games: [] }, { status: 502 })
+  }
+}

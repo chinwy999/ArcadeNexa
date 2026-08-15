@@ -1,0 +1,80 @@
+import { NextRequest, NextResponse } from 'next/server'
+import { fetchGamesPage } from '@/lib/gamepixFeed'
+import { fetchGMGamesPage } from '@/lib/gameMonetizeFeed'
+import { convertGame, convertGMGame, type Game } from '@/lib/games'
+
+export const dynamic = 'force-dynamic'
+
+export async function GET(request: NextRequest) {
+  try {
+    const { searchParams } = new URL(request.url)
+
+    const page = Math.max(
+      1,
+      Number(searchParams.get('page') || '1')
+    )
+
+    const pagination = Math.min(
+      48,
+      Math.max(
+        1,
+        Number(searchParams.get('pagination') || '48')
+      )
+    )
+
+    const genre = searchParams.get('genre') || ''
+
+    console.log(
+      `[ArcadeNexa API] Loading page ${page}, ${pagination} games`
+    )
+
+    const [gpResult, gmResult] = await Promise.all([
+      fetchGamesPage(page, 96, 'quality'),
+      fetchGMGamesPage(page, 200),
+    ])
+
+    const gpGames = gpResult.items.map(convertGame)
+    const gmGames = gmResult.items.map(convertGMGame)
+
+    const seen = new Set<string>()
+    const merged: Game[] = []
+
+    for (const game of [...gmGames, ...gpGames]) {
+      if (!seen.has(game.slug)) {
+        seen.add(game.slug)
+        merged.push(game)
+      }
+    }
+
+    const filtered = genre
+      ? merged.filter(game =>
+          game.category?.toLowerCase() === genre.toLowerCase() ||
+          game.genreFilter?.toLowerCase() === genre.toLowerCase()
+        )
+      : merged
+
+    const games = filtered.slice(0, pagination)
+
+    console.log(
+      `[ArcadeNexa API] Returning ${games.length} games`
+    )
+
+    return NextResponse.json(games, {
+      headers: {
+        'Cache-Control':
+          'public, s-maxage=3600, stale-while-revalidate=86400',
+      },
+    })
+  } catch (error) {
+    console.error('[ArcadeNexa API] Error:', error)
+
+    return NextResponse.json(
+      {
+        ok: false,
+        error: 'Unable to load games',
+        games: [],
+      },
+      { status: 502 }
+    )
+  }
+}

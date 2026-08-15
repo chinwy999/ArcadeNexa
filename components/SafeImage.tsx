@@ -35,6 +35,7 @@ export default function SafeImage({ src, alt, gradient, initials, sizes, classNa
         alt={alt}
         fill
         unoptimized
+        loading="lazy"
         className={className}
         sizes={sizes}
         onLoad={() => setLoading(false)}
