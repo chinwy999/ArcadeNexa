@@ -261,7 +261,7 @@ export default async function HomePage() {
 
           <div className="grid grid-cols-2 gap-3 sm:grid-cols-2 sm:gap-5 lg:grid-cols-4">
             {featuredGames.map((game) => (
-              <GameCard key={game.slug} game={game} lazy />
+              <GameCard key={game.slug} game={game} />
             ))}
           </div>
         </div>
@@ -289,7 +289,7 @@ export default async function HomePage() {
 
           <div className="grid grid-cols-2 gap-3 sm:grid-cols-2 sm:gap-5 lg:grid-cols-4">
             {trendingGames.map((game) => (
-              <GameCard key={game.slug} game={game} lazy />
+              <GameCard key={game.slug} game={game} />
             ))}
           </div>
         </div>
@@ -316,7 +316,7 @@ export default async function HomePage() {
 
           <div className="grid grid-cols-2 gap-3 sm:grid-cols-2 sm:gap-5 lg:grid-cols-4">
             {newGames.map((game) => (
-              <GameCard key={game.slug} game={game} lazy />
+              <GameCard key={game.slug} game={game} />
             ))}
           </div>
         </div>
