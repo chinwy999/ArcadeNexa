@@ -1,18 +1,19 @@
-import { Swords, Gamepad2, Puzzle, Flag, Trophy, Crosshair, Globe2, Crown, Map, Shield } from "lucide-react"
+import { Globe2, Crown, Map, Shield } from "lucide-react"
 import { getGames } from '@/lib/games'
 import GameCard from '@/components/GameCard'
 import FeaturedGamesSlider from '@/components/FeaturedGamesSlider'
 import Link from 'next/link'
+import Image from 'next/image'
 
 export const dynamic = 'force-dynamic'
 
-const categoryMeta: Record<string, { icon: any; color: string }> = {
-  Action: { icon: Swords, color: 'from-red-500 to-orange-500' },
-  Casual: { icon: Gamepad2, color: 'from-green-500 to-emerald-400' },
-  Puzzle: { icon: Puzzle, color: 'from-yellow-500 to-amber-400' },
-  Racing: { icon: Flag, color: 'from-amber-500 to-orange-400' },
-  Sports: { icon: Trophy, color: 'from-cyan-500 to-blue-400' },
-  Shooter: { icon: Crosshair, color: 'from-red-500 to-zinc-500' },
+const categoryMeta: Record<string, { icon?: any; image?: string; color: string }> = {
+  Action: { image: '/images/categories/action.webp', color: 'from-red-500 to-orange-500' },
+  Casual: { image: '/images/categories/casual.webp', color: 'from-green-500 to-emerald-400' },
+  Puzzle: { image: '/images/categories/puzzle.webp', color: 'from-yellow-500 to-amber-400' },
+  Racing: { image: '/images/categories/racing.webp', color: 'from-amber-500 to-orange-400' },
+  Sports: { image: '/images/categories/sports.webp', color: 'from-cyan-500 to-blue-400' },
+  Shooter: { image: '/images/categories/shooter.webp', color: 'from-red-500 to-zinc-500' },
   Simulation: { icon: Globe2, color: 'from-sky-500 to-blue-400' },
   Strategy: { icon: Crown, color: 'from-indigo-500 to-blue-400' },
   Adventure: { icon: Map, color: 'from-teal-500 to-green-400' },
@@ -196,12 +197,28 @@ export default async function HomePage() {
                   />
 
                   <div
-                    className={`relative mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br ${meta.color} shadow-lg transition-transform duration-300 group-hover:scale-110`}
+                    className="relative mb-4 h-32 overflow-hidden rounded-2xl border border-white/10 bg-black/20 shadow-lg transition-all duration-300 group-hover:scale-[1.02] group-hover:border-white/20"
                   >
-                    <Icon
-                      className="h-7 w-7 text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.7)]"
-                      strokeWidth={2.4}
-                    />
+                    {meta.image ? (
+                      <Image
+                        src={meta.image}
+                        alt={`${category} games`}
+                        fill
+                        sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
+                        className="object-cover transition-transform duration-500 group-hover:scale-110"
+                      />
+                    ) : Icon ? (
+                      <div
+                        className={`flex h-full w-full items-center justify-center bg-gradient-to-br ${meta.color}`}
+                      >
+                        <Icon
+                          className="h-10 w-10 text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.7)]"
+                          strokeWidth={2.4}
+                        />
+                      </div>
+                    ) : null}
+
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
                   </div>
 
                   <div className="relative">

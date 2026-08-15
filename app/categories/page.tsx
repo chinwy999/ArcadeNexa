@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import Image from 'next/image'
 import { getGames } from '@/lib/games'
 
 export const metadata: Metadata = {
@@ -8,15 +9,15 @@ export const metadata: Metadata = {
   alternates: { canonical: '/categories' },
 }
 
-const categoryMeta: Record<string, { desc: string; gradient: string; bg: string; icon: string }> = {
+const categoryMeta: Record<string, { desc: string; gradient: string; bg: string; icon: string; image?: string }> = {
   'adventure':          { desc: 'Explore worlds & epic quests',    gradient: 'from-teal-400 to-green-500',      bg: 'from-teal-500/20 to-green-500/10',      icon: '🗺️' },
-  'action':             { desc: 'Fast-paced action games',         gradient: 'from-red-400 to-orange-500',      bg: 'from-red-500/20 to-orange-500/10',      icon: '⚔️' },
+  'action':             { image: '/images/categories/action.webp', desc: 'Fast-paced action games',         gradient: 'from-red-400 to-orange-500',      bg: 'from-red-500/20 to-orange-500/10',      icon: '⚔️' },
   'arcade':             { desc: 'Classic arcade fun',              gradient: 'from-pink-400 to-purple-600',     bg: 'from-pink-500/20 to-purple-500/10',     icon: '🕹️' },
-  'casual':             { desc: 'Fun and quick games',             gradient: 'from-green-400 to-emerald-500',   bg: 'from-green-500/20 to-emerald-500/10',   icon: '🎯' },
-  'puzzle':             { desc: 'Brain teasers & logic',           gradient: 'from-yellow-400 to-amber-500',    bg: 'from-yellow-500/20 to-amber-500/10',    icon: '🧩' },
-  'racing':             { desc: 'High-speed racing',               gradient: 'from-amber-400 to-orange-500',   bg: 'from-amber-500/20 to-orange-500/10',   icon: '🏎️' },
-  'sports':             { desc: 'Sports & athletics',              gradient: 'from-cyan-400 to-blue-500',       bg: 'from-cyan-500/20 to-blue-500/10',       icon: '⚽' },
-  'shooter':            { desc: 'Shoot your way to victory',       gradient: 'from-red-500 to-zinc-600',        bg: 'from-red-500/20 to-zinc-500/10',        icon: '🔫' },
+  'casual':             { image: '/images/categories/casual.webp', desc: 'Fun and quick games',             gradient: 'from-green-400 to-emerald-500',   bg: 'from-green-500/20 to-emerald-500/10',   icon: '🎯' },
+  'puzzle':             { image: '/images/categories/puzzle.webp', desc: 'Brain teasers & logic',           gradient: 'from-yellow-400 to-amber-500',    bg: 'from-yellow-500/20 to-amber-500/10',    icon: '🧩' },
+  'racing':             { image: '/images/categories/racing.webp', desc: 'High-speed racing',               gradient: 'from-amber-400 to-orange-500',   bg: 'from-amber-500/20 to-orange-500/10',   icon: '🏎️' },
+  'sports':             { image: '/images/categories/sports.webp', desc: 'Sports & athletics',              gradient: 'from-cyan-400 to-blue-500',       bg: 'from-cyan-500/20 to-blue-500/10',       icon: '⚽' },
+  'shooter':            { image: '/images/categories/shooter.webp', desc: 'Shoot your way to victory',       gradient: 'from-red-500 to-zinc-600',        bg: 'from-red-500/20 to-zinc-500/10',        icon: '🔫' },
   'simulation':         { desc: 'Simulation & physics',            gradient: 'from-sky-400 to-blue-500',        bg: 'from-sky-500/20 to-blue-500/10',        icon: '🌍' },
   'strategy':           { desc: 'Plan, build & conquer',           gradient: 'from-indigo-400 to-blue-600',     bg: 'from-indigo-500/20 to-blue-500/10',     icon: '♟️' },
   'battle':             { desc: 'Battle & defense',                gradient: 'from-orange-400 to-red-500',      bg: 'from-orange-500/20 to-red-500/10',      icon: '🛡️' },
@@ -108,8 +109,22 @@ export default async function CategoriesPage() {
               {/* Content */}
               <div className="relative p-4 flex flex-col gap-3">
                 {/* Icon box */}
-                <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${meta.gradient} flex items-center justify-center shadow-lg text-2xl group-hover:scale-110 transition-transform duration-300`}>
-                  {meta.icon}
+                <div className="relative w-full h-24 overflow-hidden rounded-xl border border-white/10 bg-black/20 shadow-lg group-hover:scale-[1.02] transition-transform duration-300">
+                  {meta.image ? (
+                    <Image
+                      src={meta.image}
+                      alt={`${filter.replace(/-/g, ' ')} games`}
+                      fill
+                      sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
+                      className="object-cover transition-transform duration-500 group-hover:scale-110"
+                    />
+                  ) : (
+                    <div className={`flex h-full w-full items-center justify-center bg-gradient-to-br ${meta.gradient} text-2xl`}>
+                      {meta.icon}
+                    </div>
+                  )}
+
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
                 </div>
 
                 {/* Text */}
