@@ -31,7 +31,7 @@ export default async function GamesPage({
   try {
     const { getGamesPage } = await import('@/lib/games')
     const result = await getGamesPage(currentPage, GAMES_PER_PAGE, selectedGenre)
-    games = result.games as Game[]
+    games = result.games as unknown as Game[]
   } catch (error) {
     console.error('[Games Page] failed:', error)
   }
