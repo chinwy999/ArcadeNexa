@@ -27,32 +27,13 @@ export default async function GamesPage({
     ? Math.max(1, parsedPage)
     : 1
 
-  /*
-   * مهم:
-   * لا نستعمل getGames() هنا.
-   *
-   * كل صفحة تطلب فقط 48 لعبة من API.
-   */
-  const apiUrl =
-    `/api/games?page=${currentPage}` +
-    `&pagination=${GAMES_PER_PAGE}` +
-    (selectedGenre
-      ? `&genre=${encodeURIComponent(selectedGenre)}`
-      : '')
-
   let games: Game[] = []
-
   try {
-    const response = await fetch(apiUrl, {
-      cache: 'no-store',
-    })
-
-    if (response.ok) {
-      const data = await response.json()
-      games = Array.isArray(data) ? data : []
-    }
+    const { getGamesPage } = await import('@/lib/games')
+    const result = await getGamesPage(currentPage, GAMES_PER_PAGE, selectedGenre)
+    games = result.games as Game[]
   } catch (error) {
-    console.error('[Games Page] API request failed:', error)
+    console.error('[Games Page] failed:', error)
   }
 
   /*
