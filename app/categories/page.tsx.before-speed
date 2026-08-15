@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
+import { getGames } from '@/lib/games'
 
 export const metadata: Metadata = {
   title: 'Categories',
@@ -38,26 +39,26 @@ const categoryMeta: Record<string, { desc: string; gradient: string; bg: string;
   'memory':             { image: '/images/categories/memory.webp', desc: 'Memory & concentration',          gradient: 'from-violet-500 to-purple-600',   bg: 'from-violet-500/20 to-purple-500/10',   icon: '🎭' },
   'trivia':             { image: '/images/categories/trivia.webp', desc: 'Quiz & trivia games',             gradient: 'from-yellow-500 to-amber-600',    bg: 'from-yellow-500/20 to-amber-500/10',    icon: '❓' },
   'hidden-object':      { image: '/images/categories/hidden-object.webp', desc: 'Find hidden objects',             gradient: 'from-teal-500 to-cyan-600',       bg: 'from-teal-500/20 to-cyan-500/10',       icon: '🔍' },
-  'animal':             { image: '/images/categories/adventure.webp', desc: 'Animal themed games',             gradient: 'from-lime-500 to-green-600',      bg: 'from-lime-500/20 to-green-500/10',      icon: '🐾' },
-  'cats':               { image: '/images/categories/idle.webp', desc: 'Cat themed games',                gradient: 'from-orange-300 to-amber-500',    bg: 'from-orange-500/20 to-amber-500/10',    icon: '🐱' },
-  'monster':            { image: '/images/categories/horror.webp', desc: 'Monster & creature games',        gradient: 'from-purple-600 to-violet-700',   bg: 'from-purple-500/20 to-violet-500/10',   icon: '👾' },
+  'animal':             { desc: 'Animal themed games',             gradient: 'from-lime-500 to-green-600',      bg: 'from-lime-500/20 to-green-500/10',      icon: '🐾' },
+  'cats':               { desc: 'Cat themed games',                gradient: 'from-orange-300 to-amber-500',    bg: 'from-orange-500/20 to-amber-500/10',    icon: '🐱' },
+  'monster':            { desc: 'Monster & creature games',        gradient: 'from-purple-600 to-violet-700',   bg: 'from-purple-500/20 to-violet-500/10',   icon: '👾' },
   'zombie':             { image: '/images/categories/zombie.webp', desc: 'Zombie survival games',           gradient: 'from-green-700 to-lime-600',      bg: 'from-green-700/20 to-lime-500/10',      icon: '🧟' },
-  'stickman':           { image: '/images/categories/runner.webp', desc: 'Stickman action games',           gradient: 'from-gray-500 to-slate-600',      bg: 'from-gray-500/20 to-slate-500/10',      icon: '🏃' },
-  'retro':              { image: '/images/categories/arcade.webp', desc: 'Classic retro games',             gradient: 'from-amber-600 to-yellow-700',    bg: 'from-amber-500/20 to-yellow-500/10',    icon: '🎮' },
-  'snake':              { image: '/images/categories/io.webp', desc: 'Snake & worm games',              gradient: 'from-green-600 to-emerald-700',   bg: 'from-green-500/20 to-emerald-500/10',   icon: '🐍' },
-  'airplane':           { image: '/images/categories/flying.webp', desc: 'Flying & airplane games',         gradient: 'from-sky-500 to-blue-600',        bg: 'from-sky-500/20 to-blue-500/10',        icon: '✈️' },
-  'basketball':         { image: '/images/categories/sports.webp', desc: 'Basketball games',                gradient: 'from-orange-500 to-red-600',      bg: 'from-orange-500/20 to-red-500/10',      icon: '🏀' },
-  'golf':               { image: '/images/categories/ball.webp', desc: 'Golf games',                      gradient: 'from-green-400 to-lime-500',      bg: 'from-green-500/20 to-lime-500/10',      icon: '⛳' },
-  'block':              { image: '/images/categories/puzzle.webp', desc: 'Block & building games',          gradient: 'from-blue-400 to-indigo-500',     bg: 'from-blue-500/20 to-indigo-500/10',     icon: '🧱' },
-  'building':           { image: '/images/categories/sandbox.webp', desc: 'Building & construction',         gradient: 'from-yellow-600 to-amber-700',    bg: 'from-yellow-500/20 to-amber-500/10',    icon: '🏗️' },
+  'stickman':           { desc: 'Stickman action games',           gradient: 'from-gray-500 to-slate-600',      bg: 'from-gray-500/20 to-slate-500/10',      icon: '🏃' },
+  'retro':              { desc: 'Classic retro games',             gradient: 'from-amber-600 to-yellow-700',    bg: 'from-amber-500/20 to-yellow-500/10',    icon: '🎮' },
+  'snake':              { desc: 'Snake & worm games',              gradient: 'from-green-600 to-emerald-700',   bg: 'from-green-500/20 to-emerald-500/10',   icon: '🐍' },
+  'airplane':           { desc: 'Flying & airplane games',         gradient: 'from-sky-500 to-blue-600',        bg: 'from-sky-500/20 to-blue-500/10',        icon: '✈️' },
+  'basketball':         { desc: 'Basketball games',                gradient: 'from-orange-500 to-red-600',      bg: 'from-orange-500/20 to-red-500/10',      icon: '🏀' },
+  'golf':               { desc: 'Golf games',                      gradient: 'from-green-400 to-lime-500',      bg: 'from-green-500/20 to-lime-500/10',      icon: '⛳' },
+  'block':              { desc: 'Block & building games',          gradient: 'from-blue-400 to-indigo-500',     bg: 'from-blue-500/20 to-indigo-500/10',     icon: '🧱' },
+  'building':           { desc: 'Building & construction',         gradient: 'from-yellow-600 to-amber-700',    bg: 'from-yellow-500/20 to-amber-500/10',    icon: '🏗️' },
   'farming':            { image: '/images/categories/farming.webp', desc: 'Farming & management',            gradient: 'from-lime-400 to-green-600',      bg: 'from-lime-500/20 to-green-500/10',      icon: '🌾' },
-  'drawing':            { image: '/images/categories/hyper-casual.webp', desc: 'Drawing & creative games',        gradient: 'from-pink-400 to-rose-500',       bg: 'from-pink-500/20 to-rose-500/10',       icon: '🎨' },
-  'robots':             { image: '/images/categories/space.webp', desc: 'Robot & sci-fi games',            gradient: 'from-slate-500 to-gray-600',      bg: 'from-slate-500/20 to-gray-500/10',      icon: '🤖' },
-  'fun':                { image: '/images/categories/clicker.webp', desc: 'Fun & entertaining games',        gradient: 'from-yellow-400 to-orange-500',   bg: 'from-yellow-500/20 to-orange-500/10',   icon: '😄' },
-  'games-for-girls':    { image: '/images/categories/beauty-dress-up.webp', desc: 'Games for girls',                 gradient: 'from-pink-500 to-rose-600',       bg: 'from-pink-500/20 to-rose-500/10',       icon: '👑' },
-  '2048':               { image: '/images/categories/math.webp', desc: '2048 & number puzzles',           gradient: 'from-orange-400 to-amber-500',    bg: 'from-orange-500/20 to-amber-500/10',    icon: '🔢' },
-  'first-person-shooter': { image: '/images/categories/shooter.webp', desc: 'First person shooter',         gradient: 'from-red-600 to-orange-700',      bg: 'from-red-500/20 to-orange-500/10',      icon: '🎯' },
-  'christmas':          { image: '/images/categories/tycoon.webp', desc: 'Christmas & holiday games',       gradient: 'from-red-500 to-green-600',       bg: 'from-red-500/20 to-green-500/10',       icon: '🎄' },
+  'drawing':            { desc: 'Drawing & creative games',        gradient: 'from-pink-400 to-rose-500',       bg: 'from-pink-500/20 to-rose-500/10',       icon: '🎨' },
+  'robots':             { desc: 'Robot & sci-fi games',            gradient: 'from-slate-500 to-gray-600',      bg: 'from-slate-500/20 to-gray-500/10',      icon: '🤖' },
+  'fun':                { desc: 'Fun & entertaining games',        gradient: 'from-yellow-400 to-orange-500',   bg: 'from-yellow-500/20 to-orange-500/10',   icon: '😄' },
+  'games-for-girls':    { desc: 'Games for girls',                 gradient: 'from-pink-500 to-rose-600',       bg: 'from-pink-500/20 to-rose-500/10',       icon: '👑' },
+  '2048':               { desc: '2048 & number puzzles',           gradient: 'from-orange-400 to-amber-500',    bg: 'from-orange-500/20 to-amber-500/10',    icon: '🔢' },
+  'first-person-shooter': { desc: 'First person shooter',         gradient: 'from-red-600 to-orange-700',      bg: 'from-red-500/20 to-orange-500/10',      icon: '🎯' },
+  'christmas':          { desc: 'Christmas & holiday games',       gradient: 'from-red-500 to-green-600',       bg: 'from-red-500/20 to-green-500/10',       icon: '🎄' },
 }
 
 const categoryImages: Record<string, string> = {
@@ -132,8 +133,14 @@ const categoryImages: Record<string, string> = {
 }
 
 export default async function CategoriesPage() {
-  // الفئات ثابتة، ولا نحتاج لتحميل آلاف الألعاب أثناء build.
-  const filters = Object.keys(categoryMeta)
+  const games = await getGames()
+
+  const filters = Object.keys(categoryMeta).filter(cat =>
+    games.some(g =>
+      g.genreFilter?.toLowerCase() === cat.toLowerCase() ||
+      g.category?.toLowerCase() === cat.toLowerCase()
+    )
+  )
 
   return (
     <div className="py-16 px-4 sm:px-6 max-w-7xl mx-auto">
@@ -144,7 +151,7 @@ export default async function CategoriesPage() {
         </div>
         <h1 className="text-5xl font-black text-white mb-3">Explore Games</h1>
         <p className="text-text-secondary text-lg">
-          <span className="text-white font-bold">29,400+</span> games across{' '}
+          <span className="text-white font-bold">{games.length.toLocaleString()}</span> games across{' '}
           <span className="text-electric-violet font-bold">{filters.length}</span> categories
         </p>
       </div>
@@ -154,7 +161,10 @@ export default async function CategoriesPage() {
         {filters.map(filter => {
           const meta = categoryMeta[filter]
           const image = categoryImages[filter] ?? meta?.image
-          const count = 0
+          const count = games.filter(g =>
+            g.genreFilter?.toLowerCase() === filter.toLowerCase() ||
+            g.category?.toLowerCase() === filter.toLowerCase()
+          ).length
 
           return (
             <Link

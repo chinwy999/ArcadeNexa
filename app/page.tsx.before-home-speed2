@@ -21,10 +21,8 @@ const categoryMeta: Record<string, { icon?: any; image?: string; color: string }
 }
 
 export default async function HomePage() {
-  // الصفحة الرئيسية تحتاج فقط عينة صغيرة من الألعاب.
-  // لا ننتظر تحميل الكتالوج الكامل +29,400 لعبة.
   const allGames = await getGames()
-  const games = allGames.slice(0, 32)
+  const games = allGames.slice(0, 100)
 
   const gmGames = [...games].filter(g => g.provider === 'GameMonetize')
   const gpGames = [...games].filter(g => g.provider === 'GamePix')
@@ -44,7 +42,10 @@ export default async function HomePage() {
     )
   )
 
-  const gameCountLabel = '29,400+'
+  const gameCountLabel =
+    games.length >= 1000
+      ? `${(games.length / 1000).toFixed(1)}K+`
+      : `13000+`
 
   return (
     <main className="min-h-screen overflow-hidden">
@@ -180,7 +181,11 @@ export default async function HomePage() {
               const meta = categoryMeta[category]
               const Icon = meta.icon
 
-              const categoryGameCount = 'Explore'
+              const categoryGameCount = games.filter(
+                (game) =>
+                  game.genreFilter?.toLowerCase() === category.toLowerCase() ||
+                  game.category?.toLowerCase() === category.toLowerCase()
+              ).length
 
               return (
                 <Link
@@ -223,7 +228,7 @@ export default async function HomePage() {
                     </h3>
 
                     <p className="mt-1 text-xs font-medium text-gray-500">
-                      {categoryGameCount}
+                      {categoryGameCount} {categoryGameCount === 1 ? 'Game' : 'Games'}
                     </p>
                   </div>
 

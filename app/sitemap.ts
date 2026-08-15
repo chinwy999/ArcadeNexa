@@ -1,5 +1,4 @@
 import type { MetadataRoute } from 'next'
-import { getGames } from '@/lib/games'
 import { articles } from '@/lib/articles'
 import { getSiteUrl } from '@/lib/site'
 
@@ -28,26 +27,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.7,
   }))
 
-  let gameEntries: MetadataRoute.Sitemap = []
+  // لا نحمل كتالوج الألعاب أثناء build.
+  // تحميل آلاف الألعاب هنا يسبب بطء شديد و429 من GameMonetize.
+  const gameEntries: MetadataRoute.Sitemap = []
 
-  try {
-    const games = await getGames()
-
-    gameEntries = games
-      .filter((game) => game.slug && game.playable)
-      .map((game) => ({
-        url: `${base}/games/${game.slug}`,
-        lastModified: now,
-        changeFrequency: 'weekly' as const,
-        priority: 0.8,
-      }))
-  } catch (error) {
-    console.error('[Sitemap] Failed to load games:', error)
-  }
 
   return [
     ...staticPages,
     ...articleEntries,
-    ...gameEntries,
   ]
 }

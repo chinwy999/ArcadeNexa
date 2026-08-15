@@ -102,7 +102,7 @@ export function convertGame(item: GamePixItem): Game {
 }
 
 // جلب 20 صفحة × 96 لعبة = ~1920 لعبة
-const SERVER_PAGES = 140
+const SERVER_PAGES = 20
 const PAGE_SIZE = 96
 // كاش 6 ساعات
 const CACHE_DURATION = 6 * 60 * 60 * 1000
@@ -231,7 +231,7 @@ export function convertGMGame(item: GameMonetizeItem): Game {
 }
 
 
-const GM_PAGES = 339
+const GM_PAGES = 50
 const GM_PAGE_SIZE = 200
 
 async function loadGMGames(): Promise<Game[]> {
