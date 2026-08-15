@@ -10,39 +10,39 @@ export const metadata: Metadata = {
 }
 
 const categoryMeta: Record<string, { desc: string; gradient: string; bg: string; icon: string; image?: string }> = {
-  'adventure':          { desc: 'Explore worlds & epic quests',    gradient: 'from-teal-400 to-green-500',      bg: 'from-teal-500/20 to-green-500/10',      icon: '🗺️' },
+  'adventure':          { image: '/images/categories/adventure.webp', desc: 'Explore worlds & epic quests',    gradient: 'from-teal-400 to-green-500',      bg: 'from-teal-500/20 to-green-500/10',      icon: '🗺️' },
   'action':             { image: '/images/categories/action.webp', desc: 'Fast-paced action games',         gradient: 'from-red-400 to-orange-500',      bg: 'from-red-500/20 to-orange-500/10',      icon: '⚔️' },
-  'arcade':             { desc: 'Classic arcade fun',              gradient: 'from-pink-400 to-purple-600',     bg: 'from-pink-500/20 to-purple-500/10',     icon: '🕹️' },
+  'arcade':             { image: '/images/categories/arcade.webp', desc: 'Classic arcade fun',              gradient: 'from-pink-400 to-purple-600',     bg: 'from-pink-500/20 to-purple-500/10',     icon: '🕹️' },
   'casual':             { image: '/images/categories/casual.webp', desc: 'Fun and quick games',             gradient: 'from-green-400 to-emerald-500',   bg: 'from-green-500/20 to-emerald-500/10',   icon: '🎯' },
   'puzzle':             { image: '/images/categories/puzzle.webp', desc: 'Brain teasers & logic',           gradient: 'from-yellow-400 to-amber-500',    bg: 'from-yellow-500/20 to-amber-500/10',    icon: '🧩' },
   'racing':             { image: '/images/categories/racing.webp', desc: 'High-speed racing',               gradient: 'from-amber-400 to-orange-500',   bg: 'from-amber-500/20 to-orange-500/10',   icon: '🏎️' },
   'sports':             { image: '/images/categories/sports.webp', desc: 'Sports & athletics',              gradient: 'from-cyan-400 to-blue-500',       bg: 'from-cyan-500/20 to-blue-500/10',       icon: '⚽' },
   'shooter':            { image: '/images/categories/shooter.webp', desc: 'Shoot your way to victory',       gradient: 'from-red-500 to-zinc-600',        bg: 'from-red-500/20 to-zinc-500/10',        icon: '🔫' },
-  'simulation':         { desc: 'Simulation & physics',            gradient: 'from-sky-400 to-blue-500',        bg: 'from-sky-500/20 to-blue-500/10',        icon: '🌍' },
-  'strategy':           { desc: 'Plan, build & conquer',           gradient: 'from-indigo-400 to-blue-600',     bg: 'from-indigo-500/20 to-blue-500/10',     icon: '♟️' },
-  'battle':             { desc: 'Battle & defense',                gradient: 'from-orange-400 to-red-500',      bg: 'from-orange-500/20 to-red-500/10',      icon: '🛡️' },
-  'platformer':         { desc: 'Jump & run platform games',       gradient: 'from-lime-400 to-green-500',      bg: 'from-lime-500/20 to-green-500/10',      icon: '🏃' },
-  'fighting':           { desc: 'Combat & fighting',               gradient: 'from-rose-400 to-red-600',        bg: 'from-rose-500/20 to-red-500/10',        icon: '🥊' },
-  'runner':             { desc: 'Endless runner games',            gradient: 'from-violet-400 to-purple-600',   bg: 'from-violet-500/20 to-purple-500/10',   icon: '👟' },
-  'idle':               { desc: 'Idle & clicker games',            gradient: 'from-slate-400 to-gray-600',      bg: 'from-slate-500/20 to-gray-500/10',      icon: '💤' },
-  'clicker':            { desc: 'Click your way to success',       gradient: 'from-orange-300 to-yellow-500',   bg: 'from-orange-500/20 to-yellow-500/10',   icon: '👆' },
-  'hyper-casual':       { desc: 'Simple & addictive',              gradient: 'from-pink-400 to-rose-500',       bg: 'from-pink-500/20 to-rose-500/10',       icon: '⚡' },
-  'io':                 { desc: 'Multiplayer .io games',           gradient: 'from-emerald-400 to-teal-500',    bg: 'from-emerald-500/20 to-teal-500/10',    icon: '🌐' },
-  'match-3':            { desc: 'Match 3 puzzle games',            gradient: 'from-purple-400 to-pink-500',     bg: 'from-purple-500/20 to-pink-500/10',     icon: '💎' },
-  'ball':               { desc: 'Ball & physics games',            gradient: 'from-blue-400 to-cyan-500',       bg: 'from-blue-500/20 to-cyan-500/10',       icon: '🎱' },
-  'car':                { desc: 'Car & driving games',             gradient: 'from-gray-400 to-slate-600',      bg: 'from-gray-500/20 to-slate-500/10',      icon: '🚗' },
-  'card':               { desc: 'Card & board games',              gradient: 'from-red-400 to-pink-500',        bg: 'from-red-500/20 to-pink-500/10',        icon: '🃏' },
-  'board':              { desc: 'Classic board games',             gradient: 'from-amber-500 to-yellow-600',    bg: 'from-amber-500/20 to-yellow-500/10',    icon: '🎲' },
-  'brain':              { desc: 'Brain training games',            gradient: 'from-cyan-500 to-blue-600',       bg: 'from-cyan-500/20 to-blue-500/10',       icon: '🧠' },
-  'educational':        { desc: 'Learn while you play',            gradient: 'from-green-500 to-teal-600',      bg: 'from-green-500/20 to-teal-500/10',      icon: '📚' },
-  'math':               { desc: 'Math & number games',             gradient: 'from-blue-500 to-indigo-600',     bg: 'from-blue-500/20 to-indigo-500/10',     icon: '🔢' },
-  'memory':             { desc: 'Memory & concentration',          gradient: 'from-violet-500 to-purple-600',   bg: 'from-violet-500/20 to-purple-500/10',   icon: '🎭' },
-  'trivia':             { desc: 'Quiz & trivia games',             gradient: 'from-yellow-500 to-amber-600',    bg: 'from-yellow-500/20 to-amber-500/10',    icon: '❓' },
-  'hidden-object':      { desc: 'Find hidden objects',             gradient: 'from-teal-500 to-cyan-600',       bg: 'from-teal-500/20 to-cyan-500/10',       icon: '🔍' },
+  'simulation':         { image: '/images/categories/simulation.webp', desc: 'Simulation & physics',            gradient: 'from-sky-400 to-blue-500',        bg: 'from-sky-500/20 to-blue-500/10',        icon: '🌍' },
+  'strategy':           { image: '/images/categories/strategy.webp', desc: 'Plan, build & conquer',           gradient: 'from-indigo-400 to-blue-600',     bg: 'from-indigo-500/20 to-blue-500/10',     icon: '♟️' },
+  'battle':             { image: '/images/categories/battle.webp', desc: 'Battle & defense',                gradient: 'from-orange-400 to-red-500',      bg: 'from-orange-500/20 to-red-500/10',      icon: '🛡️' },
+  'platformer':         { image: '/images/categories/platformer.webp', desc: 'Jump & run platform games',       gradient: 'from-lime-400 to-green-500',      bg: 'from-lime-500/20 to-green-500/10',      icon: '🏃' },
+  'fighting':           { image: '/images/categories/fighting.webp', desc: 'Combat & fighting',               gradient: 'from-rose-400 to-red-600',        bg: 'from-rose-500/20 to-red-500/10',        icon: '🥊' },
+  'runner':             { image: '/images/categories/runner.webp', desc: 'Endless runner games',            gradient: 'from-violet-400 to-purple-600',   bg: 'from-violet-500/20 to-purple-500/10',   icon: '👟' },
+  'idle':               { image: '/images/categories/idle.webp', desc: 'Idle & clicker games',            gradient: 'from-slate-400 to-gray-600',      bg: 'from-slate-500/20 to-gray-500/10',      icon: '💤' },
+  'clicker':            { image: '/images/categories/clicker.webp', desc: 'Click your way to success',       gradient: 'from-orange-300 to-yellow-500',   bg: 'from-orange-500/20 to-yellow-500/10',   icon: '👆' },
+  'hyper-casual':       { image: '/images/categories/hyper-casual.webp', desc: 'Simple & addictive',              gradient: 'from-pink-400 to-rose-500',       bg: 'from-pink-500/20 to-rose-500/10',       icon: '⚡' },
+  'io':                 { image: '/images/categories/io.webp', desc: 'Multiplayer .io games',           gradient: 'from-emerald-400 to-teal-500',    bg: 'from-emerald-500/20 to-teal-500/10',    icon: '🌐' },
+  'match-3':            { image: '/images/categories/match-3.webp', desc: 'Match 3 puzzle games',            gradient: 'from-purple-400 to-pink-500',     bg: 'from-purple-500/20 to-pink-500/10',     icon: '💎' },
+  'ball':               { image: '/images/categories/ball.webp', desc: 'Ball & physics games',            gradient: 'from-blue-400 to-cyan-500',       bg: 'from-blue-500/20 to-cyan-500/10',       icon: '🎱' },
+  'car':                { image: '/images/categories/car.webp', desc: 'Car & driving games',             gradient: 'from-gray-400 to-slate-600',      bg: 'from-gray-500/20 to-slate-500/10',      icon: '🚗' },
+  'card':               { image: '/images/categories/card.webp', desc: 'Card & board games',              gradient: 'from-red-400 to-pink-500',        bg: 'from-red-500/20 to-pink-500/10',        icon: '🃏' },
+  'board':              { image: '/images/categories/board.webp', desc: 'Classic board games',             gradient: 'from-amber-500 to-yellow-600',    bg: 'from-amber-500/20 to-yellow-500/10',    icon: '🎲' },
+  'brain':              { image: '/images/categories/brain.webp', desc: 'Brain training games',            gradient: 'from-cyan-500 to-blue-600',       bg: 'from-cyan-500/20 to-blue-500/10',       icon: '🧠' },
+  'educational':        { image: '/images/categories/educational.webp', desc: 'Learn while you play',            gradient: 'from-green-500 to-teal-600',      bg: 'from-green-500/20 to-teal-500/10',      icon: '📚' },
+  'math':               { image: '/images/categories/math.webp', desc: 'Math & number games',             gradient: 'from-blue-500 to-indigo-600',     bg: 'from-blue-500/20 to-indigo-500/10',     icon: '🔢' },
+  'memory':             { image: '/images/categories/memory.webp', desc: 'Memory & concentration',          gradient: 'from-violet-500 to-purple-600',   bg: 'from-violet-500/20 to-purple-500/10',   icon: '🎭' },
+  'trivia':             { image: '/images/categories/trivia.webp', desc: 'Quiz & trivia games',             gradient: 'from-yellow-500 to-amber-600',    bg: 'from-yellow-500/20 to-amber-500/10',    icon: '❓' },
+  'hidden-object':      { image: '/images/categories/hidden-object.webp', desc: 'Find hidden objects',             gradient: 'from-teal-500 to-cyan-600',       bg: 'from-teal-500/20 to-cyan-500/10',       icon: '🔍' },
   'animal':             { desc: 'Animal themed games',             gradient: 'from-lime-500 to-green-600',      bg: 'from-lime-500/20 to-green-500/10',      icon: '🐾' },
   'cats':               { desc: 'Cat themed games',                gradient: 'from-orange-300 to-amber-500',    bg: 'from-orange-500/20 to-amber-500/10',    icon: '🐱' },
   'monster':            { desc: 'Monster & creature games',        gradient: 'from-purple-600 to-violet-700',   bg: 'from-purple-500/20 to-violet-500/10',   icon: '👾' },
-  'zombie':             { desc: 'Zombie survival games',           gradient: 'from-green-700 to-lime-600',      bg: 'from-green-700/20 to-lime-500/10',      icon: '🧟' },
+  'zombie':             { image: '/images/categories/zombie.webp', desc: 'Zombie survival games',           gradient: 'from-green-700 to-lime-600',      bg: 'from-green-700/20 to-lime-500/10',      icon: '🧟' },
   'stickman':           { desc: 'Stickman action games',           gradient: 'from-gray-500 to-slate-600',      bg: 'from-gray-500/20 to-slate-500/10',      icon: '🏃' },
   'retro':              { desc: 'Classic retro games',             gradient: 'from-amber-600 to-yellow-700',    bg: 'from-amber-500/20 to-yellow-500/10',    icon: '🎮' },
   'snake':              { desc: 'Snake & worm games',              gradient: 'from-green-600 to-emerald-700',   bg: 'from-green-500/20 to-emerald-500/10',   icon: '🐍' },
@@ -51,7 +51,7 @@ const categoryMeta: Record<string, { desc: string; gradient: string; bg: string;
   'golf':               { desc: 'Golf games',                      gradient: 'from-green-400 to-lime-500',      bg: 'from-green-500/20 to-lime-500/10',      icon: '⛳' },
   'block':              { desc: 'Block & building games',          gradient: 'from-blue-400 to-indigo-500',     bg: 'from-blue-500/20 to-indigo-500/10',     icon: '🧱' },
   'building':           { desc: 'Building & construction',         gradient: 'from-yellow-600 to-amber-700',    bg: 'from-yellow-500/20 to-amber-500/10',    icon: '🏗️' },
-  'farming':            { desc: 'Farming & management',            gradient: 'from-lime-400 to-green-600',      bg: 'from-lime-500/20 to-green-500/10',      icon: '🌾' },
+  'farming':            { image: '/images/categories/farming.webp', desc: 'Farming & management',            gradient: 'from-lime-400 to-green-600',      bg: 'from-lime-500/20 to-green-500/10',      icon: '🌾' },
   'drawing':            { desc: 'Drawing & creative games',        gradient: 'from-pink-400 to-rose-500',       bg: 'from-pink-500/20 to-rose-500/10',       icon: '🎨' },
   'robots':             { desc: 'Robot & sci-fi games',            gradient: 'from-slate-500 to-gray-600',      bg: 'from-slate-500/20 to-gray-500/10',      icon: '🤖' },
   'fun':                { desc: 'Fun & entertaining games',        gradient: 'from-yellow-400 to-orange-500',   bg: 'from-yellow-500/20 to-orange-500/10',   icon: '😄' },
@@ -59,6 +59,59 @@ const categoryMeta: Record<string, { desc: string; gradient: string; bg: string;
   '2048':               { desc: '2048 & number puzzles',           gradient: 'from-orange-400 to-amber-500',    bg: 'from-orange-500/20 to-amber-500/10',    icon: '🔢' },
   'first-person-shooter': { desc: 'First person shooter',         gradient: 'from-red-600 to-orange-700',      bg: 'from-red-500/20 to-orange-500/10',      icon: '🎯' },
   'christmas':          { desc: 'Christmas & holiday games',       gradient: 'from-red-500 to-green-600',       bg: 'from-red-500/20 to-green-500/10',       icon: '🎄' },
+}
+
+const categoryImages: Record<string, string> = {
+  'action': '/images/categories/action.webp',
+  'adventure': '/images/categories/adventure.webp',
+  'air-combat': '/images/categories/air-combat.webp',
+  'arcade': '/images/categories/arcade.webp',
+  'ball': '/images/categories/ball.webp',
+  'battle': '/images/categories/battle.webp',
+  'beauty-dress-up': '/images/categories/beauty-dress-up.webp',
+  'bike': '/images/categories/bike.webp',
+  'board': '/images/categories/board.webp',
+  'boat': '/images/categories/boat.webp',
+  'brain': '/images/categories/brain.webp',
+  'car': '/images/categories/car.webp',
+  'card': '/images/categories/card.webp',
+  'casual': '/images/categories/casual.webp',
+  'clicker': '/images/categories/clicker.webp',
+  'cooking': '/images/categories/cooking.webp',
+  'educational': '/images/categories/educational.webp',
+  'farming': '/images/categories/farming.webp',
+  'fighting': '/images/categories/fighting.webp',
+  'flying': '/images/categories/flying.webp',
+  'hidden-object': '/images/categories/hidden-object.webp',
+  'horror': '/images/categories/horror.webp',
+  'hyper-casual': '/images/categories/hyper-casual.webp',
+  'idle': '/images/categories/idle.webp',
+  'io': '/images/categories/io.webp',
+  'match-3': '/images/categories/match-3.webp',
+  'math': '/images/categories/math.webp',
+  'memory': '/images/categories/memory.webp',
+  'mmorpg': '/images/categories/mmorpg.webp',
+  'open-world': '/images/categories/open-world.webp',
+  'platformer': '/images/categories/platformer.webp',
+  'puzzle': '/images/categories/puzzle.webp',
+  'quiz': '/images/categories/quiz.webp',
+  'racing': '/images/categories/racing.webp',
+  'rpg': '/images/categories/rpg.webp',
+  'runner': '/images/categories/runner.webp',
+  'sandbox': '/images/categories/sandbox.webp',
+  'shooter': '/images/categories/shooter.webp',
+  'simulation': '/images/categories/simulation.webp',
+  'space': '/images/categories/space.webp',
+  'sports': '/images/categories/sports.webp',
+  'stealth': '/images/categories/stealth.webp',
+  'strategy': '/images/categories/strategy.webp',
+  'survival': '/images/categories/survival.webp',
+  'tank': '/images/categories/tank.webp',
+  'time-management': '/images/categories/time-management.webp',
+  'trivia': '/images/categories/trivia.webp',
+  'tycoon': '/images/categories/tycoon.webp',
+  'word': '/images/categories/word.webp',
+  'zombie': '/images/categories/zombie.webp',
 }
 
 export default async function CategoriesPage() {
@@ -89,6 +142,7 @@ export default async function CategoriesPage() {
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3">
         {filters.map(filter => {
           const meta = categoryMeta[filter]
+          const image = categoryImages[filter] ?? meta?.image
           const count = games.filter(g =>
             g.genreFilter?.toLowerCase() === filter.toLowerCase() ||
             g.category?.toLowerCase() === filter.toLowerCase()
@@ -110,9 +164,9 @@ export default async function CategoriesPage() {
               <div className="relative p-4 flex flex-col gap-3">
                 {/* Icon box */}
                 <div className="relative w-full h-24 overflow-hidden rounded-xl border border-white/10 bg-black/20 shadow-lg group-hover:scale-[1.02] transition-transform duration-300">
-                  {meta.image ? (
+                  {image ? (
                     <Image
-                      src={meta.image}
+                      src={image}
                       alt={`${filter.replace(/-/g, ' ')} games`}
                       fill
                       sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
