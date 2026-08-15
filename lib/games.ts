@@ -231,10 +231,31 @@ export function convertGMGame(item: GameMonetizeItem): Game {
 }
 
 
+const GM_PAGES = 50
+const GM_PAGE_SIZE = 200
+
 async function loadGMGames(): Promise<Game[]> {
   try {
-    const result = await fetchGMGamesPage(1, 500)
-    return result.items.map(convertGMGame)
+    const allItems: GameMonetizeItem[] = []
+    const seen = new Set<string>()
+    for (let page = 1; page <= GM_PAGES; page++) {
+      try {
+        const result = await fetchGMGamesPage(page, GM_PAGE_SIZE)
+        for (const item of result.items) {
+          const key = String(item.id || "").trim()
+          if (key && seen.has(key) === false) {
+            seen.add(key)
+            allItems.push(item)
+          }
+        }
+        if (result.items.length < GM_PAGE_SIZE) break
+      } catch (err) {
+        console.error("[ArcadeNexa] GM page " + page + " failed:", err)
+        break
+      }
+    }
+    console.log("[ArcadeNexa] GameMonetize loaded " + allItems.length + " games")
+    return allItems.map(convertGMGame)
   } catch (error) {
     console.error("[ArcadeNexa] GameMonetize failed:", error)
     return []
