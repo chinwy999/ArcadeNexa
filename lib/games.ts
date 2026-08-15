@@ -231,7 +231,7 @@ export function convertGMGame(item: GameMonetizeItem): Game {
 }
 
 
-const GM_PAGES = 50
+const GM_PAGES = 339
 const GM_PAGE_SIZE = 200
 
 async function loadGMGames(): Promise<Game[]> {
