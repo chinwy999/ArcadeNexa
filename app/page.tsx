@@ -14,10 +14,10 @@ const categoryMeta: Record<string, { icon?: any; image?: string; color: string }
   Racing: { image: '/images/categories/racing.webp', color: 'from-amber-500 to-orange-400' },
   Sports: { image: '/images/categories/sports.webp', color: 'from-cyan-500 to-blue-400' },
   Shooter: { image: '/images/categories/shooter.webp', color: 'from-red-500 to-zinc-500' },
-  Simulation: { icon: Globe2, color: 'from-sky-500 to-blue-400' },
-  Strategy: { icon: Crown, color: 'from-indigo-500 to-blue-400' },
-  Adventure: { icon: Map, color: 'from-teal-500 to-green-400' },
-  Battle: { icon: Shield, color: 'from-orange-500 to-red-400' },
+  Simulation: { image: '/images/categories/simulation.webp', color: 'from-sky-500 to-blue-400' },
+  Strategy: { image: '/images/categories/strategy.webp', color: 'from-indigo-500 to-blue-400' },
+  Adventure: { image: '/images/categories/adventure.webp', color: 'from-teal-500 to-green-400' },
+  Battle: { image: '/images/categories/battle.webp', color: 'from-orange-500 to-red-400' },
 }
 
 export default async function HomePage() {
