@@ -40,7 +40,7 @@ export default async function GamesPage({
    * الـAPI يجلب صفحات المصادر مباشرة.
    * GamePix لديه 141 صفحة حاليًا عند 96 لعبة/صفحة.
    */
-  const totalPages = 141
+  const totalPages = 500
 
   const sortedGames = [...games].sort(
     (a, b) => (b.rating || 0) - (a.rating || 0)
