@@ -122,13 +122,13 @@ const categoryImages: Record<string, string> = {
   'golf': '/images/categories/golf.webp',
   'block': '/images/categories/block.webp',
   'building': '/images/categories/simulation.webp',
-  'drawing': '/images/categories/educational.webp',
-  'robots': '/images/categories/air-combat.webp',
+  'drawing': '/images/categories/drawing.webp',
+  'robots': '/images/categories/robots.webp',
   'fun': '/images/categories/casual.webp',
   'games-for-girls': '/images/categories/beauty-dress-up.webp',
   '2048': '/images/categories/match-3.webp',
   'first-person-shooter': '/images/categories/shooter.webp',
-  'christmas': '/images/categories/casual.webp',
+  'christmas': '/images/categories/christmas.webp',
 }
 
 export default async function CategoriesPage() {
