@@ -125,7 +125,7 @@ export default function Header() {
       </div>
 
       {mobileOpen && (
-        <div className="border-t border-white/10 bg-space-black/98 px-4 pb-6 pt-4 shadow-2xl lg:hidden">
+        <div className="fixed inset-x-0 top-16 z-40 border-t border-white/10 bg-space-black px-4 pb-6 pt-4 shadow-2xl lg:hidden overflow-y-auto max-h-[calc(100vh-4rem)]">
           <div className="mx-auto max-w-7xl">
 
             <Link
