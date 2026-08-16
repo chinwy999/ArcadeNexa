@@ -106,45 +106,6 @@ export default async function HomePage() {
             </div>
           </div>
 
-          <div className="relative mx-auto w-full max-w-xl">
-            <div className="absolute -inset-6 rounded-[2rem] bg-electric-violet/10 blur-3xl" />
-
-            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.04] p-3 shadow-2xl backdrop-blur-xl">
-              {featuredGames[0] ? (
-                <Link
-                  href={`/games/${featuredGames[0].slug}`}
-                  className="group block overflow-hidden rounded-2xl"
-                >
-                  <div className="relative aspect-[16/11] overflow-hidden rounded-2xl bg-black">
-                    <img
-                      src={featuredGames[0].thumbnail}
-                      alt={featuredGames[0].name}
-                      className="h-full w-full object-cover transition duration-700 group-hover:scale-105"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
-
-                    <div className="absolute left-5 top-5 rounded-full border border-neon-green/30 bg-black/60 px-3 py-1.5 text-xs font-bold text-neon-green backdrop-blur">
-                      FEATURED GAME
-                    </div>
-
-                    <div className="absolute inset-x-5 bottom-5">
-                      <p className="mb-1 text-xs font-bold uppercase tracking-widest text-neon-green">
-                        Top Rated
-                      </p>
-                      <h2 className="text-2xl font-black text-white sm:text-3xl">
-                        {featuredGames[0].name}
-                      </h2>
-                      <div className="mt-3 inline-flex rounded-lg bg-white px-4 py-2 text-sm font-black text-black transition group-hover:bg-neon-green">
-                        PLAY GAME →
-                      </div>
-                    </div>
-                  </div>
-                </Link>
-              ) : (
-                <div className="aspect-[16/11] rounded-2xl bg-white/5" />
-              )}
-            </div>
-          </div>
         </div>
       </section>
 
