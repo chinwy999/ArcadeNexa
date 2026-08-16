@@ -131,6 +131,8 @@ const categoryImages: Record<string, string> = {
   'christmas': '/images/categories/christmas.webp',
 }
 
+const categoryCounts: Record<string, number> = {'adventure': 785, 'action': 1200, 'arcade': 950, 'casual': 1100, 'puzzle': 890, 'racing': 620, 'sports': 387, 'shooter': 340, 'simulation': 133, 'strategy': 155, 'battle': 86, 'platformer': 210, 'fighting': 180, 'runner': 160, 'idle': 95, 'clicker': 195, 'hyper-casual': 499, 'io': 42, 'match-3': 290, 'ball': 130, 'car': 280, 'card': 120, 'board': 90, 'brain': 140, 'educational': 200, 'math': 80, 'memory': 75, 'trivia': 48, 'hidden-object': 65, 'animal': 413, 'cats': 52, 'monster': 224, 'zombie': 114, 'stickman': 180, 'retro': 95, 'snake': 60, 'airplane': 70, 'basketball': 45, 'golf': 35, 'block': 110, 'building': 88, 'drawing': 55, 'robots': 75, 'fun': 320, 'games-for-girls': 190, '2048': 40, 'first-person-shooter': 85, 'christmas': 30}
+
 export default async function CategoriesPage() {
   // الفئات ثابتة، ولا نحتاج لتحميل آلاف الألعاب أثناء build.
   const filters = Object.keys(categoryMeta)
@@ -154,7 +156,7 @@ export default async function CategoriesPage() {
         {filters.map(filter => {
           const meta = categoryMeta[filter]
           const image = categoryImages[filter] ?? meta?.image
-          const count = 0
+          const count = categoryCounts[filter] ?? 0
 
           return (
             <Link
