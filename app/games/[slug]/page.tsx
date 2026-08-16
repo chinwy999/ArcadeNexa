@@ -25,7 +25,7 @@ export async function generateMetadata(
   }
 
   return {
-    title: `${game.title} - Play Free Online | ArcadeNexa`,
+    title: `${game.title} - Play Free Online`,
     description:
       game.description ||
       `Play ${game.title} for free online on ArcadeNexa. No download required, instant play in your browser.`,
