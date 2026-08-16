@@ -176,7 +176,7 @@ export default function FeaturedGamesSlider({
                   </span>
 
                   <span className="rounded-lg border border-neon-green/20 bg-neon-green/5 px-3 py-1.5 text-sm font-bold text-neon-green backdrop-blur">
-                    {game.provider || 'ArcadeNexa'}
+                    ArcadeNexa
                   </span>
 
                 </div>

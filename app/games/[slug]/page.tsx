@@ -96,7 +96,7 @@ export default async function GamePage({ params }: { params: { slug: string } })
             <div className="space-y-3">
               <div className="flex justify-between">
                 <span className="text-gray-400">Provider</span>
-                <span className="text-white font-medium">{game.provider}</span>
+                <span className="text-white font-medium">ArcadeNexa</span>
               </div>
               <div className="flex justify-between">
                 <span className="text-gray-400">Platform</span>
