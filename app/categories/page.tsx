@@ -51,13 +51,13 @@ const categoryMeta: Record<string, { desc: string; gradient: string; bg: string;
   'block':              { image: '/images/categories/block.webp', desc: 'Block & building games',          gradient: 'from-blue-400 to-indigo-500',     bg: 'from-blue-500/20 to-indigo-500/10',     icon: '🧱' },
   'building':           { image: '/images/categories/building.webp', desc: 'Building & construction',         gradient: 'from-yellow-600 to-amber-700',    bg: 'from-yellow-500/20 to-amber-500/10',    icon: '🏗️' },
   'farming':            { image: '/images/categories/farming.webp', desc: 'Farming & management',            gradient: 'from-lime-400 to-green-600',      bg: 'from-lime-500/20 to-green-500/10',      icon: '🌾' },
-  'drawing':            { image: '/images/categories/hyper-casual.webp', desc: 'Drawing & creative games',        gradient: 'from-pink-400 to-rose-500',       bg: 'from-pink-500/20 to-rose-500/10',       icon: '🎨' },
-  'robots':             { image: '/images/categories/space.webp', desc: 'Robot & sci-fi games',            gradient: 'from-slate-500 to-gray-600',      bg: 'from-slate-500/20 to-gray-500/10',      icon: '🤖' },
+  'drawing':            { image: '/images/categories/drawing.webp', desc: 'Drawing & creative games',        gradient: 'from-pink-400 to-rose-500',       bg: 'from-pink-500/20 to-rose-500/10',       icon: '🎨' },
+  'robots':             { image: '/images/categories/robots.webp', desc: 'Robot & sci-fi games',            gradient: 'from-slate-500 to-gray-600',      bg: 'from-slate-500/20 to-gray-500/10',      icon: '🤖' },
   'fun':                { image: '/images/categories/clicker.webp', desc: 'Fun & entertaining games',        gradient: 'from-yellow-400 to-orange-500',   bg: 'from-yellow-500/20 to-orange-500/10',   icon: '😄' },
   'games-for-girls':    { image: '/images/categories/beauty-dress-up.webp', desc: 'Games for girls',                 gradient: 'from-pink-500 to-rose-600',       bg: 'from-pink-500/20 to-rose-500/10',       icon: '👑' },
   '2048':               { image: '/images/categories/math.webp', desc: '2048 & number puzzles',           gradient: 'from-orange-400 to-amber-500',    bg: 'from-orange-500/20 to-amber-500/10',    icon: '🔢' },
   'first-person-shooter': { image: '/images/categories/shooter.webp', desc: 'First person shooter',         gradient: 'from-red-600 to-orange-700',      bg: 'from-red-500/20 to-orange-500/10',      icon: '🎯' },
-  'christmas':          { image: '/images/categories/tycoon.webp', desc: 'Christmas & holiday games',       gradient: 'from-red-500 to-green-600',       bg: 'from-red-500/20 to-green-500/10',       icon: '🎄' },
+  'christmas':          { image: '/images/categories/christmas.webp', desc: 'Christmas & holiday games',       gradient: 'from-red-500 to-green-600',       bg: 'from-red-500/20 to-green-500/10',       icon: '🎄' },
 }
 
 const categoryImages: Record<string, string> = {
