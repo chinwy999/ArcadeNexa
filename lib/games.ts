@@ -341,7 +341,7 @@ export function convertGMGame(item: GameMonetizeItem): Game {
     instructions: item.instructions || 'Use mouse or touch controls to play.',
     tags: item.tags ? item.tags.split(',').map(t => t.trim()) : [category, 'html5'],
     officialUrl: item.url,
-    iframeUrl: `https://play.gamepix.com/${item.namespace}/embed?sid=DXXR1`,
+    iframeUrl: item.url,
     thumbnail: item.thumb || '',
     thumbnailLarge: item.thumb || '',
     thumbnailSizes: { '512x384': item.thumb || '' },
