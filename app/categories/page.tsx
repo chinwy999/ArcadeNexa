@@ -58,7 +58,6 @@ const categoryMeta: Record<string, { desc: string; gradient: string; bg: string;
   'games-for-girls':    { image: '/images/categories/beauty-dress-up.webp', desc: 'Games for girls',                 gradient: 'from-pink-500 to-rose-600',       bg: 'from-pink-500/20 to-rose-500/10',       icon: '👑' },
   '2048':               { image: '/images/categories/math.webp', desc: '2048 & number puzzles',           gradient: 'from-orange-400 to-amber-500',    bg: 'from-orange-500/20 to-amber-500/10',    icon: '🔢' },
   'first-person-shooter': { image: '/images/categories/shooter.webp', desc: 'First person shooter',         gradient: 'from-red-600 to-orange-700',      bg: 'from-red-500/20 to-orange-500/10',      icon: '🎯' },
-  'christmas':          { image: '/images/categories/christmas.webp', desc: 'Christmas & holiday games',       gradient: 'from-red-500 to-green-600',       bg: 'from-red-500/20 to-green-500/10',       icon: '🎄' },
 }
 
 const categoryImages: Record<string, string> = {
@@ -129,10 +128,9 @@ const categoryImages: Record<string, string> = {
   'games-for-girls': '/images/categories/beauty-dress-up.webp',
   '2048': '/images/categories/match-3.webp',
   'first-person-shooter': '/images/categories/shooter.webp',
-  'christmas': '/images/categories/christmas.webp',
 }
 
-const categoryCounts: Record<string, number> = {'adventure': 785, 'action': 1200, 'arcade': 950, 'casual': 1100, 'puzzle': 890, 'racing': 620, 'sports': 387, 'shooter': 340, 'simulation': 133, 'strategy': 155, 'battle': 86, 'platformer': 210, 'fighting': 180, 'runner': 160, 'idle': 95, 'clicker': 195, 'hyper-casual': 499, 'io': 42, 'match-3': 290, 'ball': 130, 'car': 280, 'card': 120, 'board': 90, 'brain': 140, 'educational': 200, 'math': 80, 'memory': 75, 'trivia': 48, 'hidden-object': 65, 'animal': 413, 'cats': 52, 'monster': 224, 'zombie': 114, 'stickman': 180, 'retro': 95, 'snake': 60, 'airplane': 70, 'basketball': 45, 'golf': 35, 'block': 110, 'building': 88, 'drawing': 55, 'robots': 75, 'fun': 320, 'games-for-girls': 190, '2048': 40, 'first-person-shooter': 85, 'christmas': 30, 'farming': 72, 'cooking': 95, 'bike': 60, 'space': 110, 'rpg': 145, 'survival': 130, 'horror': 48, 'sandbox': 65, 'word': 55, 'tycoon': 80, 'tank': 45, 'time-management': 70, 'quiz': 40, 'mmorpg': 25, 'open-world': 55, 'stealth': 30, 'boat': 35, 'air-combat': 50, 'beauty-dress-up': 190}
+const categoryCounts: Record<string, number> = {'adventure': 785, 'action': 1200, 'arcade': 950, 'casual': 1100, 'puzzle': 890, 'racing': 620, 'sports': 387, 'shooter': 340, 'simulation': 133, 'strategy': 155, 'battle': 86, 'platformer': 210, 'fighting': 180, 'runner': 160, 'idle': 95, 'clicker': 195, 'hyper-casual': 499, 'io': 42, 'match-3': 290, 'ball': 130, 'car': 280, 'card': 120, 'board': 90, 'brain': 140, 'educational': 200, 'math': 80, 'memory': 75, 'trivia': 48, 'hidden-object': 65, 'animal': 413, 'cats': 52, 'monster': 224, 'zombie': 114, 'stickman': 180, 'retro': 95, 'snake': 60, 'airplane': 70, 'basketball': 45, 'golf': 35, 'block': 110, 'building': 88, 'drawing': 55, 'robots': 75, 'fun': 320, 'games-for-girls': 190, '2048': 40, 'first-person-shooter': 85, 'farming': 72, 'cooking': 95, 'bike': 60, 'space': 110, 'rpg': 145, 'survival': 130, 'horror': 48, 'sandbox': 65, 'word': 55, 'tycoon': 80, 'tank': 45, 'time-management': 70, 'quiz': 40, 'mmorpg': 25, 'open-world': 55, 'stealth': 30, 'boat': 35, 'air-combat': 50, 'beauty-dress-up': 190}
 
 export default async function CategoriesPage() {
   const filters = Object.keys(categoryMeta)
