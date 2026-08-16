@@ -8,38 +8,34 @@ import Image from 'next/image'
 export const dynamic = 'force-dynamic'
 
 const categoryMeta: Record<string, { icon?: any; image?: string; color: string }> = {
-  Action: { image: '/images/categories/action.webp', color: 'from-red-500 to-orange-500' },
-  Casual: { image: '/images/categories/casual.webp', color: 'from-green-500 to-emerald-400' },
-  Puzzle: { image: '/images/categories/puzzle.webp', color: 'from-yellow-500 to-amber-400' },
-  Racing: { image: '/images/categories/racing.webp', color: 'from-amber-500 to-orange-400' },
-  Sports: { image: '/images/categories/sports.webp', color: 'from-cyan-500 to-blue-400' },
-  Shooter: { image: '/images/categories/shooter.webp', color: 'from-red-500 to-zinc-500' },
+  Action:     { image: '/images/categories/action.webp',     color: 'from-red-500 to-orange-500' },
+  Casual:     { image: '/images/categories/casual.webp',     color: 'from-green-500 to-emerald-400' },
+  Puzzle:     { image: '/images/categories/puzzle.webp',     color: 'from-yellow-500 to-amber-400' },
+  Racing:     { image: '/images/categories/racing.webp',     color: 'from-amber-500 to-orange-400' },
+  Sports:     { image: '/images/categories/sports.webp',     color: 'from-cyan-500 to-blue-400' },
+  Shooter:    { image: '/images/categories/shooter.webp',    color: 'from-red-500 to-zinc-500' },
   Simulation: { image: '/images/categories/simulation.webp', color: 'from-sky-500 to-blue-400' },
-  Strategy: { image: '/images/categories/strategy.webp', color: 'from-indigo-500 to-blue-400' },
-  Adventure: { image: '/images/categories/adventure.webp', color: 'from-teal-500 to-green-400' },
-  Battle: { image: '/images/categories/battle.webp', color: 'from-orange-500 to-red-400' },
+  Strategy:   { image: '/images/categories/strategy.webp',   color: 'from-indigo-500 to-blue-400' },
+  Adventure:  { image: '/images/categories/adventure.webp',  color: 'from-teal-500 to-green-400' },
+  Battle:     { image: '/images/categories/battle.webp',     color: 'from-orange-500 to-red-400' },
 }
 
 export default async function HomePage() {
-  // الصفحة الرئيسية تحتاج فقط عينة صغيرة من الألعاب.
-  // لا ننتظر تحميل الكتالوج الكامل +29,400 لعبة.
   const games = await getHomeGames()
 
-  const gmGames = [...games].filter(g => g.provider === 'GameMonetize')
-  const gpGames = [...games].filter(g => g.provider === 'GamePix')
+  // ترتيب موحد من كل المصادر — لا يعتمد على مصدر واحد
+  const byRating   = [...games].sort((a, b) => b.rating - a.rating)
+  const byYear     = [...games].sort((a, b) => b.releaseYear - a.releaseYear)
 
-  const featuredGames = [...gmGames].sort((a, b) => b.rating - a.rating).slice(0, 8)
-  const newGames = [...gmGames].sort((a, b) => b.releaseYear - a.releaseYear).slice(8, 16)
-  const trendingGames = [...gpGames].sort((a, b) => b.rating - a.rating).slice(0, 8)
-
-
-
+  const featuredGames = byRating.slice(0, 8)
+  const trendingGames = byRating.slice(8, 16)
+  const newGames      = byYear.slice(0, 8)
 
   const availableCategories = Object.keys(categoryMeta).filter((cat) =>
     games.some(
       (game) =>
         game.genreFilter?.toLowerCase() === cat.toLowerCase() ||
-        game.category?.toLowerCase() === cat.toLowerCase()
+        game.category?.toLowerCase()    === cat.toLowerCase()
     )
   )
 
@@ -60,10 +56,8 @@ export default async function HomePage() {
             </div>
 
             <h1 className="text-5xl font-black leading-[0.95] tracking-tight text-white sm:text-7xl lg:text-8xl">
-              PLAY.
-              <br />
-              <span className="gradient-text">DISCOVER.</span>
-              <br />
+              PLAY.<br />
+              <span className="gradient-text">DISCOVER.</span><br />
               REPEAT.
             </h1>
 
@@ -73,17 +67,10 @@ export default async function HomePage() {
             </p>
 
             <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row lg:justify-start">
-              <Link
-                href="/games"
-                className="rounded-xl bg-neon-green px-8 py-4 text-center text-base font-black text-space-black shadow-lg shadow-neon-green/20 transition hover:-translate-y-1 hover:shadow-neon-green/30"
-              >
+              <Link href="/games" className="rounded-xl bg-neon-green px-8 py-4 text-center text-base font-black text-space-black shadow-lg shadow-neon-green/20 transition hover:-translate-y-1 hover:shadow-neon-green/30">
                 PLAY NOW →
               </Link>
-
-              <Link
-                href="/categories"
-                className="rounded-xl border border-white/15 bg-white/5 px-8 py-4 text-center text-base font-bold text-white backdrop-blur transition hover:bg-white/10"
-              >
+              <Link href="/categories" className="rounded-xl border border-white/15 bg-white/5 px-8 py-4 text-center text-base font-bold text-white backdrop-blur transition hover:bg-white/10">
                 EXPLORE CATEGORIES
               </Link>
             </div>
@@ -95,7 +82,7 @@ export default async function HomePage() {
               </div>
               <div className="h-7 w-px bg-white/10" />
               <div>
-                <strong className="text-xl text-white">{47}</strong>
+                <strong className="text-xl text-white">47</strong>
                 <span className="ml-2 text-gray-500">Categories</span>
               </div>
               <div className="h-7 w-px bg-white/10" />
@@ -105,7 +92,6 @@ export default async function HomePage() {
               </div>
             </div>
           </div>
-
         </div>
       </section>
 
@@ -119,18 +105,10 @@ export default async function HomePage() {
         <div className="mx-auto max-w-7xl">
           <div className="mb-5 flex items-end justify-between">
             <div>
-              <p className="text-xs font-bold uppercase tracking-[0.25em] text-neon-green">
-                Explore
-              </p>
-              <h2 className="mt-1 text-2xl font-black text-white sm:text-3xl">
-                Browse Categories
-              </h2>
+              <p className="text-xs font-bold uppercase tracking-[0.25em] text-neon-green">Explore</p>
+              <h2 className="mt-1 text-2xl font-black text-white sm:text-3xl">Browse Categories</h2>
             </div>
-
-            <Link
-              href="/categories"
-              className="text-sm font-bold text-gray-400 transition hover:text-neon-green"
-            >
+            <Link href="/categories" className="text-sm font-bold text-gray-400 transition hover:text-neon-green">
               View All →
             </Link>
           </div>
@@ -139,57 +117,35 @@ export default async function HomePage() {
             {availableCategories.map((category) => {
               const meta = categoryMeta[category]
               const Icon = meta.icon
-
-              const categoryGameCount = 'Explore'
-
               return (
                 <Link
                   key={category}
                   href={`/games?genre=${encodeURIComponent(category)}`}
                   className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] p-4 shadow-xl backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:border-white/20 hover:bg-white/[0.07] active:scale-[0.97]"
                 >
-                  <div
-                    className={`absolute -right-8 -top-8 h-24 w-24 rounded-full bg-gradient-to-br ${meta.color} opacity-20 blur-2xl transition-opacity duration-300 group-hover:opacity-40`}
-                  />
-
-                  <div
-                    className="relative mb-4 h-32 overflow-hidden rounded-2xl border border-white/10 bg-black/20 shadow-lg transition-all duration-300 group-hover:scale-[1.02] group-hover:border-white/20"
-                  >
+                  <div className={`absolute -right-8 -top-8 h-24 w-24 rounded-full bg-gradient-to-br ${meta.color} opacity-20 blur-2xl transition-opacity duration-300 group-hover:opacity-40`} />
+                  <div className="relative mb-4 h-32 overflow-hidden rounded-2xl border border-white/10 bg-black/20 shadow-lg transition-all duration-300 group-hover:scale-[1.02] group-hover:border-white/20">
                     {meta.image ? (
                       <Image
                         src={meta.image}
                         alt={`${category} games`}
                         fill
                         sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
-                        loading="lazy" className="object-cover transition-transform duration-500 group-hover:scale-110"
+                        loading="lazy"
+                        className="object-cover transition-transform duration-500 group-hover:scale-110"
                       />
                     ) : Icon ? (
-                      <div
-                        className={`flex h-full w-full items-center justify-center bg-gradient-to-br ${meta.color}`}
-                      >
-                        <Icon
-                          className="h-10 w-10 text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.7)]"
-                          strokeWidth={2.4}
-                        />
+                      <div className={`flex h-full w-full items-center justify-center bg-gradient-to-br ${meta.color}`}>
+                        <Icon className="h-10 w-10 text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.7)]" strokeWidth={2.4} />
                       </div>
                     ) : null}
-
                     <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
                   </div>
-
                   <div className="relative">
-                    <h3 className="text-sm font-black uppercase tracking-wide text-white">
-                      {category}
-                    </h3>
-
-                    <p className="mt-1 text-xs font-medium text-gray-500">
-                      {categoryGameCount}
-                    </p>
+                    <h3 className="text-sm font-black uppercase tracking-wide text-white">{category}</h3>
+                    <p className="mt-1 text-xs font-medium text-gray-500">Explore</p>
                   </div>
-
-                  <div className="absolute bottom-4 right-4 text-xs font-bold text-white/30 transition-colors group-hover:text-white/80">
-                    →
-                  </div>
+                  <div className="absolute bottom-4 right-4 text-xs font-bold text-white/30 transition-colors group-hover:text-white/80">→</div>
                 </Link>
               )
             })}
@@ -197,116 +153,95 @@ export default async function HomePage() {
         </div>
       </section>
 
+      {/* ⭐ Top Rated */}
       <section className="px-4 py-14">
         <div className="mx-auto max-w-7xl">
           <div className="mb-7 flex items-end justify-between">
             <div>
-              <p className="text-xs font-bold uppercase tracking-[0.25em] text-electric-violet">
-                Popular
-              </p>
-              <h2 className="mt-1 text-3xl font-black text-white">
-                ⭐ Top Rated Games
-              </h2>
-              <p className="mt-1 text-sm text-gray-500">
-                The games players are loving right now.
-              </p>
+              <p className="text-xs font-bold uppercase tracking-[0.25em] text-electric-violet">Popular</p>
+              <h2 className="mt-1 text-3xl font-black text-white">⭐ Top Rated Games</h2>
+              <p className="mt-1 text-sm text-gray-500">The games players are loving right now.</p>
             </div>
-
-            <Link
-              href="/games"
-              className="hidden text-sm font-bold text-gray-400 hover:text-neon-green sm:block"
-            >
+            <Link href="/games" className="hidden text-sm font-bold text-gray-400 hover:text-neon-green sm:block">
               View All →
             </Link>
           </div>
 
-          <div className="grid grid-cols-2 gap-3 sm:grid-cols-2 sm:gap-5 lg:grid-cols-4">
-            {featuredGames.map((game) => (
-              <GameCard key={game.slug} game={game} />
-            ))}
-          </div>
+          {featuredGames.length > 0 ? (
+            <div className="grid grid-cols-2 gap-3 sm:grid-cols-2 sm:gap-5 lg:grid-cols-4">
+              {featuredGames.map((game) => (
+                <GameCard key={game.slug} game={game} />
+              ))}
+            </div>
+          ) : (
+            <p className="text-gray-500 text-center py-10">Loading games...</p>
+          )}
         </div>
       </section>
 
+      {/* 🔥 Trending */}
       <section className="border-y border-white/5 bg-white/[0.015] px-4 py-14">
         <div className="mx-auto max-w-7xl">
           <div className="mb-7 flex items-end justify-between">
             <div>
-              <p className="text-xs font-bold uppercase tracking-[0.25em] text-cyan-400">
-                Hot Right Now
-              </p>
-              <h2 className="mt-1 text-3xl font-black text-white">
-                🔥 Trending Games
-              </h2>
+              <p className="text-xs font-bold uppercase tracking-[0.25em] text-cyan-400">Hot Right Now</p>
+              <h2 className="mt-1 text-3xl font-black text-white">🔥 Trending Games</h2>
             </div>
-
-            <Link
-              href="/games"
-              className="text-sm font-bold text-gray-400 hover:text-neon-green"
-            >
+            <Link href="/games" className="text-sm font-bold text-gray-400 hover:text-neon-green">
               See More →
             </Link>
           </div>
 
-          <div className="grid grid-cols-2 gap-3 sm:grid-cols-2 sm:gap-5 lg:grid-cols-4">
-            {trendingGames.map((game) => (
-              <GameCard key={game.slug} game={game} />
-            ))}
-          </div>
+          {trendingGames.length > 0 ? (
+            <div className="grid grid-cols-2 gap-3 sm:grid-cols-2 sm:gap-5 lg:grid-cols-4">
+              {trendingGames.map((game) => (
+                <GameCard key={game.slug} game={game} />
+              ))}
+            </div>
+          ) : (
+            <p className="text-gray-500 text-center py-10">Loading games...</p>
+          )}
         </div>
       </section>
+
+      {/* 🆕 New Games */}
       <section className="px-4 py-14">
         <div className="mx-auto max-w-7xl">
           <div className="mb-7 flex items-end justify-between">
             <div>
-              <p className="text-xs font-bold uppercase tracking-[0.25em] text-neon-green">
-                Fresh Arrivals
-              </p>
-              <h2 className="mt-1 text-3xl font-black text-white">
-                🆕 New Games
-              </h2>
+              <p className="text-xs font-bold uppercase tracking-[0.25em] text-neon-green">Fresh Arrivals</p>
+              <h2 className="mt-1 text-3xl font-black text-white">🆕 New Games</h2>
             </div>
-
-            <Link
-              href="/games"
-              className="text-sm font-bold text-gray-400 hover:text-neon-green"
-            >
+            <Link href="/games" className="text-sm font-bold text-gray-400 hover:text-neon-green">
               See More →
             </Link>
           </div>
 
-          <div className="grid grid-cols-2 gap-3 sm:grid-cols-2 sm:gap-5 lg:grid-cols-4">
-            {newGames.map((game) => (
-              <GameCard key={game.slug} game={game} />
-            ))}
-          </div>
+          {newGames.length > 0 ? (
+            <div className="grid grid-cols-2 gap-3 sm:grid-cols-2 sm:gap-5 lg:grid-cols-4">
+              {newGames.map((game) => (
+                <GameCard key={game.slug} game={game} />
+              ))}
+            </div>
+          ) : (
+            <p className="text-gray-500 text-center py-10">Loading games...</p>
+          )}
         </div>
       </section>
 
       <section className="px-4 py-16">
         <div className="mx-auto max-w-7xl overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-electric-violet/20 via-white/[0.03] to-neon-green/10 p-8 text-center sm:p-12">
           <div className="mx-auto max-w-2xl">
-            <p className="text-xs font-bold uppercase tracking-[0.3em] text-neon-green">
-              Your next game is waiting
-            </p>
-
-            <h2 className="mt-3 text-3xl font-black text-white sm:text-5xl">
-              Find your next favorite game.
-            </h2>
-
-            <p className="mt-4 text-gray-400">
-              Explore the full ArcadeNexa collection and start playing instantly.
-            </p>
-
-            <Link
-              href="/games"
-              className="mt-8 inline-flex rounded-xl bg-neon-green px-8 py-4 font-black text-space-black shadow-lg shadow-neon-green/20 transition hover:-translate-y-1"
-            >
+            <p className="text-xs font-bold uppercase tracking-[0.3em] text-neon-green">Your next game is waiting</p>
+            <h2 className="mt-3 text-3xl font-black text-white sm:text-5xl">Find your next favorite game.</h2>
+            <p className="mt-4 text-gray-400">Explore the full ArcadeNexa collection and start playing instantly.</p>
+            <Link href="/games" className="mt-8 inline-flex rounded-xl bg-neon-green px-8 py-4 font-black text-space-black shadow-lg shadow-neon-green/20 transition hover:-translate-y-1">
               EXPLORE ALL GAMES →
             </Link>
           </div>
         </div>
       </section>
+
     </main>
   )
 }
