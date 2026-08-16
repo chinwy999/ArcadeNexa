@@ -229,19 +229,23 @@ export async function getGamesPage(
 
   try {
     /*
-     * مهم:
-     * لا نستعمل getGames() هنا.
-     * كل طلب يجلب جزءًا صغيرًا فقط من الكتالوج.
+     * كل صفحة API تقابل صفحة مستقلة من المصادر.
+     *
+     * سابقاً كان:
+     *   ceil((page * size) / 96)
+     *
+     * وهذا جعل الصفحة 1 والصفحة 2 تستخدمان
+     * نفس صفحة GamePix عندما يكون size = 48.
+     *
+     * الآن:
+     *   API page 1 -> GamePix page 1
+     *   API page 2 -> GamePix page 2
+     *   API page 3 -> GamePix page 3
      */
 
-    const gpPage = Math.max(
-      1,
-      Math.ceil((safePage * safeSize) / 96)
-    )
-
     const [gpResult, gmResult] = await Promise.all([
-      fetchGamesPage(gpPage, 96, 'quality'),
-      fetchGMGamesPage(safePage, 200),
+      fetchGamesPage(safePage, safeSize, 'quality'),
+      fetchGMGamesPage(safePage, safeSize),
     ])
 
     const gpGames = gpResult.items.map(convertGame)
@@ -251,6 +255,8 @@ export async function getGamesPage(
     let merged: Game[] = []
 
     for (const game of [...gmGames, ...gpGames]) {
+      if (!game.slug) continue
+
       if (!seen.has(game.slug)) {
         seen.add(game.slug)
         merged.push(game)
@@ -266,14 +272,19 @@ export async function getGamesPage(
       )
     }
 
-    merged.sort((a, b) => b.rating - a.rating)
-
+    /*
+     * لا نعيد ترتيب الصفحة بالكامل بطريقة قد تؤثر
+     * على استقرار pagination بين الصفحات.
+     *
+     * كل مصدر يعيد صفحته الخاصة، ثم ندمجهما.
+     */
     const games = merged.slice(0, safeSize)
 
     const hasMore =
       gpResult.nextPage !== null ||
       gmResult.nextPage !== null ||
-      merged.length >= safeSize
+      gpResult.items.length >= safeSize ||
+      gmResult.items.length >= safeSize
 
     console.log(
       `[ArcadeNexa] Page ${safePage}: ${games.length} games`
@@ -390,39 +401,122 @@ async function loadGMGames(): Promise<Game[]> {
 
 // ===== FAST SLUG LOOKUP =====
 export async function getGameBySlugFast(slug: string): Promise<Game | null> {
-  // GameMonetize: slug = "gm-{id}"
+  /*
+   * FAST SLUG LOOKUP
+   *
+   * GameMonetize:
+   *   - Uses direct ID lookup.
+   *   - Does NOT scan feed pages.
+   *   - Successful lookups are cached in memory.
+   *
+   * GamePix:
+   *   - Keeps the existing limited fast lookup.
+   */
+
+  // ---------------------------------------------------------
+  // GameMonetize
+  // ---------------------------------------------------------
   if (slug.startsWith('gm-')) {
-    try {
-      const id = slug.replace('gm-', '')
-      const { fetchGMGamesPage } = await import('./gameMonetizeFeed')
-      // ابحث في أول 5 صفحات فقط
-      for (let page = 1; page <= 5; page++) {
-        const result = await fetchGMGamesPage(page, 200)
-        const item = result.items.find((i: any) => String(i.id) === id)
-        if (item) return convertGMGame(item)
-        if (result.items.length < 200) break
+    const id = slug.slice(3).trim()
+
+    if (!id) return null
+
+    const gmSlugCache =
+      (globalThis as typeof globalThis & {
+        __arcadeNexaGMSlugCache?: Map<string, Game>
+      }).__arcadeNexaGMSlugCache ||
+      new Map<string, Game>()
+
+    ;(
+      globalThis as typeof globalThis & {
+        __arcadeNexaGMSlugCache?: Map<string, Game>
       }
-    } catch {}
+    ).__arcadeNexaGMSlugCache = gmSlugCache
+
+    const cached = gmSlugCache.get(slug)
+
+    if (cached) {
+      return cached
+    }
+
+    try {
+      const { fetchGMGameById } =
+        await import('./gameMonetizeFeed')
+
+      console.log(
+        `[ArcadeNexa] GM lookup START: slug=${slug} id=${id}`
+      )
+
+      const item = await fetchGMGameById(id)
+
+      console.log(
+        `[ArcadeNexa] GM lookup RESULT: slug=${slug} id=${id} found=${Boolean(item)} title=${item?.title || 'NONE'}`
+      )
+
+
+      if (item) {
+        const game = convertGMGame(item)
+
+        gmSlugCache.set(slug, game)
+
+        console.log(
+          `[ArcadeNexa] GM direct slug lookup: ${slug} found`
+        )
+
+        return game
+      }
+    } catch (error) {
+      console.error(
+        `[ArcadeNexa] GameMonetize direct lookup failed for ${slug}:`,
+        error
+      )
+    }
+
     return null
   }
 
-  // GamePix: ابحث في أول 3 صفحات
+  // ---------------------------------------------------------
+  // GamePix
+  // ---------------------------------------------------------
   try {
-    const { fetchGamesPage } = await import('./gamepixFeed')
-    for (let page = 1; page <= 3; page++) {
-      const result = await fetchGamesPage(page, 96, 'quality')
+    const { fetchGamesPage } =
+      await import('./gamepixFeed')
+
+    for (let page = 1; page <= 10; page++) {
+      const result = await fetchGamesPage(
+        page,
+        96,
+        'quality'
+      )
+
       const item = result.items.find(
         (i: any) => (i.namespace || i.id) === slug
       )
-      if (item) return convertGame(item)
-      if (!result.nextPage) break
-    }
-  } catch {}
 
-  // fallback للكاش إذا كان موجوداً
+      if (item) {
+        return convertGame(item)
+      }
+
+      if (!result.nextPage) {
+        break
+      }
+    }
+  } catch (error) {
+    console.error(
+      `[ArcadeNexa] GamePix slug lookup failed for ${slug}:`,
+      error
+    )
+  }
+
+  // ---------------------------------------------------------
+  // Existing catalog cache fallback
+  // ---------------------------------------------------------
   if (cachedGames) {
-    return cachedGames.find(g => g.slug === slug) || null
+    return cachedGames.find(
+      g => g.slug === slug
+    ) || null
   }
 
   return null
 }
+
