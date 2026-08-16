@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     template: '%s | ArcadeNexa',
   },
   description: 'Play 13,000+ free HTML5 games instantly on ArcadeNexa. No download, no registration required. Action, Puzzle, Racing, Sports and more!',
-  keywords: ['HTML5 games', 'free online games', 'browser games', 'instant play', 'ArcadeNexa', 'GamePix', 'no download games'],
+  keywords: ['HTML5 games', 'free online games', 'browser games', 'instant play', 'ArcadeNexa', 'no download games'],
   authors: [{ name: 'ArcadeNexa' }],
   creator: 'ArcadeNexa',
   openGraph: {
