@@ -387,3 +387,42 @@ async function loadGMGames(): Promise<Game[]> {
     return []
   }
 }
+
+// ===== FAST SLUG LOOKUP =====
+export async function getGameBySlugFast(slug: string): Promise<Game | null> {
+  // GameMonetize: slug = "gm-{id}"
+  if (slug.startsWith('gm-')) {
+    try {
+      const id = slug.replace('gm-', '')
+      const { fetchGMGamesPage } = await import('./gameMonetizeFeed')
+      // ابحث في أول 5 صفحات فقط
+      for (let page = 1; page <= 5; page++) {
+        const result = await fetchGMGamesPage(page, 200)
+        const item = result.items.find((i: any) => String(i.id) === id)
+        if (item) return convertGMGame(item)
+        if (result.items.length < 200) break
+      }
+    } catch {}
+    return null
+  }
+
+  // GamePix: ابحث في أول 3 صفحات
+  try {
+    const { fetchGamesPage } = await import('./gamepixFeed')
+    for (let page = 1; page <= 3; page++) {
+      const result = await fetchGamesPage(page, 96, 'quality')
+      const item = result.items.find(
+        (i: any) => (i.namespace || i.id) === slug
+      )
+      if (item) return convertGame(item)
+      if (!result.nextPage) break
+    }
+  } catch {}
+
+  // fallback للكاش إذا كان موجوداً
+  if (cachedGames) {
+    return cachedGames.find(g => g.slug === slug) || null
+  }
+
+  return null
+}
