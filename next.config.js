@@ -18,6 +18,7 @@ const nextConfig = {
     return [
       {
         source: '/sitemap.xml', destination: '/sitemap-index', permanent: false },
+      { source: '/sitemap.xml', destination: '/sitemap-index', permanent: false },
       { source: '/privacy-policy',
         destination: '/privacy',
         permanent: true,
