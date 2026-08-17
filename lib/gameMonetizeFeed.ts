@@ -72,7 +72,7 @@ export async function fetchGMGameById(
   const request = (async () => {
     const url = new URL(GM_API)
 
-    url.searchParams.set('format', '0')
+    url.searchParams.set('format', 'json')
     url.searchParams.set('id', safeId)
 
     const controller = new AbortController()
@@ -147,7 +147,7 @@ export async function fetchGMGamesPage(
 
   const url = new URL(GM_API)
 
-  url.searchParams.set('format', '0')
+  url.searchParams.set('format', 'json')
   url.searchParams.set('num', String(safeAmount))
   url.searchParams.set('page', String(safePage))
 
