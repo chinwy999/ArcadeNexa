@@ -152,6 +152,7 @@ export default function FeaturedGamesSlider({
           <button
             type="button"
             onClick={previousSlide}
+            aria-label="Previous slide"
             className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white transition hover:border-electric-violet/60 hover:bg-electric-violet/20"
           >
             <ChevronLeft className="h-4 w-4" />
@@ -162,7 +163,8 @@ export default function FeaturedGamesSlider({
           <button
             type="button"
             onClick={nextSlide}
-            className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white transition hover:border-electric-violet/60 hover:bg-electric-violet/20"
+            aria-label="Next slide"
+            className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white transition hover:bg-electric-violet/20"
           >
             <ChevronRight className="h-4 w-4" />
           </button>
@@ -290,6 +292,7 @@ export default function FeaturedGamesSlider({
               key={item.slug}
               type="button"
               onClick={() => goTo(index, index > current ? 'next' : 'prev')}
+              aria-label={`Go to game ${index + 1}: ${item.title}`}
               className={`group relative min-w-[130px] snap-start overflow-hidden rounded-xl border transition-all duration-300 sm:min-w-[160px] ${
                 index === current
                   ? 'border-neon-green/60 shadow-[0_0_16px_rgba(34,197,94,0.2)]'
