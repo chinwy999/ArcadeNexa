@@ -17,7 +17,8 @@ const nextConfig = {
   async redirects() {
     return [
       {
-        source: '/privacy-policy',
+        source: '/sitemap.xml', destination: '/sitemap-index', permanent: false },
+      { source: '/privacy-policy',
         destination: '/privacy',
         permanent: true,
       },
