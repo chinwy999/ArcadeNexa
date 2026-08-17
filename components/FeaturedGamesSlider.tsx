@@ -174,13 +174,13 @@ export default function FeaturedGamesSlider({
       {/* Main Hero */}
       <div
         className="relative overflow-hidden rounded-2xl border border-white/10 bg-black shadow-2xl"
-        style={{ minHeight: 400 }}
+        style={{ aspectRatio: "16/7" }}
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
       >
         {/* Slides */}
-        <div className="relative w-full" style={{ minHeight: 400 }}>
+        <div className="relative w-full" style={{ aspectRatio: "16/7" }}>
 
           {/* Outgoing slide */}
           {animating && prevGame && (
