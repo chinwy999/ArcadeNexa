@@ -47,6 +47,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" dir="ltr">
       <head>
         <link rel="icon" href="/favicon.ico" />
+        <meta name="google-site-verification" content="j-iHu7oSEMHvRJt9EXUbTqBgAL71liygmOrO5HD72EU" />
       </head>
       <body className="min-h-screen bg-space-black text-text-primary antialiased">
         <Header />
