@@ -1,7 +1,7 @@
 import GameCard from '@/components/GameCard'
 import Link from 'next/link'
 
-export const dynamic = 'force-dynamic'
+export const revalidate = 300
 
 const GAMES_PER_PAGE = 48
 

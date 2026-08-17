@@ -5,7 +5,7 @@ import FeaturedGamesSlider from '@/components/FeaturedGamesSlider'
 import Link from 'next/link'
 import Image from 'next/image'
 
-export const dynamic = 'force-dynamic'
+export const revalidate = 300
 
 const categoryMeta: Record<string, { icon?: any; image?: string; color: string }> = {
   Action:     { image: '/images/categories/action.webp',     color: 'from-red-500 to-orange-500' },
