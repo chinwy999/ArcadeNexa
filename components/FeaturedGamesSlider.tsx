@@ -271,7 +271,7 @@ export default function FeaturedGamesSlider({
               onClick={() => goTo(i, i > current ? 'next' : 'prev')}
               className="relative h-1 overflow-hidden rounded-full transition-all duration-300"
               style={{ width: i === current ? 40 : 16, background: 'rgba(255,255,255,0.15)' }}
-              aria-label={`Go to slide ${i + 1}`}
+              aria-label={`Featured game ${i + 1} of ${total}`}
             >
               {i === current && (
                 <div
