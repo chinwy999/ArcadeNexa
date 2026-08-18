@@ -33,7 +33,7 @@ export default function AboutPage() {
             <h2 className="text-2xl font-bold text-white">What We Offer</h2>
           </div>
           <ul className="text-text-secondary space-y-2">
-            <li>✅ 13,000+ free HTML5 games</li>
+            <li>✅ 29,400+ free HTML5 games</li>
             <li>✅ Instant play — no download required</li>
             <li>✅ No registration or login needed</li>
             <li>✅ Works on any device — mobile, tablet, desktop</li>

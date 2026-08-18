@@ -11,7 +11,7 @@ export default function AdBanner() {
             <Gamepad2 className="w-6 h-6 text-neon-green" />
           </div>
           <div>
-            <h4 className="text-white font-bold text-sm sm:text-base">13,000+ Free Games Await!</h4>
+            <h4 className="text-white font-bold text-sm sm:text-base">29,400+ Free Games Await!</h4>
             <p className="text-text-secondary text-xs">No download, no login — just instant play in your browser.</p>
           </div>
         </div>
