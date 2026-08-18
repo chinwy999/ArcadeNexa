@@ -26,7 +26,6 @@ function sleep(ms: number) {
   return new Promise(resolve => setTimeout(resolve, ms))
 }
 
-
 type GMDirectCacheEntry = {
   item: GameMonetizeItem | null
   expiresAt: number
@@ -39,6 +38,74 @@ const gmDirectCache =
 
 const gmDirectInflight =
   new Map<string, Promise<GameMonetizeItem | null>>()
+
+/*
+ * GameMonetize occasionally returns XML/HTML instead of JSON.
+ *
+ * Never call response.json() blindly.
+ * Read the response as text first, inspect the content,
+ * and only then parse JSON.
+ */
+async function parseGMResponse(
+  response: Response,
+  context: string
+): Promise<GameMonetizeItem[]> {
+  const contentType =
+    response.headers.get('content-type') || ''
+
+  const text = await response.text()
+  const trimmed = text.trim()
+
+  if (!trimmed) {
+    throw new Error(
+      `GameMonetize empty response (${context})`
+    )
+  }
+
+  /*
+   * XML / HTML responses normally begin with "<".
+   * This is a provider response problem, not a JSON problem,
+   * so callers should not repeatedly retry it.
+   */
+  if (
+    trimmed.startsWith('<') ||
+    /^(<\?xml|<!doctype|<html\b)/i.test(trimmed)
+  ) {
+    throw new Error(
+      `GameMonetize returned XML/HTML instead of JSON ` +
+      `(${context}, content-type: ${contentType || 'unknown'})`
+    )
+  }
+
+  let data: unknown
+
+  try {
+    data = JSON.parse(trimmed)
+  } catch {
+    throw new Error(
+      `GameMonetize returned invalid JSON ` +
+      `(${context}, content-type: ${contentType || 'unknown'})`
+    )
+  }
+
+  if (Array.isArray(data)) {
+    return data as GameMonetizeItem[]
+  }
+
+  if (
+    typeof data === 'object' &&
+    data !== null &&
+    Array.isArray(
+      (data as { items?: unknown }).items
+    )
+  ) {
+    return (
+      (data as { items: GameMonetizeItem[] }).items
+    )
+  }
+
+  return []
+}
 
 export async function fetchGMGameById(
   id: string
@@ -72,7 +139,7 @@ export async function fetchGMGameById(
   const request = (async () => {
     const url = new URL(GM_API)
 
-    url.searchParams.set('format', 'json')
+    url.searchParams.set('format', '0')
     url.searchParams.set('id', safeId)
 
     const controller = new AbortController()
@@ -102,14 +169,10 @@ export async function fetchGMGameById(
         )
       }
 
-      const data = await response.json()
-
-      const items: GameMonetizeItem[] =
-        Array.isArray(data)
-          ? data
-          : Array.isArray(data?.items)
-            ? data.items
-            : []
+      const items = await parseGMResponse(
+        response,
+        `id ${safeId}`
+      )
 
       const item =
         items.find(
@@ -119,7 +182,8 @@ export async function fetchGMGameById(
 
       gmDirectCache.set(safeId, {
         item,
-        expiresAt: Date.now() + GM_DIRECT_CACHE_TTL,
+        expiresAt:
+          Date.now() + GM_DIRECT_CACHE_TTL,
       })
 
       return item
@@ -137,21 +201,31 @@ export async function fetchGMGameById(
   }
 }
 
-
 export async function fetchGMGamesPage(
   page = 1,
   amount = 200
 ): Promise<GameMonetizePage> {
-  const safePage = Math.max(1, Math.floor(page))
-  const safeAmount = Math.min(200, Math.max(1, Math.floor(amount)))
+  const safePage = Math.max(
+    1,
+    Math.floor(page)
+  )
+
+  const safeAmount = Math.min(
+    200,
+    Math.max(1, Math.floor(amount))
+  )
 
   const url = new URL(GM_API)
 
-  url.searchParams.set('format', 'json')
+  url.searchParams.set('format', '0')
   url.searchParams.set('num', String(safeAmount))
   url.searchParams.set('page', String(safePage))
 
-  for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
+  for (
+    let attempt = 1;
+    attempt <= MAX_RETRIES;
+    attempt++
+  ) {
     const controller = new AbortController()
 
     const timeout = setTimeout(
@@ -160,49 +234,72 @@ export async function fetchGMGamesPage(
     )
 
     try {
-      const response = await fetch(url.toString(), {
-        signal: controller.signal,
-        headers: {
-          Accept: 'application/json',
-          'User-Agent': 'ArcadeNexa/1.0',
-        },
-        next: {
-          revalidate: 21600,
-        },
-      })
+      const response = await fetch(
+        url.toString(),
+        {
+          signal: controller.signal,
+          headers: {
+            Accept: 'application/json',
+            'User-Agent': 'ArcadeNexa/1.0',
+          },
+          next: {
+            revalidate: 21600,
+          },
+        }
+      )
 
       /*
+       * 429 means GameMonetize is rate-limiting us.
+       *
        * IMPORTANT:
+       * Do NOT retry 429 responses.
+       * Retrying immediately only increases provider pressure
+       * and makes the build slower.
        *
-       * Do not wait 60 seconds and retry repeatedly when
-       * GameMonetize rate-limits us.
-       *
-       * The caller can safely treat this page as unavailable.
+       * The caller can safely treat this page as temporarily unavailable.
        */
       if (response.status === 429) {
         console.warn(
-          `[ArcadeNexa] GameMonetize rate limit on page ${safePage}`
+          `[ArcadeNexa] GameMonetize HTTP 429 on page ${safePage} - skipping without retry`
         )
 
-        throw new Error(
-          `GameMonetize HTTP 429 on page ${safePage}`
-        )
+        return {
+          items: [],
+          page: safePage,
+          nextPage: null,
+        }
       }
 
+      /*
+       * Retry temporary server errors.
+       * Do not retry 4xx errors unnecessarily.
+       */
       if (!response.ok) {
+        if (response.status >= 500) {
+          throw new Error(
+            `GameMonetize HTTP ${response.status} ` +
+            `on page ${safePage}`
+          )
+        }
+
         throw new Error(
-          `GameMonetize HTTP ${response.status}`
+          `GameMonetize HTTP ${response.status} ` +
+          `on page ${safePage} (non-retryable)`
         )
       }
 
-      const data = await response.json()
-
-      const items: GameMonetizeItem[] =
-        Array.isArray(data)
-          ? data
-          : Array.isArray(data?.items)
-            ? data.items
-            : []
+      /*
+       * IMPORTANT:
+       * parseGMResponse() reads text first and detects
+       * XML/HTML before attempting JSON.parse().
+       *
+       * XML/HTML is treated as a provider-format error
+       * and is NOT retried.
+       */
+      const items = await parseGMResponse(
+        response,
+        `page ${safePage}`
+      )
 
       return {
         items,
@@ -213,7 +310,36 @@ export async function fetchGMGamesPage(
             : null,
       }
     } catch (error) {
-      if (attempt >= MAX_RETRIES) {
+      const message =
+        error instanceof Error
+          ? error.message
+          : String(error)
+
+      /*
+       * XML/HTML and invalid JSON are not transient
+       * network failures. Retrying them only wastes
+       * build time and can increase provider pressure.
+       */
+      const nonRetryable =
+        message.includes(
+          'returned XML/HTML instead of JSON'
+        ) ||
+        message.includes(
+          'returned invalid JSON'
+        ) ||
+        message.includes(
+          '(non-retryable)'
+        )
+
+      if (
+        nonRetryable ||
+        attempt >= MAX_RETRIES
+      ) {
+        console.error(
+          `[ArcadeNexa] GameMonetize page ${safePage} failed:`,
+          message
+        )
+
         throw error
       }
 
