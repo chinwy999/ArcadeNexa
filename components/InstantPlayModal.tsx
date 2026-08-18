@@ -13,11 +13,21 @@ export default function InstantPlayModal({ game, onClose }: Props) {
     <div className="fixed inset-0 bg-black/95 z-50 flex items-center justify-center p-4">
       <div className="relative w-full max-w-6xl h-[90vh] bg-gray-900 rounded-xl overflow-hidden">
         <div className="absolute top-4 right-4 z-10 flex gap-2">
-          <button onClick={() => window.open(game.iframeUrl, '_blank')} className="bg-gray-800 hover:bg-gray-700 p-2 rounded-lg">
-            <Maximize2 className="w-5 h-5" />
+          <button
+            type="button"
+            onClick={() => window.open(game.iframeUrl, '_blank')}
+            aria-label={`Open ${game.name} in a new window`}
+            className="bg-gray-800 hover:bg-gray-700 p-2 rounded-lg"
+          >
+            <Maximize2 className="w-5 h-5" aria-hidden="true" />
           </button>
-          <button onClick={onClose} className="bg-gray-800 hover:bg-gray-700 p-2 rounded-lg">
-            <X className="w-5 h-5" />
+          <button
+            type="button"
+            onClick={onClose}
+            aria-label="Close game"
+            className="bg-gray-800 hover:bg-gray-700 p-2 rounded-lg"
+          >
+            <X className="w-5 h-5" aria-hidden="true" />
           </button>
         </div>
 
