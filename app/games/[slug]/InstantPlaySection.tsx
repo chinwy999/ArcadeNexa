@@ -181,8 +181,9 @@ export default function InstantPlaySection({ game }: { game: Game }) {
             <p className="text-gray-400 text-sm mb-4">Record your score for <span className="text-white font-bold">{game.title}</span></p>
             <div className="space-y-3 mb-4">
               <div>
-                <label className="text-gray-400 text-xs mb-1 block">Your Name</label>
+                <label htmlFor="score-username" className="text-gray-400 text-xs mb-1 block">Your Name</label>
                 <input
+                  id="score-username"
                   type="text"
                   value={username}
                   onChange={e => setUsername(e.target.value)}
@@ -192,8 +193,9 @@ export default function InstantPlaySection({ game }: { game: Game }) {
                 />
               </div>
               <div>
-                <label className="text-gray-400 text-xs mb-1 block">Your Score</label>
+                <label htmlFor="score-value" className="text-gray-400 text-xs mb-1 block">Your Score</label>
                 <input
+                  id="score-value"
                   type="number"
                   value={score}
                   onChange={e => setScore(e.target.value)}

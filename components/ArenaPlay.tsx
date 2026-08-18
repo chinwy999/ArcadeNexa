@@ -75,7 +75,12 @@ export default function ArenaPlay({ game, onClose, isModal = false }: Props) {
         )}
 
         {isPlaying && (
-          <div onClick={handleClick} className="w-full h-full flex flex-col items-center justify-center cursor-pointer select-none relative group" role="button" tabIndex={0} onKeyDown={e=>{if(e.key==='Enter'||e.key===' ') handleClick()}} aria-label="Click to score">
+          <div onClick={handleClick} className="w-full h-full flex flex-col items-center justify-center cursor-pointer select-none relative group" role="button" tabIndex={0} onKeyDown={e => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault()
+              handleClick()
+            }
+          }} aria-label="Click to score">
             <div className="absolute top-4 left-4 text-xs font-bold text-neon-green bg-neon-green/10 px-3 py-1 rounded-full border border-neon-green/30">SCORE: {score} / 15</div>
             <div className="absolute top-4 right-4 text-xs text-text-secondary">Click fast!</div>
             <div className="w-28 h-28 rounded-full bg-gradient-to-br from-hot-pink to-electric-violet flex items-center justify-center text-white font-black text-2xl shadow-[0_0_30px_rgba(236,72,153,0.6)] animate-pulse transform active:scale-95 transition-transform">

@@ -54,7 +54,7 @@ export default function RegisterClient() {
             <label htmlFor="confirm" className="block text-sm text-text-secondary mb-1">Confirm Password</label>
             <input id="confirm" type="password" value={confirm} onChange={e=>setConfirm(e.target.value)} className="w-full bg-elevated border border-white/10 rounded-xl px-4 py-3 text-white focus:ring-2 focus:ring-electric-violet outline-none" placeholder="••••••••" required />
           </div>
-          <label className="flex gap-2 text-xs text-text-secondary"><input type="checkbox" required /> I agree to the <Link href="/terms" className="text-electric-violet hover:underline">Terms</Link> and <Link href="/privacy" className="text-electric-violet hover:underline">Privacy</Link></label>
+          <label htmlFor="register-terms" className="flex gap-2 text-xs text-text-secondary"><input id="register-terms" type="checkbox" required /> I agree to the <Link href="/terms" className="text-electric-violet hover:underline">Terms</Link> and <Link href="/privacy" className="text-electric-violet hover:underline">Privacy</Link></label>
 
           <button type="submit" disabled={loading} className="w-full bg-electric-violet hover:bg-violet-600 disabled:opacity-50 text-white font-bold py-3 rounded-xl transition">{loading ? 'Creating...' : 'CREATE ACCOUNT'}</button>
           {message && <div className="bg-neon-green/10 border border-neon-green/30 text-neon-green text-sm p-3 rounded-xl">{message}</div>}

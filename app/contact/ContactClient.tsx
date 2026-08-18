@@ -44,8 +44,9 @@ export default function ContactClient() {
           <h2 className="text-2xl font-bold text-white mb-6">Send a Message</h2>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label className="block text-sm text-text-secondary mb-1">Name</label>
+              <label htmlFor="contact-name" className="block text-sm text-text-secondary mb-1">Name</label>
               <input
+                id="contact-name"
                 value={form.name}
                 onChange={e => setForm({ ...form, name: e.target.value })}
                 required
@@ -54,8 +55,9 @@ export default function ContactClient() {
               />
             </div>
             <div>
-              <label className="block text-sm text-text-secondary mb-1">Email</label>
+              <label htmlFor="contact-email" className="block text-sm text-text-secondary mb-1">Email</label>
               <input
+                id="contact-email"
                 type="email"
                 value={form.email}
                 onChange={e => setForm({ ...form, email: e.target.value })}
@@ -65,8 +67,9 @@ export default function ContactClient() {
               />
             </div>
             <div>
-              <label className="block text-sm text-text-secondary mb-1">Subject</label>
+              <label htmlFor="contact-subject" className="block text-sm text-text-secondary mb-1">Subject</label>
               <select
+                id="contact-subject"
                 value={form.subject}
                 onChange={e => setForm({ ...form, subject: e.target.value })}
                 className="w-full bg-elevated border border-white/10 rounded-xl px-4 py-3 text-white focus:ring-2 focus:ring-electric-violet outline-none"
@@ -79,8 +82,9 @@ export default function ContactClient() {
               </select>
             </div>
             <div>
-              <label className="block text-sm text-text-secondary mb-1">Message</label>
+              <label htmlFor="contact-message" className="block text-sm text-text-secondary mb-1">Message</label>
               <textarea
+                id="contact-message"
                 rows={5}
                 value={form.message}
                 onChange={e => setForm({ ...form, message: e.target.value })}

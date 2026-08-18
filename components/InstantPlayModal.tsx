@@ -20,9 +20,10 @@ export default function InstantPlayModal({ game, onClose }: Props) {
             <X className="w-5 h-5" />
           </button>
         </div>
-        
-        <iframe 
-          src={game.iframeUrl} 
+
+        <iframe
+          src={game.iframeUrl}
+          title={`${game.name} game`}
           className="w-full h-full"
           allowFullScreen
           sandbox="allow-scripts allow-same-origin allow-forms"

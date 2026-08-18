@@ -81,22 +81,22 @@ export default function GamesClient() {
 
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-400 mb-2">Genre</label>
-              <select value={genre} onChange={e => setGenre(e.target.value)} className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-2">
+              <label htmlFor="games-genre" className="block text-sm font-medium text-gray-400 mb-2">Genre</label>
+              <select id="games-genre" value={genre} onChange={e => setGenre(e.target.value)} className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-2">
                 {allGenres.map(g => <option key={g} value={g}>{g}</option>)}
               </select>
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-400 mb-2">Platform</label>
-              <select value={platform} onChange={e => setPlatform(e.target.value)} className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-2">
+              <label htmlFor="games-platform" className="block text-sm font-medium text-gray-400 mb-2">Platform</label>
+              <select id="games-platform" value={platform} onChange={e => setPlatform(e.target.value)} className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-2">
                 <option value="All">All Platforms</option>
                 <option value="PC">PC</option>
                 <option value="Multi">Multi-Platform</option>
               </select>
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-400 mb-2">Rating</label>
-              <select value={rating} onChange={e => setRating(e.target.value)} className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-2">
+              <label htmlFor="games-rating" className="block text-sm font-medium text-gray-400 mb-2">Rating</label>
+              <select id="games-rating" value={rating} onChange={e => setRating(e.target.value)} className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-2">
                 <option value="All">All Ratings</option>
                 <option value="5">5 Stars</option>
                 <option value="4">4+ Stars</option>
@@ -104,8 +104,8 @@ export default function GamesClient() {
               </select>
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-400 mb-2">Search</label>
-              <input type="text" value={search} onChange={e => setSearch(e.target.value)} placeholder="Search games..." className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-2" />
+              <label htmlFor="games-search" className="block text-sm font-medium text-gray-400 mb-2">Search</label>
+              <input id="games-search" type="text" value={search} onChange={e => setSearch(e.target.value)} placeholder="Search games..." className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-2" />
             </div>
           </div>
         </div>
