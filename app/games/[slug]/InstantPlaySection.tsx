@@ -167,7 +167,7 @@ export default function InstantPlaySection({ game }: { game: Game }) {
 
       {game.instructions && (
         <div className="px-4 py-3 bg-elevated/50 border-t border-white/5">
-          <h4 className="text-white font-bold text-xs mb-1">How to Play:</h4>
+          <p className="text-white font-bold text-xs mb-1">How to Play:</p>
           <p className="text-text-secondary text-xs leading-relaxed">{game.instructions}</p>
         </div>
       )}
