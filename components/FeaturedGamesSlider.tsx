@@ -269,16 +269,23 @@ export default function FeaturedGamesSlider({
               key={i}
               type="button"
               onClick={() => goTo(i, i > current ? 'next' : 'prev')}
-              className="relative h-1 overflow-hidden rounded-full transition-all duration-300"
-              style={{ width: i === current ? 40 : 16, background: 'rgba(255,255,255,0.15)' }}
+              className="relative flex h-11 w-11 items-center justify-center rounded-full transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-neon-green focus-visible:ring-offset-2 focus-visible:ring-offset-dark-navy"
               aria-label={`Featured game ${i + 1} of ${total}`}
             >
-              {i === current && (
-                <div
-                  className="absolute inset-y-0 left-0 rounded-full bg-neon-green transition-none"
-                  style={{ width: `${progress}%` }}
-                />
-              )}
+              <span
+                className="relative block h-1 overflow-hidden rounded-full"
+                style={{
+                  width: i === current ? 40 : 16,
+                  background: 'rgba(255,255,255,0.15)',
+                }}
+              >
+                {i === current && (
+                  <span
+                    className="absolute inset-y-0 left-0 rounded-full bg-neon-green transition-none"
+                    style={{ width: `${progress}%` }}
+                  />
+                )}
+              </span>
             </button>
           ))}
         </div>
