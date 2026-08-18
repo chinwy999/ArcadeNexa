@@ -23,7 +23,7 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className="text-white font-semibold uppercase tracking-wider text-sm mb-4">Platform</h4>
+            <h2 className="text-white font-semibold uppercase tracking-wider text-sm mb-4">Platform</h2>
             <ul className="space-y-2.5">
               <li><Link href="/games" className="text-text-secondary hover:text-white text-sm transition-colors">Games</Link></li>
               <li><Link href="/categories" className="text-text-secondary hover:text-white text-sm transition-colors">Categories</Link></li>
@@ -35,7 +35,7 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className="text-white font-semibold uppercase tracking-wider text-sm mb-4">Support</h4>
+            <h2 className="text-white font-semibold uppercase tracking-wider text-sm mb-4">Support</h2>
             <ul className="space-y-2.5">
               <li><Link href="/about" className="text-text-secondary hover:text-white text-sm transition-colors">About Us</Link></li>
               <li><Link href="/faq" className="text-text-secondary hover:text-white text-sm transition-colors">FAQ</Link></li>
@@ -44,7 +44,7 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className="text-white font-semibold uppercase tracking-wider text-sm mb-4">Legal</h4>
+            <h2 className="text-white font-semibold uppercase tracking-wider text-sm mb-4">Legal</h2>
             <ul className="space-y-2.5">
               <li><Link href="/privacy" className="text-text-secondary hover:text-white text-sm transition-colors">Privacy Policy</Link></li>
               <li><Link href="/terms" className="text-text-secondary hover:text-white text-sm transition-colors">Terms of Service</Link></li>
