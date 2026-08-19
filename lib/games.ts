@@ -479,35 +479,92 @@ export async function getGameBySlugFast(slug: string): Promise<Game | null> {
       return cached
     }
 
+    /*
+     * IMPORTANT:
+     * GameMonetize may return HTTP 429 for direct ID requests.
+     * A 429 must NEVER turn an existing game into a 404.
+     *
+     * First try the already cached/full catalog.
+     * Only use the direct API as a fallback.
+     */
+
+    try {
+      if (cachedGames && cachedGames.length > 0) {
+        const catalogGame = cachedGames.find(
+          game => game.slug === slug
+        )
+
+        if (catalogGame) {
+          gmSlugCache.set(slug, catalogGame)
+
+          console.log(
+            `[ArcadeNexa] GM catalog lookup HIT: ${slug}`
+          )
+
+          return catalogGame
+        }
+      }
+    } catch (error) {
+      console.warn(
+        `[ArcadeNexa] GM catalog lookup failed for ${slug}:`,
+        error
+      )
+    }
+
     try {
       const { fetchGMGameById } =
         await import('./gameMonetizeFeed')
 
       console.log(
-        `[ArcadeNexa] GM lookup START: slug=${slug} id=${id}`
+        `[ArcadeNexa] GM direct lookup START: slug=${slug} id=${id}`
       )
 
       const item = await fetchGMGameById(id)
 
       console.log(
-        `[ArcadeNexa] GM lookup RESULT: slug=${slug} id=${id} found=${Boolean(item)} title=${item?.title || 'NONE'}`
+        `[ArcadeNexa] GM direct lookup RESULT: slug=${slug} id=${id} found=${Boolean(item)} title=${item?.title || 'NONE'}`
       )
-
 
       if (item) {
         const game = convertGMGame(item)
 
         gmSlugCache.set(slug, game)
 
-        console.log(
-          `[ArcadeNexa] GM direct slug lookup: ${slug} found`
-        )
-
         return game
       }
     } catch (error) {
+      console.warn(
+        `[ArcadeNexa] GM direct lookup unavailable for ${slug}; using catalog fallback`,
+        error
+      )
+    }
+
+    /*
+     * Final fallback:
+     * Load the catalog once and search it.
+     *
+     * This is slower on the first request, but prevents
+     * legitimate GameMonetize games from becoming 404.
+     */
+    try {
+      const allGames = await loadGames()
+
+      const catalogGame = allGames.find(
+        game => game.slug === slug
+      )
+
+      if (catalogGame) {
+        gmSlugCache.set(slug, catalogGame)
+
+        console.log(
+          `[ArcadeNexa] GM final catalog fallback HIT: ${slug}`
+        )
+
+        return catalogGame
+      }
+    } catch (error) {
       console.error(
-        `[ArcadeNexa] GameMonetize direct lookup failed for ${slug}:`,
+        `[ArcadeNexa] GM final catalog fallback failed for ${slug}:`,
         error
       )
     }
