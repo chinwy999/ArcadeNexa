@@ -87,7 +87,38 @@ export default async function GamePage({ params }: PageParams) {
     notFound()
   }
 
+
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "VideoGame",
+    "name": game.title,
+    "description": game.description || `Play ${game.title} free online`,
+    "image": game.thumbnail,
+    "url": `https://arcade-nexa-3gxg.vercel.app/games/${game.slug}`,
+    "applicationCategory": "Game",
+    "operatingSystem": "Web Browser",
+    "genre": game.category,
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": game.rating,
+      "bestRating": "10",
+      "worstRating": "1",
+      "ratingCount": "100"
+    }
+  }
+
   return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
     <div className="container mx-auto px-4 py-8 max-w-6xl">
       <RecentlyPlayedTracker
         slug={game.slug}
@@ -271,5 +302,6 @@ export default async function GamePage({ params }: PageParams) {
 
       </div>
     </div>
+    </>
   )
 }
