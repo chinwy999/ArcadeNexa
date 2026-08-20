@@ -1,3 +1,4 @@
+import { calculateArcadeNexaScore } from './arcadeNexaScore'
 import { fetchGMGamesPage, GameMonetizeItem } from './gameMonetizeFeed'
 import { fetchGamesPage, GamePixItem } from './gamepixFeed'
 
@@ -62,13 +63,32 @@ function getAspectRatio(width: number, height: number): string {
 }
 
 export function convertGame(item: GamePixItem): Game {
-  const quality = Number(item.quality_score) || 0
-  const rating = Math.max(1, Math.min(10, Math.round(quality * 10)))
+  const quality = Math.max(
+    0,
+    Math.min(1, Number(item.quality_score) || 0)
+  )
+
   const publishedDate = new Date(item.date_published)
+
   const releaseYear = Number.isNaN(publishedDate.getTime())
     ? new Date().getFullYear()
     : publishedDate.getFullYear()
+
   const category = item.category || 'arcade'
+
+  // ArcadeNexa Score:
+  // Internal quality score calculated from 5 factors.
+  const rating = calculateArcadeNexaScore({
+    rating: 5.5 + quality * 4.5,
+    releaseYear,
+    playable: Boolean(item.url),
+    thumbnail: item.banner_image || item.image || '',
+    description: item.description || '',
+    instructions: 'Use mouse or touch controls to play.',
+    tags: [category, 'html5', 'browser'],
+    title: item.title || 'Untitled Game',
+  })
+
 
   return {
     id: `gamepix-${item.namespace || item.id}`,
@@ -385,7 +405,20 @@ export function convertGMGame(item: GameMonetizeItem): Game {
     gradient: getGradient(slug),
     genre: [category, 'HTML5'],
     genreFilter: category,
-    rating: 8,
+    // GameMonetize does not provide a reliable user rating.
+    // ArcadeNexa calculates its own score from 5 quality factors.
+    rating: calculateArcadeNexaScore({
+      rating: 7.0,
+      releaseYear: new Date().getFullYear(),
+      playable: Boolean(item.url),
+      thumbnail: item.thumb || '',
+      description: item.description || item.instructions || '',
+      instructions: item.instructions || '',
+      tags: item.tags
+        ? item.tags.split(',').map(t => t.trim())
+        : [category, 'html5'],
+      title: item.title || 'Untitled Game',
+    }),
     platform: 'Multi',
     description: item.description || item.instructions || 'Play instantly in your browser.',
     longDescription: item.description || item.instructions || 'Play instantly in your browser.',

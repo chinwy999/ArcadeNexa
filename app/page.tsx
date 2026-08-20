@@ -4,6 +4,7 @@ import GameCard from '@/components/GameCard'
 import FeaturedGamesSlider from '@/components/FeaturedGamesSlider'
 import Link from 'next/link'
 import Image from 'next/image'
+import RecentlyPlayed from '@/components/RecentlyPlayed'
 
 export const revalidate = 300
 
@@ -23,13 +24,71 @@ const categoryMeta: Record<string, { icon?: any; image?: string; color: string }
 export default async function HomePage() {
   const games = await getHomeGames()
 
-  // ترتيب موحد من كل المصادر — لا يعتمد على مصدر واحد
-  const byRating   = [...games].sort((a, b) => b.rating - a.rating)
-  const byYear     = [...games].sort((a, b) => b.releaseYear - a.releaseYear)
+  /*
+   * Build distinct homepage sections.
+   *
+   * IMPORTANT:
+   * We deliberately prevent the same game from appearing
+   * in multiple sections.
+   *
+   * We also avoid calling the section "Trending" because
+   * ArcadeNexa does not yet have real play-count analytics.
+   */
 
-  const featuredGames = byRating.slice(0, 8)
-  const trendingGames = byRating.slice(8, 16)
-  const newGames      = byYear.slice(0, 8)
+  const usedSlugs = new Set<string>()
+
+  function takeUnique(
+    source: typeof games,
+    count: number,
+    predicate?: (game: typeof games[number]) => boolean
+  ) {
+    const result: typeof games = []
+
+    for (const game of source) {
+      if (result.length >= count) break
+      if (usedSlugs.has(game.slug)) continue
+      if (predicate && !predicate(game)) continue
+
+      usedSlugs.add(game.slug)
+      result.push(game)
+    }
+
+    return result
+  }
+
+  const byScore = [...games].sort((a, b) => b.rating - a.rating)
+
+  const byNewest = [...games].sort((a, b) => {
+    if (b.releaseYear !== a.releaseYear) {
+      return b.releaseYear - a.releaseYear
+    }
+
+    return b.rating - a.rating
+  })
+
+  /*
+   * Editor picks use a deterministic score based on the game
+   * identity. This gives visitors variety without pretending
+   * we have fake player analytics.
+   */
+  const editorPicks = [...games].sort((a, b) => {
+    const score = (slug: string) => {
+      let hash = 0
+
+      for (let i = 0; i < slug.length; i++) {
+        hash = ((hash << 5) - hash) + slug.charCodeAt(i)
+        hash |= 0
+      }
+
+      return Math.abs(hash) % 100
+    }
+
+    return score(b.slug) - score(a.slug)
+  })
+
+  const featuredGames = takeUnique(byScore, 8)
+  const newGames = takeUnique(byNewest, 8)
+  const editorGames = takeUnique(editorPicks, 8)
 
   const availableCategories = Object.keys(categoryMeta).filter((cat) =>
     games.some(
@@ -100,6 +159,8 @@ export default async function HomePage() {
           <FeaturedGamesSlider games={games} />
         </div>
       </section>
+
+      <RecentlyPlayed />
 
       <section className="px-4 py-8">
         <div className="mx-auto max-w-7xl">
@@ -179,22 +240,23 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* 🔥 Trending */}
+      {/* ✨ Editor's Picks */}
       <section className="border-y border-white/5 bg-white/[0.015] px-4 py-14">
         <div className="mx-auto max-w-7xl">
           <div className="mb-7 flex items-end justify-between">
             <div>
-              <p className="text-xs font-bold uppercase tracking-[0.25em] text-cyan-400">Hot Right Now</p>
-              <h2 className="mt-1 text-3xl font-black text-white">🔥 Trending Games</h2>
+              <p className="text-xs font-bold uppercase tracking-[0.25em] text-cyan-400">Handpicked Discovery</p>
+              <h2 className="mt-1 text-3xl font-black text-white">✨ Editor's Picks</h2>
+              <p className="mt-1 text-sm text-gray-500">Fresh games worth discovering today.</p>
             </div>
             <Link href="/games" className="text-sm font-bold text-gray-400 hover:text-neon-green">
               See More →
             </Link>
           </div>
 
-          {trendingGames.length > 0 ? (
+          {editorGames.length > 0 ? (
             <div className="grid grid-cols-2 gap-3 sm:grid-cols-2 sm:gap-5 lg:grid-cols-4">
-              {trendingGames.map((game) => (
+              {editorGames.map((game) => (
                 <GameCard key={game.slug} game={game} />
               ))}
             </div>

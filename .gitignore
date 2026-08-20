@@ -10,3 +10,4 @@ core
 node_modules/
 .next/
 *.backup
+tsconfig.tsbuildinfo

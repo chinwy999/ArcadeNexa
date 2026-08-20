@@ -3,6 +3,8 @@ import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import type { Metadata } from 'next'
 import InstantPlaySection from './InstantPlaySection'
+import RecentlyPlayedTracker from '@/components/RecentlyPlayedTracker'
+import FavoriteButton from '@/components/FavoriteButton'
 
 export const dynamic = 'force-dynamic'
 
@@ -87,6 +89,13 @@ export default async function GamePage({ params }: PageParams) {
 
   return (
     <div className="container mx-auto px-4 py-8 max-w-6xl">
+      <RecentlyPlayedTracker
+        slug={game.slug}
+        title={game.title}
+        thumbnail={game.thumbnail}
+        gradient={game.gradient}
+        initials={game.initials}
+      />
 
       {/* Breadcrumb */}
       <div className="flex items-center gap-2 text-sm text-text-secondary mb-6">
@@ -137,9 +146,17 @@ export default async function GamePage({ params }: PageParams) {
             {game.category}
           </span>
 
-          <span className="text-yellow-400 text-sm font-bold">
-            ★ {game.rating}/10
+          <span
+            className="text-yellow-400 text-sm font-bold"
+            title="ArcadeNexa Score"
+          >
+            ★ {Number(game.rating).toFixed(1)} ArcadeNexa Score
           </span>
+
+          <FavoriteButton
+            slug={game.slug}
+            title={game.title}
+          />
         </div>
       </div>
 
@@ -220,7 +237,7 @@ export default async function GamePage({ params }: PageParams) {
                 </span>
 
                 <span className="text-yellow-400 font-medium">
-                  ★ {game.rating}/10
+                  ★ {Number(game.rating).toFixed(1)}/10
                 </span>
               </div>
 

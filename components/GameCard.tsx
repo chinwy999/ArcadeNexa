@@ -61,7 +61,11 @@ export default function GameCard({ game, onPlay }: GameCardProps) {
             {game.name}
           </h3>
 
-          <span className="shrink-0 text-xs text-yellow-400">
+          <span
+            className="shrink-0 text-xs text-yellow-400"
+            title="ArcadeNexa Score"
+            aria-label={`ArcadeNexa Score ${rating.toFixed(1)} out of 10`}
+          >
             ★ {rating.toFixed(1)}
           </span>
         </div>
