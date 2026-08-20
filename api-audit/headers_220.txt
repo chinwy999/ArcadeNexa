@@ -1,0 +1,12 @@
+HTTP/2 200 
+age: 780
+cache-control: public
+content-type: application/json
+date: Thu, 20 Aug 2026 18:14:29 GMT
+server: Vercel
+strict-transport-security: max-age=63072000; includeSubDomains; preload
+vary: RSC, Next-Router-State-Tree, Next-Router-Prefetch
+x-matched-path: /api/games
+x-vercel-cache: HIT
+x-vercel-id: cdg1::iad1::r9d9q-1787250449027-a6834cf773b0
+

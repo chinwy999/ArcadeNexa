@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import { articles } from '@/lib/articles'
+import { allArticles as articles } from '@/lib/articles'
 import { getSiteUrl } from '@/lib/site'
 import { fetchGamesPage } from '@/lib/gamepixFeed'
 import { fetchGMGamesPage } from '@/lib/gameMonetizeFeed'
@@ -132,6 +132,30 @@ export async function GET(
         lastModified: now,
         changeFrequency: 'yearly',
         priority: 0.3,
+      },
+      {
+        url: `${base}/unblocked-games`,
+        lastModified: now,
+        changeFrequency: 'weekly',
+        priority: 0.9,
+      },
+      {
+        url: `${base}/two-player-games`,
+        lastModified: now,
+        changeFrequency: 'weekly',
+        priority: 0.9,
+      },
+      {
+        url: `${base}/chromebook-games`,
+        lastModified: now,
+        changeFrequency: 'weekly',
+        priority: 0.9,
+      },
+      {
+        url: `${base}/games-for-girls`,
+        lastModified: now,
+        changeFrequency: 'weekly',
+        priority: 0.9,
       },
     ]
 
