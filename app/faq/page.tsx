@@ -26,7 +26,7 @@ const faqs = [
   },
   {
     q: 'How many games are available?',
-    a: 'We currently offer 29,400+ free HTML5 games across 10+ categories including Action, Puzzle, Racing, Sports, and more.'
+    a: 'We currently offer 13,485+ free HTML5 games across 10+ categories including Action, Puzzle, Racing, Sports, and more.'
   },
   {
     q: 'Why is a game not loading?',

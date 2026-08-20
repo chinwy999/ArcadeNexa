@@ -1,5 +1,41 @@
+import type { Metadata } from 'next'
 import GameCard from '@/components/GameCard'
 import Link from 'next/link'
+
+export const metadata: Metadata = {
+  title: 'Free HTML5 Games - Play Online Games',
+  description:
+    'Play 13,485+ free HTML5 games online on ArcadeNexa. Discover action, puzzle, racing, sports, strategy and casual games instantly with no download or registration.',
+  keywords: [
+    'free HTML5 games',
+    'free online games',
+    'browser games',
+    'instant play games',
+    'arcade games',
+    'ArcadeNexa',
+  ],
+  alternates: {
+    canonical: '/games',
+  },
+  openGraph: {
+    type: 'website',
+    url: '/games',
+    title: 'Free HTML5 Games - Play Online Games | ArcadeNexa',
+    description:
+      'Play 13,485+ free HTML5 games online instantly. No download or registration required.',
+    siteName: 'ArcadeNexa',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Free HTML5 Games - Play Online Games | ArcadeNexa',
+    description:
+      'Play 13,485+ free HTML5 games online instantly. No download or registration required.',
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+}
 
 export const revalidate = 300
 

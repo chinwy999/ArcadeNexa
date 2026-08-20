@@ -186,6 +186,106 @@ async function loadGames(): Promise<Game[]> {
   return loadingPromise
 }
 
+
+/**
+ * REAL CATALOG COUNT
+ *
+ * GamePix currently exposes 141 pages:
+ * - pages 1-140 = 96 games
+ * - page 141 = 45 games
+ * - exact total = 13,485
+ *
+ * We calculate the exact count from the provider instead
+ * of using a hard-coded marketing number.
+ */
+let cachedRealGameCount: number | null = null
+let realGameCountTimestamp = 0
+
+const REAL_COUNT_CACHE = 6 * 60 * 60 * 1000
+
+export async function getRealGameCount(): Promise<number> {
+  const now = Date.now()
+
+  if (
+    cachedRealGameCount !== null &&
+    now - realGameCountTimestamp < REAL_COUNT_CACHE
+  ) {
+    return cachedRealGameCount
+  }
+
+  try {
+    // GamePix exact count
+    const firstPage = await fetchGamesPage(1, 96, 'quality')
+
+    if (!firstPage.totalPages || firstPage.totalPages < 1) {
+      throw new Error('GamePix total pages unavailable')
+    }
+
+    const lastPage = firstPage.totalPages
+    const finalPage =
+      lastPage === 1
+        ? firstPage
+        : await fetchGamesPage(lastPage, 96, 'quality')
+
+    const gamePixCount =
+      lastPage === 1
+        ? firstPage.items.length
+        : (lastPage - 1) * 96 + finalPage.items.length
+
+    // GameMonetize verified available catalog count.
+    // We intentionally use a small page size and stop on an empty page.
+    let gameMonetizeCount = 0
+
+    try {
+      const { fetchGMGamesPage } = await import('@/lib/gameMonetizeFeed')
+
+      for (let page = 1; page <= 9; page++) {
+        const result = await fetchGMGamesPage(page, 200)
+
+        if (!result.items || result.items.length === 0) {
+          break
+        }
+
+        gameMonetizeCount += result.items.length
+
+        // Avoid unnecessary requests after a short final page.
+        if (result.items.length < 200) {
+          break
+        }
+
+        // Small delay to reduce provider rate-limit risk.
+        if (page < 9) {
+          await new Promise((resolve) => setTimeout(resolve, 500))
+        }
+      }
+    } catch (error) {
+      console.error(
+        '[ArcadeNexa] Failed to determine GameMonetize count:',
+        error
+      )
+    }
+
+    const exactCount = gamePixCount + gameMonetizeCount
+
+    cachedRealGameCount = exactCount
+    realGameCountTimestamp = now
+
+    console.log(
+      `[ArcadeNexa] REAL catalog count: GamePix=${gamePixCount}, GameMonetize=${gameMonetizeCount}, Total=${exactCount}`
+    )
+
+    return exactCount
+  } catch (error) {
+    console.error(
+      '[ArcadeNexa] Failed to determine real catalog count:',
+      error
+    )
+
+    // Last verified combined catalog count.
+    return 14485
+  }
+}
+
 export async function getGames(): Promise<Game[]> {
   return loadGames()
 }
@@ -248,106 +348,249 @@ export async function getGamesPage(
   const safeSize = Math.min(48, Math.max(1, Math.floor(pageSize)))
   const normalizedGenre = genre.trim().toLowerCase()
 
-  let gpResult: Awaited<ReturnType<typeof fetchGamesPage>> | null = null
-  let gmResult: Awaited<ReturnType<typeof fetchGMGamesPage>> | null = null
+  /*
+   * ARCADENEXA PAGINATION MODEL
+   *
+   * Each ArcadeNexa page contains up to:
+   *   24 GameMonetize + 24 GamePix
+   *
+   * Each provider is treated as an independent stream.
+   */
+
+  const providerTake = Math.ceil(safeSize / 2)
+  const arcadeOffset = (safePage - 1) * providerTake
 
   /*
-   * GamePix:
-   * - Supports server-side category filtering.
-   * - When a category is requested, it is the primary source.
-   *
-   * GameMonetize:
-   * - Does not reliably support the same category pagination.
-   * - It is used as an additional source only.
+   * ---------------------------------------------------------
+   * GAMEPIX STREAM
+   * ---------------------------------------------------------
    */
-  const [gpSettled, gmSettled] = await Promise.allSettled([
-    fetchGamesPage(
-      safePage,
-      safeSize,
+
+  const GP_PAGE_SIZE = 48
+
+  const gpProviderPage =
+    Math.floor(arcadeOffset / GP_PAGE_SIZE) + 1
+
+  const gpOffset =
+    arcadeOffset % GP_PAGE_SIZE
+
+  let gpRaw: Game[] = []
+  let gpHasMore = false
+
+  try {
+    const result = await fetchGamesPage(
+      gpProviderPage,
+      GP_PAGE_SIZE,
       'quality',
       normalizedGenre
-    ),
-    fetchGMGamesPage(safePage, safeSize),
-  ])
+    )
 
-  if (gpSettled.status === 'fulfilled') {
-    gpResult = gpSettled.value
-  } else {
+    gpRaw = result.items.map(convertGame)
+
+    gpHasMore =
+      result.nextPage !== null ||
+      gpRaw.length >= GP_PAGE_SIZE
+
+    gpRaw = gpRaw.slice(
+      gpOffset,
+      gpOffset + providerTake
+    )
+  } catch (error) {
     console.error(
-      `[ArcadeNexa] GamePix page ${safePage} unavailable:`,
-      gpSettled.reason
+      `[ArcadeNexa] GamePix provider page ${gpProviderPage} unavailable:`,
+      error
     )
   }
-
-  if (gmSettled.status === 'fulfilled') {
-    gmResult = gmSettled.value
-  } else {
-    console.error(
-      `[ArcadeNexa] GameMonetize page ${safePage} unavailable:`,
-      gmSettled.reason
-    )
-  }
-
-  let gpGames = gpResult
-    ? gpResult.items.map(convertGame)
-    : []
-
-  let gmGames = gmResult
-    ? gmResult.items.map(convertGMGame)
-    : []
 
   /*
-   * For categories, GamePix is already filtered server-side.
-   * Filter GameMonetize locally.
+   * ---------------------------------------------------------
+   * GAMEMONETIZE STREAM
+   * ---------------------------------------------------------
+   *
+   * ALL-GAMES:
+   *   The provider feed can be sliced directly.
+   *
+   * CATEGORY:
+   *   Category filtering changes the effective stream.
+   *   Therefore we walk GameMonetize pages from page 1,
+   *   filter the requested category, and only then apply
+   *   the absolute offset.
+   *
+   * This prevents category games from being skipped when
+   * unrelated games occupy earlier provider pages.
    */
-  if (normalizedGenre) {
-    gmGames = gmGames.filter(game =>
-      game.category?.toLowerCase() === normalizedGenre ||
-      game.genreFilter?.toLowerCase() === normalizedGenre
+
+  const GM_PAGE_SIZE = 200
+
+  let gmRaw: Game[] = []
+  let gmHasMore = false
+
+  try {
+    if (!normalizedGenre) {
+      const gmProviderPage =
+        Math.floor(arcadeOffset / GM_PAGE_SIZE) + 1
+
+      const gmOffset =
+        arcadeOffset % GM_PAGE_SIZE
+
+      const result = await fetchGMGamesPage(
+        gmProviderPage,
+        GM_PAGE_SIZE
+      )
+
+      const raw = result.items.map(convertGMGame)
+
+      gmHasMore =
+        result.nextPage !== null ||
+        raw.length >= GM_PAGE_SIZE
+
+      gmRaw = raw.slice(
+        gmOffset,
+        gmOffset + providerTake
+      )
+
+      console.log(
+        `[ArcadeNexa] GM all-games stream: ` +
+        `provider=${gmProviderPage}, offset=${gmOffset}`
+      )
+    } else {
+      /*
+       * CATEGORY STREAM
+       *
+       * We need enough filtered games to reach:
+       *
+       *   arcadeOffset + providerTake
+       *
+       * Example:
+       *   Arcade page 10
+       *   offset = 216
+       *
+       * We continue fetching GM pages until at least
+       * 240 matching category games are collected, or
+       * the provider reaches its end.
+       */
+
+      const requiredEnd =
+        arcadeOffset + providerTake
+
+      const categoryGames: Game[] = []
+
+      const seenGM = new Set<string>()
+
+      let providerPage = 1
+      let providerEnded = false
+
+      while (
+        categoryGames.length < requiredEnd &&
+        providerPage <= 50
+      ) {
+        const result = await fetchGMGamesPage(
+          providerPage,
+          GM_PAGE_SIZE
+        )
+
+        const raw = result.items.map(convertGMGame)
+
+        for (const game of raw) {
+          const matchesCategory =
+            game.category?.toLowerCase() === normalizedGenre ||
+            game.genreFilter?.toLowerCase() === normalizedGenre
+
+          if (!matchesCategory) {
+            continue
+          }
+
+          if (!game.slug || seenGM.has(game.slug)) {
+            continue
+          }
+
+          seenGM.add(game.slug)
+          categoryGames.push(game)
+        }
+
+        if (
+          result.nextPage === null ||
+          raw.length < GM_PAGE_SIZE
+        ) {
+          providerEnded = true
+          break
+        }
+
+        providerPage++
+      }
+
+      gmRaw = categoryGames.slice(
+        arcadeOffset,
+        arcadeOffset + providerTake
+      )
+
+      gmHasMore =
+        categoryGames.length > arcadeOffset + providerTake ||
+        !providerEnded
+
+      console.log(
+        `[ArcadeNexa] GM category stream: ` +
+        `genre=${normalizedGenre}, ` +
+        `pagesScanned=${providerPage}, ` +
+        `matches=${categoryGames.length}, ` +
+        `offset=${arcadeOffset}`
+      )
+    }
+  } catch (error) {
+    console.error(
+      `[ArcadeNexa] GameMonetize stream unavailable ` +
+      `(genre=${normalizedGenre || 'all'}):`,
+      error
     )
   }
 
-  let merged: Game[] = []
+  /*
+   * ---------------------------------------------------------
+   * MERGE
+   * ---------------------------------------------------------
+   *
+   * Keep the intended provider balance:
+   *
+   *   GameMonetize first
+   *   GamePix second
+   *
+   * If one provider is unavailable, the other provider
+   * can fill the remaining slots.
+   */
 
-  if (normalizedGenre) {
-    /*
-     * CATEGORY MODE
-     *
-     * GamePix gets priority and can fill the entire page.
-     * GameMonetize is appended only when GamePix has fewer
-     * than safeSize games.
-     *
-     * This prevents the old 50/50 split from producing
-     * pages like 25 games when GameMonetize has only one
-     * matching game.
-     */
-    merged = [
-      ...gpGames,
-      ...gmGames,
+  let merged: Game[] = [
+    ...gmRaw,
+    ...gpRaw
+  ]
+
+  if (merged.length < safeSize) {
+    const fallback = [
+      ...gpRaw,
+      ...gmRaw
     ]
-  } else {
-    /*
-     * ALL GAMES MODE
-     *
-     * Keep a balanced provider mix for the main catalog.
-     */
-    const halfSize = Math.ceil(safeSize / 2)
 
-    if (gpGames.length > 0 && gmGames.length > 0) {
-      merged = [
-        ...gmGames.slice(0, halfSize),
-        ...gpGames.slice(0, safeSize - halfSize),
-      ]
-    } else if (gmGames.length > 0) {
-      merged = gmGames.slice(0, safeSize)
-    } else {
-      merged = gpGames.slice(0, safeSize)
+    for (const game of fallback) {
+      if (merged.length >= safeSize) {
+        break
+      }
+
+      if (
+        game.slug &&
+        !merged.some(
+          existing => existing.slug === game.slug
+        )
+      ) {
+        merged.push(game)
+      }
     }
   }
 
   /*
-   * Remove duplicate slugs.
+   * ---------------------------------------------------------
+   * REMOVE DUPLICATES
+   * ---------------------------------------------------------
    */
+
   const seen = new Set<string>()
 
   merged = merged.filter(game => {
@@ -362,6 +605,7 @@ export async function getGamesPage(
   /*
    * Final category safety check.
    */
+
   if (normalizedGenre) {
     merged = merged.filter(game =>
       game.category?.toLowerCase() === normalizedGenre ||
@@ -372,30 +616,19 @@ export async function getGamesPage(
   const games = merged.slice(0, safeSize)
 
   /*
-   * Pagination:
-   *
-   * In category mode, GamePix's pagination is the primary
-   * source of truth. GameMonetize only extends the page.
+   * ---------------------------------------------------------
+   * HAS MORE
+   * ---------------------------------------------------------
    */
-  const gpHasMore =
-    gpResult !== null &&
-    (
-      gpResult.nextPage !== null ||
-      gpResult.items.length >= safeSize
-    )
 
-  const gmHasMore =
-    gmResult !== null &&
-    (
-      gmResult.nextPage !== null ||
-      gmResult.items.length >= safeSize
-    )
-
-  const hasMore = gpHasMore || gmHasMore
+  const hasMore =
+    gpHasMore ||
+    gmHasMore ||
+    games.length >= safeSize
 
   console.log(
     `[ArcadeNexa] Page ${safePage}: ${games.length} games ` +
-    `(GamePix=${gpGames.length}, GameMonetize=${gmGames.length}, ` +
+    `(GamePix provider=${gpProviderPage}, offset=${gpOffset}, ` +
     `genre=${normalizedGenre || 'all'})`
   )
 

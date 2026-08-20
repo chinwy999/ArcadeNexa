@@ -3,10 +3,26 @@ import Link from 'next/link'
 import { allArticles as articles } from '@/lib/articles'
 
 export const metadata: Metadata = {
-  title: 'ArcadeNexa Blog | Gaming Guides, Tips & Articles',
+  title: {
+    absolute: 'ArcadeNexa Blog | Gaming Guides, Tips & Articles',
+  },
   description:
     'Read original gaming guides, browser gaming explainers, genre guides, tips, and articles from ArcadeNexa.',
   alternates: { canonical: '/news' },
+  openGraph: {
+    type: 'website',
+    url: '/news',
+    title: 'ArcadeNexa Blog | Gaming Guides, Tips & Articles',
+    description:
+      'Read original gaming guides, browser gaming explainers, genre guides, tips, and articles from ArcadeNexa.',
+    siteName: 'ArcadeNexa',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'ArcadeNexa Blog | Gaming Guides, Tips & Articles',
+    description:
+      'Read original gaming guides, browser gaming explainers, genre guides, tips, and articles from ArcadeNexa.',
+  },
 }
 
 export default function NewsPage() {

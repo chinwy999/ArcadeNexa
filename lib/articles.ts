@@ -474,12 +474,12 @@ export const seoArticles = [
     readTime: '8 min read',
     intro: 'Finding games that actually work on school networks can be frustrating. Most gaming sites get blocked, and Flash is gone. This guide covers the best unblocked games for school in 2025 that run on any browser, including Chromebook, with no download or login required.',
     sections: [
-      { heading: 'Why most games get blocked at school', body: 'School networks use content filters that block domains categorized as gaming or entertainment. The good news is that HTML5 games hosted on educational-friendly domains often bypass these filters. ArcadeNexa hosts 29,400+ HTML5 games that work directly in your browser without any plugin or download.' },
+      { heading: 'Why most games get blocked at school', body: 'School networks use content filters that block domains categorized as gaming or entertainment. The good news is that HTML5 games hosted on educational-friendly domains often bypass these filters. ArcadeNexa hosts 13,485+ HTML5 games that work directly in your browser without any plugin or download.' },
       { heading: 'Best unblocked game genres for school', body: 'Puzzle games are the top choice for school breaks — they are quiet, require no sound, and can be paused instantly. Casual games like match-3 and idle games also work well. Racing and action games are popular for longer breaks. All categories are available on ArcadeNexa with instant play.' },
       { heading: 'Do these games work on Chromebook?', body: 'Yes. Chromebooks are the most common school device, and HTML5 games run natively in Chrome without any installation. Every game on ArcadeNexa is Chromebook-compatible. Simply open the browser, visit the site, and start playing.' },
       { heading: 'Top unblocked game categories in 2025', body: 'The most searched unblocked game types in 2025 include: puzzle games, .IO multiplayer games like Agar.io and Slither.io, casual clicker games, unblocked racing games, and math-based brain games. ArcadeNexa covers all of these across 47 categories.' },
       { heading: 'How to play without getting caught', body: 'Choose games that do not require sound — most browser games have a mute button. Pick games with a clean interface that can be minimized quickly. Puzzle and casual games are ideal because they look productive and can be paused instantly.' },
-      { heading: 'ArcadeNexa vs other unblocked game sites', body: 'Unlike Unblocked Games 76 or similar sites, ArcadeNexa offers a modern interface, mobile-friendly design, and 29,400+ curated HTML5 games from trusted providers. No outdated Flash content, no broken links, and no sketchy ads.' },
+      { heading: 'ArcadeNexa vs other unblocked game sites', body: 'Unlike Unblocked Games 76 or similar sites, ArcadeNexa offers a modern interface, mobile-friendly design, and 13,485+ curated HTML5 games from trusted providers. No outdated Flash content, no broken links, and no sketchy ads.' },
     ],
     faq: [
       { question: 'Are unblocked games safe to play at school?', answer: 'HTML5 games on reputable platforms like ArcadeNexa are safe. They run inside your browser and do not require downloading any files.' },
@@ -491,13 +491,13 @@ export const seoArticles = [
   {
     slug: 'best-free-online-games-no-download',
     title: 'Best Free Online Games With No Download Required in 2025',
-    description: 'Play the best free online games instantly with no download, no login, and no installation. Over 29,400 HTML5 browser games available right now.',
+    description: 'Play the best free online games instantly with no download, no login, and no installation. Over 13,485 HTML5 browser games available right now.',
     category: 'GUIDE',
     date: '2026-08-19',
     readTime: '7 min read',
     intro: 'The best free online games are the ones you can play right now — no app store, no installation, no waiting. HTML5 browser games have made instant play a reality across every device. Here is everything you need to know about finding and playing free games with no download required.',
     sections: [
-      { heading: 'What makes a game truly free to play', body: 'A genuinely free browser game requires no purchase, no subscription, and no account creation. ArcadeNexa offers 29,400+ games that are completely free, with no login required. Simply click a game and start playing in seconds.' },
+      { heading: 'What makes a game truly free to play', body: 'A genuinely free browser game requires no purchase, no subscription, and no account creation. ArcadeNexa offers 13,485+ games that are completely free, with no login required. Simply click a game and start playing in seconds.' },
       { heading: 'Best free puzzle games online', body: 'Puzzle games are among the most popular free browser games. Match-3 games, block puzzles, word games, and logic challenges all run perfectly in any modern browser. They load quickly and work on both desktop and mobile.' },
       { heading: 'Best free action games no download', body: 'Action games that run in the browser include shooters, platformers, fighting games, and endless runners. HTML5 technology delivers smooth gameplay without any installation. ArcadeNexa features hundreds of free action titles across multiple sub-genres.' },
       { heading: 'Free multiplayer games in your browser', body: '.IO games are the kings of free multiplayer browser gaming. Games like Agar.io, Slither.io, and similar titles let you compete against real players worldwide without downloading anything. Find them all in the IO category on ArcadeNexa.' },
@@ -505,7 +505,7 @@ export const seoArticles = [
       { heading: 'How to find the best free games quickly', body: 'Use category filters to narrow your search. Read the game description to check controls and platform compatibility. Start with highly rated titles and explore related games from there. ArcadeNexa\'s 47 categories make discovery straightforward.' },
     ],
     faq: [
-      { question: 'Are all games on ArcadeNexa really free?', answer: 'Yes. All 29,400+ games on ArcadeNexa are free to play with no login or payment required.' },
+      { question: 'Are all games on ArcadeNexa really free?', answer: 'Yes. All 13,485+ games on ArcadeNexa are free to play with no login or payment required.' },
       { question: 'Do free browser games work on mobile?', answer: 'Most HTML5 games on ArcadeNexa are mobile-optimized and work on smartphones and tablets.' },
       { question: 'Is it safe to play free online games?', answer: 'Playing games on reputable HTML5 gaming platforms is safe. No downloads means no risk of installing unwanted software.' },
       { question: 'Can I play free games offline?', answer: 'Most browser games require an internet connection to load. Some may cache assets for limited offline use depending on the title.' },
@@ -525,7 +525,7 @@ export const seoArticles = [
       { heading: 'Best .IO games for free periods', body: '.IO multiplayer games are ideal for longer free periods. You can join a game, compete for a few minutes, and leave without losing any progress. Popular .IO games include territory games, survival games, and competitive skill games.' },
       { heading: 'Games that work silently', body: 'Sound is the biggest giveaway when gaming at school. Choose games with a visible mute button and disable sound immediately. Puzzle games, strategy games, and card games all work perfectly without any audio.' },
       { heading: 'Racing and action games for lunch breaks', body: 'If you have a longer break, racing and action games provide more excitement. They are fast, engaging, and easy to understand. Most browser racing games use simple keyboard or touch controls and launch in under 10 seconds.' },
-      { heading: 'How to find new games quickly', body: 'ArcadeNexa organizes 29,400+ games across 47 categories. Browse by genre, check the trending section for popular titles, or search for a specific game type. Every game starts instantly with no account needed.' },
+      { heading: 'How to find new games quickly', body: 'ArcadeNexa organizes 13,485+ games across 47 categories. Browse by genre, check the trending section for popular titles, or search for a specific game type. Every game starts instantly with no account needed.' },
     ],
     faq: [
       { question: 'What games can I play at school on a Chromebook?', answer: 'Any HTML5 game on ArcadeNexa works on Chromebook. The Chrome browser runs these games natively with no plugins required.' },

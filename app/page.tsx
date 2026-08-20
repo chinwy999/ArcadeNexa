@@ -1,5 +1,5 @@
 import { Globe2, Crown, Map, Shield } from "lucide-react"
-import { getHomeGames } from '@/lib/games'
+import { getHomeGames, getRealGameCount } from '@/lib/games'
 import GameCard from '@/components/GameCard'
 import FeaturedGamesSlider from '@/components/FeaturedGamesSlider'
 import Link from 'next/link'
@@ -22,7 +22,10 @@ const categoryMeta: Record<string, { icon?: any; image?: string; color: string }
 }
 
 export default async function HomePage() {
-  const games = await getHomeGames()
+  const [games, realGameCount] = await Promise.all([
+    getHomeGames(),
+    getRealGameCount(),
+  ])
 
   /*
    * Build distinct homepage sections.
@@ -98,7 +101,7 @@ export default async function HomePage() {
     )
   )
 
-  const gameCountLabel = '29,400+'
+  const gameCountLabel = realGameCount.toLocaleString('en-US')
 
   return (
     <main className="min-h-screen overflow-hidden">
