@@ -32,39 +32,32 @@ export default async function GamesPage({
   let hasMore = false
 
   try {
-    const { getGames, getGamesPage } = await import('@/lib/games')
+    const { getGamesPage } = await import('@/lib/games')
 
     if (selectedGenre) {
       /*
        * Category pages:
-       * We need the complete catalog to know how many games
-       * belong to the selected category.
+       * Use provider-side pagination instead of loading the
+       * complete catalog.
+       *
+       * GamePix supports category filtering directly.
+       * GameMonetize is filtered independently inside getGamesPage().
        */
-      const allGames = await getGames()
-
-      const normalizedGenre = selectedGenre.trim().toLowerCase()
-
-      const categoryGames = allGames
-        .filter(
-          (g: any) =>
-            g.category?.toLowerCase() === normalizedGenre ||
-            g.genreFilter?.toLowerCase() === normalizedGenre
-        )
-        .sort((a: any, b: any) => (b.rating || 0) - (a.rating || 0))
-
-      totalPages = Math.max(
-        1,
-        Math.ceil(categoryGames.length / GAMES_PER_PAGE)
+      const result = await getGamesPage(
+        currentPage,
+        GAMES_PER_PAGE,
+        selectedGenre
       )
 
-      const start = (currentPage - 1) * GAMES_PER_PAGE
+      games = result.games as unknown as Game[]
+      hasMore = result.hasMore
 
-      games = categoryGames.slice(
-        start,
-        start + GAMES_PER_PAGE
-      ) as unknown as Game[]
-
-      hasMore = currentPage < totalPages
+      /*
+       * Provider pagination does not expose a reliable total
+       * number of category pages, so use hasMore rather than
+       * inventing a total.
+       */
+      totalPages = null
     } else {
       /*
        * All games:
@@ -112,9 +105,7 @@ export default async function GamesPage({
   }
 
   const canGoPrev = currentPage > 1
-  const canGoNext = selectedGenre
-    ? currentPage < (totalPages || 1)
-    : hasMore
+  const canGoNext = hasMore
 
   return (
     <div className="container mx-auto px-4 py-8">

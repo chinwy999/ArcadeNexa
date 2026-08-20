@@ -32,7 +32,8 @@ export interface GamePixPage {
 export async function fetchGamesPage(
   page = 1,
   pagination = DEFAULT_PAGE_SIZE,
-  order = 'quality'
+  order = 'quality',
+  category = ''
 ): Promise<GamePixPage> {
   const safePage = Math.max(1, Number(page) || 1)
   const safePagination = Math.min(
@@ -45,6 +46,10 @@ export async function fetchGamesPage(
   url.searchParams.set('pagination', String(safePagination))
   url.searchParams.set('page', String(safePage))
   url.searchParams.set('order', order)
+
+  if (category.trim()) {
+    url.searchParams.set('category', category.trim().toLowerCase())
+  }
 
   const controller = new AbortController()
   const timeout = setTimeout(() => controller.abort(), REQUEST_TIMEOUT)

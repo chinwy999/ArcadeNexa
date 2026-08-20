@@ -246,20 +246,27 @@ export async function getGamesPage(
 ): Promise<{ games: Game[]; hasMore: boolean }> {
   const safePage = Math.max(1, Math.floor(page))
   const safeSize = Math.min(48, Math.max(1, Math.floor(pageSize)))
-
-  /*
-   * Each provider is handled independently.
-   *
-   * IMPORTANT:
-   * A GameMonetize 429/error must NOT make the whole
-   * games page return zero games when GamePix is available.
-   */
+  const normalizedGenre = genre.trim().toLowerCase()
 
   let gpResult: Awaited<ReturnType<typeof fetchGamesPage>> | null = null
   let gmResult: Awaited<ReturnType<typeof fetchGMGamesPage>> | null = null
 
+  /*
+   * GamePix:
+   * - Supports server-side category filtering.
+   * - When a category is requested, it is the primary source.
+   *
+   * GameMonetize:
+   * - Does not reliably support the same category pagination.
+   * - It is used as an additional source only.
+   */
   const [gpSettled, gmSettled] = await Promise.allSettled([
-    fetchGamesPage(safePage, safeSize, 'quality'),
+    fetchGamesPage(
+      safePage,
+      safeSize,
+      'quality',
+      normalizedGenre
+    ),
     fetchGMGamesPage(safePage, safeSize),
   ])
 
@@ -281,35 +288,61 @@ export async function getGamesPage(
     )
   }
 
-  const gpGames = gpResult
+  let gpGames = gpResult
     ? gpResult.items.map(convertGame)
     : []
 
-  const gmGames = gmResult
+  let gmGames = gmResult
     ? gmResult.items.map(convertGMGame)
     : []
 
   /*
-   * Combine both providers without allowing one failed
-   * provider to remove the other provider's games.
-   *
-   * We take half of the page from each provider when both
-   * are available. If one provider fails, the other provider
-   * can fill the entire page.
+   * For categories, GamePix is already filtered server-side.
+   * Filter GameMonetize locally.
    */
-  const halfSize = Math.ceil(safeSize / 2)
+  if (normalizedGenre) {
+    gmGames = gmGames.filter(game =>
+      game.category?.toLowerCase() === normalizedGenre ||
+      game.genreFilter?.toLowerCase() === normalizedGenre
+    )
+  }
 
   let merged: Game[] = []
 
-  if (gpGames.length > 0 && gmGames.length > 0) {
+  if (normalizedGenre) {
+    /*
+     * CATEGORY MODE
+     *
+     * GamePix gets priority and can fill the entire page.
+     * GameMonetize is appended only when GamePix has fewer
+     * than safeSize games.
+     *
+     * This prevents the old 50/50 split from producing
+     * pages like 25 games when GameMonetize has only one
+     * matching game.
+     */
     merged = [
-      ...gmGames.slice(0, halfSize),
-      ...gpGames.slice(0, safeSize - halfSize),
+      ...gpGames,
+      ...gmGames,
     ]
-  } else if (gmGames.length > 0) {
-    merged = gmGames.slice(0, safeSize)
   } else {
-    merged = gpGames.slice(0, safeSize)
+    /*
+     * ALL GAMES MODE
+     *
+     * Keep a balanced provider mix for the main catalog.
+     */
+    const halfSize = Math.ceil(safeSize / 2)
+
+    if (gpGames.length > 0 && gmGames.length > 0) {
+      merged = [
+        ...gmGames.slice(0, halfSize),
+        ...gpGames.slice(0, safeSize - halfSize),
+      ]
+    } else if (gmGames.length > 0) {
+      merged = gmGames.slice(0, safeSize)
+    } else {
+      merged = gpGames.slice(0, safeSize)
+    }
   }
 
   /*
@@ -327,11 +360,9 @@ export async function getGamesPage(
   })
 
   /*
-   * Apply category filtering after provider merging.
+   * Final category safety check.
    */
-  if (genre.trim()) {
-    const normalizedGenre = genre.trim().toLowerCase()
-
+  if (normalizedGenre) {
     merged = merged.filter(game =>
       game.category?.toLowerCase() === normalizedGenre ||
       game.genreFilter?.toLowerCase() === normalizedGenre
@@ -340,6 +371,12 @@ export async function getGamesPage(
 
   const games = merged.slice(0, safeSize)
 
+  /*
+   * Pagination:
+   *
+   * In category mode, GamePix's pagination is the primary
+   * source of truth. GameMonetize only extends the page.
+   */
   const gpHasMore =
     gpResult !== null &&
     (
@@ -358,7 +395,8 @@ export async function getGamesPage(
 
   console.log(
     `[ArcadeNexa] Page ${safePage}: ${games.length} games ` +
-    `(GamePix=${gpGames.length}, GameMonetize=${gmGames.length})`
+    `(GamePix=${gpGames.length}, GameMonetize=${gmGames.length}, ` +
+    `genre=${normalizedGenre || 'all'})`
   )
 
   return {
