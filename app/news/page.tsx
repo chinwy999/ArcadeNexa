@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { articles } from '@/lib/articles'
+import { allArticles as articles } from '@/lib/articles'
 
 export const metadata: Metadata = {
   title: 'ArcadeNexa Blog | Gaming Guides, Tips & Articles',

@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import { articles } from '@/lib/articles'
+import { allArticles as articles } from '@/lib/articles'
 
 type Props = {
   params: { slug: string }
