@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import { allArticles as articles } from '@/lib/articles'
+import { allArticles } from '@/lib/articles'
 import { getSiteUrl } from '@/lib/site'
 import { fetchGamesPage } from '@/lib/gamepixFeed'
 import { fetchGMGamesPage } from '@/lib/gameMonetizeFeed'
@@ -159,7 +159,7 @@ export async function GET(
       },
     ]
 
-    const articleEntries = articles.map((article) => ({
+    const articleEntries = allArticles.map((article) => ({
       url: `${base}/blog/${article.slug}`,
       lastModified: new Date(article.date),
       changeFrequency: 'monthly',
