@@ -537,4 +537,241 @@ export const seoArticles = [
 ]
 
 // دمج المقالات الجديدة مع القديمة
-export const allArticles = [...articles, ...seoArticles]
+export const highTrafficArticles: Article[] = [
+  {
+    slug: "best-io-games-online-2026",
+    title: "Best IO Games to Play Online Free in 2026",
+    description: "Discover the best IO games to play online free in 2026. Explore top multiplayer browser games with no download required.",
+    category: "TOP LIST",
+    date: "2026-08-21",
+    readTime: "9 min read",
+    intro: "IO games have become one of the most popular genres in browser gaming. These multiplayer titles drop you into a shared world where you compete against players from around the globe with no download and no lengthy setup.",
+    sections: [
+      {
+        heading: "What Are IO Games?",
+        body: "IO games are lightweight online multiplayer games commonly associated with the .io domain extension used by early titles. They are known for simple mechanics, real-time competition, and instant browser access. The genre includes territory games, survival games, snake-style challenges, tank battles, and battle royale formats."
+      },
+      {
+        heading: "Why IO Games Remain Popular",
+        body: "The biggest advantage of IO games is accessibility. Most can be opened and played within seconds, making them ideal for short sessions. Their multiplayer nature also keeps matches unpredictable because each opponent can use a different strategy."
+      },
+      {
+        heading: "Popular Types of IO Games",
+        body: "The genre includes cell-growth games, multiplayer snake games, tank battles, shooters, survival arenas, territory-control games, and team-based challenges. This variety means players can find both casual and highly competitive experiences."
+      },
+      {
+        heading: "IO Games for Different Devices",
+        body: "Many modern browser IO games support desktop, tablet, and mobile devices. Keyboard and mouse controls can offer greater precision for competitive games, while touch-friendly titles are convenient for phones and tablets."
+      },
+      {
+        heading: "Where to Play IO Games",
+        body: "ArcadeNexa offers browser games that can be played instantly without a traditional installation. Browse the multiplayer and action-related categories to discover titles that match your preferred style."
+      }
+    ],
+    faq: [
+      {
+        question: "Are IO games free to play?",
+        answer: "Many IO games are free to play directly in a browser, although individual titles can have different features or monetization models."
+      },
+      {
+        question: "Do IO games work on mobile?",
+        answer: "Many modern IO games support smartphones and tablets, but compatibility depends on the individual game."
+      },
+      {
+        question: "Do IO games require a download?",
+        answer: "Browser-based IO games generally run directly from a web page without requiring a traditional game installation."
+      }
+    ]
+  },
+
+  {
+    slug: "best-car-games-online-free-no-download-2026",
+    title: "Best Car Games Online Free — No Download Required (2026)",
+    description: "Discover free browser car games for racing, driving, parking, and stunt challenges with no traditional installation required.",
+    category: "TOP LIST",
+    date: "2026-08-20",
+    readTime: "8 min read",
+    intro: "Car games remain one of the most popular categories in browser gaming. From fast arcade racing to precise parking and stunt challenges, modern browser games offer a wide range of driving experiences without requiring a traditional installation.",
+    sections: [
+      {
+        heading: "Why Browser Car Games Are Popular",
+        body: "Car games combine speed, control, competition, and progression. Browser-based versions allow players to start quickly, making them useful for both short sessions and longer gameplay."
+      },
+      {
+        heading: "Arcade Racing Games",
+        body: "Arcade racers prioritize fast gameplay and accessible controls over realistic simulation. They are usually easy to understand and are well suited to casual play."
+      },
+      {
+        heading: "Stunt and Physics Games",
+        body: "Stunt driving games challenge players to navigate ramps, loops, elevated tracks, and physics-based obstacles. Precise timing and vehicle control are usually more important than simply reaching maximum speed."
+      },
+      {
+        heading: "Parking and Driving Challenges",
+        body: "Parking games focus on spatial awareness and precision. More advanced driving games can introduce traffic, obstacles, larger vehicles, and increasingly complex routes."
+      },
+      {
+        heading: "Play Car Games on ArcadeNexa",
+        body: "ArcadeNexa offers browser games across racing, driving, action, and casual categories. Games can be explored by category to find titles suited to different devices and control preferences."
+      }
+    ],
+    faq: [
+      {
+        question: "Can I play car games without downloading them?",
+        answer: "Many modern car games run directly in a compatible browser without requiring a traditional installation."
+      },
+      {
+        question: "Do browser car games work on mobile?",
+        answer: "Many titles support touch controls, although the best experience depends on the individual game."
+      },
+      {
+        question: "Are browser car games free?",
+        answer: "Many browser car games are free to access, though availability and monetization can vary between titles."
+      }
+    ]
+  },
+
+  {
+    slug: "best-math-games-for-kids-online-free-2026",
+    title: "Best Math Games for Kids Online Free — Play in Browser (2026)",
+    description: "Explore browser-based math games for kids that practice arithmetic, logic, memory, and problem-solving through interactive gameplay.",
+    category: "EDUCATIONAL",
+    date: "2026-08-19",
+    readTime: "8 min read",
+    intro: "Math games can turn arithmetic and problem-solving practice into interactive challenges. The best educational games combine clear learning goals with engaging gameplay so children can practice number skills in a more enjoyable environment.",
+    sections: [
+      {
+        heading: "Why Game-Based Math Practice Can Help",
+        body: "Interactive games can increase engagement by giving players immediate feedback and a clear objective. Repetition through gameplay can also help children practice arithmetic skills in a more active format."
+      },
+      {
+        heading: "Addition and Subtraction Games",
+        body: "Games for younger learners often present simple number problems through visual challenges, matching activities, or interactive obstacles. Gradual difficulty progression can help children build confidence."
+      },
+      {
+        heading: "Multiplication and Division Games",
+        body: "Multiplication challenges often use repetition and speed to encourage recall. Visual grouping activities can help explain division before children move to more abstract numerical problems."
+      },
+      {
+        heading: "Logic and Problem-Solving Games",
+        body: "Pattern recognition, sequences, spatial reasoning, and logic puzzles can develop broader mathematical thinking beyond basic arithmetic."
+      },
+      {
+        heading: "Finding Educational Games on ArcadeNexa",
+        body: "ArcadeNexa includes educational, puzzle, memory, and number-based browser games. Players can explore categories to find challenges appropriate for their interests and ability level."
+      }
+    ],
+    faq: [
+      {
+        question: "Are online math games useful for practice?",
+        answer: "They can provide an engaging way to practice arithmetic and problem-solving, especially when used alongside appropriate teaching and learning activities."
+      },
+      {
+        question: "Do math games work on tablets?",
+        answer: "Many browser-based educational games support touch devices, but compatibility varies by title."
+      },
+      {
+        question: "Do math games require an account?",
+        answer: "Many browser games can be played without creating an account, although requirements vary by platform and title."
+      }
+    ]
+  },
+
+  {
+    slug: "best-shooting-games-online-no-download-2026",
+    title: "Best Shooting Games Online Free — No Download (2026)",
+    description: "Explore free browser shooting games including arcade shooters, action games, zombie challenges, and multiplayer experiences.",
+    category: "TOP LIST",
+    date: "2026-08-18",
+    readTime: "8 min read",
+    intro: "Shooting games are a major part of browser gaming. The genre includes top-down arcade shooters, side-scrolling action games, survival challenges, and competitive multiplayer experiences that can be accessed directly through a browser.",
+    sections: [
+      {
+        heading: "Types of Browser Shooting Games",
+        body: "Browser shooters include arcade, first-person, third-person, survival, space, and multiplayer formats. Each style offers different controls, pacing, and gameplay objectives."
+      },
+      {
+        heading: "Arcade and Space Shooters",
+        body: "Classic arcade shooters often focus on surviving waves of enemies, collecting power-ups, and improving high scores. Their simple controls make them suitable for short gaming sessions."
+      },
+      {
+        heading: "First-Person Browser Games",
+        body: "Modern browser technologies can support three-dimensional first-person gameplay. Performance depends on the game, browser, device hardware, and network conditions."
+      },
+      {
+        heading: "Zombie and Survival Games",
+        body: "Survival shooters add pressure through enemy waves, limited resources, and escalating difficulty. Players often need to balance movement, positioning, and ammunition management."
+      },
+      {
+        heading: "Play Shooting Games on ArcadeNexa",
+        body: "ArcadeNexa provides browser games across shooter and action categories. Explore available titles to find arcade challenges, survival games, and other fast-paced experiences."
+      }
+    ],
+    faq: [
+      {
+        question: "Are browser shooting games free?",
+        answer: "Many browser shooting games are free to play, although individual games can have different availability or monetization models."
+      },
+      {
+        question: "Do shooting games work on Chromebook?",
+        answer: "Many HTML5 browser games can run on modern Chromebooks, although performance and compatibility depend on the specific game."
+      },
+      {
+        question: "Can browser shooting games be multiplayer?",
+        answer: "Some browser games support real-time multiplayer, while others are designed primarily for single-player gameplay."
+      }
+    ]
+  },
+
+  {
+    slug: "best-puzzle-games-online-free-adults-2026",
+    title: "Best Free Puzzle Games Online for Adults (2026)",
+    description: "Explore free browser puzzle games for adults including match-3, logic, word, memory, and spatial challenges.",
+    category: "TOP LIST",
+    date: "2026-08-17",
+    readTime: "9 min read",
+    intro: "Puzzle games offer a different kind of challenge from fast-paced action games. They reward observation, patience, reasoning, and experimentation, making them suitable for both quick breaks and longer sessions.",
+    sections: [
+      {
+        heading: "Why Adults Enjoy Puzzle Games",
+        body: "Puzzle games provide a mental challenge without necessarily requiring fast reflexes. The satisfaction of identifying a solution or completing a difficult level can make them engaging across a wide range of ages."
+      },
+      {
+        heading: "Match-3 Puzzle Games",
+        body: "Match-3 games use simple piece-swapping or arrangement mechanics while later levels can introduce limited moves, special pieces, and multiple objectives."
+      },
+      {
+        heading: "Logic and Deduction Puzzles",
+        body: "Logic games present rules and constraints that players must analyze to reach a solution. These challenges emphasize reasoning, planning, and experimentation."
+      },
+      {
+        heading: "Word and Language Puzzles",
+        body: "Word games can challenge vocabulary, spelling, pattern recognition, and lateral thinking through formats such as anagrams, word building, and definition-based challenges."
+      },
+      {
+        heading: "Find Puzzle Games on ArcadeNexa",
+        body: "ArcadeNexa offers puzzle, brain, casual, and memory-related browser games. Browse available categories to find a challenge that suits your preferred style."
+      }
+    ],
+    faq: [
+      {
+        question: "Are online puzzle games free for adults?",
+        answer: "Many browser puzzle games are free to play, although availability can vary between individual titles."
+      },
+      {
+        question: "What puzzle games are popular with adults?",
+        answer: "Logic, word, memory, tile, and match-3 games are all popular categories because they offer different kinds of mental challenge."
+      },
+      {
+        question: "Can puzzle games be played on mobile?",
+        answer: "Many browser puzzle games support smartphones and tablets, depending on the individual title."
+      }
+    ]
+  }
+]
+
+// دمج جميع المقالات
+export const allArticles: Article[] = [
+  ...articles,
+  ...seoArticles,
+  ...highTrafficArticles,
+]
