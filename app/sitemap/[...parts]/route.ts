@@ -98,7 +98,7 @@ export async function GET(
         priority: 0.8,
       },
       {
-        url: `${base}/news`,
+        url: `${base}/blog`,
         lastModified: now,
         changeFrequency: 'weekly',
         priority: 0.7,
@@ -160,7 +160,7 @@ export async function GET(
     ]
 
     const articleEntries = articles.map((article) => ({
-      url: `${base}/news/${article.slug}`,
+      url: `${base}/blog/${article.slug}`,
       lastModified: new Date(article.date),
       changeFrequency: 'monthly',
       priority: 0.6,

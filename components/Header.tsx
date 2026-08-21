@@ -16,7 +16,7 @@ const navLinks = [
   { href: '/categories', label: 'Categories' },
   { href: '/tournaments', label: 'Tournaments' },
   { href: '/leaderboard', label: 'Leaderboard' },
-  { href: '/news', label: 'News' },
+  { href: '/blog', label: 'Blog' },
 ]
 
 export default function Header() {

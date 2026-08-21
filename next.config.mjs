@@ -4,6 +4,21 @@ const nextConfig = {
     useWasmBinary: true,
     forceSwcTransforms: false,
   },
+
+  async redirects() {
+    return [
+      {
+        source: '/news',
+        destination: '/blog',
+        permanent: true,
+      },
+      {
+        source: '/news/:slug*',
+        destination: '/blog/:slug*',
+        permanent: true,
+      },
+    ]
+  },
 }
 
 export default nextConfig
