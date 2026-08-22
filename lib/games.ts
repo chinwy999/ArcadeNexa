@@ -883,7 +883,15 @@ export async function getGameBySlugFast(slug: string): Promise<Game | null> {
     const { fetchGamesPage } =
       await import('./gamepixFeed')
 
-    for (let page = 1; page <= 10; page++) {
+    /*
+     * Search the full available GamePix catalog.
+     *
+     * A fixed limit of 10 pages caused valid older games,
+     * such as kids-math-online, to return 404.
+     */
+    const GAMEPIX_MAX_PAGES = 141
+
+    for (let page = 1; page <= GAMEPIX_MAX_PAGES; page++) {
       const result = await fetchGamesPage(
         page,
         96,
