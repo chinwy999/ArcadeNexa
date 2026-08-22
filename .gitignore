@@ -12,3 +12,6 @@ node_modules/
 *.backup
 tsconfig.tsbuildinfo
 api-audit/
+.audit-games/
+.audit-all-games.sh
+backups/

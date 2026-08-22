@@ -5,6 +5,7 @@ import type { Metadata } from 'next'
 import InstantPlaySection from './InstantPlaySection'
 import RecentlyPlayedTracker from '@/components/RecentlyPlayedTracker'
 import FavoriteButton from '@/components/FavoriteButton'
+import { allArticles } from '@/lib/articles'
 
 export const dynamic = 'force-dynamic'
 
@@ -74,6 +75,148 @@ export async function generateStaticParams() {
   return []
 }
 
+
+function getHowToPlay(game: {
+  title: string
+  category: string
+  instructions?: string
+}) {
+  const category = game.category.toLowerCase()
+
+  const categoryInstructions: Record<string, string> = {
+    racing:
+      'Use the available steering, acceleration, and brake controls to guide your vehicle through the track. Avoid obstacles, maintain speed, and aim for the best finish time.',
+
+    puzzle:
+      'Use your mouse, touch screen, or keyboard controls to interact with the puzzle. Study the board carefully, plan your moves, and complete the objective with as few mistakes as possible.',
+
+    action:
+      'Use the available movement and action controls to overcome obstacles and complete the level. React quickly, explore the environment, and use the game mechanics to your advantage.',
+
+    shooter:
+      'Use your mouse, touch controls, or keyboard to aim and interact with targets. Watch your surroundings, react quickly, and complete the objective before the level ends.',
+
+    sports:
+      'Use the on-screen or keyboard controls to move your player and perform actions. Time your movements carefully and complete the objective to win the match.',
+
+    strategy:
+      'Plan your moves before acting. Use the available controls to manage your units, resources, or objectives and adapt your strategy as the game progresses.',
+
+    simulation:
+      'Use the available controls to interact with the game world and manage its systems. Follow the objectives, experiment with the available mechanics, and progress at your own pace.',
+
+    adventure:
+      'Explore the game world, interact with objects and characters, and follow the objectives. Use the available movement and action controls to progress through the adventure.',
+
+    casual:
+      'Use the simple mouse, touch, or keyboard controls provided by the game. Follow the objective, react to what appears on screen, and enjoy the game at your own pace.',
+
+    arcade:
+      'Use the available mouse, touch, or keyboard controls to play. React quickly, complete the objective, avoid obstacles, and try to achieve the highest score possible.',
+  }
+
+  for (const key of Object.keys(categoryInstructions)) {
+    if (category.includes(key)) {
+      return categoryInstructions[key]
+    }
+  }
+
+  return game.instructions &&
+    game.instructions !== 'Use mouse or touch controls to play.'
+    ? game.instructions
+    : 'Use the available mouse, touch, or keyboard controls to play. Follow the on-screen objective, learn the game mechanics, and complete the level or challenge.'
+}
+
+function getRelatedArticles(game: {
+  title: string
+  category: string
+}) {
+  const titleWords = game.title
+    .toLowerCase()
+    .split(/[^a-z0-9]+/)
+    .filter((word) => word.length >= 3)
+
+  const category = game.category.toLowerCase()
+
+  const categoryKeywords: Record<string, string[]> = {
+    racing: ['racing', 'race', 'car', 'driving'],
+    puzzle: ['puzzle'],
+    action: ['action', 'reflexes', 'timing'],
+    shooter: ['shooting', 'shooter'],
+    sports: ['sports', 'sport'],
+    strategy: ['strategy'],
+    simulation: ['simulation'],
+    adventure: ['adventure'],
+    casual: ['casual'],
+    arcade: ['arcade'],
+  }
+
+  const keywords = [
+    category,
+    ...(categoryKeywords[category] || []),
+  ]
+
+  const scored = allArticles
+    .map((article) => {
+      const searchable = [
+        article.title,
+        article.description,
+        article.intro,
+        article.category,
+        ...article.sections.map((section) => section.heading),
+      ]
+        .join(' ')
+        .toLowerCase()
+
+      let score = 0
+
+      for (const keyword of keywords) {
+        if (keyword && searchable.includes(keyword)) {
+          score += keyword === category ? 8 : 4
+        }
+      }
+
+      for (const word of titleWords) {
+        if (searchable.includes(word)) {
+          score += 2
+        }
+      }
+
+      if (article.category === 'GUIDE') {
+        score += 1
+      }
+
+      return { article, score }
+    })
+    .filter(({ article }) => article.slug)
+    .sort((a, b) => b.score - a.score)
+
+  const selected = scored
+    .filter(({ score }) => score > 0)
+    .slice(0, 3)
+    .map(({ article }) => article)
+
+  if (selected.length >= 3) {
+    return selected
+  }
+
+  const selectedSlugs = new Set(
+    selected.map((article) => article.slug)
+  )
+
+  for (const article of allArticles) {
+    if (!selectedSlugs.has(article.slug)) {
+      selected.push(article)
+    }
+
+    if (selected.length === 3) {
+      break
+    }
+  }
+
+  return selected
+}
+
 export default async function GamePage({ params }: PageParams) {
   /*
    * The game lookup is intentionally kept here as the single
@@ -86,6 +229,9 @@ export default async function GamePage({ params }: PageParams) {
   if (!game) {
     notFound()
   }
+
+  const howToPlay = getHowToPlay(game)
+  const relatedArticles = getRelatedArticles(game)
 
 
   const jsonLd = {
@@ -211,19 +357,49 @@ export default async function GamePage({ params }: PageParams) {
             </p>
           </div>
 
-          <div className="glass rounded-2xl p-6 border border-white/5">
-            <h3 className="text-xl font-bold text-white mb-3">
-              How to Play
-            </h3>
+                      <div className="glass rounded-2xl p-6 border border-white/5">
+              <h2 className="text-xl font-bold text-white mb-3">
+                How to Play {game.title}
+              </h2>
 
-            <p className="text-gray-400">
-              {game.instructions}
-            </p>
+              <p className="text-gray-400 leading-relaxed">
+                {howToPlay}
+              </p>
+
+              <p className="mt-4 text-sm text-text-secondary">
+                Controls may vary by game. Check the on-screen instructions when
+                the game loads for the exact keyboard, mouse, or touch controls.
+              </p>
+            </div>
+
+            <div className="glass rounded-2xl p-6 border border-white/5">
+              <h2 className="text-xl font-bold text-white mb-4">
+                Gaming Guides & Tips
+              </h2>
+
+              <div className="grid gap-3 sm:grid-cols-3">
+                {relatedArticles.map((article) => (
+                  <Link
+                    key={article.slug}
+                    href={`/blog/${article.slug}`}
+                    className="rounded-xl border border-white/10 bg-white/[0.02] p-4 transition hover:border-electric-violet/40 hover:bg-white/[0.04]"
+                  >
+                    <span className="mb-2 block text-xs font-bold uppercase tracking-wide text-electric-violet">
+                      {article.category}
+                    </span>
+
+                    <span className="block text-sm font-bold leading-6 text-white">
+                      {article.title}
+                    </span>
+                  </Link>
+                ))}
+              </div>
+            </div>
+
+
           </div>
 
-        </div>
-
-        <div className="space-y-4">
+          <div className="space-y-4">
 
           <div className="glass rounded-2xl p-6 border border-white/5">
             <h3 className="text-xl font-bold text-white mb-4">
