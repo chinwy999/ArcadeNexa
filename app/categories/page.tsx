@@ -146,7 +146,7 @@ export default async function CategoriesPage() {
         </div>
         <h1 className="text-5xl font-black text-white mb-3">Explore Games</h1>
         <p className="text-text-secondary text-lg">
-          <span className="text-white font-bold">13,485+</span> games across{' '}
+          <span className="text-white font-bold">15,285+</span> games across{' '}
           <span className="text-electric-violet font-bold">{filters.length}</span> categories
         </p>
       </div>

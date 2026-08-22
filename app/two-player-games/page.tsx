@@ -5,7 +5,7 @@ import { getGames } from '@/lib/games'
 
 export const metadata: Metadata = {
   title: 'Two Player Games – Free Online 2 Player Games | ArcadeNexa',
-  description: 'Play the best two player games online free. Compete with friends on the same device. No download, no login. 13,485+ free browser games including 2 player options.',
+  description: 'Play the best two player games online free. Compete with friends on the same device. No download, no login. 15,285+ free browser games including 2 player options.',
   keywords: 'two player games, 2 player games, two player games online, 2 player games unblocked, games for two players',
   alternates: { canonical: '/two-player-games' },
 }
@@ -49,7 +49,7 @@ export default async function TwoPlayerGamesPage() {
           </h1>
           <p className="mx-auto mb-6 max-w-2xl text-lg text-gray-300">
             Challenge a friend on the <strong className="text-white">same device</strong> or compete solo.
-            ArcadeNexa has 13,485+ free browser games including the best 2 player games — no download, no login.
+            ArcadeNexa has 15,285+ free browser games including the best 2 player games — no download, no login.
           </p>
           <div className="mb-8 flex flex-wrap justify-center gap-2 text-sm">
             {['2 Player Sports','Fighting Games','Racing Games','.IO Multiplayer','Same Screen','Unblocked'].map(tag => (

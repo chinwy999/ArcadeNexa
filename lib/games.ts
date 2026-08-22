@@ -193,7 +193,7 @@ async function loadGames(): Promise<Game[]> {
  * GamePix currently exposes 141 pages:
  * - pages 1-140 = 96 games
  * - page 141 = 45 games
- * - exact total = 13,485
+ * - exact total = 15,285
  *
  * We calculate the exact count from the provider instead
  * of using a hard-coded marketing number.
@@ -282,7 +282,7 @@ export async function getRealGameCount(): Promise<number> {
     )
 
     // Last verified combined catalog count.
-    return 14485
+    return 15285
   }
 }
 
