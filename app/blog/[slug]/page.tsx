@@ -2,6 +2,8 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { allArticles as articles } from '@/lib/articles'
+import { getGamesPage, type Game } from '@/lib/games'
+import GameCard from '@/components/GameCard'
 
 type Props = {
   params: { slug: string }
@@ -9,6 +11,146 @@ type Props = {
 
 export function generateStaticParams() {
   return articles.map((article) => ({ slug: article.slug }))
+}
+
+
+function getGameCategoryForArticle(article: {
+  slug: string
+  title: string
+  category: string
+}): string {
+  const text = `${article.slug} ${article.title} ${article.category}`.toLowerCase()
+
+  if (
+    text.includes('racing') ||
+    text.includes('race') ||
+    text.includes('driving') ||
+    text.includes('car')
+  ) {
+    return 'racing'
+  }
+
+  if (
+    text.includes('puzzle') ||
+    text.includes('logic')
+  ) {
+    return 'puzzle'
+  }
+
+  if (
+    text.includes('strategy')
+  ) {
+    return 'strategy'
+  }
+
+  if (
+    text.includes('sport')
+  ) {
+    return 'sports'
+  }
+
+  if (
+    text.includes('shooter') ||
+    text.includes('shooting')
+  ) {
+    return 'shooter'
+  }
+
+  if (
+    text.includes('adventure')
+  ) {
+    return 'adventure'
+  }
+
+  if (
+    text.includes('simulation')
+  ) {
+    return 'simulation'
+  }
+
+  if (
+    text.includes('casual')
+  ) {
+    return 'casual'
+  }
+
+  if (
+    text.includes('arcade')
+  ) {
+    return 'arcade'
+  }
+
+  if (
+    text.includes('action') ||
+    text.includes('reflex') ||
+    text.includes('timing')
+  ) {
+    return 'action'
+  }
+
+  return ''
+}
+
+const relatedGamesCache = new Map<string, Game[]>()
+
+async function getRelatedGamesForArticle(article: {
+  slug: string
+  title: string
+  category: string
+}): Promise<Game[]> {
+  const category = getGameCategoryForArticle(article)
+  const cacheKey = category || 'general'
+
+  const cached = relatedGamesCache.get(cacheKey)
+
+  if (cached) {
+    return cached
+  }
+
+  try {
+    const result = await getGamesPage(
+      1,
+      6,
+      category
+    )
+
+    let games = result.games.filter(
+      (game) => Boolean(game.slug)
+    )
+
+    // If the category has too few games, use the general catalog
+    // so every article can still contain useful internal links.
+    if (games.length < 3) {
+      const fallback = await getGamesPage(1, 6, '')
+
+      const existing = new Set(
+        games.map((game) => game.slug)
+      )
+
+      for (const game of fallback.games) {
+        if (!existing.has(game.slug)) {
+          games.push(game)
+        }
+
+        if (games.length >= 6) {
+          break
+        }
+      }
+    }
+
+    games = games.slice(0, 6)
+
+    relatedGamesCache.set(cacheKey, games)
+
+    return games
+  } catch (error) {
+    console.error(
+      `[ArcadeNexa] Failed to load related games for article ${article.slug}:`,
+      error
+    )
+
+    return []
+  }
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -35,7 +177,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 }
 
-export default function ArticlePage({ params }: Props) {
+export default async function ArticlePage({ params }: Props) {
   const article = articles.find((item) => item.slug === params.slug)
 
   if (!article) {
@@ -50,6 +192,8 @@ export default function ArticlePage({ params }: Props) {
   const fallbackRelated = related.length
     ? related
     : articles.filter((item) => item.slug !== article.slug).slice(0, 3)
+
+  const relatedGames = await getRelatedGamesForArticle(article)
 
   const jsonLd = {
     '@context': 'https://schema.org',
@@ -141,6 +285,46 @@ export default function ArticlePage({ params }: Props) {
           </section>
         ))}
       </article>
+
+      {relatedGames.length > 0 && (
+        <section className="mt-14" aria-labelledby="related-games-heading">
+          <div className="mb-6">
+            <span className="text-xs font-black uppercase tracking-[0.2em] text-neon-green">
+              Play Related Games
+            </span>
+
+            <h2
+              id="related-games-heading"
+              className="mt-2 text-2xl font-black text-white sm:text-3xl"
+            >
+              Games You Can Play on ArcadeNexa
+            </h2>
+
+            <p className="mt-2 max-w-2xl leading-7 text-text-secondary">
+              Try games related to this article directly on ArcadeNexa.
+              No download is required.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-2 gap-4 md:grid-cols-3">
+            {relatedGames.map((game) => (
+              <GameCard
+                key={game.slug}
+                game={game}
+              />
+            ))}
+          </div>
+
+          <div className="mt-6 text-center">
+            <Link
+              href="/games"
+              className="inline-flex rounded-xl border border-neon-green/30 bg-neon-green/10 px-5 py-3 font-bold text-neon-green transition hover:bg-neon-green/20"
+            >
+              Browse All Games →
+            </Link>
+          </div>
+        </section>
+      )}
 
       <section className="mt-14 rounded-2xl border border-white/10 bg-white/[0.03] p-6">
         <h2 className="mb-6 text-2xl font-bold text-white">
