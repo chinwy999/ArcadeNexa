@@ -16,7 +16,11 @@ export async function GET(request: NextRequest) {
       48,
       Math.max(
         1,
-        Number(searchParams.get('pagination') || '48')
+        Number(
+          searchParams.get('limit') ||
+          searchParams.get('pagination') ||
+          '48'
+        )
       )
     )
 
@@ -28,12 +32,18 @@ export async function GET(request: NextRequest) {
       genre
     )
 
-    return NextResponse.json(result.games, {
-      headers: {
-        'Cache-Control':
-          'public, s-maxage=3600, stale-while-revalidate=86400',
+    return NextResponse.json(
+      {
+        games: result.games,
+        hasMore: result.hasMore,
       },
-    })
+      {
+        headers: {
+          'Cache-Control':
+            'public, s-maxage=3600, stale-while-revalidate=86400',
+        },
+      }
+    )
   } catch (error) {
     console.error('[API /games]', error)
 
@@ -42,6 +52,7 @@ export async function GET(request: NextRequest) {
         ok: false,
         error: 'Unable to load games',
         games: [],
+        hasMore: false,
       },
       { status: 502 }
     )

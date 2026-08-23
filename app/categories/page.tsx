@@ -1,215 +1,580 @@
 import type { Metadata } from 'next'
-export const dynamic = 'force-dynamic'
 import Link from 'next/link'
 import Image from 'next/image'
 
+export const dynamic = 'force-dynamic'
+
 export const metadata: Metadata = {
-  title: 'Categories',
-  description: 'Browse ArcadeNexa games by category',
+  title: 'Game Categories',
+  description:
+    'Explore 15,285+ free browser games by category on ArcadeNexa.',
   alternates: { canonical: '/categories' },
 }
 
-const categoryMeta: Record<string, { desc: string; gradient: string; bg: string; icon: string; image?: string }> = {
-  'adventure':          { image: '/images/categories/adventure.webp', desc: 'Explore worlds & epic quests',    gradient: 'from-teal-400 to-green-500',      bg: 'from-teal-500/20 to-green-500/10',      icon: '🗺️' },
-  'action':             { image: '/images/categories/action.webp', desc: 'Fast-paced action games',         gradient: 'from-red-400 to-orange-500',      bg: 'from-red-500/20 to-orange-500/10',      icon: '⚔️' },
-  'arcade':             { image: '/images/categories/arcade.webp', desc: 'Classic arcade fun',              gradient: 'from-pink-400 to-purple-600',     bg: 'from-pink-500/20 to-purple-500/10',     icon: '🕹️' },
-  'casual':             { image: '/images/categories/casual.webp', desc: 'Fun and quick games',             gradient: 'from-green-400 to-emerald-500',   bg: 'from-green-500/20 to-emerald-500/10',   icon: '🎯' },
-  'puzzle':             { image: '/images/categories/puzzle.webp', desc: 'Brain teasers & logic',           gradient: 'from-yellow-400 to-amber-500',    bg: 'from-yellow-500/20 to-amber-500/10',    icon: '🧩' },
-  'racing':             { image: '/images/categories/racing.webp', desc: 'High-speed racing',               gradient: 'from-amber-400 to-orange-500',   bg: 'from-amber-500/20 to-orange-500/10',   icon: '🏎️' },
-  'sports':             { image: '/images/categories/sports.webp', desc: 'Sports & athletics',              gradient: 'from-cyan-400 to-blue-500',       bg: 'from-cyan-500/20 to-blue-500/10',       icon: '⚽' },
-  'shooter':            { image: '/images/categories/shooter.webp', desc: 'Shoot your way to victory',       gradient: 'from-red-500 to-zinc-600',        bg: 'from-red-500/20 to-zinc-500/10',        icon: '🔫' },
-  'simulation':         { image: '/images/categories/simulation.webp', desc: 'Simulation & physics',            gradient: 'from-sky-400 to-blue-500',        bg: 'from-sky-500/20 to-blue-500/10',        icon: '🌍' },
-  'strategy':           { image: '/images/categories/strategy.webp', desc: 'Plan, build & conquer',           gradient: 'from-indigo-400 to-blue-600',     bg: 'from-indigo-500/20 to-blue-500/10',     icon: '♟️' },
-  'battle':             { image: '/images/categories/battle.webp', desc: 'Battle & defense',                gradient: 'from-orange-400 to-red-500',      bg: 'from-orange-500/20 to-red-500/10',      icon: '🛡️' },
-  'platformer':         { image: '/images/categories/platformer.webp', desc: 'Jump & run platform games',       gradient: 'from-lime-400 to-green-500',      bg: 'from-lime-500/20 to-green-500/10',      icon: '🏃' },
-  'fighting':           { image: '/images/categories/fighting.webp', desc: 'Combat & fighting',               gradient: 'from-rose-400 to-red-600',        bg: 'from-rose-500/20 to-red-500/10',        icon: '🥊' },
-  'runner':             { image: '/images/categories/runner.webp', desc: 'Endless runner games',            gradient: 'from-violet-400 to-purple-600',   bg: 'from-violet-500/20 to-purple-500/10',   icon: '👟' },
-  'idle':               { image: '/images/categories/idle.webp', desc: 'Idle & clicker games',            gradient: 'from-slate-400 to-gray-600',      bg: 'from-slate-500/20 to-gray-500/10',      icon: '💤' },
-  'clicker':            { image: '/images/categories/clicker.webp', desc: 'Click your way to success',       gradient: 'from-orange-300 to-yellow-500',   bg: 'from-orange-500/20 to-yellow-500/10',   icon: '👆' },
-  'hyper-casual':       { image: '/images/categories/hyper-casual.webp', desc: 'Simple & addictive',              gradient: 'from-pink-400 to-rose-500',       bg: 'from-pink-500/20 to-rose-500/10',       icon: '⚡' },
-  'io':                 { image: '/images/categories/io.webp', desc: 'Multiplayer .io games',           gradient: 'from-emerald-400 to-teal-500',    bg: 'from-emerald-500/20 to-teal-500/10',    icon: '🌐' },
-  'match-3':            { image: '/images/categories/match-3.webp', desc: 'Match 3 puzzle games',            gradient: 'from-purple-400 to-pink-500',     bg: 'from-purple-500/20 to-pink-500/10',     icon: '💎' },
-  'ball':               { image: '/images/categories/ball.webp', desc: 'Ball & physics games',            gradient: 'from-blue-400 to-cyan-500',       bg: 'from-blue-500/20 to-cyan-500/10',       icon: '🎱' },
-  'car':                { image: '/images/categories/car.webp', desc: 'Car & driving games',             gradient: 'from-gray-400 to-slate-600',      bg: 'from-gray-500/20 to-slate-500/10',      icon: '🚗' },
-  'card':               { image: '/images/categories/card.webp', desc: 'Card & board games',              gradient: 'from-red-400 to-pink-500',        bg: 'from-red-500/20 to-pink-500/10',        icon: '🃏' },
-  'board':              { image: '/images/categories/board.webp', desc: 'Classic board games',             gradient: 'from-amber-500 to-yellow-600',    bg: 'from-amber-500/20 to-yellow-500/10',    icon: '🎲' },
-  'brain':              { image: '/images/categories/brain.webp', desc: 'Brain training games',            gradient: 'from-cyan-500 to-blue-600',       bg: 'from-cyan-500/20 to-blue-500/10',       icon: '🧠' },
-  'educational':        { image: '/images/categories/educational.webp', desc: 'Learn while you play',            gradient: 'from-green-500 to-teal-600',      bg: 'from-green-500/20 to-teal-500/10',      icon: '📚' },
-  'math':               { image: '/images/categories/math.webp', desc: 'Math & number games',             gradient: 'from-blue-500 to-indigo-600',     bg: 'from-blue-500/20 to-indigo-500/10',     icon: '🔢' },
-  'memory':             { image: '/images/categories/memory.webp', desc: 'Memory & concentration',          gradient: 'from-violet-500 to-purple-600',   bg: 'from-violet-500/20 to-purple-500/10',   icon: '🎭' },
-  'trivia':             { image: '/images/categories/trivia.webp', desc: 'Quiz & trivia games',             gradient: 'from-yellow-500 to-amber-600',    bg: 'from-yellow-500/20 to-amber-500/10',    icon: '❓' },
-  'hidden-object':      { image: '/images/categories/hidden-object.webp', desc: 'Find hidden objects',             gradient: 'from-teal-500 to-cyan-600',       bg: 'from-teal-500/20 to-cyan-500/10',       icon: '🔍' },
-  'animal':             { image: '/images/categories/animal.webp', desc: 'Animal themed games',             gradient: 'from-lime-500 to-green-600',      bg: 'from-lime-500/20 to-green-500/10',      icon: '🐾' },
-  'cats':               { image: '/images/categories/cats.webp', desc: 'Cat themed games',                gradient: 'from-orange-300 to-amber-500',    bg: 'from-orange-500/20 to-amber-500/10',    icon: '🐱' },
-  'monster':            { image: '/images/categories/monster.webp', desc: 'Monster & creature games',        gradient: 'from-purple-600 to-violet-700',   bg: 'from-purple-500/20 to-violet-500/10',   icon: '👾' },
-  'zombie':             { image: '/images/categories/zombie.webp', desc: 'Zombie survival games',           gradient: 'from-green-700 to-lime-600',      bg: 'from-green-700/20 to-lime-500/10',      icon: '🧟' },
-  'stickman':           { image: '/images/categories/runner.webp', desc: 'Stickman action games',           gradient: 'from-gray-500 to-slate-600',      bg: 'from-gray-500/20 to-slate-500/10',      icon: '🏃' },
-  'retro':              { image: '/images/categories/arcade.webp', desc: 'Classic retro games',             gradient: 'from-amber-600 to-yellow-700',    bg: 'from-amber-500/20 to-yellow-500/10',    icon: '🎮' },
-  'snake':              { image: '/images/categories/snake.webp', desc: 'Snake & worm games',              gradient: 'from-green-600 to-emerald-700',   bg: 'from-green-500/20 to-emerald-500/10',   icon: '🐍' },
-  'airplane':           { image: '/images/categories/flying.webp', desc: 'Flying & airplane games',         gradient: 'from-sky-500 to-blue-600',        bg: 'from-sky-500/20 to-blue-500/10',        icon: '✈️' },
-  'basketball':         { image: '/images/categories/basketball.webp', desc: 'Basketball games',                gradient: 'from-orange-500 to-red-600',      bg: 'from-orange-500/20 to-red-500/10',      icon: '🏀' },
-  'golf':               { image: '/images/categories/golf.webp', desc: 'Golf games',                      gradient: 'from-green-400 to-lime-500',      bg: 'from-green-500/20 to-lime-500/10',      icon: '⛳' },
-  'block':              { image: '/images/categories/block.webp', desc: 'Block & building games',          gradient: 'from-blue-400 to-indigo-500',     bg: 'from-blue-500/20 to-indigo-500/10',     icon: '🧱' },
-  'building':           { image: '/images/categories/building.webp', desc: 'Building & construction',         gradient: 'from-yellow-600 to-amber-700',    bg: 'from-yellow-500/20 to-amber-500/10',    icon: '🏗️' },
-  'farming':            { image: '/images/categories/farming.webp', desc: 'Farming & management',            gradient: 'from-lime-400 to-green-600',      bg: 'from-lime-500/20 to-green-500/10',      icon: '🌾' },
-  'drawing':            { image: '/images/categories/drawing.webp', desc: 'Drawing & creative games',        gradient: 'from-pink-400 to-rose-500',       bg: 'from-pink-500/20 to-rose-500/10',       icon: '🎨' },
-  'robots':             { image: '/images/categories/robots.webp', desc: 'Robot & sci-fi games',            gradient: 'from-slate-500 to-gray-600',      bg: 'from-slate-500/20 to-gray-500/10',      icon: '🤖' },
-  'fun':                { image: '/images/categories/clicker.webp', desc: 'Fun & entertaining games',        gradient: 'from-yellow-400 to-orange-500',   bg: 'from-yellow-500/20 to-orange-500/10',   icon: '😄' },
-  'games-for-girls':    { image: '/images/categories/beauty-dress-up.webp', desc: 'Games for girls',                 gradient: 'from-pink-500 to-rose-600',       bg: 'from-pink-500/20 to-rose-500/10',       icon: '👑' },
-  '2048':               { image: '/images/categories/math.webp', desc: '2048 & number puzzles',           gradient: 'from-orange-400 to-amber-500',    bg: 'from-orange-500/20 to-amber-500/10',    icon: '🔢' },
-  'first-person-shooter': { image: '/images/categories/shooter.webp', desc: 'First person shooter',         gradient: 'from-red-600 to-orange-700',      bg: 'from-red-500/20 to-orange-500/10',      icon: '🎯' },
+type Category = {
+  slug: string
+  title: string
+  description: string
+  image?: string
+  fallbackImage?: string
+  accent: string
+  featured?: boolean
+}
+
+const categoryAliases: Record<string, string> = {
+  hypercasual: 'hyper-casual',
+  shooting: 'shooter',
+  girls: 'games-for-girls',
 }
 
 const categoryImages: Record<string, string> = {
-  'action': '/images/categories/action.webp',
-  'adventure': '/images/categories/adventure.webp',
+  action: '/images/categories/action.webp',
+  adventure: '/images/categories/adventure.webp',
   'air-combat': '/images/categories/air-combat.webp',
-  'arcade': '/images/categories/arcade.webp',
-  'ball': '/images/categories/ball.webp',
-  'battle': '/images/categories/battle.webp',
+  animal: '/images/categories/animal.webp',
+  arcade: '/images/categories/arcade.webp',
+  ball: '/images/categories/ball.webp',
+  basketball: '/images/categories/basketball.webp',
+  battle: '/images/categories/battle.webp',
   'beauty-dress-up': '/images/categories/beauty-dress-up.webp',
-  'bike': '/images/categories/bike.webp',
-  'board': '/images/categories/board.webp',
-  'boat': '/images/categories/boat.webp',
-  'brain': '/images/categories/brain.webp',
-  'car': '/images/categories/car.webp',
-  'card': '/images/categories/card.webp',
-  'casual': '/images/categories/casual.webp',
-  'clicker': '/images/categories/clicker.webp',
-  'cooking': '/images/categories/cooking.webp',
-  'educational': '/images/categories/educational.webp',
-  'farming': '/images/categories/farming.webp',
-  'fighting': '/images/categories/fighting.webp',
-  'flying': '/images/categories/flying.webp',
+  bike: '/images/categories/bike.webp',
+  block: '/images/categories/block.webp',
+  board: '/images/categories/board.webp',
+  boat: '/images/categories/boat.webp',
+  brain: '/images/categories/brain.webp',
+  building: '/images/categories/building.webp',
+  car: '/images/categories/car.webp',
+  card: '/images/categories/card.webp',
+  casual: '/images/categories/casual.webp',
+  cats: '/images/categories/cats.webp',
+  clicker: '/images/categories/clicker.webp',
+  cooking: '/images/categories/cooking.webp',
+  drawing: '/images/categories/drawing.webp',
+  educational: '/images/categories/educational.webp',
+  farming: '/images/categories/farming.webp',
+  fighting: '/images/categories/fighting.webp',
+  flying: '/images/categories/flying.webp',
+  golf: '/images/categories/golf.webp',
   'hidden-object': '/images/categories/hidden-object.webp',
-  'horror': '/images/categories/horror.webp',
+  horror: '/images/categories/horror.webp',
   'hyper-casual': '/images/categories/hyper-casual.webp',
-  'idle': '/images/categories/idle.webp',
-  'io': '/images/categories/io.webp',
+  idle: '/images/categories/idle.webp',
+  io: '/images/categories/io.webp',
   'match-3': '/images/categories/match-3.webp',
-  'math': '/images/categories/math.webp',
-  'memory': '/images/categories/memory.webp',
-  'mmorpg': '/images/categories/mmorpg.webp',
+  math: '/images/categories/math.webp',
+  memory: '/images/categories/memory.webp',
+  mmorpg: '/images/categories/mmorpg.webp',
+  monster: '/images/categories/monster.webp',
   'open-world': '/images/categories/open-world.webp',
-  'platformer': '/images/categories/platformer.webp',
-  'puzzle': '/images/categories/puzzle.webp',
-  'quiz': '/images/categories/quiz.webp',
-  'racing': '/images/categories/racing.webp',
-  'rpg': '/images/categories/rpg.webp',
-  'runner': '/images/categories/runner.webp',
-  'sandbox': '/images/categories/sandbox.webp',
-  'shooter': '/images/categories/shooter.webp',
-  'simulation': '/images/categories/simulation.webp',
-  'space': '/images/categories/space.webp',
-  'sports': '/images/categories/sports.webp',
-  'stealth': '/images/categories/stealth.webp',
-  'strategy': '/images/categories/strategy.webp',
-  'survival': '/images/categories/survival.webp',
-  'tank': '/images/categories/tank.webp',
+  platformer: '/images/categories/platformer.webp',
+  puzzle: '/images/categories/puzzle.webp',
+  quiz: '/images/categories/quiz.webp',
+  racing: '/images/categories/racing.webp',
+  robots: '/images/categories/robots.webp',
+  rpg: '/images/categories/rpg.webp',
+  runner: '/images/categories/runner.webp',
+  sandbox: '/images/categories/sandbox.webp',
+  shooter: '/images/categories/shooter.webp',
+  simulation: '/images/categories/simulation.webp',
+  snake: '/images/categories/snake.webp',
+  space: '/images/categories/space.webp',
+  sports: '/images/categories/sports.webp',
+  stealth: '/images/categories/stealth.webp',
+  strategy: '/images/categories/strategy.webp',
+  survival: '/images/categories/survival.webp',
+  tank: '/images/categories/tank.webp',
   'time-management': '/images/categories/time-management.webp',
-  'trivia': '/images/categories/trivia.webp',
-  'tycoon': '/images/categories/tycoon.webp',
-  'word': '/images/categories/word.webp',
-  'zombie': '/images/categories/zombie.webp',
-  'animal': '/images/categories/animal.webp',
-  'cats': '/images/categories/cats.webp',
-  'monster': '/images/categories/monster.webp',
-  'stickman': '/images/categories/fighting.webp',
-  'retro': '/images/categories/arcade.webp',
-  'snake': '/images/categories/snake.webp',
-  'airplane': '/images/categories/flying.webp',
-  'basketball': '/images/categories/basketball.webp',
-  'golf': '/images/categories/golf.webp',
-  'block': '/images/categories/block.webp',
-  'building': '/images/categories/simulation.webp',
-  'drawing': '/images/categories/drawing.webp',
-  'robots': '/images/categories/robots.webp',
-  'fun': '/images/categories/casual.webp',
-  'games-for-girls': '/images/categories/beauty-dress-up.webp',
-  '2048': '/images/categories/match-3.webp',
-  'first-person-shooter': '/images/categories/shooter.webp',
+  trivia: '/images/categories/trivia.webp',
+  tycoon: '/images/categories/tycoon.webp',
+  word: '/images/categories/word.webp',
+  zombie: '/images/categories/zombie.webp',
 }
 
-const categoryCounts: Record<string, number> = {'adventure': 785, 'action': 1200, 'arcade': 950, 'casual': 1100, 'puzzle': 890, 'racing': 620, 'sports': 387, 'shooter': 340, 'simulation': 133, 'strategy': 155, 'battle': 86, 'platformer': 210, 'fighting': 180, 'runner': 160, 'idle': 95, 'clicker': 195, 'hyper-casual': 499, 'io': 42, 'match-3': 290, 'ball': 130, 'car': 280, 'card': 120, 'board': 90, 'brain': 140, 'educational': 200, 'math': 80, 'memory': 75, 'trivia': 48, 'hidden-object': 65, 'animal': 413, 'cats': 52, 'monster': 224, 'zombie': 114, 'stickman': 180, 'retro': 95, 'snake': 60, 'airplane': 70, 'basketball': 45, 'golf': 35, 'block': 110, 'building': 88, 'drawing': 55, 'robots': 75, 'fun': 320, 'games-for-girls': 190, '2048': 40, 'first-person-shooter': 85, 'farming': 72, 'cooking': 95, 'bike': 60, 'space': 110, 'rpg': 145, 'survival': 130, 'horror': 48, 'sandbox': 65, 'word': 55, 'tycoon': 80, 'tank': 45, 'time-management': 70, 'quiz': 40, 'mmorpg': 25, 'open-world': 55, 'stealth': 30, 'boat': 35, 'air-combat': 50, 'beauty-dress-up': 190}
+const categories: Category[] = [
+  {
+    slug: 'action',
+    title: 'Action',
+    description: 'Fast-paced action and intense gameplay.',
+    accent: 'from-red-500/70 to-orange-500/20',
+    featured: true,
+  },
+  {
+    slug: 'adventure',
+    title: 'Adventure',
+    description: 'Explore worlds, quests and epic stories.',
+    accent: 'from-teal-500/70 to-green-500/20',
+    featured: true,
+  },
+  {
+    slug: 'arcade',
+    title: 'Arcade',
+    description: 'Classic pick-up-and-play arcade fun.',
+    accent: 'from-pink-500/70 to-purple-600/20',
+    featured: true,
+  },
+  {
+    slug: 'casual',
+    title: 'Casual',
+    description: 'Easy, fun games for quick play sessions.',
+    accent: 'from-green-500/70 to-emerald-500/20',
+    featured: true,
+  },
+  {
+    slug: 'puzzle',
+    title: 'Puzzle',
+    description: 'Brain teasers, logic and problem solving.',
+    accent: 'from-yellow-500/70 to-amber-500/20',
+    featured: true,
+  },
+  {
+    slug: 'racing',
+    title: 'Racing',
+    description: 'Speed, drifting and high-octane competition.',
+    accent: 'from-orange-500/70 to-red-500/20',
+    featured: true,
+  },
+  {
+    slug: 'sports',
+    title: 'Sports',
+    description: 'Football, basketball, golf and more.',
+    accent: 'from-cyan-500/70 to-blue-500/20',
+    featured: true,
+  },
+  {
+    slug: 'shooter',
+    title: 'Shooter',
+    description: 'Aim, shoot and battle your way to victory.',
+    accent: 'from-red-600/70 to-zinc-700/20',
+    featured: true,
+  },
+  {
+    slug: 'simulation',
+    title: 'Simulation',
+    description: 'Realistic worlds, systems and experiences.',
+    accent: 'from-sky-500/70 to-blue-600/20',
+    featured: true,
+  },
+  {
+    slug: 'strategy',
+    title: 'Strategy',
+    description: 'Plan carefully, build and outsmart opponents.',
+    accent: 'from-indigo-500/70 to-blue-700/20',
+    featured: true,
+  },
+  {
+    slug: 'hyper-casual',
+    title: 'Hyper Casual',
+    description: 'Simple controls and instantly playable games.',
+    accent: 'from-violet-500/70 to-purple-600/20',
+  },
+  {
+    slug: 'platformer',
+    title: 'Platformer',
+    description: 'Jump, run and conquer challenging levels.',
+    accent: 'from-lime-500/70 to-green-600/20',
+  },
+  {
+    slug: 'fighting',
+    title: 'Fighting',
+    description: 'Combat, martial arts and head-to-head action.',
+    accent: 'from-rose-500/70 to-red-600/20',
+  },
+  {
+    slug: 'runner',
+    title: 'Runner',
+    description: 'Keep moving and beat your best distance.',
+    accent: 'from-purple-500/70 to-violet-600/20',
+  },
+  {
+    slug: 'idle',
+    title: 'Idle',
+    description: 'Progress and build even with simple actions.',
+    accent: 'from-slate-500/70 to-gray-700/20',
+  },
+  {
+    slug: 'clicker',
+    title: 'Clicker',
+    description: 'Tap, click and build your progress.',
+    accent: 'from-amber-500/70 to-orange-600/20',
+  },
+  {
+    slug: 'io',
+    title: '.IO',
+    description: 'Competitive online multiplayer-style games.',
+    accent: 'from-emerald-500/70 to-teal-600/20',
+  },
+  {
+    slug: 'match-3',
+    title: 'Match 3',
+    description: 'Match colors, gems and objects.',
+    accent: 'from-purple-500/70 to-pink-600/20',
+  },
+  {
+    slug: 'car',
+    title: 'Car',
+    description: 'Drive, park, race and customize cars.',
+    accent: 'from-slate-500/70 to-zinc-700/20',
+  },
+  {
+    slug: 'bike',
+    title: 'Bike',
+    description: 'Motorbikes, stunts and two-wheel racing.',
+    accent: 'from-orange-500/70 to-red-600/20',
+  },
+  {
+    slug: 'ball',
+    title: 'Ball',
+    description: 'Physics, sports and skill-based ball games.',
+    accent: 'from-blue-500/70 to-cyan-600/20',
+  },
+  {
+    slug: 'card',
+    title: 'Card',
+    description: 'Cards, decks and classic tabletop gameplay.',
+    accent: 'from-red-500/70 to-pink-600/20',
+  },
+  {
+    slug: 'board',
+    title: 'Board',
+    description: 'Classic board and tabletop games.',
+    accent: 'from-amber-500/70 to-yellow-600/20',
+  },
+  {
+    slug: 'brain',
+    title: 'Brain',
+    description: 'Challenge memory, logic and concentration.',
+    accent: 'from-cyan-500/70 to-blue-600/20',
+  },
+  {
+    slug: 'educational',
+    title: 'Educational',
+    description: 'Learn while playing and having fun.',
+    accent: 'from-green-500/70 to-teal-600/20',
+  },
+  {
+    slug: 'math',
+    title: 'Math',
+    description: 'Numbers, arithmetic and calculation games.',
+    accent: 'from-blue-500/70 to-indigo-600/20',
+  },
+  {
+    slug: 'memory',
+    title: 'Memory',
+    description: 'Train recall, focus and concentration.',
+    accent: 'from-violet-500/70 to-purple-700/20',
+  },
+  {
+    slug: 'trivia',
+    title: 'Trivia',
+    description: 'Test your knowledge with quizzes and facts.',
+    accent: 'from-yellow-500/70 to-amber-600/20',
+  },
+  {
+    slug: 'hidden-object',
+    title: 'Hidden Object',
+    description: 'Search scenes and find hidden clues.',
+    accent: 'from-teal-500/70 to-cyan-600/20',
+  },
+  {
+    slug: 'animal',
+    title: 'Animal',
+    description: 'Animal-themed adventures and challenges.',
+    accent: 'from-lime-500/70 to-green-600/20',
+  },
+  {
+    slug: 'cats',
+    title: 'Cats',
+    description: 'Playful games starring feline friends.',
+    accent: 'from-orange-500/70 to-amber-600/20',
+  },
+  {
+    slug: 'monster',
+    title: 'Monster',
+    description: 'Creatures, monsters and fantastic worlds.',
+    accent: 'from-purple-600/70 to-violet-700/20',
+    fallbackImage: '/images/categories/arcade.webp',
+  },
+  {
+    slug: 'zombie',
+    title: 'Zombie',
+    description: 'Survive hordes and defeat the undead.',
+    accent: 'from-green-700/70 to-lime-700/20',
+  },
+  {
+    slug: 'snake',
+    title: 'Snake',
+    description: 'Classic snake and worm challenges.',
+    accent: 'from-green-600/70 to-emerald-700/20',
+  },
+  {
+    slug: 'flying',
+    title: 'Flying',
+    description: 'Take off and explore the skies.',
+    accent: 'from-sky-500/70 to-blue-700/20',
+  },
+  {
+    slug: 'basketball',
+    title: 'Basketball',
+    description: 'Shoot hoops and master the court.',
+    accent: 'from-orange-500/70 to-red-600/20',
+  },
+  {
+    slug: 'golf',
+    title: 'Golf',
+    description: 'Aim for the perfect shot and beat par.',
+    accent: 'from-green-500/70 to-lime-600/20',
+  },
+  {
+    slug: 'farming',
+    title: 'Farming',
+    description: 'Grow, harvest and manage your farm.',
+    accent: 'from-lime-500/70 to-green-700/20',
+  },
+  {
+    slug: 'cooking',
+    title: 'Cooking',
+    description: 'Cook recipes and run your kitchen.',
+    accent: 'from-orange-500/70 to-amber-600/20',
+  },
+  {
+    slug: 'building',
+    title: 'Building',
+    description: 'Create, construct and manage projects.',
+    accent: 'from-yellow-600/70 to-amber-700/20',
+  },
+  {
+    slug: 'drawing',
+    title: 'Drawing',
+    description: 'Creative drawing and art challenges.',
+    accent: 'from-pink-500/70 to-rose-600/20',
+  },
+  {
+    slug: 'robots',
+    title: 'Robots',
+    description: 'Robots, technology and sci-fi action.',
+    accent: 'from-slate-500/70 to-gray-700/20',
+  },
+  {
+    slug: 'games-for-girls',
+    title: 'Games for Girls',
+    description: 'Fashion, beauty and dress-up adventures.',
+    accent: 'from-pink-500/70 to-rose-700/20',
+    image: '/images/categories/beauty-dress-up.webp',
+  },
+  {
+    slug: '2048',
+    title: '2048',
+    description: 'Merge tiles and master number puzzles.',
+    accent: 'from-orange-500/70 to-amber-600/20',
+    image: '/images/categories/match-3.webp',
+  },
+  {
+    slug: 'rpg',
+    title: 'RPG',
+    description: 'Characters, quests and role-playing adventures.',
+    accent: 'from-purple-500/70 to-indigo-700/20',
+  },
+  {
+    slug: 'survival',
+    title: 'Survival',
+    description: 'Gather resources and survive dangerous worlds.',
+    accent: 'from-green-600/70 to-emerald-800/20',
+  },
+  {
+    slug: 'horror',
+    title: 'Horror',
+    description: 'Scary stories and thrilling challenges.',
+    accent: 'from-red-700/70 to-black/40',
+  },
+  {
+    slug: 'open-world',
+    title: 'Open World',
+    description: 'Explore large worlds and choose your adventure.',
+    accent: 'from-sky-500/70 to-indigo-700/20',
+  },
+  {
+    slug: 'space',
+    title: 'Space',
+    description: 'Explore galaxies and futuristic worlds.',
+    accent: 'from-indigo-600/70 to-purple-800/20',
+  },
+]
 
-export default async function CategoriesPage() {
-  const filters = Object.keys(categoryMeta)
-  // استخدم الأعداد الثابتة — الكتالوج الكامل بطيء جداً للتحميل هنا
-  const realCounts: Record<string, number> = categoryCounts
+const displayTitle = (slug: string) => {
+  if (slug === 'io') return '.IO'
+  if (slug === 'rpg') return 'RPG'
+  if (slug === '2048') return '2048'
+
+  return slug
+    .split('-')
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(' ')
+}
+
+export default function CategoriesPage() {
+  const featuredCategories = categories.filter(category => category.featured)
+  const allCategories = categories
 
   return (
-    <div className="py-16 px-4 sm:px-6 max-w-7xl mx-auto">
-      {/* Header */}
-      <div className="mb-12">
-        <div className="inline-flex items-center gap-2 bg-electric-violet/10 border border-electric-violet/20 text-electric-violet text-xs font-bold px-3 py-1 rounded-full mb-4">
-          🎮 BROWSE CATEGORIES
+    <main className="max-w-7xl mx-auto px-4 sm:px-6 py-10 sm:py-16">
+      <header className="mb-10 sm:mb-14">
+        <div className="inline-flex items-center gap-2 rounded-full border border-electric-violet/30 bg-electric-violet/10 px-3 py-1 text-xs font-bold text-electric-violet">
+          <span aria-hidden="true">🎮</span>
+          BROWSE GAME CATEGORIES
         </div>
-        <h1 className="text-5xl font-black text-white mb-3">Explore Games</h1>
-        <p className="text-text-secondary text-lg">
-          <span className="text-white font-bold">15,285+</span> games across{' '}
-          <span className="text-electric-violet font-bold">{filters.length}</span> categories
+
+        <h1 className="mt-4 text-4xl font-black tracking-tight text-white sm:text-5xl">
+          Explore Games by Category
+        </h1>
+
+        <p className="mt-3 max-w-2xl text-base leading-7 text-text-secondary sm:text-lg">
+          Discover <span className="font-bold text-white">15,285+ free browser games</span>{' '}
+          across action, puzzle, racing, sports, adventure and many more genres.
         </p>
-      </div>
+      </header>
 
-      {/* Grid */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3">
-        {filters.map(filter => {
-          const meta = categoryMeta[filter]
-          const image = categoryImages[filter] ?? meta?.image
-          const count = realCounts[filter] ?? categoryCounts[filter] ?? 0
-
-          return (
-            <Link
-              key={filter}
-              href={`/games?genre=${encodeURIComponent(filter)}`}
-              className="group relative rounded-2xl overflow-hidden border border-white/8 hover:border-white/20 transition-all duration-300 hover:scale-[1.03] hover:shadow-2xl block"
+      <section aria-labelledby="popular-categories">
+        <div className="mb-5 flex items-end justify-between gap-4">
+          <div>
+            <p className="text-sm font-bold uppercase tracking-widest text-electric-violet">
+              Start here
+            </p>
+            <h2
+              id="popular-categories"
+              className="mt-1 text-2xl font-black text-white sm:text-3xl"
             >
-              {/* Background */}
-              <div className={`absolute inset-0 bg-gradient-to-br ${meta.bg} opacity-60 group-hover:opacity-100 transition-opacity duration-300`} />
-              
-              {/* Top shine line */}
-              <div className={`absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r ${meta.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
+              Popular Categories
+            </h2>
+          </div>
 
-              {/* Content */}
-              <div className="relative p-4 flex flex-col gap-3">
-                {/* Icon box */}
-                <div className="relative w-full h-24 overflow-hidden rounded-xl border border-white/10 bg-black/20 shadow-lg group-hover:scale-[1.02] transition-transform duration-300">
+          <span className="hidden text-sm text-text-secondary sm:block">
+            {featuredCategories.length} featured genres
+          </span>
+        </div>
+
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
+          {featuredCategories.map(category => {
+            const image =
+              category.image ||
+              categoryImages[category.slug] ||
+              category.fallbackImage
+
+            return (
+              <Link
+                key={category.slug}
+                href={`/games?genre=${encodeURIComponent(
+                  categoryAliases[category.slug] || category.slug
+                )}`}
+                className="group relative min-h-[150px] overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] transition duration-300 hover:-translate-y-1 hover:border-white/25 hover:shadow-2xl"
+              >
+                {image && (
+                  <Image
+                    src={image}
+                    alt={`${category.title} games`}
+                    fill
+                    sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
+                    className="object-cover transition duration-500 group-hover:scale-110"
+                  />
+                )}
+
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
+                <div
+                  className={`absolute inset-0 bg-gradient-to-br ${category.accent} opacity-30 transition group-hover:opacity-55`}
+                />
+
+                <div className="absolute inset-x-0 bottom-0 p-4">
+                  <h3 className="text-base font-black text-white">
+                    {category.title}
+                  </h3>
+                  <p className="mt-1 line-clamp-2 text-xs leading-5 text-gray-300">
+                    {category.description}
+                  </p>
+                </div>
+              </Link>
+            )
+          })}
+        </div>
+      </section>
+
+      <section className="mt-12 sm:mt-16" aria-labelledby="all-categories">
+        <div className="mb-5">
+          <p className="text-sm font-bold uppercase tracking-widest text-electric-violet">
+            Browse everything
+          </p>
+          <h2
+            id="all-categories"
+            className="mt-1 text-2xl font-black text-white sm:text-3xl"
+          >
+            All Game Categories
+          </h2>
+          <p className="mt-2 text-sm text-text-secondary">
+            Choose a genre to find games you can play instantly in your browser.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+          {allCategories.map(category => {
+            const image =
+              category.image ||
+              categoryImages[category.slug] ||
+              category.fallbackImage
+
+            return (
+              <Link
+                key={category.slug}
+                href={`/games?genre=${encodeURIComponent(
+                  categoryAliases[category.slug] || category.slug
+                )}`}
+                className="group relative overflow-hidden rounded-xl border border-white/10 bg-white/[0.025] transition duration-300 hover:-translate-y-0.5 hover:border-white/25 hover:bg-white/[0.05]"
+              >
+                <div className="relative h-28 overflow-hidden">
                   {image ? (
                     <Image
                       src={image}
-                      alt={`${filter.replace(/-/g, ' ')} games`}
+                      alt=""
                       fill
                       sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
-                      className="object-cover transition-transform duration-500 group-hover:scale-110"
+                      className="object-cover transition duration-500 group-hover:scale-110"
                     />
                   ) : (
-                    <div className={`flex h-full w-full items-center justify-center bg-gradient-to-br ${meta.gradient} text-2xl`}>
-                      {meta.icon}
-                    </div>
+                    <div
+                      className={`h-full bg-gradient-to-br ${category.accent}`}
+                    />
                   )}
 
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
                 </div>
 
-                {/* Text */}
-                <div>
-                  <h3 className="text-white font-bold capitalize text-sm leading-tight mb-1 group-hover:text-white transition-colors">
-                    {filter.replace(/-/g, ' ')}
+                <div className="p-3">
+                  <h3 className="text-sm font-bold text-white">
+                    {displayTitle(category.slug)}
                   </h3>
-                  <p className="text-gray-500 text-[10px] leading-tight line-clamp-2 group-hover:text-gray-400 transition-colors">
-                    {meta.desc}
+                  <p className="mt-1 line-clamp-2 min-h-[32px] text-[11px] leading-4 text-text-secondary">
+                    {category.description}
                   </p>
                 </div>
+              </Link>
+            )
+          })}
+        </div>
+      </section>
 
-                {/* Count badge */}
-                <div className={`self-start px-2 py-0.5 rounded-full bg-gradient-to-r ${meta.gradient} text-white text-[10px] font-black shadow-sm`}>
-                  {count.toLocaleString()} games
-                </div>
-              </div>
-            </Link>
-          )
-        })}
-      </div>
-    </div>
+      <section className="mt-12 rounded-2xl border border-white/10 bg-white/[0.025] p-6 sm:p-8">
+        <h2 className="text-xl font-black text-white">
+          New games added regularly
+        </h2>
+        <p className="mt-2 max-w-2xl text-sm leading-6 text-text-secondary">
+          ArcadeNexa combines games from trusted HTML5 game providers so you can
+          discover and play thousands of games directly in your browser.
+        </p>
+
+        <Link
+          href="/games"
+          className="mt-5 inline-flex rounded-xl bg-electric-violet px-5 py-3 text-sm font-bold text-white transition hover:brightness-110"
+        >
+          Browse All Games
+        </Link>
+      </section>
+    </main>
   )
 }

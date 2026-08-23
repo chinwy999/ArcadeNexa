@@ -2,6 +2,52 @@ import { calculateArcadeNexaScore } from './arcadeNexaScore'
 import { fetchGMGamesPage, GameMonetizeItem } from './gameMonetizeFeed'
 import { fetchGamesPage, GamePixItem } from './gamepixFeed'
 
+
+/*
+ * Provider category names are not always identical.
+ * Keep original values in the game data and normalize only for comparison.
+ */
+function normalizeGenre(value: string | undefined | null): string {
+  const raw = String(value || "")
+    .trim()
+    .toLowerCase()
+    .replace(/_/g, "-")
+    .replace(/\s+/g, "-")
+
+  const aliases: Record<string, string> = {
+    shooting: "shooter",
+    shooter: "shooter",
+
+    hypercasual: "hyper-casual",
+    "hyper-casual": "hyper-casual",
+
+    match3: "match-3",
+    "match-3": "match-3",
+
+    hiddenobject: "hidden-object",
+    "hidden-object": "hidden-object",
+
+    "games-for-girls": "girls",
+    girl: "girls",
+    girls: "girls",
+  }
+
+  return aliases[raw] || raw
+}
+
+function matchesGenre(
+  requestedGenre: string | undefined | null,
+  gameCategory: string | undefined | null,
+  gameGenreFilter: string | undefined | null
+): boolean {
+  const requested = normalizeGenre(requestedGenre)
+
+  return (
+    normalizeGenre(gameCategory) === requested ||
+    normalizeGenre(gameGenreFilter) === requested
+  )
+}
+
 export interface Game {
   id: string
   slug: string
@@ -127,6 +173,29 @@ const PAGE_SIZE = 96
 // كاش 6 ساعات
 const CACHE_DURATION = 6 * 60 * 60 * 1000
 
+// Cache the expensive real provider count separately.
+// This prevents multiple concurrent pages/components from scanning
+// GameMonetize pages and calculating the same catalog total repeatedly.
+const REAL_COUNT_CACHE_DURATION = 6 * 60 * 60 * 1000
+
+let realGameCountCache: {
+  value: number
+  expiresAt: number
+} | null = null
+
+let realGameCountInflight: Promise<number> | null = null
+
+// Home catalog is small but can still be requested concurrently.
+// Cache the merged result and share one in-flight request.
+const HOME_GAMES_CACHE_DURATION = 6 * 60 * 60 * 1000
+
+let homeGamesCache: {
+  value: Game[]
+  expiresAt: number
+} | null = null
+
+let homeGamesInflight: Promise<Game[]> | null = null
+
 let cachedGames: Game[] | null = null
 let cacheTimestamp = 0
 let loadingPromise: Promise<Game[]> | null = null
@@ -207,6 +276,24 @@ export async function getRealGameCount(): Promise<number> {
   const now = Date.now()
 
   if (
+    realGameCountCache &&
+    realGameCountCache.expiresAt > now
+  ) {
+    console.log(
+      `[ArcadeNexa] REAL catalog count cache HIT: ${realGameCountCache.value}`
+    )
+    return realGameCountCache.value
+  }
+
+  if (realGameCountInflight) {
+    console.log("[ArcadeNexa] REAL catalog count inflight JOIN")
+    return realGameCountInflight
+  }
+
+  realGameCountInflight = (async () => {
+  const now = Date.now()
+
+  if (
     cachedRealGameCount !== null &&
     now - realGameCountTimestamp < REAL_COUNT_CACHE
   ) {
@@ -284,6 +371,24 @@ export async function getRealGameCount(): Promise<number> {
     // Last verified combined catalog count.
     return 15285
   }
+})()
+
+  try {
+    const value = await realGameCountInflight
+
+    realGameCountCache = {
+      value,
+      expiresAt: Date.now() + REAL_COUNT_CACHE_DURATION,
+    }
+
+    console.log(
+      `[ArcadeNexa] REAL catalog count cached: ${value}`
+    )
+
+    return value
+  } finally {
+    realGameCountInflight = null
+  }
 }
 
 export async function getGames(): Promise<Game[]> {
@@ -297,47 +402,89 @@ export async function getGames(): Promise<Game[]> {
  * GamePix / GameMonetize عند فتح الصفحة الرئيسية.
  */
 export async function getHomeGames(): Promise<Game[]> {
-  try {
-    console.log('[ArcadeNexa] Loading fast home catalog...')
+  const now = Date.now()
 
-    const [gpResult, gmResult] = await Promise.all([
-      fetchGamesPage(1, 96, 'quality'),
-      fetchGMGamesPage(1, 200),
-    ])
+  if (
+    homeGamesCache &&
+    homeGamesCache.expiresAt > now
+  ) {
+    console.log(
+      `[ArcadeNexa] Home catalog cache HIT: ${homeGamesCache.value.length} games`
+    )
 
-    const gpGames = gpResult.items.map(convertGame)
-    const gmGames = gmResult.items.map(convertGMGame)
+    return homeGamesCache.value
+  }
 
-    const seen = new Set<string>()
-    const merged: Game[] = []
+  if (homeGamesInflight) {
+    console.log("[ArcadeNexa] Home catalog inflight JOIN")
 
-    for (const game of [...gmGames, ...gpGames]) {
-      if (!seen.has(game.slug)) {
-        seen.add(game.slug)
-        merged.push(game)
+    return homeGamesInflight
+  }
+
+  homeGamesInflight = (async () => {
+    try {
+      console.log('[ArcadeNexa] Loading fast home catalog...')
+
+      const [gpResult, gmResult] = await Promise.all([
+        fetchGamesPage(1, 96, 'quality'),
+        fetchGMGamesPage(1, 200),
+      ])
+
+      const gpGames = gpResult.items.map(convertGame)
+      const gmGames = gmResult.items.map(convertGMGame)
+
+      const seen = new Set<string>()
+      const merged: Game[] = []
+
+      for (const game of [...gmGames, ...gpGames]) {
+        if (!seen.has(game.slug)) {
+          seen.add(game.slug)
+          merged.push(game)
+        }
+      }
+
+      const result = merged
+        .sort((a, b) => b.rating - a.rating)
+        .slice(0, 32)
+
+      console.log(
+        `[ArcadeNexa] Home catalog ready: ${result.length} games`
+      )
+
+      return result
+    } catch (error) {
+      console.error(
+        '[ArcadeNexa] Fast home catalog failed:',
+        error
+      )
+
+      // Keep the existing fallback behavior.
+      try {
+        const allGames = await loadGames()
+        return allGames.slice(0, 32)
+      } catch {
+        return []
       }
     }
+  })()
 
-    const result = merged
-      .sort((a, b) => b.rating - a.rating)
-      .slice(0, 32)
+  try {
+    const value = await homeGamesInflight
 
-    console.log(`[ArcadeNexa] Home catalog ready: ${result.length} games`)
-
-    return result
-  } catch (error) {
-    console.error('[ArcadeNexa] Fast home catalog failed:', error)
-
-    // Fallback إلى الكاش/الكتالوج الكامل إذا كان متاحًا.
-    try {
-      const allGames = await loadGames()
-      return allGames.slice(0, 32)
-    } catch {
-      return []
+    homeGamesCache = {
+      value,
+      expiresAt: Date.now() + HOME_GAMES_CACHE_DURATION,
     }
+
+    console.log(
+      `[ArcadeNexa] Home catalog cached: ${value.length} games`
+    )
+
+    return value
+  } finally {
+    homeGamesInflight = null
   }
 }
-
 
 export async function getGamesPage(
   page = 1,
@@ -346,7 +493,7 @@ export async function getGamesPage(
 ): Promise<{ games: Game[]; hasMore: boolean }> {
   const safePage = Math.max(1, Math.floor(page))
   const safeSize = Math.min(48, Math.max(1, Math.floor(pageSize)))
-  const normalizedGenre = genre.trim().toLowerCase()
+  const normalizedGenre = normalizeGenre(genre)
 
   /*
    * ARCADENEXA PAGINATION MODEL
@@ -427,31 +574,130 @@ export async function getGamesPage(
 
   try {
     if (!normalizedGenre) {
-      const gmProviderPage =
+      /*
+       * ALL-GAMES STREAM
+       *
+       * A single ArcadeNexa page may cross a GameMonetize
+       * provider-page boundary.
+       *
+       * Example:
+       *   GM page size = 200
+       *   arcadeOffset = 192
+       *   providerTake = 24
+       *
+       * GM page 1 provides only 8 games (192..199),
+       * so the remaining 16 games must come from GM page 2.
+       *
+       * Therefore we collect enough provider games across
+       * consecutive GM pages before slicing the ArcadeNexa
+       * provider window.
+       */
+
+      const requiredEnd =
+        arcadeOffset + providerTake + 1
+
+      const collectedGM: Game[] = []
+
+      const seenGM = new Set<string>()
+
+      let providerPage =
         Math.floor(arcadeOffset / GM_PAGE_SIZE) + 1
 
-      const gmOffset =
+      let providerOffset =
         arcadeOffset % GM_PAGE_SIZE
 
-      const result = await fetchGMGamesPage(
-        gmProviderPage,
-        GM_PAGE_SIZE
+      let providerEnded = false
+
+      /*
+       * Continue across GM provider pages until we have enough
+       * games to satisfy the requested ArcadeNexa window plus
+       * one extra game for hasMore detection.
+       */
+      while (
+        collectedGM.length <
+          requiredEnd - arcadeOffset &&
+        providerPage <= 50
+      ) {
+        const result = await fetchGMGamesPage(
+          providerPage,
+          GM_PAGE_SIZE
+        )
+
+        const raw = result.items.map(
+          convertGMGame
+        )
+
+        /*
+         * Only use the portion of the first provider page
+         * starting at the requested provider offset.
+         *
+         * Subsequent provider pages start at offset 0.
+         */
+        const start =
+          providerPage ===
+          Math.floor(arcadeOffset / GM_PAGE_SIZE) + 1
+            ? providerOffset
+            : 0
+
+        const available =
+          raw.slice(start)
+
+        for (const game of available) {
+          if (
+            !game.slug ||
+            seenGM.has(game.slug)
+          ) {
+            continue
+          }
+
+          seenGM.add(game.slug)
+          collectedGM.push(game)
+
+          if (
+            collectedGM.length >=
+            requiredEnd - arcadeOffset
+          ) {
+            break
+          }
+        }
+
+        if (
+          result.nextPage === null ||
+          raw.length < GM_PAGE_SIZE
+        ) {
+          providerEnded = true
+          break
+        }
+
+        providerPage =
+          result.nextPage || providerPage + 1
+
+        providerOffset = 0
+      }
+
+      gmRaw = collectedGM.slice(
+        0,
+        providerTake
       )
 
-      const raw = result.items.map(convertGMGame)
-
+      /*
+       * We fetched one extra candidate when available.
+       * This allows hasMore to represent an actual additional
+       * GameMonetize game rather than merely another provider page.
+       */
       gmHasMore =
-        result.nextPage !== null ||
-        raw.length >= GM_PAGE_SIZE
-
-      gmRaw = raw.slice(
-        gmOffset,
-        gmOffset + providerTake
-      )
+        collectedGM.length > providerTake ||
+        (
+          !providerEnded &&
+          collectedGM.length >= providerTake
+        )
 
       console.log(
         `[ArcadeNexa] GM all-games stream: ` +
-        `provider=${gmProviderPage}, offset=${gmOffset}`
+        `startProvider=${Math.floor(arcadeOffset / GM_PAGE_SIZE) + 1}, ` +
+        `startOffset=${arcadeOffset % GM_PAGE_SIZE}, ` +
+        `pagesScanned=${providerPage - Math.floor(arcadeOffset / GM_PAGE_SIZE)}, ` +
+        `games=${gmRaw.length}`
       )
     } else {
       /*
@@ -470,8 +716,11 @@ export async function getGamesPage(
        * the provider reaches its end.
        */
 
+      // Collect one extra matching game beyond the requested
+      // provider slice so we can determine whether this stream
+      // actually has another page of category results.
       const requiredEnd =
-        arcadeOffset + providerTake
+        arcadeOffset + providerTake + 1
 
       const categoryGames: Game[] = []
 
@@ -493,8 +742,11 @@ export async function getGamesPage(
 
         for (const game of raw) {
           const matchesCategory =
-            game.category?.toLowerCase() === normalizedGenre ||
-            game.genreFilter?.toLowerCase() === normalizedGenre
+            matchesGenre(
+              normalizedGenre,
+              game.category,
+              game.genreFilter
+            )
 
           if (!matchesCategory) {
             continue
@@ -524,9 +776,11 @@ export async function getGamesPage(
         arcadeOffset + providerTake
       )
 
+      // hasMore must be based on an actual additional
+      // category game, not merely on the provider having
+      // more pages or an unresolved feed state.
       gmHasMore =
-        categoryGames.length > arcadeOffset + providerTake ||
-        !providerEnded
+        categoryGames.length > arcadeOffset + providerTake
 
       console.log(
         `[ArcadeNexa] GM category stream: ` +
@@ -546,16 +800,21 @@ export async function getGamesPage(
 
   /*
    * ---------------------------------------------------------
-   * MERGE
+   * PROVIDER FAILOVER
    * ---------------------------------------------------------
    *
-   * Keep the intended provider balance:
+   * Normal mode:
    *
-   *   GameMonetize first
-   *   GamePix second
+   *   GameMonetize = providerTake
+   *   GamePix      = providerTake
    *
-   * If one provider is unavailable, the other provider
-   * can fill the remaining slots.
+   * If one provider fails completely, the healthy provider
+   * gets one opportunity to fill the missing capacity.
+   *
+   * IMPORTANT:
+   * We do NOT refetch both providers.
+   * Extra provider requests happen only after a real
+   * provider failure.
    */
 
   let merged: Game[] = [
@@ -563,25 +822,140 @@ export async function getGamesPage(
     ...gpRaw
   ]
 
-  if (merged.length < safeSize) {
-    const fallback = [
-      ...gpRaw,
-      ...gmRaw
-    ]
+  const gmAvailable = gmRaw.length > 0
+  const gpAvailable = gpRaw.length > 0
 
-    for (const game of fallback) {
-      if (merged.length >= safeSize) {
-        break
-      }
+  /*
+   * GameMonetize failed:
+   *
+   * Fetch enough GamePix games to fill the requested page.
+   * The normal GamePix request has already completed, so
+   * this extra request is only made during actual failover.
+   */
+  if (!gmAvailable && gpAvailable && gpRaw.length < safeSize) {
+    try {
+      const fallbackResult = await fetchGamesPage(
+        gpProviderPage,
+        GP_PAGE_SIZE,
+        'quality',
+        normalizedGenre
+      )
 
-      if (
-        game.slug &&
-        !merged.some(
-          existing => existing.slug === game.slug
+      const fallbackGames =
+        fallbackResult.items.map(convertGame)
+
+      const fallbackSlice = fallbackGames.slice(
+        gpOffset,
+        gpOffset + safeSize
+      )
+
+      gpHasMore =
+        fallbackResult.nextPage !== null ||
+        fallbackGames.length >= GP_PAGE_SIZE
+
+      merged = fallbackSlice
+    } catch (error) {
+      console.error(
+        `[ArcadeNexa] GamePix failover unavailable:`,
+        error
+      )
+    }
+  }
+
+  /*
+   * GamePix failed:
+   *
+   * Fetch enough GameMonetize games to fill the requested
+   * page. For ALL-GAMES this follows the same provider
+   * offset used by the normal GM stream.
+   *
+   * Category streams cannot safely be reconstructed from
+   * gmRaw alone, so we leave the existing category stream
+   * untouched if it already returned data.
+   */
+  if (!gpAvailable && gmAvailable && gmRaw.length < safeSize) {
+    try {
+      if (!normalizedGenre) {
+        /*
+         * FULL GM FAILOVER MODE
+         *
+         * GamePix is unavailable, so GameMonetize becomes the
+         * sole provider for this ArcadeNexa page.
+         *
+         * IMPORTANT:
+         * The normal balanced stream uses providerTake=24,
+         * but failover capacity is 48 games per page.
+         *
+         * Therefore failover pagination MUST use safeSize,
+         * not arcadeOffset/providerTake.
+         *
+         * Page 1 -> GM 0..47
+         * Page 2 -> GM 48..95
+         * Page 3 -> GM 96..143
+         */
+        const fallbackOffset =
+          (safePage - 1) * safeSize
+
+        const fallbackProviderPage =
+          Math.floor(fallbackOffset / GM_PAGE_SIZE) + 1
+
+        const fallbackProviderOffset =
+          fallbackOffset % GM_PAGE_SIZE
+
+        const fallbackResult = await fetchGMGamesPage(
+          fallbackProviderPage,
+          GM_PAGE_SIZE
         )
-      ) {
-        merged.push(game)
+
+        const fallbackGames =
+          fallbackResult.items.map(convertGMGame)
+
+        const fallbackSlice = fallbackGames.slice(
+          fallbackProviderOffset,
+          fallbackProviderOffset + safeSize
+        )
+
+        /*
+         * If the requested 48-game window crosses a GM provider
+         * page boundary, fetch the next GM provider page and
+         * append the remaining capacity.
+         */
+        if (fallbackSlice.length < safeSize &&
+            fallbackResult.nextPage !== null) {
+          const nextResult = await fetchGMGamesPage(
+            fallbackResult.nextPage,
+            GM_PAGE_SIZE
+          )
+
+          const nextGames =
+            nextResult.items.map(convertGMGame)
+
+          fallbackSlice.push(
+            ...nextGames.slice(
+              0,
+              safeSize - fallbackSlice.length
+            )
+          )
+
+          gmHasMore =
+            nextResult.nextPage !== null ||
+            nextGames.length >= GM_PAGE_SIZE
+        } else {
+          gmHasMore =
+            fallbackResult.nextPage !== null ||
+            fallbackGames.length >= GM_PAGE_SIZE
+        }
+
+        /*
+         * GM is now the complete page source.
+         */
+        merged = fallbackSlice
       }
+    } catch (error) {
+      console.error(
+        `[ArcadeNexa] GameMonetize failover unavailable:`,
+        error
+      )
     }
   }
 
@@ -608,8 +982,11 @@ export async function getGamesPage(
 
   if (normalizedGenre) {
     merged = merged.filter(game =>
-      game.category?.toLowerCase() === normalizedGenre ||
-      game.genreFilter?.toLowerCase() === normalizedGenre
+      matchesGenre(
+        normalizedGenre,
+        game.category,
+        game.genreFilter
+      )
     )
   }
 
@@ -621,10 +998,15 @@ export async function getGamesPage(
    * ---------------------------------------------------------
    */
 
+  // Never advertise another page when this page is empty.
+  // More importantly, only advertise hasMore when at least
+  // one provider has confirmed an actual additional game.
   const hasMore =
-    gpHasMore ||
-    gmHasMore ||
-    games.length >= safeSize
+    games.length > 0 &&
+    (
+      gpHasMore ||
+      gmHasMore
+    )
 
   console.log(
     `[ArcadeNexa] Page ${safePage}: ${games.length} games ` +
@@ -661,11 +1043,40 @@ export async function getGameCount(): Promise<number> {
 export const games: Game[] = []
 
 
+
+function cleanGMText(value: string | null | undefined): string {
+  if (!value) return ''
+
+  return value
+    .replace(/<br\s*\/?>/gi, '\n')
+    .replace(/<\/p>\s*<p[^>]*>/gi, '\n\n')
+    .replace(/<[^>]*>/g, '')
+    .replace(/&nbsp;/gi, ' ')
+    .replace(/&amp;/gi, '&')
+    .replace(/&quot;/gi, '"')
+    .replace(/&#39;|&apos;/gi, "'")
+    .replace(/&lt;/gi, '<')
+    .replace(/&gt;/gi, '>')
+    .replace(/[ \t]+\n/g, '\n')
+    .replace(/\n[ \t]+/g, '\n')
+    .replace(/[ \t]{2,}/g, ' ')
+    .trim()
+}
+
 export function convertGMGame(item: GameMonetizeItem): Game {
   const slug = `gm-${item.id}`
   const category = item.category?.toLowerCase() || 'arcade'
   const w = Number(item.width) || 800
   const h = Number(item.height) || 600
+
+  const cleanDescription =
+    cleanGMText(item.description) ||
+    cleanGMText(item.instructions) ||
+    'Play instantly in your browser.'
+
+  const cleanInstructions =
+    cleanGMText(item.instructions) ||
+    'Use mouse or touch controls to play.'
 
   return {
     id: `gamemonetize-${item.id}`,
@@ -683,17 +1094,17 @@ export function convertGMGame(item: GameMonetizeItem): Game {
       releaseYear: new Date().getFullYear(),
       playable: Boolean(item.url),
       thumbnail: item.thumb || '',
-      description: item.description || item.instructions || '',
-      instructions: item.instructions || '',
+      description: cleanDescription,
+      instructions: cleanInstructions,
       tags: item.tags
         ? item.tags.split(',').map(t => t.trim())
         : [category, 'html5'],
       title: item.title || 'Untitled Game',
     }),
     platform: 'Multi',
-    description: item.description || item.instructions || 'Play instantly in your browser.',
-    longDescription: item.description || item.instructions || 'Play instantly in your browser.',
-    instructions: item.instructions || 'Use mouse or touch controls to play.',
+    description: cleanDescription,
+    longDescription: cleanDescription,
+    instructions: cleanInstructions,
     tags: item.tags ? item.tags.split(',').map(t => t.trim()) : [category, 'html5'],
     officialUrl: item.url,
     iframeUrl: item.url,

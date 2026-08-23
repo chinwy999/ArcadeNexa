@@ -39,6 +39,33 @@ const gmDirectCache =
 const gmDirectInflight =
   new Map<string, Promise<GameMonetizeItem | null>>()
 
+
+/*
+ * ---------------------------------------------------------
+ * PAGE CACHE
+ * ---------------------------------------------------------
+ *
+ * GameMonetize aggressively rate-limits repeated requests.
+ *
+ * Successful provider pages are cached for 6 hours.
+ * Simultaneous requests for the same page are deduplicated.
+ */
+
+type GMPageCacheEntry = {
+  result: GameMonetizePage
+  expiresAt: number
+}
+
+const GM_PAGE_CACHE_TTL =
+  6 * 60 * 60 * 1000
+
+const gmPageCache =
+  new Map<string, GMPageCacheEntry>()
+
+const gmPageInflight =
+  new Map<string, Promise<GameMonetizePage>>()
+
+
 /*
  * GameMonetize occasionally returns XML/HTML instead of JSON.
  *
@@ -215,151 +242,260 @@ export async function fetchGMGamesPage(
     Math.max(1, Math.floor(amount))
   )
 
-  const url = new URL(GM_API)
+  const cacheKey =
+    `${safePage}:${safeAmount}`
 
-  url.searchParams.set('format', '0')
-  url.searchParams.set('num', String(safeAmount))
-  url.searchParams.set('page', String(safePage))
+  const now = Date.now()
 
-  for (
-    let attempt = 1;
-    attempt <= MAX_RETRIES;
-    attempt++
+  /*
+   * ---------------------------------------------------------
+   * PAGE CACHE
+   * ---------------------------------------------------------
+   *
+   * GameMonetize aggressively rate-limits repeated requests.
+   * Reuse successful provider pages for 6 hours.
+   */
+  const cached = gmPageCache.get(cacheKey)
+
+  if (
+    cached &&
+    cached.expiresAt > now
   ) {
-    const controller = new AbortController()
-
-    const timeout = setTimeout(
-      () => controller.abort(),
-      REQUEST_TIMEOUT
+    console.log(
+      `[ArcadeNexa] GM page cache HIT: ` +
+      `page=${safePage}, amount=${safeAmount}`
     )
 
-    try {
-      const response = await fetch(
-        url.toString(),
-        {
-          signal: controller.signal,
-          headers: {
-            Accept: 'application/json',
-            'User-Agent': 'ArcadeNexa/1.0',
-          },
-          next: {
-            revalidate: 21600,
-          },
-        }
+    return cached.result
+  }
+
+  /*
+   * ---------------------------------------------------------
+   * INFLIGHT DEDUPLICATION
+   * ---------------------------------------------------------
+   *
+   * If several server requests ask for the same provider page
+   * simultaneously, make only one network request.
+   */
+  const existing =
+    gmPageInflight.get(cacheKey)
+
+  if (existing) {
+    console.log(
+      `[ArcadeNexa] GM page inflight JOIN: ` +
+      `page=${safePage}, amount=${safeAmount}`
+    )
+
+    return existing
+  }
+
+  const request = (async () => {
+    const url = new URL(GM_API)
+
+    url.searchParams.set(
+      'format',
+      '0'
+    )
+
+    url.searchParams.set(
+      'num',
+      String(safeAmount)
+    )
+
+    url.searchParams.set(
+      'page',
+      String(safePage)
+    )
+
+    for (
+      let attempt = 1;
+      attempt <= MAX_RETRIES;
+      attempt++
+    ) {
+      const controller =
+        new AbortController()
+
+      const timeout = setTimeout(
+        () => controller.abort(),
+        REQUEST_TIMEOUT
       )
 
-      /*
-       * 429 means GameMonetize is rate-limiting us.
-       *
-       * IMPORTANT:
-       * Do NOT retry 429 responses.
-       * Retrying immediately only increases provider pressure
-       * and makes the build slower.
-       *
-       * The caller can safely treat this page as temporarily unavailable.
-       */
-      if (response.status === 429) {
-        console.warn(
-          `[ArcadeNexa] GameMonetize HTTP 429 on page ${safePage} - skipping without retry`
-        )
+      try {
+        const response =
+          await fetch(
+            url.toString(),
+            {
+              signal: controller.signal,
+              headers: {
+                Accept: 'application/json',
+                'User-Agent':
+                  'ArcadeNexa/1.0',
+              },
+              next: {
+                revalidate: 21600,
+              },
+            }
+          )
 
-        return {
-          items: [],
-          page: safePage,
-          nextPage: null,
+        /*
+         * 429:
+         * Do not retry.
+         *
+         * Cache the empty result briefly so repeated page
+         * requests do not immediately hit GameMonetize again.
+         */
+        if (
+          response.status === 429
+        ) {
+          console.warn(
+            `[ArcadeNexa] GameMonetize HTTP 429 ` +
+            `on page ${safePage} - temporary cooldown`
+          )
+
+          const result: GameMonetizePage = {
+            items: [],
+            page: safePage,
+            nextPage: null,
+          }
+
+          gmPageCache.set(
+            cacheKey,
+            {
+              result,
+              expiresAt:
+                Date.now() + 5 * 60 * 1000,
+            }
+          )
+
+          return result
         }
-      }
 
-      /*
-       * Retry temporary server errors.
-       * Do not retry 4xx errors unnecessarily.
-       */
-      if (!response.ok) {
-        if (response.status >= 500) {
+        /*
+         * Retry temporary 5xx errors only.
+         */
+        if (!response.ok) {
+          if (
+            response.status >= 500
+          ) {
+            throw new Error(
+              `GameMonetize HTTP ` +
+              `${response.status} ` +
+              `on page ${safePage}`
+            )
+          }
+
           throw new Error(
-            `GameMonetize HTTP ${response.status} ` +
-            `on page ${safePage}`
+            `GameMonetize HTTP ` +
+            `${response.status} ` +
+            `on page ${safePage} ` +
+            `(non-retryable)`
           )
         }
 
-        throw new Error(
-          `GameMonetize HTTP ${response.status} ` +
-          `on page ${safePage} (non-retryable)`
-        )
-      }
+        const items =
+          await parseGMResponse(
+            response,
+            `page ${safePage}`
+          )
 
-      /*
-       * IMPORTANT:
-       * parseGMResponse() reads text first and detects
-       * XML/HTML before attempting JSON.parse().
-       *
-       * XML/HTML is treated as a provider-format error
-       * and is NOT retried.
-       */
-      const items = await parseGMResponse(
-        response,
-        `page ${safePage}`
-      )
+        const result: GameMonetizePage = {
+          items,
+          page: safePage,
+          nextPage:
+            items.length >= safeAmount
+              ? safePage + 1
+              : null,
+        }
 
-      return {
-        items,
-        page: safePage,
-        nextPage:
-          items.length >= safeAmount
-            ? safePage + 1
-            : null,
-      }
-    } catch (error) {
-      const message =
-        error instanceof Error
-          ? error.message
-          : String(error)
-
-      /*
-       * XML/HTML and invalid JSON are not transient
-       * network failures. Retrying them only wastes
-       * build time and can increase provider pressure.
-       */
-      const nonRetryable =
-        message.includes(
-          'returned XML/HTML instead of JSON'
-        ) ||
-        message.includes(
-          'returned invalid JSON'
-        ) ||
-        message.includes(
-          '(non-retryable)'
+        /*
+         * Successful pages stay cached for 6 hours.
+         */
+        gmPageCache.set(
+          cacheKey,
+          {
+            result,
+            expiresAt:
+              Date.now() +
+              GM_PAGE_CACHE_TTL,
+          }
         )
 
-      if (
-        nonRetryable ||
-        attempt >= MAX_RETRIES
-      ) {
-        console.error(
-          `[ArcadeNexa] GameMonetize page ${safePage} failed:`,
-          message
+        console.log(
+          `[ArcadeNexa] GM page cached: ` +
+          `page=${safePage}, ` +
+          `items=${items.length}`
         )
 
-        throw error
+        return result
+      } catch (error) {
+        const message =
+          error instanceof Error
+            ? error.message
+            : String(error)
+
+        /*
+         * XML/HTML and invalid JSON are provider-format
+         * problems, not transient network errors.
+         */
+        const nonRetryable =
+          message.includes(
+            'returned XML/HTML instead of JSON'
+          ) ||
+          message.includes(
+            'returned invalid JSON'
+          ) ||
+          message.includes(
+            '(non-retryable)'
+          )
+
+        if (
+          nonRetryable ||
+          attempt >= MAX_RETRIES
+        ) {
+          console.error(
+            `[ArcadeNexa] GameMonetize ` +
+            `page ${safePage} failed:`,
+            message
+          )
+
+          throw error
+        }
+
+        const delay =
+          Math.min(
+            5000,
+            1000 * attempt
+          )
+
+        console.warn(
+          `[ArcadeNexa] GameMonetize ` +
+          `page ${safePage} failed. ` +
+          `Retry ${attempt}/${MAX_RETRIES} ` +
+          `in ${delay}ms`
+        )
+
+        await sleep(delay)
+      } finally {
+        clearTimeout(timeout)
       }
-
-      const delay = Math.min(
-        5000,
-        1000 * attempt
-      )
-
-      console.warn(
-        `[ArcadeNexa] GameMonetize page ${safePage} failed. ` +
-        `Retry ${attempt}/${MAX_RETRIES} in ${delay}ms`
-      )
-
-      await sleep(delay)
-    } finally {
-      clearTimeout(timeout)
     }
-  }
 
-  throw new Error(
-    `GameMonetize page ${safePage} failed`
+    throw new Error(
+      `GameMonetize page ` +
+      `${safePage} failed`
+    )
+  })()
+
+  gmPageInflight.set(
+    cacheKey,
+    request
   )
+
+  try {
+    return await request
+  } finally {
+    gmPageInflight.delete(
+      cacheKey
+    )
+  }
 }

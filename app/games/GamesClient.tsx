@@ -23,7 +23,7 @@ export default function GamesClient() {
       try {
         const res = await fetch('/api/games')
         const data = await res.json()
-        setGames(data)
+        setGames(data.games ?? [])
       } catch (error) {
         console.error('Error fetching games:', error)
       } finally {
