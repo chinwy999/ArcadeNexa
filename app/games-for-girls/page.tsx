@@ -5,7 +5,7 @@ import { getGames } from '@/lib/games'
 
 export const metadata: Metadata = {
   title: 'Games for Girls – Free Online Girl Games | ArcadeNexa',
-  description: 'Play the best free games for girls online. Fashion, puzzle, casual, cooking and more. No download, no login. 15,285+ free browser games for girls of all ages.',
+  description: 'Play the best free games for girls online. Fashion, puzzle, casual, cooking and more. No download, no login. 13,000+ free browser games for girls of all ages.',
   keywords: 'games for girls, girl games, free girl games online, games for girls free, fun games for girls',
   alternates: { canonical: '/games-for-girls' },
 }
@@ -47,7 +47,7 @@ export default async function GamesForGirlsPage() {
             </span>
           </h1>
           <p className="mx-auto mb-6 max-w-2xl text-lg text-gray-300">
-            Discover <strong className="text-white">15,285+ free games</strong> including puzzle, casual, match-3, memory, and brain games. Play instantly in your browser — no download, no login required.
+            Discover <strong className="text-white">13,000+ free games</strong> including puzzle, casual, match-3, memory, and brain games. Play instantly in your browser — no download, no login required.
           </p>
           <div className="mb-8 flex flex-wrap justify-center gap-2 text-sm">
             {['Puzzle Games','Match 3','Casual Games','Brain Games','Memory','Educational','Free Forever'].map(tag => (

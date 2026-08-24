@@ -7,7 +7,7 @@ export const dynamic = 'force-dynamic'
 export const metadata: Metadata = {
   title: 'Game Categories',
   description:
-    'Explore 15,285+ free browser games by category on ArcadeNexa.',
+    'Explore 13,000+ free browser games by category on ArcadeNexa.',
   alternates: { canonical: '/categories' },
 }
 
@@ -428,7 +428,7 @@ export default function CategoriesPage() {
         </h1>
 
         <p className="mt-3 max-w-2xl text-base leading-7 text-text-secondary sm:text-lg">
-          Discover <span className="font-bold text-white">15,285+ free browser games</span>{' '}
+          Discover <span className="font-bold text-white">13,000+ free browser games</span>{' '}
           across action, puzzle, racing, sports, adventure and many more genres.
         </p>
       </header>

@@ -5,7 +5,7 @@ import { getGames } from '@/lib/games'
 
 export const metadata: Metadata = {
   title: 'Chromebook Games – Free Browser Games for School | ArcadeNexa',
-  description: 'Play free Chromebook games instantly. No download, no install. 15,285+ HTML5 games that work perfectly on any Chromebook at school or home.',
+  description: 'Play free Chromebook games instantly. No download, no install. 13,000+ HTML5 games that work perfectly on any Chromebook at school or home.',
   keywords: 'chromebook games, games for chromebook, chromebook games unblocked, free chromebook games, school chromebook games',
   alternates: { canonical: '/chromebook-games' },
 }
@@ -31,7 +31,7 @@ export default async function ChromebookGamesPage() {
             </span>
           </h1>
           <p className="mx-auto mb-6 max-w-2xl text-lg text-gray-300">
-            Every game on ArcadeNexa works perfectly on Chromebook. <strong className="text-white">15,285+ free HTML5 games</strong> — no download, no install, no Flash. Just open Chrome and play.
+            Every game on ArcadeNexa works perfectly on Chromebook. <strong className="text-white">13,000+ free HTML5 games</strong> — no download, no install, no Flash. Just open Chrome and play.
           </p>
           <div className="mb-8 flex flex-wrap justify-center gap-2 text-sm">
             {['No Download','No Flash','Works on Chrome','School Safe','Free Forever','Touch Friendly'].map(tag => (

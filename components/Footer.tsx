@@ -15,7 +15,7 @@ export default function Footer() {
                 <span className="text-white">ARCADE</span><span className="gradient-text">NEXA</span>
               </span>
             </Link>
-            <p className="text-text-secondary text-sm">Free HTML5 gaming platform. 15,285+ games, instant play, no download required.</p>
+            <p className="text-text-secondary text-sm">Free HTML5 gaming platform. 13,000+ games, instant play, no download required.</p>
             <div className="flex items-center gap-2">
               <span className="bg-neon-green/10 border border-neon-green/20 text-neon-green text-xs px-3 py-1 rounded-full font-bold">🎮 Free to Play</span>
               <span className="bg-white/5 border border-white/10 text-text-secondary text-xs px-3 py-1 rounded-full">No Login</span>

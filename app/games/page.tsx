@@ -5,7 +5,7 @@ import Link from 'next/link'
 export const metadata: Metadata = {
   title: 'Free HTML5 Games - Play Online Games',
   description:
-    'Play 15,285+ free HTML5 games online on ArcadeNexa. Discover action, puzzle, racing, sports, strategy and casual games instantly with no download or registration.',
+    'Play 13,000+ free HTML5 games online on ArcadeNexa. Discover action, puzzle, racing, sports, strategy and casual games instantly with no download or registration.',
   keywords: [
     'free HTML5 games',
     'free online games',
@@ -22,14 +22,14 @@ export const metadata: Metadata = {
     url: '/games',
     title: 'Free HTML5 Games - Play Online Games | ArcadeNexa',
     description:
-      'Play 15,285+ free HTML5 games online instantly. No download or registration required.',
+      'Play 13,000+ free HTML5 games online instantly. No download or registration required.',
     siteName: 'ArcadeNexa',
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Free HTML5 Games - Play Online Games | ArcadeNexa',
     description:
-      'Play 15,285+ free HTML5 games online instantly. No download or registration required.',
+      'Play 13,000+ free HTML5 games online instantly. No download or registration required.',
   },
   robots: {
     index: true,
