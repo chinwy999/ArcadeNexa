@@ -109,8 +109,8 @@ export default async function HomePage() {
 
         <div className="mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-[1.1fr_0.9fr]">
           <div className="text-center lg:text-left">
-            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-neon-green/20 bg-neon-green/10 px-4 py-2 text-xs font-bold uppercase tracking-widest text-neon-green">
-              <span className="h-2 w-2 animate-pulse rounded-full bg-neon-green" />
+            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-nexa-emerald/20 bg-nexa-emerald/10 px-4 py-2 text-xs font-bold uppercase tracking-widest text-nexa-emerald">
+              <span className="h-2 w-2 animate-pulse rounded-full bg-nexa-emerald" />
               {gameCountLabel} Free Browser Games
             </div>
 
@@ -126,7 +126,7 @@ export default async function HomePage() {
             </p>
 
             <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row lg:justify-start">
-              <Link href="/games" className="rounded-xl bg-neon-green px-8 py-4 text-center text-base font-black text-space-black shadow-lg shadow-neon-green/20 transition hover:-translate-y-1 hover:shadow-neon-green/30">
+              <Link href="/games" className="rounded-xl bg-nexa-emerald px-8 py-4 text-center text-base font-black text-nexa-black shadow-lg shadow-nexa-emerald/20 transition hover:-translate-y-1 hover:shadow-nexa-emerald/30">
                 PLAY NOW →
               </Link>
               <Link href="/categories" className="rounded-xl border border-white/15 bg-white/5 px-8 py-4 text-center text-base font-bold text-white backdrop-blur transition hover:bg-white/10">
@@ -146,7 +146,7 @@ export default async function HomePage() {
               </div>
               <div className="h-7 w-px bg-white/10" />
               <div>
-                <strong className="text-xl text-neon-green">100%</strong>
+                <strong className="text-xl text-nexa-emerald">100%</strong>
                 <span className="ml-2 text-gray-500">Free</span>
               </div>
             </div>
@@ -166,10 +166,10 @@ export default async function HomePage() {
         <div className="mx-auto max-w-7xl">
           <div className="mb-5 flex items-end justify-between">
             <div>
-              <p className="text-xs font-bold uppercase tracking-[0.25em] text-neon-green">Explore</p>
+              <p className="text-xs font-bold uppercase tracking-[0.25em] text-nexa-emerald">Explore</p>
               <h2 className="mt-1 text-2xl font-black text-white sm:text-3xl">Browse Categories</h2>
             </div>
-            <Link href="/categories" className="text-sm font-bold text-gray-400 transition hover:text-neon-green">
+            <Link href="/categories" className="text-sm font-bold text-gray-400 transition hover:text-nexa-emerald">
               View All →
             </Link>
           </div>
@@ -219,11 +219,11 @@ export default async function HomePage() {
         <div className="mx-auto max-w-7xl">
           <div className="mb-7 flex items-end justify-between">
             <div>
-              <p className="text-xs font-bold uppercase tracking-[0.25em] text-electric-violet">Popular</p>
+              <p className="text-xs font-bold uppercase tracking-[0.25em] text-nexa-violet">Popular</p>
               <h2 className="mt-1 text-3xl font-black text-white">⭐ Top Rated Games</h2>
               <p className="mt-1 text-sm text-gray-500">The games players are loving right now.</p>
             </div>
-            <Link href="/games" className="hidden text-sm font-bold text-gray-400 hover:text-neon-green sm:block">
+            <Link href="/games" className="hidden text-sm font-bold text-gray-400 hover:text-nexa-emerald sm:block">
               View All →
             </Link>
           </div>
@@ -249,7 +249,7 @@ export default async function HomePage() {
               <h2 className="mt-1 text-3xl font-black text-white">✨ Editor's Picks</h2>
               <p className="mt-1 text-sm text-gray-500">Fresh games worth discovering today.</p>
             </div>
-            <Link href="/games" className="text-sm font-bold text-gray-400 hover:text-neon-green">
+            <Link href="/games" className="text-sm font-bold text-gray-400 hover:text-nexa-emerald">
               See More →
             </Link>
           </div>
@@ -271,10 +271,10 @@ export default async function HomePage() {
         <div className="mx-auto max-w-7xl">
           <div className="mb-7 flex items-end justify-between">
             <div>
-              <p className="text-xs font-bold uppercase tracking-[0.25em] text-neon-green">Fresh Arrivals</p>
+              <p className="text-xs font-bold uppercase tracking-[0.25em] text-nexa-emerald">Fresh Arrivals</p>
               <h2 className="mt-1 text-3xl font-black text-white">🆕 New Games</h2>
             </div>
-            <Link href="/games" className="text-sm font-bold text-gray-400 hover:text-neon-green">
+            <Link href="/games" className="text-sm font-bold text-gray-400 hover:text-nexa-emerald">
               See More →
             </Link>
           </div>
@@ -292,12 +292,12 @@ export default async function HomePage() {
       </section>
 
       <section className="px-4 py-16">
-        <div className="mx-auto max-w-7xl overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-electric-violet/20 via-white/[0.03] to-neon-green/10 p-8 text-center sm:p-12">
+        <div className="mx-auto max-w-7xl overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-nexa-violet/20 via-white/[0.03] to-nexa-emerald/10 p-8 text-center sm:p-12">
           <div className="mx-auto max-w-2xl">
-            <p className="text-xs font-bold uppercase tracking-[0.3em] text-neon-green">Your next game is waiting</p>
+            <p className="text-xs font-bold uppercase tracking-[0.3em] text-nexa-emerald">Your next game is waiting</p>
             <h2 className="mt-3 text-3xl font-black text-white sm:text-5xl">Find your next favorite game.</h2>
             <p className="mt-4 text-gray-400">Explore the full ArcadeNexa collection and start playing instantly.</p>
-            <Link href="/games" className="mt-8 inline-flex rounded-xl bg-neon-green px-8 py-4 font-black text-space-black shadow-lg shadow-neon-green/20 transition hover:-translate-y-1">
+            <Link href="/games" className="mt-8 inline-flex rounded-xl bg-nexa-emerald px-8 py-4 font-black text-nexa-black shadow-lg shadow-nexa-emerald/20 transition hover:-translate-y-1">
               EXPLORE ALL GAMES →
             </Link>
           </div>

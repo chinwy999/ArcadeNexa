@@ -140,8 +140,8 @@ export default function FeaturedGamesSlider({
       {/* Header */}
       <div className="mb-5 flex items-center justify-between gap-4">
         <div className="flex items-center gap-2">
-          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-electric-violet/20">
-            <Sparkles className="h-4 w-4 text-electric-violet" />
+          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-nexa-violet/20">
+            <Sparkles className="h-4 w-4 text-nexa-violet" />
           </div>
           <div>
             <h2 className="text-xl font-black text-white sm:text-2xl">Featured Games</h2>
@@ -153,7 +153,7 @@ export default function FeaturedGamesSlider({
             type="button"
             onClick={previousSlide}
             aria-label="Previous slide"
-            className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white transition hover:border-electric-violet/60 hover:bg-electric-violet/20"
+            className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white transition hover:border-nexa-violet/60 hover:bg-nexa-violet/20"
           >
             <ChevronLeft className="h-4 w-4" />
           </button>
@@ -164,7 +164,7 @@ export default function FeaturedGamesSlider({
             type="button"
             onClick={nextSlide}
             aria-label="Next slide"
-            className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white transition hover:bg-electric-violet/20"
+            className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white transition hover:bg-nexa-violet/20"
           >
             <ChevronRight className="h-4 w-4" />
           </button>
@@ -219,7 +219,7 @@ export default function FeaturedGamesSlider({
             <div className="absolute inset-0 flex items-end sm:items-center pb-16 sm:pb-0">
               <div className="w-full max-w-xl px-6 py-8 sm:px-10">
 
-                <div key={`badge-${game.slug}`} className="fade-up fade-up-1 mb-4 inline-flex items-center gap-1.5 rounded-full border border-electric-violet/40 bg-electric-violet/15 px-3 py-1 text-[11px] font-black uppercase tracking-widest text-electric-violet backdrop-blur">
+                <div key={`badge-${game.slug}`} className="fade-up fade-up-1 mb-4 inline-flex items-center gap-1.5 rounded-full border border-nexa-violet/40 bg-nexa-violet/15 px-3 py-1 text-[11px] font-black uppercase tracking-widest text-nexa-violet backdrop-blur">
                   <Sparkles className="h-3 w-3" />
                   Featured
                 </div>
@@ -236,7 +236,7 @@ export default function FeaturedGamesSlider({
                   <span className="rounded-lg border border-white/10 bg-white/5 px-3 py-1 text-sm capitalize text-gray-300 backdrop-blur">
                     {game.category || 'Arcade'}
                   </span>
-                  <span className="inline-flex items-center gap-1 rounded-lg border border-neon-green/20 bg-neon-green/10 px-3 py-1 text-sm font-bold text-neon-green">
+                  <span className="inline-flex items-center gap-1 rounded-lg border border-nexa-emerald/20 bg-nexa-emerald/10 px-3 py-1 text-sm font-bold text-nexa-emerald">
                     <Zap className="h-3 w-3 fill-current" />
                     Instant Play
                   </span>
@@ -249,7 +249,7 @@ export default function FeaturedGamesSlider({
                 <div key={`btn-${game.slug}`} className="fade-up fade-up-4 mt-6 flex items-center gap-3">
                   <Link
                     href={`/games/${game.slug}`}
-                    className="group inline-flex items-center gap-2 rounded-xl bg-neon-green px-6 py-3 text-sm font-black text-black shadow-[0_0_24px_rgba(34,197,94,0.3)] transition-all duration-200 hover:scale-105 hover:shadow-[0_0_36px_rgba(34,197,94,0.5)]"
+                    className="group inline-flex items-center gap-2 rounded-xl bg-nexa-emerald px-6 py-3 text-sm font-black text-black shadow-[0_0_24px_rgba(34,197,94,0.3)] transition-all duration-200 hover:scale-105 hover:shadow-[0_0_36px_rgba(34,197,94,0.5)]"
                   >
                     <Play className="h-4 w-4 fill-current" />
                     PLAY NOW
@@ -269,7 +269,7 @@ export default function FeaturedGamesSlider({
               key={i}
               type="button"
               onClick={() => goTo(i, i > current ? 'next' : 'prev')}
-              className="relative flex h-11 w-11 items-center justify-center rounded-full transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-neon-green focus-visible:ring-offset-2 focus-visible:ring-offset-dark-navy"
+              className="relative flex h-11 w-11 items-center justify-center rounded-full transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-nexa-emerald focus-visible:ring-offset-2 focus-visible:ring-offset-nexa-navy"
               aria-label={`Featured game ${i + 1} of ${total}`}
             >
               <span
@@ -281,7 +281,7 @@ export default function FeaturedGamesSlider({
               >
                 {i === current && (
                   <span
-                    className="absolute inset-y-0 left-0 rounded-full bg-neon-green transition-none"
+                    className="absolute inset-y-0 left-0 rounded-full bg-nexa-emerald transition-none"
                     style={{ width: `${progress}%` }}
                   />
                 )}
@@ -302,7 +302,7 @@ export default function FeaturedGamesSlider({
               aria-label={`Go to game ${index + 1}: ${item.title}`}
               className={`group relative min-w-[130px] snap-start overflow-hidden rounded-xl border transition-all duration-300 sm:min-w-[160px] ${
                 index === current
-                  ? 'border-neon-green/60 shadow-[0_0_16px_rgba(34,197,94,0.2)]'
+                  ? 'border-nexa-emerald/60 shadow-[0_0_16px_rgba(34,197,94,0.2)]'
                   : 'border-white/8 opacity-60 hover:opacity-90 hover:border-white/25'
               }`}
             >
@@ -316,7 +316,7 @@ export default function FeaturedGamesSlider({
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/10 to-transparent" />
                 {index === current && (
-                  <div className="absolute left-2 top-2 flex items-center gap-1 rounded-full bg-neon-green px-2 py-0.5 text-[9px] font-black text-black">
+                  <div className="absolute left-2 top-2 flex items-center gap-1 rounded-full bg-nexa-emerald px-2 py-0.5 text-[9px] font-black text-black">
                     <Play className="h-2.5 w-2.5 fill-current" />
                     NOW
                   </div>

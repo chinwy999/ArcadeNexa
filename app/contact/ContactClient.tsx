@@ -51,7 +51,7 @@ export default function ContactClient() {
                 onChange={e => setForm({ ...form, name: e.target.value })}
                 required
                 placeholder="Your name"
-                className="w-full bg-elevated border border-white/10 rounded-xl px-4 py-3 text-white focus:ring-2 focus:ring-electric-violet outline-none placeholder:text-gray-600"
+                className="w-full bg-nexa-surface border border-white/10 rounded-xl px-4 py-3 text-white focus:ring-2 focus:ring-nexa-violet outline-none placeholder:text-gray-600"
               />
             </div>
             <div>
@@ -63,7 +63,7 @@ export default function ContactClient() {
                 onChange={e => setForm({ ...form, email: e.target.value })}
                 required
                 placeholder="your@email.com"
-                className="w-full bg-elevated border border-white/10 rounded-xl px-4 py-3 text-white focus:ring-2 focus:ring-electric-violet outline-none placeholder:text-gray-600"
+                className="w-full bg-nexa-surface border border-white/10 rounded-xl px-4 py-3 text-white focus:ring-2 focus:ring-nexa-violet outline-none placeholder:text-gray-600"
               />
             </div>
             <div>
@@ -72,7 +72,7 @@ export default function ContactClient() {
                 id="contact-subject"
                 value={form.subject}
                 onChange={e => setForm({ ...form, subject: e.target.value })}
-                className="w-full bg-elevated border border-white/10 rounded-xl px-4 py-3 text-white focus:ring-2 focus:ring-electric-violet outline-none"
+                className="w-full bg-nexa-surface border border-white/10 rounded-xl px-4 py-3 text-white focus:ring-2 focus:ring-nexa-violet outline-none"
               >
                 <option>General</option>
                 <option>Bug Report</option>
@@ -90,18 +90,18 @@ export default function ContactClient() {
                 onChange={e => setForm({ ...form, message: e.target.value })}
                 required
                 placeholder="Tell us how we can help..."
-                className="w-full bg-elevated border border-white/10 rounded-xl px-4 py-3 text-white focus:ring-2 focus:ring-electric-violet outline-none placeholder:text-gray-600 resize-none"
+                className="w-full bg-nexa-surface border border-white/10 rounded-xl px-4 py-3 text-white focus:ring-2 focus:ring-nexa-violet outline-none placeholder:text-gray-600 resize-none"
               />
             </div>
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-electric-violet hover:bg-violet-600 disabled:opacity-50 text-white font-bold py-3 rounded-xl transition"
+              className="w-full bg-nexa-violet hover:bg-violet-600 disabled:opacity-50 text-white font-bold py-3 rounded-xl transition"
             >
               {loading ? 'Sending...' : 'SEND MESSAGE'}
             </button>
             {sent && (
-              <div className="bg-neon-green/10 border border-neon-green/30 text-neon-green text-sm p-4 rounded-xl text-center">
+              <div className="bg-nexa-emerald/10 border border-nexa-emerald/30 text-nexa-emerald text-sm p-4 rounded-xl text-center">
                 ✅ Message sent successfully! We will get back to you soon.
               </div>
             )}

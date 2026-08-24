@@ -2,37 +2,149 @@
 @tailwind components;
 @tailwind utilities;
 
+/* =========================================================
+   ArcadeNexa — Midnight / Cyan / Emerald Design System
+   ========================================================= */
+
 :root {
-  --space-black: #050510;
-  --dark-navy: #0a0a1a;
-  --elevated: #15152a;
+  --nexa-black: #04050b;
+  --nexa-navy: #080b16;
+  --nexa-surface: #0d1220;
+
+  --surface: rgba(13, 18, 32, 0.72);
+  --surface-soft: rgba(255, 255, 255, 0.035);
+  --surface-hover: rgba(255, 255, 255, 0.055);
+
+  --line: rgba(255, 255, 255, 0.075);
+  --line-strong: rgba(255, 255, 255, 0.12);
+
+  --nexa-cyan: #22d3ee;
+  --nexa-cyan-soft: rgba(34, 211, 238, 0.12);
+
+  --nexa-emerald: #34d399;
+  --nexa-emerald-soft: rgba(52, 211, 153, 0.12);
+
+  --nexa-violet: #8b5cf6;
+  --nexa-violet-soft: rgba(139, 92, 246, 0.12);
+
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
 }
 
 html {
   scroll-behavior: smooth;
-  background: var(--space-black);
+  background: var(--nexa-black);
+  color-scheme: dark;
 }
 
 body {
+  position: relative;
+  min-height: 100vh;
   margin: 0;
+  overflow-x: hidden;
+
   background:
-    radial-gradient(circle at 50% -10%, rgba(124, 58, 237, 0.08), transparent 32rem),
-    var(--space-black);
-  color: white;
+    radial-gradient(
+      circle at 50% -12%,
+      rgba(34, 211, 238, 0.095),
+      transparent 30rem
+    ),
+    radial-gradient(
+      circle at 8% 30%,
+      rgba(139, 92, 246, 0.055),
+      transparent 28rem
+    ),
+    radial-gradient(
+      circle at 92% 70%,
+      rgba(52, 211, 153, 0.035),
+      transparent 26rem
+    ),
+    var(--nexa-black);
+
+  color: var(--text-primary);
+
   font-family:
     system-ui,
     -apple-system,
     BlinkMacSystemFont,
     "Segoe UI",
     Roboto,
+    Helvetica,
+    Arial,
     sans-serif;
-  overflow-x: hidden;
+
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
 }
 
+/* Subtle gaming-grid atmosphere */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+
+  background-image:
+    linear-gradient(
+      rgba(255, 255, 255, 0.018) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.018) 1px,
+      transparent 1px
+    );
+
+  background-size: 48px 48px;
+
+  mask-image: linear-gradient(
+    to bottom,
+    black 0%,
+    rgba(0, 0, 0, 0.55) 35%,
+    transparent 85%
+  );
+
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    black 0%,
+    rgba(0, 0, 0, 0.55) 35%,
+    transparent 85%
+  );
+}
+
+/* Soft top atmospheric glow */
+body::after {
+  content: "";
+  position: fixed;
+  left: 50%;
+  top: -260px;
+  z-index: -1;
+
+  width: 680px;
+  height: 680px;
+
+  transform: translateX(-50%);
+  pointer-events: none;
+
+  background: radial-gradient(
+    circle,
+    rgba(34, 211, 238, 0.055) 0%,
+    rgba(139, 92, 246, 0.035) 32%,
+    transparent 70%
+  );
+
+  filter: blur(12px);
+}
+
+/* =========================================================
+   Base elements
+   ========================================================= */
+
 ::selection {
-  background: rgba(34, 197, 94, 0.3);
+  background: rgba(34, 211, 238, 0.28);
   color: white;
 }
 
@@ -48,34 +160,172 @@ a {
 
 button:focus-visible,
 a:focus-visible {
-  outline: 2px solid #22c55e;
+  outline: 2px solid var(--nexa-cyan);
   outline-offset: 3px;
 }
 
+/* =========================================================
+   Reusable surfaces
+   ========================================================= */
+
 .glass {
-  background: rgba(10, 10, 26, 0.72);
-  border-color: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.055),
+      rgba(255, 255, 255, 0.018)
+    ),
+    rgba(8, 11, 22, 0.74);
+
+  border: 1px solid var(--line);
+
+  box-shadow:
+    0 18px 55px rgba(0, 0, 0, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.025);
+
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
 }
+
+.glass:hover {
+  border-color: var(--line-strong);
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.065),
+      rgba(255, 255, 255, 0.022)
+    ),
+    rgba(8, 11, 22, 0.78);
+}
+
+/* Consistent section atmosphere */
+.section-surface {
+  position: relative;
+  isolation: isolate;
+}
+
+.section-surface::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+
+  background:
+    radial-gradient(
+      circle at 20% 0%,
+      rgba(34, 211, 238, 0.035),
+      transparent 24rem
+    ),
+    radial-gradient(
+      circle at 85% 100%,
+      rgba(139, 92, 246, 0.035),
+      transparent 24rem
+    );
+}
+
+/* =========================================================
+   Typography
+   ========================================================= */
 
 .gradient-text {
   background: linear-gradient(
-    135deg,
-    #22c55e 0%,
-    #22d3ee 45%,
-    #7c3aed 100%
+    120deg,
+    #f8fafc 0%,
+    #67e8f9 38%,
+    #22d3ee 62%,
+    #a78bfa 100%
   );
+
   -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
   background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
+
+.gradient-text-green {
+  background: linear-gradient(
+    120deg,
+    #34d399 0%,
+    #22d3ee 55%,
+    #818cf8 100%
+  );
+
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* =========================================================
+   Glow utilities
+   ========================================================= */
 
 .neon-glow {
   box-shadow:
-    0 0 20px rgba(124, 58, 237, 0.25),
-    0 0 45px rgba(34, 197, 94, 0.08);
+    0 0 24px rgba(34, 211, 238, 0.13),
+    0 0 65px rgba(139, 92, 246, 0.07);
 }
+
+.cyan-glow {
+  box-shadow:
+    0 0 22px rgba(34, 211, 238, 0.12),
+    0 10px 40px rgba(0, 0, 0, 0.22);
+}
+
+.emerald-glow {
+  box-shadow:
+    0 0 22px rgba(52, 211, 153, 0.12),
+    0 10px 40px rgba(0, 0, 0, 0.22);
+}
+
+/* =========================================================
+   Premium button helper
+   ========================================================= */
+
+.btn-premium {
+  position: relative;
+  overflow: hidden;
+
+  border: 1px solid rgba(34, 211, 238, 0.22);
+  background:
+    linear-gradient(
+      135deg,
+      rgba(34, 211, 238, 0.16),
+      rgba(139, 92, 246, 0.12)
+    );
+
+  color: #cffafe;
+
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+
+  transition:
+    transform 300ms ease,
+    border-color 300ms ease,
+    box-shadow 300ms ease,
+    background 300ms ease;
+}
+
+.btn-premium:hover {
+  transform: translateY(-2px);
+
+  border-color: rgba(34, 211, 238, 0.42);
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(34, 211, 238, 0.22),
+      rgba(139, 92, 246, 0.17)
+    );
+
+  box-shadow:
+    0 16px 38px rgba(0, 0, 0, 0.28),
+    0 0 30px rgba(34, 211, 238, 0.08);
+}
+
+/* =========================================================
+   Scrollbars
+   ========================================================= */
 
 .scrollbar-hide {
   -ms-overflow-style: none;
@@ -92,17 +342,33 @@ a:focus-visible {
 }
 
 ::-webkit-scrollbar-track {
-  background: #050510;
+  background: #04050b;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(148, 163, 184, 0.25);
+  background:
+    linear-gradient(
+      180deg,
+      rgba(34, 211, 238, 0.28),
+      rgba(139, 92, 246, 0.28)
+    );
+
   border-radius: 999px;
+  border: 2px solid #04050b;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(34, 197, 94, 0.45);
+  background:
+    linear-gradient(
+      180deg,
+      rgba(34, 211, 238, 0.5),
+      rgba(139, 92, 246, 0.5)
+    );
 }
+
+/* =========================================================
+   Utilities / Animations
+   ========================================================= */
 
 @layer utilities {
   .animate-fade-in {
@@ -110,11 +376,15 @@ a:focus-visible {
   }
 
   .animate-slide-up {
-    animation: slideUp 0.3s ease-out both;
+    animation: slideUp 0.45s ease-out both;
   }
 
   .animate-pulse-slow {
-    animation: pulseSlow 3s infinite;
+    animation: pulseSlow 3.5s ease-in-out infinite;
+  }
+
+  .animate-glow {
+    animation: glowPulse 4s ease-in-out infinite;
   }
 
   .text-balance {
@@ -136,26 +406,41 @@ a:focus-visible {
 
 @keyframes slideUp {
   0% {
-    transform: translateY(20px);
     opacity: 0;
+    transform: translateY(20px);
   }
 
   100% {
-    transform: translateY(0);
     opacity: 1;
+    transform: translateY(0);
   }
 }
 
 @keyframes pulseSlow {
   0%,
   100% {
-    opacity: 0.5;
+    opacity: 0.48;
   }
 
   50% {
-    opacity: 0.8;
+    opacity: 0.78;
   }
 }
+
+@keyframes glowPulse {
+  0%,
+  100% {
+    opacity: 0.65;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+/* =========================================================
+   Mobile optimization
+   ========================================================= */
 
 @media (max-width: 640px) {
   html {
@@ -164,10 +449,39 @@ a:focus-visible {
 
   body {
     background:
-      radial-gradient(circle at 50% -10%, rgba(124, 58, 237, 0.06), transparent 22rem),
-      var(--space-black);
+      radial-gradient(
+        circle at 50% -10%,
+        rgba(34, 211, 238, 0.075),
+        transparent 20rem
+      ),
+      radial-gradient(
+        circle at 100% 35%,
+        rgba(139, 92, 246, 0.04),
+        transparent 18rem
+      ),
+      var(--nexa-black);
+  }
+
+  body::before {
+    background-size: 38px 38px;
+    opacity: 0.55;
+  }
+
+  body::after {
+    width: 420px;
+    height: 420px;
+    top: -160px;
+  }
+
+  .glass {
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
   }
 }
+
+/* =========================================================
+   Reduced motion
+   ========================================================= */
 
 @media (prefers-reduced-motion: reduce) {
   html {

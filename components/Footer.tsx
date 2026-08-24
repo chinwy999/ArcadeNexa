@@ -2,14 +2,14 @@ import Link from 'next/link'
 
 export default function Footer() {
   return (
-    <footer className="border-t border-white/5 bg-dark-navy/50">
+    <footer className="border-t border-white/5 bg-nexa-navy/50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-12">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
 
           <div className="space-y-4">
             <Link href="/" className="flex items-center gap-2" aria-label="ArcadeNexa Home">
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-electric-violet to-neon-green flex items-center justify-center transform rotate-45">
-                <span className="text-space-black font-black text-sm transform -rotate-45">N</span>
+              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-nexa-violet to-nexa-emerald flex items-center justify-center transform rotate-45">
+                <span className="text-nexa-black font-black text-sm transform -rotate-45">N</span>
               </div>
               <span className="text-xl font-black tracking-wider">
                 <span className="text-white">ARCADE</span><span className="gradient-text">NEXA</span>
@@ -17,7 +17,7 @@ export default function Footer() {
             </Link>
             <p className="text-text-secondary text-sm">Free HTML5 gaming platform. 13,000+ games, instant play, no download required.</p>
             <div className="flex items-center gap-2">
-              <span className="bg-neon-green/10 border border-neon-green/20 text-neon-green text-xs px-3 py-1 rounded-full font-bold">🎮 Free to Play</span>
+              <span className="bg-nexa-emerald/10 border border-nexa-emerald/20 text-nexa-emerald text-xs px-3 py-1 rounded-full font-bold">🎮 Free to Play</span>
               <span className="bg-white/5 border border-white/10 text-text-secondary text-xs px-3 py-1 rounded-full">No Login</span>
             </div>
           </div>

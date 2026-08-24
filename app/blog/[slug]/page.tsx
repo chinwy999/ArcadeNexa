@@ -250,7 +250,7 @@ export default async function ArticlePage({ params }: Props) {
 
       <header className="mb-10">
         <div className="mb-4 flex flex-wrap items-center gap-3 text-sm">
-          <span className="rounded-full border border-neon-green/20 bg-neon-green/10 px-3 py-1 font-bold text-neon-green">
+          <span className="rounded-full border border-nexa-emerald/20 bg-nexa-emerald/10 px-3 py-1 font-bold text-nexa-emerald">
             {article.category}
           </span>
           <time dateTime={article.date} className="text-text-secondary">
@@ -289,7 +289,7 @@ export default async function ArticlePage({ params }: Props) {
       {relatedGames.length > 0 && (
         <section className="mt-14" aria-labelledby="related-games-heading">
           <div className="mb-6">
-            <span className="text-xs font-black uppercase tracking-[0.2em] text-neon-green">
+            <span className="text-xs font-black uppercase tracking-[0.2em] text-nexa-emerald">
               Play Related Games
             </span>
 
@@ -318,7 +318,7 @@ export default async function ArticlePage({ params }: Props) {
           <div className="mt-6 text-center">
             <Link
               href="/games"
-              className="inline-flex rounded-xl border border-neon-green/30 bg-neon-green/10 px-5 py-3 font-bold text-neon-green transition hover:bg-neon-green/20"
+              className="inline-flex rounded-xl border border-nexa-emerald/30 bg-nexa-emerald/10 px-5 py-3 font-bold text-nexa-emerald transition hover:bg-nexa-emerald/20"
             >
               Browse All Games →
             </Link>
@@ -351,7 +351,7 @@ export default async function ArticlePage({ params }: Props) {
             <Link
               key={item.slug}
               href={`/blog/${item.slug}`}
-              className="rounded-xl border border-white/10 p-4 text-white transition hover:border-electric-violet/40 hover:bg-white/[0.03]"
+              className="rounded-xl border border-white/10 p-4 text-white transition hover:border-nexa-violet/40 hover:bg-white/[0.03]"
             >
               <span className="text-sm font-bold">{item.title}</span>
             </Link>
@@ -361,7 +361,7 @@ export default async function ArticlePage({ params }: Props) {
         <div className="mt-8">
           <Link
             href="/games"
-            className="inline-flex rounded-xl bg-electric-violet px-5 py-3 font-bold text-white transition hover:opacity-90"
+            className="inline-flex rounded-xl bg-nexa-violet px-5 py-3 font-bold text-white transition hover:opacity-90"
           >
             Explore ArcadeNexa Games →
           </Link>

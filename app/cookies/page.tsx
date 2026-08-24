@@ -24,7 +24,7 @@ export default function CookiesPage() {
           <p className="mb-4">ArcadeNexa uses minimal cookies to ensure the platform works correctly:</p>
           <ul className="space-y-3">
             <li className="flex gap-3">
-              <span className="text-neon-green font-bold">✅</span>
+              <span className="text-nexa-emerald font-bold">✅</span>
               <div><strong className="text-white">Essential Cookies</strong> — Required for the platform to function properly, such as remembering your preferences.</div>
             </li>
             <li className="flex gap-3">
@@ -57,7 +57,7 @@ export default function CookiesPage() {
 
         <section className="glass p-6 rounded-xl border border-white/5">
           <h2 className="text-white font-bold text-xl mb-3">Contact Us</h2>
-          <p>If you have questions about our cookie policy, please reach out via our <a href="/contact" className="text-electric-violet hover:underline">Contact page</a>.</p>
+          <p>If you have questions about our cookie policy, please reach out via our <a href="/contact" className="text-nexa-violet hover:underline">Contact page</a>.</p>
         </section>
 
         <p className="text-xs text-center">Last updated: August 2026</p>

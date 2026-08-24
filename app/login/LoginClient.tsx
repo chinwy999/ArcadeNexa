@@ -11,7 +11,7 @@ export default function LoginClient() {
           ArcadeNexa is completely free and open. No account required — just pick a game and start playing instantly!
         </p>
         <div className="space-y-3">
-          <Link href="/games" className="w-full bg-electric-violet hover:bg-violet-600 text-white font-bold py-3 rounded-xl transition block">
+          <Link href="/games" className="w-full bg-nexa-violet hover:bg-violet-600 text-white font-bold py-3 rounded-xl transition block">
             Browse Games →
           </Link>
           <Link href="/categories" className="w-full border border-white/10 hover:bg-white/5 text-white font-bold py-3 rounded-xl transition block">

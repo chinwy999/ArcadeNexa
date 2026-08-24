@@ -47,11 +47,11 @@ export default function SearchClient({ allGames }: { allGames: Game[] }) {
             value={q}
             onChange={e => setQ(e.target.value)}
             placeholder="Search games, categories..."
-            className="w-full bg-elevated border border-white/10 rounded-xl pl-12 pr-4 py-4 text-white placeholder:text-text-secondary focus:ring-2 focus:ring-electric-violet outline-none"
+            className="w-full bg-nexa-surface border border-white/10 rounded-xl pl-12 pr-4 py-4 text-white placeholder:text-text-secondary focus:ring-2 focus:ring-nexa-violet outline-none"
             autoFocus
           />
         </div>
-        <button type="submit" className="bg-electric-violet hover:bg-violet-600 text-white px-6 py-4 rounded-xl font-bold transition">
+        <button type="submit" className="bg-nexa-violet hover:bg-violet-600 text-white px-6 py-4 rounded-xl font-bold transition">
           Search
         </button>
       </form>
@@ -63,7 +63,7 @@ export default function SearchClient({ allGames }: { allGames: Game[] }) {
           <div className="flex gap-2 flex-wrap">
             {popularCategories.map(cat => (
               <button key={cat} onClick={() => setQ(cat)}
-                className="px-4 py-2 rounded-full bg-white/5 border border-white/10 text-white text-sm hover:bg-electric-violet/20 hover:border-electric-violet/40 transition">
+                className="px-4 py-2 rounded-full bg-white/5 border border-white/10 text-white text-sm hover:bg-nexa-violet/20 hover:border-nexa-violet/40 transition">
                 {cat}
               </button>
             ))}
@@ -78,15 +78,15 @@ export default function SearchClient({ allGames }: { allGames: Game[] }) {
 
         {results.map(g => (
           <Link key={g.slug} href={`/games/${g.slug}`}
-            className="flex items-center gap-4 glass p-4 rounded-xl border border-white/5 hover:border-electric-violet/40 transition group">
+            className="flex items-center gap-4 glass p-4 rounded-xl border border-white/5 hover:border-nexa-violet/40 transition group">
             <div className={`w-14 h-14 rounded-xl flex items-center justify-center ${g.gradient} font-black text-white flex-shrink-0`}>
               {g.initials}
             </div>
             <div className="flex-1 min-w-0">
-              <h3 className="text-white font-bold group-hover:text-electric-violet transition-colors truncate">{g.name}</h3>
+              <h3 className="text-white font-bold group-hover:text-nexa-violet transition-colors truncate">{g.name}</h3>
               <p className="text-text-secondary text-sm">{g.category} • {g.platform}</p>
             </div>
-            <span className="text-neon-green text-xs font-bold flex-shrink-0">{g.rating}★</span>
+            <span className="text-nexa-emerald text-xs font-bold flex-shrink-0">{g.rating}★</span>
           </Link>
         ))}
 

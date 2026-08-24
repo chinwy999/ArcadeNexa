@@ -110,8 +110,8 @@ export default function LeaderboardPage() {
 
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
 
-        <div className="bg-elevated rounded-2xl border border-white/5 p-5">
-          <Users className="w-6 h-6 text-electric-violet mb-3" />
+        <div className="bg-nexa-surface rounded-2xl border border-white/5 p-5">
+          <Users className="w-6 h-6 text-nexa-violet mb-3" />
 
           <p className="text-gray-400 text-sm">
             Recorded Players
@@ -122,7 +122,7 @@ export default function LeaderboardPage() {
           </p>
         </div>
 
-        <div className="bg-elevated rounded-2xl border border-white/5 p-5">
+        <div className="bg-nexa-surface rounded-2xl border border-white/5 p-5">
           <Trophy className="w-6 h-6 text-yellow-400 mb-3" />
 
           <p className="text-gray-400 text-sm">
@@ -136,12 +136,12 @@ export default function LeaderboardPage() {
           </p>
         </div>
 
-        <div className="bg-elevated rounded-2xl border border-white/5 p-5">
+        <div className="bg-nexa-surface rounded-2xl border border-white/5 p-5">
           <p className="text-gray-400 text-sm">
             Ranking Type
           </p>
 
-          <p className="text-lg font-bold text-neon-green mt-1">
+          <p className="text-lg font-bold text-nexa-emerald mt-1">
             Arena Trials
           </p>
 
@@ -154,7 +154,7 @@ export default function LeaderboardPage() {
 
       {players.length === 0 ? (
 
-        <div className="text-center py-20 bg-elevated rounded-2xl border border-white/5">
+        <div className="text-center py-20 bg-nexa-surface rounded-2xl border border-white/5">
 
           <p className="text-6xl mb-4">
             🏆
@@ -173,13 +173,13 @@ export default function LeaderboardPage() {
 
       ) : (
 
-        <div className="bg-elevated rounded-2xl overflow-hidden border border-white/5">
+        <div className="bg-nexa-surface rounded-2xl overflow-hidden border border-white/5">
 
           <div className="overflow-x-auto">
 
             <table className="w-full">
 
-              <thead className="bg-space-black">
+              <thead className="bg-nexa-black">
 
                 <tr>
                   <th className="p-4 text-left text-gray-400 font-medium">

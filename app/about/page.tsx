@@ -63,10 +63,10 @@ export default function AboutPage() {
 
       </div>
 
-      <div className="bg-gradient-to-r from-electric-violet/20 to-neon-green/20 border border-white/10 rounded-2xl p-8 text-center mb-8">
+      <div className="bg-gradient-to-r from-nexa-violet/20 to-nexa-emerald/20 border border-white/10 rounded-2xl p-8 text-center mb-8">
         <h2 className="text-2xl font-black text-white mb-2">Ready to Play?</h2>
         <p className="text-text-secondary mb-6">Join thousands of players on ArcadeNexa today.</p>
-        <Link href="/games" className="bg-neon-green text-space-black px-8 py-3 rounded-xl font-black hover:opacity-90 transition-all hover:scale-105 inline-block">
+        <Link href="/games" className="bg-nexa-emerald text-nexa-black px-8 py-3 rounded-xl font-black hover:opacity-90 transition-all hover:scale-105 inline-block">
           Browse Games →
         </Link>
       </div>

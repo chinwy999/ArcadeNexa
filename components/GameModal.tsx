@@ -19,7 +19,7 @@ export default function GameModal({ game, onClose, onEarn }: { game: Game | null
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-space-black/90 backdrop-blur-md animate-fade-in"
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-nexa-black/90 backdrop-blur-md animate-fade-in"
       role="dialog"
       aria-modal="true"
       aria-labelledby="game-modal-title"

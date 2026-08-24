@@ -44,7 +44,7 @@ export default function Header() {
     pathname === href || pathname.startsWith(`${href}/`)
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-space-black/80 backdrop-blur-xl">
+    <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-nexa-black/80 backdrop-blur-xl">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6">
 
         <Link
@@ -52,8 +52,8 @@ export default function Header() {
           aria-label="ArcadeNexa Home"
           className="group flex items-center gap-2.5"
         >
-          <div className="relative flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-electric-violet to-neon-green shadow-lg shadow-electric-violet/20 transition-transform duration-300 group-hover:rotate-6">
-            <Gamepad2 className="h-5 w-5 text-space-black" />
+          <div className="relative flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-nexa-violet to-nexa-emerald shadow-lg shadow-nexa-violet/20 transition-transform duration-300 group-hover:rotate-6">
+            <Gamepad2 className="h-5 w-5 text-nexa-black" />
           </div>
 
           <span className="text-lg font-black tracking-tight sm:text-xl">
@@ -93,7 +93,7 @@ export default function Header() {
 
           <Link
             href="/games"
-            className="rounded-xl bg-neon-green px-4 py-2.5 text-xs font-black text-space-black shadow-lg shadow-neon-green/10 transition hover:-translate-y-0.5 hover:shadow-neon-green/20"
+            className="rounded-xl bg-nexa-emerald px-4 py-2.5 text-xs font-black text-nexa-black shadow-lg shadow-nexa-emerald/10 transition hover:-translate-y-0.5 hover:shadow-nexa-emerald/20"
           >
             PLAY NOW
           </Link>
@@ -125,12 +125,12 @@ export default function Header() {
       </div>
 
       {mobileOpen && (
-        <div className="fixed inset-x-0 top-16 z-40 border-t border-white/10 bg-space-black px-4 pb-6 pt-4 shadow-2xl lg:hidden overflow-y-auto max-h-[calc(100vh-4rem)]">
+        <div className="fixed inset-x-0 top-16 z-40 border-t border-white/10 bg-nexa-black px-4 pb-6 pt-4 shadow-2xl lg:hidden overflow-y-auto max-h-[calc(100vh-4rem)]">
           <div className="mx-auto max-w-7xl">
 
             <Link
               href="/games"
-              className="mb-4 flex items-center justify-between rounded-2xl bg-gradient-to-r from-neon-green to-emerald-400 p-4 text-space-black"
+              className="mb-4 flex items-center justify-between rounded-2xl bg-gradient-to-r from-nexa-emerald to-emerald-400 p-4 text-nexa-black"
             >
               <div>
                 <p className="text-lg font-black">PLAY NOW</p>
@@ -152,7 +152,7 @@ export default function Header() {
                     href={link.href}
                     className={`flex items-center justify-between rounded-xl px-4 py-3.5 text-sm font-bold transition ${
                       active
-                        ? 'bg-electric-violet/15 text-white'
+                        ? 'bg-nexa-violet/15 text-white'
                         : 'text-text-secondary hover:bg-white/5 hover:text-white'
                     }`}
                   >

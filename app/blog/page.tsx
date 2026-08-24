@@ -29,7 +29,7 @@ export default function BlogPage() {
   return (
     <main className="mx-auto max-w-6xl px-4 py-16">
       <header className="mb-12">
-        <p className="mb-3 text-sm font-bold uppercase tracking-widest text-neon-green">
+        <p className="mb-3 text-sm font-bold uppercase tracking-widest text-nexa-emerald">
           ArcadeNexa Editorial
         </p>
         <h1 className="mb-4 text-4xl font-black text-white sm:text-5xl">
@@ -45,10 +45,10 @@ export default function BlogPage() {
         {articles.map((article) => (
           <article
             key={article.slug}
-            className="glass rounded-2xl border border-white/10 p-6 transition hover:-translate-y-1 hover:border-electric-violet/40"
+            className="glass rounded-2xl border border-white/10 p-6 transition hover:-translate-y-1 hover:border-nexa-violet/40"
           >
             <div className="mb-4 flex items-center justify-between gap-3 text-xs">
-              <span className="rounded-full border border-neon-green/20 bg-neon-green/10 px-3 py-1 font-bold text-neon-green">
+              <span className="rounded-full border border-nexa-emerald/20 bg-nexa-emerald/10 px-3 py-1 font-bold text-nexa-emerald">
                 {article.category}
               </span>
               <span className="text-text-secondary">{article.readTime}</span>
@@ -57,7 +57,7 @@ export default function BlogPage() {
             <h2 className="mb-3 text-xl font-bold text-white">
               <Link
                 href={`/blog/${article.slug}`}
-                className="hover:text-neon-green"
+                className="hover:text-nexa-emerald"
               >
                 {article.title}
               </Link>
@@ -69,7 +69,7 @@ export default function BlogPage() {
 
             <Link
               href={`/blog/${article.slug}`}
-              className="font-bold text-neon-green hover:underline"
+              className="font-bold text-nexa-emerald hover:underline"
             >
               Read article →
             </Link>

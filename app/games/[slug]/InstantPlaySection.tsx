@@ -78,7 +78,7 @@ export default function InstantPlaySection({ game }: { game: Game }) {
   return (
     <div
       ref={containerRef}
-      className="glass rounded-3xl overflow-hidden border border-electric-violet/30 shadow-[0_0_40px_rgba(124,58,237,0.2)] bg-[#0a0a1a]"
+      className="glass rounded-3xl overflow-hidden border border-nexa-violet/30 shadow-[0_0_40px_rgba(124,58,237,0.2)] bg-[#0a0a1a]"
     >
       <div className="flex items-center justify-between px-4 py-3 bg-[#15152a]/90 border-b border-white/5">
         <div className="flex items-center gap-3 min-w-0">
@@ -87,7 +87,7 @@ export default function InstantPlaySection({ game }: { game: Game }) {
           </div>
           <div className="min-w-0">
             <h3 className="text-white font-bold text-sm truncate">{game.name} — Instant Play</h3>
-            <p className="text-[10px] text-neon-green">LIVE • {game.width}x{game.height} • {providerName}</p>
+            <p className="text-[10px] text-nexa-emerald">LIVE • {game.width}x{game.height} • {providerName}</p>
           </div>
         </div>
         <button
@@ -105,7 +105,7 @@ export default function InstantPlaySection({ game }: { game: Game }) {
       >
         {isLoading && !hasError && (
           <div className="absolute inset-0 z-10 bg-[#0a0a1a] flex flex-col items-center justify-center gap-3">
-            <div className="w-10 h-10 border-4 border-electric-violet/20 border-t-electric-violet rounded-full animate-spin" />
+            <div className="w-10 h-10 border-4 border-nexa-violet/20 border-t-nexa-violet rounded-full animate-spin" />
             <p className="text-text-secondary text-sm">Loading {game.name}...</p>
           </div>
         )}
@@ -113,7 +113,7 @@ export default function InstantPlaySection({ game }: { game: Game }) {
           <div className="absolute inset-0 z-20 bg-[#0a0a1a] flex flex-col items-center justify-center p-6 text-center">
             <p className="text-white font-bold mb-2">Game could not be loaded</p>
             <p className="text-text-secondary text-xs mb-4">Check your connection and try again.</p>
-            <button onClick={retry} className="bg-electric-violet text-white px-4 py-2 rounded-lg text-sm">Retry</button>
+            <button onClick={retry} className="bg-nexa-violet text-white px-4 py-2 rounded-lg text-sm">Retry</button>
           </div>
         ) : (
           <iframe
@@ -140,7 +140,7 @@ export default function InstantPlaySection({ game }: { game: Game }) {
         </span>
         <div className="flex items-center gap-3">
           {scoreSaved && (
-            <span className="text-neon-green font-bold flex items-center gap-1">
+            <span className="text-nexa-emerald font-bold flex items-center gap-1">
               <Trophy className="w-3 h-3" /> Score saved!
             </span>
           )}
@@ -156,7 +156,7 @@ export default function InstantPlaySection({ game }: { game: Game }) {
               href={game.officialUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 text-electric-violet hover:text-white"
+              className="inline-flex items-center gap-1 text-nexa-violet hover:text-white"
             >
               Official Page
               <ExternalLink className="w-3 h-3" />
@@ -166,7 +166,7 @@ export default function InstantPlaySection({ game }: { game: Game }) {
       </div>
 
       {game.instructions && (
-        <div className="px-4 py-3 bg-elevated/50 border-t border-white/5">
+        <div className="px-4 py-3 bg-nexa-surface/50 border-t border-white/5">
           <p className="text-white font-bold text-xs mb-1">How to Play:</p>
           <p className="text-text-secondary text-xs leading-relaxed">{game.instructions}</p>
         </div>
@@ -189,7 +189,7 @@ export default function InstantPlaySection({ game }: { game: Game }) {
                   onChange={e => setUsername(e.target.value)}
                   placeholder="Enter your name..."
                   maxLength={20}
-                  className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2 text-white text-sm outline-none focus:border-electric-violet/60"
+                  className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2 text-white text-sm outline-none focus:border-nexa-violet/60"
                 />
               </div>
               <div>
@@ -201,7 +201,7 @@ export default function InstantPlaySection({ game }: { game: Game }) {
                   onChange={e => setScore(e.target.value)}
                   placeholder="Enter your score..."
                   min="0"
-                  className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2 text-white text-sm outline-none focus:border-electric-violet/60"
+                  className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2 text-white text-sm outline-none focus:border-nexa-violet/60"
                 />
               </div>
             </div>
@@ -215,7 +215,7 @@ export default function InstantPlaySection({ game }: { game: Game }) {
               <button
                 onClick={handleSaveScore}
                 disabled={!username.trim() || !score.trim()}
-                className="flex-1 py-2 rounded-xl bg-electric-violet text-white text-sm font-bold disabled:opacity-40"
+                className="flex-1 py-2 rounded-xl bg-nexa-violet text-white text-sm font-bold disabled:opacity-40"
               >
                 Save Score
               </button>

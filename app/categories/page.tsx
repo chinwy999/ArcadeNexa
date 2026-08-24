@@ -418,7 +418,7 @@ export default function CategoriesPage() {
   return (
     <main className="max-w-7xl mx-auto px-4 sm:px-6 py-10 sm:py-16">
       <header className="mb-10 sm:mb-14">
-        <div className="inline-flex items-center gap-2 rounded-full border border-electric-violet/30 bg-electric-violet/10 px-3 py-1 text-xs font-bold text-electric-violet">
+        <div className="inline-flex items-center gap-2 rounded-full border border-nexa-violet/30 bg-nexa-violet/10 px-3 py-1 text-xs font-bold text-nexa-violet">
           <span aria-hidden="true">🎮</span>
           BROWSE GAME CATEGORIES
         </div>
@@ -436,7 +436,7 @@ export default function CategoriesPage() {
       <section aria-labelledby="popular-categories">
         <div className="mb-5 flex items-end justify-between gap-4">
           <div>
-            <p className="text-sm font-bold uppercase tracking-widest text-electric-violet">
+            <p className="text-sm font-bold uppercase tracking-widest text-nexa-violet">
               Start here
             </p>
             <h2
@@ -498,7 +498,7 @@ export default function CategoriesPage() {
 
       <section className="mt-12 sm:mt-16" aria-labelledby="all-categories">
         <div className="mb-5">
-          <p className="text-sm font-bold uppercase tracking-widest text-electric-violet">
+          <p className="text-sm font-bold uppercase tracking-widest text-nexa-violet">
             Browse everything
           </p>
           <h2
@@ -570,7 +570,7 @@ export default function CategoriesPage() {
 
         <Link
           href="/games"
-          className="mt-5 inline-flex rounded-xl bg-electric-violet px-5 py-3 text-sm font-bold text-white transition hover:brightness-110"
+          className="mt-5 inline-flex rounded-xl bg-nexa-violet px-5 py-3 text-sm font-bold text-white transition hover:brightness-110"
         >
           Browse All Games
         </Link>

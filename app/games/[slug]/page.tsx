@@ -315,7 +315,7 @@ export default async function GamePage({ params }: PageParams) {
         </h1>
 
         <div className="flex items-center gap-3 flex-wrap">
-          <span className="bg-neon-green/10 border border-neon-green/20 text-neon-green text-xs px-3 py-1 rounded-full font-bold">
+          <span className="bg-nexa-emerald/10 border border-nexa-emerald/20 text-nexa-emerald text-xs px-3 py-1 rounded-full font-bold">
             HTML5 • Free
           </span>
 
@@ -382,9 +382,9 @@ export default async function GamePage({ params }: PageParams) {
                   <Link
                     key={article.slug}
                     href={`/blog/${article.slug}`}
-                    className="rounded-xl border border-white/10 bg-white/[0.02] p-4 transition hover:border-electric-violet/40 hover:bg-white/[0.04]"
+                    className="rounded-xl border border-white/10 bg-white/[0.02] p-4 transition hover:border-nexa-violet/40 hover:bg-white/[0.04]"
                   >
-                    <span className="mb-2 block text-xs font-bold uppercase tracking-wide text-electric-violet">
+                    <span className="mb-2 block text-xs font-bold uppercase tracking-wide text-nexa-violet">
                       {article.category}
                     </span>
 
@@ -463,11 +463,11 @@ export default async function GamePage({ params }: PageParams) {
 
           <Link
             href={`/games?genre=${game.category}`}
-            className="block glass rounded-2xl p-4 border border-white/5 hover:border-electric-violet/40 transition text-center"
+            className="block glass rounded-2xl p-4 border border-white/5 hover:border-nexa-violet/40 transition text-center"
           >
             <p className="text-text-secondary text-sm">
               More{' '}
-              <span className="capitalize text-electric-violet font-bold">
+              <span className="capitalize text-nexa-violet font-bold">
                 {game.category}
               </span>{' '}
               games →

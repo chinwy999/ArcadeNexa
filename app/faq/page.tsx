@@ -71,7 +71,7 @@ export default function FAQPage() {
       <div className="glass rounded-2xl border border-white/5 p-8 text-center">
         <h2 className="text-2xl font-bold text-white mb-2">Still have questions?</h2>
         <p className="text-text-secondary mb-6">Our team is happy to help you.</p>
-        <Link href="/contact" className="bg-electric-violet text-white px-8 py-3 rounded-xl font-bold hover:opacity-90 transition inline-block">
+        <Link href="/contact" className="bg-nexa-violet text-white px-8 py-3 rounded-xl font-bold hover:opacity-90 transition inline-block">
           Contact Us
         </Link>
       </div>

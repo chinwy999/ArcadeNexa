@@ -9,6 +9,7 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        // Legacy compatibility
         "space-black": "#050510",
         "dark-navy": "#0a0a1a",
         "elevated": "#15152a",
@@ -16,8 +17,19 @@ const config: Config = {
         "neon-green": "#22c55e",
         "hot-pink": "#ec4899",
         "gold": "#fbbf24",
-        "text-primary": "#ffffff",
+
+        // ArcadeNexa Pro Design System
+        "nexa-black": "#04050b",
+        "nexa-navy": "#080b16",
+        "nexa-surface": "#0d1220",
+        "nexa-cyan": "#22d3ee",
+        "nexa-emerald": "#34d399",
+        "nexa-violet": "#8b5cf6",
+        "nexa-gold": "#fbbf24",
+
+        "text-primary": "#f8fafc",
         "text-secondary": "#94a3b8",
+        "text-muted": "#64748b",
       },
       animation: {
         "fade-in": "fadeIn 0.5s ease-out",

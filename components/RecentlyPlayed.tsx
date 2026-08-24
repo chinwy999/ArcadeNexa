@@ -98,7 +98,7 @@ export default function RecentlyPlayed() {
             <Link
               key={game.slug}
               href={`/games/${game.slug}`}
-              className="group min-w-0 overflow-hidden rounded-xl border border-white/5 bg-elevated transition hover:-translate-y-1 hover:border-cyan-400/30"
+              className="group min-w-0 overflow-hidden rounded-xl border border-white/5 bg-nexa-surface transition hover:-translate-y-1 hover:border-cyan-400/30"
             >
               <div className="relative aspect-[4/3] overflow-hidden">
                 <SafeImage

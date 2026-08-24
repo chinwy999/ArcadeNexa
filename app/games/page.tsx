@@ -161,7 +161,7 @@ export default async function GamesPage({
         {selectedGenre && (
           <Link
             href="/games"
-            className="text-neon-green text-sm mt-2 inline-block hover:underline"
+            className="text-nexa-emerald text-sm mt-2 inline-block hover:underline"
           >
             ← Back to All Games
           </Link>
@@ -169,7 +169,7 @@ export default async function GamesPage({
       </div>
 
       {sortedGames.length === 0 ? (
-        <div className="text-center py-20 bg-elevated rounded-lg border border-white/5">
+        <div className="text-center py-20 bg-nexa-surface rounded-lg border border-white/5">
           <p className="text-6xl mb-4">🎮</p>
 
           <p className="text-xl text-gray-400">
@@ -179,7 +179,7 @@ export default async function GamesPage({
 
           <Link
             href="/games"
-            className="inline-block mt-6 px-6 py-3 rounded-xl bg-electric-violet text-white font-bold"
+            className="inline-block mt-6 px-6 py-3 rounded-xl bg-nexa-violet text-white font-bold"
           >
             View All Games
           </Link>
