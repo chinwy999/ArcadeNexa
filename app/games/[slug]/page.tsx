@@ -258,6 +258,7 @@ export default async function GamePage({ params }: PageParams) {
     "url": `${getSiteUrl()}/games/${game.slug}`,
     "applicationCategory": "Game",
     "operatingSystem": "Web Browser",
+      "gamePlatform": "Web Browser",
     "genre": game.category,
     "offers": {
       "@type": "Offer",

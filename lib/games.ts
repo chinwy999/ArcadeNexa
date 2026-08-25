@@ -134,13 +134,42 @@ function buildGameDescriptions({
   const usefulDescription =
     rawDescription &&
     rawDescription !== 'Play this game instantly in your browser.' &&
-    rawDescription.length >= 80
+    rawDescription.length >= 40
       ? rawDescription
       : ''
 
-  const shortDescription = usefulDescription
-    ? usefulDescription
-    : `${gameTitle} is a free ${gameCategory} browser game on ArcadeNexa. Play instantly in your browser with no download required.`
+  const seoBase =
+    `${gameTitle} is a free ${gameCategory} browser game on ArcadeNexa. ` +
+    `Play instantly with no download required.`
+
+  const makeSeoDescription = (text: string) => {
+    const normalized = clean(text)
+
+    if (normalized.length >= 120 && normalized.length <= 160) {
+      return normalized
+    }
+
+    if (normalized.length > 160) {
+      const cut = normalized.slice(0, 157)
+      const lastSpace = cut.lastIndexOf(' ')
+      return `${(lastSpace > 100 ? cut.slice(0, lastSpace) : cut).trim()}...`
+    }
+
+    const fallback =
+      `${normalized} Play ${gameTitle} free online on ArcadeNexa with no download required.`
+
+    if (fallback.length <= 160) {
+      return fallback
+    }
+
+    const cut = fallback.slice(0, 157)
+    const lastSpace = cut.lastIndexOf(' ')
+    return `${(lastSpace > 100 ? cut.slice(0, lastSpace) : cut).trim()}...`
+  }
+
+  const shortDescription = makeSeoDescription(
+    usefulDescription || seoBase
+  )
 
   const tagText = cleanTags.length
     ? ` The game is tagged with ${cleanTags.join(', ')}.`
