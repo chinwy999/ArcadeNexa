@@ -100,6 +100,66 @@ function getGradient(slug: string): string {
   return GRADIENTS[Math.abs(hash) % GRADIENTS.length]
 }
 
+
+function buildGameDescriptions({
+  title,
+  description,
+  category,
+  tags = [],
+  instructions,
+}: {
+  title: string
+  description?: string
+  category?: string
+  tags?: string[]
+  instructions?: string
+}): {
+  description: string
+  longDescription: string
+} {
+  const clean = (value: string | undefined | null) =>
+    String(value || '')
+      .replace(/\s+/g, ' ')
+      .trim()
+
+  const gameTitle = clean(title) || 'This game'
+  const rawDescription = clean(description)
+  const gameCategory = clean(category) || 'arcade'
+
+  const cleanTags = tags
+    .map(tag => clean(tag))
+    .filter(Boolean)
+    .slice(0, 4)
+
+  const usefulDescription =
+    rawDescription &&
+    rawDescription !== 'Play this game instantly in your browser.' &&
+    rawDescription.length >= 80
+      ? rawDescription
+      : ''
+
+  const shortDescription = usefulDescription
+    ? usefulDescription
+    : `${gameTitle} is a free ${gameCategory} browser game on ArcadeNexa. Play instantly in your browser with no download required.`
+
+  const tagText = cleanTags.length
+    ? ` The game is tagged with ${cleanTags.join(', ')}.`
+    : ''
+
+  const instructionText = clean(instructions)
+    ? ` ${clean(instructions)}`
+    : ' Use the on-screen instructions and controls provided by the game.'
+
+  const longDescription = usefulDescription
+    ? `${usefulDescription}${tagText}${instructionText} Play ${gameTitle} for free on ArcadeNexa and enjoy an instant browser gaming experience with no download required.`
+    : `${gameTitle} is a free ${gameCategory} browser game available on ArcadeNexa. Play instantly in your browser with no download or installation required.${tagText}${instructionText} Start playing ${gameTitle} directly from its game page and discover a quick, accessible browser gaming experience.`
+
+  return {
+    description: shortDescription,
+    longDescription,
+  }
+}
+
 function getAspectRatio(width: number, height: number): string {
   const gcd = (a: number, b: number): number => b === 0 ? a : gcd(b, a % b)
   const safeWidth = width > 0 ? width : 800
@@ -131,7 +191,7 @@ export function convertGame(item: GamePixItem): Game {
     thumbnail: item.banner_image || item.image || '',
     description: item.description || '',
     instructions: 'Use mouse or touch controls to play.',
-    tags: [category, 'html5', 'browser'],
+      tags: [category, 'html5', 'browser'],
     title: item.title || 'Untitled Game',
   })
 
@@ -146,11 +206,16 @@ export function convertGame(item: GamePixItem): Game {
     genre: [category, 'HTML5'],
     genreFilter: category,
     rating,
-    platform: 'Multi',
-    description: item.description || 'Play this game instantly in your browser.',
-    longDescription: item.description || 'Play this game instantly in your browser.',
-    instructions: 'Use mouse or touch controls to play.',
-    tags: [category, 'html5', 'browser'],
+      platform: 'Multi',
+      ...buildGameDescriptions({
+        title: item.title || 'Untitled Game',
+        description: item.description,
+        category,
+        tags: [category, 'html5', 'browser'],
+        instructions: 'Use mouse or touch controls to play.',
+      }),
+      instructions: 'Use mouse or touch controls to play.',
+      tags: [category, 'html5', 'browser'],
     officialUrl: item.url,
     iframeUrl: `https://play.gamepix.com/${item.namespace}/embed?sid=DXXR1`,
     thumbnail: item.banner_image || item.image || '',
@@ -572,6 +637,15 @@ export async function getGamesPage(
   let gmRaw: Game[] = []
   let gmHasMore = false
 
+  /*
+   * Reuse category results during GamePix -> GameMonetize
+   * failover so we do not rescan GameMonetize from page 1.
+   */
+  let gmCategoryStream: Game[] | null = null
+  let gmCategorySeen = new Set<string>()
+  let gmCategoryNextPage = 1
+  let gmCategoryEnded = false
+
   try {
     if (!normalizedGenre) {
       /*
@@ -703,90 +777,64 @@ export async function getGamesPage(
       /*
        * CATEGORY STREAM
        *
-       * We need enough filtered games to reach:
+       * IMPORTANT:
+       * GameMonetize ordering must remain stable between
+       * ArcadeNexa page requests.
        *
-       *   arcadeOffset + providerTake
-       *
-       * Example:
-       *   Arcade page 10
-       *   offset = 216
-       *
-       * We continue fetching GM pages until at least
-       * 240 matching category games are collected, or
-       * the provider reaches its end.
+       * The filtered category stream is therefore stored
+       * in a persistent in-memory snapshot instead of being
+       * rebuilt from provider page 1 for every request.
        */
 
-      // Collect one extra matching game beyond the requested
-      // provider slice so we can determine whether this stream
-      // actually has another page of category results.
       const requiredEnd =
-        arcadeOffset + providerTake + 1
+        arcadeOffset +
+        providerTake +
+        1
 
-      const categoryGames: Game[] = []
-
-      const seenGM = new Set<string>()
-
-      let providerPage = 1
-      let providerEnded = false
-
-      while (
-        categoryGames.length < requiredEnd &&
-        providerPage <= 50
-      ) {
-        const result = await fetchGMGamesPage(
-          providerPage,
-          GM_PAGE_SIZE
+      const snapshot =
+        await getGMCategorySnapshot(
+          normalizedGenre,
+          requiredEnd
         )
 
-        const raw = result.items.map(convertGMGame)
+      const categoryGames =
+        snapshot.games
 
-        for (const game of raw) {
-          const matchesCategory =
-            matchesGenre(
-              normalizedGenre,
-              game.category,
-              game.genreFilter
-            )
+      gmCategoryStream =
+        categoryGames
 
-          if (!matchesCategory) {
-            continue
-          }
+      gmCategorySeen =
+        new Set(
+          categoryGames
+            .map(game => game.slug)
+            .filter(Boolean)
+        )
 
-          if (!game.slug || seenGM.has(game.slug)) {
-            continue
-          }
+      const cachedSnapshot =
+        gmCategorySnapshotCache.get(
+          normalizedGenre
+        )
 
-          seenGM.add(game.slug)
-          categoryGames.push(game)
-        }
+      gmCategoryNextPage =
+        cachedSnapshot?.nextPage || 1
 
-        if (
-          result.nextPage === null ||
-          raw.length < GM_PAGE_SIZE
-        ) {
-          providerEnded = true
-          break
-        }
+      gmCategoryEnded =
+        cachedSnapshot?.ended ?? false
 
-        providerPage++
-      }
+      gmRaw =
+        categoryGames.slice(
+          arcadeOffset,
+          arcadeOffset + providerTake
+        )
 
-      gmRaw = categoryGames.slice(
-        arcadeOffset,
-        arcadeOffset + providerTake
-      )
-
-      // hasMore must be based on an actual additional
-      // category game, not merely on the provider having
-      // more pages or an unresolved feed state.
       gmHasMore =
-        categoryGames.length > arcadeOffset + providerTake
+        categoryGames.length >
+        arcadeOffset + providerTake
 
       console.log(
         `[ArcadeNexa] GM category stream: ` +
         `genre=${normalizedGenre}, ` +
-        `pagesScanned=${providerPage}, ` +
-        `matches=${categoryGames.length}, ` +
+        `snapshotGames=${categoryGames.length}, ` +
         `offset=${arcadeOffset}`
       )
     }
@@ -828,14 +876,34 @@ export async function getGamesPage(
   /*
    * GameMonetize failed:
    *
-   * Fetch enough GamePix games to fill the requested page.
-   * The normal GamePix request has already completed, so
-   * this extra request is only made during actual failover.
+   * IMPORTANT:
+   * GamePix must become the COMPLETE provider stream.
+   *
+   * The normal hybrid mode reserves only providerTake
+   * GamePix games (24 for a 48-game ArcadeNexa page).
+   *
+   * During GM failover we must NOT reuse gpProviderPage/gpOffset,
+   * because that would cause:
+   *
+   *   Page 1 -> GP page 1, games 0..47
+   *   Page 2 -> GP page 1, games 24..47
+   *
+   * which creates 24 duplicates.
+   *
+   * Instead, GamePix gets its own full-page pagination:
+   *
+   *   Arcade page 1 -> GamePix page 1
+   *   Arcade page 2 -> GamePix page 2
+   *   Arcade page 3 -> GamePix page 3
+   *
+   * GM snapshot/fallback logic below remains untouched.
    */
   if (!gmAvailable && gpAvailable && gpRaw.length < safeSize) {
     try {
+      const fallbackProviderPage = safePage
+
       const fallbackResult = await fetchGamesPage(
-        gpProviderPage,
+        fallbackProviderPage,
         GP_PAGE_SIZE,
         'quality',
         normalizedGenre
@@ -844,113 +912,204 @@ export async function getGamesPage(
       const fallbackGames =
         fallbackResult.items.map(convertGame)
 
-      const fallbackSlice = fallbackGames.slice(
-        gpOffset,
-        gpOffset + safeSize
+      merged = fallbackGames.slice(
+        0,
+        safeSize
       )
 
       gpHasMore =
         fallbackResult.nextPage !== null ||
         fallbackGames.length >= GP_PAGE_SIZE
 
-      merged = fallbackSlice
+      console.log(
+        `[ArcadeNexa] GamePix full failover: ` +
+        `page=${safePage}, providerPage=${fallbackProviderPage}, ` +
+        `games=${merged.length}, genre=${normalizedGenre || 'all'}`
+      )
     } catch (error) {
       console.error(
         `[ArcadeNexa] GamePix failover unavailable:`,
         error
       )
+
+      /*
+       * Do not fall back to the partial hybrid GamePix window.
+       *
+       * In full failover mode, a provider page failure/end means
+       * the requested ArcadeNexa page cannot be served as a
+       * complete GamePix page. Returning the previously loaded
+       * 24-game hybrid slice would create incorrect pagination.
+       */
+      merged = []
+      gpHasMore = false
     }
   }
 
   /*
    * GamePix failed:
    *
-   * Fetch enough GameMonetize games to fill the requested
-   * page. For ALL-GAMES this follows the same provider
-   * offset used by the normal GM stream.
-   *
-   * Category streams cannot safely be reconstructed from
-   * gmRaw alone, so we leave the existing category stream
-   * untouched if it already returned data.
+   * GameMonetize becomes the complete source for the requested
+   * ArcadeNexa page. Category streams reuse the filtered results
+   * already collected above and only continue scanning when the
+   * requested failover window requires additional games.
    */
   if (!gpAvailable && gmAvailable && gmRaw.length < safeSize) {
     try {
-      if (!normalizedGenre) {
+      /*
+       * FULL GM FAILOVER MODE
+       *
+       * GamePix is unavailable, so GameMonetize becomes
+       * the complete source for this ArcadeNexa page.
+       *
+       * Category requests reuse the persistent snapshot.
+       * This guarantees:
+       *
+       * Page 1 -> 0..47
+       * Page 2 -> 48..95
+       * Page 3 -> 96..143
+       *
+       * without rebuilding the category stream from
+       * GameMonetize page 1 on every request.
+       */
+
+      const fallbackOffset =
+        (safePage - 1) * safeSize
+
+      const requiredEnd =
+        fallbackOffset +
+        safeSize +
+        1
+
+      let fallbackGames: Game[]
+
+      if (normalizedGenre) {
+        const snapshot =
+          await getGMCategorySnapshot(
+            normalizedGenre,
+            requiredEnd
+          )
+
+        fallbackGames =
+          snapshot.games
+      } else {
         /*
-         * FULL GM FAILOVER MODE
-         *
-         * GamePix is unavailable, so GameMonetize becomes the
-         * sole provider for this ArcadeNexa page.
-         *
-         * IMPORTANT:
-         * The normal balanced stream uses providerTake=24,
-         * but failover capacity is 48 games per page.
-         *
-         * Therefore failover pagination MUST use safeSize,
-         * not arcadeOffset/providerTake.
-         *
-         * Page 1 -> GM 0..47
-         * Page 2 -> GM 48..95
-         * Page 3 -> GM 96..143
+         * ALL-GAMES failover keeps the existing provider
+         * pagination behavior.
          */
-        const fallbackOffset =
-          (safePage - 1) * safeSize
+        fallbackGames = []
 
-        const fallbackProviderPage =
-          Math.floor(fallbackOffset / GM_PAGE_SIZE) + 1
+        const seenFallback =
+          new Set<string>()
 
-        const fallbackProviderOffset =
+        let providerPage =
+          Math.floor(
+            fallbackOffset / GM_PAGE_SIZE
+          ) + 1
+
+        let providerOffset =
           fallbackOffset % GM_PAGE_SIZE
 
-        const fallbackResult = await fetchGMGamesPage(
-          fallbackProviderPage,
-          GM_PAGE_SIZE
-        )
+        let fallbackEnded = false
 
-        const fallbackGames =
-          fallbackResult.items.map(convertGMGame)
-
-        const fallbackSlice = fallbackGames.slice(
-          fallbackProviderOffset,
-          fallbackProviderOffset + safeSize
-        )
-
-        /*
-         * If the requested 48-game window crosses a GM provider
-         * page boundary, fetch the next GM provider page and
-         * append the remaining capacity.
-         */
-        if (fallbackSlice.length < safeSize &&
-            fallbackResult.nextPage !== null) {
-          const nextResult = await fetchGMGamesPage(
-            fallbackResult.nextPage,
-            GM_PAGE_SIZE
-          )
-
-          const nextGames =
-            nextResult.items.map(convertGMGame)
-
-          fallbackSlice.push(
-            ...nextGames.slice(
-              0,
-              safeSize - fallbackSlice.length
+        while (
+          !fallbackEnded &&
+          fallbackGames.length <
+            requiredEnd &&
+          providerPage <= GM_PAGES
+        ) {
+          const result =
+            await fetchGMGamesPage(
+              providerPage,
+              GM_PAGE_SIZE
             )
-          )
 
-          gmHasMore =
-            nextResult.nextPage !== null ||
-            nextGames.length >= GM_PAGE_SIZE
-        } else {
-          gmHasMore =
-            fallbackResult.nextPage !== null ||
-            fallbackGames.length >= GM_PAGE_SIZE
+          const raw =
+            result.items.map(convertGMGame)
+
+          const startOffset =
+            providerPage ===
+            Math.floor(
+              fallbackOffset /
+              GM_PAGE_SIZE
+            ) + 1
+              ? providerOffset
+              : 0
+
+          for (
+            const game of
+            raw.slice(startOffset)
+          ) {
+            if (
+              !game.slug ||
+              seenFallback.has(game.slug)
+            ) {
+              continue
+            }
+
+            seenFallback.add(game.slug)
+            fallbackGames.push(game)
+
+            if (
+              fallbackGames.length >=
+              requiredEnd
+            ) {
+              break
+            }
+          }
+
+          if (
+            result.nextPage === null ||
+            raw.length < GM_PAGE_SIZE
+          ) {
+            fallbackEnded = true
+            break
+          }
+
+          providerPage =
+            result.nextPage ||
+            providerPage + 1
+
+          providerOffset = 0
         }
-
-        /*
-         * GM is now the complete page source.
-         */
-        merged = fallbackSlice
       }
+
+      merged =
+        fallbackGames.slice(
+          fallbackOffset,
+          fallbackOffset + safeSize
+        )
+
+      gmHasMore =
+        fallbackGames.length >
+          fallbackOffset + safeSize ||
+        (
+          fallbackGames.length >=
+            fallbackOffset + safeSize &&
+          (
+            normalizedGenre
+              ? !(
+                  gmCategorySnapshotCache
+                    .get(normalizedGenre)
+                    ?.ended
+                )
+              : true
+          )
+        )
+
+      console.log(
+        `[ArcadeNexa] GameMonetize full failover: ` +
+        `page=${safePage}, ` +
+        `genre=${normalizedGenre || 'all'}, ` +
+        `offset=${fallbackOffset}, ` +
+        `games=${merged.length}`
+      )
+      console.log(
+        `[ArcadeNexa] GameMonetize full failover: ` +
+        `page=${safePage}, ` +
+        `genre=${normalizedGenre || 'all'}, ` +
+        `offset=${fallbackOffset}, ` +
+        `games=${merged.length}`
+      )
     } catch (error) {
       console.error(
         `[ArcadeNexa] GameMonetize failover unavailable:`,
@@ -958,6 +1117,7 @@ export async function getGamesPage(
       )
     }
   }
+
 
   /*
    * ---------------------------------------------------------
@@ -1101,11 +1261,18 @@ export function convertGMGame(item: GameMonetizeItem): Game {
         : [category, 'html5'],
       title: item.title || 'Untitled Game',
     }),
-    platform: 'Multi',
-    description: cleanDescription,
-    longDescription: cleanDescription,
-    instructions: cleanInstructions,
-    tags: item.tags ? item.tags.split(',').map(t => t.trim()) : [category, 'html5'],
+      platform: 'Multi',
+      ...buildGameDescriptions({
+        title: item.title || 'Untitled Game',
+        description: cleanDescription,
+        category,
+        tags: item.tags
+          ? item.tags.split(',').map(t => t.trim())
+          : [category, 'html5'],
+        instructions: cleanInstructions,
+      }),
+      instructions: cleanInstructions,
+      tags: item.tags ? item.tags.split(',').map(t => t.trim()) : [category, 'html5'],
     officialUrl: item.url,
     iframeUrl: item.url,
     thumbnail: item.thumb || '',
@@ -1125,6 +1292,200 @@ export function convertGMGame(item: GameMonetizeItem): Game {
 
 const GM_PAGES = 50
 const GM_PAGE_SIZE = 200
+
+const GM_CATEGORY_CACHE_DURATION =
+  6 * 60 * 60 * 1000
+
+interface GMCategorySnapshot {
+  games: Game[]
+  nextPage: number
+  ended: boolean
+  expiresAt: number
+}
+
+const gmCategorySnapshotCache =
+  new Map<string, GMCategorySnapshot>()
+
+const gmCategorySnapshotInflight =
+  new Map<string, Promise<Game[]>>()
+
+async function getGMCategorySnapshot(
+  genre: string,
+  requiredCount: number
+): Promise<{
+  games: Game[]
+  hasMore: boolean
+}> {
+  const key = normalizeGenre(genre)
+  const now = Date.now()
+
+  let snapshot =
+    gmCategorySnapshotCache.get(key)
+
+  /*
+   * Expired snapshots are discarded so provider ordering
+   * is refreshed periodically.
+   */
+  if (
+    snapshot &&
+    snapshot.expiresAt <= now
+  ) {
+    gmCategorySnapshotCache.delete(key)
+    snapshot = undefined
+  }
+
+  /*
+   * If another request is already extending this category,
+   * wait for it instead of launching a duplicate scan.
+   */
+  const existingInflight =
+    gmCategorySnapshotInflight.get(key)
+
+  if (
+    existingInflight &&
+    (!snapshot ||
+      snapshot.games.length < requiredCount)
+  ) {
+    await existingInflight
+    snapshot =
+      gmCategorySnapshotCache.get(key)
+  }
+
+  /*
+   * Nothing more is required from the provider.
+   */
+  if (
+    snapshot &&
+    (
+      snapshot.games.length >= requiredCount ||
+      snapshot.ended
+    )
+  ) {
+    return {
+      games: snapshot.games,
+      hasMore:
+        snapshot.games.length > requiredCount - 1 ||
+        !snapshot.ended,
+    }
+  }
+
+  const inflight = (async () => {
+    let current =
+      gmCategorySnapshotCache.get(key)
+
+    if (!current) {
+      current = {
+        games: [],
+        nextPage: 1,
+        ended: false,
+        expiresAt:
+          Date.now() +
+          GM_CATEGORY_CACHE_DURATION,
+      }
+    }
+
+    const seen = new Set(
+      current.games
+        .map(game => game.slug)
+        .filter(Boolean)
+    )
+
+    while (
+      !current.ended &&
+      current.games.length < requiredCount &&
+      current.nextPage <= GM_PAGES
+    ) {
+      const providerPage =
+        current.nextPage
+
+      const result =
+        await fetchGMGamesPage(
+          providerPage,
+          GM_PAGE_SIZE
+        )
+
+      const raw =
+        result.items.map(convertGMGame)
+
+      for (const game of raw) {
+        if (
+          !game.slug ||
+          seen.has(game.slug)
+        ) {
+          continue
+        }
+
+        if (
+          !matchesGenre(
+            key,
+            game.category,
+            game.genreFilter
+          )
+        ) {
+          continue
+        }
+
+        seen.add(game.slug)
+        current.games.push(game)
+      }
+
+      if (
+        result.nextPage === null ||
+        raw.length < GM_PAGE_SIZE
+      ) {
+        current.ended = true
+        break
+      }
+
+      current.nextPage =
+        result.nextPage ||
+        providerPage + 1
+    }
+
+    current.expiresAt =
+      Date.now() +
+      GM_CATEGORY_CACHE_DURATION
+
+    gmCategorySnapshotCache.set(
+      key,
+      current
+    )
+
+    console.log(
+      `[ArcadeNexa] GM category snapshot: ` +
+      `genre=${key}, ` +
+      `games=${current.games.length}, ` +
+      `nextPage=${current.nextPage}, ` +
+      `ended=${current.ended}`
+    )
+
+    return current.games
+  })()
+
+  gmCategorySnapshotInflight.set(
+    key,
+    inflight
+  )
+
+  try {
+    const games = await inflight
+
+    return {
+      games,
+      hasMore:
+        games.length >= requiredCount &&
+        Boolean(
+          gmCategorySnapshotCache
+            .get(key)
+            ?.ended === false
+        ) ||
+        games.length > requiredCount,
+    }
+  } finally {
+    gmCategorySnapshotInflight.delete(key)
+  }
+}
+
 
 async function loadGMGames(): Promise<Game[]> {
   try {
