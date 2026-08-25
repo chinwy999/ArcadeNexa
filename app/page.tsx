@@ -101,10 +101,10 @@ export default async function HomePage() {
   const gameCountLabel = '13,000+'
 
   return (
-    <main className="min-h-screen overflow-hidden">
+    <main className="min-h-screen overflow-hidden bg-transparent">
 
-      <section className="relative px-4 pt-24 pb-16 sm:pt-28 sm:pb-20">
-        <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_20%_20%,rgba(124,58,237,0.24),transparent_35%),radial-gradient(circle_at_80%_30%,rgba(34,197,94,0.14),transparent_30%)]" />
+      <section className="arcade-hero relative px-4 pt-28 pb-20 sm:pt-32 sm:pb-24">
+        <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_20%_20%,rgba(56,189,248,0.08),transparent_35%),radial-gradient(circle_at_80%_30%,rgba(139,92,246,0.06),transparent_30%)]" />
         <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
 
         <div className="mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-[1.1fr_0.9fr]">
@@ -114,7 +114,7 @@ export default async function HomePage() {
               {gameCountLabel} Free Browser Games
             </div>
 
-            <h1 className="text-5xl font-black leading-[0.95] tracking-tight text-white sm:text-7xl lg:text-8xl">
+            <h1 className="text-5xl font-black leading-[0.9] tracking-[-0.04em] text-white sm:text-7xl lg:text-[6.5rem]">
               PLAY.<br />
               <span className="gradient-text">DISCOVER.</span><br />
               REPEAT.
@@ -126,10 +126,10 @@ export default async function HomePage() {
             </p>
 
             <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row lg:justify-start">
-              <Link href="/games" className="rounded-xl bg-nexa-emerald px-8 py-4 text-center text-base font-black text-nexa-black shadow-lg shadow-nexa-emerald/20 transition hover:-translate-y-1 hover:shadow-nexa-emerald/30">
+              <Link href="/games" className="btn-premium rounded-xl px-8 py-4 text-center text-base font-black">
                 PLAY NOW →
               </Link>
-              <Link href="/categories" className="rounded-xl border border-white/15 bg-white/5 px-8 py-4 text-center text-base font-bold text-white backdrop-blur transition hover:bg-white/10">
+              <Link href="/categories" className="rounded-xl border border-white/10 bg-white/[0.035] px-8 py-4 text-center text-base font-bold text-white transition hover:border-cyan-400/30 hover:bg-white/[0.06]">
                 EXPLORE CATEGORIES
               </Link>
             </div>
@@ -182,10 +182,10 @@ export default async function HomePage() {
                 <Link
                   key={category}
                   href={`/games?genre=${encodeURIComponent(category)}`}
-                  className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] p-4 shadow-xl backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:border-white/20 hover:bg-white/[0.07] active:scale-[0.97]"
+                  className="category-card group relative overflow-hidden rounded-2xl p-4 active:scale-[0.97]"
                 >
                   <div className={`absolute -right-8 -top-8 h-24 w-24 rounded-full bg-gradient-to-br ${meta.color} opacity-20 blur-2xl transition-opacity duration-300 group-hover:opacity-40`} />
-                  <div className="relative mb-4 h-32 overflow-hidden rounded-2xl border border-white/10 bg-black/20 shadow-lg transition-all duration-300 group-hover:scale-[1.02] group-hover:border-white/20">
+                  <div className="relative mb-4 h-32 overflow-hidden rounded-xl border border-white/10 bg-black/30 shadow-lg transition-all duration-300 group-hover:scale-[1.02] group-hover:border-cyan-400/20">
                     {meta.image ? (
                       <Image
                         src={meta.image}
@@ -241,7 +241,7 @@ export default async function HomePage() {
       </section>
 
       {/* ✨ Editor's Picks */}
-      <section className="border-y border-white/5 bg-white/[0.015] px-4 py-14">
+      <section className="border-y border-white/[0.06] bg-[#050b17]/60 px-4 py-16">
         <div className="mx-auto max-w-7xl">
           <div className="mb-7 flex items-end justify-between">
             <div>
