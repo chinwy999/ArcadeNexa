@@ -6,6 +6,7 @@ import InstantPlaySection from './InstantPlaySection'
 import RecentlyPlayedTracker from '@/components/RecentlyPlayedTracker'
 import FavoriteButton from '@/components/FavoriteButton'
 import { allArticles } from '@/lib/articles'
+import { getSiteUrl } from '@/lib/site'
 
 export const dynamic = 'force-dynamic'
 
@@ -27,8 +28,21 @@ export async function generateMetadata(
     }
   }
 
+  const titleSuffix = ' - Play Free Online'
+  const maxTitleLength = 60
+  const maxGameTitleLength = maxTitleLength - titleSuffix.length
+
+  const seoTitle =
+    game.title.length > maxGameTitleLength
+      ? `${game.title
+          .slice(0, maxGameTitleLength - 3)
+          .trimEnd()}...`
+      : game.title
+
+  const pageTitle = `${seoTitle}${titleSuffix}`
+
   return {
-    title: `${game.title} - Play Free Online`,
+    title: pageTitle,
     description:
       game.description ||
       `Play ${game.title} for free online on ArcadeNexa. No download required, instant play in your browser.`,
@@ -41,7 +55,7 @@ export async function generateMetadata(
       'ArcadeNexa',
     ],
     openGraph: {
-      title: `${game.title} - Play Free Online`,
+      title: pageTitle,
       description:
         game.description ||
         `Play ${game.title} for free on ArcadeNexa`,
@@ -55,11 +69,12 @@ export async function generateMetadata(
             },
           ]
         : [],
+      url: `${getSiteUrl()}/games/${game.slug}`,
       type: 'website',
     },
     twitter: {
       card: 'summary_large_image',
-      title: `${game.title} - Play Free Online`,
+      title: pageTitle,
       description:
         game.description ||
         `Play ${game.title} for free on ArcadeNexa`,
@@ -240,7 +255,7 @@ export default async function GamePage({ params }: PageParams) {
     "name": game.title,
     "description": game.description || `Play ${game.title} free online`,
     "image": game.thumbnail,
-    "url": `https://arcade-nexa-3gxg.vercel.app/games/${game.slug}`,
+    "url": `${getSiteUrl()}/games/${game.slug}`,
     "applicationCategory": "Game",
     "operatingSystem": "Web Browser",
     "genre": game.category,
