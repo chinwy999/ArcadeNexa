@@ -8,25 +8,25 @@
    ========================================================= */
 
 :root {
-  --nexa-black: #030711;
-  --nexa-navy: #07101f;
-  --nexa-surface: #0b1628;
+  --nexa-black: #02040a;
+  --nexa-navy: #061126;
+  --nexa-surface: #0c1a30;
 
   --nexa-blue: #38bdf8;
-  --nexa-cyan: #22d3ee;
-  --nexa-emerald: #34d399;
-  --nexa-violet: #8b5cf6;
-  --nexa-gold: #fbbf24;
+  --nexa-cyan: #22e6ff;
+  --nexa-emerald: #35e6a0;
+  --nexa-violet: #9b6cff;
+  --nexa-gold: #ffd34d;
 
-  --text-primary: #f8fafc;
-  --text-secondary: #a8b4c7;
-  --text-muted: #66758b;
+  --text-primary: #ffffff;
+  --text-secondary: #c4d0e0;
+  --text-muted: #8495ad;
 
-  --line: rgba(148, 163, 184, 0.10);
-  --line-strong: rgba(56, 189, 248, 0.28);
+  --line: rgba(148, 163, 184, 0.18);
+  --line-strong: rgba(56, 189, 248, 0.48);
 
-  --surface: rgba(7, 16, 31, 0.92);
-  --surface-soft: rgba(255,255,255,0.035);
+  --surface: rgba(7, 16, 31, 0.96);
+  --surface-soft: rgba(255,255,255,0.055);
 }
 
 html {
@@ -467,3 +467,344 @@ nav a:hover {
     animation-iteration-count: 1 !important;
   }
 }
+
+/* =========================================================
+   ArcadeNexa — NEON ARCADE REDESIGN
+   CSS-ONLY VISUAL LAYER
+   No SEO / API / Game Logic changes
+   ========================================================= */
+
+
+
+/* =========================================================
+   GLOBAL BACKGROUND
+   ========================================================= */
+
+html {
+  background:
+    radial-gradient(
+      circle at 50% -10%,
+      rgba(0, 240, 255, 0.16),
+      transparent 32rem
+    ),
+    #02030a;
+}
+
+body {
+  background:
+    radial-gradient(
+      ellipse 55% 35% at 50% 0%,
+      rgba(0, 170, 255, 0.13),
+      transparent 70%
+    ),
+    radial-gradient(
+      ellipse 40% 30% at 0% 25%,
+      rgba(139, 92, 255, 0.10),
+      transparent 70%
+    ),
+    radial-gradient(
+      ellipse 38% 32% at 100% 48%,
+      rgba(255, 43, 214, 0.075),
+      transparent 70%
+    ),
+    radial-gradient(
+      ellipse 45% 35% at 50% 100%,
+      rgba(0, 245, 160, 0.055),
+      transparent 70%
+    ),
+    linear-gradient(
+      180deg,
+      #02030a 0%,
+      #030616 28%,
+      #05091a 62%,
+      #02030a 100%
+    );
+
+  color: var(--text-primary);
+}
+
+/* =========================================================
+   CYBER GRID
+   ========================================================= */
+
+body::before {
+  background-image:
+    linear-gradient(
+      rgba(0, 240, 255, 0.026) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(139, 92, 255, 0.026) 1px,
+      transparent 1px
+    );
+
+  background-size: 64px 64px;
+
+  mask-image:
+    linear-gradient(
+      to bottom,
+      black 0%,
+      rgba(0, 0, 0, 0.72) 30%,
+      transparent 82%
+    );
+
+  -webkit-mask-image:
+    linear-gradient(
+      to bottom,
+      black 0%,
+      rgba(0, 0, 0, 0.72) 30%,
+      transparent 82%
+    );
+}
+
+/* =========================================================
+   TOP AURORA
+   ========================================================= */
+
+body::after {
+  width: 900px;
+  height: 900px;
+  top: -460px;
+
+  background:
+    radial-gradient(
+      circle at 40% 50%,
+      rgba(0, 240, 255, 0.14),
+      transparent 42%
+    ),
+    radial-gradient(
+      circle at 65% 55%,
+      rgba(139, 92, 255, 0.13),
+      transparent 48%
+    ),
+    radial-gradient(
+      circle,
+      rgba(255, 43, 214, 0.045),
+      transparent 70%
+    );
+
+  filter: blur(28px);
+}
+
+/* =========================================================
+   TEXT
+   ========================================================= */
+
+.text-text-secondary {
+  color: #d4dded !important;
+}
+
+.text-text-primary {
+  color: #ffffff !important;
+}
+
+.text-text-muted {
+  color: #91a0b8 !important;
+}
+
+/* =========================================================
+   PREMIUM ARCADE SURFACES
+   ========================================================= */
+
+.glass {
+  background:
+    linear-gradient(
+      145deg,
+      rgba(16, 28, 58, 0.94),
+      rgba(5, 9, 23, 0.97)
+    );
+
+  border: 1px solid rgba(0, 210, 255, 0.18);
+
+  box-shadow:
+    0 18px 50px rgba(0, 0, 0, 0.42),
+    inset 0 1px 0 rgba(255, 255, 255, 0.055),
+    inset 0 0 28px rgba(0, 150, 255, 0.025);
+
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+
+  transition:
+    transform 0.22s ease,
+    border-color 0.22s ease,
+    background 0.22s ease,
+    box-shadow 0.22s ease;
+}
+
+.glass:hover {
+  border-color: rgba(0, 240, 255, 0.52);
+
+  box-shadow:
+    0 24px 65px rgba(0, 0, 0, 0.52),
+    0 0 34px rgba(0, 210, 255, 0.10),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+/* =========================================================
+   LINKS
+   ========================================================= */
+
+a {
+  transition:
+    color 0.18s ease,
+    text-shadow 0.18s ease;
+}
+
+a:hover {
+  text-shadow:
+    0 0 14px rgba(0, 240, 255, 0.32);
+}
+
+/* =========================================================
+   BUTTONS
+   ========================================================= */
+
+button {
+  transition:
+    transform 0.18s ease,
+    filter 0.18s ease,
+    box-shadow 0.18s ease;
+}
+
+button:hover {
+  filter: brightness(1.10);
+}
+
+button:active {
+  transform: translateY(1px);
+}
+
+/* =========================================================
+   NEON FOCUS
+   ========================================================= */
+
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid #00f0ff;
+  outline-offset: 3px;
+
+  box-shadow:
+    0 0 18px rgba(0, 240, 255, 0.32);
+}
+
+/* =========================================================
+   HEADINGS
+   ========================================================= */
+
+h1,
+h2,
+h3 {
+  color: #ffffff;
+  text-shadow:
+    0 0 22px rgba(0, 190, 255, 0.12);
+}
+
+/* =========================================================
+   SECTION ATMOSPHERE
+   ========================================================= */
+
+.section-surface::before {
+  background:
+    radial-gradient(
+      ellipse at 15% 0%,
+      rgba(0, 240, 255, 0.055),
+      transparent 42%
+    ),
+    radial-gradient(
+      ellipse at 85% 25%,
+      rgba(139, 92, 255, 0.045),
+      transparent 44%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(0, 190, 255, 0.025),
+      transparent 38%,
+      rgba(139, 92, 255, 0.018)
+    );
+}
+
+/* =========================================================
+   IMAGE / GAME CARD GLOW
+   ========================================================= */
+
+img {
+  transition:
+    filter 0.25s ease,
+    transform 0.25s ease;
+}
+
+/* Don't alter image geometry or functionality */
+img:hover {
+  filter:
+    saturate(1.08)
+    contrast(1.035);
+}
+
+/* =========================================================
+   SELECTION
+   ========================================================= */
+
+::selection {
+  background: rgba(0, 240, 255, 0.34);
+  color: #ffffff;
+}
+
+/* =========================================================
+   SCROLLBAR
+   ========================================================= */
+
+::-webkit-scrollbar {
+  width: 9px;
+}
+
+::-webkit-scrollbar-track {
+  background: #02030a;
+}
+
+::-webkit-scrollbar-thumb {
+  background:
+    linear-gradient(
+      180deg,
+      #00cfff,
+      #754cff
+    );
+
+  border-radius: 999px;
+
+  border: 2px solid #02030a;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background:
+    linear-gradient(
+      180deg,
+      #00f0ff,
+      #a06cff
+    );
+}
+
+/* =========================================================
+   MOBILE SAFETY
+   ========================================================= */
+
+@media (max-width: 768px) {
+  body::after {
+    width: 600px;
+    height: 600px;
+    top: -300px;
+  }
+
+  body::before {
+    background-size: 48px 48px;
+  }
+
+  .glass {
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+}
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
