@@ -5,7 +5,6 @@ import FeaturedGamesSlider from '@/components/FeaturedGamesSlider'
 import Link from 'next/link'
 import Image from 'next/image'
 import RecentlyPlayed from '@/components/RecentlyPlayed'
-import AdsterraBanner from "@/components/ads/AdsterraBanner";
 import AdsterraTop from "@/components/ads/AdsterraTop";
 
 export const revalidate = 300
@@ -105,7 +104,6 @@ export default async function HomePage() {
   return (
     <main className="min-h-screen overflow-hidden bg-transparent">
       <AdsterraTop />
-      <AdsterraBanner />
 
       <section className="arcade-hero relative px-4 pt-28 pb-20 sm:pt-32 sm:pb-24">
         <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_20%_20%,rgba(56,189,248,0.08),transparent_35%),radial-gradient(circle_at_80%_30%,rgba(139,92,246,0.06),transparent_30%)]" />
