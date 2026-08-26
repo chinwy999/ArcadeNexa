@@ -59,12 +59,12 @@ export default function GameCard({ game, onPlay }: GameCardProps) {
 
       <div className="relative p-4">
         <div className="mb-3 flex items-start justify-between gap-3">
-          <h3 className="min-w-0 truncate text-sm font-bold tracking-tight text-[color:var(--text-primary)] transition-colors duration-300 group-hover:text-nexa-cyan sm:text-base">
+          <h3 className="min-w-0 flex-1 line-clamp-2 text-sm font-bold leading-snug tracking-tight text-[color:var(--text-primary)] transition-colors duration-300 group-hover:text-nexa-cyan sm:text-base">
             {game.name}
           </h3>
 
           <span
-            className="flex shrink-0 items-center gap-1 rounded-full border border-nexa-gold/10 bg-nexa-gold/[0.06] px-2 py-0.5 text-[10px] font-bold text-nexa-gold"
+            className="flex shrink-0 items-center gap-1 self-start rounded-full border border-nexa-gold/10 bg-nexa-gold/[0.06] px-2 py-0.5 text-[10px] font-bold text-nexa-gold"
             title="ArcadeNexa Score"
             aria-label={`ArcadeNexa Score ${rating.toFixed(1)} out of 10`}
           >
