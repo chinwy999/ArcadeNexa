@@ -28,8 +28,6 @@ export default function Footer() {
               <li><Link href="/games" className="text-[color:var(--text-secondary)] hover:text-[color:var(--text-primary)] text-sm transition-colors">Games</Link></li>
               <li><Link href="/categories" className="text-[color:var(--text-secondary)] hover:text-[color:var(--text-primary)] text-sm transition-colors">Categories</Link></li>
               <li><Link href="/search" className="text-[color:var(--text-secondary)] hover:text-[color:var(--text-primary)] text-sm transition-colors">Search</Link></li>
-              <li><Link href="/tournaments" className="text-[color:var(--text-secondary)] hover:text-[color:var(--text-primary)] text-sm transition-colors">Tournaments</Link></li>
-              <li><Link href="/leaderboard" className="text-[color:var(--text-secondary)] hover:text-[color:var(--text-primary)] text-sm transition-colors">Leaderboard</Link></li>
               <li><Link href="/blog" className="text-[color:var(--text-secondary)] hover:text-[color:var(--text-primary)] text-sm transition-colors">Blog</Link></li>
             </ul>
           </div>

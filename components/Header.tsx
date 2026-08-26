@@ -14,8 +14,6 @@ import {
 const navLinks = [
   { href: '/games', label: 'Games' },
   { href: '/categories', label: 'Categories' },
-  { href: '/tournaments', label: 'Tournaments' },
-  { href: '/leaderboard', label: 'Leaderboard' },
   { href: '/blog', label: 'Blog' },
 ]
 

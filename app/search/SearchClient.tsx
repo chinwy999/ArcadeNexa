@@ -17,13 +17,65 @@ export default function SearchClient({ allGames }: { allGames: Game[] }) {
 
   const results = useMemo(() => {
     if (!q.trim()) return allGames.slice(0, 8)
-    const lower = q.toLowerCase()
-    return allGames.filter(g =>
-      g.name.toLowerCase().includes(lower) ||
-      g.description.toLowerCase().includes(lower) ||
-      g.category.toLowerCase().includes(lower) ||
-      g.genreFilter.toLowerCase().includes(lower)
-    )
+    const terms = q
+      .toLowerCase()
+      .trim()
+      .split(/\\s+/)
+      .filter(Boolean)
+
+    const normalize = (value: unknown) =>
+      String(value ?? '')
+        .toLowerCase()
+        .replace(/[-_]+/g, ' ')
+        .trim()
+
+    return allGames
+      .map((g) => {
+        const searchable = [
+          g.name,
+          g.title,
+          g.description,
+          g.longDescription,
+          g.category,
+          g.genre,
+          g.genreFilter,
+          g.platform,
+          g.provider,
+          g.instructions,
+          g.tags,
+        ]
+          .flatMap((value) =>
+            Array.isArray(value) ? value : [value]
+          )
+          .map(normalize)
+          .join(' ')
+
+        const matches = terms.every((term) =>
+          searchable.includes(normalize(term))
+        )
+
+        if (!matches) return null
+
+        let score = 0
+        const name = normalize(g.name)
+        const title = normalize(g.title)
+        const category = normalize(g.category)
+
+        for (const term of terms) {
+          if (name === term || title === term) score += 100
+          else if (name.includes(term) || title.includes(term)) score += 50
+          else if (category.includes(term)) score += 30
+          else score += 10
+        }
+
+        return { game: g, score }
+      })
+      .filter(
+        (item): item is { game: typeof allGames[number]; score: number } =>
+          item !== null
+      )
+      .sort((a, b) => b.score - a.score)
+      .map((item) => item.game)
   }, [q, allGames])
 
   const handleSubmit = (e: React.FormEvent) => {

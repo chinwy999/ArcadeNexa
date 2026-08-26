@@ -1,35 +1,12 @@
 'use client'
 import { useRef, useState, useEffect } from 'react'
-import { Maximize2, Gamepad2, ExternalLink, Trophy } from 'lucide-react'
+import { Maximize2, Gamepad2, ExternalLink } from 'lucide-react'
 import type { Game } from '@/lib/games'
-
-const LEADERBOARD_KEY = 'arcade-nexa-leaderboard'
-
-function saveScore(game: Game, username: string, score: number) {
-  try {
-    const existing = JSON.parse(localStorage.getItem(LEADERBOARD_KEY) || '[]')
-    const entry = {
-      username,
-      gameSlug: game.slug,
-      gameTitle: game.title,
-      score,
-      lastPlayed: new Date().toISOString(),
-    }
-    existing.push(entry)
-    existing.sort((a: any, b: any) => b.score - a.score)
-    localStorage.setItem(LEADERBOARD_KEY, JSON.stringify(existing.slice(0, 100)))
-    window.dispatchEvent(new Event('arcade-nexa-score-updated'))
-  } catch {}
-}
 
 export default function InstantPlaySection({ game }: { game: Game }) {
   const [isFullscreen, setIsFullscreen] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
   const [hasError, setHasError] = useState(false)
-  const [showScoreModal, setShowScoreModal] = useState(false)
-  const [username, setUsername] = useState('')
-  const [score, setScore] = useState('')
-  const [scoreSaved, setScoreSaved] = useState(false)
   const containerRef = useRef<HTMLDivElement>(null)
   const iframeRef = useRef<HTMLIFrameElement>(null)
 
@@ -55,7 +32,6 @@ export default function InstantPlaySection({ game }: { game: Game }) {
   useEffect(() => {
     setIsLoading(true)
     setHasError(false)
-    setScoreSaved(false)
   }, [game.iframeUrl])
 
   const retry = () => {
@@ -64,16 +40,7 @@ export default function InstantPlaySection({ game }: { game: Game }) {
     if (iframeRef.current) iframeRef.current.src = game.iframeUrl
   }
 
-  const handleSaveScore = () => {
-    if (!username.trim() || !score.trim()) return
-    const numScore = parseInt(score)
-    if (isNaN(numScore) || numScore < 0) return
-    saveScore(game, username.trim(), numScore)
-    setScoreSaved(true)
-    setShowScoreModal(false)
-    setUsername('')
-    setScore('')
-  }
+
 
   return (
     <div
@@ -139,18 +106,6 @@ export default function InstantPlaySection({ game }: { game: Game }) {
           Play instantly on this page • ESC to exit fullscreen
         </span>
         <div className="flex items-center gap-3">
-          {scoreSaved && (
-            <span className="text-nexa-emerald font-bold flex items-center gap-1">
-              <Trophy className="w-3 h-3" /> Score saved!
-            </span>
-          )}
-          <button
-            onClick={() => setShowScoreModal(true)}
-            className="inline-flex items-center gap-1 text-nexa-gold hover:text-[color:var(--text-primary)] transition font-bold"
-          >
-            <Trophy className="w-3 h-3" />
-            Submit Score
-          </button>
           {game.officialUrl && (
             <a
               href={game.officialUrl}
@@ -172,57 +127,7 @@ export default function InstantPlaySection({ game }: { game: Game }) {
         </div>
       )}
 
-      {showScoreModal && (
-        <div className="fixed inset-0 z-50 bg-black/70 flex items-center justify-center p-4">
-          <div className="bg-nexa-surface border border-[color:var(--white-10)] rounded-2xl p-6 w-full max-w-sm">
-            <h3 className="text-[color:var(--text-primary)] font-black text-xl mb-1 flex items-center gap-2">
-              <Trophy className="w-5 h-5 text-nexa-gold" /> Submit Score
-            </h3>
-            <p className="text-[color:var(--text-secondary)] text-sm mb-4">Record your score for <span className="text-[color:var(--text-primary)] font-bold">{game.title}</span></p>
-            <div className="space-y-3 mb-4">
-              <div>
-                <label htmlFor="score-username" className="text-[color:var(--text-secondary)] text-xs mb-1 block">Your Name</label>
-                <input
-                  id="score-username"
-                  type="text"
-                  value={username}
-                  onChange={e => setUsername(e.target.value)}
-                  placeholder="Enter your name..."
-                  maxLength={20}
-                  className="w-full bg-[color:var(--white-05)] border border-[color:var(--white-10)] rounded-xl px-4 py-2 text-[color:var(--text-primary)] text-sm outline-none focus:border-nexa-violet/60"
-                />
-              </div>
-              <div>
-                <label htmlFor="score-value" className="text-[color:var(--text-secondary)] text-xs mb-1 block">Your Score</label>
-                <input
-                  id="score-value"
-                  type="number"
-                  value={score}
-                  onChange={e => setScore(e.target.value)}
-                  placeholder="Enter your score..."
-                  min="0"
-                  className="w-full bg-[color:var(--white-05)] border border-[color:var(--white-10)] rounded-xl px-4 py-2 text-[color:var(--text-primary)] text-sm outline-none focus:border-nexa-violet/60"
-                />
-              </div>
-            </div>
-            <div className="flex gap-2">
-              <button
-                onClick={() => setShowScoreModal(false)}
-                className="flex-1 py-2 rounded-xl border border-[color:var(--white-10)] text-[color:var(--text-secondary)] text-sm hover:bg-[color:var(--white-05)]"
-              >
-                Cancel
-              </button>
-              <button
-                onClick={handleSaveScore}
-                disabled={!username.trim() || !score.trim()}
-                className="flex-1 py-2 rounded-xl bg-nexa-violet text-[color:var(--text-primary)] text-sm font-bold disabled:opacity-40"
-              >
-                Save Score
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+
     </div>
   )
 }

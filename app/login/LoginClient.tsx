@@ -18,9 +18,6 @@ export default function LoginClient() {
             Browse Categories
           </Link>
         </div>
-        <p className="text-[color:var(--text-secondary)] text-sm mt-6">
-          Coming soon: accounts for tournaments and leaderboards 🏆
-        </p>
       </div>
     </div>
   )
