@@ -465,7 +465,7 @@ export default function CategoriesPage() {
                 href={`/games?genre=${encodeURIComponent(
                   categoryAliases[category.slug] || category.slug
                 )}`}
-                className="group relative min-h-[150px] overflow-hidden rounded-2xl border border-[color:var(--white-10)] bg-[color:var(--white-03)] transition duration-300 hover:-translate-y-1 hover:border-[color:var(--white-25)] hover:shadow-2xl"
+                className="group relative aspect-[4/3] overflow-hidden rounded-2xl border border-[color:var(--white-10)] bg-[color:var(--white-03)] transition duration-300 hover:-translate-y-1 hover:border-[color:var(--white-25)] hover:shadow-2xl"
               >
                 {image && (
                   <Image
@@ -473,7 +473,7 @@ export default function CategoriesPage() {
                     alt={`${category.title} games`}
                     fill
                     sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
-                    className="object-cover transition duration-500 group-hover:scale-110"
+                    className="h-full w-full object-cover object-center transition duration-500 group-hover:scale-110"
                   />
                 )}
 
@@ -527,14 +527,14 @@ export default function CategoriesPage() {
                 )}`}
                 className="group relative overflow-hidden rounded-xl border border-[color:var(--white-10)] bg-[color:var(--white-03)] transition duration-300 hover:-translate-y-0.5 hover:border-[color:var(--white-25)] hover:bg-[color:var(--white-05)]"
               >
-                <div className="relative h-28 overflow-hidden">
+                <div className="relative aspect-[4/3] w-full overflow-hidden">
                   {image ? (
                     <Image
                       src={image}
                       alt=""
                       fill
                       sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
-                      className="object-cover transition duration-500 group-hover:scale-110"
+                      className="h-full w-full object-cover object-center transition duration-500 group-hover:scale-110"
                     />
                   ) : (
                     <div

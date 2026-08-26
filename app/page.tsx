@@ -185,7 +185,7 @@ export default async function HomePage() {
                   className="category-card group relative overflow-hidden rounded-2xl p-4 active:scale-[0.97]"
                 >
                   <div className={`absolute -right-8 -top-8 h-24 w-24 rounded-full bg-gradient-to-br ${meta.color} opacity-20 blur-2xl transition-opacity duration-300 group-hover:opacity-40`} />
-                  <div className="relative mb-4 h-32 overflow-hidden rounded-xl border border-[color:var(--white-10)] bg-black/30 shadow-lg transition-all duration-300 group-hover:scale-[1.02] group-hover:border-nexa-cyan/20">
+                  <div className="relative mb-4 aspect-[4/3] w-full overflow-hidden rounded-xl border border-[color:var(--white-10)] bg-black/30 shadow-lg transition-all duration-300 group-hover:scale-[1.02] group-hover:border-nexa-cyan/20">
                     {meta.image ? (
                       <Image
                         src={meta.image}
@@ -193,7 +193,7 @@ export default async function HomePage() {
                         fill
                         sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
                         loading="lazy"
-                        className="object-cover transition-transform duration-500 group-hover:scale-110"
+                        className="h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-110"
                       />
                     ) : Icon ? (
                       <div className={`flex h-full w-full items-center justify-center bg-gradient-to-br ${meta.color}`}>
