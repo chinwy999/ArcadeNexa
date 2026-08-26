@@ -7,7 +7,7 @@ export const dynamic = 'force-dynamic'
 export const metadata: Metadata = {
   title: 'Game Categories',
   description:
-    'Explore 13,000+ free browser games by category on ArcadeNexa.',
+    'Explore 15,000+ free browser games by category on ArcadeNexa.',
   alternates: { canonical: '/categories' },
 }
 
@@ -423,12 +423,12 @@ export default function CategoriesPage() {
           BROWSE GAME CATEGORIES
         </div>
 
-        <h1 className="mt-4 text-4xl font-black tracking-tight text-white sm:text-5xl">
+        <h1 className="mt-4 text-4xl font-black tracking-tight text-nexa-text-primary sm:text-5xl">
           Explore Games by Category
         </h1>
 
         <p className="mt-3 max-w-2xl text-base leading-7 text-text-secondary sm:text-lg">
-          Discover <span className="font-bold text-white">13,000+ free browser games</span>{' '}
+          Discover <span className="font-bold text-nexa-text-primary">15,000+ free browser games</span>{' '}
           across action, puzzle, racing, sports, adventure and many more genres.
         </p>
       </header>
@@ -441,7 +441,7 @@ export default function CategoriesPage() {
             </p>
             <h2
               id="popular-categories"
-              className="mt-1 text-2xl font-black text-white sm:text-3xl"
+              className="mt-1 text-2xl font-black text-nexa-text-primary sm:text-3xl"
             >
               Popular Categories
             </h2>
@@ -483,10 +483,10 @@ export default function CategoriesPage() {
                 />
 
                 <div className="absolute inset-x-0 bottom-0 p-4">
-                  <h3 className="text-base font-black text-white">
+                  <h3 className="text-base font-black text-nexa-text-primary">
                     {category.title}
                   </h3>
-                  <p className="mt-1 line-clamp-2 text-xs leading-5 text-gray-300">
+                  <p className="mt-1 line-clamp-2 text-xs leading-5 text-nexa-text-secondary">
                     {category.description}
                   </p>
                 </div>
@@ -503,7 +503,7 @@ export default function CategoriesPage() {
           </p>
           <h2
             id="all-categories"
-            className="mt-1 text-2xl font-black text-white sm:text-3xl"
+            className="mt-1 text-2xl font-black text-nexa-text-primary sm:text-3xl"
           >
             All Game Categories
           </h2>
@@ -546,7 +546,7 @@ export default function CategoriesPage() {
                 </div>
 
                 <div className="p-3">
-                  <h3 className="text-sm font-bold text-white">
+                  <h3 className="text-sm font-bold text-nexa-text-primary">
                     {displayTitle(category.slug)}
                   </h3>
                   <p className="mt-1 line-clamp-2 min-h-[32px] text-[11px] leading-4 text-text-secondary">
@@ -560,7 +560,7 @@ export default function CategoriesPage() {
       </section>
 
       <section className="mt-12 rounded-2xl border border-white/10 bg-white/[0.025] p-6 sm:p-8">
-        <h2 className="text-xl font-black text-white">
+        <h2 className="text-xl font-black text-nexa-text-primary">
           New games added regularly
         </h2>
         <p className="mt-2 max-w-2xl text-sm leading-6 text-text-secondary">
@@ -570,7 +570,7 @@ export default function CategoriesPage() {
 
         <Link
           href="/games"
-          className="mt-5 inline-flex rounded-xl bg-nexa-violet px-5 py-3 text-sm font-bold text-white transition hover:brightness-110"
+          className="mt-5 inline-flex rounded-xl bg-nexa-violet px-5 py-3 text-sm font-bold text-nexa-text-primary transition hover:brightness-110"
         >
           Browse All Games
         </Link>

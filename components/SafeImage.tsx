@@ -18,7 +18,7 @@ export default function SafeImage({ src, alt, gradient, initials, sizes, classNa
   if (error) {
     return (
       <div className={`absolute inset-0 flex items-center justify-center ${gradient || 'bg-gradient-to-br from-purple-500/30 to-blue-500/30'}`}>
-        {initials && <span className="text-5xl font-black text-white/30">{initials}</span>}
+        {initials && <span className="text-5xl font-black text-nexa-text-primary/30">{initials}</span>}
       </div>
     )
   }

@@ -32,7 +32,7 @@ export default function BlogPage() {
         <p className="mb-3 text-sm font-bold uppercase tracking-widest text-nexa-emerald">
           ArcadeNexa Editorial
         </p>
-        <h1 className="mb-4 text-4xl font-black text-white sm:text-5xl">
+        <h1 className="mb-4 text-4xl font-black text-nexa-text-primary sm:text-5xl">
           Gaming Guides & Articles
         </h1>
         <p className="max-w-3xl text-lg leading-8 text-text-secondary">
@@ -54,7 +54,7 @@ export default function BlogPage() {
               <span className="text-text-secondary">{article.readTime}</span>
             </div>
 
-            <h2 className="mb-3 text-xl font-bold text-white">
+            <h2 className="mb-3 text-xl font-bold text-nexa-text-primary">
               <Link
                 href={`/blog/${article.slug}`}
                 className="hover:text-nexa-emerald"

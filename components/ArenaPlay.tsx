@@ -37,14 +37,14 @@ export default function ArenaPlay({ game, onClose, isModal = false }: Props) {
     <div className={`${isModal ? '' : 'w-full'} glass rounded-3xl p-6 sm:p-8 border border-nexa-violet/40 shadow-[0_0_50px_rgba(124,58,237,0.4)]`}>
       <div className="flex items-start justify-between gap-4 mb-6">
         <div className="flex items-center gap-4">
-          <div className={`w-14 h-14 rounded-2xl flex items-center justify-center ${game.gradient} font-black text-2xl text-white shadow-lg`}>{game.initials}</div>
+          <div className={`w-14 h-14 rounded-2xl flex items-center justify-center ${game.gradient} font-black text-2xl text-nexa-text-primary shadow-lg`}>{game.initials}</div>
           <div>
-            <h2 className="text-2xl font-black text-white">{game.name} — Arena Trial</h2>
+            <h2 className="text-2xl font-black text-nexa-text-primary">{game.name} — Arena Trial</h2>
             <p className="text-text-secondary text-sm">Interactive skill check — earn NexCoins for tournament credits</p>
           </div>
         </div>
         {onClose && (
-          <button onClick={onClose} className="text-text-secondary hover:text-white bg-white/5 p-2 rounded-full hover:bg-white/10 transition" aria-label="Close trial">
+          <button onClick={onClose} className="text-text-secondary hover:text-nexa-text-primary bg-white/5 p-2 rounded-full hover:bg-white/10 transition" aria-label="Close trial">
             ✕
           </button>
         )}
@@ -53,7 +53,7 @@ export default function ArenaPlay({ game, onClose, isModal = false }: Props) {
       <div className="bg-nexa-navy/50 border border-white/5 rounded-xl p-3 mb-4 flex gap-2 items-start text-xs text-text-secondary">
         <Info className="w-4 h-4 text-nexa-emerald flex-shrink-0 mt-0.5" />
         <span>
-          <strong className="text-white">Disclaimer:</strong> {game.name} is a trademark of its respective owner. This is a ArcadeNexa skill trial, not the full commercial game. 
+          <strong className="text-nexa-text-primary">Disclaimer:</strong> {game.name} is a trademark of its respective owner. This is a ArcadeNexa skill trial, not the full commercial game.
           {game.officialUrl && (
             <> Play the official game at <a href={game.officialUrl} target="_blank" rel="noopener noreferrer" className="text-nexa-violet hover:underline inline-flex items-center gap-1">{game.officialUrl} <ExternalLink className="w-3 h-3" /></a></>
           )}
@@ -66,7 +66,7 @@ export default function ArenaPlay({ game, onClose, isModal = false }: Props) {
             <div className="w-20 h-20 rounded-full bg-nexa-violet/20 text-nexa-violet flex items-center justify-center mx-auto mb-2 animate-bounce">
               <Play className="w-10 h-10 ml-1" />
             </div>
-            <h3 className="text-xl font-bold text-white">Ready for Trial?</h3>
+            <h3 className="text-xl font-bold text-nexa-text-primary">Ready for Trial?</h3>
             <p className="text-text-secondary text-sm max-w-md mx-auto">Click the glowing orb as fast as you can 15 times to prove your reflexes and unlock <span className="text-nexa-gold font-bold">+150 NexCoins</span>!</p>
             <button onClick={startGame} className="bg-gradient-to-r from-nexa-violet to-nexa-emerald text-nexa-black font-black px-8 py-3.5 rounded-xl text-base shadow-[0_0_20px_rgba(34,197,94,0.4)] hover:scale-105 transition-all">
               START TRIAL NOW
@@ -83,7 +83,7 @@ export default function ArenaPlay({ game, onClose, isModal = false }: Props) {
           }} aria-label="Click to score">
             <div className="absolute top-4 left-4 text-xs font-bold text-nexa-emerald bg-nexa-emerald/10 px-3 py-1 rounded-full border border-nexa-emerald/30">SCORE: {score} / 15</div>
             <div className="absolute top-4 right-4 text-xs text-text-secondary">Click fast!</div>
-            <div className="w-28 h-28 rounded-full bg-gradient-to-br from-nexa-violet to-nexa-violet flex items-center justify-center text-white font-black text-2xl shadow-[0_0_30px_rgba(236,72,153,0.6)] animate-pulse transform active:scale-95 transition-transform">
+            <div className="w-28 h-28 rounded-full bg-gradient-to-br from-nexa-violet to-nexa-violet flex items-center justify-center text-nexa-text-primary font-black text-2xl shadow-[0_0_30px_rgba(236,72,153,0.6)] animate-pulse transform active:scale-95 transition-transform">
               CLICK!
             </div>
             <p className="text-text-secondary text-xs mt-6">Aim training — rapid clicks, no purchase required</p>
@@ -95,14 +95,14 @@ export default function ArenaPlay({ game, onClose, isModal = false }: Props) {
             <div className="w-16 h-16 rounded-2xl bg-nexa-emerald/20 text-nexa-emerald flex items-center justify-center mx-auto mb-2">
               <Trophy className="w-8 h-8" />
             </div>
-            <h3 className="text-2xl font-black text-white">Trial Completed!</h3>
+            <h3 className="text-2xl font-black text-nexa-text-primary">Trial Completed!</h3>
             <p className="text-text-secondary text-sm">You finished the {game.name} trial and earned <span className="text-nexa-gold font-bold">+{earned} NexCoins</span>!</p>
             <div className="flex items-center justify-center gap-3">
-              <button onClick={startGame} className="flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white font-bold px-6 py-3 rounded-xl text-sm transition-colors">
+              <button onClick={startGame} className="flex items-center gap-2 bg-white/10 hover:bg-white/20 text-nexa-text-primary font-bold px-6 py-3 rounded-xl text-sm transition-colors">
                 <RefreshCw className="w-4 h-4" /> Play Again
               </button>
               {onClose && (
-                <button onClick={onClose} className="bg-nexa-violet hover:bg-violet-600 text-white font-bold px-6 py-3 rounded-xl text-sm transition-colors">Collect & Close</button>
+                <button onClick={onClose} className="bg-nexa-violet hover:bg-violet-600 text-nexa-text-primary font-bold px-6 py-3 rounded-xl text-sm transition-colors">Collect & Close</button>
               )}
             </div>
           </div>

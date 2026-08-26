@@ -60,13 +60,13 @@ export default async function UnblockedGamesPage() {
   }
 
   return (
-    <main className="min-h-screen bg-[#0a0a0f] text-white">
+    <main className="min-h-screen bg-nexa-black text-nexa-text-primary">
 
-      <section className="relative overflow-hidden bg-gradient-to-b from-[#12122a] to-[#0a0a0f] px-4 py-16 text-center">
+      <section className="relative overflow-hidden bg-gradient-to-b from-nexa-navy to-nexa-black px-4 py-16 text-center">
         <div className="relative mx-auto max-w-3xl">
 
-          <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-green-500/30 bg-green-500/10 px-4 py-1.5 text-sm text-green-400">
-            <span className="h-2 w-2 animate-pulse rounded-full bg-green-400" />
+          <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-nexa-emerald/30 bg-nexa-emerald/10 px-4 py-1.5 text-sm text-nexa-emerald">
+            <span className="h-2 w-2 animate-pulse rounded-full bg-nexa-emerald" />
             Free HTML5 Games • Instant Play
           </div>
 
@@ -77,7 +77,7 @@ export default async function UnblockedGamesPage() {
             </span>
           </h1>
 
-          <p className="mx-auto mb-6 max-w-2xl text-lg text-gray-300">
+          <p className="mx-auto mb-6 max-w-2xl text-lg text-nexa-text-secondary">
             Play free HTML5 games instantly in your browser. No download,
             no Flash and no registration required.
           </p>
@@ -92,7 +92,7 @@ export default async function UnblockedGamesPage() {
             ].map(tag => (
               <span
                 key={tag}
-                className="rounded-full border border-gray-700 bg-gray-800/60 px-3 py-1 text-gray-300"
+                className="rounded-full border border-nexa-violet/25 bg-nexa-surface/60 px-3 py-1 text-nexa-text-secondary"
               >
                 {tag}
               </span>
@@ -101,7 +101,7 @@ export default async function UnblockedGamesPage() {
 
           <Link
             href="/games"
-            className="inline-block rounded-xl bg-green-500 px-8 py-3 font-bold text-black transition hover:bg-green-400"
+            className="inline-block rounded-xl bg-nexa-emerald px-8 py-3 font-bold text-nexa-black transition hover:bg-nexa-emerald"
           >
             Play Games →
           </Link>
@@ -120,9 +120,9 @@ export default async function UnblockedGamesPage() {
               <Link
                 key={game.id}
                 href={`/games/${game.slug}`}
-                className="group rounded-xl border border-gray-800 bg-gray-900/60 p-2 transition hover:border-green-500/50 hover:bg-gray-800"
+                className="group rounded-xl border border-nexa-violet/20 bg-nexa-black/60 p-2 transition hover:border-nexa-emerald/50 hover:bg-nexa-surface"
               >
-                <div className="mb-2 aspect-square overflow-hidden rounded-lg bg-gray-800">
+                <div className="mb-2 aspect-square overflow-hidden rounded-lg bg-nexa-surface">
 
                   {game.thumbnail ? (
                     <img
@@ -141,7 +141,7 @@ export default async function UnblockedGamesPage() {
 
                 </div>
 
-                <p className="truncate text-xs font-medium text-gray-200">
+                <p className="truncate text-xs font-medium text-nexa-text-secondary">
                   {game.title}
                 </p>
               </Link>
@@ -172,7 +172,7 @@ export default async function UnblockedGamesPage() {
 
                 <Link
                   href={`/games?genre=${cat.key}`}
-                  className="text-sm text-green-400 hover:text-green-300"
+                  className="text-sm text-nexa-emerald hover:text-nexa-emerald"
                 >
                   View all →
                 </Link>
@@ -183,9 +183,9 @@ export default async function UnblockedGamesPage() {
                   <Link
                     key={game.id}
                     href={`/games/${game.slug}`}
-                    className="group rounded-xl border border-gray-800 bg-gray-900/60 p-2 transition hover:border-green-500/50 hover:bg-gray-800"
+                    className="group rounded-xl border border-nexa-violet/20 bg-nexa-black/60 p-2 transition hover:border-nexa-emerald/50 hover:bg-nexa-surface"
                   >
-                    <div className="mb-2 aspect-square overflow-hidden rounded-lg bg-gray-800">
+                    <div className="mb-2 aspect-square overflow-hidden rounded-lg bg-nexa-surface">
 
                       {game.thumbnail ? (
                         <img
@@ -204,7 +204,7 @@ export default async function UnblockedGamesPage() {
 
                     </div>
 
-                    <p className="truncate text-xs text-gray-300">
+                    <p className="truncate text-xs text-nexa-text-secondary">
                       {game.title}
                     </p>
                   </Link>
@@ -218,13 +218,13 @@ export default async function UnblockedGamesPage() {
 
       <section className="mx-auto max-w-3xl px-4 py-12">
 
-        <div className="rounded-2xl border border-gray-800 bg-gray-900/40 p-8">
+        <div className="rounded-2xl border border-nexa-violet/20 bg-nexa-black/40 p-8">
 
           <h2 className="mb-4 text-2xl font-bold">
             What Are Unblocked Games?
           </h2>
 
-          <div className="space-y-4 leading-relaxed text-gray-300">
+          <div className="space-y-4 leading-relaxed text-nexa-text-secondary">
 
             <p>
               Unblocked games are browser games that can be played without
@@ -276,13 +276,13 @@ export default async function UnblockedGamesPage() {
           ].map(({ q, a }) => (
             <details
               key={q}
-              className="rounded-xl border border-gray-800 bg-gray-900/50 px-5 py-4"
+              className="rounded-xl border border-nexa-violet/20 bg-nexa-black/50 px-5 py-4"
             >
-              <summary className="cursor-pointer font-semibold text-white">
+              <summary className="cursor-pointer font-semibold text-nexa-text-primary">
                 {q}
               </summary>
 
-              <p className="mt-3 text-gray-400">
+              <p className="mt-3 text-nexa-text-secondary">
                 {a}
               </p>
             </details>

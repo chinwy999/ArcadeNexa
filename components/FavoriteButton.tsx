@@ -60,8 +60,8 @@ export default function FavoriteButton({
       aria-pressed={favorite}
       className={`inline-flex items-center gap-2 rounded-xl border px-4 py-2.5 text-sm font-bold transition ${
         favorite
-          ? 'border-pink-400/40 bg-pink-400/10 text-pink-300'
-          : 'border-white/10 bg-white/5 text-gray-300 hover:border-pink-400/30 hover:text-pink-300'
+          ? 'border-nexa-violet/40 bg-nexa-violet/10 text-nexa-violet'
+          : 'border-white/10 bg-white/5 text-nexa-text-secondary hover:border-nexa-violet/30 hover:text-nexa-violet'
       }`}
     >
       <Heart

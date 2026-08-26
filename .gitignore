@@ -15,3 +15,6 @@ api-audit/
 .audit-games/
 .audit-all-games.sh
 backups/
+
+*.before-*
+.arcadenexa-*

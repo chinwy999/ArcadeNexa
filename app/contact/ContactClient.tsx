@@ -35,13 +35,13 @@ export default function ContactClient() {
 
   return (
     <div className="py-20 px-4 sm:px-6 max-w-5xl mx-auto animate-fade-in">
-      <h1 className="text-5xl font-black text-white mb-4">Contact Us</h1>
+      <h1 className="text-5xl font-black text-nexa-text-primary mb-4">Contact Us</h1>
       <p className="text-text-secondary text-lg mb-12">Have a question, bug report, or partnership inquiry? We'd love to hear from you.</p>
 
       <div className="grid md:grid-cols-2 gap-12">
 
         <div>
-          <h2 className="text-2xl font-bold text-white mb-6">Send a Message</h2>
+          <h2 className="text-2xl font-bold text-nexa-text-primary mb-6">Send a Message</h2>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
               <label htmlFor="contact-name" className="block text-sm text-text-secondary mb-1">Name</label>
@@ -51,7 +51,7 @@ export default function ContactClient() {
                 onChange={e => setForm({ ...form, name: e.target.value })}
                 required
                 placeholder="Your name"
-                className="w-full bg-nexa-surface border border-white/10 rounded-xl px-4 py-3 text-white focus:ring-2 focus:ring-nexa-violet outline-none placeholder:text-gray-600"
+                className="w-full bg-nexa-surface border border-white/10 rounded-xl px-4 py-3 text-nexa-text-primary focus:ring-2 focus:ring-nexa-violet outline-none placeholder:text-nexa-text-muted"
               />
             </div>
             <div>
@@ -63,7 +63,7 @@ export default function ContactClient() {
                 onChange={e => setForm({ ...form, email: e.target.value })}
                 required
                 placeholder="your@email.com"
-                className="w-full bg-nexa-surface border border-white/10 rounded-xl px-4 py-3 text-white focus:ring-2 focus:ring-nexa-violet outline-none placeholder:text-gray-600"
+                className="w-full bg-nexa-surface border border-white/10 rounded-xl px-4 py-3 text-nexa-text-primary focus:ring-2 focus:ring-nexa-violet outline-none placeholder:text-nexa-text-muted"
               />
             </div>
             <div>
@@ -72,7 +72,7 @@ export default function ContactClient() {
                 id="contact-subject"
                 value={form.subject}
                 onChange={e => setForm({ ...form, subject: e.target.value })}
-                className="w-full bg-nexa-surface border border-white/10 rounded-xl px-4 py-3 text-white focus:ring-2 focus:ring-nexa-violet outline-none"
+                className="w-full bg-nexa-surface border border-white/10 rounded-xl px-4 py-3 text-nexa-text-primary focus:ring-2 focus:ring-nexa-violet outline-none"
               >
                 <option>General</option>
                 <option>Bug Report</option>
@@ -90,13 +90,13 @@ export default function ContactClient() {
                 onChange={e => setForm({ ...form, message: e.target.value })}
                 required
                 placeholder="Tell us how we can help..."
-                className="w-full bg-nexa-surface border border-white/10 rounded-xl px-4 py-3 text-white focus:ring-2 focus:ring-nexa-violet outline-none placeholder:text-gray-600 resize-none"
+                className="w-full bg-nexa-surface border border-white/10 rounded-xl px-4 py-3 text-nexa-text-primary focus:ring-2 focus:ring-nexa-violet outline-none placeholder:text-nexa-text-muted resize-none"
               />
             </div>
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-nexa-violet hover:bg-violet-600 disabled:opacity-50 text-white font-bold py-3 rounded-xl transition"
+              className="w-full bg-nexa-violet hover:bg-violet-600 disabled:opacity-50 text-nexa-text-primary font-bold py-3 rounded-xl transition"
             >
               {loading ? 'Sending...' : 'SEND MESSAGE'}
             </button>
@@ -106,7 +106,7 @@ export default function ContactClient() {
               </div>
             )}
             {error && (
-              <div className="bg-red-500/10 border border-red-500/30 text-red-400 text-sm p-4 rounded-xl text-center">
+              <div className="bg-nexa-violet/10 border border-nexa-violet/30 text-nexa-violet text-sm p-4 rounded-xl text-center">
                 ❌ {error}
               </div>
             )}
@@ -114,12 +114,12 @@ export default function ContactClient() {
         </div>
 
         <div className="space-y-6">
-          <h2 className="text-2xl font-bold text-white mb-6">Get in Touch</h2>
+          <h2 className="text-2xl font-bold text-nexa-text-primary mb-6">Get in Touch</h2>
 
           <div className="glass p-6 rounded-xl border border-white/5">
             <div className="flex items-center gap-3 mb-3">
               <span className="text-2xl">📧</span>
-              <h3 className="text-white font-bold">Email Support</h3>
+              <h3 className="text-nexa-text-primary font-bold">Email Support</h3>
             </div>
             <p className="text-text-secondary text-sm">mostapha.bensasi@gmail.com</p>
             <p className="text-text-secondary text-sm mt-1">We typically respond within 24 hours.</p>
@@ -128,7 +128,7 @@ export default function ContactClient() {
           <div className="glass p-6 rounded-xl border border-white/5">
             <div className="flex items-center gap-3 mb-3">
               <span className="text-2xl">🐛</span>
-              <h3 className="text-white font-bold">Bug Reports</h3>
+              <h3 className="text-nexa-text-primary font-bold">Bug Reports</h3>
             </div>
             <p className="text-text-secondary text-sm">Found a bug? Please include the game name, device, browser, and steps to reproduce the issue.</p>
           </div>
@@ -136,7 +136,7 @@ export default function ContactClient() {
           <div className="glass p-6 rounded-xl border border-white/5">
             <div className="flex items-center gap-3 mb-3">
               <span className="text-2xl">🤝</span>
-              <h3 className="text-white font-bold">Partnerships</h3>
+              <h3 className="text-nexa-text-primary font-bold">Partnerships</h3>
             </div>
             <p className="text-text-secondary text-sm">Interested in partnering with ArcadeNexa? We're open to game developers, sponsors, and content creators.</p>
           </div>
@@ -144,7 +144,7 @@ export default function ContactClient() {
           <div className="glass p-6 rounded-xl border border-white/5">
             <div className="flex items-center gap-3 mb-3">
               <span className="text-2xl">⏱️</span>
-              <h3 className="text-white font-bold">Response Time</h3>
+              <h3 className="text-nexa-text-primary font-bold">Response Time</h3>
             </div>
             <p className="text-text-secondary text-sm">We aim to respond to all inquiries within 24-48 hours on business days.</p>
           </div>

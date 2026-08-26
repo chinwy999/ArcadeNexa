@@ -5,7 +5,7 @@ import { getGames } from '@/lib/games'
 
 export const metadata: Metadata = {
   title: 'Games for Girls – Free Online Girl Games | ArcadeNexa',
-  description: 'Play the best free games for girls online. Fashion, puzzle, casual, cooking and more. No download, no login. 13,000+ free browser games for girls of all ages.',
+  description: 'Play the best free games for girls online. Fashion, puzzle, casual, cooking and more. No download, no login. 15,000+ free browser games for girls of all ages.',
   keywords: 'games for girls, girl games, free girl games online, games for girls free, fun games for girls',
   alternates: { canonical: '/games-for-girls' },
 }
@@ -32,12 +32,12 @@ export default async function GamesForGirlsPage() {
   }
 
   return (
-    <main className="min-h-screen bg-[#0a0a0f] text-white">
+    <main className="min-h-screen bg-nexa-black text-nexa-text-primary">
 
-      <section className="relative overflow-hidden bg-gradient-to-b from-[#1a0a1e] to-[#0a0a0f] px-4 py-16 text-center">
+      <section className="relative overflow-hidden bg-gradient-to-b from-nexa-violet/20 to-nexa-black px-4 py-16 text-center">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_rgba(236,72,153,0.15),transparent_60%)]" />
         <div className="relative mx-auto max-w-3xl">
-          <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-pink-500/30 bg-pink-500/10 px-4 py-1.5 text-sm text-pink-400">
+          <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-nexa-violet/30 bg-nexa-violet/10 px-4 py-1.5 text-sm text-nexa-violet">
             <span>💖</span> Free • No Login • Play Instantly
           </div>
           <h1 className="mb-4 text-4xl font-extrabold tracking-tight sm:text-5xl">
@@ -46,15 +46,15 @@ export default async function GamesForGirlsPage() {
               Girls
             </span>
           </h1>
-          <p className="mx-auto mb-6 max-w-2xl text-lg text-gray-300">
-            Discover <strong className="text-white">13,000+ free games</strong> including puzzle, casual, match-3, memory, and brain games. Play instantly in your browser — no download, no login required.
+          <p className="mx-auto mb-6 max-w-2xl text-lg text-nexa-text-secondary">
+            Discover <strong className="text-nexa-text-primary">15,000+ free games</strong> including puzzle, casual, match-3, memory, and brain games. Play instantly in your browser — no download, no login required.
           </p>
           <div className="mb-8 flex flex-wrap justify-center gap-2 text-sm">
             {['Puzzle Games','Match 3','Casual Games','Brain Games','Memory','Educational','Free Forever'].map(tag => (
-              <span key={tag} className="rounded-full border border-gray-700 bg-gray-800/60 px-3 py-1 text-gray-300">{tag}</span>
+              <span key={tag} className="rounded-full border border-nexa-violet/25 bg-nexa-surface/60 px-3 py-1 text-nexa-text-secondary">{tag}</span>
             ))}
           </div>
-          <Link href="/games" className="inline-block rounded-xl bg-pink-500 px-8 py-3 font-bold text-white transition hover:bg-pink-400">
+          <Link href="/games" className="inline-block rounded-xl bg-nexa-violet px-8 py-3 font-bold text-nexa-text-primary transition hover:bg-nexa-violet">
             Browse All Games →
           </Link>
         </div>
@@ -66,14 +66,14 @@ export default async function GamesForGirlsPage() {
           <div className="grid grid-cols-3 gap-3 sm:grid-cols-4 md:grid-cols-6">
             {featured.map(game => (
               <Link key={game.id} href={`/games/${game.slug}`}
-                className="group rounded-xl border border-gray-800 bg-gray-900/60 p-2 transition hover:border-pink-500/50 hover:bg-gray-800">
-                <div className="mb-2 aspect-square overflow-hidden rounded-lg bg-gray-800">
+                className="group rounded-xl border border-nexa-violet/20 bg-nexa-black/60 p-2 transition hover:border-nexa-violet/50 hover:bg-nexa-surface">
+                <div className="mb-2 aspect-square overflow-hidden rounded-lg bg-nexa-surface">
                   {game.thumbnail
                     ? <img src={game.thumbnail} alt={game.title} className="h-full w-full object-cover transition group-hover:scale-105" loading="lazy" />
                     : <div className={`flex h-full w-full items-center justify-center text-lg font-bold ${game.gradient}`}>{game.initials}</div>
                   }
                 </div>
-                <p className="truncate text-xs font-medium text-gray-200">{game.title}</p>
+                <p className="truncate text-xs font-medium text-nexa-text-secondary">{game.title}</p>
               </Link>
             ))}
           </div>
@@ -91,19 +91,19 @@ export default async function GamesForGirlsPage() {
                 <h3 className="flex items-center gap-2 text-xl font-bold">
                   <span>{cat.icon}</span><span>Free {cat.label} Games</span>
                 </h3>
-                <Link href={`/categories/${cat.key}`} className="text-sm text-pink-400 hover:text-pink-300">View all →</Link>
+                <Link href={`/categories/${cat.key}`} className="text-sm text-nexa-violet hover:text-nexa-violet">View all →</Link>
               </div>
               <div className="grid grid-cols-4 gap-3 sm:grid-cols-8">
                 {catGames.map(game => (
                   <Link key={game.id} href={`/games/${game.slug}`}
-                    className="group rounded-xl border border-gray-800 bg-gray-900/60 p-2 transition hover:border-pink-500/50 hover:bg-gray-800">
-                    <div className="mb-2 aspect-square overflow-hidden rounded-lg bg-gray-800">
+                    className="group rounded-xl border border-nexa-violet/20 bg-nexa-black/60 p-2 transition hover:border-nexa-violet/50 hover:bg-nexa-surface">
+                    <div className="mb-2 aspect-square overflow-hidden rounded-lg bg-nexa-surface">
                       {game.thumbnail
                         ? <img src={game.thumbnail} alt={game.title} className="h-full w-full object-cover transition group-hover:scale-105" loading="lazy" />
                         : <div className={`flex h-full w-full items-center justify-center text-sm font-bold ${game.gradient}`}>{game.initials}</div>
                       }
                     </div>
-                    <p className="truncate text-xs text-gray-300">{game.title}</p>
+                    <p className="truncate text-xs text-nexa-text-secondary">{game.title}</p>
                   </Link>
                 ))}
               </div>
@@ -113,12 +113,12 @@ export default async function GamesForGirlsPage() {
       </section>
 
       <section className="mx-auto max-w-3xl px-4 py-12">
-        <div className="rounded-2xl border border-gray-800 bg-gray-900/40 p-8">
+        <div className="rounded-2xl border border-nexa-violet/20 bg-nexa-black/40 p-8">
           <h2 className="mb-4 text-2xl font-bold">Best Free Online Games for Girls</h2>
-          <div className="space-y-4 text-gray-300 leading-relaxed">
+          <div className="space-y-4 text-nexa-text-secondary leading-relaxed">
             <p>ArcadeNexa offers a huge collection of free online games perfect for girls of all ages. From relaxing puzzle and match-3 games to brain training and educational games, there is something for everyone.</p>
-            <p>All games are <strong className="text-white">completely free</strong> with no download or login required. Simply open your browser on any device — phone, tablet, laptop, or Chromebook — and start playing instantly.</p>
-            <p>Popular categories include <strong className="text-white">match-3 puzzle games</strong>, casual games for quick fun, memory and brain games for a mental challenge, and educational games that make learning enjoyable.</p>
+            <p>All games are <strong className="text-nexa-text-primary">completely free</strong> with no download or login required. Simply open your browser on any device — phone, tablet, laptop, or Chromebook — and start playing instantly.</p>
+            <p>Popular categories include <strong className="text-nexa-text-primary">match-3 puzzle games</strong>, casual games for quick fun, memory and brain games for a mental challenge, and educational games that make learning enjoyable.</p>
           </div>
         </div>
       </section>

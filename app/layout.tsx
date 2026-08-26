@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     default: 'ArcadeNexa - Free HTML5 Games Online',
     template: '%s | ArcadeNexa',
   },
-  description: 'Play 13,000+ free HTML5 games instantly on ArcadeNexa. No download, no registration required. Action, Puzzle, Racing, Sports and more!',
+  description: 'Play 15,000+ free HTML5 games instantly on ArcadeNexa. No download, no registration required. Action, Puzzle, Racing, Sports and more!',
   keywords: ['HTML5 games', 'free online games', 'browser games', 'instant play', 'ArcadeNexa', 'no download games'],
   authors: [{ name: 'ArcadeNexa' }],
   creator: 'ArcadeNexa',
@@ -21,13 +21,13 @@ export const metadata: Metadata = {
     locale: 'en_US',
     url: siteUrl,
     title: 'ArcadeNexa - Free HTML5 Games Online',
-    description: 'Play 13,000+ free HTML5 games instantly. No download, no registration required.',
+    description: 'Play 15,000+ free HTML5 games instantly. No download, no registration required.',
     siteName: 'ArcadeNexa',
   },
   twitter: {
     card: 'summary_large_image',
     title: 'ArcadeNexa - Free HTML5 Games Online',
-    description: 'Play 13,000+ free HTML5 games instantly. No download required.',
+    description: 'Play 15,000+ free HTML5 games instantly. No download required.',
   },
   robots: {
     index: true,
@@ -60,7 +60,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           "@type": "Organization",
           "name": "ArcadeNexa",
           "url": siteUrl,
-          "description": "Free HTML5 gaming platform with 13,000+ instant play games"
+          "description": "Free HTML5 gaming platform with 15,000+ instant play games"
         })}} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{__html: JSON.stringify({
           "@context": "https://schema.org",

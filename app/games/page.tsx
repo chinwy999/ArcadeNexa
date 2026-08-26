@@ -5,7 +5,7 @@ import Link from 'next/link'
 export const metadata: Metadata = {
   title: 'Free HTML5 Games - Play Online Games',
   description:
-    'Play 13,000+ free HTML5 games online on ArcadeNexa. Discover action, puzzle, racing, sports, strategy and casual games instantly with no download or registration.',
+    'Play 15,000+ free HTML5 games online on ArcadeNexa. Discover action, puzzle, racing, sports, strategy and casual games instantly with no download or registration.',
   keywords: [
     'free HTML5 games',
     'free online games',
@@ -22,14 +22,14 @@ export const metadata: Metadata = {
     url: '/games',
     title: 'Free HTML5 Games - Play Online Games | ArcadeNexa',
     description:
-      'Play 13,000+ free HTML5 games online instantly. No download or registration required.',
+      'Play 15,000+ free HTML5 games online instantly. No download or registration required.',
     siteName: 'ArcadeNexa',
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Free HTML5 Games - Play Online Games | ArcadeNexa',
     description:
-      'Play 13,000+ free HTML5 games online instantly. No download or registration required.',
+      'Play 15,000+ free HTML5 games online instantly. No download or registration required.',
   },
   robots: {
     index: true,
@@ -147,13 +147,13 @@ export default async function GamesPage({
     <div className="container mx-auto px-4 py-8">
 
       <div className="mb-8">
-        <h1 className="text-4xl font-bold mb-2 text-white capitalize">
+        <h1 className="text-4xl font-bold mb-2 text-nexa-text-primary capitalize">
           {selectedGenre
             ? `${selectedGenre.replace(/-/g, ' ')} Games`
             : 'Games Arena'}
         </h1>
 
-        <p className="text-gray-400">
+        <p className="text-nexa-text-secondary">
           {games.length} HTML5 Games — Page {currentPage}
           {totalPages ? ` of ${totalPages}` : ''}
         </p>
@@ -172,14 +172,14 @@ export default async function GamesPage({
         <div className="text-center py-20 bg-nexa-surface rounded-lg border border-white/5">
           <p className="text-6xl mb-4">🎮</p>
 
-          <p className="text-xl text-gray-400">
+          <p className="text-xl text-nexa-text-secondary">
             No games found
             {selectedGenre ? ' in this category' : ''}
           </p>
 
           <Link
             href="/games"
-            className="inline-block mt-6 px-6 py-3 rounded-xl bg-nexa-violet text-white font-bold"
+            className="inline-block mt-6 px-6 py-3 rounded-xl bg-nexa-violet text-nexa-text-primary font-bold"
           >
             View All Games
           </Link>
@@ -201,20 +201,20 @@ export default async function GamesPage({
               {canGoPrev && (
                 <Link
                   href={buildUrl(currentPage - 1)}
-                  className="px-5 py-3 rounded-xl border border-white/10 text-white hover:bg-white/10 transition font-bold"
+                  className="px-5 py-3 rounded-xl border border-white/10 text-nexa-text-primary hover:bg-white/10 transition font-bold"
                 >
                   ← Prev
                 </Link>
               )}
 
-              <span className="px-5 py-3 rounded-xl bg-white/5 border border-white/10 text-gray-300 font-bold">
+              <span className="px-5 py-3 rounded-xl bg-white/5 border border-white/10 text-nexa-text-secondary font-bold">
                 Page {currentPage}
               </span>
 
               {canGoNext && (
                 <Link
                   href={buildUrl(currentPage + 1)}
-                  className="px-5 py-3 rounded-xl border border-white/10 text-white hover:bg-white/10 transition font-bold"
+                  className="px-5 py-3 rounded-xl border border-white/10 text-nexa-text-primary hover:bg-white/10 transition font-bold"
                 >
                   Next →
                 </Link>

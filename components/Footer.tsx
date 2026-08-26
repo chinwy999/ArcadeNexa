@@ -12,10 +12,10 @@ export default function Footer() {
                 <span className="text-nexa-black font-black text-sm transform -rotate-45">N</span>
               </div>
               <span className="text-xl font-black tracking-wider">
-                <span className="text-white">ARCADE</span><span className="gradient-text">NEXA</span>
+                <span className="text-nexa-text-primary">ARCADE</span><span className="gradient-text">NEXA</span>
               </span>
             </Link>
-            <p className="text-text-secondary text-sm">Free HTML5 gaming platform. 13,000+ games, instant play, no download required.</p>
+            <p className="text-text-secondary text-sm">Free HTML5 gaming platform. 15,000+ games, instant play, no download required.</p>
             <div className="flex items-center gap-2">
               <span className="bg-nexa-emerald/10 border border-nexa-emerald/20 text-nexa-emerald text-xs px-3 py-1 rounded-full font-bold">🎮 Free to Play</span>
               <span className="bg-white/5 border border-white/10 text-text-secondary text-xs px-3 py-1 rounded-full">No Login</span>
@@ -23,32 +23,32 @@ export default function Footer() {
           </div>
 
           <div>
-            <h2 className="text-white font-semibold uppercase tracking-wider text-sm mb-4">Platform</h2>
+            <h2 className="text-nexa-text-primary font-semibold uppercase tracking-wider text-sm mb-4">Platform</h2>
             <ul className="space-y-2.5">
-              <li><Link href="/games" className="text-text-secondary hover:text-white text-sm transition-colors">Games</Link></li>
-              <li><Link href="/categories" className="text-text-secondary hover:text-white text-sm transition-colors">Categories</Link></li>
-              <li><Link href="/search" className="text-text-secondary hover:text-white text-sm transition-colors">Search</Link></li>
-              <li><Link href="/tournaments" className="text-text-secondary hover:text-white text-sm transition-colors">Tournaments</Link></li>
-              <li><Link href="/leaderboard" className="text-text-secondary hover:text-white text-sm transition-colors">Leaderboard</Link></li>
-              <li><Link href="/blog" className="text-text-secondary hover:text-white text-sm transition-colors">Blog</Link></li>
+              <li><Link href="/games" className="text-text-secondary hover:text-nexa-text-primary text-sm transition-colors">Games</Link></li>
+              <li><Link href="/categories" className="text-text-secondary hover:text-nexa-text-primary text-sm transition-colors">Categories</Link></li>
+              <li><Link href="/search" className="text-text-secondary hover:text-nexa-text-primary text-sm transition-colors">Search</Link></li>
+              <li><Link href="/tournaments" className="text-text-secondary hover:text-nexa-text-primary text-sm transition-colors">Tournaments</Link></li>
+              <li><Link href="/leaderboard" className="text-text-secondary hover:text-nexa-text-primary text-sm transition-colors">Leaderboard</Link></li>
+              <li><Link href="/blog" className="text-text-secondary hover:text-nexa-text-primary text-sm transition-colors">Blog</Link></li>
             </ul>
           </div>
 
           <div>
-            <h2 className="text-white font-semibold uppercase tracking-wider text-sm mb-4">Support</h2>
+            <h2 className="text-nexa-text-primary font-semibold uppercase tracking-wider text-sm mb-4">Support</h2>
             <ul className="space-y-2.5">
-              <li><Link href="/about" className="text-text-secondary hover:text-white text-sm transition-colors">About Us</Link></li>
-              <li><Link href="/faq" className="text-text-secondary hover:text-white text-sm transition-colors">FAQ</Link></li>
-              <li><Link href="/contact" className="text-text-secondary hover:text-white text-sm transition-colors">Contact Us</Link></li>
+              <li><Link href="/about" className="text-text-secondary hover:text-nexa-text-primary text-sm transition-colors">About Us</Link></li>
+              <li><Link href="/faq" className="text-text-secondary hover:text-nexa-text-primary text-sm transition-colors">FAQ</Link></li>
+              <li><Link href="/contact" className="text-text-secondary hover:text-nexa-text-primary text-sm transition-colors">Contact Us</Link></li>
             </ul>
           </div>
 
           <div>
-            <h2 className="text-white font-semibold uppercase tracking-wider text-sm mb-4">Legal</h2>
+            <h2 className="text-nexa-text-primary font-semibold uppercase tracking-wider text-sm mb-4">Legal</h2>
             <ul className="space-y-2.5">
-              <li><Link href="/privacy" className="text-text-secondary hover:text-white text-sm transition-colors">Privacy Policy</Link></li>
-              <li><Link href="/terms" className="text-text-secondary hover:text-white text-sm transition-colors">Terms of Service</Link></li>
-              <li><Link href="/cookies" className="text-text-secondary hover:text-white text-sm transition-colors">Cookie Policy</Link></li>
+              <li><Link href="/privacy" className="text-text-secondary hover:text-nexa-text-primary text-sm transition-colors">Privacy Policy</Link></li>
+              <li><Link href="/terms" className="text-text-secondary hover:text-nexa-text-primary text-sm transition-colors">Terms of Service</Link></li>
+              <li><Link href="/cookies" className="text-text-secondary hover:text-nexa-text-primary text-sm transition-colors">Cookie Policy</Link></li>
             </ul>
           </div>
         </div>

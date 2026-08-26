@@ -11,11 +11,11 @@ export default function AdBanner() {
             <Gamepad2 className="w-6 h-6 text-nexa-emerald" />
           </div>
           <div>
-            <p className="text-white font-bold text-sm sm:text-base">13,000+ Free Games Await!</p>
+            <p className="text-nexa-text-primary font-bold text-sm sm:text-base">15,000+ Free Games Await!</p>
             <p className="text-text-secondary text-xs">No download, no login — just instant play in your browser.</p>
           </div>
         </div>
-        <Link href="/games" className="flex items-center gap-2 bg-gradient-to-r from-nexa-violet to-violet-600 hover:from-violet-600 hover:to-nexa-violet text-white text-xs font-bold px-5 py-2.5 rounded-lg transition-all shadow-lg whitespace-nowrap">
+        <Link href="/games" className="flex items-center gap-2 bg-gradient-to-r from-nexa-violet to-violet-600 hover:from-violet-600 hover:to-nexa-violet text-nexa-text-primary text-xs font-bold px-5 py-2.5 rounded-lg transition-all shadow-lg whitespace-nowrap">
           <span>Play Now →</span>
         </Link>
       </div>

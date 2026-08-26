@@ -22,10 +22,7 @@ export async function generateMetadata(
   const game = await getGameBySlug(params.slug)
 
   if (!game) {
-    return {
-      title: 'Game Not Found',
-      description: 'The game you are looking for does not exist.',
-    }
+    notFound()
   }
 
   const titleSuffix = ' - Play Free Online'
@@ -294,7 +291,7 @@ export default async function GamePage({ params }: PageParams) {
       <div className="flex items-center gap-2 text-sm text-text-secondary mb-6">
         <Link
           href="/"
-          className="hover:text-white transition"
+          className="hover:text-nexa-text-primary transition"
         >
           Home
         </Link>
@@ -303,7 +300,7 @@ export default async function GamePage({ params }: PageParams) {
 
         <Link
           href="/games"
-          className="hover:text-white transition"
+          className="hover:text-nexa-text-primary transition"
         >
           Games
         </Link>
@@ -312,21 +309,21 @@ export default async function GamePage({ params }: PageParams) {
 
         <Link
           href={`/games?genre=${game.category}`}
-          className="hover:text-white transition capitalize"
+          className="hover:text-nexa-text-primary transition capitalize"
         >
           {game.category}
         </Link>
 
         <span>/</span>
 
-        <span className="text-white truncate">
+        <span className="text-nexa-text-primary truncate">
           {game.title}
         </span>
       </div>
 
       {/* Game Title */}
       <div className="mb-6">
-        <h1 className="text-3xl font-black text-white mb-2">
+        <h1 className="text-3xl font-black text-nexa-text-primary mb-2">
           {game.title}
         </h1>
 
@@ -340,7 +337,7 @@ export default async function GamePage({ params }: PageParams) {
           </span>
 
           <span
-            className="text-yellow-400 text-sm font-bold"
+            className="text-nexa-gold text-sm font-bold"
             title="ArcadeNexa Score"
           >
             ★ {Number(game.rating).toFixed(1)} ArcadeNexa Score
@@ -364,21 +361,21 @@ export default async function GamePage({ params }: PageParams) {
         <div className="md:col-span-2 space-y-6">
 
           <div className="glass rounded-2xl p-6 border border-white/5">
-            <h2 className="text-xl font-bold text-white mb-3">
+            <h2 className="text-xl font-bold text-nexa-text-primary mb-3">
               About {game.title}
             </h2>
 
-            <p className="text-gray-400 leading-relaxed">
+            <p className="text-nexa-text-secondary leading-relaxed">
               {game.longDescription}
             </p>
           </div>
 
                       <div className="glass rounded-2xl p-6 border border-white/5">
-              <h2 className="text-xl font-bold text-white mb-3">
+              <h2 className="text-xl font-bold text-nexa-text-primary mb-3">
                 How to Play {game.title}
               </h2>
 
-              <p className="text-gray-400 leading-relaxed">
+              <p className="text-nexa-text-secondary leading-relaxed">
                 {howToPlay}
               </p>
 
@@ -389,7 +386,7 @@ export default async function GamePage({ params }: PageParams) {
             </div>
 
             <div className="glass rounded-2xl p-6 border border-white/5">
-              <h2 className="text-xl font-bold text-white mb-4">
+              <h2 className="text-xl font-bold text-nexa-text-primary mb-4">
                 Gaming Guides & Tips
               </h2>
 
@@ -404,7 +401,7 @@ export default async function GamePage({ params }: PageParams) {
                       {article.category}
                     </span>
 
-                    <span className="block text-sm font-bold leading-6 text-white">
+                    <span className="block text-sm font-bold leading-6 text-nexa-text-primary">
                       {article.title}
                     </span>
                   </Link>
@@ -418,58 +415,58 @@ export default async function GamePage({ params }: PageParams) {
           <div className="space-y-4">
 
           <div className="glass rounded-2xl p-6 border border-white/5">
-            <h3 className="text-xl font-bold text-white mb-4">
+            <h3 className="text-xl font-bold text-nexa-text-primary mb-4">
               Details
             </h3>
 
             <div className="space-y-3">
 
               <div className="flex justify-between">
-                <span className="text-gray-400">
+                <span className="text-nexa-text-secondary">
                   Provider
                 </span>
 
-                <span className="text-white font-medium">
+                <span className="text-nexa-text-primary font-medium">
                   {game.provider}
                 </span>
               </div>
 
               <div className="flex justify-between">
-                <span className="text-gray-400">
+                <span className="text-nexa-text-secondary">
                   Platform
                 </span>
 
-                <span className="text-white font-medium">
+                <span className="text-nexa-text-primary font-medium">
                   {game.platform}
                 </span>
               </div>
 
               <div className="flex justify-between">
-                <span className="text-gray-400">
+                <span className="text-nexa-text-secondary">
                   Category
                 </span>
 
-                <span className="text-white font-medium capitalize">
+                <span className="text-nexa-text-primary font-medium capitalize">
                   {game.category}
                 </span>
               </div>
 
               <div className="flex justify-between">
-                <span className="text-gray-400">
+                <span className="text-nexa-text-secondary">
                   Rating
                 </span>
 
-                <span className="text-yellow-400 font-medium">
+                <span className="text-nexa-gold font-medium">
                   ★ {Number(game.rating).toFixed(1)}/10
                 </span>
               </div>
 
               <div className="flex justify-between">
-                <span className="text-gray-400">
+                <span className="text-nexa-text-secondary">
                   Resolution
                 </span>
 
-                <span className="text-white font-medium">
+                <span className="text-nexa-text-primary font-medium">
                   {game.width}×{game.height}
                 </span>
               </div>

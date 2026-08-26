@@ -18,6 +18,16 @@
   --nexa-violet: #9b6cff;
   --nexa-gold: #ffd34d;
 
+  /* Semantic UI tokens */
+  --nexa-scroll-track: #02040a;
+  --nexa-scroll-thumb: #061126;
+  --nexa-scroll-thumb-hover: #0c1a30;
+
+  /* Atmospheric background tokens */
+  --nexa-atmosphere-1: #030711;
+  --nexa-atmosphere-2: #050b17;
+  --nexa-atmosphere-3: #07101f;
+
   --text-primary: #ffffff;
   --text-secondary: #c4d0e0;
   --text-muted: #8495ad;
@@ -59,9 +69,9 @@ body {
     ),
     linear-gradient(
       180deg,
-      #030711 0%,
-      #050b17 45%,
-      #07101f 100%
+      var(--nexa-atmosphere-1) 0%,
+      var(--nexa-atmosphere-2) 45%,
+      var(--nexa-atmosphere-3) 100%
     );
 
   color: var(--text-primary);
@@ -411,7 +421,7 @@ nav a {
 }
 
 nav a:hover {
-  color: #67e8f9;
+  color: var(--nexa-cyan);
 }
 
 /* =========================================================
@@ -424,16 +434,16 @@ nav a:hover {
 }
 
 ::-webkit-scrollbar-track {
-  background: #030711;
+  background: var(--nexa-scroll-track);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #1b314b;
+  background: var(--nexa-scroll-thumb);
   border-radius: 999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #245070;
+  background: var(--nexa-scroll-thumb-hover);
 }
 
 /* =========================================================
@@ -469,9 +479,8 @@ nav a:hover {
 }
 
 /* =========================================================
-   ArcadeNexa — NEON ARCADE REDESIGN
-   CSS-ONLY VISUAL LAYER
-   No SEO / API / Game Logic changes
+   ArcadeNexa — UNIFIED COLOR & BACKGROUND SYSTEM
+   Visual layer only — no SEO / API / game logic changes
    ========================================================= */
 
 
@@ -481,43 +490,42 @@ nav a:hover {
    ========================================================= */
 
 html {
-  background:
-    radial-gradient(
-      circle at 50% -10%,
-      rgba(0, 240, 255, 0.16),
-      transparent 32rem
-    ),
-    #02030a;
+  background: var(--nexa-black);
+  color-scheme: dark;
 }
 
 body {
+  position: relative;
+  min-height: 100vh;
+  margin: 0;
+  overflow-x: hidden;
+
   background:
     radial-gradient(
       ellipse 55% 35% at 50% 0%,
-      rgba(0, 170, 255, 0.13),
+      rgba(56, 189, 248, 0.12),
       transparent 70%
     ),
     radial-gradient(
       ellipse 40% 30% at 0% 25%,
-      rgba(139, 92, 255, 0.10),
+      rgba(139, 92, 246, 0.07),
       transparent 70%
     ),
     radial-gradient(
       ellipse 38% 32% at 100% 48%,
-      rgba(255, 43, 214, 0.075),
+      rgba(255, 43, 214, 0.045),
       transparent 70%
     ),
     radial-gradient(
       ellipse 45% 35% at 50% 100%,
-      rgba(0, 245, 160, 0.055),
+      rgba(53, 230, 160, 0.035),
       transparent 70%
     ),
     linear-gradient(
       180deg,
-      #02030a 0%,
-      #030616 28%,
-      #05091a 62%,
-      #02030a 100%
+      var(--nexa-atmosphere-1) 0%,
+      var(--nexa-atmosphere-2) 45%,
+      var(--nexa-atmosphere-3) 100%
     );
 
   color: var(--text-primary);
@@ -530,31 +538,31 @@ body {
 body::before {
   background-image:
     linear-gradient(
-      rgba(0, 240, 255, 0.026) 1px,
+      rgba(148, 163, 184, 0.018) 1px,
       transparent 1px
     ),
     linear-gradient(
       90deg,
-      rgba(139, 92, 255, 0.026) 1px,
+      rgba(148, 163, 184, 0.018) 1px,
       transparent 1px
     );
 
-  background-size: 64px 64px;
+  background-size: 56px 56px;
 
   mask-image:
     linear-gradient(
       to bottom,
       black 0%,
-      rgba(0, 0, 0, 0.72) 30%,
-      transparent 82%
+      rgba(0, 0, 0, 0.55) 35%,
+      transparent 78%
     );
 
   -webkit-mask-image:
     linear-gradient(
       to bottom,
       black 0%,
-      rgba(0, 0, 0, 0.72) 30%,
-      transparent 82%
+      rgba(0, 0, 0, 0.55) 35%,
+      transparent 78%
     );
 }
 
@@ -563,141 +571,76 @@ body::before {
    ========================================================= */
 
 body::after {
-  width: 900px;
-  height: 900px;
-  top: -460px;
+  width: 760px;
+  height: 760px;
+  top: -340px;
 
   background:
     radial-gradient(
       circle at 40% 50%,
-      rgba(0, 240, 255, 0.14),
+      rgba(56, 189, 248, 0.075),
       transparent 42%
     ),
     radial-gradient(
       circle at 65% 55%,
-      rgba(139, 92, 255, 0.13),
+      rgba(139, 92, 246, 0.065),
       transparent 48%
     ),
     radial-gradient(
       circle,
-      rgba(255, 43, 214, 0.045),
+      rgba(255, 43, 214, 0.025),
       transparent 70%
     );
 
-  filter: blur(28px);
+  filter: blur(20px);
 }
 
 /* =========================================================
    TEXT
    ========================================================= */
 
-.text-text-secondary {
-  color: #d4dded !important;
+.text-text-primary {
+  color: var(--text-primary) !important;
 }
 
-.text-text-primary {
-  color: #ffffff !important;
+.text-text-secondary {
+  color: var(--text-secondary) !important;
 }
 
 .text-text-muted {
-  color: #91a0b8 !important;
+  color: var(--text-muted) !important;
 }
 
 /* =========================================================
-   PREMIUM ARCADE SURFACES
+   GLASS SURFACES
    ========================================================= */
 
 .glass {
   background:
     linear-gradient(
       145deg,
-      rgba(16, 28, 58, 0.94),
-      rgba(5, 9, 23, 0.97)
+      rgba(16, 28, 58, 0.92),
+      rgba(5, 9, 23, 0.96)
     );
 
-  border: 1px solid rgba(0, 210, 255, 0.18);
+  border: 1px solid var(--line);
 
   box-shadow:
-    0 18px 50px rgba(0, 0, 0, 0.42),
-    inset 0 1px 0 rgba(255, 255, 255, 0.055),
-    inset 0 0 28px rgba(0, 150, 255, 0.025);
+    0 18px 50px rgba(0, 0, 0, 0.40),
+    inset 0 1px 0 rgba(255, 255, 255, 0.045),
+    inset 0 0 28px rgba(0, 150, 255, 0.018);
 
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-
-  transition:
-    transform 0.22s ease,
-    border-color 0.22s ease,
-    background 0.22s ease,
-    box-shadow 0.22s ease;
 }
 
 .glass:hover {
-  border-color: rgba(0, 240, 255, 0.52);
+  border-color: var(--line-strong);
 
   box-shadow:
-    0 24px 65px rgba(0, 0, 0, 0.52),
-    0 0 34px rgba(0, 210, 255, 0.10),
-    inset 0 1px 0 rgba(255, 255, 255, 0.08);
-}
-
-/* =========================================================
-   LINKS
-   ========================================================= */
-
-a {
-  transition:
-    color 0.18s ease,
-    text-shadow 0.18s ease;
-}
-
-a:hover {
-  text-shadow:
-    0 0 14px rgba(0, 240, 255, 0.32);
-}
-
-/* =========================================================
-   BUTTONS
-   ========================================================= */
-
-button {
-  transition:
-    transform 0.18s ease,
-    filter 0.18s ease,
-    box-shadow 0.18s ease;
-}
-
-button:hover {
-  filter: brightness(1.10);
-}
-
-button:active {
-  transform: translateY(1px);
-}
-
-/* =========================================================
-   NEON FOCUS
-   ========================================================= */
-
-button:focus-visible,
-a:focus-visible {
-  outline: 2px solid #00f0ff;
-  outline-offset: 3px;
-
-  box-shadow:
-    0 0 18px rgba(0, 240, 255, 0.32);
-}
-
-/* =========================================================
-   HEADINGS
-   ========================================================= */
-
-h1,
-h2,
-h3 {
-  color: #ffffff;
-  text-shadow:
-    0 0 22px rgba(0, 190, 255, 0.12);
+    0 24px 65px rgba(0, 0, 0, 0.50),
+    0 0 34px rgba(0, 210, 255, 0.075),
+    inset 0 1px 0 rgba(255, 255, 255, 0.07);
 }
 
 /* =========================================================
@@ -708,37 +651,49 @@ h3 {
   background:
     radial-gradient(
       ellipse at 15% 0%,
-      rgba(0, 240, 255, 0.055),
+      rgba(56, 189, 248, 0.045),
       transparent 42%
     ),
     radial-gradient(
       ellipse at 85% 25%,
-      rgba(139, 92, 255, 0.045),
+      rgba(139, 92, 246, 0.035),
       transparent 44%
     ),
     linear-gradient(
       180deg,
-      rgba(0, 190, 255, 0.025),
+      rgba(56, 189, 248, 0.018),
       transparent 38%,
-      rgba(139, 92, 255, 0.018)
+      rgba(139, 92, 246, 0.012)
     );
 }
 
 /* =========================================================
-   IMAGE / GAME CARD GLOW
+   LINKS / FOCUS
    ========================================================= */
 
-img {
-  transition:
-    filter 0.25s ease,
-    transform 0.25s ease;
+a:hover {
+  text-shadow: 0 0 14px rgba(34, 230, 255, 0.25);
 }
 
-/* Don't alter image geometry or functionality */
-img:hover {
-  filter:
-    saturate(1.08)
-    contrast(1.035);
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid var(--nexa-cyan);
+  outline-offset: 3px;
+
+  box-shadow:
+    0 0 18px rgba(34, 230, 255, 0.28);
+}
+
+/* =========================================================
+   HEADINGS
+   ========================================================= */
+
+h1,
+h2,
+h3 {
+  color: var(--text-primary);
+  text-shadow:
+    0 0 22px rgba(56, 189, 248, 0.10);
 }
 
 /* =========================================================
@@ -746,8 +701,8 @@ img:hover {
    ========================================================= */
 
 ::selection {
-  background: rgba(0, 240, 255, 0.34);
-  color: #ffffff;
+  background: rgba(34, 230, 255, 0.30);
+  color: var(--text-primary);
 }
 
 /* =========================================================
@@ -759,33 +714,32 @@ img:hover {
 }
 
 ::-webkit-scrollbar-track {
-  background: #02030a;
+  background: var(--nexa-scroll-track);
 }
 
 ::-webkit-scrollbar-thumb {
   background:
     linear-gradient(
       180deg,
-      #00cfff,
-      #754cff
+      var(--nexa-blue),
+      var(--nexa-violet)
     );
 
   border-radius: 999px;
-
-  border: 2px solid #02030a;
+  border: 2px solid var(--nexa-scroll-track);
 }
 
 ::-webkit-scrollbar-thumb:hover {
   background:
     linear-gradient(
       180deg,
-      #00f0ff,
-      #a06cff
+      var(--nexa-cyan),
+      var(--nexa-violet)
     );
 }
 
 /* =========================================================
-   MOBILE SAFETY
+   MOBILE COLOR SAFETY
    ========================================================= */
 
 @media (max-width: 768px) {
@@ -805,6 +759,17 @@ img:hover {
   }
 }
 
-/* =========================================================
-   REDUCED MOTION
-   ========================================================= */
+/* ArcadeNexa — semantic text token aliases */
+@layer utilities {
+  .text-nexa-text-primary {
+    color: var(--text-primary);
+  }
+
+  .text-nexa-text-secondary {
+    color: var(--text-secondary);
+  }
+
+  .text-nexa-text-muted {
+    color: var(--text-muted);
+  }
+}

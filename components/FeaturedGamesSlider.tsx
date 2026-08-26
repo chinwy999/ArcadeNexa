@@ -144,8 +144,8 @@ export default function FeaturedGamesSlider({
             <Sparkles className="h-4 w-4 text-nexa-violet" />
           </div>
           <div>
-            <h2 className="text-xl font-black text-white sm:text-2xl">Featured Games</h2>
-            <p className="text-[11px] text-gray-500">Hand-picked · Updated daily</p>
+            <h2 className="text-xl font-black text-nexa-text-primary sm:text-2xl">Featured Games</h2>
+            <p className="text-[11px] text-nexa-text-muted">Hand-picked · Updated daily</p>
           </div>
         </div>
         <div className="flex items-center gap-2">
@@ -153,18 +153,18 @@ export default function FeaturedGamesSlider({
             type="button"
             onClick={previousSlide}
             aria-label="Previous slide"
-            className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white transition hover:border-nexa-violet/60 hover:bg-nexa-violet/20"
+            className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/[0.05] text-nexa-text-primary transition hover:border-nexa-violet/60 hover:bg-nexa-violet/20"
           >
             <ChevronLeft className="h-4 w-4" />
           </button>
-          <span className="min-w-[40px] text-center text-xs font-bold text-gray-400">
+          <span className="min-w-[40px] text-center text-xs font-bold text-nexa-text-secondary">
             {current + 1} / {total}
           </span>
           <button
             type="button"
             onClick={nextSlide}
             aria-label="Next slide"
-            className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white transition hover:bg-nexa-violet/20"
+            className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/[0.05] text-nexa-text-primary transition hover:bg-nexa-violet/20"
           >
             <ChevronRight className="h-4 w-4" />
           </button>
@@ -224,16 +224,16 @@ export default function FeaturedGamesSlider({
                   Featured
                 </div>
 
-                <h3 key={`title-${game.slug}`} className="fade-up fade-up-2 text-3xl font-black leading-tight tracking-tight text-white drop-shadow-2xl sm:text-4xl lg:text-5xl">
+                <h3 key={`title-${game.slug}`} className="fade-up fade-up-2 text-3xl font-black leading-tight tracking-tight text-nexa-text-primary drop-shadow-2xl sm:text-4xl lg:text-5xl">
                   {game.title}
                 </h3>
 
                 <div key={`meta-${game.slug}`} className="fade-up fade-up-3 mt-4 flex flex-wrap items-center gap-2">
-                  <span className="inline-flex items-center gap-1 rounded-lg bg-yellow-400/15 px-3 py-1 text-sm font-black text-yellow-400">
+                  <span className="inline-flex items-center gap-1 rounded-lg bg-nexa-gold/15 px-3 py-1 text-sm font-black text-nexa-gold">
                     <Star className="h-3.5 w-3.5 fill-current" />
                     {Number(game.rating || 0).toFixed(1)}
                   </span>
-                  <span className="rounded-lg border border-white/10 bg-white/5 px-3 py-1 text-sm capitalize text-gray-300 backdrop-blur">
+                  <span className="rounded-lg border border-white/10 bg-white/[0.05] px-3 py-1 text-sm capitalize text-nexa-text-secondary backdrop-blur">
                     {game.category || 'Arcade'}
                   </span>
                   <span className="inline-flex items-center gap-1 rounded-lg border border-nexa-emerald/20 bg-nexa-emerald/10 px-3 py-1 text-sm font-bold text-nexa-emerald">
@@ -242,14 +242,14 @@ export default function FeaturedGamesSlider({
                   </span>
                 </div>
 
-                <p key={`desc-${game.slug}`} className="fade-up fade-up-3 mt-3 hidden max-w-md text-sm leading-relaxed text-gray-400 sm:block">
+                <p key={`desc-${game.slug}`} className="fade-up fade-up-3 mt-3 hidden max-w-md text-sm leading-relaxed text-nexa-text-secondary sm:block">
                   {game.description || 'Play instantly in your browser. No downloads required.'}
                 </p>
 
                 <div key={`btn-${game.slug}`} className="fade-up fade-up-4 mt-6 flex items-center gap-3">
                   <Link
                     href={`/games/${game.slug}`}
-                    className="group inline-flex items-center gap-2 rounded-xl bg-nexa-emerald px-6 py-3 text-sm font-black text-black shadow-[0_0_24px_rgba(34,197,94,0.3)] transition-all duration-200 hover:scale-105 hover:shadow-[0_0_36px_rgba(34,197,94,0.5)]"
+                    className="group inline-flex items-center gap-2 rounded-xl bg-nexa-emerald px-6 py-3 text-sm font-black text-nexa-black shadow-[0_0_24px_rgba(34,197,94,0.3)] transition-all duration-200 hover:scale-105 hover:shadow-[0_0_36px_rgba(34,197,94,0.5)]"
                   >
                     <Play className="h-4 w-4 fill-current" />
                     PLAY NOW
@@ -316,14 +316,14 @@ export default function FeaturedGamesSlider({
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/10 to-transparent" />
                 {index === current && (
-                  <div className="absolute left-2 top-2 flex items-center gap-1 rounded-full bg-nexa-emerald px-2 py-0.5 text-[9px] font-black text-black">
+                  <div className="absolute left-2 top-2 flex items-center gap-1 rounded-full bg-nexa-emerald px-2 py-0.5 text-[9px] font-black text-nexa-black">
                     <Play className="h-2.5 w-2.5 fill-current" />
                     NOW
                   </div>
                 )}
                 <div className="absolute bottom-2 left-2 right-2">
-                  <p className="truncate text-[11px] font-black text-white">{item.title}</p>
-                  <div className="mt-0.5 flex items-center gap-1 text-[10px] text-yellow-400">
+                  <p className="truncate text-[11px] font-black text-nexa-text-primary">{item.title}</p>
+                  <div className="mt-0.5 flex items-center gap-1 text-[10px] text-nexa-gold">
                     <Star className="h-2.5 w-2.5 fill-current" />
                     {Number(item.rating || 0).toFixed(1)}
                   </div>

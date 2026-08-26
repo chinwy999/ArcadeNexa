@@ -241,11 +241,11 @@ export default async function ArticlePage({ params }: Props) {
       />
 
       <nav className="mb-8 text-sm text-text-secondary" aria-label="Breadcrumb">
-        <Link href="/" className="hover:text-white">Home</Link>
+        <Link href="/" className="hover:text-nexa-text-primary">Home</Link>
         <span className="mx-2">/</span>
-        <Link href="/blog" className="hover:text-white">Blog</Link>
+        <Link href="/blog" className="hover:text-nexa-text-primary">Blog</Link>
         <span className="mx-2">/</span>
-        <span className="text-white">{article.title}</span>
+        <span className="text-nexa-text-primary">{article.title}</span>
       </nav>
 
       <header className="mb-10">
@@ -264,7 +264,7 @@ export default async function ArticlePage({ params }: Props) {
           <span className="text-text-secondary">• {article.readTime}</span>
         </div>
 
-        <h1 className="mb-6 text-4xl font-black leading-tight text-white sm:text-5xl">
+        <h1 className="mb-6 text-4xl font-black leading-tight text-nexa-text-primary sm:text-5xl">
           {article.title}
         </h1>
 
@@ -276,7 +276,7 @@ export default async function ArticlePage({ params }: Props) {
       <article className="space-y-10">
         {article.sections.map((section) => (
           <section key={section.heading}>
-            <h2 className="mb-4 text-2xl font-bold text-white">
+            <h2 className="mb-4 text-2xl font-bold text-nexa-text-primary">
               {section.heading}
             </h2>
             <p className="text-lg leading-9 text-text-secondary">
@@ -295,7 +295,7 @@ export default async function ArticlePage({ params }: Props) {
 
             <h2
               id="related-games-heading"
-              className="mt-2 text-2xl font-black text-white sm:text-3xl"
+              className="mt-2 text-2xl font-black text-nexa-text-primary sm:text-3xl"
             >
               Games You Can Play on ArcadeNexa
             </h2>
@@ -327,14 +327,14 @@ export default async function ArticlePage({ params }: Props) {
       )}
 
       <section className="mt-14 rounded-2xl border border-white/10 bg-white/[0.03] p-6">
-        <h2 className="mb-6 text-2xl font-bold text-white">
+        <h2 className="mb-6 text-2xl font-bold text-nexa-text-primary">
           Frequently Asked Questions
         </h2>
 
         <div className="space-y-6">
           {article.faq.map((item) => (
             <div key={item.question}>
-              <h3 className="mb-2 font-bold text-white">{item.question}</h3>
+              <h3 className="mb-2 font-bold text-nexa-text-primary">{item.question}</h3>
               <p className="leading-7 text-text-secondary">{item.answer}</p>
             </div>
           ))}
@@ -342,7 +342,7 @@ export default async function ArticlePage({ params }: Props) {
       </section>
 
       <section className="mt-12 border-t border-white/10 pt-10">
-        <h2 className="mb-5 text-2xl font-bold text-white">
+        <h2 className="mb-5 text-2xl font-bold text-nexa-text-primary">
           Continue Exploring
         </h2>
 
@@ -351,7 +351,7 @@ export default async function ArticlePage({ params }: Props) {
             <Link
               key={item.slug}
               href={`/blog/${item.slug}`}
-              className="rounded-xl border border-white/10 p-4 text-white transition hover:border-nexa-violet/40 hover:bg-white/[0.03]"
+              className="rounded-xl border border-white/10 p-4 text-nexa-text-primary transition hover:border-nexa-violet/40 hover:bg-white/[0.03]"
             >
               <span className="text-sm font-bold">{item.title}</span>
             </Link>
@@ -361,7 +361,7 @@ export default async function ArticlePage({ params }: Props) {
         <div className="mt-8">
           <Link
             href="/games"
-            className="inline-flex rounded-xl bg-nexa-violet px-5 py-3 font-bold text-white transition hover:opacity-90"
+            className="inline-flex rounded-xl bg-nexa-violet px-5 py-3 font-bold text-nexa-text-primary transition hover:opacity-90"
           >
             Explore ArcadeNexa Games →
           </Link>
