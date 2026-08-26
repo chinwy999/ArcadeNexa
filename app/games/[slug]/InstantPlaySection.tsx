@@ -80,19 +80,19 @@ export default function InstantPlaySection({ game }: { game: Game }) {
       ref={containerRef}
       className="glass rounded-3xl overflow-hidden border border-nexa-violet/30 shadow-[0_0_40px_rgba(124,58,237,0.2)] bg-nexa-navy"
     >
-      <div className="flex items-center justify-between px-4 py-3 bg-nexa-surface/90 border-b border-white/5">
+      <div className="flex items-center justify-between px-4 py-3 bg-nexa-surface/90 border-b border-[color:var(--white-05)]">
         <div className="flex items-center gap-3 min-w-0">
-          <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${game.gradient} font-black text-nexa-text-primary text-sm`}>
+          <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${game.gradient} font-black text-[color:var(--text-primary)] text-sm`}>
             {game.initials}
           </div>
           <div className="min-w-0">
-            <h3 className="text-nexa-text-primary font-bold text-sm truncate">{game.name} — Instant Play</h3>
+            <h3 className="text-[color:var(--text-primary)] font-bold text-sm truncate">{game.name} — Instant Play</h3>
             <p className="text-[10px] text-nexa-emerald">LIVE • {game.width}x{game.height} • {providerName}</p>
           </div>
         </div>
         <button
           onClick={toggleFullscreen}
-          className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10 text-nexa-text-primary flex items-center justify-center"
+          className="w-8 h-8 rounded-lg bg-[color:var(--white-05)] border border-[color:var(--white-10)] hover:bg-[color:var(--white-10)] text-[color:var(--text-primary)] flex items-center justify-center"
           aria-label="Toggle fullscreen"
         >
           <Maximize2 className="w-4 h-4" />
@@ -106,14 +106,14 @@ export default function InstantPlaySection({ game }: { game: Game }) {
         {isLoading && !hasError && (
           <div className="absolute inset-0 z-10 bg-nexa-navy flex flex-col items-center justify-center gap-3">
             <div className="w-10 h-10 border-4 border-nexa-violet/20 border-t-nexa-violet rounded-full animate-spin" />
-            <p className="text-text-secondary text-sm">Loading {game.name}...</p>
+            <p className="text-[color:var(--text-secondary)] text-sm">Loading {game.name}...</p>
           </div>
         )}
         {hasError ? (
           <div className="absolute inset-0 z-20 bg-nexa-navy flex flex-col items-center justify-center p-6 text-center">
-            <p className="text-nexa-text-primary font-bold mb-2">Game could not be loaded</p>
-            <p className="text-text-secondary text-xs mb-4">Check your connection and try again.</p>
-            <button onClick={retry} className="bg-nexa-violet text-nexa-text-primary px-4 py-2 rounded-lg text-sm">Retry</button>
+            <p className="text-[color:var(--text-primary)] font-bold mb-2">Game could not be loaded</p>
+            <p className="text-[color:var(--text-secondary)] text-xs mb-4">Check your connection and try again.</p>
+            <button onClick={retry} className="bg-nexa-violet text-[color:var(--text-primary)] px-4 py-2 rounded-lg text-sm">Retry</button>
           </div>
         ) : (
           <iframe
@@ -133,7 +133,7 @@ export default function InstantPlaySection({ game }: { game: Game }) {
         )}
       </div>
 
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 px-4 py-3 bg-nexa-surface/80 border-t border-white/5 text-[11px] text-text-secondary">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 px-4 py-3 bg-nexa-surface/80 border-t border-[color:var(--white-05)] text-[11px] text-[color:var(--text-secondary)]">
         <span className="flex items-center gap-2">
           <Gamepad2 className="w-3 h-3" />
           Play instantly on this page • ESC to exit fullscreen
@@ -146,7 +146,7 @@ export default function InstantPlaySection({ game }: { game: Game }) {
           )}
           <button
             onClick={() => setShowScoreModal(true)}
-            className="inline-flex items-center gap-1 text-nexa-gold hover:text-nexa-text-primary transition font-bold"
+            className="inline-flex items-center gap-1 text-nexa-gold hover:text-[color:var(--text-primary)] transition font-bold"
           >
             <Trophy className="w-3 h-3" />
             Submit Score
@@ -156,7 +156,7 @@ export default function InstantPlaySection({ game }: { game: Game }) {
               href={game.officialUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 text-nexa-violet hover:text-nexa-text-primary"
+              className="inline-flex items-center gap-1 text-nexa-violet hover:text-[color:var(--text-primary)]"
             >
               Official Page
               <ExternalLink className="w-3 h-3" />
@@ -166,22 +166,22 @@ export default function InstantPlaySection({ game }: { game: Game }) {
       </div>
 
       {game.instructions && (
-        <div className="px-4 py-3 bg-nexa-surface/50 border-t border-white/5">
-          <p className="text-nexa-text-primary font-bold text-xs mb-1">How to Play:</p>
-          <p className="text-text-secondary text-xs leading-relaxed">{game.instructions}</p>
+        <div className="px-4 py-3 bg-nexa-surface/50 border-t border-[color:var(--white-05)]">
+          <p className="text-[color:var(--text-primary)] font-bold text-xs mb-1">How to Play:</p>
+          <p className="text-[color:var(--text-secondary)] text-xs leading-relaxed">{game.instructions}</p>
         </div>
       )}
 
       {showScoreModal && (
         <div className="fixed inset-0 z-50 bg-black/70 flex items-center justify-center p-4">
-          <div className="bg-nexa-surface border border-white/10 rounded-2xl p-6 w-full max-w-sm">
-            <h3 className="text-nexa-text-primary font-black text-xl mb-1 flex items-center gap-2">
+          <div className="bg-nexa-surface border border-[color:var(--white-10)] rounded-2xl p-6 w-full max-w-sm">
+            <h3 className="text-[color:var(--text-primary)] font-black text-xl mb-1 flex items-center gap-2">
               <Trophy className="w-5 h-5 text-nexa-gold" /> Submit Score
             </h3>
-            <p className="text-nexa-text-secondary text-sm mb-4">Record your score for <span className="text-nexa-text-primary font-bold">{game.title}</span></p>
+            <p className="text-[color:var(--text-secondary)] text-sm mb-4">Record your score for <span className="text-[color:var(--text-primary)] font-bold">{game.title}</span></p>
             <div className="space-y-3 mb-4">
               <div>
-                <label htmlFor="score-username" className="text-nexa-text-secondary text-xs mb-1 block">Your Name</label>
+                <label htmlFor="score-username" className="text-[color:var(--text-secondary)] text-xs mb-1 block">Your Name</label>
                 <input
                   id="score-username"
                   type="text"
@@ -189,11 +189,11 @@ export default function InstantPlaySection({ game }: { game: Game }) {
                   onChange={e => setUsername(e.target.value)}
                   placeholder="Enter your name..."
                   maxLength={20}
-                  className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2 text-nexa-text-primary text-sm outline-none focus:border-nexa-violet/60"
+                  className="w-full bg-[color:var(--white-05)] border border-[color:var(--white-10)] rounded-xl px-4 py-2 text-[color:var(--text-primary)] text-sm outline-none focus:border-nexa-violet/60"
                 />
               </div>
               <div>
-                <label htmlFor="score-value" className="text-nexa-text-secondary text-xs mb-1 block">Your Score</label>
+                <label htmlFor="score-value" className="text-[color:var(--text-secondary)] text-xs mb-1 block">Your Score</label>
                 <input
                   id="score-value"
                   type="number"
@@ -201,21 +201,21 @@ export default function InstantPlaySection({ game }: { game: Game }) {
                   onChange={e => setScore(e.target.value)}
                   placeholder="Enter your score..."
                   min="0"
-                  className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2 text-nexa-text-primary text-sm outline-none focus:border-nexa-violet/60"
+                  className="w-full bg-[color:var(--white-05)] border border-[color:var(--white-10)] rounded-xl px-4 py-2 text-[color:var(--text-primary)] text-sm outline-none focus:border-nexa-violet/60"
                 />
               </div>
             </div>
             <div className="flex gap-2">
               <button
                 onClick={() => setShowScoreModal(false)}
-                className="flex-1 py-2 rounded-xl border border-white/10 text-nexa-text-secondary text-sm hover:bg-white/5"
+                className="flex-1 py-2 rounded-xl border border-[color:var(--white-10)] text-[color:var(--text-secondary)] text-sm hover:bg-[color:var(--white-05)]"
               >
                 Cancel
               </button>
               <button
                 onClick={handleSaveScore}
                 disabled={!username.trim() || !score.trim()}
-                className="flex-1 py-2 rounded-xl bg-nexa-violet text-nexa-text-primary text-sm font-bold disabled:opacity-40"
+                className="flex-1 py-2 rounded-xl bg-nexa-violet text-[color:var(--text-primary)] text-sm font-bold disabled:opacity-40"
               >
                 Save Score
               </button>

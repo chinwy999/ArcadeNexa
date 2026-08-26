@@ -114,13 +114,13 @@ export default async function HomePage() {
               {gameCountLabel} Free Browser Games
             </div>
 
-            <h1 className="text-5xl font-black leading-[0.9] tracking-[-0.04em] text-nexa-text-primary sm:text-7xl lg:text-[6.5rem]">
+            <h1 className="text-5xl font-black leading-[0.9] tracking-[-0.04em] text-[color:var(--text-primary)] sm:text-7xl lg:text-[6.5rem]">
               PLAY.<br />
               <span className="gradient-text">DISCOVER.</span><br />
               REPEAT.
             </h1>
 
-            <p className="mx-auto mt-6 max-w-2xl text-base leading-7 text-nexa-text-secondary sm:text-lg lg:mx-0">
+            <p className="mx-auto mt-6 max-w-2xl text-base leading-7 text-[color:var(--text-secondary)] sm:text-lg lg:mx-0">
               Discover fast, free HTML5 games built for instant play.
               No downloads. No waiting. Just pick a game and play.
             </p>
@@ -129,25 +129,25 @@ export default async function HomePage() {
               <Link href="/games" className="btn-premium rounded-xl px-8 py-4 text-center text-base font-black">
                 PLAY NOW →
               </Link>
-              <Link href="/categories" className="rounded-xl border border-white/10 bg-white/[0.035] px-8 py-4 text-center text-base font-bold text-nexa-text-primary transition hover:border-nexa-cyan/30 hover:bg-white/[0.06]">
+              <Link href="/categories" className="rounded-xl border border-[color:var(--white-10)] bg-[color:var(--white-03)] px-8 py-4 text-center text-base font-bold text-[color:var(--text-primary)] transition hover:border-nexa-cyan/30 hover:bg-[color:var(--white-06)]">
                 EXPLORE CATEGORIES
               </Link>
             </div>
 
             <div className="mt-10 flex flex-wrap justify-center gap-6 text-sm lg:justify-start">
               <div>
-                <strong className="text-xl text-nexa-text-primary">{gameCountLabel}</strong>
-                <span className="ml-2 text-nexa-text-muted">Games</span>
+                <strong className="text-xl text-[color:var(--text-primary)]">{gameCountLabel}</strong>
+                <span className="ml-2 text-[color:var(--text-muted)]">Games</span>
               </div>
-              <div className="h-7 w-px bg-white/10" />
+              <div className="h-7 w-px bg-[color:var(--white-10)]" />
               <div>
-                <strong className="text-xl text-nexa-text-primary">47</strong>
-                <span className="ml-2 text-nexa-text-muted">Categories</span>
+                <strong className="text-xl text-[color:var(--text-primary)]">47</strong>
+                <span className="ml-2 text-[color:var(--text-muted)]">Categories</span>
               </div>
-              <div className="h-7 w-px bg-white/10" />
+              <div className="h-7 w-px bg-[color:var(--white-10)]" />
               <div>
                 <strong className="text-xl text-nexa-emerald">100%</strong>
-                <span className="ml-2 text-nexa-text-muted">Free</span>
+                <span className="ml-2 text-[color:var(--text-muted)]">Free</span>
               </div>
             </div>
           </div>
@@ -167,9 +167,9 @@ export default async function HomePage() {
           <div className="mb-5 flex items-end justify-between">
             <div>
               <p className="text-xs font-bold uppercase tracking-[0.25em] text-nexa-emerald">Explore</p>
-              <h2 className="mt-1 text-2xl font-black text-nexa-text-primary sm:text-3xl">Browse Categories</h2>
+              <h2 className="mt-1 text-2xl font-black text-[color:var(--text-primary)] sm:text-3xl">Browse Categories</h2>
             </div>
-            <Link href="/categories" className="text-sm font-bold text-nexa-text-secondary transition hover:text-nexa-emerald">
+            <Link href="/categories" className="text-sm font-bold text-[color:var(--text-secondary)] transition hover:text-nexa-emerald">
               View All →
             </Link>
           </div>
@@ -185,7 +185,7 @@ export default async function HomePage() {
                   className="category-card group relative overflow-hidden rounded-2xl p-4 active:scale-[0.97]"
                 >
                   <div className={`absolute -right-8 -top-8 h-24 w-24 rounded-full bg-gradient-to-br ${meta.color} opacity-20 blur-2xl transition-opacity duration-300 group-hover:opacity-40`} />
-                  <div className="relative mb-4 h-32 overflow-hidden rounded-xl border border-white/10 bg-black/30 shadow-lg transition-all duration-300 group-hover:scale-[1.02] group-hover:border-nexa-cyan/20">
+                  <div className="relative mb-4 h-32 overflow-hidden rounded-xl border border-[color:var(--white-10)] bg-black/30 shadow-lg transition-all duration-300 group-hover:scale-[1.02] group-hover:border-nexa-cyan/20">
                     {meta.image ? (
                       <Image
                         src={meta.image}
@@ -197,16 +197,16 @@ export default async function HomePage() {
                       />
                     ) : Icon ? (
                       <div className={`flex h-full w-full items-center justify-center bg-gradient-to-br ${meta.color}`}>
-                        <Icon className="h-10 w-10 text-nexa-text-primary drop-shadow-[0_0_10px_rgba(255,255,255,0.7)]" strokeWidth={2.4} />
+                        <Icon className="h-10 w-10 text-[color:var(--text-primary)] drop-shadow-[0_0_10px_rgba(255,255,255,0.7)]" strokeWidth={2.4} />
                       </div>
                     ) : null}
                     <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
                   </div>
                   <div className="relative">
-                    <h3 className="text-sm font-black uppercase tracking-wide text-nexa-text-primary">{category}</h3>
-                    <p className="mt-1 text-xs font-medium text-nexa-text-muted">Explore</p>
+                    <h3 className="text-sm font-black uppercase tracking-wide text-[color:var(--text-primary)]">{category}</h3>
+                    <p className="mt-1 text-xs font-medium text-[color:var(--text-muted)]">Explore</p>
                   </div>
-                  <div className="absolute bottom-4 right-4 text-xs font-bold text-nexa-text-primary/30 transition-colors group-hover:text-nexa-text-primary/80">→</div>
+                  <div className="absolute bottom-4 right-4 text-xs font-bold text-[color:var(--text-primary)]/30 transition-colors group-hover:text-[color:var(--text-primary)]/80">→</div>
                 </Link>
               )
             })}
@@ -220,10 +220,10 @@ export default async function HomePage() {
           <div className="mb-7 flex items-end justify-between">
             <div>
               <p className="text-xs font-bold uppercase tracking-[0.25em] text-nexa-violet">Popular</p>
-              <h2 className="mt-1 text-3xl font-black text-nexa-text-primary">⭐ Top Rated Games</h2>
-              <p className="mt-1 text-sm text-nexa-text-muted">The games players are loving right now.</p>
+              <h2 className="mt-1 text-3xl font-black text-[color:var(--text-primary)]">⭐ Top Rated Games</h2>
+              <p className="mt-1 text-sm text-[color:var(--text-muted)]">The games players are loving right now.</p>
             </div>
-            <Link href="/games" className="hidden text-sm font-bold text-nexa-text-secondary hover:text-nexa-emerald sm:block">
+            <Link href="/games" className="hidden text-sm font-bold text-[color:var(--text-secondary)] hover:text-nexa-emerald sm:block">
               View All →
             </Link>
           </div>
@@ -235,7 +235,7 @@ export default async function HomePage() {
               ))}
             </div>
           ) : (
-            <p className="text-nexa-text-muted text-center py-10">Loading games...</p>
+            <p className="text-[color:var(--text-muted)] text-center py-10">Loading games...</p>
           )}
         </div>
       </section>
@@ -246,10 +246,10 @@ export default async function HomePage() {
           <div className="mb-7 flex items-end justify-between">
             <div>
               <p className="text-xs font-bold uppercase tracking-[0.25em] text-nexa-cyan">Handpicked Discovery</p>
-              <h2 className="mt-1 text-3xl font-black text-nexa-text-primary">✨ Editor's Picks</h2>
-              <p className="mt-1 text-sm text-nexa-text-muted">Fresh games worth discovering today.</p>
+              <h2 className="mt-1 text-3xl font-black text-[color:var(--text-primary)]">✨ Editor's Picks</h2>
+              <p className="mt-1 text-sm text-[color:var(--text-muted)]">Fresh games worth discovering today.</p>
             </div>
-            <Link href="/games" className="text-sm font-bold text-nexa-text-secondary hover:text-nexa-emerald">
+            <Link href="/games" className="text-sm font-bold text-[color:var(--text-secondary)] hover:text-nexa-emerald">
               See More →
             </Link>
           </div>
@@ -261,7 +261,7 @@ export default async function HomePage() {
               ))}
             </div>
           ) : (
-            <p className="text-nexa-text-muted text-center py-10">Loading games...</p>
+            <p className="text-[color:var(--text-muted)] text-center py-10">Loading games...</p>
           )}
         </div>
       </section>
@@ -272,9 +272,9 @@ export default async function HomePage() {
           <div className="mb-7 flex items-end justify-between">
             <div>
               <p className="text-xs font-bold uppercase tracking-[0.25em] text-nexa-emerald">Fresh Arrivals</p>
-              <h2 className="mt-1 text-3xl font-black text-nexa-text-primary">🆕 New Games</h2>
+              <h2 className="mt-1 text-3xl font-black text-[color:var(--text-primary)]">🆕 New Games</h2>
             </div>
-            <Link href="/games" className="text-sm font-bold text-nexa-text-secondary hover:text-nexa-emerald">
+            <Link href="/games" className="text-sm font-bold text-[color:var(--text-secondary)] hover:text-nexa-emerald">
               See More →
             </Link>
           </div>
@@ -286,17 +286,17 @@ export default async function HomePage() {
               ))}
             </div>
           ) : (
-            <p className="text-nexa-text-muted text-center py-10">Loading games...</p>
+            <p className="text-[color:var(--text-muted)] text-center py-10">Loading games...</p>
           )}
         </div>
       </section>
 
       <section className="px-4 py-16">
-        <div className="mx-auto max-w-7xl overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-nexa-violet/20 via-white/[0.03] to-nexa-emerald/10 p-8 text-center sm:p-12">
+        <div className="mx-auto max-w-7xl overflow-hidden rounded-3xl border border-[color:var(--white-10)] bg-gradient-to-br from-nexa-violet/20 via-white/[0.03] to-nexa-emerald/10 p-8 text-center sm:p-12">
           <div className="mx-auto max-w-2xl">
             <p className="text-xs font-bold uppercase tracking-[0.3em] text-nexa-emerald">Your next game is waiting</p>
-            <h2 className="mt-3 text-3xl font-black text-nexa-text-primary sm:text-5xl">Find your next favorite game.</h2>
-            <p className="mt-4 text-nexa-text-secondary">Explore the full ArcadeNexa collection and start playing instantly.</p>
+            <h2 className="mt-3 text-3xl font-black text-[color:var(--text-primary)] sm:text-5xl">Find your next favorite game.</h2>
+            <p className="mt-4 text-[color:var(--text-secondary)]">Explore the full ArcadeNexa collection and start playing instantly.</p>
             <Link href="/games" className="mt-8 inline-flex rounded-xl bg-nexa-emerald px-8 py-4 font-black text-nexa-black shadow-lg shadow-nexa-emerald/20 transition hover:-translate-y-1">
               EXPLORE ALL GAMES →
             </Link>

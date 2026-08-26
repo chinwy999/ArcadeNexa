@@ -423,12 +423,12 @@ export default function CategoriesPage() {
           BROWSE GAME CATEGORIES
         </div>
 
-        <h1 className="mt-4 text-4xl font-black tracking-tight text-nexa-text-primary sm:text-5xl">
+        <h1 className="mt-4 text-4xl font-black tracking-tight text-[color:var(--text-primary)] sm:text-5xl">
           Explore Games by Category
         </h1>
 
-        <p className="mt-3 max-w-2xl text-base leading-7 text-text-secondary sm:text-lg">
-          Discover <span className="font-bold text-nexa-text-primary">15,000+ free browser games</span>{' '}
+        <p className="mt-3 max-w-2xl text-base leading-7 text-[color:var(--text-secondary)] sm:text-lg">
+          Discover <span className="font-bold text-[color:var(--text-primary)]">15,000+ free browser games</span>{' '}
           across action, puzzle, racing, sports, adventure and many more genres.
         </p>
       </header>
@@ -441,13 +441,13 @@ export default function CategoriesPage() {
             </p>
             <h2
               id="popular-categories"
-              className="mt-1 text-2xl font-black text-nexa-text-primary sm:text-3xl"
+              className="mt-1 text-2xl font-black text-[color:var(--text-primary)] sm:text-3xl"
             >
               Popular Categories
             </h2>
           </div>
 
-          <span className="hidden text-sm text-text-secondary sm:block">
+          <span className="hidden text-sm text-[color:var(--text-secondary)] sm:block">
             {featuredCategories.length} featured genres
           </span>
         </div>
@@ -465,7 +465,7 @@ export default function CategoriesPage() {
                 href={`/games?genre=${encodeURIComponent(
                   categoryAliases[category.slug] || category.slug
                 )}`}
-                className="group relative min-h-[150px] overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] transition duration-300 hover:-translate-y-1 hover:border-white/25 hover:shadow-2xl"
+                className="group relative min-h-[150px] overflow-hidden rounded-2xl border border-[color:var(--white-10)] bg-[color:var(--white-03)] transition duration-300 hover:-translate-y-1 hover:border-[color:var(--white-25)] hover:shadow-2xl"
               >
                 {image && (
                   <Image
@@ -483,10 +483,10 @@ export default function CategoriesPage() {
                 />
 
                 <div className="absolute inset-x-0 bottom-0 p-4">
-                  <h3 className="text-base font-black text-nexa-text-primary">
+                  <h3 className="text-base font-black text-[color:var(--text-primary)]">
                     {category.title}
                   </h3>
-                  <p className="mt-1 line-clamp-2 text-xs leading-5 text-nexa-text-secondary">
+                  <p className="mt-1 line-clamp-2 text-xs leading-5 text-[color:var(--text-secondary)]">
                     {category.description}
                   </p>
                 </div>
@@ -503,11 +503,11 @@ export default function CategoriesPage() {
           </p>
           <h2
             id="all-categories"
-            className="mt-1 text-2xl font-black text-nexa-text-primary sm:text-3xl"
+            className="mt-1 text-2xl font-black text-[color:var(--text-primary)] sm:text-3xl"
           >
             All Game Categories
           </h2>
-          <p className="mt-2 text-sm text-text-secondary">
+          <p className="mt-2 text-sm text-[color:var(--text-secondary)]">
             Choose a genre to find games you can play instantly in your browser.
           </p>
         </div>
@@ -525,7 +525,7 @@ export default function CategoriesPage() {
                 href={`/games?genre=${encodeURIComponent(
                   categoryAliases[category.slug] || category.slug
                 )}`}
-                className="group relative overflow-hidden rounded-xl border border-white/10 bg-white/[0.025] transition duration-300 hover:-translate-y-0.5 hover:border-white/25 hover:bg-white/[0.05]"
+                className="group relative overflow-hidden rounded-xl border border-[color:var(--white-10)] bg-[color:var(--white-03)] transition duration-300 hover:-translate-y-0.5 hover:border-[color:var(--white-25)] hover:bg-[color:var(--white-05)]"
               >
                 <div className="relative h-28 overflow-hidden">
                   {image ? (
@@ -546,10 +546,10 @@ export default function CategoriesPage() {
                 </div>
 
                 <div className="p-3">
-                  <h3 className="text-sm font-bold text-nexa-text-primary">
+                  <h3 className="text-sm font-bold text-[color:var(--text-primary)]">
                     {displayTitle(category.slug)}
                   </h3>
-                  <p className="mt-1 line-clamp-2 min-h-[32px] text-[11px] leading-4 text-text-secondary">
+                  <p className="mt-1 line-clamp-2 min-h-[32px] text-[11px] leading-4 text-[color:var(--text-secondary)]">
                     {category.description}
                   </p>
                 </div>
@@ -559,18 +559,18 @@ export default function CategoriesPage() {
         </div>
       </section>
 
-      <section className="mt-12 rounded-2xl border border-white/10 bg-white/[0.025] p-6 sm:p-8">
-        <h2 className="text-xl font-black text-nexa-text-primary">
+      <section className="mt-12 rounded-2xl border border-[color:var(--white-10)] bg-[color:var(--white-03)] p-6 sm:p-8">
+        <h2 className="text-xl font-black text-[color:var(--text-primary)]">
           New games added regularly
         </h2>
-        <p className="mt-2 max-w-2xl text-sm leading-6 text-text-secondary">
+        <p className="mt-2 max-w-2xl text-sm leading-6 text-[color:var(--text-secondary)]">
           ArcadeNexa combines games from trusted HTML5 game providers so you can
           discover and play thousands of games directly in your browser.
         </p>
 
         <Link
           href="/games"
-          className="mt-5 inline-flex rounded-xl bg-nexa-violet px-5 py-3 text-sm font-bold text-nexa-text-primary transition hover:brightness-110"
+          className="mt-5 inline-flex rounded-xl bg-nexa-violet px-5 py-3 text-sm font-bold text-[color:var(--text-primary)] transition hover:brightness-110"
         >
           Browse All Games
         </Link>

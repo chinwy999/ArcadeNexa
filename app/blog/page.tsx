@@ -32,10 +32,10 @@ export default function BlogPage() {
         <p className="mb-3 text-sm font-bold uppercase tracking-widest text-nexa-emerald">
           ArcadeNexa Editorial
         </p>
-        <h1 className="mb-4 text-4xl font-black text-nexa-text-primary sm:text-5xl">
+        <h1 className="mb-4 text-4xl font-black text-[color:var(--text-primary)] sm:text-5xl">
           Gaming Guides & Articles
         </h1>
-        <p className="max-w-3xl text-lg leading-8 text-text-secondary">
+        <p className="max-w-3xl text-lg leading-8 text-[color:var(--text-secondary)]">
           Practical guides, explainers, comparisons, and gaming tips designed
           to help you discover and enjoy browser games.
         </p>
@@ -45,16 +45,16 @@ export default function BlogPage() {
         {articles.map((article) => (
           <article
             key={article.slug}
-            className="glass rounded-2xl border border-white/10 p-6 transition hover:-translate-y-1 hover:border-nexa-violet/40"
+            className="glass rounded-2xl border border-[color:var(--white-10)] p-6 transition hover:-translate-y-1 hover:border-nexa-violet/40"
           >
             <div className="mb-4 flex items-center justify-between gap-3 text-xs">
               <span className="rounded-full border border-nexa-emerald/20 bg-nexa-emerald/10 px-3 py-1 font-bold text-nexa-emerald">
                 {article.category}
               </span>
-              <span className="text-text-secondary">{article.readTime}</span>
+              <span className="text-[color:var(--text-secondary)]">{article.readTime}</span>
             </div>
 
-            <h2 className="mb-3 text-xl font-bold text-nexa-text-primary">
+            <h2 className="mb-3 text-xl font-bold text-[color:var(--text-primary)]">
               <Link
                 href={`/blog/${article.slug}`}
                 className="hover:text-nexa-emerald"
@@ -63,7 +63,7 @@ export default function BlogPage() {
               </Link>
             </h2>
 
-            <p className="mb-5 line-clamp-4 text-sm leading-7 text-text-secondary">
+            <p className="mb-5 line-clamp-4 text-sm leading-7 text-[color:var(--text-secondary)]">
               {article.description}
             </p>
 

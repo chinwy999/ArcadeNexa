@@ -288,10 +288,10 @@ export default async function GamePage({ params }: PageParams) {
       />
 
       {/* Breadcrumb */}
-      <div className="flex items-center gap-2 text-sm text-text-secondary mb-6">
+      <div className="flex items-center gap-2 text-sm text-[color:var(--text-secondary)] mb-6">
         <Link
           href="/"
-          className="hover:text-nexa-text-primary transition"
+          className="hover:text-[color:var(--text-primary)] transition"
         >
           Home
         </Link>
@@ -300,7 +300,7 @@ export default async function GamePage({ params }: PageParams) {
 
         <Link
           href="/games"
-          className="hover:text-nexa-text-primary transition"
+          className="hover:text-[color:var(--text-primary)] transition"
         >
           Games
         </Link>
@@ -309,21 +309,21 @@ export default async function GamePage({ params }: PageParams) {
 
         <Link
           href={`/games?genre=${game.category}`}
-          className="hover:text-nexa-text-primary transition capitalize"
+          className="hover:text-[color:var(--text-primary)] transition capitalize"
         >
           {game.category}
         </Link>
 
         <span>/</span>
 
-        <span className="text-nexa-text-primary truncate">
+        <span className="text-[color:var(--text-primary)] truncate">
           {game.title}
         </span>
       </div>
 
       {/* Game Title */}
       <div className="mb-6">
-        <h1 className="text-3xl font-black text-nexa-text-primary mb-2">
+        <h1 className="text-3xl font-black text-[color:var(--text-primary)] mb-2">
           {game.title}
         </h1>
 
@@ -332,7 +332,7 @@ export default async function GamePage({ params }: PageParams) {
             HTML5 • Free
           </span>
 
-          <span className="bg-white/5 border border-white/10 text-text-secondary text-xs px-3 py-1 rounded-full capitalize">
+          <span className="bg-[color:var(--white-05)] border border-[color:var(--white-10)] text-[color:var(--text-secondary)] text-xs px-3 py-1 rounded-full capitalize">
             {game.category}
           </span>
 
@@ -360,33 +360,33 @@ export default async function GamePage({ params }: PageParams) {
 
         <div className="md:col-span-2 space-y-6">
 
-          <div className="glass rounded-2xl p-6 border border-white/5">
-            <h2 className="text-xl font-bold text-nexa-text-primary mb-3">
+          <div className="glass rounded-2xl p-6 border border-[color:var(--white-05)]">
+            <h2 className="text-xl font-bold text-[color:var(--text-primary)] mb-3">
               About {game.title}
             </h2>
 
-            <p className="text-nexa-text-secondary leading-relaxed">
+            <p className="text-[color:var(--text-secondary)] leading-relaxed">
               {game.longDescription}
             </p>
           </div>
 
-                      <div className="glass rounded-2xl p-6 border border-white/5">
-              <h2 className="text-xl font-bold text-nexa-text-primary mb-3">
+                      <div className="glass rounded-2xl p-6 border border-[color:var(--white-05)]">
+              <h2 className="text-xl font-bold text-[color:var(--text-primary)] mb-3">
                 How to Play {game.title}
               </h2>
 
-              <p className="text-nexa-text-secondary leading-relaxed">
+              <p className="text-[color:var(--text-secondary)] leading-relaxed">
                 {howToPlay}
               </p>
 
-              <p className="mt-4 text-sm text-text-secondary">
+              <p className="mt-4 text-sm text-[color:var(--text-secondary)]">
                 Controls may vary by game. Check the on-screen instructions when
                 the game loads for the exact keyboard, mouse, or touch controls.
               </p>
             </div>
 
-            <div className="glass rounded-2xl p-6 border border-white/5">
-              <h2 className="text-xl font-bold text-nexa-text-primary mb-4">
+            <div className="glass rounded-2xl p-6 border border-[color:var(--white-05)]">
+              <h2 className="text-xl font-bold text-[color:var(--text-primary)] mb-4">
                 Gaming Guides & Tips
               </h2>
 
@@ -395,13 +395,13 @@ export default async function GamePage({ params }: PageParams) {
                   <Link
                     key={article.slug}
                     href={`/blog/${article.slug}`}
-                    className="rounded-xl border border-white/10 bg-white/[0.02] p-4 transition hover:border-nexa-violet/40 hover:bg-white/[0.04]"
+                    className="rounded-xl border border-[color:var(--white-10)] bg-[color:var(--white-02)] p-4 transition hover:border-nexa-violet/40 hover:bg-[color:var(--white-04)]"
                   >
                     <span className="mb-2 block text-xs font-bold uppercase tracking-wide text-nexa-violet">
                       {article.category}
                     </span>
 
-                    <span className="block text-sm font-bold leading-6 text-nexa-text-primary">
+                    <span className="block text-sm font-bold leading-6 text-[color:var(--text-primary)]">
                       {article.title}
                     </span>
                   </Link>
@@ -414,45 +414,45 @@ export default async function GamePage({ params }: PageParams) {
 
           <div className="space-y-4">
 
-          <div className="glass rounded-2xl p-6 border border-white/5">
-            <h3 className="text-xl font-bold text-nexa-text-primary mb-4">
+          <div className="glass rounded-2xl p-6 border border-[color:var(--white-05)]">
+            <h3 className="text-xl font-bold text-[color:var(--text-primary)] mb-4">
               Details
             </h3>
 
             <div className="space-y-3">
 
               <div className="flex justify-between">
-                <span className="text-nexa-text-secondary">
+                <span className="text-[color:var(--text-secondary)]">
                   Provider
                 </span>
 
-                <span className="text-nexa-text-primary font-medium">
+                <span className="text-[color:var(--text-primary)] font-medium">
                   {game.provider}
                 </span>
               </div>
 
               <div className="flex justify-between">
-                <span className="text-nexa-text-secondary">
+                <span className="text-[color:var(--text-secondary)]">
                   Platform
                 </span>
 
-                <span className="text-nexa-text-primary font-medium">
+                <span className="text-[color:var(--text-primary)] font-medium">
                   {game.platform}
                 </span>
               </div>
 
               <div className="flex justify-between">
-                <span className="text-nexa-text-secondary">
+                <span className="text-[color:var(--text-secondary)]">
                   Category
                 </span>
 
-                <span className="text-nexa-text-primary font-medium capitalize">
+                <span className="text-[color:var(--text-primary)] font-medium capitalize">
                   {game.category}
                 </span>
               </div>
 
               <div className="flex justify-between">
-                <span className="text-nexa-text-secondary">
+                <span className="text-[color:var(--text-secondary)]">
                   Rating
                 </span>
 
@@ -462,11 +462,11 @@ export default async function GamePage({ params }: PageParams) {
               </div>
 
               <div className="flex justify-between">
-                <span className="text-nexa-text-secondary">
+                <span className="text-[color:var(--text-secondary)]">
                   Resolution
                 </span>
 
-                <span className="text-nexa-text-primary font-medium">
+                <span className="text-[color:var(--text-primary)] font-medium">
                   {game.width}×{game.height}
                 </span>
               </div>
@@ -476,9 +476,9 @@ export default async function GamePage({ params }: PageParams) {
 
           <Link
             href={`/games?genre=${game.category}`}
-            className="block glass rounded-2xl p-4 border border-white/5 hover:border-nexa-violet/40 transition text-center"
+            className="block glass rounded-2xl p-4 border border-[color:var(--white-05)] hover:border-nexa-violet/40 transition text-center"
           >
-            <p className="text-text-secondary text-sm">
+            <p className="text-[color:var(--text-secondary)] text-sm">
               More{' '}
               <span className="capitalize text-nexa-violet font-bold">
                 {game.category}

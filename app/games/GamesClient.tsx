@@ -68,7 +68,7 @@ export default function GamesClient() {
             <Gamepad2 className="w-8 h-8 text-nexa-violet" />
             <h1 className="text-4xl font-bold">Games Arena</h1>
           </div>
-          <p className="text-nexa-text-secondary">
+          <p className="text-[color:var(--text-secondary)]">
             {games.length} HTML5 games - instant play, no download, fullscreen support.
           </p>
         </div>
@@ -81,13 +81,13 @@ export default function GamesClient() {
 
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
             <div>
-              <label htmlFor="games-genre" className="block text-sm font-medium text-nexa-text-secondary mb-2">Genre</label>
+              <label htmlFor="games-genre" className="block text-sm font-medium text-[color:var(--text-secondary)] mb-2">Genre</label>
               <select id="games-genre" value={genre} onChange={e => setGenre(e.target.value)} className="w-full bg-nexa-surface border border-nexa-violet/25 rounded-lg px-4 py-2">
                 {allGenres.map(g => <option key={g} value={g}>{g}</option>)}
               </select>
             </div>
             <div>
-              <label htmlFor="games-platform" className="block text-sm font-medium text-nexa-text-secondary mb-2">Platform</label>
+              <label htmlFor="games-platform" className="block text-sm font-medium text-[color:var(--text-secondary)] mb-2">Platform</label>
               <select id="games-platform" value={platform} onChange={e => setPlatform(e.target.value)} className="w-full bg-nexa-surface border border-nexa-violet/25 rounded-lg px-4 py-2">
                 <option value="All">All Platforms</option>
                 <option value="PC">PC</option>
@@ -95,7 +95,7 @@ export default function GamesClient() {
               </select>
             </div>
             <div>
-              <label htmlFor="games-rating" className="block text-sm font-medium text-nexa-text-secondary mb-2">Rating</label>
+              <label htmlFor="games-rating" className="block text-sm font-medium text-[color:var(--text-secondary)] mb-2">Rating</label>
               <select id="games-rating" value={rating} onChange={e => setRating(e.target.value)} className="w-full bg-nexa-surface border border-nexa-violet/25 rounded-lg px-4 py-2">
                 <option value="All">All Ratings</option>
                 <option value="5">5 Stars</option>
@@ -104,7 +104,7 @@ export default function GamesClient() {
               </select>
             </div>
             <div>
-              <label htmlFor="games-search" className="block text-sm font-medium text-nexa-text-secondary mb-2">Search</label>
+              <label htmlFor="games-search" className="block text-sm font-medium text-[color:var(--text-secondary)] mb-2">Search</label>
               <input id="games-search" type="text" value={search} onChange={e => setSearch(e.target.value)} placeholder="Search games..." className="w-full bg-nexa-surface border border-nexa-violet/25 rounded-lg px-4 py-2" />
             </div>
           </div>
@@ -120,14 +120,14 @@ export default function GamesClient() {
 
         {filtered.length === 0 && (
           <div className="text-center py-20">
-            <Gamepad2 className="w-16 h-16 mx-auto text-nexa-text-muted mb-4" />
-            <p className="text-nexa-text-secondary text-lg">No games match your filters</p>
+            <Gamepad2 className="w-16 h-16 mx-auto text-[color:var(--text-muted)] mb-4" />
+            <p className="text-[color:var(--text-secondary)] text-lg">No games match your filters</p>
           </div>
         )}
 
         {hasMore && (
           <div className="flex justify-center">
-            <button onClick={() => setVisibleCount(v => v + PAGE_SIZE)} className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-nexa-text-primary px-8 py-3 rounded-lg font-semibold">
+            <button onClick={() => setVisibleCount(v => v + PAGE_SIZE)} className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-[color:var(--text-primary)] px-8 py-3 rounded-lg font-semibold">
               Load More Games ({visible.length} / {filtered.length})
             </button>
           </div>

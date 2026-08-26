@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 export const dynamic = 'force-dynamic'
 import Link from 'next/link'
 import { getGames } from '@/lib/games'
+import SafeImage from '@/components/SafeImage'
 
 export const metadata: Metadata = {
   title: 'Two Player Games – Free Online 2 Player Games | ArcadeNexa',
@@ -32,7 +33,7 @@ export default async function TwoPlayerGamesPage() {
   }
 
   return (
-    <main className="min-h-screen bg-nexa-black text-nexa-text-primary">
+    <main className="min-h-screen bg-nexa-black text-[color:var(--text-primary)]">
 
       {/* HERO */}
       <section className="relative overflow-hidden bg-gradient-to-b from-nexa-violet/30 to-nexa-black px-4 py-16 text-center">
@@ -47,16 +48,16 @@ export default async function TwoPlayerGamesPage() {
               Free Online
             </span>
           </h1>
-          <p className="mx-auto mb-6 max-w-2xl text-lg text-nexa-text-secondary">
-            Challenge a friend on the <strong className="text-nexa-text-primary">same device</strong> or compete solo.
+          <p className="mx-auto mb-6 max-w-2xl text-lg text-[color:var(--text-secondary)]">
+            Challenge a friend on the <strong className="text-[color:var(--text-primary)]">same device</strong> or compete solo.
             ArcadeNexa has 15,000+ free browser games including the best 2 player games — no download, no login.
           </p>
           <div className="mb-8 flex flex-wrap justify-center gap-2 text-sm">
             {['2 Player Sports','Fighting Games','Racing Games','.IO Multiplayer','Same Screen','Unblocked'].map(tag => (
-              <span key={tag} className="rounded-full border border-nexa-violet/25 bg-nexa-surface/60 px-3 py-1 text-nexa-text-secondary">{tag}</span>
+              <span key={tag} className="rounded-full border border-nexa-violet/25 bg-nexa-surface/60 px-3 py-1 text-[color:var(--text-secondary)]">{tag}</span>
             ))}
           </div>
-          <Link href="/games" className="inline-block rounded-xl bg-nexa-violet px-8 py-3 font-bold text-nexa-text-primary transition hover:bg-nexa-violet">
+          <Link href="/games" className="inline-block rounded-xl bg-nexa-violet px-8 py-3 font-bold text-[color:var(--text-primary)] transition hover:bg-nexa-violet">
             Browse All Games →
           </Link>
         </div>
@@ -70,13 +71,18 @@ export default async function TwoPlayerGamesPage() {
             {featured.map(game => (
               <Link key={game.id} href={`/games/${game.slug}`}
                 className="group rounded-xl border border-nexa-violet/20 bg-nexa-black/60 p-2 transition hover:border-nexa-violet/50 hover:bg-nexa-surface">
-                <div className="mb-2 aspect-square overflow-hidden rounded-lg bg-nexa-surface">
+                <div className="relative mb-2 aspect-square overflow-hidden rounded-lg bg-nexa-surface">
                   {game.thumbnail
-                    ? <img src={game.thumbnail} alt={game.title} className="h-full w-full object-cover transition group-hover:scale-105" loading="lazy" />
+                    ? <SafeImage
+                          src={game.thumbnail}
+                          alt={game.title}
+                          className="object-cover transition group-hover:scale-105"
+                          sizes="(max-width: 640px) 33vw, 16vw"
+                        />
                     : <div className={`flex h-full w-full items-center justify-center text-lg font-bold ${game.gradient}`}>{game.initials}</div>
                   }
                 </div>
-                <p className="truncate text-xs font-medium text-nexa-text-secondary">{game.title}</p>
+                <p className="truncate text-xs font-medium text-[color:var(--text-secondary)]">{game.title}</p>
               </Link>
             ))}
           </div>
@@ -101,13 +107,18 @@ export default async function TwoPlayerGamesPage() {
                 {catGames.map(game => (
                   <Link key={game.id} href={`/games/${game.slug}`}
                     className="group rounded-xl border border-nexa-violet/20 bg-nexa-black/60 p-2 transition hover:border-nexa-violet/50 hover:bg-nexa-surface">
-                    <div className="mb-2 aspect-square overflow-hidden rounded-lg bg-nexa-surface">
+                    <div className="relative mb-2 aspect-square overflow-hidden rounded-lg bg-nexa-surface">
                       {game.thumbnail
-                        ? <img src={game.thumbnail} alt={game.title} className="h-full w-full object-cover transition group-hover:scale-105" loading="lazy" />
+                        ? <SafeImage
+                          src={game.thumbnail}
+                          alt={game.title}
+                          className="object-cover transition group-hover:scale-105"
+                          sizes="(max-width: 640px) 33vw, 16vw"
+                        />
                         : <div className={`flex h-full w-full items-center justify-center text-sm font-bold ${game.gradient}`}>{game.initials}</div>
                       }
                     </div>
-                    <p className="truncate text-xs text-nexa-text-secondary">{game.title}</p>
+                    <p className="truncate text-xs text-[color:var(--text-secondary)]">{game.title}</p>
                   </Link>
                 ))}
               </div>
@@ -120,10 +131,10 @@ export default async function TwoPlayerGamesPage() {
       <section className="mx-auto max-w-3xl px-4 py-12">
         <div className="rounded-2xl border border-nexa-violet/20 bg-nexa-black/40 p-8">
           <h2 className="mb-4 text-2xl font-bold">Best Two Player Games Online Free</h2>
-          <div className="space-y-4 text-nexa-text-secondary leading-relaxed">
+          <div className="space-y-4 text-[color:var(--text-secondary)] leading-relaxed">
             <p>Two player games are perfect for competing with a friend or family member on the same device. ArcadeNexa offers the best selection of free 2 player browser games including sports, fighting, racing, and .IO multiplayer games.</p>
-            <p>All games are <strong className="text-nexa-text-primary">free to play with no download</strong> required. Simply open the game in your browser and start competing. Works on desktop, laptop, tablet, and mobile — including school Chromebooks.</p>
-            <p>Popular two player game categories include <strong className="text-nexa-text-primary">sports games</strong> like soccer and basketball, <strong className="text-nexa-text-primary">fighting games</strong> for head-to-head combat, and <strong className="text-nexa-text-primary">.IO games</strong> for multiplayer competition online.</p>
+            <p>All games are <strong className="text-[color:var(--text-primary)]">free to play with no download</strong> required. Simply open the game in your browser and start competing. Works on desktop, laptop, tablet, and mobile — including school Chromebooks.</p>
+            <p>Popular two player game categories include <strong className="text-[color:var(--text-primary)]">sports games</strong> like soccer and basketball, <strong className="text-[color:var(--text-primary)]">fighting games</strong> for head-to-head combat, and <strong className="text-[color:var(--text-primary)]">.IO games</strong> for multiplayer competition online.</p>
           </div>
         </div>
       </section>

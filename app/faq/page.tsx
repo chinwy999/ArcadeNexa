@@ -53,25 +53,25 @@ const faqs = [
 export default function FAQPage() {
   return (
     <div className="py-20 px-4 sm:px-6 max-w-4xl mx-auto animate-fade-in">
-      <h1 className="text-5xl font-black text-nexa-text-primary mb-4">FAQ</h1>
-      <p className="text-text-secondary text-lg mb-12">Frequently Asked Questions about ArcadeNexa</p>
+      <h1 className="text-5xl font-black text-[color:var(--text-primary)] mb-4">FAQ</h1>
+      <p className="text-[color:var(--text-secondary)] text-lg mb-12">Frequently Asked Questions about ArcadeNexa</p>
 
       <div className="space-y-4 mb-12">
         {faqs.map((f, i) => (
-          <details key={i} className="glass rounded-xl border border-white/5 p-5 group">
-            <summary className="text-nexa-text-primary font-bold cursor-pointer list-none flex justify-between items-center gap-4">
+          <details key={i} className="glass rounded-xl border border-[color:var(--white-05)] p-5 group">
+            <summary className="text-[color:var(--text-primary)] font-bold cursor-pointer list-none flex justify-between items-center gap-4">
               <span>{f.q}</span>
-              <span className="text-text-secondary group-open:rotate-180 transition-transform flex-shrink-0">▼</span>
+              <span className="text-[color:var(--text-secondary)] group-open:rotate-180 transition-transform flex-shrink-0">▼</span>
             </summary>
-            <p className="text-text-secondary text-sm mt-4 leading-relaxed">{f.a}</p>
+            <p className="text-[color:var(--text-secondary)] text-sm mt-4 leading-relaxed">{f.a}</p>
           </details>
         ))}
       </div>
 
-      <div className="glass rounded-2xl border border-white/5 p-8 text-center">
-        <h2 className="text-2xl font-bold text-nexa-text-primary mb-2">Still have questions?</h2>
-        <p className="text-text-secondary mb-6">Our team is happy to help you.</p>
-        <Link href="/contact" className="bg-nexa-violet text-nexa-text-primary px-8 py-3 rounded-xl font-bold hover:opacity-90 transition inline-block">
+      <div className="glass rounded-2xl border border-[color:var(--white-05)] p-8 text-center">
+        <h2 className="text-2xl font-bold text-[color:var(--text-primary)] mb-2">Still have questions?</h2>
+        <p className="text-[color:var(--text-secondary)] mb-6">Our team is happy to help you.</p>
+        <Link href="/contact" className="bg-nexa-violet text-[color:var(--text-primary)] px-8 py-3 rounded-xl font-bold hover:opacity-90 transition inline-block">
           Contact Us
         </Link>
       </div>

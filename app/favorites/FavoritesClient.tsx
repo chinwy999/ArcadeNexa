@@ -129,11 +129,11 @@ export default function FavoritesClient() {
               Your Collection
             </p>
 
-            <h1 className="mt-2 text-3xl font-black text-nexa-text-primary sm:text-4xl">
+            <h1 className="mt-2 text-3xl font-black text-[color:var(--text-primary)] sm:text-4xl">
               ♥ Favorite Games
             </h1>
 
-            <p className="mt-2 text-sm text-nexa-text-secondary">
+            <p className="mt-2 text-sm text-[color:var(--text-secondary)]">
               Games you saved to play later.
             </p>
           </div>
@@ -152,21 +152,21 @@ export default function FavoritesClient() {
 
         {loading ? (
           <div className="py-20 text-center">
-            <div className="mx-auto h-8 w-8 animate-spin rounded-full border-2 border-white/10 border-t-cyan-400" />
+            <div className="mx-auto h-8 w-8 animate-spin rounded-full border-2 border-[color:var(--white-10)] border-t-cyan-400" />
 
-            <p className="mt-4 text-sm text-nexa-text-muted">
+            <p className="mt-4 text-sm text-[color:var(--text-muted)]">
               Loading your favorites...
             </p>
           </div>
         ) : games.length === 0 ? (
-          <div className="rounded-2xl border border-white/5 bg-white/[0.03] px-6 py-20 text-center">
-            <Heart className="mx-auto h-12 w-12 text-nexa-text-muted" />
+          <div className="rounded-2xl border border-[color:var(--white-05)] bg-[color:var(--white-03)] px-6 py-20 text-center">
+            <Heart className="mx-auto h-12 w-12 text-[color:var(--text-muted)]" />
 
-            <h2 className="mt-5 text-xl font-bold text-nexa-text-primary">
+            <h2 className="mt-5 text-xl font-bold text-[color:var(--text-primary)]">
               No favorite games yet
             </h2>
 
-            <p className="mx-auto mt-2 max-w-md text-sm text-nexa-text-muted">
+            <p className="mx-auto mt-2 max-w-md text-sm text-[color:var(--text-muted)]">
               Tap “Add to Favorites” on any game to save it here.
             </p>
 
@@ -182,7 +182,7 @@ export default function FavoritesClient() {
             {games.map((game) => (
               <div
                 key={game.slug}
-                className="group overflow-hidden rounded-2xl border border-white/5 bg-white/[0.03] transition hover:-translate-y-1 hover:border-nexa-violet/30"
+                className="group overflow-hidden rounded-2xl border border-[color:var(--white-05)] bg-[color:var(--white-03)] transition hover:-translate-y-1 hover:border-nexa-violet/30"
               >
                 <Link
                   href={`/games/${game.slug}`}
@@ -206,12 +206,12 @@ export default function FavoritesClient() {
                       href={`/games/${game.slug}`}
                       className="min-w-0"
                     >
-                      <h2 className="truncate text-sm font-bold text-nexa-text-primary transition group-hover:text-nexa-cyan">
+                      <h2 className="truncate text-sm font-bold text-[color:var(--text-primary)] transition group-hover:text-nexa-cyan">
                         {game.title}
                       </h2>
 
                       {game.genre && (
-                        <p className="mt-1 truncate text-xs text-nexa-text-muted">
+                        <p className="mt-1 truncate text-xs text-[color:var(--text-muted)]">
                           {game.genre}
                         </p>
                       )}
@@ -228,7 +228,7 @@ export default function FavoritesClient() {
                       onClick={() => removeFavorite(game.slug)}
                       aria-label={`Remove ${game.title} from favorites`}
                       title="Remove from favorites"
-                      className="shrink-0 rounded-lg p-2 text-nexa-text-muted transition hover:bg-nexa-violet/10 hover:text-nexa-violet"
+                      className="shrink-0 rounded-lg p-2 text-[color:var(--text-muted)] transition hover:bg-nexa-violet/10 hover:text-nexa-violet"
                     >
                       <X className="h-4 w-4" />
                     </button>

@@ -32,35 +32,35 @@ export default function RegisterClient() {
 
   return (
     <div className="min-h-[80vh] flex items-center justify-center px-4 py-20 animate-fade-in">
-      <div className="w-full max-w-md glass rounded-2xl p-8 border border-white/10">
-        <h1 className="text-3xl font-black text-nexa-text-primary mb-2">Create Account</h1>
-        <p className="text-text-secondary mb-6">Join the arena and forge your legend</p>
+      <div className="w-full max-w-md glass rounded-2xl p-8 border border-[color:var(--white-10)]">
+        <h1 className="text-3xl font-black text-[color:var(--text-primary)] mb-2">Create Account</h1>
+        <p className="text-[color:var(--text-secondary)] mb-6">Join the arena and forge your legend</p>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label htmlFor="username" className="block text-sm text-text-secondary mb-1">Username</label>
-            <input id="username" value={username} onChange={e=>setUsername(e.target.value)} className="w-full bg-nexa-surface border border-white/10 rounded-xl px-4 py-3 text-nexa-text-primary focus:ring-2 focus:ring-nexa-violet outline-none" placeholder="Legend123" required />
+            <label htmlFor="username" className="block text-sm text-[color:var(--text-secondary)] mb-1">Username</label>
+            <input id="username" value={username} onChange={e=>setUsername(e.target.value)} className="w-full bg-nexa-surface border border-[color:var(--white-10)] rounded-xl px-4 py-3 text-[color:var(--text-primary)] focus:ring-2 focus:ring-nexa-violet outline-none" placeholder="Legend123" required />
           </div>
           <div>
-            <label htmlFor="email" className="block text-sm text-text-secondary mb-1">Email</label>
-            <input id="email" type="email" value={email} onChange={e=>setEmail(e.target.value)} className="w-full bg-nexa-surface border border-white/10 rounded-xl px-4 py-3 text-nexa-text-primary focus:ring-2 focus:ring-nexa-violet outline-none" placeholder="you@example.com" required />
+            <label htmlFor="email" className="block text-sm text-[color:var(--text-secondary)] mb-1">Email</label>
+            <input id="email" type="email" value={email} onChange={e=>setEmail(e.target.value)} className="w-full bg-nexa-surface border border-[color:var(--white-10)] rounded-xl px-4 py-3 text-[color:var(--text-primary)] focus:ring-2 focus:ring-nexa-violet outline-none" placeholder="you@example.com" required />
           </div>
           <div>
-            <label htmlFor="password" className="block text-sm text-text-secondary mb-1">Password</label>
-            <input id="password" type="password" value={password} onChange={e=>setPassword(e.target.value)} className="w-full bg-nexa-surface border border-white/10 rounded-xl px-4 py-3 text-nexa-text-primary focus:ring-2 focus:ring-nexa-violet outline-none" placeholder="••••••••" required />
+            <label htmlFor="password" className="block text-sm text-[color:var(--text-secondary)] mb-1">Password</label>
+            <input id="password" type="password" value={password} onChange={e=>setPassword(e.target.value)} className="w-full bg-nexa-surface border border-[color:var(--white-10)] rounded-xl px-4 py-3 text-[color:var(--text-primary)] focus:ring-2 focus:ring-nexa-violet outline-none" placeholder="••••••••" required />
             {strength && <p className={`text-xs mt-1 ${strength.color}`}>Strength: {strength.label}</p>}
           </div>
           <div>
-            <label htmlFor="confirm" className="block text-sm text-text-secondary mb-1">Confirm Password</label>
-            <input id="confirm" type="password" value={confirm} onChange={e=>setConfirm(e.target.value)} className="w-full bg-nexa-surface border border-white/10 rounded-xl px-4 py-3 text-nexa-text-primary focus:ring-2 focus:ring-nexa-violet outline-none" placeholder="••••••••" required />
+            <label htmlFor="confirm" className="block text-sm text-[color:var(--text-secondary)] mb-1">Confirm Password</label>
+            <input id="confirm" type="password" value={confirm} onChange={e=>setConfirm(e.target.value)} className="w-full bg-nexa-surface border border-[color:var(--white-10)] rounded-xl px-4 py-3 text-[color:var(--text-primary)] focus:ring-2 focus:ring-nexa-violet outline-none" placeholder="••••••••" required />
           </div>
-          <label htmlFor="register-terms" className="flex gap-2 text-xs text-text-secondary"><input id="register-terms" type="checkbox" required /> I agree to the <Link href="/terms" className="text-nexa-violet hover:underline">Terms</Link> and <Link href="/privacy" className="text-nexa-violet hover:underline">Privacy</Link></label>
+          <label htmlFor="register-terms" className="flex gap-2 text-xs text-[color:var(--text-secondary)]"><input id="register-terms" type="checkbox" required /> I agree to the <Link href="/terms" className="text-nexa-violet hover:underline">Terms</Link> and <Link href="/privacy" className="text-nexa-violet hover:underline">Privacy</Link></label>
 
-          <button type="submit" disabled={loading} className="w-full bg-nexa-violet hover:bg-violet-600 disabled:opacity-50 text-nexa-text-primary font-bold py-3 rounded-xl transition">{loading ? 'Creating...' : 'CREATE ACCOUNT'}</button>
+          <button type="submit" disabled={loading} className="w-full bg-nexa-violet hover:bg-violet-600 disabled:opacity-50 text-[color:var(--text-primary)] font-bold py-3 rounded-xl transition">{loading ? 'Creating...' : 'CREATE ACCOUNT'}</button>
           {message && <div className="bg-nexa-emerald/10 border border-nexa-emerald/30 text-nexa-emerald text-sm p-3 rounded-xl">{message}</div>}
         </form>
 
-        <div className="mt-6 text-center text-sm text-text-secondary">Already have an account? <Link href="/login" className="text-nexa-violet hover:underline font-bold">Login</Link></div>
+        <div className="mt-6 text-center text-sm text-[color:var(--text-secondary)]">Already have an account? <Link href="/login" className="text-nexa-violet hover:underline font-bold">Login</Link></div>
       </div>
     </div>
   )

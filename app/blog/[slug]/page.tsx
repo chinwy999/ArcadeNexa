@@ -240,12 +240,12 @@ export default async function ArticlePage({ params }: Props) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }}
       />
 
-      <nav className="mb-8 text-sm text-text-secondary" aria-label="Breadcrumb">
-        <Link href="/" className="hover:text-nexa-text-primary">Home</Link>
+      <nav className="mb-8 text-sm text-[color:var(--text-secondary)]" aria-label="Breadcrumb">
+        <Link href="/" className="hover:text-[color:var(--text-primary)]">Home</Link>
         <span className="mx-2">/</span>
-        <Link href="/blog" className="hover:text-nexa-text-primary">Blog</Link>
+        <Link href="/blog" className="hover:text-[color:var(--text-primary)]">Blog</Link>
         <span className="mx-2">/</span>
-        <span className="text-nexa-text-primary">{article.title}</span>
+        <span className="text-[color:var(--text-primary)]">{article.title}</span>
       </nav>
 
       <header className="mb-10">
@@ -253,7 +253,7 @@ export default async function ArticlePage({ params }: Props) {
           <span className="rounded-full border border-nexa-emerald/20 bg-nexa-emerald/10 px-3 py-1 font-bold text-nexa-emerald">
             {article.category}
           </span>
-          <time dateTime={article.date} className="text-text-secondary">
+          <time dateTime={article.date} className="text-[color:var(--text-secondary)]">
             {new Date(`${article.date}T00:00:00Z`).toLocaleDateString('en-US', {
               year: 'numeric',
               month: 'long',
@@ -261,14 +261,14 @@ export default async function ArticlePage({ params }: Props) {
               timeZone: 'UTC',
             })}
           </time>
-          <span className="text-text-secondary">• {article.readTime}</span>
+          <span className="text-[color:var(--text-secondary)]">• {article.readTime}</span>
         </div>
 
-        <h1 className="mb-6 text-4xl font-black leading-tight text-nexa-text-primary sm:text-5xl">
+        <h1 className="mb-6 text-4xl font-black leading-tight text-[color:var(--text-primary)] sm:text-5xl">
           {article.title}
         </h1>
 
-        <p className="text-xl leading-9 text-text-secondary">
+        <p className="text-xl leading-9 text-[color:var(--text-secondary)]">
           {article.intro}
         </p>
       </header>
@@ -276,10 +276,10 @@ export default async function ArticlePage({ params }: Props) {
       <article className="space-y-10">
         {article.sections.map((section) => (
           <section key={section.heading}>
-            <h2 className="mb-4 text-2xl font-bold text-nexa-text-primary">
+            <h2 className="mb-4 text-2xl font-bold text-[color:var(--text-primary)]">
               {section.heading}
             </h2>
-            <p className="text-lg leading-9 text-text-secondary">
+            <p className="text-lg leading-9 text-[color:var(--text-secondary)]">
               {section.body}
             </p>
           </section>
@@ -295,12 +295,12 @@ export default async function ArticlePage({ params }: Props) {
 
             <h2
               id="related-games-heading"
-              className="mt-2 text-2xl font-black text-nexa-text-primary sm:text-3xl"
+              className="mt-2 text-2xl font-black text-[color:var(--text-primary)] sm:text-3xl"
             >
               Games You Can Play on ArcadeNexa
             </h2>
 
-            <p className="mt-2 max-w-2xl leading-7 text-text-secondary">
+            <p className="mt-2 max-w-2xl leading-7 text-[color:var(--text-secondary)]">
               Try games related to this article directly on ArcadeNexa.
               No download is required.
             </p>
@@ -326,23 +326,23 @@ export default async function ArticlePage({ params }: Props) {
         </section>
       )}
 
-      <section className="mt-14 rounded-2xl border border-white/10 bg-white/[0.03] p-6">
-        <h2 className="mb-6 text-2xl font-bold text-nexa-text-primary">
+      <section className="mt-14 rounded-2xl border border-[color:var(--white-10)] bg-[color:var(--white-03)] p-6">
+        <h2 className="mb-6 text-2xl font-bold text-[color:var(--text-primary)]">
           Frequently Asked Questions
         </h2>
 
         <div className="space-y-6">
           {article.faq.map((item) => (
             <div key={item.question}>
-              <h3 className="mb-2 font-bold text-nexa-text-primary">{item.question}</h3>
-              <p className="leading-7 text-text-secondary">{item.answer}</p>
+              <h3 className="mb-2 font-bold text-[color:var(--text-primary)]">{item.question}</h3>
+              <p className="leading-7 text-[color:var(--text-secondary)]">{item.answer}</p>
             </div>
           ))}
         </div>
       </section>
 
-      <section className="mt-12 border-t border-white/10 pt-10">
-        <h2 className="mb-5 text-2xl font-bold text-nexa-text-primary">
+      <section className="mt-12 border-t border-[color:var(--white-10)] pt-10">
+        <h2 className="mb-5 text-2xl font-bold text-[color:var(--text-primary)]">
           Continue Exploring
         </h2>
 
@@ -351,7 +351,7 @@ export default async function ArticlePage({ params }: Props) {
             <Link
               key={item.slug}
               href={`/blog/${item.slug}`}
-              className="rounded-xl border border-white/10 p-4 text-nexa-text-primary transition hover:border-nexa-violet/40 hover:bg-white/[0.03]"
+              className="rounded-xl border border-[color:var(--white-10)] p-4 text-[color:var(--text-primary)] transition hover:border-nexa-violet/40 hover:bg-[color:var(--white-03)]"
             >
               <span className="text-sm font-bold">{item.title}</span>
             </Link>
@@ -361,7 +361,7 @@ export default async function ArticlePage({ params }: Props) {
         <div className="mt-8">
           <Link
             href="/games"
-            className="inline-flex rounded-xl bg-nexa-violet px-5 py-3 font-bold text-nexa-text-primary transition hover:opacity-90"
+            className="inline-flex rounded-xl bg-nexa-violet px-5 py-3 font-bold text-[color:var(--text-primary)] transition hover:opacity-90"
           >
             Explore ArcadeNexa Games →
           </Link>

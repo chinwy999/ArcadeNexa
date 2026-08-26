@@ -83,12 +83,12 @@ export default function RecentlyPlayed() {
               Continue
             </p>
 
-            <h2 className="mt-1 text-2xl font-black text-nexa-text-primary sm:text-3xl">
+            <h2 className="mt-1 text-2xl font-black text-[color:var(--text-primary)] sm:text-3xl">
               ↻ Recently Played
             </h2>
           </div>
 
-          <span className="text-xs text-nexa-text-muted">
+          <span className="text-xs text-[color:var(--text-muted)]">
             Your last games
           </span>
         </div>
@@ -98,7 +98,7 @@ export default function RecentlyPlayed() {
             <Link
               key={game.slug}
               href={`/games/${game.slug}`}
-              className="group min-w-0 overflow-hidden rounded-xl border border-white/5 bg-nexa-surface transition hover:-translate-y-1 hover:border-nexa-cyan/30"
+              className="group min-w-0 overflow-hidden rounded-xl border border-[color:var(--white-05)] bg-nexa-surface transition hover:-translate-y-1 hover:border-nexa-cyan/30"
             >
               <div className="relative aspect-[4/3] overflow-hidden">
                 <SafeImage
@@ -112,7 +112,7 @@ export default function RecentlyPlayed() {
               </div>
 
               <div className="p-2.5">
-                <p className="truncate text-xs font-bold text-nexa-text-primary group-hover:text-nexa-cyan">
+                <p className="truncate text-xs font-bold text-[color:var(--text-primary)] group-hover:text-nexa-cyan">
                   {game.title}
                 </p>
               </div>

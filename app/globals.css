@@ -3,11 +3,16 @@
 @tailwind utilities;
 
 /* =========================================================
-   ArcadeNexa — Deep Space Arcade
-   Premium Gaming UI
+   ArcadeNexa — Premium Deep Space Visual System
+   PHASE VISUAL 5.0
+   Visual layer only
    ========================================================= */
 
 :root {
+  /* =======================================================
+     CORE BRAND PALETTE
+     ======================================================= */
+
   --nexa-black: #02040a;
   --nexa-navy: #061126;
   --nexa-surface: #0c1a30;
@@ -18,26 +23,94 @@
   --nexa-violet: #9b6cff;
   --nexa-gold: #ffd34d;
 
-  /* Semantic UI tokens */
-  --nexa-scroll-track: #02040a;
-  --nexa-scroll-thumb: #061126;
-  --nexa-scroll-thumb-hover: #0c1a30;
+  /* =======================================================
+     ATMOSPHERE
+     ======================================================= */
 
-  /* Atmospheric background tokens */
   --nexa-atmosphere-1: #030711;
   --nexa-atmosphere-2: #050b17;
   --nexa-atmosphere-3: #07101f;
 
+  --nexa-glow-cyan: rgba(34, 230, 255, 0.10);
+  --nexa-glow-blue: rgba(56, 189, 248, 0.08);
+  --nexa-glow-violet: rgba(155, 108, 255, 0.065);
+
+  /* =======================================================
+     TEXT
+     ======================================================= */
+
   --text-primary: #ffffff;
   --text-secondary: #c4d0e0;
   --text-muted: #8495ad;
+  --text-subtle: #64748b;
 
-  --line: rgba(148, 163, 184, 0.18);
-  --line-strong: rgba(56, 189, 248, 0.48);
+  /* =======================================================
+     BORDERS
+     ======================================================= */
 
-  --surface: rgba(7, 16, 31, 0.96);
-  --surface-soft: rgba(255,255,255,0.055);
+  --line: rgba(148, 163, 184, 0.12);
+  --line-soft: rgba(148, 163, 184, 0.08);
+  --line-strong: rgba(56, 189, 248, 0.42);
+  --line-cyan: rgba(34, 230, 255, 0.30);
+
+  /* =======================================================
+     WHITE OPACITY SCALE
+     ======================================================= */
+
+  --white-02: rgba(255, 255, 255, 0.02);
+  --white-03: rgba(255, 255, 255, 0.03);
+  --white-04: rgba(255, 255, 255, 0.04);
+  --white-05: rgba(255, 255, 255, 0.05);
+  --white-06: rgba(255, 255, 255, 0.06);
+  --white-08: rgba(255, 255, 255, 0.08);
+  --white-10: rgba(255, 255, 255, 0.10);
+  --white-15: rgba(255, 255, 255, 0.15);
+  --white-20: rgba(255, 255, 255, 0.20);
+  --white-25: rgba(255, 255, 255, 0.25);
+
+  /* =======================================================
+     SURFACES
+     ======================================================= */
+
+  --surface: rgba(7, 16, 31, 0.94);
+  --surface-soft: rgba(255, 255, 255, 0.038);
+  --surface-hover: rgba(255, 255, 255, 0.058);
+
+  /* PREMIUM VISUAL LAYERS */
+  --nexa-glass-top: rgba(255, 255, 255, 0.045);
+  --nexa-glass-bottom: rgba(255, 255, 255, 0.012);
+  --nexa-glass-hover-top: rgba(255, 255, 255, 0.058);
+  --nexa-glass-hover-bottom: rgba(255, 255, 255, 0.018);
+  --nexa-card-line: rgba(148, 163, 184, 0.105);
+  --nexa-card-line-hover: rgba(34, 230, 255, 0.32);
+  --nexa-card-glow: rgba(34, 230, 255, 0.055);
+
+  /* =======================================================
+     SHADOWS
+     ======================================================= */
+
+  --shadow-soft:
+    0 12px 35px rgba(0, 0, 0, 0.20);
+
+  --shadow-card:
+    0 18px 50px rgba(0, 0, 0, 0.24);
+
+  --shadow-card-hover:
+    0 26px 70px rgba(0, 0, 0, 0.34),
+    0 0 42px var(--nexa-card-glow);
+
+  /* =======================================================
+     SCROLLBAR
+     ======================================================= */
+
+  --nexa-scroll-track: #02040a;
+  --nexa-scroll-thumb: #061126;
+  --nexa-scroll-thumb-hover: #0c1a30;
 }
+
+/* =========================================================
+   DOCUMENT
+   ========================================================= */
 
 html {
   scroll-behavior: smooth;
@@ -53,25 +126,25 @@ body {
 
   background:
     radial-gradient(
-      circle at 50% -15%,
-      rgba(56, 189, 248, 0.12),
-      transparent 34rem
+      ellipse 70% 42% at 50% -8%,
+      rgba(56, 189, 248, 0.085),
+      transparent 68%
     ),
     radial-gradient(
-      circle at -5% 30%,
-      rgba(34, 211, 238, 0.045),
-      transparent 30rem
+      ellipse 42% 38% at -10% 38%,
+      rgba(34, 230, 255, 0.028),
+      transparent 72%
     ),
     radial-gradient(
-      circle at 105% 65%,
-      rgba(139, 92, 246, 0.055),
-      transparent 30rem
+      ellipse 45% 40% at 110% 72%,
+      rgba(155, 108, 255, 0.035),
+      transparent 72%
     ),
     linear-gradient(
       180deg,
-      var(--nexa-atmosphere-1) 0%,
-      var(--nexa-atmosphere-2) 45%,
-      var(--nexa-atmosphere-3) 100%
+      #030711 0%,
+      #050b17 48%,
+      #07101f 100%
     );
 
   color: var(--text-primary);
@@ -93,7 +166,10 @@ body {
   text-rendering: optimizeLegibility;
 }
 
-/* Very subtle technical grid */
+/* =========================================================
+   SUBTLE TECHNICAL GRID
+   ========================================================= */
+
 body::before {
   content: "";
   position: fixed;
@@ -103,22 +179,22 @@ body::before {
 
   background-image:
     linear-gradient(
-      rgba(148,163,184,0.018) 1px,
+      rgba(148, 163, 184, 0.014) 1px,
       transparent 1px
     ),
     linear-gradient(
       90deg,
-      rgba(148,163,184,0.018) 1px,
+      rgba(148, 163, 184, 0.014) 1px,
       transparent 1px
     );
 
-  background-size: 56px 56px;
+  background-size: 58px 58px;
 
   mask-image:
     linear-gradient(
       to bottom,
       black 0%,
-      rgba(0,0,0,.55) 35%,
+      rgba(0, 0, 0, 0.52) 34%,
       transparent 78%
     );
 
@@ -126,40 +202,46 @@ body::before {
     linear-gradient(
       to bottom,
       black 0%,
-      rgba(0,0,0,.55) 35%,
+      rgba(0, 0, 0, 0.52) 34%,
       transparent 78%
     );
 }
 
-/* Top atmospheric light */
+/* =========================================================
+   TOP ATMOSPHERIC LIGHT
+   ========================================================= */
+
 body::after {
   content: "";
   position: fixed;
-  top: -340px;
+  top: -380px;
   left: 50%;
   z-index: -1;
 
-  width: 760px;
-  height: 760px;
+  width: 820px;
+  height: 820px;
 
   transform: translateX(-50%);
-
   pointer-events: none;
 
   background:
     radial-gradient(
       circle,
-      rgba(56,189,248,.075) 0%,
-      rgba(34,211,238,.035) 30%,
+      rgba(56, 189, 248, 0.065) 0%,
+      rgba(34, 230, 255, 0.028) 32%,
       transparent 70%
     );
 
-  filter: blur(20px);
+  filter: blur(24px);
 }
 
+/* =========================================================
+   BASIC INTERACTION
+   ========================================================= */
+
 ::selection {
-  background: rgba(34,211,238,.28);
-  color: white;
+  background: rgba(34, 230, 255, 0.25);
+  color: #ffffff;
 }
 
 a,
@@ -179,42 +261,56 @@ a:focus-visible {
 }
 
 /* =========================================================
-   Premium Surfaces
+   PREMIUM GLASS SURFACE
    ========================================================= */
 
 .glass {
+  position: relative;
+
   background:
     linear-gradient(
       145deg,
-      rgba(255,255,255,.045),
-      rgba(255,255,255,.015)
+      var(--nexa-glass-top),
+      var(--nexa-glass-bottom)
     ),
-    rgba(7,16,31,.90);
+    var(--surface);
 
   border: 1px solid var(--line);
 
   box-shadow:
-    0 16px 45px rgba(0,0,0,.24),
-    inset 0 1px 0 rgba(255,255,255,.025);
+    var(--shadow-soft),
+    inset 0 1px 0 rgba(255, 255, 255, 0.032);
 
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
 
   transition:
-    transform .25s ease,
-    border-color .25s ease,
-    background .25s ease,
-    box-shadow .25s ease;
+    transform 0.25s ease,
+    border-color 0.25s ease,
+    background 0.25s ease,
+    box-shadow 0.25s ease;
 }
 
 .glass:hover {
   border-color: var(--line-strong);
 
+  background:
+    linear-gradient(
+      145deg,
+      var(--nexa-glass-hover-top),
+      var(--nexa-glass-hover-bottom)
+    ),
+    var(--surface);
+
   box-shadow:
-    0 22px 55px rgba(0,0,0,.30),
-    0 0 30px rgba(56,189,248,.035),
-    inset 0 1px 0 rgba(255,255,255,.035);
+    var(--shadow-card-hover),
+    0 0 38px var(--nexa-card-glow),
+    inset 0 1px 0 rgba(255, 255, 255, 0.035);
 }
+
+/* =========================================================
+   SECTION SURFACE
+   ========================================================= */
 
 .section-surface {
   position: relative;
@@ -231,14 +327,14 @@ a:focus-visible {
   background:
     linear-gradient(
       180deg,
-      rgba(56,189,248,.018),
-      transparent 35%,
-      rgba(139,92,246,.015)
+      rgba(56, 189, 248, 0.014),
+      transparent 36%,
+      rgba(155, 108, 255, 0.012)
     );
 }
 
 /* =========================================================
-   Typography
+   TYPOGRAPHY
    ========================================================= */
 
 .gradient-text {
@@ -248,8 +344,8 @@ a:focus-visible {
       #ffffff 0%,
       #e0f2fe 24%,
       #38bdf8 52%,
-      #22d3ee 72%,
-      #8b5cf6 100%
+      #22e6ff 72%,
+      #9b6cff 100%
     );
 
   -webkit-background-clip: text;
@@ -261,9 +357,9 @@ a:focus-visible {
   background:
     linear-gradient(
       115deg,
-      #34d399,
-      #22d3ee,
-      #60a5fa
+      #35e6a0 0%,
+      #22e6ff 52%,
+      #60a5fa 100%
     );
 
   -webkit-background-clip: text;
@@ -272,54 +368,54 @@ a:focus-visible {
 }
 
 /* =========================================================
-   Premium Buttons
+   PREMIUM BUTTON
    ========================================================= */
 
 .btn-premium {
   position: relative;
   overflow: hidden;
 
-  border: 1px solid rgba(56,189,248,.28);
+  border: 1px solid rgba(56, 189, 248, 0.28);
 
   background:
     linear-gradient(
       135deg,
-      rgba(56,189,248,.18),
-      rgba(34,211,238,.10)
+      rgba(56, 189, 248, 0.17),
+      rgba(34, 230, 255, 0.085)
     );
 
   color: #e0f2fe;
 
   box-shadow:
-    0 12px 30px rgba(0,0,0,.24),
-    inset 0 1px 0 rgba(255,255,255,.07);
+    0 12px 30px rgba(0, 0, 0, 0.24),
+    inset 0 1px 0 rgba(255, 255, 255, 0.065);
 
   transition:
-    transform .25s ease,
-    border-color .25s ease,
-    box-shadow .25s ease,
-    background .25s ease;
+    transform 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease,
+    background 0.25s ease;
 }
 
 .btn-premium:hover {
   transform: translateY(-2px);
 
-  border-color: rgba(56,189,248,.55);
+  border-color: rgba(56, 189, 248, 0.52);
 
   background:
     linear-gradient(
       135deg,
-      rgba(56,189,248,.26),
-      rgba(34,211,238,.15)
+      rgba(56, 189, 248, 0.24),
+      rgba(34, 230, 255, 0.13)
     );
 
   box-shadow:
-    0 16px 36px rgba(0,0,0,.28),
-    0 0 24px rgba(56,189,248,.08);
+    0 16px 36px rgba(0, 0, 0, 0.28),
+    0 0 25px rgba(56, 189, 248, 0.075);
 }
 
 /* =========================================================
-   Hero
+   HERO
    ========================================================= */
 
 .arcade-hero {
@@ -328,14 +424,14 @@ a:focus-visible {
 
   background:
     radial-gradient(
-      circle at 72% 20%,
-      rgba(56,189,248,.11),
-      transparent 25rem
+      ellipse 50% 70% at 72% 20%,
+      rgba(56, 189, 248, 0.085),
+      transparent 72%
     ),
     radial-gradient(
-      circle at 20% 60%,
-      rgba(139,92,246,.06),
-      transparent 24rem
+      ellipse 45% 65% at 20% 60%,
+      rgba(155, 108, 255, 0.045),
+      transparent 72%
     );
 }
 
@@ -344,7 +440,7 @@ a:focus-visible {
   position: absolute;
   inset: 1rem;
 
-  border: 1px solid rgba(56,189,248,.055);
+  border: 1px solid rgba(56, 189, 248, 0.045);
   border-radius: 2rem;
 
   pointer-events: none;
@@ -352,11 +448,11 @@ a:focus-visible {
 
 .arcade-hero h1 {
   text-shadow:
-    0 8px 40px rgba(0,0,0,.45);
+    0 8px 40px rgba(0, 0, 0, 0.45);
 }
 
 /* =========================================================
-   Category Cards
+   CATEGORY CARDS
    ========================================================= */
 
 .category-card {
@@ -366,58 +462,65 @@ a:focus-visible {
   background:
     linear-gradient(
       145deg,
-      rgba(255,255,255,.055),
-      rgba(255,255,255,.018)
+      rgba(255, 255, 255, 0.048),
+      rgba(255, 255, 255, 0.014)
     ),
-    rgba(7,16,31,.90);
+    rgba(7, 16, 31, 0.90);
 
-  border: 1px solid rgba(148,163,184,.10);
+  border: 1px solid var(--line-soft);
 
   box-shadow:
-    0 14px 32px rgba(0,0,0,.22);
+    0 14px 34px rgba(0, 0, 0, 0.22);
 
   transition:
-    transform .3s ease,
-    border-color .3s ease,
-    box-shadow .3s ease;
+    transform 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease,
+    background 0.3s ease;
 }
 
 .category-card:hover {
   transform: translateY(-5px);
 
-  border-color: rgba(56,189,248,.30);
+  border-color: rgba(56, 189, 248, 0.28);
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255, 255, 255, 0.058),
+      rgba(255, 255, 255, 0.018)
+    ),
+    rgba(7, 16, 31, 0.94);
 
   box-shadow:
-    0 22px 45px rgba(0,0,0,.30),
-    0 0 28px rgba(56,189,248,.055);
+    0 24px 48px rgba(0, 0, 0, 0.30),
+    0 0 28px rgba(56, 189, 248, 0.045);
 }
+
+
 
 /* =========================================================
-   Game Cards
-   ========================================================= */
-
-.game-card {
-  transition:
-    transform .25s ease,
-    filter .25s ease;
-}
-
-.game-card:hover {
-  transform: translateY(-4px);
-}
-
-/* =========================================================
-   Navigation / Header Compatibility
+   HEADER COMPATIBILITY
    ========================================================= */
 
 header {
-  border-color: rgba(148,163,184,.09) !important;
+  border-color: rgba(148, 163, 184, 0.10) !important;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(2, 4, 10, 0.94),
+      rgba(2, 4, 10, 0.78)
+    ) !important;
+
+  box-shadow:
+    0 10px 35px rgba(0, 0, 0, 0.16);
 }
 
 nav a {
   transition:
-    color .2s ease,
-    background .2s ease;
+    color 0.2s ease,
+    background 0.2s ease,
+    border-color 0.2s ease;
 }
 
 nav a:hover {
@@ -425,7 +528,7 @@ nav a:hover {
 }
 
 /* =========================================================
-   Scrollbar
+   SCROLLBAR
    ========================================================= */
 
 ::-webkit-scrollbar {
@@ -447,329 +550,258 @@ nav a:hover {
 }
 
 /* =========================================================
-   Mobile
+   MOBILE
    ========================================================= */
 
 @media (max-width: 640px) {
   body::before {
-    background-size: 42px 42px;
+    background-size: 44px 44px;
+  }
+
+  body::after {
+    width: 620px;
+    height: 620px;
+    top: -280px;
   }
 
   .arcade-hero::before {
-    inset: .5rem;
+    inset: 0.5rem;
     border-radius: 1.25rem;
   }
 
   .glass {
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(11px);
+    -webkit-backdrop-filter: blur(11px);
   }
 }
 
-/* Respect reduced motion */
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
   *::after {
     scroll-behavior: auto !important;
-    transition-duration: .01ms !important;
-    animation-duration: .01ms !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
   }
 }
 
 /* =========================================================
-   ArcadeNexa — UNIFIED COLOR & BACKGROUND SYSTEM
-   Visual layer only — no SEO / API / game logic changes
+   ArcadeNexa — VISUAL HARMONIZATION HISTORY
+   GLOBAL VISUAL HARMONIZATION
+   Visual layer only
    ========================================================= */
 
-
-
 /* =========================================================
-   GLOBAL BACKGROUND
-   ========================================================= */
-
-html {
-  background: var(--nexa-black);
-  color-scheme: dark;
-}
-
-body {
-  position: relative;
-  min-height: 100vh;
-  margin: 0;
-  overflow-x: hidden;
-
-  background:
-    radial-gradient(
-      ellipse 55% 35% at 50% 0%,
-      rgba(56, 189, 248, 0.12),
-      transparent 70%
-    ),
-    radial-gradient(
-      ellipse 40% 30% at 0% 25%,
-      rgba(139, 92, 246, 0.07),
-      transparent 70%
-    ),
-    radial-gradient(
-      ellipse 38% 32% at 100% 48%,
-      rgba(255, 43, 214, 0.045),
-      transparent 70%
-    ),
-    radial-gradient(
-      ellipse 45% 35% at 50% 100%,
-      rgba(53, 230, 160, 0.035),
-      transparent 70%
-    ),
-    linear-gradient(
-      180deg,
-      var(--nexa-atmosphere-1) 0%,
-      var(--nexa-atmosphere-2) 45%,
-      var(--nexa-atmosphere-3) 100%
-    );
-
-  color: var(--text-primary);
-}
-
-/* =========================================================
-   CYBER GRID
-   ========================================================= */
-
-body::before {
-  background-image:
-    linear-gradient(
-      rgba(148, 163, 184, 0.018) 1px,
-      transparent 1px
-    ),
-    linear-gradient(
-      90deg,
-      rgba(148, 163, 184, 0.018) 1px,
-      transparent 1px
-    );
-
-  background-size: 56px 56px;
-
-  mask-image:
-    linear-gradient(
-      to bottom,
-      black 0%,
-      rgba(0, 0, 0, 0.55) 35%,
-      transparent 78%
-    );
-
-  -webkit-mask-image:
-    linear-gradient(
-      to bottom,
-      black 0%,
-      rgba(0, 0, 0, 0.55) 35%,
-      transparent 78%
-    );
-}
-
-/* =========================================================
-   TOP AURORA
-   ========================================================= */
-
-body::after {
-  width: 760px;
-  height: 760px;
-  top: -340px;
-
-  background:
-    radial-gradient(
-      circle at 40% 50%,
-      rgba(56, 189, 248, 0.075),
-      transparent 42%
-    ),
-    radial-gradient(
-      circle at 65% 55%,
-      rgba(139, 92, 246, 0.065),
-      transparent 48%
-    ),
-    radial-gradient(
-      circle,
-      rgba(255, 43, 214, 0.025),
-      transparent 70%
-    );
-
-  filter: blur(20px);
-}
-
-/* =========================================================
-   TEXT
-   ========================================================= */
-
-.text-text-primary {
-  color: var(--text-primary) !important;
-}
-
-.text-text-secondary {
-  color: var(--text-secondary) !important;
-}
-
-.text-text-muted {
-  color: var(--text-muted) !important;
-}
-
-/* =========================================================
-   GLASS SURFACES
+   UNIFIED SURFACE LANGUAGE
    ========================================================= */
 
 .glass {
+  border-color: var(--line-soft);
   background:
     linear-gradient(
       145deg,
-      rgba(16, 28, 58, 0.92),
-      rgba(5, 9, 23, 0.96)
-    );
-
-  border: 1px solid var(--line);
-
-  box-shadow:
-    0 18px 50px rgba(0, 0, 0, 0.40),
-    inset 0 1px 0 rgba(255, 255, 255, 0.045),
-    inset 0 0 28px rgba(0, 150, 255, 0.018);
-
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+      rgba(255, 255, 255, 0.042),
+      rgba(255, 255, 255, 0.012)
+    ),
+    rgba(7, 16, 31, 0.92);
 }
 
 .glass:hover {
-  border-color: var(--line-strong);
-
-  box-shadow:
-    0 24px 65px rgba(0, 0, 0, 0.50),
-    0 0 34px rgba(0, 210, 255, 0.075),
-    inset 0 1px 0 rgba(255, 255, 255, 0.07);
+  border-color: rgba(56, 189, 248, 0.26);
 }
 
 /* =========================================================
-   SECTION ATMOSPHERE
+   HEADER — QUIET PREMIUM
    ========================================================= */
 
-.section-surface::before {
-  background:
-    radial-gradient(
-      ellipse at 15% 0%,
-      rgba(56, 189, 248, 0.045),
-      transparent 42%
-    ),
-    radial-gradient(
-      ellipse at 85% 25%,
-      rgba(139, 92, 246, 0.035),
-      transparent 44%
-    ),
-    linear-gradient(
-      180deg,
-      rgba(56, 189, 248, 0.018),
-      transparent 38%,
-      rgba(139, 92, 246, 0.012)
-    );
+
+
+header nav a {
+  position: relative;
 }
 
-/* =========================================================
-   LINKS / FOCUS
-   ========================================================= */
-
-a:hover {
-  text-shadow: 0 0 14px rgba(34, 230, 255, 0.25);
-}
-
-button:focus-visible,
-a:focus-visible {
-  outline: 2px solid var(--nexa-cyan);
-  outline-offset: 3px;
-
-  box-shadow:
-    0 0 18px rgba(34, 230, 255, 0.28);
-}
-
-/* =========================================================
-   HEADINGS
-   ========================================================= */
-
-h1,
-h2,
-h3 {
-  color: var(--text-primary);
-  text-shadow:
-    0 0 22px rgba(56, 189, 248, 0.10);
-}
-
-/* =========================================================
-   SELECTION
-   ========================================================= */
-
-::selection {
-  background: rgba(34, 230, 255, 0.30);
+header nav a[aria-current="page"] {
   color: var(--text-primary);
 }
 
 /* =========================================================
-   SCROLLBAR
+   GAME CARDS — CONSISTENT DEPTH
    ========================================================= */
 
-::-webkit-scrollbar {
-  width: 9px;
-}
 
-::-webkit-scrollbar-track {
-  background: var(--nexa-scroll-track);
-}
 
-::-webkit-scrollbar-thumb {
+/* =========================================================
+   GAME CARDS — CONSISTENT DEPTH
+   ========================================================= */
+
+.game-card {
+  border: 1px solid var(--line-soft);
   background:
     linear-gradient(
-      180deg,
-      var(--nexa-blue),
-      var(--nexa-violet)
-    );
+      145deg,
+      rgba(255, 255, 255, 0.048),
+      rgba(255, 255, 255, 0.014)
+    ),
+    rgba(7, 16, 31, 0.92);
 
-  border-radius: 999px;
-  border: 2px solid var(--nexa-scroll-track);
+  box-shadow:
+    0 16px 45px rgba(0, 0, 0, 0.24);
+
+  transition:
+    transform 0.25s ease,
+    border-color 0.25s ease,
+    background 0.25s ease,
+    box-shadow 0.25s ease;
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background:
-    linear-gradient(
-      180deg,
-      var(--nexa-cyan),
-      var(--nexa-violet)
-    );
+.game-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(34, 230, 255, 0.30);
+
+  box-shadow:
+    0 24px 65px rgba(0, 0, 0, 0.34),
+    0 0 28px rgba(34, 230, 255, 0.055);
 }
 
 /* =========================================================
-   MOBILE COLOR SAFETY
+   IMAGES — PREMIUM CONTRAST
    ========================================================= */
 
-@media (max-width: 768px) {
-  body::after {
-    width: 600px;
-    height: 600px;
-    top: -300px;
+.game-card img,
+.category-card img {
+  transition:
+    transform 0.7s ease,
+    filter 0.5s ease;
+}
+
+.game-card:hover img,
+.category-card:hover img {
+  filter:
+    saturate(1.05)
+    contrast(1.02);
+}
+
+/* =========================================================
+   UNIFIED BUTTON LANGUAGE
+   ========================================================= */
+
+.btn-premium {
+  border-color: rgba(34, 230, 255, 0.26);
+}
+
+.btn-premium:hover {
+  border-color: rgba(34, 230, 255, 0.48);
+}
+
+/* Emerald remains the ACTION color.
+   Cyan remains the BRAND/INTERACTION color.
+   Violet remains SECONDARY only. */
+
+.btn-premium,
+button[class*="bg-nexa-emerald"],
+a[class*="bg-nexa-emerald"] {
+  box-shadow:
+    0 12px 30px rgba(0, 0, 0, 0.24),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+/* =========================================================
+   BADGES / PILLS
+   ========================================================= */
+
+[class*="rounded-full"][class*="border-nexa-violet"] {
+  background-color: rgba(155, 108, 255, 0.055);
+  border-color: rgba(155, 108, 255, 0.18);
+}
+
+[class*="rounded-full"][class*="border-nexa-cyan"] {
+  background-color: rgba(34, 230, 255, 0.055);
+  border-color: rgba(34, 230, 255, 0.20);
+}
+
+[class*="rounded-full"][class*="border-nexa-emerald"] {
+  background-color: rgba(53, 230, 160, 0.055);
+  border-color: rgba(53, 230, 160, 0.20);
+}
+
+/* =========================================================
+   VIOLET — REDUCE VISUAL DOMINANCE
+   ========================================================= */
+
+[class*="shadow-[0_0_"][class*="violet"] {
+  filter: saturate(0.90);
+}
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+footer {
+  position: relative;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(6, 17, 38, 0.58),
+      rgba(2, 4, 10, 0.88)
+    ) !important;
+
+  border-top-color: rgba(148, 163, 184, 0.09) !important;
+}
+
+footer a {
+  transition:
+    color 0.2s ease,
+    opacity 0.2s ease;
+}
+
+footer a:hover {
+  color: var(--nexa-cyan);
+}
+
+/* =========================================================
+   SECTION DIVIDERS
+   ========================================================= */
+
+hr {
+  border-color: var(--line-soft);
+}
+
+/* =========================================================
+   FOCUS / ACCESSIBILITY
+   ========================================================= */
+
+:focus-visible {
+  outline-color: var(--nexa-cyan);
+}
+
+/* =========================================================
+   MOBILE VISUAL BALANCE
+   ========================================================= */
+
+@media (max-width: 640px) {
+  body {
+    background:
+      radial-gradient(
+        ellipse 90% 30% at 50% 0%,
+        rgba(56, 189, 248, 0.075),
+        transparent 70%
+      ),
+      linear-gradient(
+        180deg,
+        #030711 0%,
+        #050b17 50%,
+        #07101f 100%
+      );
   }
 
-  body::before {
-    background-size: 48px 48px;
-  }
-
-  .glass {
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+  .game-card:hover,
+  .category-card:hover {
+    transform: translateY(-2px);
   }
 }
 
-/* ArcadeNexa — semantic text token aliases */
-@layer utilities {
-  .text-nexa-text-primary {
-    color: var(--text-primary);
-  }
-
-  .text-nexa-text-secondary {
-    color: var(--text-secondary);
-  }
-
-  .text-nexa-text-muted {
-    color: var(--text-muted);
-  }
-}

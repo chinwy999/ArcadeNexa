@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { getGamesPage, type Game } from '@/lib/games'
 import { getSiteUrl } from '@/lib/site'
+import SafeImage from '@/components/SafeImage'
 
 export const dynamic = 'force-dynamic'
 
@@ -60,7 +61,7 @@ export default async function UnblockedGamesPage() {
   }
 
   return (
-    <main className="min-h-screen bg-nexa-black text-nexa-text-primary">
+    <main className="min-h-screen bg-nexa-black text-[color:var(--text-primary)]">
 
       <section className="relative overflow-hidden bg-gradient-to-b from-nexa-navy to-nexa-black px-4 py-16 text-center">
         <div className="relative mx-auto max-w-3xl">
@@ -77,7 +78,7 @@ export default async function UnblockedGamesPage() {
             </span>
           </h1>
 
-          <p className="mx-auto mb-6 max-w-2xl text-lg text-nexa-text-secondary">
+          <p className="mx-auto mb-6 max-w-2xl text-lg text-[color:var(--text-secondary)]">
             Play free HTML5 games instantly in your browser. No download,
             no Flash and no registration required.
           </p>
@@ -92,7 +93,7 @@ export default async function UnblockedGamesPage() {
             ].map(tag => (
               <span
                 key={tag}
-                className="rounded-full border border-nexa-violet/25 bg-nexa-surface/60 px-3 py-1 text-nexa-text-secondary"
+                className="rounded-full border border-nexa-violet/25 bg-nexa-surface/60 px-3 py-1 text-[color:var(--text-secondary)]"
               >
                 {tag}
               </span>
@@ -122,14 +123,14 @@ export default async function UnblockedGamesPage() {
                 href={`/games/${game.slug}`}
                 className="group rounded-xl border border-nexa-violet/20 bg-nexa-black/60 p-2 transition hover:border-nexa-emerald/50 hover:bg-nexa-surface"
               >
-                <div className="mb-2 aspect-square overflow-hidden rounded-lg bg-nexa-surface">
+                <div className="relative mb-2 aspect-square overflow-hidden rounded-lg bg-nexa-surface">
 
                   {game.thumbnail ? (
-                    <img
+                    <SafeImage
                       src={game.thumbnail}
                       alt={game.title}
-                      className="h-full w-full object-cover transition group-hover:scale-105"
-                      loading="lazy"
+                      className="object-cover transition group-hover:scale-105"
+                      sizes="(max-width: 640px) 33vw, 16vw"
                     />
                   ) : (
                     <div
@@ -141,7 +142,7 @@ export default async function UnblockedGamesPage() {
 
                 </div>
 
-                <p className="truncate text-xs font-medium text-nexa-text-secondary">
+                <p className="truncate text-xs font-medium text-[color:var(--text-secondary)]">
                   {game.title}
                 </p>
               </Link>
@@ -185,14 +186,14 @@ export default async function UnblockedGamesPage() {
                     href={`/games/${game.slug}`}
                     className="group rounded-xl border border-nexa-violet/20 bg-nexa-black/60 p-2 transition hover:border-nexa-emerald/50 hover:bg-nexa-surface"
                   >
-                    <div className="mb-2 aspect-square overflow-hidden rounded-lg bg-nexa-surface">
+                    <div className="relative mb-2 aspect-square overflow-hidden rounded-lg bg-nexa-surface">
 
                       {game.thumbnail ? (
-                        <img
+                        <SafeImage
                           src={game.thumbnail}
                           alt={game.title}
-                          className="h-full w-full object-cover transition group-hover:scale-105"
-                          loading="lazy"
+                          className="object-cover transition group-hover:scale-105"
+                          sizes="(max-width: 640px) 25vw, 12vw"
                         />
                       ) : (
                         <div
@@ -204,7 +205,7 @@ export default async function UnblockedGamesPage() {
 
                     </div>
 
-                    <p className="truncate text-xs text-nexa-text-secondary">
+                    <p className="truncate text-xs text-[color:var(--text-secondary)]">
                       {game.title}
                     </p>
                   </Link>
@@ -224,7 +225,7 @@ export default async function UnblockedGamesPage() {
             What Are Unblocked Games?
           </h2>
 
-          <div className="space-y-4 leading-relaxed text-nexa-text-secondary">
+          <div className="space-y-4 leading-relaxed text-[color:var(--text-secondary)]">
 
             <p>
               Unblocked games are browser games that can be played without
@@ -278,11 +279,11 @@ export default async function UnblockedGamesPage() {
               key={q}
               className="rounded-xl border border-nexa-violet/20 bg-nexa-black/50 px-5 py-4"
             >
-              <summary className="cursor-pointer font-semibold text-nexa-text-primary">
+              <summary className="cursor-pointer font-semibold text-[color:var(--text-primary)]">
                 {q}
               </summary>
 
-              <p className="mt-3 text-nexa-text-secondary">
+              <p className="mt-3 text-[color:var(--text-secondary)]">
                 {a}
               </p>
             </details>

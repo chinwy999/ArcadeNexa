@@ -21,7 +21,7 @@ export default function GameCard({ game, onPlay }: GameCardProps) {
     typeof game.rating === 'number' ? game.rating : 8.5
 
   return (
-    <article className="group relative min-w-0 overflow-hidden rounded-2xl border border-white/[0.07] bg-gradient-to-b from-white/[0.055] to-white/[0.02] shadow-[0_16px_50px_rgba(0,0,0,0.18)] transition-all duration-500 hover:-translate-y-1.5 hover:border-nexa-cyan/30 hover:shadow-[0_24px_70px_rgba(0,0,0,0.34),0_0_35px_rgba(34,211,238,0.08)]">
+    <article className="group relative min-w-0 overflow-hidden rounded-2xl border border-[color:var(--nexa-card-line)] bg-gradient-to-b from-[color:var(--nexa-glass-top)] to-[color:var(--nexa-glass-bottom)] shadow-[0_16px_50px_rgba(0,0,0,0.22)] transition-all duration-500 hover:-translate-y-1.5 hover:border-[color:var(--nexa-card-line-hover)] hover:shadow-[0_24px_70px_rgba(0,0,0,0.34),0_0_42px_var(--nexa-card-glow)]">
 
       <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
 
@@ -46,12 +46,12 @@ export default function GameCard({ game, onPlay }: GameCardProps) {
           Instant
         </div>
 
-        <div className="pointer-events-none absolute right-3 top-3 rounded-full border border-white/10 bg-nexa-black/75 px-2.5 py-1 text-[10px] font-semibold text-nexa-text-primary/80 backdrop-blur-md">
+        <div className="pointer-events-none absolute right-3 top-3 rounded-full border border-[color:var(--white-10)] bg-nexa-black/75 px-2.5 py-1 text-[10px] font-semibold text-[color:var(--text-primary)]/80 backdrop-blur-md">
           {game.platform}
         </div>
 
         <div className="pointer-events-none absolute inset-0 flex items-center justify-center bg-nexa-black/35 opacity-0 transition-all duration-500 group-hover:opacity-100">
-          <div className="flex h-16 w-16 scale-75 items-center justify-center rounded-full border border-white/30 bg-white text-nexa-black shadow-2xl transition-transform duration-500 group-hover:scale-100">
+          <div className="flex h-16 w-16 scale-75 items-center justify-center rounded-full border border-[color:var(--white-20)] bg-[color:var(--text-primary)] text-nexa-black shadow-2xl transition-transform duration-500 group-hover:scale-100">
             <Play className="ml-1 h-7 w-7 fill-current" />
           </div>
         </div>
@@ -59,7 +59,7 @@ export default function GameCard({ game, onPlay }: GameCardProps) {
 
       <div className="relative p-4">
         <div className="mb-3 flex items-start justify-between gap-3">
-          <h3 className="min-w-0 truncate text-sm font-bold tracking-tight text-nexa-text-primary transition-colors duration-300 group-hover:text-nexa-cyan sm:text-base">
+          <h3 className="min-w-0 truncate text-sm font-bold tracking-tight text-[color:var(--text-primary)] transition-colors duration-300 group-hover:text-nexa-cyan sm:text-base">
             {game.name}
           </h3>
 
@@ -74,7 +74,7 @@ export default function GameCard({ game, onPlay }: GameCardProps) {
         </div>
 
         <div className="flex items-center justify-between gap-3">
-          <span className="text-[10px] font-semibold uppercase tracking-wider text-nexa-text-muted">
+          <span className="text-[10px] font-semibold uppercase tracking-wider text-[color:var(--text-muted)]">
             HTML5 Game
           </span>
 

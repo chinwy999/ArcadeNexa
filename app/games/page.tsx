@@ -147,13 +147,13 @@ export default async function GamesPage({
     <div className="container mx-auto px-4 py-8">
 
       <div className="mb-8">
-        <h1 className="text-4xl font-bold mb-2 text-nexa-text-primary capitalize">
+        <h1 className="text-4xl font-bold mb-2 text-[color:var(--text-primary)] capitalize">
           {selectedGenre
             ? `${selectedGenre.replace(/-/g, ' ')} Games`
             : 'Games Arena'}
         </h1>
 
-        <p className="text-nexa-text-secondary">
+        <p className="text-[color:var(--text-secondary)]">
           {games.length} HTML5 Games — Page {currentPage}
           {totalPages ? ` of ${totalPages}` : ''}
         </p>
@@ -169,17 +169,17 @@ export default async function GamesPage({
       </div>
 
       {sortedGames.length === 0 ? (
-        <div className="text-center py-20 bg-nexa-surface rounded-lg border border-white/5">
+        <div className="text-center py-20 bg-nexa-surface rounded-lg border border-[color:var(--white-05)]">
           <p className="text-6xl mb-4">🎮</p>
 
-          <p className="text-xl text-nexa-text-secondary">
+          <p className="text-xl text-[color:var(--text-secondary)]">
             No games found
             {selectedGenre ? ' in this category' : ''}
           </p>
 
           <Link
             href="/games"
-            className="inline-block mt-6 px-6 py-3 rounded-xl bg-nexa-violet text-nexa-text-primary font-bold"
+            className="inline-block mt-6 px-6 py-3 rounded-xl bg-nexa-violet text-[color:var(--text-primary)] font-bold"
           >
             View All Games
           </Link>
@@ -201,20 +201,20 @@ export default async function GamesPage({
               {canGoPrev && (
                 <Link
                   href={buildUrl(currentPage - 1)}
-                  className="px-5 py-3 rounded-xl border border-white/10 text-nexa-text-primary hover:bg-white/10 transition font-bold"
+                  className="px-5 py-3 rounded-xl border border-[color:var(--white-10)] text-[color:var(--text-primary)] hover:bg-[color:var(--white-10)] transition font-bold"
                 >
                   ← Prev
                 </Link>
               )}
 
-              <span className="px-5 py-3 rounded-xl bg-white/5 border border-white/10 text-nexa-text-secondary font-bold">
+              <span className="px-5 py-3 rounded-xl bg-[color:var(--white-05)] border border-[color:var(--white-10)] text-[color:var(--text-secondary)] font-bold">
                 Page {currentPage}
               </span>
 
               {canGoNext && (
                 <Link
                   href={buildUrl(currentPage + 1)}
-                  className="px-5 py-3 rounded-xl border border-white/10 text-nexa-text-primary hover:bg-white/10 transition font-bold"
+                  className="px-5 py-3 rounded-xl border border-[color:var(--white-10)] text-[color:var(--text-primary)] hover:bg-[color:var(--white-10)] transition font-bold"
                 >
                   Next →
                 </Link>

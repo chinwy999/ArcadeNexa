@@ -61,7 +61,7 @@ export default function FavoriteButton({
       className={`inline-flex items-center gap-2 rounded-xl border px-4 py-2.5 text-sm font-bold transition ${
         favorite
           ? 'border-nexa-violet/40 bg-nexa-violet/10 text-nexa-violet'
-          : 'border-white/10 bg-white/5 text-nexa-text-secondary hover:border-nexa-violet/30 hover:text-nexa-violet'
+          : 'border-[color:var(--white-10)] bg-[color:var(--white-05)] text-[color:var(--text-secondary)] hover:border-nexa-violet/30 hover:text-nexa-violet'
       }`}
     >
       <Heart

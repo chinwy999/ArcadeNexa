@@ -85,19 +85,19 @@ export default function LeaderboardPage() {
           <div className="flex items-center gap-3 mb-2">
             <Trophy className="w-8 h-8 text-nexa-gold" />
 
-            <h1 className="text-4xl font-bold text-nexa-text-primary">
+            <h1 className="text-4xl font-bold text-[color:var(--text-primary)]">
               Top Players
             </h1>
           </div>
 
-          <p className="text-nexa-text-secondary">
+          <p className="text-[color:var(--text-secondary)]">
             ArcadeNexa Arena rankings
           </p>
         </div>
 
         <button
           onClick={refreshLeaderboard}
-          className="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-xl bg-white/5 border border-white/10 text-nexa-text-primary hover:bg-white/10 transition"
+          className="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-xl bg-[color:var(--white-05)] border border-[color:var(--white-10)] text-[color:var(--text-primary)] hover:bg-[color:var(--white-10)] transition"
         >
           <RefreshCw
             className={`w-4 h-4 ${updated ? 'animate-spin' : ''}`}
@@ -110,34 +110,34 @@ export default function LeaderboardPage() {
 
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
 
-        <div className="bg-nexa-surface rounded-2xl border border-white/5 p-5">
+        <div className="bg-nexa-surface rounded-2xl border border-[color:var(--white-05)] p-5">
           <Users className="w-6 h-6 text-nexa-violet mb-3" />
 
-          <p className="text-nexa-text-secondary text-sm">
+          <p className="text-[color:var(--text-secondary)] text-sm">
             Recorded Players
           </p>
 
-          <p className="text-2xl font-black text-nexa-text-primary mt-1">
+          <p className="text-2xl font-black text-[color:var(--text-primary)] mt-1">
             {players.length}
           </p>
         </div>
 
-        <div className="bg-nexa-surface rounded-2xl border border-white/5 p-5">
+        <div className="bg-nexa-surface rounded-2xl border border-[color:var(--white-05)] p-5">
           <Trophy className="w-6 h-6 text-nexa-gold mb-3" />
 
-          <p className="text-nexa-text-secondary text-sm">
+          <p className="text-[color:var(--text-secondary)] text-sm">
             Highest Score
           </p>
 
-          <p className="text-2xl font-black text-nexa-text-primary mt-1">
+          <p className="text-2xl font-black text-[color:var(--text-primary)] mt-1">
             {players.length
               ? players[0].score.toLocaleString()
               : '—'}
           </p>
         </div>
 
-        <div className="bg-nexa-surface rounded-2xl border border-white/5 p-5">
-          <p className="text-nexa-text-secondary text-sm">
+        <div className="bg-nexa-surface rounded-2xl border border-[color:var(--white-05)] p-5">
+          <p className="text-[color:var(--text-secondary)] text-sm">
             Ranking Type
           </p>
 
@@ -145,7 +145,7 @@ export default function LeaderboardPage() {
             Arena Trials
           </p>
 
-          <p className="text-xs text-nexa-text-muted mt-1">
+          <p className="text-xs text-[color:var(--text-muted)] mt-1">
             Stored on this device
           </p>
         </div>
@@ -154,17 +154,17 @@ export default function LeaderboardPage() {
 
       {players.length === 0 ? (
 
-        <div className="text-center py-20 bg-nexa-surface rounded-2xl border border-white/5">
+        <div className="text-center py-20 bg-nexa-surface rounded-2xl border border-[color:var(--white-05)]">
 
           <p className="text-6xl mb-4">
             🏆
           </p>
 
-          <p className="text-xl text-nexa-text-secondary mb-2">
+          <p className="text-xl text-[color:var(--text-secondary)] mb-2">
             No Arena scores yet
           </p>
 
-          <p className="text-nexa-text-muted max-w-md mx-auto">
+          <p className="text-[color:var(--text-muted)] max-w-md mx-auto">
             Complete an ArcadeNexa Arena Trial to record your score
             and appear here.
           </p>
@@ -173,7 +173,7 @@ export default function LeaderboardPage() {
 
       ) : (
 
-        <div className="bg-nexa-surface rounded-2xl overflow-hidden border border-white/5">
+        <div className="bg-nexa-surface rounded-2xl overflow-hidden border border-[color:var(--white-05)]">
 
           <div className="overflow-x-auto">
 
@@ -182,19 +182,19 @@ export default function LeaderboardPage() {
               <thead className="bg-nexa-black">
 
                 <tr>
-                  <th className="p-4 text-left text-nexa-text-secondary font-medium">
+                  <th className="p-4 text-left text-[color:var(--text-secondary)] font-medium">
                     Rank
                   </th>
 
-                  <th className="p-4 text-left text-nexa-text-secondary font-medium">
+                  <th className="p-4 text-left text-[color:var(--text-secondary)] font-medium">
                     Player
                   </th>
 
-                  <th className="p-4 text-left text-nexa-text-secondary font-medium">
+                  <th className="p-4 text-left text-[color:var(--text-secondary)] font-medium">
                     Game
                   </th>
 
-                  <th className="p-4 text-right text-nexa-text-secondary font-medium">
+                  <th className="p-4 text-right text-[color:var(--text-secondary)] font-medium">
                     Score
                   </th>
                 </tr>
@@ -207,7 +207,7 @@ export default function LeaderboardPage() {
 
                   <tr
                     key={`${player.gameSlug}-${player.lastPlayed}-${index}`}
-                    className="border-t border-white/5 hover:bg-white/5 transition-colors"
+                    className="border-t border-[color:var(--white-05)] hover:bg-[color:var(--white-05)] transition-colors"
                   >
 
                     <td className="p-4 text-xl">
@@ -220,11 +220,11 @@ export default function LeaderboardPage() {
                             : `#${index + 1}`}
                     </td>
 
-                    <td className="p-4 font-bold text-nexa-text-primary">
+                    <td className="p-4 font-bold text-[color:var(--text-primary)]">
                       {player.username}
                     </td>
 
-                    <td className="p-4 text-nexa-text-secondary">
+                    <td className="p-4 text-[color:var(--text-secondary)]">
                       {player.gameTitle}
                     </td>
 
@@ -246,7 +246,7 @@ export default function LeaderboardPage() {
 
       )}
 
-      <div className="mt-6 p-4 rounded-xl border border-white/5 bg-white/[0.02] text-xs text-nexa-text-muted">
+      <div className="mt-6 p-4 rounded-xl border border-[color:var(--white-05)] bg-[color:var(--white-02)] text-xs text-[color:var(--text-muted)]">
         Rankings currently use local browser storage. A true global
         leaderboard requires a server-side database and authenticated
         player accounts.

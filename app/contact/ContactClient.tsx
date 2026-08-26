@@ -35,27 +35,27 @@ export default function ContactClient() {
 
   return (
     <div className="py-20 px-4 sm:px-6 max-w-5xl mx-auto animate-fade-in">
-      <h1 className="text-5xl font-black text-nexa-text-primary mb-4">Contact Us</h1>
-      <p className="text-text-secondary text-lg mb-12">Have a question, bug report, or partnership inquiry? We'd love to hear from you.</p>
+      <h1 className="text-5xl font-black text-[color:var(--text-primary)] mb-4">Contact Us</h1>
+      <p className="text-[color:var(--text-secondary)] text-lg mb-12">Have a question, bug report, or partnership inquiry? We'd love to hear from you.</p>
 
       <div className="grid md:grid-cols-2 gap-12">
 
         <div>
-          <h2 className="text-2xl font-bold text-nexa-text-primary mb-6">Send a Message</h2>
+          <h2 className="text-2xl font-bold text-[color:var(--text-primary)] mb-6">Send a Message</h2>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label htmlFor="contact-name" className="block text-sm text-text-secondary mb-1">Name</label>
+              <label htmlFor="contact-name" className="block text-sm text-[color:var(--text-secondary)] mb-1">Name</label>
               <input
                 id="contact-name"
                 value={form.name}
                 onChange={e => setForm({ ...form, name: e.target.value })}
                 required
                 placeholder="Your name"
-                className="w-full bg-nexa-surface border border-white/10 rounded-xl px-4 py-3 text-nexa-text-primary focus:ring-2 focus:ring-nexa-violet outline-none placeholder:text-nexa-text-muted"
+                className="w-full bg-nexa-surface border border-[color:var(--white-10)] rounded-xl px-4 py-3 text-[color:var(--text-primary)] focus:ring-2 focus:ring-nexa-violet outline-none placeholder:text-[color:var(--text-muted)]"
               />
             </div>
             <div>
-              <label htmlFor="contact-email" className="block text-sm text-text-secondary mb-1">Email</label>
+              <label htmlFor="contact-email" className="block text-sm text-[color:var(--text-secondary)] mb-1">Email</label>
               <input
                 id="contact-email"
                 type="email"
@@ -63,16 +63,16 @@ export default function ContactClient() {
                 onChange={e => setForm({ ...form, email: e.target.value })}
                 required
                 placeholder="your@email.com"
-                className="w-full bg-nexa-surface border border-white/10 rounded-xl px-4 py-3 text-nexa-text-primary focus:ring-2 focus:ring-nexa-violet outline-none placeholder:text-nexa-text-muted"
+                className="w-full bg-nexa-surface border border-[color:var(--white-10)] rounded-xl px-4 py-3 text-[color:var(--text-primary)] focus:ring-2 focus:ring-nexa-violet outline-none placeholder:text-[color:var(--text-muted)]"
               />
             </div>
             <div>
-              <label htmlFor="contact-subject" className="block text-sm text-text-secondary mb-1">Subject</label>
+              <label htmlFor="contact-subject" className="block text-sm text-[color:var(--text-secondary)] mb-1">Subject</label>
               <select
                 id="contact-subject"
                 value={form.subject}
                 onChange={e => setForm({ ...form, subject: e.target.value })}
-                className="w-full bg-nexa-surface border border-white/10 rounded-xl px-4 py-3 text-nexa-text-primary focus:ring-2 focus:ring-nexa-violet outline-none"
+                className="w-full bg-nexa-surface border border-[color:var(--white-10)] rounded-xl px-4 py-3 text-[color:var(--text-primary)] focus:ring-2 focus:ring-nexa-violet outline-none"
               >
                 <option>General</option>
                 <option>Bug Report</option>
@@ -82,7 +82,7 @@ export default function ContactClient() {
               </select>
             </div>
             <div>
-              <label htmlFor="contact-message" className="block text-sm text-text-secondary mb-1">Message</label>
+              <label htmlFor="contact-message" className="block text-sm text-[color:var(--text-secondary)] mb-1">Message</label>
               <textarea
                 id="contact-message"
                 rows={5}
@@ -90,13 +90,13 @@ export default function ContactClient() {
                 onChange={e => setForm({ ...form, message: e.target.value })}
                 required
                 placeholder="Tell us how we can help..."
-                className="w-full bg-nexa-surface border border-white/10 rounded-xl px-4 py-3 text-nexa-text-primary focus:ring-2 focus:ring-nexa-violet outline-none placeholder:text-nexa-text-muted resize-none"
+                className="w-full bg-nexa-surface border border-[color:var(--white-10)] rounded-xl px-4 py-3 text-[color:var(--text-primary)] focus:ring-2 focus:ring-nexa-violet outline-none placeholder:text-[color:var(--text-muted)] resize-none"
               />
             </div>
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-nexa-violet hover:bg-violet-600 disabled:opacity-50 text-nexa-text-primary font-bold py-3 rounded-xl transition"
+              className="w-full bg-nexa-violet hover:bg-violet-600 disabled:opacity-50 text-[color:var(--text-primary)] font-bold py-3 rounded-xl transition"
             >
               {loading ? 'Sending...' : 'SEND MESSAGE'}
             </button>
@@ -114,39 +114,39 @@ export default function ContactClient() {
         </div>
 
         <div className="space-y-6">
-          <h2 className="text-2xl font-bold text-nexa-text-primary mb-6">Get in Touch</h2>
+          <h2 className="text-2xl font-bold text-[color:var(--text-primary)] mb-6">Get in Touch</h2>
 
-          <div className="glass p-6 rounded-xl border border-white/5">
+          <div className="glass p-6 rounded-xl border border-[color:var(--white-05)]">
             <div className="flex items-center gap-3 mb-3">
               <span className="text-2xl">📧</span>
-              <h3 className="text-nexa-text-primary font-bold">Email Support</h3>
+              <h3 className="text-[color:var(--text-primary)] font-bold">Email Support</h3>
             </div>
-            <p className="text-text-secondary text-sm">mostapha.bensasi@gmail.com</p>
-            <p className="text-text-secondary text-sm mt-1">We typically respond within 24 hours.</p>
+            <p className="text-[color:var(--text-secondary)] text-sm">mostapha.bensasi@gmail.com</p>
+            <p className="text-[color:var(--text-secondary)] text-sm mt-1">We typically respond within 24 hours.</p>
           </div>
 
-          <div className="glass p-6 rounded-xl border border-white/5">
+          <div className="glass p-6 rounded-xl border border-[color:var(--white-05)]">
             <div className="flex items-center gap-3 mb-3">
               <span className="text-2xl">🐛</span>
-              <h3 className="text-nexa-text-primary font-bold">Bug Reports</h3>
+              <h3 className="text-[color:var(--text-primary)] font-bold">Bug Reports</h3>
             </div>
-            <p className="text-text-secondary text-sm">Found a bug? Please include the game name, device, browser, and steps to reproduce the issue.</p>
+            <p className="text-[color:var(--text-secondary)] text-sm">Found a bug? Please include the game name, device, browser, and steps to reproduce the issue.</p>
           </div>
 
-          <div className="glass p-6 rounded-xl border border-white/5">
+          <div className="glass p-6 rounded-xl border border-[color:var(--white-05)]">
             <div className="flex items-center gap-3 mb-3">
               <span className="text-2xl">🤝</span>
-              <h3 className="text-nexa-text-primary font-bold">Partnerships</h3>
+              <h3 className="text-[color:var(--text-primary)] font-bold">Partnerships</h3>
             </div>
-            <p className="text-text-secondary text-sm">Interested in partnering with ArcadeNexa? We're open to game developers, sponsors, and content creators.</p>
+            <p className="text-[color:var(--text-secondary)] text-sm">Interested in partnering with ArcadeNexa? We're open to game developers, sponsors, and content creators.</p>
           </div>
 
-          <div className="glass p-6 rounded-xl border border-white/5">
+          <div className="glass p-6 rounded-xl border border-[color:var(--white-05)]">
             <div className="flex items-center gap-3 mb-3">
               <span className="text-2xl">⏱️</span>
-              <h3 className="text-nexa-text-primary font-bold">Response Time</h3>
+              <h3 className="text-[color:var(--text-primary)] font-bold">Response Time</h3>
             </div>
-            <p className="text-text-secondary text-sm">We aim to respond to all inquiries within 24-48 hours on business days.</p>
+            <p className="text-[color:var(--text-secondary)] text-sm">We aim to respond to all inquiries within 24-48 hours on business days.</p>
           </div>
         </div>
 
