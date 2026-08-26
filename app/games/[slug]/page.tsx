@@ -7,6 +7,7 @@ import RecentlyPlayedTracker from '@/components/RecentlyPlayedTracker'
 import FavoriteButton from '@/components/FavoriteButton'
 import { allArticles } from '@/lib/articles'
 import { getSiteUrl } from '@/lib/site'
+import AdsterraBanner from '@/components/ads/AdsterraBanner'
 
 export const dynamic = 'force-dynamic'
 
@@ -352,6 +353,8 @@ export default async function GamePage({ params }: PageParams) {
 
       {/* Game Player */}
       <div className="mb-8">
+        <AdsterraBanner />
+
         <InstantPlaySection game={game} />
       </div>
 

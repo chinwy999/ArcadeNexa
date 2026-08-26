@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import GameCard from '@/components/GameCard'
 import Link from 'next/link'
+import AdsterraGames from "@/components/ads/AdsterraGames";
 
 export const metadata: Metadata = {
   title: 'Free HTML5 Games - Play Online Games',
@@ -186,6 +187,8 @@ export default async function GamesPage({
         </div>
       ) : (
         <>
+          <AdsterraGames />
+
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-12">
             {sortedGames.map((game) => (
               <GameCard

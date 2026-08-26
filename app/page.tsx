@@ -6,6 +6,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import RecentlyPlayed from '@/components/RecentlyPlayed'
 import AdsterraBanner from "@/components/ads/AdsterraBanner";
+import AdsterraTop from "@/components/ads/AdsterraTop";
 
 export const revalidate = 300
 
@@ -103,6 +104,7 @@ export default async function HomePage() {
 
   return (
     <main className="min-h-screen overflow-hidden bg-transparent">
+      <AdsterraTop />
       <AdsterraBanner />
 
       <section className="arcade-hero relative px-4 pt-28 pb-20 sm:pt-32 sm:pb-24">
