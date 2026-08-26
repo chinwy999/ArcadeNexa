@@ -71,7 +71,7 @@ function getTagCount(
 }
 
 /**
- * ArcadeNexa Score V3
+ * ArcadeNexa Score V4
  *
  * Internal editorial/quality score.
  *
@@ -83,6 +83,16 @@ function getTagCount(
  * - distinguish weak and strong content
  * - avoid artificial 9+ inflation
  * - keep GamePix and GameMonetize reasonably balanced
+ *
+ * V4 change vs V3:
+ * The final normalization previously compressed the weighted
+ * score into a very narrow visible band (most "typically good"
+ * games landed at exactly 8.2 after rounding). The underlying
+ * per-factor math was fine; only the spread was too tight.
+ * V4 widens the final spread and relaxes the quality guards so
+ * that real differences between games (quality_score, metadata
+ * richness, freshness) are actually visible in the displayed
+ * score, without changing what any single factor rewards.
  */
 export function calculateArcadeNexaScore(
   game: ArcadeNexaScoreInput
@@ -196,7 +206,7 @@ export function calculateArcadeNexaScore(
    * ============================================================
    */
 
-  let content = 4.4
+  let content = 4.6
 
   const descriptionLength =
     description.length
@@ -408,6 +418,11 @@ export function calculateArcadeNexaScore(
    *
    * These prevent a game with poor metadata from receiving an
    * artificially high score.
+   *
+   * V4: thresholds raised (8.2/8.4/8.4 -> 8.6/8.7/8.7) so these
+   * guards only catch genuinely weak-but-inflated cases instead
+   * of clipping the vast majority of "typically good" games into
+   * the same narrow band.
    */
 
   if (!title) {
@@ -440,21 +455,21 @@ export function calculateArcadeNexaScore(
 
   if (
     baseRating < 7 &&
-    weighted >= 8.2
+    weighted >= 8.6
   ) {
     weighted -= 0.30
   }
 
   if (
     content < 6.5 &&
-    weighted >= 8.4
+    weighted >= 8.7
   ) {
     weighted -= 0.25
   }
 
   if (
     playability < 7.5 &&
-    weighted >= 8.4
+    weighted >= 8.7
   ) {
     weighted -= 0.25
   }
@@ -470,11 +485,16 @@ export function calculateArcadeNexaScore(
    * 7.x → average/good
    * 8.x → strong
    * 9.x → exceptional
+   *
+   * V4: spread factor raised from 0.72 to 0.95 so that real
+   * per-factor differences between games actually show up in
+   * the rounded, displayed score instead of collapsing to a
+   * single repeated value.
    */
 
   const finalScore =
     6 +
-    (weighted - 5) * 0.72
+    (weighted - 5) * 0.95
 
   return Number(
     clamp(
@@ -578,7 +598,7 @@ export function getArcadeNexaScoreBreakdown(
     9.8
   )
 
-  let content = 4.4
+  let content = 4.6
 
   const d = description.length
   const i = instructions.length
@@ -701,28 +721,28 @@ export function getArcadeNexaScoreBreakdown(
 
   if (
     baseRating < 7 &&
-    weighted >= 8.2
+    weighted >= 8.6
   ) {
     weighted -= 0.30
   }
 
   if (
     content < 6.5 &&
-    weighted >= 8.4
+    weighted >= 8.7
   ) {
     weighted -= 0.25
   }
 
   if (
     playability < 7.5 &&
-    weighted >= 8.4
+    weighted >= 8.7
   ) {
     weighted -= 0.25
   }
 
   const finalScore = Number(
     clamp(
-      6 + (weighted - 5) * 0.72,
+      6 + (weighted - 5) * 0.95,
       6.0,
       9.8
     ).toFixed(1)
