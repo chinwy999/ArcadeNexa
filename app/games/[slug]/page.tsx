@@ -9,6 +9,7 @@ import { allArticles } from '@/lib/articles'
 import { getSiteUrl } from '@/lib/site'
 import AdsterraBanner from '@/components/ads/AdsterraBanner'
 import AdsterraSidebar from '@/components/ads/AdsterraSidebar'
+import HilltopMultitag from '@/components/ads/HilltopMultitag'
 
 export const dynamic = 'force-dynamic'
 
@@ -357,6 +358,8 @@ export default async function GamePage({ params }: PageParams) {
         <AdsterraBanner />
 
         <InstantPlaySection game={game} />
+
+        <HilltopMultitag />
       </div>
 
       {/* Game Info */}
