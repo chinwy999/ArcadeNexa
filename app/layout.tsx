@@ -54,7 +54,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <main className="pt-16">
           {children}
         </main>
-        <Footer />
+<script src="https://pl31045270.profitableratecpmnetwork.com/a1/dd/b8/a1ddb888e0b6ea30ae8110f682aa63d0.js"></script>
+        <script src="https://pl31045271.profitableratecpmnetwork.com/a7/fa/9c/a7fa9c78b482be0b1d03715f54273f58.js"></script>
+        <script src="https://pl31045270.profitableratecpmnetwork.com/a1/dd/b8/a1ddb888e0b6ea30ae8110f682aa63d0.js"></script>
+        <script src="https://pl31045271.profitableratecpmnetwork.com/a7/fa/9c/a7fa9c78b482be0b1d03715f54273f58.js"></script>
+        <Footer />        <Footer />
         <script type="application/ld+json" dangerouslySetInnerHTML={{__html: JSON.stringify({
           "@context": "https://schema.org",
           "@type": "Organization",
