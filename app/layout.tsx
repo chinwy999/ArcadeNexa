@@ -56,6 +56,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </main>
         <script async src="https://pl31045270.profitableratecpmnetwork.com/a1/dd/b8/a1ddb888e0b6ea30ae8110f682aa63d0.js"></script>
         <script async src="https://pl31045271.profitableratecpmnetwork.com/a7/fa/9c/a7fa9c78b482be0b1d03715f54273f58.js"></script>
+        <div id="container-a65b979f47b71a91b2448c709b97e96e"></div>
+        <script async data-cfasync="false" src="https://pl31053046.profitableratecpmnetwork.com/a65b979f47b71a91b2448c709b97e96e/invoke.js"></script>
         <Footer />
         <script type="application/ld+json" dangerouslySetInnerHTML={{__html: JSON.stringify({
           "@context": "https://schema.org",

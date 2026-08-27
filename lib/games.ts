@@ -1545,21 +1545,57 @@ async function loadGMGames(): Promise<Game[]> {
 }
 
 // ===== FAST SLUG LOOKUP =====
-export async function getGameBySlugFast(slug: string): Promise<Game | null> {
+export async function getGameBySlugFast(
+  slug: string
+): Promise<Game | null> {
   /*
    * FAST SLUG LOOKUP
    *
    * GameMonetize:
-   *   - Uses direct ID lookup.
-   *   - Does NOT scan feed pages.
-   *   - Successful lookups are cached in memory.
+   *   1. Memory cache
+   *   2. Existing catalog cache
+   *   3. Direct ID lookup
+   *   4. Full catalog fallback
    *
    * GamePix:
-   *   - Keeps the existing limited fast lookup.
+   *   1. Memory cache
+   *   2. Existing catalog cache
+   *   3. Limited sequential feed lookup
+   *
+   * IMPORTANT:
+   * Never scan the entire GamePix catalog on every request.
+   * Sitemap/pagination remain responsible for catalog discovery.
    */
 
+  if (!slug) return null
+
   // ---------------------------------------------------------
-  // GameMonetize
+  // SHARED GAMEPIX SLUG CACHE
+  // ---------------------------------------------------------
+  const gamePixSlugCache =
+    (globalThis as typeof globalThis & {
+      __arcadeNexaGamePixSlugCache?: Map<string, Game>
+    }).__arcadeNexaGamePixSlugCache ||
+    new Map<string, Game>()
+
+  ;(
+    globalThis as typeof globalThis & {
+      __arcadeNexaGamePixSlugCache?: Map<string, Game>
+    }
+  ).__arcadeNexaGamePixSlugCache = gamePixSlugCache
+
+  const gamePixCached = gamePixSlugCache.get(slug)
+
+  if (gamePixCached) {
+    console.log(
+      `[ArcadeNexa] GamePix slug cache HIT: ${slug}`
+    )
+
+    return gamePixCached
+  }
+
+  // ---------------------------------------------------------
+  // GAMEMONETIZE
   // ---------------------------------------------------------
   if (slug.startsWith('gm-')) {
     const id = slug.slice(3).trim()
@@ -1585,12 +1621,8 @@ export async function getGameBySlugFast(slug: string): Promise<Game | null> {
     }
 
     /*
-     * IMPORTANT:
      * GameMonetize may return HTTP 429 for direct ID requests.
      * A 429 must NEVER turn an existing game into a 404.
-     *
-     * First try the already cached/full catalog.
-     * Only use the direct API as a fallback.
      */
 
     try {
@@ -1627,7 +1659,9 @@ export async function getGameBySlugFast(slug: string): Promise<Game | null> {
       const item = await fetchGMGameById(id)
 
       console.log(
-        `[ArcadeNexa] GM direct lookup RESULT: slug=${slug} id=${id} found=${Boolean(item)} title=${item?.title || 'NONE'}`
+        `[ArcadeNexa] GM direct lookup RESULT: ` +
+        `slug=${slug} id=${id} found=${Boolean(item)} ` +
+        `title=${item?.title || 'NONE'}`
       )
 
       if (item) {
@@ -1639,18 +1673,12 @@ export async function getGameBySlugFast(slug: string): Promise<Game | null> {
       }
     } catch (error) {
       console.warn(
-        `[ArcadeNexa] GM direct lookup unavailable for ${slug}; using catalog fallback`,
+        `[ArcadeNexa] GM direct lookup unavailable for ${slug}; ` +
+        `using catalog fallback`,
         error
       )
     }
 
-    /*
-     * Final fallback:
-     * Load the catalog once and search it.
-     *
-     * This is slower on the first request, but prevents
-     * legitimate GameMonetize games from becoming 404.
-     */
     try {
       const allGames = await loadGames()
 
@@ -1678,21 +1706,52 @@ export async function getGameBySlugFast(slug: string): Promise<Game | null> {
   }
 
   // ---------------------------------------------------------
-  // GamePix
+  // GAMEPIX
   // ---------------------------------------------------------
   try {
     const { fetchGamesPage } =
       await import('./gamepixFeed')
 
     /*
-     * Search the full available GamePix catalog.
+     * First check the existing catalog cache.
      *
-     * A fixed limit of 10 pages caused valid older games,
-     * such as kids-math-online, to return 404.
+     * This is important for games already discovered by:
+     *   - home catalog
+     *   - pagination
+     *   - other server requests
      */
-    const GAMEPIX_MAX_PAGES = 141
+    if (cachedGames && cachedGames.length > 0) {
+      const catalogGame = cachedGames.find(
+        game => game.slug === slug
+      )
 
-    for (let page = 1; page <= GAMEPIX_MAX_PAGES; page++) {
+      if (catalogGame) {
+        gamePixSlugCache.set(slug, catalogGame)
+
+        console.log(
+          `[ArcadeNexa] GamePix catalog lookup HIT: ${slug}`
+        )
+
+        return catalogGame
+      }
+    }
+
+    /*
+     * Limited lookup:
+     *
+     * GamePix pages are ordered by quality.
+     * Most games are therefore found near the beginning.
+     *
+     * We deliberately avoid scanning all 141 pages during
+     * a normal page request.
+     */
+    const GAMEPIX_LOOKUP_MAX_PAGES = 12
+
+    for (
+      let page = 1;
+      page <= GAMEPIX_LOOKUP_MAX_PAGES;
+      page++
+    ) {
       const result = await fetchGamesPage(
         page,
         96,
@@ -1700,17 +1759,31 @@ export async function getGameBySlugFast(slug: string): Promise<Game | null> {
       )
 
       const item = result.items.find(
-        (i: any) => (i.namespace || i.id) === slug
+        (i: GamePixItem) =>
+          (i.namespace || i.id) === slug
       )
 
       if (item) {
-        return convertGame(item)
+        const game = convertGame(item)
+
+        gamePixSlugCache.set(slug, game)
+
+        console.log(
+          `[ArcadeNexa] GamePix feed lookup HIT: ` +
+          `slug=${slug} page=${page}`
+        )
+
+        return game
       }
 
       if (!result.nextPage) {
         break
       }
     }
+
+    console.warn(
+      `[ArcadeNexa] GamePix limited lookup MISS: ${slug}`
+    )
   } catch (error) {
     console.error(
       `[ArcadeNexa] GamePix slug lookup failed for ${slug}:`,
@@ -1718,13 +1791,18 @@ export async function getGameBySlugFast(slug: string): Promise<Game | null> {
     )
   }
 
-  // ---------------------------------------------------------
-  // Existing catalog cache fallback
-  // ---------------------------------------------------------
+  /*
+   * Final existing catalog fallback.
+   */
   if (cachedGames) {
-    return cachedGames.find(
-      g => g.slug === slug
-    ) || null
+    const catalogGame = cachedGames.find(
+      game => game.slug === slug
+    )
+
+    if (catalogGame) {
+      gamePixSlugCache.set(slug, catalogGame)
+      return catalogGame
+    }
   }
 
   return null
