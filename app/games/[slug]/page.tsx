@@ -8,6 +8,7 @@ import FavoriteButton from '@/components/FavoriteButton'
 import { allArticles } from '@/lib/articles'
 import { getSiteUrl } from '@/lib/site'
 import AdsterraBanner from '@/components/ads/AdsterraBanner'
+import AdsterraSidebar from '@/components/ads/AdsterraSidebar'
 
 export const dynamic = 'force-dynamic'
 
@@ -476,6 +477,8 @@ export default async function GamePage({ params }: PageParams) {
 
             </div>
           </div>
+
+          <AdsterraSidebar />
 
           <Link
             href={`/games?genre=${game.category}`}
