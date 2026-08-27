@@ -48,6 +48,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         <link rel="icon" href="/favicon.ico" />
         <meta name="google-site-verification" content="j-iHu7oSEMHvRJt9EXUbTqBgAL71liygmOrO5HD72EU" />
+        <meta name="44bee4f3953015f0fb0854150e90e01530b6ba26" content="44bee4f3953015f0fb0854150e90e01530b6ba26" />
       </head>
       <body className="min-h-screen bg-nexa-black text-[color:var(--text-primary)] antialiased">
         <Header />
