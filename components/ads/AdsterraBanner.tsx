@@ -4,11 +4,9 @@ import Script from 'next/script';
 
 export default function AdsterraBanner() {
   return (
-    <div className="w-full px-3 sm:px-4">
-      <div className="mx-auto my-6 flex min-h-[70px] w-full max-w-4xl items-center justify-center overflow-hidden rounded-lg">
-        <div
-          className="flex h-[50px] w-[320px] max-w-full items-center justify-center"
-        >
+    <div className="w-full overflow-hidden">
+      <div className="mx-auto my-6 flex w-full justify-center overflow-hidden px-2">
+        <div className="relative h-[50px] w-[320px] max-w-full overflow-hidden">
           <Script id="adsterra-320x50-options" strategy="afterInteractive">
             {`
               atOptions = {
