@@ -12,7 +12,7 @@ export default function NotFound() {
       <div className="flex flex-col sm:flex-row gap-4">
         <Link href="/" className="bg-nexa-violet hover:bg-violet-600 text-[color:var(--text-primary)] px-6 py-3 rounded-xl font-bold transition">Go Home</Link>
         <Link href="/games" className="border border-[color:var(--white-20)] hover:bg-[color:var(--white-10)] text-[color:var(--text-primary)] px-6 py-3 rounded-xl font-bold transition">Browse Games</Link>
-        <Link href="/search" className="border border-nexa-emerald text-nexa-emerald hover:bg-nexa-emerald/10 px-6 py-3 rounded-xl font-bold transition">Search Arena</Link>
+        <Link href="/search" className="border border-nexa-emerald text-nexa-emerald hover:bg-nexa-emerald/10 px-6 py-3 rounded-xl font-bold transition">Search Games</Link>
       </div>
       <p className="text-xs text-[color:var(--text-secondary)] mt-8">If you believe this is an error, contact mostapha.bensasi@gmail.com</p>
     </div>

@@ -98,11 +98,11 @@ export default function SearchClient() {
   return (
     <div className="py-20 px-4 sm:px-6 max-w-4xl mx-auto animate-fade-in">
       <h1 className="text-4xl font-black text-[color:var(--text-primary)] mb-2">
-        Search Arena
+        Search Games
       </h1>
 
       <p className="text-[color:var(--text-secondary)] mb-8">
-        Find your next game from 15,000+ titles
+        Find your next game from 15,000+ free games
       </p>
 
       <form onSubmit={handleSubmit} className="flex gap-3 mb-6">
@@ -162,7 +162,7 @@ export default function SearchClient() {
 
         {loading && (
           <div className="text-center py-12 text-[color:var(--text-secondary)]">
-            Searching the arcade...
+            Searching games...
           </div>
         )}
 

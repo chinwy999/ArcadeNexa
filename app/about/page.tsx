@@ -37,7 +37,7 @@ export default function AboutPage() {
             <li>✅ Instant play — no download required</li>
             <li>✅ No registration or login needed</li>
             <li>✅ Works on any device — mobile, tablet, desktop</li>
-            <li>✅ 10+ game categories</li>
+            <li>✅ 47+ game categories</li>
           </ul>
         </section>
 
