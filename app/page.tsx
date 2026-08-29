@@ -10,14 +10,14 @@ export const revalidate = 300
 
 const categoryMeta: Record<string, { icon?: any; image?: string; color: string }> = {
   Action:     { image: '/images/categories/action.webp',     color: 'from-red-500 to-orange-500' },
-  Casual:     { image: '/images/categories/casual.webp',     color: 'from-green-500 to-emerald-400' },
+  Casual:     { image: '/images/categories/casual.webp',     color: 'from-nexa-emerald to-nexa-cyan' },
   Puzzle:     { image: '/images/categories/puzzle.webp',     color: 'from-yellow-500 to-amber-400' },
   Racing:     { image: '/images/categories/racing.webp',     color: 'from-amber-500 to-orange-400' },
-  Sports:     { image: '/images/categories/sports.webp',     color: 'from-cyan-500 to-blue-400' },
+  Sports:     { image: '/images/categories/sports.webp',     color: 'from-nexa-cyan to-nexa-blue' },
   Shooter:    { image: '/images/categories/shooter.webp',    color: 'from-red-500 to-zinc-500' },
-  Simulation: { image: '/images/categories/simulation.webp', color: 'from-sky-500 to-blue-400' },
-  Strategy:   { image: '/images/categories/strategy.webp',   color: 'from-indigo-500 to-blue-400' },
-  Adventure:  { image: '/images/categories/adventure.webp',  color: 'from-teal-500 to-green-400' },
+  Simulation: { image: '/images/categories/simulation.webp', color: 'from-nexa-blue to-nexa-cyan' },
+  Strategy:   { image: '/images/categories/strategy.webp',   color: 'from-nexa-blue to-nexa-cyan' },
+  Adventure:  { image: '/images/categories/adventure.webp',  color: 'from-nexa-emerald to-nexa-cyan' },
   Battle:     { image: '/images/categories/battle.webp',     color: 'from-orange-500 to-red-400' },
 }
 

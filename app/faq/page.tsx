@@ -71,7 +71,7 @@ export default function FAQPage() {
       <div className="glass rounded-2xl border border-[color:var(--white-05)] p-8 text-center">
         <h2 className="text-2xl font-bold text-[color:var(--text-primary)] mb-2">Still have questions?</h2>
         <p className="text-[color:var(--text-secondary)] mb-6">Our team is happy to help you.</p>
-        <Link href="/contact" className="bg-nexa-violet text-[color:var(--text-primary)] px-8 py-3 rounded-xl font-bold hover:opacity-90 transition inline-block">
+        <Link href="/contact" className="bg-nexa-cyan text-[color:var(--text-primary)] px-8 py-3 rounded-xl font-bold hover:opacity-90 transition inline-block">
           Contact Us
         </Link>
       </div>

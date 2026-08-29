@@ -128,7 +128,7 @@ export default function Header() {
 
             <Link
               href="/games"
-              className="mb-4 flex items-center justify-between rounded-2xl bg-gradient-to-r from-nexa-emerald to-emerald-400 p-4 text-nexa-black"
+              className="mb-4 flex items-center justify-between rounded-2xl bg-gradient-to-r from-nexa-emerald to-nexa-cyan p-4 text-nexa-black"
             >
               <div>
                 <p className="text-lg font-black">PLAY NOW</p>

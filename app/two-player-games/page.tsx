@@ -12,12 +12,12 @@ export const metadata: Metadata = {
 }
 
 const TWO_PLAYER_CATEGORIES = [
-  { key: 'sports',   label: 'Sports',   icon: '⚽', color: 'from-cyan-400 to-blue-500' },
-  { key: 'fighting', label: 'Fighting', icon: '🥊', color: 'from-rose-400 to-red-600' },
+  { key: 'sports',   label: 'Sports',   icon: '⚽', color: 'from-nexa-cyan to-nexa-blue' },
+  { key: 'fighting', label: 'Fighting', icon: '🥊', color: 'from-nexa-emerald to-nexa-blue' },
   { key: 'racing',   label: 'Racing',   icon: '🏎️', color: 'from-amber-400 to-orange-500' },
-  { key: 'io',       label: '.IO',      icon: '🌐', color: 'from-emerald-400 to-teal-500' },
+  { key: 'io',       label: '.IO',      icon: '🌐', color: 'from-nexa-emerald to-nexa-cyan' },
   { key: 'action',   label: 'Action',   icon: '⚔️', color: 'from-red-500 to-orange-500' },
-  { key: 'arcade',   label: 'Arcade',   icon: '🕹️', color: 'from-pink-400 to-purple-600' },
+  { key: 'arcade',   label: 'Arcade',   icon: '🕹️', color: 'from-nexa-cyan to-nexa-blue' },
 ]
 
 export default async function TwoPlayerGamesPage() {
@@ -44,7 +44,7 @@ export default async function TwoPlayerGamesPage() {
           </div>
           <h1 className="mb-4 text-4xl font-extrabold tracking-tight sm:text-5xl">
             Two Player Games{' '}
-            <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-nexa-cyan to-nexa-blue bg-clip-text text-transparent">
               Free Online
             </span>
           </h1>

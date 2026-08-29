@@ -45,7 +45,7 @@ export default function InstantPlaySection({ game }: { game: Game }) {
   return (
     <div
       ref={containerRef}
-      className="glass rounded-3xl overflow-hidden border border-nexa-violet/30 shadow-[0_0_40px_rgba(124,58,237,0.2)] bg-nexa-navy"
+      className="glass rounded-3xl overflow-hidden border border-nexa-violet/25 shadow-[0_0_40px_var(--nexa-violet-shadow)] bg-nexa-navy"
     >
       <div className="flex items-center justify-between px-4 py-3 bg-nexa-surface/90 border-b border-[color:var(--white-05)]">
         <div className="flex items-center gap-3 min-w-0">

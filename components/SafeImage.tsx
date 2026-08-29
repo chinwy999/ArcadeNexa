@@ -17,7 +17,7 @@ export default function SafeImage({ src, alt, gradient, initials, sizes, classNa
 
   if (error) {
     return (
-      <div className={`absolute inset-0 flex items-center justify-center ${gradient || 'bg-gradient-to-br from-purple-500/30 to-blue-500/30'}`}>
+      <div className={`absolute inset-0 flex items-center justify-center ${gradient || 'bg-gradient-to-br from-nexa-cyan/30 to-nexa-blue/30'}`}>
         {initials && <span className="text-5xl font-black text-[color:var(--text-primary)]/30">{initials}</span>}
       </div>
     )
@@ -26,7 +26,7 @@ export default function SafeImage({ src, alt, gradient, initials, sizes, classNa
   return (
     <>
       {loading && (
-        <div className={`absolute inset-0 flex items-center justify-center ${gradient || 'bg-gradient-to-br from-purple-500/30 to-blue-500/30'}`}>
+        <div className={`absolute inset-0 flex items-center justify-center ${gradient || 'bg-gradient-to-br from-nexa-cyan/30 to-nexa-blue/30'}`}>
           <div className="w-10 h-10 border-4 border-[color:var(--white-20)] border-t-white rounded-full animate-spin"></div>
         </div>
       )}

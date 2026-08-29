@@ -34,7 +34,7 @@ export default function ArenaPlay({ game, onClose, isModal = false }: Props) {
   }, [score, isPlaying, isCompleted])
 
   return (
-    <div className={`${isModal ? '' : 'w-full'} glass rounded-3xl p-6 sm:p-8 border border-nexa-violet/40 shadow-[0_0_50px_rgba(124,58,237,0.4)]`}>
+    <div className={`${isModal ? '' : 'w-full'} glass rounded-3xl p-6 sm:p-8 border border-nexa-violet/30 shadow-[0_0_50px_var(--nexa-violet-shadow-strong)]`}>
       <div className="flex items-start justify-between gap-4 mb-6">
         <div className="flex items-center gap-4">
           <div className={`w-14 h-14 rounded-2xl flex items-center justify-center ${game.gradient} font-black text-2xl text-[color:var(--text-primary)] shadow-lg`}>{game.initials}</div>
@@ -83,7 +83,7 @@ export default function ArenaPlay({ game, onClose, isModal = false }: Props) {
           }} aria-label="Click to score">
             <div className="absolute top-4 left-4 text-xs font-bold text-nexa-emerald bg-nexa-emerald/10 px-3 py-1 rounded-full border border-nexa-emerald/30">SCORE: {score} / 15</div>
             <div className="absolute top-4 right-4 text-xs text-[color:var(--text-secondary)]">Click fast!</div>
-            <div className="w-28 h-28 rounded-full bg-gradient-to-br from-nexa-violet to-nexa-violet flex items-center justify-center text-[color:var(--text-primary)] font-black text-2xl shadow-[0_0_30px_rgba(236,72,153,0.6)] animate-pulse transform active:scale-95 transition-transform">
+            <div className="w-28 h-28 rounded-full bg-gradient-to-br from-nexa-violet to-nexa-cyan flex items-center justify-center text-[color:var(--text-primary)] font-black text-2xl shadow-[0_0_30px_var(--nexa-violet-shadow-strong)] animate-pulse transform active:scale-95 transition-transform">
               CLICK!
             </div>
             <p className="text-[color:var(--text-secondary)] text-xs mt-6">Aim training — rapid clicks, no purchase required</p>
@@ -102,7 +102,7 @@ export default function ArenaPlay({ game, onClose, isModal = false }: Props) {
                 <RefreshCw className="w-4 h-4" /> Play Again
               </button>
               {onClose && (
-                <button onClick={onClose} className="bg-nexa-violet hover:bg-violet-600 text-[color:var(--text-primary)] font-bold px-6 py-3 rounded-xl text-sm transition-colors">Collect & Close</button>
+                <button onClick={onClose} className="bg-nexa-violet hover:brightness-110 text-[color:var(--text-primary)] font-bold px-6 py-3 rounded-xl text-sm transition-colors">Collect & Close</button>
               )}
             </div>
           </div>

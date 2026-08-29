@@ -46,7 +46,7 @@ export default function TermsPage() {
 
         <section className="glass p-6 rounded-xl border border-[color:var(--white-05)]">
           <h2 className="text-[color:var(--text-primary)] font-bold text-xl mb-3">7. Contact</h2>
-          <p>For questions about these terms, please use our <a href="/contact" className="text-nexa-violet hover:underline">Contact page</a>.</p>
+          <p>For questions about these terms, please use our <a href="/contact" className="text-nexa-cyan hover:underline">Contact page</a>.</p>
         </section>
 
         <p className="text-xs text-center">Last updated: August 2026</p>

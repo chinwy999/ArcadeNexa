@@ -73,7 +73,7 @@ export default async function UnblockedGamesPage() {
 
           <h1 className="mb-4 text-4xl font-extrabold tracking-tight sm:text-5xl">
             Unblocked Games{' '}
-            <span className="bg-gradient-to-r from-green-400 to-cyan-400 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-nexa-emerald to-nexa-cyan bg-clip-text text-transparent">
               Online
             </span>
           </h1>

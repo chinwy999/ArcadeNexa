@@ -51,7 +51,7 @@ export default function ContactClient() {
                 onChange={e => setForm({ ...form, name: e.target.value })}
                 required
                 placeholder="Your name"
-                className="w-full bg-nexa-surface border border-[color:var(--white-10)] rounded-xl px-4 py-3 text-[color:var(--text-primary)] focus:ring-2 focus:ring-nexa-violet outline-none placeholder:text-[color:var(--text-muted)]"
+                className="w-full bg-nexa-surface border border-[color:var(--white-10)] rounded-xl px-4 py-3 text-[color:var(--text-primary)] focus:ring-2 focus:ring-nexa-cyan outline-none placeholder:text-[color:var(--text-muted)]"
               />
             </div>
             <div>
@@ -63,7 +63,7 @@ export default function ContactClient() {
                 onChange={e => setForm({ ...form, email: e.target.value })}
                 required
                 placeholder="your@email.com"
-                className="w-full bg-nexa-surface border border-[color:var(--white-10)] rounded-xl px-4 py-3 text-[color:var(--text-primary)] focus:ring-2 focus:ring-nexa-violet outline-none placeholder:text-[color:var(--text-muted)]"
+                className="w-full bg-nexa-surface border border-[color:var(--white-10)] rounded-xl px-4 py-3 text-[color:var(--text-primary)] focus:ring-2 focus:ring-nexa-cyan outline-none placeholder:text-[color:var(--text-muted)]"
               />
             </div>
             <div>
@@ -72,7 +72,7 @@ export default function ContactClient() {
                 id="contact-subject"
                 value={form.subject}
                 onChange={e => setForm({ ...form, subject: e.target.value })}
-                className="w-full bg-nexa-surface border border-[color:var(--white-10)] rounded-xl px-4 py-3 text-[color:var(--text-primary)] focus:ring-2 focus:ring-nexa-violet outline-none"
+                className="w-full bg-nexa-surface border border-[color:var(--white-10)] rounded-xl px-4 py-3 text-[color:var(--text-primary)] focus:ring-2 focus:ring-nexa-cyan outline-none"
               >
                 <option>General</option>
                 <option>Bug Report</option>
@@ -90,13 +90,13 @@ export default function ContactClient() {
                 onChange={e => setForm({ ...form, message: e.target.value })}
                 required
                 placeholder="Tell us how we can help..."
-                className="w-full bg-nexa-surface border border-[color:var(--white-10)] rounded-xl px-4 py-3 text-[color:var(--text-primary)] focus:ring-2 focus:ring-nexa-violet outline-none placeholder:text-[color:var(--text-muted)] resize-none"
+                className="w-full bg-nexa-surface border border-[color:var(--white-10)] rounded-xl px-4 py-3 text-[color:var(--text-primary)] focus:ring-2 focus:ring-nexa-cyan outline-none placeholder:text-[color:var(--text-muted)] resize-none"
               />
             </div>
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-nexa-violet hover:bg-violet-600 disabled:opacity-50 text-[color:var(--text-primary)] font-bold py-3 rounded-xl transition"
+              className="w-full bg-nexa-cyan hover:brightness-110 disabled:opacity-50 text-[color:var(--text-primary)] font-bold py-3 rounded-xl transition"
             >
               {loading ? 'Sending...' : 'SEND MESSAGE'}
             </button>
@@ -106,7 +106,7 @@ export default function ContactClient() {
               </div>
             )}
             {error && (
-              <div className="bg-nexa-violet/10 border border-nexa-violet/30 text-nexa-violet text-sm p-4 rounded-xl text-center">
+              <div className="bg-nexa-cyan/10 border border-nexa-cyan/30 text-nexa-cyan text-sm p-4 rounded-xl text-center">
                 ❌ {error}
               </div>
             )}

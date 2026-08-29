@@ -13,11 +13,11 @@ export const metadata: Metadata = {
 
 const GIRL_CATEGORIES = [
   { key: 'puzzle',   label: 'Puzzle',      icon: '🧩', color: 'from-yellow-400 to-amber-500' },
-  { key: 'casual',   label: 'Casual',      icon: '🎯', color: 'from-pink-400 to-rose-500' },
-  { key: 'match-3',  label: 'Match 3',     icon: '💎', color: 'from-purple-400 to-pink-500' },
-  { key: 'brain',    label: 'Brain',       icon: '🧠', color: 'from-cyan-500 to-blue-600' },
-  { key: 'memory',   label: 'Memory',      icon: '🎭', color: 'from-violet-500 to-purple-600' },
-  { key: 'educational', label: 'Educational', icon: '📚', color: 'from-green-500 to-teal-600' },
+  { key: 'casual',   label: 'Casual',      icon: '🎯', color: 'from-nexa-cyan to-nexa-emerald' },
+  { key: 'match-3',  label: 'Match 3',     icon: '💎', color: 'from-nexa-blue to-nexa-cyan' },
+  { key: 'brain',    label: 'Brain',       icon: '🧠', color: 'from-nexa-cyan to-nexa-blue' },
+  { key: 'memory',   label: 'Memory',      icon: '🎭', color: 'from-nexa-blue to-nexa-cyan' },
+  { key: 'educational', label: 'Educational', icon: '📚', color: 'from-nexa-emerald to-nexa-cyan' },
 ]
 
 export default async function GamesForGirlsPage() {
@@ -36,14 +36,14 @@ export default async function GamesForGirlsPage() {
     <main className="min-h-screen bg-nexa-black text-[color:var(--text-primary)]">
 
       <section className="relative overflow-hidden bg-gradient-to-b from-nexa-violet/20 to-nexa-black px-4 py-16 text-center">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_rgba(236,72,153,0.15),transparent_60%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--nexa-violet-shadow-strong),transparent_60%)]" />
         <div className="relative mx-auto max-w-3xl">
           <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-nexa-violet/30 bg-nexa-violet/10 px-4 py-1.5 text-sm text-nexa-violet">
             <span>💖</span> Free • No Login • Play Instantly
           </div>
           <h1 className="mb-4 text-4xl font-extrabold tracking-tight sm:text-5xl">
             Fun Games for{' '}
-            <span className="bg-gradient-to-r from-pink-400 to-purple-400 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-nexa-cyan to-nexa-blue bg-clip-text text-transparent">
               Girls
             </span>
           </h1>

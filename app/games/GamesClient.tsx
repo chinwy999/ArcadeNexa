@@ -127,7 +127,7 @@ export default function GamesClient() {
 
         {hasMore && (
           <div className="flex justify-center">
-            <button onClick={() => setVisibleCount(v => v + PAGE_SIZE)} className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-[color:var(--text-primary)] px-8 py-3 rounded-lg font-semibold">
+            <button onClick={() => setVisibleCount(v => v + PAGE_SIZE)} className="bg-gradient-to-r from-nexa-blue to-nexa-cyan hover:brightness-110 text-[color:var(--text-primary)] px-8 py-3 rounded-lg font-semibold">
               Load More Games ({visible.length} / {filtered.length})
             </button>
           </div>

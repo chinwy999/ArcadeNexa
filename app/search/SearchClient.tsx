@@ -118,14 +118,14 @@ export default function SearchClient() {
             value={q}
             onChange={(e) => setQ(e.target.value)}
             placeholder="Search games, categories..."
-            className="w-full bg-nexa-surface border border-[color:var(--white-10)] rounded-xl pl-12 pr-4 py-4 text-[color:var(--text-primary)] placeholder:text-[color:var(--text-secondary)] focus:ring-2 focus:ring-nexa-violet outline-none"
+            className="w-full bg-nexa-surface border border-[color:var(--white-10)] rounded-xl pl-12 pr-4 py-4 text-[color:var(--text-primary)] placeholder:text-[color:var(--text-secondary)] focus:ring-2 focus:ring-nexa-cyan outline-none"
             autoFocus
           />
         </div>
 
         <button
           type="submit"
-          className="bg-nexa-violet hover:bg-violet-600 text-[color:var(--text-primary)] px-6 py-4 rounded-xl font-bold transition"
+          className="bg-nexa-cyan hover:brightness-110 text-[color:var(--text-primary)] px-6 py-4 rounded-xl font-bold transition"
         >
           Search
         </button>
@@ -142,7 +142,7 @@ export default function SearchClient() {
               <button
                 key={cat}
                 onClick={() => selectCategory(cat)}
-                className="px-4 py-2 rounded-full bg-[color:var(--white-05)] border border-[color:var(--white-10)] text-[color:var(--text-primary)] text-sm hover:bg-nexa-violet/20 hover:border-nexa-violet/40 transition"
+                className="px-4 py-2 rounded-full bg-[color:var(--white-05)] border border-[color:var(--white-10)] text-[color:var(--text-primary)] text-sm hover:bg-nexa-cyan/20 hover:border-nexa-cyan/40 transition"
               >
                 {cat}
               </button>
@@ -171,7 +171,7 @@ export default function SearchClient() {
             <Link
               key={g.slug}
               href={`/games/${g.slug}`}
-              className="flex items-center gap-4 glass p-4 rounded-xl border border-[color:var(--white-05)] hover:border-nexa-violet/40 transition group"
+              className="flex items-center gap-4 glass p-4 rounded-xl border border-[color:var(--white-05)] hover:border-nexa-cyan/40 transition group"
             >
               <div
                 className={`w-14 h-14 rounded-xl flex items-center justify-center ${g.gradient} font-black text-[color:var(--text-primary)] flex-shrink-0`}
@@ -180,7 +180,7 @@ export default function SearchClient() {
               </div>
 
               <div className="flex-1 min-w-0">
-                <h3 className="text-[color:var(--text-primary)] font-bold group-hover:text-nexa-violet transition-colors truncate">
+                <h3 className="text-[color:var(--text-primary)] font-bold group-hover:text-nexa-cyan transition-colors truncate">
                   {g.name}
                 </h3>
 

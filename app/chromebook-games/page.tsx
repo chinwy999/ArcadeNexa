@@ -27,7 +27,7 @@ export default async function ChromebookGamesPage() {
           </div>
           <h1 className="mb-4 text-4xl font-extrabold tracking-tight sm:text-5xl">
             Free Games for{' '}
-            <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-nexa-blue to-nexa-cyan bg-clip-text text-transparent">
               Chromebook
             </span>
           </h1>

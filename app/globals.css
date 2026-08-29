@@ -34,6 +34,8 @@
   --nexa-glow-cyan: rgba(34, 230, 255, 0.10);
   --nexa-glow-blue: rgba(56, 189, 248, 0.08);
   --nexa-glow-violet: rgba(155, 108, 255, 0.065);
+  --nexa-violet-shadow: rgba(155, 108, 255, 0.10);
+  --nexa-violet-shadow-strong: rgba(155, 108, 255, 0.22);
 
   /* =======================================================
      TEXT
