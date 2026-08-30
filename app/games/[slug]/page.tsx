@@ -1,4 +1,5 @@
-import { getGameBySlugFast as getGameBySlug } from '@/lib/games'
+import { cache } from 'react'
+import { getGameBySlugFast } from '@/lib/games'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import type { Metadata } from 'next'
@@ -7,8 +8,11 @@ import RecentlyPlayedTracker from '@/components/RecentlyPlayedTracker'
 import FavoriteButton from '@/components/FavoriteButton'
 import { allArticles } from '@/lib/articles'
 import { getSiteUrl } from '@/lib/site'
+
+const getGameBySlug = cache(async (slug: string) => {
+  return getGameBySlugFast(slug)
+})
 import AdsterraBanner from '@/components/ads/AdsterraBanner'
-import AdsterraSidebar from '@/components/ads/AdsterraSidebar'
 import HilltopMultitag from '@/components/ads/HilltopMultitag'
 
 export const dynamic = 'force-dynamic'
@@ -481,7 +485,6 @@ export default async function GamePage({ params }: PageParams) {
             </div>
           </div>
 
-          <AdsterraSidebar />
 
           <Link
             href={`/games?genre=${game.category}`}
