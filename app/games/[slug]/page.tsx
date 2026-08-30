@@ -8,14 +8,12 @@ import RecentlyPlayedTracker from '@/components/RecentlyPlayedTracker'
 import FavoriteButton from '@/components/FavoriteButton'
 import { allArticles } from '@/lib/articles'
 import { getSiteUrl } from '@/lib/site'
-
-const getGameBySlug = cache(async (slug: string) => {
-  return getGameBySlugFast(slug)
-})
 import AdsterraBanner from '@/components/ads/AdsterraBanner'
 import HilltopMultitag from '@/components/ads/HilltopMultitag'
 
 export const dynamic = 'force-dynamic'
+export const dynamicParams = true
+export const revalidate = 0
 
 type PageParams = {
   params: {
@@ -23,13 +21,32 @@ type PageParams = {
   }
 }
 
+const getGameBySlug = cache(async (slug: string) => {
+  return getGameBySlugFast(slug)
+})
+
+/*
+ * IMPORTANT:
+ * generateMetadata must NOT call notFound().
+ *
+ * Invalid game slugs are handled exclusively by GamePage().
+ * This guarantees that the actual route can return HTTP 404.
+ */
 export async function generateMetadata(
   { params }: PageParams
 ): Promise<Metadata> {
   const game = await getGameBySlug(params.slug)
 
   if (!game) {
-    notFound()
+    return {
+      title: 'Game Not Found - ArcadeNexa',
+      description:
+        'The requested game could not be found on ArcadeNexa.',
+      robots: {
+        index: false,
+        follow: false,
+      },
+    }
   }
 
   const titleSuffix = ' - Play Free Online'
@@ -93,7 +110,6 @@ export async function generateMetadata(
 export async function generateStaticParams() {
   return []
 }
-
 
 function getHowToPlay(game: {
   title: string
@@ -238,12 +254,18 @@ function getRelatedArticles(game: {
 
 export default async function GamePage({ params }: PageParams) {
   /*
-   * The game lookup is intentionally kept here as the single
-   * source of truth for rendering the page.
+   * SINGLE SOURCE OF TRUTH FOR ROUTE VALIDATION.
    *
-   * GameMonetize uses direct ID lookup for gm-* slugs.
+   * If the requested slug does not resolve to a real game,
+   * notFound() is called here so Next.js returns HTTP 404.
    */
-  const game = await getGameBySlug(params.slug)
+  const slug = params.slug?.trim()
+
+  if (!slug) {
+    notFound()
+  }
+
+  const game = await getGameBySlug(slug)
 
   if (!game) {
     notFound()
@@ -252,136 +274,133 @@ export default async function GamePage({ params }: PageParams) {
   const howToPlay = getHowToPlay(game)
   const relatedArticles = getRelatedArticles(game)
 
-
   const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "VideoGame",
-    "name": game.title,
-    "description": game.description || `Play ${game.title} free online`,
-    "image": game.thumbnail,
-    "url": `${getSiteUrl()}/games/${game.slug}`,
-    "applicationCategory": "Game",
-    "operatingSystem": "Web Browser",
-      "gamePlatform": "Web Browser",
-    "genre": game.category,
-    "offers": {
-      "@type": "Offer",
-      "price": "0",
-      "priceCurrency": "USD",
-      "availability": "https://schema.org/InStock"
+    '@context': 'https://schema.org',
+    '@type': 'VideoGame',
+    name: game.title,
+    description:
+      game.description || `Play ${game.title} free online`,
+    image: game.thumbnail,
+    url: `${getSiteUrl()}/games/${game.slug}`,
+    applicationCategory: 'Game',
+    operatingSystem: 'Web Browser',
+    gamePlatform: 'Web Browser',
+    genre: game.category,
+    offers: {
+      '@type': 'Offer',
+      price: '0',
+      priceCurrency: 'USD',
+      availability: 'https://schema.org/InStock',
     },
-    "aggregateRating": {
-      "@type": "AggregateRating",
-      "ratingValue": game.rating,
-      "bestRating": "10",
-      "worstRating": "1",
-      "ratingCount": "100"
-    }
+    aggregateRating: {
+      '@type': 'AggregateRating',
+      ratingValue: game.rating,
+      bestRating: '10',
+      worstRating: '1',
+      ratingCount: '100',
+    },
   }
 
   return (
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
-    <div className="container mx-auto px-4 py-8 max-w-6xl">
-      <RecentlyPlayedTracker
-        slug={game.slug}
-        title={game.title}
-        thumbnail={game.thumbnail}
-        gradient={game.gradient}
-        initials={game.initials}
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(jsonLd),
+        }}
       />
 
-      {/* Breadcrumb */}
-      <div className="flex items-center gap-2 text-sm text-[color:var(--text-secondary)] mb-6">
-        <Link
-          href="/"
-          className="hover:text-[color:var(--text-primary)] transition"
-        >
-          Home
-        </Link>
+      <div className="container mx-auto px-4 py-8 max-w-6xl">
+        <RecentlyPlayedTracker
+          slug={game.slug}
+          title={game.title}
+          thumbnail={game.thumbnail}
+          gradient={game.gradient}
+          initials={game.initials}
+        />
 
-        <span>/</span>
-
-        <Link
-          href="/games"
-          className="hover:text-[color:var(--text-primary)] transition"
-        >
-          Games
-        </Link>
-
-        <span>/</span>
-
-        <Link
-          href={`/games?genre=${game.category}`}
-          className="hover:text-[color:var(--text-primary)] transition capitalize"
-        >
-          {game.category}
-        </Link>
-
-        <span>/</span>
-
-        <span className="text-[color:var(--text-primary)] truncate">
-          {game.title}
-        </span>
-      </div>
-
-      {/* Game Title */}
-      <div className="mb-6">
-        <h1 className="text-3xl font-black text-[color:var(--text-primary)] mb-2">
-          {game.title}
-        </h1>
-
-        <div className="flex items-center gap-3 flex-wrap">
-          <span className="bg-nexa-emerald/10 border border-nexa-emerald/20 text-nexa-emerald text-xs px-3 py-1 rounded-full font-bold">
-            HTML5 • Free
-          </span>
-
-          <span className="bg-[color:var(--white-05)] border border-[color:var(--white-10)] text-[color:var(--text-secondary)] text-xs px-3 py-1 rounded-full capitalize">
-            {game.category}
-          </span>
-
-          <span
-            className="text-nexa-gold text-sm font-bold"
-            title="ArcadeNexa Score"
+        <div className="flex items-center gap-2 text-sm text-[color:var(--text-secondary)] mb-6">
+          <Link
+            href="/"
+            className="hover:text-[color:var(--text-primary)] transition"
           >
-            ★ {Number(game.rating).toFixed(1)} ArcadeNexa Score
+            Home
+          </Link>
+
+          <span>/</span>
+
+          <Link
+            href="/games"
+            className="hover:text-[color:var(--text-primary)] transition"
+          >
+            Games
+          </Link>
+
+          <span>/</span>
+
+          <Link
+            href={`/games?genre=${game.category}`}
+            className="hover:text-[color:var(--text-primary)] transition capitalize"
+          >
+            {game.category}
+          </Link>
+
+          <span>/</span>
+
+          <span className="text-[color:var(--text-primary)] truncate">
+            {game.title}
           </span>
-
-          <FavoriteButton
-            slug={game.slug}
-            title={game.title}
-          />
         </div>
-      </div>
 
-      {/* Game Player */}
-      <div className="mb-8">
-        <AdsterraBanner />
+        <div className="mb-6">
+          <h1 className="text-3xl font-black text-[color:var(--text-primary)] mb-2">
+            {game.title}
+          </h1>
 
-        <InstantPlaySection game={game} />
+          <div className="flex items-center gap-3 flex-wrap">
+            <span className="bg-nexa-emerald/10 border border-nexa-emerald/20 text-nexa-emerald text-xs px-3 py-1 rounded-full font-bold">
+              HTML5 • Free
+            </span>
 
-        <HilltopMultitag />
-      </div>
+            <span className="bg-[color:var(--white-05)] border border-[color:var(--white-10)] text-[color:var(--text-secondary)] text-xs px-3 py-1 rounded-full capitalize">
+              {game.category}
+            </span>
 
-      {/* Game Info */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <span
+              className="text-nexa-gold text-sm font-bold"
+              title="ArcadeNexa Score"
+            >
+              ★ {Number(game.rating).toFixed(1)} ArcadeNexa Score
+            </span>
 
-        <div className="md:col-span-2 space-y-6">
-
-          <div className="glass rounded-2xl p-6 border border-[color:var(--white-05)]">
-            <h2 className="text-xl font-bold text-[color:var(--text-primary)] mb-3">
-              About {game.title}
-            </h2>
-
-            <p className="text-[color:var(--text-secondary)] leading-relaxed">
-              {game.longDescription}
-            </p>
+            <FavoriteButton
+              slug={game.slug}
+              title={game.title}
+            />
           </div>
+        </div>
 
-                      <div className="glass rounded-2xl p-6 border border-[color:var(--white-05)]">
+        <div className="mb-8">
+          <AdsterraBanner />
+
+          <InstantPlaySection game={game} />
+
+          <HilltopMultitag />
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="md:col-span-2 space-y-6">
+            <div className="glass rounded-2xl p-6 border border-[color:var(--white-05)]">
+              <h2 className="text-xl font-bold text-[color:var(--text-primary)] mb-3">
+                About {game.title}
+              </h2>
+
+              <p className="text-[color:var(--text-secondary)] leading-relaxed">
+                {game.longDescription}
+              </p>
+            </div>
+
+            <div className="glass rounded-2xl p-6 border border-[color:var(--white-05)]">
               <h2 className="text-xl font-bold text-[color:var(--text-primary)] mb-3">
                 How to Play {game.title}
               </h2>
@@ -419,90 +438,82 @@ export default async function GamePage({ params }: PageParams) {
                 ))}
               </div>
             </div>
-
-
           </div>
 
           <div className="space-y-4">
+            <div className="glass rounded-2xl p-6 border border-[color:var(--white-05)]">
+              <h3 className="text-xl font-bold text-[color:var(--text-primary)] mb-4">
+                Details
+              </h3>
 
-          <div className="glass rounded-2xl p-6 border border-[color:var(--white-05)]">
-            <h3 className="text-xl font-bold text-[color:var(--text-primary)] mb-4">
-              Details
-            </h3>
+              <div className="space-y-3">
+                <div className="flex justify-between">
+                  <span className="text-[color:var(--text-secondary)]">
+                    Provider
+                  </span>
 
-            <div className="space-y-3">
+                  <span className="text-[color:var(--text-primary)] font-medium">
+                    {game.provider}
+                  </span>
+                </div>
 
-              <div className="flex justify-between">
-                <span className="text-[color:var(--text-secondary)]">
-                  Provider
-                </span>
+                <div className="flex justify-between">
+                  <span className="text-[color:var(--text-secondary)]">
+                    Platform
+                  </span>
 
-                <span className="text-[color:var(--text-primary)] font-medium">
-                  {game.provider}
-                </span>
+                  <span className="text-[color:var(--text-primary)] font-medium">
+                    {game.platform}
+                  </span>
+                </div>
+
+                <div className="flex justify-between">
+                  <span className="text-[color:var(--text-secondary)]">
+                    Category
+                  </span>
+
+                  <span className="text-[color:var(--text-primary)] font-medium capitalize">
+                    {game.category}
+                  </span>
+                </div>
+
+                <div className="flex justify-between">
+                  <span className="text-[color:var(--text-secondary)]">
+                    Rating
+                  </span>
+
+                  <span className="text-nexa-gold font-medium">
+                    ★ {Number(game.rating).toFixed(1)}/10
+                  </span>
+                </div>
+
+                <div className="flex justify-between">
+                  <span className="text-[color:var(--text-secondary)]">
+                    Resolution
+                  </span>
+
+                  <span className="text-[color:var(--text-primary)] font-medium">
+                    {game.width}×{game.height}
+                  </span>
+                </div>
               </div>
-
-              <div className="flex justify-between">
-                <span className="text-[color:var(--text-secondary)]">
-                  Platform
-                </span>
-
-                <span className="text-[color:var(--text-primary)] font-medium">
-                  {game.platform}
-                </span>
-              </div>
-
-              <div className="flex justify-between">
-                <span className="text-[color:var(--text-secondary)]">
-                  Category
-                </span>
-
-                <span className="text-[color:var(--text-primary)] font-medium capitalize">
-                  {game.category}
-                </span>
-              </div>
-
-              <div className="flex justify-between">
-                <span className="text-[color:var(--text-secondary)]">
-                  Rating
-                </span>
-
-                <span className="text-nexa-gold font-medium">
-                  ★ {Number(game.rating).toFixed(1)}/10
-                </span>
-              </div>
-
-              <div className="flex justify-between">
-                <span className="text-[color:var(--text-secondary)]">
-                  Resolution
-                </span>
-
-                <span className="text-[color:var(--text-primary)] font-medium">
-                  {game.width}×{game.height}
-                </span>
-              </div>
-
             </div>
+
+            <Link
+              href={`/games?genre=${game.category}`}
+              className="block glass rounded-2xl p-4 border border-[color:var(--white-05)] hover:border-nexa-violet/40 transition text-center"
+            >
+              <p className="text-[color:var(--text-secondary)] text-sm">
+                More{' '}
+                <span className="capitalize text-nexa-violet font-bold">
+                  {game.category}
+                </span>{' '}
+                games →
+              </p>
+            </Link>
           </div>
-
-
-          <Link
-            href={`/games?genre=${game.category}`}
-            className="block glass rounded-2xl p-4 border border-[color:var(--white-05)] hover:border-nexa-violet/40 transition text-center"
-          >
-            <p className="text-[color:var(--text-secondary)] text-sm">
-              More{' '}
-              <span className="capitalize text-nexa-violet font-bold">
-                {game.category}
-              </span>{' '}
-              games →
-            </p>
-          </Link>
-
         </div>
-
       </div>
-    </div>
     </>
   )
 }
