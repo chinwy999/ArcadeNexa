@@ -1628,7 +1628,9 @@ export async function getGameBySlugFast(
     try {
       if (cachedGames && cachedGames.length > 0) {
         const catalogGame = cachedGames.find(
-          game => game.slug === slug
+          game =>
+            game.slug === slug &&
+            game.provider === 'GameMonetize'
         )
 
         if (catalogGame) {
@@ -1667,6 +1669,15 @@ export async function getGameBySlugFast(
       if (item) {
         const game = convertGMGame(item)
 
+        // SECURITY / SEO: never accept a mismatched GameMonetize result.
+        // The returned game must correspond exactly to the requested gm-* slug.
+        if (game.slug !== slug) {
+          console.warn(
+            `[ArcadeNexa] GM direct lookup slug mismatch: requested=${slug} returned=${game.slug}`
+          )
+          return null
+        }
+
         gmSlugCache.set(slug, game)
 
         return game
@@ -1683,7 +1694,9 @@ export async function getGameBySlugFast(
       const allGames = await loadGames()
 
       const catalogGame = allGames.find(
-        game => game.slug === slug
+        game =>
+          game.slug === slug &&
+          game.provider === 'GameMonetize'
       )
 
       if (catalogGame) {
