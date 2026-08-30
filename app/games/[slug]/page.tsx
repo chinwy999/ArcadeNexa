@@ -1,4 +1,3 @@
-import { cache } from 'react'
 import { getGameBySlugFast } from '@/lib/games'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
@@ -21,9 +20,9 @@ type PageParams = {
   }
 }
 
-const getGameBySlug = cache(async (slug: string) => {
+const getGameBySlug = async (slug: string) => {
   return getGameBySlugFast(slug)
-})
+}
 
 /*
  * IMPORTANT:
@@ -264,7 +263,14 @@ export default async function GamePage({ params }: PageParams) {
 
   const game = await getGameBySlug(slug)
 
+  console.log(
+    `[ArcadeNexa] GAME PAGE RESOLVE: slug=${slug} found=${Boolean(game)} title=${game?.title || 'NONE'}`
+  )
+
   if (!game) {
+    console.log(
+      `[ArcadeNexa] GAME PAGE NOTFOUND: ${slug}`
+    )
     notFound()
   }
 
