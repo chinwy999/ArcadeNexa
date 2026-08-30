@@ -8,7 +8,6 @@ import FavoriteButton from '@/components/FavoriteButton'
 import { allArticles } from '@/lib/articles'
 import { getSiteUrl } from '@/lib/site'
 import AdsterraBanner from '@/components/ads/AdsterraBanner'
-import HilltopMultitag from '@/components/ads/HilltopMultitag'
 
 export const dynamic = 'force-dynamic'
 export const dynamicParams = true
@@ -388,7 +387,6 @@ export default async function GamePage({ params }: PageParams) {
 
           <InstantPlaySection game={game} />
 
-          <HilltopMultitag />
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
