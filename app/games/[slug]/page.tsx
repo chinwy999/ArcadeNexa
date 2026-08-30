@@ -107,9 +107,6 @@ export async function generateMetadata(
   }
 }
 
-export async function generateStaticParams() {
-  return []
-}
 
 function getHowToPlay(game: {
   title: string
