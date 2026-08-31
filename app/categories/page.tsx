@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
-import { categoryIcons } from '@/lib/categoryIcons'
 
 export const dynamic = 'force-dynamic'
 
@@ -468,31 +467,20 @@ export default function CategoriesPage() {
                 )}`}
                 className="group relative aspect-[4/3] overflow-hidden rounded-2xl border border-[color:var(--white-10)] bg-[color:var(--white-03)] transition duration-300 hover:-translate-y-1 hover:border-[color:var(--white-25)] hover:shadow-2xl"
               >
-                <div
-                  className={`absolute inset-0 bg-gradient-to-br ${category.accent} opacity-70 transition group-hover:opacity-90`}
-                />
-
-                {(() => {
-                  const Icon = categoryIcons[category.slug]
-                  return Icon ? (
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <Icon
-                        className="h-12 w-12 text-white/90 drop-shadow-lg transition group-hover:scale-110"
-                        strokeWidth={1.75}
-                      />
-                    </div>
-                  ) : image ? (
-                    <Image
-                      src={image}
-                      alt={`${category.title} games`}
-                      fill
-                      sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
-                      className="h-full w-full object-cover object-center transition duration-500 group-hover:scale-110"
-                    />
-                  ) : null
-                })()}
+                {image && (
+                  <Image
+                    src={image}
+                    alt={`${category.title} games`}
+                    fill
+                    sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
+                    className="h-full w-full object-cover object-center transition duration-500 group-hover:scale-110"
+                  />
+                )}
 
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
+                <div
+                  className={`absolute inset-0 bg-gradient-to-br ${category.accent} opacity-30 transition group-hover:opacity-55`}
+                />
 
                 <div className="absolute inset-x-0 bottom-0 p-4">
                   <h3 className="text-base font-black text-[color:var(--text-primary)]">
@@ -540,29 +528,19 @@ export default function CategoriesPage() {
                 className="group relative overflow-hidden rounded-xl border border-[color:var(--white-10)] bg-[color:var(--white-03)] transition duration-300 hover:-translate-y-0.5 hover:border-[color:var(--white-25)] hover:bg-[color:var(--white-05)]"
               >
                 <div className="relative aspect-[4/3] w-full overflow-hidden">
-                  <div
-                    className={`h-full bg-gradient-to-br ${category.accent}`}
-                  />
-
-                  {(() => {
-                    const Icon = categoryIcons[category.slug]
-                    return Icon ? (
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <Icon
-                          className="h-8 w-8 text-white/90 drop-shadow-lg transition group-hover:scale-110"
-                          strokeWidth={1.75}
-                        />
-                      </div>
-                    ) : image ? (
-                      <Image
-                        src={image}
-                        alt=""
-                        fill
-                        sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
-                        className="h-full w-full object-cover object-center transition duration-500 group-hover:scale-110"
-                      />
-                    ) : null
-                  })()}
+                  {image ? (
+                    <Image
+                      src={image}
+                      alt=""
+                      fill
+                      sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
+                      className="h-full w-full object-cover object-center transition duration-500 group-hover:scale-110"
+                    />
+                  ) : (
+                    <div
+                      className={`h-full bg-gradient-to-br ${category.accent}`}
+                    />
+                  )}
 
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
                 </div>
