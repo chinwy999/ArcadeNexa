@@ -9,14 +9,14 @@ import RecentlyPlayed from '@/components/RecentlyPlayed'
 export const revalidate = 300
 
 const categoryMeta: Record<string, { icon?: any; image?: string; color: string }> = {
-  Action:     { image: '/images/categories/action.webp',     color: 'from-red-500 to-orange-500' },
-  Casual:     { image: '/images/categories/casual.webp',     color: 'from-nexa-emerald to-nexa-cyan' },
+  Action:     { image: '/images/categories/battle.webp',     color: 'from-red-500 to-orange-500' },
+  Casual:     { image: '/images/categories/arcade.webp',     color: 'from-nexa-emerald to-nexa-cyan' },
   Puzzle:     { image: '/images/categories/puzzle.webp',     color: 'from-yellow-500 to-amber-400' },
   Racing:     { image: '/images/categories/racing.webp',     color: 'from-amber-500 to-orange-400' },
   Sports:     { image: '/images/categories/sports.webp',     color: 'from-nexa-cyan to-nexa-blue' },
-  Shooter:    { image: '/images/categories/shooter.webp',    color: 'from-red-500 to-zinc-500' },
-  Simulation: { image: '/images/categories/simulation.webp', color: 'from-nexa-blue to-nexa-cyan' },
-  Strategy:   { image: '/images/categories/strategy.webp',   color: 'from-nexa-blue to-nexa-cyan' },
+  Shooter:    { image: '/images/categories/air-combat.webp',    color: 'from-red-500 to-zinc-500' },
+  Simulation: { image: '/images/categories/building.webp', color: 'from-nexa-blue to-nexa-cyan' },
+  Strategy:   { image: '/images/categories/board.webp',   color: 'from-nexa-blue to-nexa-cyan' },
   Adventure:  { image: '/images/categories/adventure.webp',  color: 'from-nexa-emerald to-nexa-cyan' },
   Battle:     { image: '/images/categories/battle.webp',     color: 'from-orange-500 to-red-400' },
 }
