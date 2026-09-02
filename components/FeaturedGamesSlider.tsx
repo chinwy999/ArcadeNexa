@@ -2,8 +2,7 @@
 
 import Link from 'next/link'
 import Image from 'next/image'
-import { useCallback, useEffect, useRef, useState } from 'react'
-import { Play, Star, Sparkles, ChevronLeft, ChevronRight, Zap } from 'lucide-react'
+import { Play, Star, Sparkles, Zap } from 'lucide-react'
 import type { Game } from '@/lib/games'
 
 interface FeaturedGamesSliderProps {
@@ -13,128 +12,62 @@ interface FeaturedGamesSliderProps {
 
 export default function FeaturedGamesSlider({
   games,
-  autoPlayMs = 6000,
 }: FeaturedGamesSliderProps) {
   const featuredGames = [...games]
     .filter((g) => g.playable && g.thumbnail && g.slug)
     .sort((a, b) => (b.rating || 0) - (a.rating || 0))
     .slice(0, 8)
 
-  const [current, setCurrent] = useState(0)
-  const [prev, setPrev] = useState<number | null>(null)
-  const [direction, setDirection] = useState<'next' | 'prev'>('next')
-  const [animating, setAnimating] = useState(false)
-  const [paused, setPaused] = useState(false)
-  const [progress, setProgress] = useState(0)
-  const progressRef = useRef<ReturnType<typeof setInterval> | null>(null)
-  const touchStartX = useRef<number | null>(null)
-  const touchEndX = useRef<number | null>(null)
-  const total = featuredGames.length
+  if (featuredGames.length === 0) return null
 
-  const goTo = useCallback((index: number, dir: 'next' | 'prev') => {
-    if (animating || index === current) return
-    setDirection(dir)
-    setPrev(current)
-    setAnimating(true)
-    setCurrent(index)
-    setProgress(0)
-    setTimeout(() => {
-      setPrev(null)
-      setAnimating(false)
-    }, 600)
-  }, [animating, current])
-
-  const nextSlide = useCallback(() => {
-    if (total < 2) return
-    goTo((current + 1) % total, 'next')
-  }, [total, current, goTo])
-
-  const previousSlide = useCallback(() => {
-    if (total < 2) return
-    goTo((current - 1 + total) % total, 'prev')
-  }, [total, current, goTo])
-
-  useEffect(() => {
-    if (total < 2 || paused) return
-    const tick = 50
-    const steps = autoPlayMs / tick
-    let step = 0
-    progressRef.current = setInterval(() => {
-      step++
-      setProgress(Math.min((step / steps) * 100, 100))
-      if (step >= steps) {
-        step = 0
-        nextSlide()
-      }
-    }, tick)
-    return () => { if (progressRef.current) clearInterval(progressRef.current) }
-  }, [nextSlide, autoPlayMs, paused, total, current])
-
-  const handleTouchStart = (e: React.TouchEvent) => {
-    touchStartX.current = e.touches[0]?.clientX ?? null
-    touchEndX.current = null
-    setPaused(true)
-  }
-  const handleTouchMove = (e: React.TouchEvent) => {
-    touchEndX.current = e.touches[0]?.clientX ?? null
-  }
-  const handleTouchEnd = () => {
-    if (touchStartX.current !== null && touchEndX.current !== null) {
-      const d = touchStartX.current - touchEndX.current
-      if (Math.abs(d) > 50) d > 0 ? nextSlide() : previousSlide()
-    }
-    touchStartX.current = null
-    touchEndX.current = null
-    setPaused(false)
-  }
-
-  if (total === 0) return null
-
-  const game = featuredGames[current]
-  const prevGame = prev !== null ? featuredGames[prev] : null
-
-  const slideIn = direction === 'next'
-    ? 'animate-[slideInRight_0.6s_cubic-bezier(0.22,1,0.36,1)_forwards]'
-    : 'animate-[slideInLeft_0.6s_cubic-bezier(0.22,1,0.36,1)_forwards]'
-  const slideOut = direction === 'next'
-    ? 'animate-[slideOutLeft_0.6s_cubic-bezier(0.22,1,0.36,1)_forwards]'
-    : 'animate-[slideOutRight_0.6s_cubic-bezier(0.22,1,0.36,1)_forwards]'
+  /*
+   * Three identical sets create a seamless infinite track.
+   * We animate exactly one set width, so the third set replaces
+   * the first without a visible jump.
+   */
+  const trackGames = [
+    ...featuredGames,
+    ...featuredGames,
+    ...featuredGames,
+  ]
 
   return (
     <section
-      className="relative w-full select-none"
+      className="relative w-full select-none overflow-hidden"
       aria-label="Featured games"
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => setPaused(false)}
     >
       <style>{`
-        @keyframes slideInRight {
-          from { transform: translateX(100%) scale(0.96); opacity: 0; }
-          to   { transform: translateX(0) scale(1);      opacity: 1; }
+        @keyframes featuredInfiniteScroll {
+          from {
+            transform: translate3d(0, 0, 0);
+          }
+
+          to {
+            transform: translate3d(-33.333333%, 0, 0);
+          }
         }
-        @keyframes slideInLeft {
-          from { transform: translateX(-100%) scale(0.96); opacity: 0; }
-          to   { transform: translateX(0) scale(1);        opacity: 1; }
+
+        .featured-infinite-track {
+          animation: featuredInfiniteScroll 52s linear infinite;
+          width: max-content;
+          will-change: transform;
         }
-        @keyframes slideOutLeft {
-          from { transform: translateX(0) scale(1);      opacity: 1; }
-          to   { transform: translateX(-100%) scale(0.96); opacity: 0; }
+
+        .featured-infinite-track:hover {
+          animation-play-state: running;
         }
-        @keyframes slideOutRight {
-          from { transform: translateX(0) scale(1);       opacity: 1; }
-          to   { transform: translateX(100%) scale(0.96); opacity: 0; }
+
+        @media (max-width: 640px) {
+          .featured-infinite-track {
+            animation-duration: 42s;
+          }
         }
-        @keyframes fadeUpIn {
-          from { transform: translateY(24px); opacity: 0; }
-          to   { transform: translateY(0);    opacity: 1; }
+
+        @media (prefers-reduced-motion: reduce) {
+          .featured-infinite-track {
+            animation-duration: 80s;
+          }
         }
-        .fade-up { animation: fadeUpIn 0.5s cubic-bezier(0.22,1,0.36,1) both; }
-        .fade-up-1 { animation-delay: 0.05s; }
-        .fade-up-2 { animation-delay: 0.13s; }
-        .fade-up-3 { animation-delay: 0.21s; }
-        .fade-up-4 { animation-delay: 0.29s; }
-        .scrollbar-hide::-webkit-scrollbar { display: none; }
-        .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
       `}</style>
 
       {/* Header */}
@@ -143,196 +76,91 @@ export default function FeaturedGamesSlider({
           <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-nexa-violet/20">
             <Sparkles className="h-4 w-4 text-nexa-violet" />
           </div>
+
           <div>
-            <h2 className="text-xl font-black text-[color:var(--text-primary)] sm:text-2xl">Featured Games</h2>
-            <p className="text-[11px] text-[color:var(--text-muted)]">Hand-picked · Updated daily</p>
+            <h2 className="text-xl font-black text-[color:var(--text-primary)] sm:text-2xl">
+              Featured Games
+            </h2>
+
+            <p className="text-[11px] text-[color:var(--text-muted)]">
+              Hand-picked · Updated daily
+            </p>
           </div>
         </div>
-        <div className="flex items-center gap-2">
-          <button
-            type="button"
-            onClick={previousSlide}
-            aria-label="Previous slide"
-            className="flex h-9 w-9 items-center justify-center rounded-full border border-[color:var(--white-10)] bg-[color:var(--white-05)] text-[color:var(--text-primary)] transition hover:border-nexa-violet/60 hover:bg-nexa-violet/20"
-          >
-            <ChevronLeft className="h-4 w-4" />
-          </button>
-          <span className="min-w-[40px] text-center text-xs font-bold text-[color:var(--text-secondary)]">
-            {current + 1} / {total}
+
+        <Link
+          href="/games"
+          className="group inline-flex items-center gap-2 rounded-full border border-[color:var(--white-10)] bg-[color:var(--white-05)] px-4 py-2 text-xs font-bold text-[color:var(--text-secondary)] transition-all hover:border-nexa-violet/50 hover:bg-nexa-violet/10 hover:text-[color:var(--text-primary)]"
+        >
+          View All
+          <span className="transition-transform duration-200 group-hover:translate-x-1">
+            →
           </span>
-          <button
-            type="button"
-            onClick={nextSlide}
-            aria-label="Next slide"
-            className="flex h-9 w-9 items-center justify-center rounded-full border border-[color:var(--white-10)] bg-[color:var(--white-05)] text-[color:var(--text-primary)] transition hover:bg-nexa-violet/20"
-          >
-            <ChevronRight className="h-4 w-4" />
-          </button>
-        </div>
+        </Link>
       </div>
 
-      {/* Main Hero */}
-      <div
-        className="relative overflow-hidden rounded-2xl border border-[color:var(--white-10)] bg-black shadow-2xl"
-        style={{ aspectRatio: "16/7" }}
-        onTouchStart={handleTouchStart}
-        onTouchMove={handleTouchMove}
-        onTouchEnd={handleTouchEnd}
-      >
-        {/* Slides */}
-        <div className="relative w-full" style={{ aspectRatio: "16/7" }}>
+      {/* Edge fade */}
+      <div className="pointer-events-none absolute bottom-0 left-0 top-[4.5rem] z-20 w-12 bg-gradient-to-r from-[var(--nexa-black)] via-[var(--nexa-black)]/70 to-transparent sm:w-24" />
 
-          {/* Outgoing slide */}
-          {animating && prevGame && (
-            <div className={`absolute inset-0 ${slideOut}`} style={{ zIndex: 1 }}>
-              <Image
-                src={prevGame.thumbnailLarge || prevGame.thumbnail}
-                alt={prevGame.title}
-                fill
-                sizes="100vw"
-                className="object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-r from-black via-black/70 to-transparent" />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/20" />
-            </div>
-          )}
+      <div className="pointer-events-none absolute bottom-0 right-0 top-[4.5rem] z-20 w-12 bg-gradient-to-l from-[var(--nexa-black)] via-[var(--nexa-black)]/70 to-transparent sm:w-24" />
 
-          {/* Incoming slide */}
-          <div
-            key={game.slug}
-            className={`absolute inset-0 ${animating ? slideIn : ''}`}
-            style={{ zIndex: 2 }}
-          >
-            <Image
-              src={game.thumbnailLarge || game.thumbnail}
-              alt={game.title}
-              fill
-              priority={current === 0}
-              sizes="100vw"
-              className="object-cover"
-            />
-            {/* Overlays */}
-            <div className="absolute inset-0 bg-gradient-to-r from-black via-black/65 to-transparent" />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/20" />
+      {/* Infinite continuous track */}
+      <div className="relative overflow-hidden py-2">
+        <div className="featured-infinite-track flex gap-3 sm:gap-4">
+          {trackGames.map((game, index) => (
+            <Link
+              key={`${game.slug}-${index}`}
+              href={`/games/${game.slug}`}
+              aria-label={`Play ${game.title}`}
+              className="group relative w-[205px] shrink-0 overflow-hidden rounded-2xl border border-[color:var(--white-10)] bg-[color:var(--nexa-surface)] shadow-[0_14px_40px_rgba(0,0,0,0.32)] transition-all duration-300 hover:-translate-y-1 hover:border-nexa-violet/50 hover:shadow-[0_18px_45px_rgba(0,0,0,0.42)] sm:w-[245px] md:w-[275px]"
+            >
+              <div className="relative aspect-[16/10] overflow-hidden">
+                <Image
+                  src={game.thumbnailLarge || game.thumbnail}
+                  alt={game.title}
+                  fill
+                  sizes="260px"
+                  loading="lazy"
+                  className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+                />
 
-            {/* Content */}
-            <div className="absolute inset-0 flex items-end sm:items-center pb-16 sm:pb-0">
-              <div className="w-full max-w-xl px-6 py-8 sm:px-10">
+                {/* Image overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/15 to-transparent" />
 
-                <div key={`badge-${game.slug}`} className="fade-up fade-up-1 mb-4 inline-flex items-center gap-1.5 rounded-full border border-nexa-violet/40 bg-nexa-violet/15 px-3 py-1 text-[11px] font-black uppercase tracking-widest text-nexa-violet backdrop-blur">
+                {/* Featured badge */}
+                <div className="absolute left-3 top-3 flex items-center gap-1 rounded-full border border-nexa-violet/30 bg-black/45 px-2.5 py-1 text-[9px] font-black uppercase tracking-wider text-nexa-violet backdrop-blur-md">
                   <Sparkles className="h-3 w-3" />
                   Featured
                 </div>
 
-                <h3 key={`title-${game.slug}`} className="fade-up fade-up-2 text-3xl font-black leading-tight tracking-tight text-[color:var(--text-primary)] drop-shadow-2xl sm:text-4xl lg:text-5xl">
+                {/* Play button */}
+                <div className="absolute right-3 top-3 flex h-9 w-9 translate-y-1 items-center justify-center rounded-full bg-nexa-emerald text-nexa-black opacity-0 shadow-[0_0_22px_rgba(34,197,94,0.35)] transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
+                  <Play className="ml-0.5 h-4 w-4 fill-current" />
+                </div>
+
+                {/* Rating */}
+                <div className="absolute bottom-3 left-3 flex items-center gap-1 rounded-lg bg-black/55 px-2 py-1 text-[10px] font-black text-nexa-gold backdrop-blur-md">
+                  <Star className="h-3 w-3 fill-current" />
+                  {Number(game.rating || 0).toFixed(1)}
+                </div>
+
+                {/* Instant play */}
+                <div className="absolute bottom-3 right-3 flex items-center gap-1 rounded-lg bg-nexa-emerald/15 px-2 py-1 text-[9px] font-black text-nexa-emerald backdrop-blur-md">
+                  <Zap className="h-3 w-3 fill-current" />
+                  PLAY
+                </div>
+              </div>
+
+              {/* Title */}
+              <div className="flex min-h-[58px] items-center px-3 py-3">
+                <h3 className="line-clamp-2 text-sm font-black leading-tight text-[color:var(--text-primary)] transition-colors duration-200 group-hover:text-nexa-violet">
                   {game.title}
                 </h3>
-
-                <div key={`meta-${game.slug}`} className="fade-up fade-up-3 mt-4 flex flex-wrap items-center gap-2">
-                  <span className="inline-flex items-center gap-1 rounded-lg bg-nexa-gold/15 px-3 py-1 text-sm font-black text-nexa-gold">
-                    <Star className="h-3.5 w-3.5 fill-current" />
-                    {Number(game.rating || 0).toFixed(1)}
-                  </span>
-                  <span className="rounded-lg border border-[color:var(--white-10)] bg-[color:var(--white-05)] px-3 py-1 text-sm capitalize text-[color:var(--text-secondary)] backdrop-blur">
-                    {game.category || 'Arcade'}
-                  </span>
-                  <span className="inline-flex items-center gap-1 rounded-lg border border-nexa-emerald/20 bg-nexa-emerald/10 px-3 py-1 text-sm font-bold text-nexa-emerald">
-                    <Zap className="h-3 w-3 fill-current" />
-                    Instant Play
-                  </span>
-                </div>
-
-                <p key={`desc-${game.slug}`} className="fade-up fade-up-3 mt-3 hidden max-w-md text-sm leading-relaxed text-[color:var(--text-secondary)] sm:block">
-                  {game.description || 'Play instantly in your browser. No downloads required.'}
-                </p>
-
-                <div key={`btn-${game.slug}`} className="fade-up fade-up-4 mt-6 flex items-center gap-3">
-                  <Link
-                    href={`/games/${game.slug}`}
-                    className="group inline-flex items-center gap-2 rounded-xl bg-nexa-emerald px-6 py-3 text-sm font-black text-nexa-black shadow-[0_0_24px_rgba(34,197,94,0.3)] transition-all duration-200 hover:scale-105 hover:shadow-[0_0_36px_rgba(34,197,94,0.5)]"
-                  >
-                    <Play className="h-4 w-4 fill-current" />
-                    PLAY NOW
-                    <span className="transition-transform duration-200 group-hover:translate-x-1">→</span>
-                  </Link>
-                </div>
-
               </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Progress bar dots */}
-        <div className="absolute bottom-0 left-0 right-0 z-10 flex items-center gap-1.5 px-6 pb-4 sm:px-10">
-          {featuredGames.map((_, i) => (
-            <button
-              key={i}
-              type="button"
-              onClick={() => goTo(i, i > current ? 'next' : 'prev')}
-              className="relative flex h-11 w-11 items-center justify-center rounded-full transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-nexa-emerald focus-visible:ring-offset-2 focus-visible:ring-offset-nexa-navy"
-              aria-label={`Featured game ${i + 1} of ${total}`}
-            >
-              <span
-                className="relative block h-1 overflow-hidden rounded-full"
-                style={{
-                  width: i === current ? 40 : 16,
-                  background: 'var(--white-15)',
-                }}
-              >
-                {i === current && (
-                  <span
-                    className="absolute inset-y-0 left-0 rounded-full bg-nexa-emerald transition-none"
-                    style={{ width: `${progress}%` }}
-                  />
-                )}
-              </span>
-            </button>
+            </Link>
           ))}
         </div>
       </div>
-
-      {/* Thumbnails strip */}
-      {total > 1 && (
-        <div className="mt-3 flex gap-2 overflow-x-auto pb-1 scrollbar-hide snap-x snap-mandatory">
-          {featuredGames.map((item, index) => (
-            <button
-              key={item.slug}
-              type="button"
-              onClick={() => goTo(index, index > current ? 'next' : 'prev')}
-              aria-label={`Go to game ${index + 1}: ${item.title}`}
-              className={`group relative min-w-[130px] snap-start overflow-hidden rounded-xl border transition-all duration-300 sm:min-w-[160px] ${
-                index === current
-                  ? 'border-nexa-emerald/60 shadow-[0_0_16px_rgba(34,197,94,0.2)]'
-                  : 'border-[color:var(--white-08)] opacity-60 hover:opacity-90 hover:border-[color:var(--white-25)]'
-              }`}
-            >
-              <div className="relative aspect-video overflow-hidden bg-black">
-                <Image
-                  src={item.thumbnail}
-                  alt={item.title}
-                  fill
-                  sizes="160px"
-                  className={`object-cover transition-transform duration-500 ${index === current ? 'scale-105' : 'group-hover:scale-105'}`}
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/10 to-transparent" />
-                {index === current && (
-                  <div className="absolute left-2 top-2 flex items-center gap-1 rounded-full bg-nexa-emerald px-2 py-0.5 text-[9px] font-black text-nexa-black">
-                    <Play className="h-2.5 w-2.5 fill-current" />
-                    NOW
-                  </div>
-                )}
-                <div className="absolute bottom-2 left-2 right-2">
-                  <p className="truncate text-[11px] font-black text-[color:var(--text-primary)]">{item.title}</p>
-                  <div className="mt-0.5 flex items-center gap-1 text-[10px] text-nexa-gold">
-                    <Star className="h-2.5 w-2.5 fill-current" />
-                    {Number(item.rating || 0).toFixed(1)}
-                  </div>
-                </div>
-              </div>
-            </button>
-          ))}
-        </div>
-      )}
     </section>
   )
 }
