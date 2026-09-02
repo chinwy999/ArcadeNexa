@@ -90,11 +90,21 @@ export default async function HomePage() {
   const newGames = takeUnique(byNewest, 8)
   const editorGames = takeUnique(editorPicks, 8)
 
-  const availableCategories = Object.keys(categoryMeta).filter((cat) =>
+  const featuredCategoryOrder = [
+    'Action',
+    'Adventure',
+    'Arcade',
+    'Puzzle',
+    'Racing',
+    'Sports',
+  ]
+
+  const availableCategories = featuredCategoryOrder.filter((cat) =>
+    categoryMeta[cat] &&
     games.some(
       (game) =>
         game.genreFilter?.toLowerCase() === cat.toLowerCase() ||
-        game.category?.toLowerCase()    === cat.toLowerCase()
+        game.category?.toLowerCase() === cat.toLowerCase()
     )
   )
 
@@ -174,39 +184,53 @@ export default async function HomePage() {
             </Link>
           </div>
 
-          <div className="scrollbar-hide grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
+          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6 lg:gap-4">
             {availableCategories.map((category) => {
               const meta = categoryMeta[category]
               const Icon = meta.icon
+
               return (
                 <Link
                   key={category}
                   href={`/games?genre=${encodeURIComponent(category)}`}
-                  className="category-card group relative overflow-hidden rounded-2xl p-4 active:scale-[0.97]"
+                  aria-label={`Browse ${category} games`}
+                  className="category-card group relative block overflow-hidden rounded-2xl border border-white/[0.07] bg-black/20 shadow-[0_10px_30px_rgba(0,0,0,0.18)] transition-all duration-300 hover:-translate-y-1 hover:border-white/[0.14] hover:shadow-[0_16px_40px_rgba(0,0,0,0.28)] active:scale-[0.98]"
                 >
-                  <div className={`absolute -right-8 -top-8 h-24 w-24 rounded-full bg-gradient-to-br ${meta.color} opacity-20 blur-2xl transition-opacity duration-300 group-hover:opacity-40`} />
-                  <div className="relative mb-4 aspect-[4/3] w-full overflow-hidden rounded-xl border border-[color:var(--white-10)] bg-black/30 shadow-lg transition-all duration-300 group-hover:scale-[1.02] group-hover:border-nexa-cyan/20">
+                  <div className="relative aspect-[4/3] w-full overflow-hidden">
                     {meta.image ? (
                       <Image
                         src={meta.image}
                         alt={`${category} games`}
                         fill
-                        sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
+                        sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 16vw"
                         loading="lazy"
-                        className="h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-110"
+                        className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-110"
                       />
                     ) : Icon ? (
                       <div className={`flex h-full w-full items-center justify-center bg-gradient-to-br ${meta.color}`}>
-                        <Icon className="h-10 w-10 text-[color:var(--text-primary)] drop-shadow-[0_0_10px_rgba(255,255,255,0.7)]" strokeWidth={2.4} />
+                        <Icon
+                          className="h-10 w-10 text-[color:var(--text-primary)] drop-shadow-[0_0_12px_rgba(255,255,255,0.7)]"
+                          strokeWidth={2.2}
+                        />
                       </div>
                     ) : null}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
+
+                    <div className="absolute inset-0 bg-gradient-to-t from-black via-black/15 to-transparent opacity-90" />
+
+                    <div className="absolute inset-x-0 bottom-0 p-3 sm:p-4">
+                      <div className="flex items-center justify-between gap-2">
+                        <h3 className="text-xs font-black uppercase tracking-[0.12em] text-white drop-shadow-lg sm:text-sm">
+                          {category}
+                        </h3>
+
+                        <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-white/15 bg-black/30 text-sm font-bold text-white/80 backdrop-blur-sm transition-all duration-300 group-hover:border-white/30 group-hover:bg-white/10 group-hover:text-white">
+                          →
+                        </span>
+                      </div>
+                    </div>
+
+                    <div className={`pointer-events-none absolute -right-10 -top-10 h-24 w-24 rounded-full bg-gradient-to-br ${meta.color} opacity-0 blur-2xl transition-opacity duration-500 group-hover:opacity-30`} />
                   </div>
-                  <div className="relative">
-                    <h3 className="text-sm font-black uppercase tracking-wide text-[color:var(--text-primary)]">{category}</h3>
-                    <p className="mt-1 text-xs font-medium text-[color:var(--text-muted)]">Explore</p>
-                  </div>
-                  <div className="absolute bottom-4 right-4 text-xs font-bold text-[color:var(--text-primary)]/30 transition-colors group-hover:text-[color:var(--text-primary)]/80">→</div>
                 </Link>
               )
             })}
