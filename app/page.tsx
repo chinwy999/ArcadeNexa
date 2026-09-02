@@ -90,23 +90,15 @@ export default async function HomePage() {
   const newGames = takeUnique(byNewest, 8)
   const editorGames = takeUnique(editorPicks, 8)
 
-  const featuredCategoryOrder = [
-    'Action',
-    'Adventure',
-    'Arcade',
-    'Puzzle',
-    'Racing',
-    'Sports',
-  ]
-
-  const availableCategories = featuredCategoryOrder.filter((cat) =>
-    categoryMeta[cat] &&
-    games.some(
-      (game) =>
-        game.genreFilter?.toLowerCase() === cat.toLowerCase() ||
-        game.category?.toLowerCase() === cat.toLowerCase()
+  const availableCategories = Object.keys(categoryMeta)
+    .filter((cat) =>
+      games.some(
+        (game) =>
+          game.genreFilter?.toLowerCase() === cat.toLowerCase() ||
+          game.category?.toLowerCase() === cat.toLowerCase()
+      )
     )
-  )
+    .slice(0, 6)
 
   const gameCountLabel = '15,000+'
 
