@@ -2,6 +2,7 @@ import { Globe2, Crown, Map, Shield } from "lucide-react"
 import { getHomeGames } from '@/lib/games'
 import GameCard from '@/components/GameCard'
 import FeaturedGamesSlider from '@/components/FeaturedGamesSlider'
+import CategorySlider from '@/components/CategorySlider'
 import Link from 'next/link'
 import Image from 'next/image'
 import RecentlyPlayed from '@/components/RecentlyPlayed'
@@ -90,15 +91,69 @@ export default async function HomePage() {
   const newGames = takeUnique(byNewest, 8)
   const editorGames = takeUnique(editorPicks, 8)
 
-  const availableCategories = Object.keys(categoryMeta)
-    .filter((cat) =>
-      games.some(
-        (game) =>
-          game.genreFilter?.toLowerCase() === cat.toLowerCase() ||
-          game.category?.toLowerCase() === cat.toLowerCase()
-      )
-    )
-    .slice(0, 6)
+  const sliderCategories = [
+    { name: 'Action', slug: 'action', image: '/images/categories/action.webp' },
+    { name: 'Adventure', slug: 'adventure', image: '/images/categories/adventure.webp' },
+    { name: 'Arcade', slug: 'arcade', image: '/images/categories/arcade.webp' },
+    { name: 'Casual', slug: 'casual', image: '/images/categories/casual.webp' },
+    { name: 'Puzzle', slug: 'puzzle', image: '/images/categories/puzzle.webp' },
+    { name: 'Racing', slug: 'racing', image: '/images/categories/racing.webp' },
+    { name: 'Sports', slug: 'sports', image: '/images/categories/sports.webp' },
+    { name: 'Shooter', slug: 'shooter', image: '/images/categories/shooter.webp' },
+    { name: 'Simulation', slug: 'simulation', image: '/images/categories/simulation.webp' },
+    { name: 'Strategy', slug: 'strategy', image: '/images/categories/strategy.webp' },
+    { name: 'Battle', slug: 'battle', image: '/images/categories/battle.webp' },
+    { name: 'Fighting', slug: 'fighting', image: '/images/categories/fighting.webp' },
+    { name: 'Platformer', slug: 'platformer', image: '/images/categories/platformer.webp' },
+    { name: 'Runner', slug: 'runner', image: '/images/categories/runner.webp' },
+    { name: 'Survival', slug: 'survival', image: '/images/categories/survival.webp' },
+    { name: 'Horror', slug: 'horror', image: '/images/categories/horror.webp' },
+    { name: 'RPG', slug: 'rpg', image: '/images/categories/rpg.webp' },
+    { name: 'MMORPG', slug: 'mmorpg', image: '/images/categories/mmorpg.webp' },
+    { name: 'Open World', slug: 'open-world', image: '/images/categories/open-world.webp' },
+    { name: 'Sandbox', slug: 'sandbox', image: '/images/categories/sandbox.webp' },
+    { name: 'Tycoon', slug: 'tycoon', image: '/images/categories/tycoon.webp' },
+    { name: 'Idle', slug: 'idle', image: '/images/categories/idle.webp' },
+    { name: 'Clicker', slug: 'clicker', image: '/images/categories/clicker.webp' },
+    { name: 'Hyper-Casual', slug: 'hyper-casual', image: '/images/categories/hyper-casual.webp' },
+    { name: 'Match 3', slug: 'match-3', image: '/images/categories/match-3.webp' },
+    { name: 'Board', slug: 'board', image: '/images/categories/board.webp' },
+    { name: 'Card', slug: 'card', image: '/images/categories/card.webp' },
+    { name: 'Quiz', slug: 'quiz', image: '/images/categories/quiz.webp' },
+    { name: 'Trivia', slug: 'trivia', image: '/images/categories/trivia.webp' },
+    { name: 'Word', slug: 'word', image: '/images/categories/word.webp' },
+    { name: 'Math', slug: 'math', image: '/images/categories/math.webp' },
+    { name: 'Memory', slug: 'memory', image: '/images/categories/memory.webp' },
+    { name: 'Educational', slug: 'educational', image: '/images/categories/educational.webp' },
+    { name: 'Cooking', slug: 'cooking', image: '/images/categories/cooking.webp' },
+    { name: 'Beauty & Dress Up', slug: 'beauty-dress-up', image: '/images/categories/beauty-dress-up.webp' },
+    { name: 'Girls', slug: 'games-for-girls', image: '/images/categories/beauty-dress-up.webp' },
+    { name: 'Farming', slug: 'farming', image: '/images/categories/farming.webp' },
+    { name: 'Time Management', slug: 'time-management', image: '/images/categories/time-management.webp' },
+    { name: 'Hidden Object', slug: 'hidden-object', image: '/images/categories/hidden-object.webp' },
+    { name: 'Stealth', slug: 'stealth', image: '/images/categories/stealth.webp' },
+    { name: 'Zombie', slug: 'zombie', image: '/images/categories/zombie.webp' },
+    { name: 'Monster', slug: 'monster', image: '/images/categories/monster.webp' },
+    { name: 'Robots', slug: 'robots', image: '/images/categories/robots.webp' },
+    { name: 'Space', slug: 'space', image: '/images/categories/space.webp' },
+    { name: 'Flying', slug: 'flying', image: '/images/categories/flying.webp' },
+    { name: 'Bike', slug: 'bike', image: '/images/categories/bike.webp' },
+    { name: 'Car', slug: 'car', image: '/images/categories/car.webp' },
+    { name: 'Tank', slug: 'tank', image: '/images/categories/tank.webp' },
+    { name: 'Golf', slug: 'golf', image: '/images/categories/golf.webp' },
+    { name: 'Basketball', slug: 'basketball', image: '/images/categories/basketball.webp' },
+    { name: 'Ball', slug: 'ball', image: '/images/categories/ball.webp' },
+    { name: 'Snake', slug: 'snake', image: '/images/categories/snake.webp' },
+    { name: 'IO', slug: 'io', image: '/images/categories/io.webp' },
+    { name: 'Christmas', slug: 'christmas', image: '/images/categories/christmas.webp' },
+    { name: 'Animal', slug: 'animal', image: '/images/categories/animal.webp' },
+    { name: 'Cats', slug: 'cats', image: '/images/categories/cats.webp' },
+    { name: 'Building', slug: 'building', image: '/images/categories/building.webp' },
+    { name: 'Block', slug: 'block', image: '/images/categories/block.webp' },
+    { name: 'Drawing', slug: 'drawing', image: '/images/categories/drawing.webp' },
+    { name: 'Air Combat', slug: 'air-combat', image: '/images/categories/air-combat.webp' },
+    { name: 'Boat', slug: 'boat', image: '/images/categories/boat.webp' },
+  ]
 
   const gameCountLabel = '15,000+'
 
@@ -176,57 +231,7 @@ export default async function HomePage() {
             </Link>
           </div>
 
-          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6 lg:gap-4">
-            {availableCategories.map((category) => {
-              const meta = categoryMeta[category]
-              const Icon = meta.icon
-
-              return (
-                <Link
-                  key={category}
-                  href={`/games?genre=${encodeURIComponent(category)}`}
-                  aria-label={`Browse ${category} games`}
-                  className="category-card group relative block overflow-hidden rounded-2xl border border-white/[0.07] bg-black/20 shadow-[0_10px_30px_rgba(0,0,0,0.18)] transition-all duration-300 hover:-translate-y-1 hover:border-white/[0.14] hover:shadow-[0_16px_40px_rgba(0,0,0,0.28)] active:scale-[0.98]"
-                >
-                  <div className="relative aspect-[4/3] w-full overflow-hidden">
-                    {meta.image ? (
-                      <Image
-                        src={meta.image}
-                        alt={`${category} games`}
-                        fill
-                        sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 16vw"
-                        loading="lazy"
-                        className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-110"
-                      />
-                    ) : Icon ? (
-                      <div className={`flex h-full w-full items-center justify-center bg-gradient-to-br ${meta.color}`}>
-                        <Icon
-                          className="h-10 w-10 text-[color:var(--text-primary)] drop-shadow-[0_0_12px_rgba(255,255,255,0.7)]"
-                          strokeWidth={2.2}
-                        />
-                      </div>
-                    ) : null}
-
-                    <div className="absolute inset-0 bg-gradient-to-t from-black via-black/15 to-transparent opacity-90" />
-
-                    <div className="absolute inset-x-0 bottom-0 p-3 sm:p-4">
-                      <div className="flex items-center justify-between gap-2">
-                        <h3 className="text-xs font-black uppercase tracking-[0.12em] text-white drop-shadow-lg sm:text-sm">
-                          {category}
-                        </h3>
-
-                        <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-white/15 bg-black/30 text-sm font-bold text-white/80 backdrop-blur-sm transition-all duration-300 group-hover:border-white/30 group-hover:bg-white/10 group-hover:text-white">
-                          →
-                        </span>
-                      </div>
-                    </div>
-
-                    <div className={`pointer-events-none absolute -right-10 -top-10 h-24 w-24 rounded-full bg-gradient-to-br ${meta.color} opacity-0 blur-2xl transition-opacity duration-500 group-hover:opacity-30`} />
-                  </div>
-                </Link>
-              )
-            })}
-          </div>
+          <CategorySlider categories={sliderCategories} />
         </div>
       </section>
 
