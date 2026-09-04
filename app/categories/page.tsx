@@ -58,6 +58,9 @@ const categoryImages: Record<string, string> = {
   'hidden-object': '/images/categories/hidden-object.webp',
   horror: '/images/categories/horror.webp',
   'hyper-casual': '/images/categories/hyper-casual.webp',
+  'games-for-girls': '/images/categories/games-for-girls.webp',
+  '2048': '/images/categories/2048.webp',
+
   idle: '/images/categories/idle.webp',
   io: '/images/categories/io.webp',
   'match-3': '/images/categories/match-3.webp',
@@ -292,7 +295,6 @@ const categories: Category[] = [
     title: 'Monster',
     description: 'Creatures, monsters and fantastic worlds.',
     accent: 'from-nexa-violet/70 to-nexa-cyan/20',
-    fallbackImage: '/images/categories/arcade.webp',
   },
   {
     slug: 'zombie',
@@ -359,14 +361,12 @@ const categories: Category[] = [
     title: 'Games for Girls',
     description: 'Fashion, beauty and dress-up adventures.',
     accent: 'from-nexa-violet/70 to-nexa-blue/20',
-    image: '/images/categories/beauty-dress-up.webp',
   },
   {
     slug: '2048',
     title: '2048',
     description: 'Merge tiles and master number puzzles.',
     accent: 'from-orange-500/70 to-amber-600/20',
-    image: '/images/categories/match-3.webp',
   },
   {
     slug: 'rpg',
