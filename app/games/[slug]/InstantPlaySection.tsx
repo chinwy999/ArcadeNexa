@@ -158,7 +158,6 @@ export default function InstantPlaySection({ game }: { game: Game }) {
             className="absolute inset-0 w-full h-full border-0 block bg-black"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen; gamepad; keyboard-map; xr-spatial-tracking"
             allowFullScreen
-            sandbox="allow-scripts allow-same-origin allow-forms allow-pointer-lock allow-popups allow-popups-to-escape-sandbox"
             referrerPolicy="strict-origin-when-cross-origin"
             loading="eager"
             scrolling="no"
