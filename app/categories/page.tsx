@@ -429,12 +429,7 @@ const categories: Category[] = [
     description: 'Boats, ships, submarines and water adventures.',
     accent: 'from-blue-500/70 to-cyan-500/20',
   },
-  {
-    slug: 'christmas',
-    title: 'Christmas',
-    description: 'Festive Christmas games and holiday adventures.',
-    accent: 'from-red-500/70 to-emerald-500/20',
-  },
+
   {
     slug: 'mmorpg',
     title: 'MMORPG',

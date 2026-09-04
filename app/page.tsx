@@ -145,7 +145,6 @@ export default async function HomePage() {
     { name: 'Ball', slug: 'ball', image: '/images/categories/ball.webp' },
     { name: 'Snake', slug: 'snake', image: '/images/categories/snake.webp' },
     { name: 'IO', slug: 'io', image: '/images/categories/io.webp' },
-    { name: 'Christmas', slug: 'christmas', image: '/images/categories/christmas.webp' },
     { name: 'Animal', slug: 'animal', image: '/images/categories/animal.webp' },
     { name: 'Cats', slug: 'cats', image: '/images/categories/cats.webp' },
     { name: 'Building', slug: 'building', image: '/images/categories/building.webp' },
