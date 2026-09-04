@@ -11,6 +11,10 @@ const nextConfig = {
   experimental: {
     useWasmBinary: true,
     forceSwcTransforms: false,
+
+    outputFileTracingIncludes: {
+      "/*": ["./data/**/*"],
+    },
   },
 
   async redirects() {

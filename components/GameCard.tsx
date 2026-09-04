@@ -12,6 +12,8 @@ interface GameCardProps {
     platform: string
     thumbnail: string
     rating?: number
+    category?: string
+    genreFilter?: string
   }
   onPlay?: () => void
 }
@@ -26,7 +28,9 @@ export default function GameCard({ game, onPlay }: GameCardProps) {
       <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
 
       <Link
-        href={`/games/${game.slug}`}
+        href={`/games/${game.slug}?genre=${encodeURIComponent(
+          game.category || game.genreFilter || ''
+        )}`}
         className="relative block aspect-[16/10] overflow-hidden"
         aria-label={`Play ${game.name}`}
       >

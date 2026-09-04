@@ -1,3 +1,6 @@
+import fs from 'node:fs'
+import path from 'node:path'
+
 import { calculateArcadeNexaScore } from './arcadeNexaScore'
 import { fetchGMGamesPage, GameMonetizeItem } from './gameMonetizeFeed'
 import { fetchGamesPage, GamePixItem } from './gamepixFeed'
@@ -1544,9 +1547,114 @@ async function loadGMGames(): Promise<Game[]> {
   }
 }
 
+
+// ===== PERSISTENT GAMEPIX CATALOG =====
+
+type GamePixCatalogIndex = Record<string, number>
+
+let persistentGamePixCatalog: Game[] | null = null
+let persistentGamePixIndex: GamePixCatalogIndex | null = null
+
+function loadPersistentGamePixCatalog(): {
+  catalog: Game[]
+  index: GamePixCatalogIndex
+} | null {
+  if (persistentGamePixCatalog && persistentGamePixIndex) {
+    return {
+      catalog: persistentGamePixCatalog,
+      index: persistentGamePixIndex,
+    }
+  }
+
+  try {
+    const catalogPath = path.join(
+      process.cwd(),
+      'data',
+      'gamepix-catalog.json'
+    )
+
+    const indexPath = path.join(
+      process.cwd(),
+      'data',
+      'gamepix-index.json'
+    )
+
+    if (!fs.existsSync(catalogPath) || !fs.existsSync(indexPath)) {
+      console.warn(
+        '[ArcadeNexa] Persistent GamePix catalog files not found.'
+      )
+      return null
+    }
+
+    const catalog = JSON.parse(
+      fs.readFileSync(catalogPath, 'utf8')
+    ) as Game[]
+
+    const index = JSON.parse(
+      fs.readFileSync(indexPath, 'utf8')
+    ) as GamePixCatalogIndex
+
+    if (!Array.isArray(catalog) || typeof index !== 'object') {
+      console.error(
+        '[ArcadeNexa] Persistent GamePix catalog validation failed.'
+      )
+      return null
+    }
+
+    persistentGamePixCatalog = catalog
+    persistentGamePixIndex = index
+
+    console.log(
+      `[ArcadeNexa] Persistent GamePix catalog loaded: ` +
+      `${catalog.length} games, ${Object.keys(index).length} index entries`
+    )
+
+    return {
+      catalog,
+      index,
+    }
+  } catch (error) {
+    console.error(
+      '[ArcadeNexa] Failed to load persistent GamePix catalog:',
+      error
+    )
+    return null
+  }
+}
+
+function getGameFromPersistentGamePixCatalog(
+  slug: string
+): Game | null {
+  const data = loadPersistentGamePixCatalog()
+
+  if (!data) return null
+
+  const position = data.index[slug]
+
+  if (
+    typeof position !== 'number' ||
+    position < 0 ||
+    position >= data.catalog.length
+  ) {
+    return null
+  }
+
+  const game = data.catalog[position]
+
+  if (!game || game.slug !== slug) {
+    console.warn(
+      `[ArcadeNexa] Persistent GamePix index mismatch: ${slug}`
+    )
+    return null
+  }
+
+  return game
+}
+
 // ===== FAST SLUG LOOKUP =====
 export async function getGameBySlugFast(
-  slug: string
+  slug: string,
+  genre = ''
 ): Promise<Game | null> {
   /*
    * FAST SLUG LOOKUP
@@ -1592,6 +1700,23 @@ export async function getGameBySlugFast(
     )
 
     return gamePixCached
+  }
+
+  // ---------------------------------------------------------
+  // PERSISTENT GAMEPIX CATALOG
+  // ---------------------------------------------------------
+  if (!slug.startsWith('gm-')) {
+    const persistentGame = getGameFromPersistentGamePixCatalog(slug)
+
+    if (persistentGame) {
+      gamePixSlugCache.set(slug, persistentGame)
+
+      console.log(
+        `[ArcadeNexa] Persistent GamePix lookup HIT: ${slug}`
+      )
+
+      return persistentGame
+    }
   }
 
   // ---------------------------------------------------------
@@ -1768,7 +1893,8 @@ export async function getGameBySlugFast(
       const result = await fetchGamesPage(
         page,
         96,
-        'quality'
+        'quality',
+        genre
       )
 
       const item = result.items.find(

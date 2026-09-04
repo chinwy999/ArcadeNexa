@@ -160,29 +160,29 @@ export default async function HomePage() {
   return (
     <main className="min-h-screen overflow-hidden bg-transparent">
 
-      <section className="arcade-hero relative px-4 pt-28 pb-20 sm:pt-32 sm:pb-24">
+      <section className="arcade-hero relative px-4 pt-16 pb-12 sm:pt-18 sm:pb-14">
         <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_20%_20%,rgba(56,189,248,0.08),transparent_35%),radial-gradient(circle_at_80%_30%,rgba(139,92,246,0.06),transparent_30%)]" />
         <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
 
-        <div className="mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-[1.1fr_0.9fr]">
+        <div className="mx-auto grid max-w-7xl items-center gap-8 lg:grid-cols-[1.1fr_0.9fr]">
           <div className="text-center lg:text-left">
-            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-nexa-emerald/20 bg-nexa-emerald/10 px-4 py-2 text-xs font-bold uppercase tracking-widest text-nexa-emerald">
+            <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-nexa-emerald/20 bg-nexa-emerald/10 px-4 py-2 text-xs font-bold uppercase tracking-widest text-nexa-emerald">
               <span className="h-2 w-2 animate-pulse rounded-full bg-nexa-emerald" />
               {gameCountLabel} Free Browser Games
             </div>
 
-            <h1 className="text-5xl font-black leading-[0.9] tracking-[-0.04em] text-[color:var(--text-primary)] sm:text-7xl lg:text-[6.5rem]">
+            <h1 className="text-4xl font-black leading-[0.92] tracking-[-0.04em] text-[color:var(--text-primary)] sm:text-6xl lg:text-[5.5rem]">
               PLAY.<br />
               <span className="gradient-text">DISCOVER.</span><br />
               REPEAT.
             </h1>
 
-            <p className="mx-auto mt-6 max-w-2xl text-base leading-7 text-[color:var(--text-secondary)] sm:text-lg lg:mx-0">
+            <p className="mx-auto mt-4 max-w-2xl text-base leading-7 text-[color:var(--text-secondary)] sm:text-lg lg:mx-0">
               Discover fast, free HTML5 games built for instant play.
               No downloads. No waiting. Just pick a game and play.
             </p>
 
-            <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row lg:justify-start">
+            <div className="mt-6 flex flex-col justify-center gap-3 sm:flex-row lg:justify-start">
               <Link href="/games" className="btn-premium rounded-xl px-8 py-4 text-center text-base font-black">
                 PLAY NOW →
               </Link>
@@ -191,7 +191,7 @@ export default async function HomePage() {
               </Link>
             </div>
 
-            <div className="mt-10 flex flex-wrap justify-center gap-6 text-sm lg:justify-start">
+            <div className="mt-6 flex flex-wrap justify-center gap-6 text-sm lg:justify-start">
               <div>
                 <strong className="text-xl text-[color:var(--text-primary)]">{gameCountLabel}</strong>
                 <span className="ml-2 text-[color:var(--text-muted)]">Games</span>

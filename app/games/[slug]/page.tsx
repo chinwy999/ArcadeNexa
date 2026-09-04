@@ -17,10 +17,16 @@ type PageParams = {
   params: {
     slug: string
   }
+  searchParams?: {
+    genre?: string
+  }
 }
 
-const getGameBySlug = async (slug: string) => {
-  return getGameBySlugFast(slug)
+const getGameBySlug = async (
+  slug: string,
+  genre = ''
+) => {
+  return getGameBySlugFast(slug, genre)
 }
 
 /*
@@ -31,9 +37,15 @@ const getGameBySlug = async (slug: string) => {
  * This guarantees that the actual route can return HTTP 404.
  */
 export async function generateMetadata(
-  { params }: PageParams
+  { params, searchParams }: PageParams
 ): Promise<Metadata> {
-  const game = await getGameBySlug(params.slug)
+  const genre =
+    searchParams?.genre?.trim() || ''
+
+  const game = await getGameBySlug(
+    params.slug,
+    genre
+  )
 
   if (!game) {
     return {
@@ -247,7 +259,7 @@ function getRelatedArticles(game: {
   return selected
 }
 
-export default async function GamePage({ params }: PageParams) {
+export default async function GamePage({ params, searchParams }: PageParams) {
   /*
    * SINGLE SOURCE OF TRUTH FOR ROUTE VALIDATION.
    *
@@ -260,7 +272,10 @@ export default async function GamePage({ params }: PageParams) {
     notFound()
   }
 
-  const game = await getGameBySlug(slug)
+  const genre =
+    searchParams?.genre?.trim() || ''
+
+  const game = await getGameBySlug(slug, genre)
 
   console.log(
     `[ArcadeNexa] GAME PAGE RESOLVE: slug=${slug} found=${Boolean(game)} title=${game?.title || 'NONE'}`
