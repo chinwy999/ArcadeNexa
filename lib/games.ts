@@ -99,6 +99,299 @@ function isSpaceGame(game: Partial<Game>): boolean {
   return false
 }
 
+/*
+ * ---------------------------------------------------------
+ * CUSTOM CATEGORY STREAMS
+ * ---------------------------------------------------------
+ *
+ * Some ArcadeNexa categories do not exist as native GamePix
+ * categories. These streams classify the persistent catalog
+ * locally instead of asking GamePix for a nonexistent slug.
+ *
+ * Keep this list intentionally small and evidence-based.
+ */
+
+/*
+ * ---------------------------------------------------------
+ * CUSTOM CATEGORY STREAMS
+ * ---------------------------------------------------------
+ *
+ * Some ArcadeNexa categories do not exist as native GamePix
+ * categories. These streams classify the persistent catalog
+ * locally using conservative, evidence-based rules.
+ *
+ * Keep these rules scoped. Do not broaden them just to
+ * increase category counts.
+ */
+
+/* =========================
+ * AIR COMBAT
+ * ========================= */
+
+const AIR_COMBAT_RE = /\b(combat|dogfight|air\s*battle|air\s*war|air\s*force|fighter|fighting|warplane|war\s*plane|plane\s*shoot|airplane\s*shoot|sky\s*combat|air\s*attack|air\s*strike|air\s*warrior|pilot.*(war|battle|combat)|(war|battle|combat).*(plane|airplane|jet|fighter))\b/i
+
+function isAirCombatGame(game: Partial<Game>): boolean {
+  const title = String(game.title || game.name || '').trim()
+  const description = String(game.description || '').trim()
+
+  if (!title) return false
+
+  const nativeCategory = normalizeGenre(game.category)
+  const nativeGenre = normalizeGenre(game.genreFilter)
+
+  const aviation =
+    nativeCategory === 'airplane' ||
+    nativeCategory === 'flight' ||
+    nativeGenre === 'airplane' ||
+    nativeGenre === 'flight'
+
+  if (!aviation) return false
+
+  return AIR_COMBAT_RE.test(title) || AIR_COMBAT_RE.test(description)
+}
+
+/* =========================
+ * BOAT
+ * ========================= */
+
+const BOAT_ALLOWED_SLUGS = new Set([
+  'tumble-boat',
+  'grandpa-fishing-boat',
+  'green-submarine',
+  'submarine-attack',
+  'survival-by-boat',
+  'color-box-ship',
+  'hunting-submarine-attack',
+  'crazy-boat-adventure',
+  'crazy-boat',
+  'boat-parking-jam',
+  'ship-up',
+  'speedboa-warer-shooting',
+  'boat-bear',
+  'ship-fish',
+  '2-ships',
+  'boat-rush',
+  'medieval-ships-defense',
+  'submarine-shooter',
+  'ghost-ship',
+  'duck-rescue-boat',
+  'boat-adventure',
+  'touch-the-ships',
+])
+
+function isBoatGame(game: Partial<Game>): boolean {
+  const slug = String(game.slug || '').trim().toLowerCase()
+
+  if (!slug || !BOAT_ALLOWED_SLUGS.has(slug)) {
+    return false
+  }
+
+  return true
+}
+
+/* =========================
+ * SANDBOX
+ * ========================= */
+
+const SANDBOX_ALLOWED_SLUGS = new Set([
+  'noob-playground',
+  'battle-simulator-sandbox',
+  'last-play-ragdoll-sandbox',
+  'people-playground-ragdoll-arena',
+  'humans-playground-sandbox',
+  'playground-ragdoll-sandbox',
+  'ragdoll-physics-push',
+  'push-ragdoll-zombie',
+  'terraria-playground',
+  'untitled-sandbox-game',
+  'craft-block-world-building',
+  'crafting-and-mining',
+  'felonplay-ragdoll-sandbox',
+  'voxel-playground-ragdoll-noob',
+  'sandbox-create-challenge',
+  'melon-sandbox-online',
+  'destroy-the-ragdoll-sandbox',
+])
+
+function isSandboxGame(game: Partial<Game>): boolean {
+  const slug = String(game.slug || '').trim().toLowerCase()
+
+  if (!slug || !SANDBOX_ALLOWED_SLUGS.has(slug)) {
+    return false
+  }
+
+  return true
+}
+
+/* =========================
+ * STEALTH
+ * ========================= */
+
+const STEALTH_ALLOWED_SLUGS = new Set([
+  'mr-bullet-stealth-ninja-killstreak',
+  'mr-sniper-2-silent-assassin',
+  'destruction-protocol-stealth-shooter',
+  'stealth-army-pusher',
+  'stealth-sprint-ninja-run',
+  'stealth-master-sneak-cat',
+  'mr-bullet-spy-puzzle',
+  'ninja-stealth',
+])
+
+function isStealthGame(game: Partial<Game>): boolean {
+  const slug = String(game.slug || '').trim().toLowerCase()
+
+  if (!slug || !STEALTH_ALLOWED_SLUGS.has(slug)) {
+    return false
+  }
+
+  return true
+}
+
+/* =========================
+ * TIME MANAGEMENT
+ * ========================= */
+
+const TIME_MANAGEMENT_ALLOWED_SLUGS = new Set([
+  'hotel-manager',
+  'supermarket-manager-simulator',
+  'cooking-mania',
+  'food-truck',
+  'marmot-diner-dash',
+  'food-truck-chef-cooking',
+  'cooking-express-match-and-serve-restaurant-game',
+  'restaurant-rush-idle-tycoon',
+  'supermarket-management-simulator',
+  'bistro-dash-mega-catch',
+  'merge-diner',
+  'breakfast-dash',
+])
+
+function isTimeManagementGame(game: Partial<Game>): boolean {
+  const slug = String(game.slug || '').trim().toLowerCase()
+
+  if (!slug || !TIME_MANAGEMENT_ALLOWED_SLUGS.has(slug)) {
+    return false
+  }
+
+  return true
+}
+
+function matchesCustomCatalogCategory(
+  genre: string,
+  game: Partial<Game>
+): boolean {
+  const requested = normalizeGenre(genre)
+
+  if (requested === 'air-combat') {
+    return isAirCombatGame(game)
+  }
+
+  if (requested === 'boat') {
+    return isBoatGame(game)
+  }
+
+  if (requested === 'sandbox') {
+    return isSandboxGame(game)
+  }
+
+  if (requested === 'stealth') {
+    return isStealthGame(game)
+  }
+
+  if (requested === 'time-management') {
+    return isTimeManagementGame(game)
+  }
+
+  const category = normalizeGenre(game.category)
+  const gameGenre = normalizeGenre(game.genreFilter)
+
+  switch (requested) {
+    case 'flying':
+      return (
+        category === 'airplane' ||
+        category === 'flight' ||
+        gameGenre === 'airplane' ||
+        gameGenre === 'flight'
+      )
+
+    case 'quiz':
+      return (
+        category === 'trivia' ||
+        gameGenre === 'trivia'
+      )
+
+    case 'tank':
+      return (
+        category === 'tanks' ||
+        gameGenre === 'tanks'
+      )
+
+    case 'beauty-dress-up':
+      return (
+        category === 'dress-up' ||
+        category === 'fashion' ||
+        category === 'makeup' ||
+        category === 'hair-salon' ||
+        gameGenre === 'dress-up' ||
+        gameGenre === 'fashion' ||
+        gameGenre === 'makeup' ||
+        gameGenre === 'hair-salon'
+      )
+
+    default:
+      return false
+  }
+}
+
+const CUSTOM_CATALOG_CATEGORIES = new Set([
+  'air-combat',
+  'boat',
+  'sandbox',
+  'stealth',
+  'time-management',
+  'flying',
+  'quiz',
+  'tank',
+  'beauty-dress-up',
+])
+
+function getCustomCatalogCategoryGames(
+  genre: string
+): Game[] | null {
+  const normalized = normalizeGenre(genre)
+
+  if (!CUSTOM_CATALOG_CATEGORIES.has(normalized)) {
+    return null
+  }
+
+  const persistent = loadPersistentGamePixCatalog()
+
+  if (!persistent) {
+    console.warn(
+      `[ArcadeNexa] Persistent GamePix catalog unavailable for custom category: ${normalized}`
+    )
+    return null
+  }
+
+  const seen = new Set<string>()
+
+  return persistent.catalog.filter(game => {
+    if (!matchesCustomCatalogCategory(normalized, game)) {
+      return false
+    }
+
+    const key = game.slug || game.id
+
+    if (!key || seen.has(key)) {
+      return false
+    }
+
+    seen.add(key)
+    return true
+  })
+}
+
 function matchesGenre(
   requestedGenre: string | undefined | null,
   gameCategory: string | undefined | null,
@@ -684,6 +977,56 @@ export async function getGamesPage(
    * The original provider/category logic remains untouched
    * for every other genre.
    */
+
+  /*
+   * ---------------------------------------------------------
+   * CUSTOM PERSISTENT CATALOG STREAMS
+   * ---------------------------------------------------------
+   *
+   * These categories are not native GamePix taxonomy names.
+   * Serve them from the persistent catalog so provider-side
+   * filtering cannot incorrectly return zero games.
+   *
+   * This branch intentionally runs before the normal hybrid
+   * GamePix/GameMonetize streams.
+   */
+  if (CUSTOM_CATALOG_CATEGORIES.has(normalizedGenre)) {
+    try {
+      const customGames = getCustomCatalogCategoryGames(
+        normalizedGenre
+      )
+
+      if (customGames) {
+        const customOffset = (safePage - 1) * safeSize
+        const pagedCustomGames = customGames.slice(
+          customOffset,
+          customOffset + safeSize
+        )
+
+        const customHasMore =
+          customGames.length > customOffset + safeSize
+
+        console.log(
+          `[ArcadeNexa] Custom catalog stream: ` +
+          `genre=${normalizedGenre}, ` +
+          `total=${customGames.length}, ` +
+          `page=${safePage}, ` +
+          `games=${pagedCustomGames.length}`
+        )
+
+        return {
+          games: pagedCustomGames,
+          hasMore: pagedCustomGames.length > 0 && customHasMore,
+        }
+      }
+    } catch (error) {
+      console.error(
+        `[ArcadeNexa] Custom catalog stream unavailable ` +
+        `(genre=${normalizedGenre}):`,
+        error
+      )
+    }
+  }
 
   if (normalizedGenre === 'space') {
     try {
