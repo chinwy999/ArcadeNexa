@@ -398,6 +398,91 @@ const categories: Category[] = [
     description: 'Explore galaxies and futuristic worlds.',
     accent: 'from-nexa-blue/70 to-nexa-violet/20',
   },
+
+  {
+    slug: 'air-combat',
+    title: 'Air Combat',
+    description: 'Dogfights, aerial battles and combat missions.',
+    accent: 'from-sky-500/70 to-blue-600/20',
+  },
+  {
+    slug: 'battle',
+    title: 'Battle',
+    description: 'Intense battles, warfare and competitive action.',
+    accent: 'from-orange-500/70 to-red-500/20',
+  },
+  {
+    slug: 'beauty-dress-up',
+    title: 'Beauty & Dress Up',
+    description: 'Fashion, makeup, styling and dress-up games.',
+    accent: 'from-pink-500/70 to-fuchsia-500/20',
+  },
+  {
+    slug: 'block',
+    title: 'Block',
+    description: 'Block-based challenges, puzzles and adventures.',
+    accent: 'from-cyan-500/70 to-blue-500/20',
+  },
+  {
+    slug: 'boat',
+    title: 'Boat',
+    description: 'Boats, ships, submarines and water adventures.',
+    accent: 'from-blue-500/70 to-cyan-500/20',
+  },
+  {
+    slug: 'christmas',
+    title: 'Christmas',
+    description: 'Festive Christmas games and holiday adventures.',
+    accent: 'from-red-500/70 to-emerald-500/20',
+  },
+  {
+    slug: 'mmorpg',
+    title: 'MMORPG',
+    description: 'Online role-playing adventures and fantasy worlds.',
+    accent: 'from-violet-500/70 to-indigo-500/20',
+  },
+  {
+    slug: 'quiz',
+    title: 'Quiz',
+    description: 'Test your knowledge with fun quiz challenges.',
+    accent: 'from-yellow-500/70 to-orange-500/20',
+  },
+  {
+    slug: 'sandbox',
+    title: 'Sandbox',
+    description: 'Create, experiment and play your way.',
+    accent: 'from-emerald-500/70 to-cyan-500/20',
+  },
+  {
+    slug: 'stealth',
+    title: 'Stealth',
+    description: 'Sneak, hide and complete missions undetected.',
+    accent: 'from-slate-500/70 to-violet-500/20',
+  },
+  {
+    slug: 'tank',
+    title: 'Tank',
+    description: 'Armored combat, tank battles and battlefield action.',
+    accent: 'from-green-600/70 to-slate-600/20',
+  },
+  {
+    slug: 'time-management',
+    title: 'Time Management',
+    description: 'Serve customers, manage tasks and beat the clock.',
+    accent: 'from-amber-500/70 to-orange-500/20',
+  },
+  {
+    slug: 'tycoon',
+    title: 'Tycoon',
+    description: 'Build businesses, manage resources and grow your empire.',
+    accent: 'from-yellow-500/70 to-amber-500/20',
+  },
+  {
+    slug: 'word',
+    title: 'Word',
+    description: 'Word puzzles, spelling challenges and vocabulary games.',
+    accent: 'from-indigo-500/70 to-violet-500/20',
+  },
 ]
 
 const displayTitle = (slug: string) => {
