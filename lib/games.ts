@@ -38,12 +38,78 @@ function normalizeGenre(value: string | undefined | null): string {
   return aliases[raw] || raw
 }
 
+/*
+ * ---------------------------------------------------------
+ * CUSTOM SPACE CATEGORY
+ * ---------------------------------------------------------
+ *
+ * GamePix does not expose a native "space" category.
+ * Keep provider categories untouched and classify Space
+ * locally using strong title/description signals.
+ *
+ * IMPORTANT:
+ * This is intentionally conservative. A game must have a
+ * strong space-related title signal, or a medium signal
+ * supported by space-related description context.
+ */
+
+const SPACE_TITLE_STRONG_RE = /\b(space|spaceship|spacecraft|starship|galaxy|galactic|asteroid|asteroids|cosmic|cosmos|universe|interstellar|orbital|spaceflight)\b/i
+
+const SPACE_TITLE_MEDIUM_RE = /\b(planet|planets|rocket|rockets|alien|aliens|mars|moon|lunar|satellite|extraterrestrial)\b/i
+
+const SPACE_CONTEXT_RE = /\b(space|spaceship|spacecraft|starship|galaxy|galactic|asteroid|asteroids|cosmic|cosmos|universe|interstellar|orbital|spaceflight|planet|planets|mars|moon|lunar|alien|aliens|extraterrestrial|ufo)\b/i
+
+/*
+ * Phrases that commonly produce false positives even though
+ * the game is not primarily space-themed.
+ */
+const SPACE_TITLE_EXCLUDE_RE = /\b(parking space|personal space|space bar|spacebar|space jam|space invaders.*(clone|mod|editor)|lunar new year|sun and moon|moon league|moon bridge|jump to the moon|space cadet.*pinball|skibidi vs alien|save the planet|galaxy bricks)\b/i
+
+function isSpaceGame(game: Partial<Game>): boolean {
+  const title = String(game.title || game.name || '').trim()
+  const description = String(game.description || '').trim()
+
+  if (!title) return false
+
+  if (SPACE_TITLE_EXCLUDE_RE.test(title)) {
+    return false
+  }
+
+  /*
+   * Strong title signal:
+   * The title itself clearly identifies a space-themed game.
+   */
+  if (SPACE_TITLE_STRONG_RE.test(title)) {
+    return true
+  }
+
+  /*
+   * Medium title signal:
+   * Require supporting context in the description so that
+   * generic words like "alien", "rocket", "moon", etc.
+   * do not automatically become Space games.
+   */
+  if (
+    SPACE_TITLE_MEDIUM_RE.test(title) &&
+    SPACE_CONTEXT_RE.test(description)
+  ) {
+    return true
+  }
+
+  return false
+}
+
 function matchesGenre(
   requestedGenre: string | undefined | null,
   gameCategory: string | undefined | null,
-  gameGenreFilter: string | undefined | null
+  gameGenreFilter: string | undefined | null,
+  game?: Partial<Game>
 ): boolean {
   const requested = normalizeGenre(requestedGenre)
+
+  if (requested === 'space') {
+    return game ? isSpaceGame(game) : false
+  }
 
   return (
     normalizeGenre(gameCategory) === requested ||
@@ -603,6 +669,65 @@ export async function getGamesPage(
 
   const providerTake = Math.ceil(safeSize / 2)
   const arcadeOffset = (safePage - 1) * providerTake
+
+  /*
+   * ---------------------------------------------------------
+   * CUSTOM SPACE STREAM
+   * ---------------------------------------------------------
+   *
+   * GamePix has no native "space" category, so provider-side
+   * category filtering would return zero results.
+   *
+   * For Space we use the persistent full GamePix catalog,
+   * classify locally, then paginate.
+   *
+   * The original provider/category logic remains untouched
+   * for every other genre.
+   */
+
+  if (normalizedGenre === 'space') {
+    try {
+      const persistent = loadPersistentGamePixCatalog()
+
+      if (persistent) {
+        const spaceGames = persistent.catalog.filter(game =>
+          isSpaceGame(game)
+        )
+
+        const spaceOffset = (safePage - 1) * safeSize
+
+        const pagedSpaceGames = spaceGames.slice(
+          spaceOffset,
+          spaceOffset + safeSize
+        )
+
+        const spaceHasMore =
+          spaceGames.length > spaceOffset + safeSize
+
+        console.log(
+          `[ArcadeNexa] Custom Space stream: ` +
+          `total=${spaceGames.length}, ` +
+          `page=${safePage}, ` +
+          `offset=${spaceOffset}, ` +
+          `games=${pagedSpaceGames.length}`
+        )
+
+        return {
+          games: pagedSpaceGames,
+          hasMore: pagedSpaceGames.length > 0 && spaceHasMore,
+        }
+      }
+
+      console.warn(
+        '[ArcadeNexa] Persistent GamePix catalog unavailable for Space'
+      )
+    } catch (error) {
+      console.error(
+        '[ArcadeNexa] Custom Space stream unavailable:',
+        error
+      )
+    }
+  }
 
   /*
    * ---------------------------------------------------------
@@ -1177,7 +1302,8 @@ export async function getGamesPage(
       matchesGenre(
         normalizedGenre,
         game.category,
-        game.genreFilter
+        game.genreFilter,
+        game
       )
     )
   }
