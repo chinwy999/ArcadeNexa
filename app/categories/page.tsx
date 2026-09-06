@@ -1,6 +1,5 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import Image from 'next/image'
 
 export const dynamic = 'force-dynamic'
 
@@ -15,8 +14,6 @@ type Category = {
   slug: string
   title: string
   description: string
-  image?: string
-  fallbackImage?: string
   accent: string
   featured?: boolean
 }
@@ -27,71 +24,6 @@ const categoryAliases: Record<string, string> = {
   girls: 'games-for-girls',
 }
 
-const categoryImages: Record<string, string> = {
-  action: '/images/categories/action.webp',
-  adventure: '/images/categories/adventure.webp',
-  'air-combat': '/images/categories/air-combat.webp',
-  animal: '/images/categories/animal.webp',
-  arcade: '/images/categories/arcade.webp',
-  ball: '/images/categories/ball.webp',
-  basketball: '/images/categories/basketball.webp',
-  battle: '/images/categories/battle.webp',
-  'beauty-dress-up': '/images/categories/beauty-dress-up.webp',
-  bike: '/images/categories/bike.webp',
-  block: '/images/categories/block.webp',
-  board: '/images/categories/board.webp',
-  boat: '/images/categories/boat.webp',
-  brain: '/images/categories/brain.webp',
-  building: '/images/categories/building.webp',
-  car: '/images/categories/car.webp',
-  card: '/images/categories/card.webp',
-  casual: '/images/categories/casual.webp',
-  cats: '/images/categories/cats.webp',
-  clicker: '/images/categories/clicker.webp',
-  cooking: '/images/categories/cooking.webp',
-  drawing: '/images/categories/drawing.webp',
-  educational: '/images/categories/educational.webp',
-  farming: '/images/categories/farming.webp',
-  fighting: '/images/categories/fighting.webp',
-  flying: '/images/categories/flying.webp',
-  golf: '/images/categories/golf.webp',
-  'hidden-object': '/images/categories/hidden-object.webp',
-  horror: '/images/categories/horror.webp',
-  'hyper-casual': '/images/categories/hyper-casual.webp',
-  'games-for-girls': '/images/categories/games-for-girls.webp',
-  '2048': '/images/categories/2048.webp',
-
-  idle: '/images/categories/idle.webp',
-  io: '/images/categories/io.webp',
-  'match-3': '/images/categories/match-3.webp',
-  math: '/images/categories/math.webp',
-  memory: '/images/categories/memory.webp',
-  mmorpg: '/images/categories/mmorpg.webp',
-  monster: '/images/categories/monster.webp',
-  'open-world': '/images/categories/open-world.webp',
-  platformer: '/images/categories/platformer.webp',
-  puzzle: '/images/categories/puzzle.webp',
-  quiz: '/images/categories/quiz.webp',
-  racing: '/images/categories/racing.webp',
-  robots: '/images/categories/robots.webp',
-  rpg: '/images/categories/rpg.webp',
-  runner: '/images/categories/runner.webp',
-  sandbox: '/images/categories/sandbox.webp',
-  shooter: '/images/categories/shooter.webp',
-  simulation: '/images/categories/simulation.webp',
-  snake: '/images/categories/snake.webp',
-  space: '/images/categories/space.webp',
-  sports: '/images/categories/sports.webp',
-  stealth: '/images/categories/stealth.webp',
-  strategy: '/images/categories/strategy.webp',
-  survival: '/images/categories/survival.webp',
-  tank: '/images/categories/tank.webp',
-  'time-management': '/images/categories/time-management.webp',
-  trivia: '/images/categories/trivia.webp',
-  tycoon: '/images/categories/tycoon.webp',
-  word: '/images/categories/word.webp',
-  zombie: '/images/categories/zombie.webp',
-}
 
 const categories: Category[] = [
   {
@@ -532,46 +464,31 @@ export default function CategoriesPage() {
         </div>
 
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
-          {featuredCategories.map(category => {
-            const image =
-              category.image ||
-              categoryImages[category.slug] ||
-              category.fallbackImage
+          {featuredCategories.map(category => (
+            <Link
+              key={category.slug}
+              href={`/games?genre=${encodeURIComponent(
+                categoryAliases[category.slug] || category.slug
+              )}`}
+              className="group flex min-h-14 items-center justify-between rounded-xl border border-[color:var(--white-10)] bg-[color:var(--white-03)] px-4 py-3 transition-all duration-200 hover:-translate-y-0.5 hover:border-nexa-violet/40 hover:bg-nexa-violet/10 hover:shadow-lg"
+            >
+              <div className="min-w-0">
+                <h3 className="truncate text-sm font-black text-[color:var(--text-primary)]">
+                  {category.title}
+                </h3>
+                <p className="mt-1 truncate text-xs text-[color:var(--text-muted)]">
+                  {category.description}
+                </p>
+              </div>
 
-            return (
-              <Link
-                key={category.slug}
-                href={`/games?genre=${encodeURIComponent(
-                  categoryAliases[category.slug] || category.slug
-                )}`}
-                className="group relative aspect-[4/3] overflow-hidden rounded-2xl border border-[color:var(--white-10)] bg-[color:var(--white-03)] transition duration-300 hover:-translate-y-1 hover:border-[color:var(--white-25)] hover:shadow-2xl"
+              <span
+                aria-hidden="true"
+                className="ml-3 shrink-0 text-sm text-[color:var(--text-muted)] transition-transform duration-200 group-hover:translate-x-1 group-hover:text-nexa-violet"
               >
-                {image && (
-                  <Image
-                    src={image}
-                    alt={`${category.title} games`}
-                    fill
-                    sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
-                    className="h-full w-full object-cover object-center transition duration-500 group-hover:scale-110"
-                  />
-                )}
-
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
-                <div
-                  className={`absolute inset-0 bg-gradient-to-br ${category.accent} opacity-30 transition group-hover:opacity-55`}
-                />
-
-                <div className="absolute inset-x-0 bottom-0 p-4">
-                  <h3 className="text-base font-black text-[color:var(--text-primary)]">
-                    {category.title}
-                  </h3>
-                  <p className="mt-1 line-clamp-2 text-xs leading-5 text-[color:var(--text-secondary)]">
-                    {category.description}
-                  </p>
-                </div>
-              </Link>
-            )
-          })}
+                →
+              </span>
+            </Link>
+          ))}
         </div>
       </section>
 
@@ -592,49 +509,26 @@ export default function CategoriesPage() {
         </div>
 
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-          {allCategories.map(category => {
-            const image =
-              category.image ||
-              categoryImages[category.slug] ||
-              category.fallbackImage
+          {allCategories.map(category => (
+            <Link
+              key={category.slug}
+              href={`/games?genre=${encodeURIComponent(
+                categoryAliases[category.slug] || category.slug
+              )}`}
+              className="group flex min-h-12 items-center justify-between rounded-xl border border-[color:var(--white-10)] bg-[color:var(--white-03)] px-3.5 py-3 transition-all duration-200 hover:-translate-y-0.5 hover:border-nexa-cyan/40 hover:bg-nexa-cyan/10"
+            >
+              <span className="truncate text-sm font-semibold text-[color:var(--text-secondary)] transition-colors group-hover:text-[color:var(--text-primary)]">
+                {displayTitle(category.slug)}
+              </span>
 
-            return (
-              <Link
-                key={category.slug}
-                href={`/games?genre=${encodeURIComponent(
-                  categoryAliases[category.slug] || category.slug
-                )}`}
-                className="group relative overflow-hidden rounded-xl border border-[color:var(--white-10)] bg-[color:var(--white-03)] transition duration-300 hover:-translate-y-0.5 hover:border-[color:var(--white-25)] hover:bg-[color:var(--white-05)]"
+              <span
+                aria-hidden="true"
+                className="ml-2 shrink-0 text-xs text-[color:var(--text-muted)] transition-all duration-200 group-hover:translate-x-1 group-hover:text-nexa-cyan"
               >
-                <div className="relative aspect-[4/3] w-full overflow-hidden">
-                  {image ? (
-                    <Image
-                      src={image}
-                      alt=""
-                      fill
-                      sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
-                      className="h-full w-full object-cover object-center transition duration-500 group-hover:scale-110"
-                    />
-                  ) : (
-                    <div
-                      className={`h-full bg-gradient-to-br ${category.accent}`}
-                    />
-                  )}
-
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-                </div>
-
-                <div className="p-3">
-                  <h3 className="text-sm font-bold text-[color:var(--text-primary)]">
-                    {displayTitle(category.slug)}
-                  </h3>
-                  <p className="mt-1 line-clamp-2 min-h-[32px] text-[11px] leading-4 text-[color:var(--text-secondary)]">
-                    {category.description}
-                  </p>
-                </div>
-              </Link>
-            )
-          })}
+                →
+              </span>
+            </Link>
+          ))}
         </div>
       </section>
 
