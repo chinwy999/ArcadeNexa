@@ -193,6 +193,8 @@ export default async function HomePage() {
         </div>
       </section>
 
+      <CategorySlider categories={sliderCategories} />
+
       <section className="px-4 py-6 sm:py-10">
         <div className="mx-auto max-w-7xl">
           <FeaturedGamesSlider games={games} />
@@ -201,11 +203,6 @@ export default async function HomePage() {
 
       <RecentlyPlayed />
 
-      <section className="px-4 py-8 sm:py-10">
-        <div className="mx-auto max-w-7xl">
-          <CategorySlider categories={sliderCategories} />
-        </div>
-      </section>
 
       {/* ⭐ Top Rated */}
       <section className="px-4 py-14">
