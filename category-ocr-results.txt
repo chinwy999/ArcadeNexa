@@ -1,0 +1,462 @@
+===== 2048 =====
+T Y
+1]
+TEEs
+SEEs
+nes
+e 4
+1]
+TEEs
+SEEs
+nes
+===== action =====
+N T T
+1 \ ) / ’ ‘
+. ‘:‘\\‘ \ p 1
+ACTION
+N
+ACTION
+===== adventure =====
+” 2 ~ ,
+e ; sy F
+B Ve i
+P
+ADVENTURE
+L
+LI |
+75
+” 5
+4
+o
+= 4
+{-
+oneﬁfuhs
+===== air-combat =====
+AIR COMBA
+34
+S
+>
+AIR COMBA
+=
+===== animal =====
+_ANIMAL GAMES //
+\
+RPN o par
+9 i‘ LY
+N b o B o S L e g
+“_ANIMAL GAMES
+4
+e
+©:9.
+- 4
+=&
+6.9
+\S—
+@%@
+>
+-
+.
+i
+T
+===== arcade =====
+ARCADE
+3
+Q---Kr
+ARCADE
+===== ball =====
+W 27 i 4
+/BALL
+WZ?
+r|/
+BALL
+===== basketball =====
+BALI.
+ARG SY, -
+— e
+BASKETBALL
+B\
+1%
+DA
+===== battle =====
+BATTLE
+10
+‘,
+' 4 .
+A W\ e
+-
+A
+BATTLE
+===== beauty-dress-up =====
+- B"hwm
+|
+@j‘
+BEAUTY &
+===== bike =====
+29 o A
+BIKE
+29
+P — .
+A
+o4
+u =
+R
+W i
+o
+BIKE
+===== block =====
+BLUGK PUZZLE
+= B_| [mme
+M Eoa _ O
+sPof o' n me
+8 .m0 oom
+- /W0 .
+\
+a
+IR DO
+0 O0CCO.
+nan
+O |
+an
+e
+O OO
+===== board =====
+BOARD
+AT e
+Jb§
+|
+= K
+T3r
+y by
+G’Y\
+4&
+BOARD
+A2
+===== boat =====
+31 asans
+ BOAT
+BOAT
+===== brain =====
+JU , ‘.’—- .
+’/ Afﬁ .)' \
+BRAIN
+< A
+BRAIN
+A5
+ey e
+===== building =====
+_ANIMAL GAMES //
+\
+RPN o par
+9 i‘ LY
+N b o B o S L e g
+“_ANIMAL GAMES
+4
+e
+©:9.
+- 4
+=&
+6.9
+\S—
+@%@
+>
+-
+.
+i
+T
+===== car =====
+| CAR
+—— | —————
+28 <-inle
+L
+CAR
+===== card =====
+& 35 .
+"CARD
+35
+y‘ |
+| CARD
+===== casual =====
+. . / y ‘ ; PN '4 .
+‘_' " \& TV &) *& I
+N -
+*
+—_—
+@
+/ \
+===== cats =====
+—————————— C ategory
+— 4
+Category
+ﬁ/}
+)1'!'
+§
+N
+-_—
+-
+===== clicker =====
+23 ® O
+Q /k -
+CLICKER
+23
+1
+CQ
+- O
+CLICKER
+===== cooking =====
+COOKIN
+R 5
+1
+O
+i
+-
+“‘w
+-
+COOKIN
+===== drawing =====
+“
+\
+(’ dmes
+Drawing
+Q
+Create and C
+\j
+mpete
+=
+===== educational =====
+o/ e !
+EDUCATIONAL
+‘a4 P& b
+9/
+=
+-
+',ad
+EDUCATIONAL
+‘a4 P& 6
+===== farming =====
+- -\
+FARMING
+L*J__\\?
+——
+£1/4|0
+FARMING
+===== fighting =====
+,..1*2 T
+h i~ .
+FIGHTING
+12
+>
+T
+===== flying =====
+,
+. " A
+CSCHVING
+30
+~:,
+CSCHVING
+===== games-for-girls =====
+4 R
+; GAMES FOR GIRLS ;
+\ 4
+GAMES FOR GIRLS
+===== golf =====
+"%\ GOLE
+ey O < —
+0L
+—j.
+i
+GAME
+CCCCCCCC
+o R a—
+===== hidden-object =====
+S
+TN a2
+HIDDEN OBJECT
+8 § ’..
+o\
+- B
+e\ \*
+-~
+.
+HIDDEN OBJECT
+===== horror =====
+HORROR
+18
+HORROR
+===== hyper-casual =====
+. k.
+9
+HYPER-CASUAL
+24
+HYPER-CASUAL
+===== idle =====
+- \ F*
+* 4
+“ ““IoLE ©
+22 oy ®
+""iole 2=
+===== io =====
+i 25“.0.":.‘
+@
+pd " « ®
+l - . © Qv,
+|10 GAMES
+25 *
+®.*
+* 4
+o @
+PN
+®.°
+- . O
+10 GAMES
+===== match-3 =====
+126 @ ®:
+2 RiE®
+o P
+- MATCH3
+26 Q@@
+® 4
+o %|®
+W PiR
+MATCH 3
+===== math =====
+o 9
+2+2=4
+| A 5e3s
+MATH
+1 26 NG
+2+2=4
+o
+7x5=35
+MATH
+1 26 GG o
+===== memory =====
+SV | }ﬁ"i>
+MEMORY
+D a7 -2
+i3
+SV
+l\tlEMORY
+D a7 -2
+===== mmorpg =====
+' "\’. N e :— 5 1
+'," ‘.". . &)
+MMORPG
+15
+R
+\/\ »
+3.3
+L
+43
+o'\' &
+w
+-
+%1
+\}
+MMORPG
+===== monster =====
+PAE >
+\ ~ Rt i ,4
+G IN A RO SN .
+P R
+(N FA S ¥ 2 N “
+L T g i .f%‘ 5 5% \\ﬁ%@ atl’
+1 aeaN 7 o 4 3 7 1
+. = A=A '3 o
+M gy 1 S AR S 7, AW w.’,
+.l et e / ¥ W Ve ) !',,ﬁ\ Ve )'4
+] p - N > 2170 A "; Y
+Lig { 38 ; T\ 7 39 e N .
+= . W Je W [
+~ LIRD / 4 ‘ h £ = N =) ‘r\\ \
+—— —
+——
+R m—
+\
+o
+L
+se
+N Ve,
+Afl
+¢
+el
+\’f/»
+1)
+¥7
+-~
+‘l““‘\\ 52
+Vo Neyf
+DY
+{36
+N\
+I3
+|
+ot
+Y
+G %o
+S
+&
+W
+o 3
+?‘s
+~
+T L
+£y o8
+~
+R 4 0 g
+?
+™
+\
+“
+Iz
+' *
+;5
+&
+LA
+I IS
+.
+B
+N
+B
+’.
+k30
+-
+-
+L
+(T
+¥
+-2
+'Rl
+7\
+I
+N
+——y
+N
+NS
+\*
+N
+NP
+\AY
+o
+7%
+w
+VT
+)_,
+\
+NE
+.\hl
+7
+")
+r\\
+===== open-world =====
+- l ar |
+| Sy A TVE O
+o~ bv. -
+OPEN WORL
+20
+M,
+<
+%m
+R P
+'
+7“‘@.
+OPEN WORLI

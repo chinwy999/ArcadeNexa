@@ -1,0 +1,8 @@
+extracted/animal-pack/PNG/Round (outline)/snake.png
+extracted/animal-pack/PNG/Round without details (outline)/snake.png
+extracted/animal-pack/PNG/Round without details/snake.png
+extracted/animal-pack/PNG/Round/snake.png
+extracted/animal-pack/PNG/Square (outline)/snake.png
+extracted/animal-pack/PNG/Square without details (outline)/snake.png
+extracted/animal-pack/PNG/Square without details/snake.png
+extracted/animal-pack/PNG/Square/snake.png
