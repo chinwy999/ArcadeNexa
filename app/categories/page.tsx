@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import { getCategoryGameCounts } from '@/lib/games'
 import type { LucideIcon } from 'lucide-react'
 import { Gamepad2, Swords, Compass, Joystick, Puzzle, Trophy, Zap, Crosshair, Car, Shield, Footprints, Skull, Wand2, Globe2, Rocket, Plane, Ship, Bot, Gem, Brain, Calculator, CircleHelp, Clock3, Building2, Sprout, ChefHat, PawPrint, Ghost, Heart, Pencil, GraduationCap, Box, CircleDot, Target, Dumbbell } from 'lucide-react'
 
@@ -111,32 +112,8 @@ const displayTitle = (slug: string) => {
   return slug.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')
 }
 
-async function getCategoryGameCounts() {
-  const counts: Record<string, number> = {}
-  for (const category of categories) {
-    try {
-      const { getGamesPage } = await import('@/lib/games')
-      const result = await getGamesPage(1, 48, category.slug)
-      let total = result.games.length
-      let page = 1
-      let hasMore = result.hasMore
-      while (hasMore && page < 5) {
-        page++
-        const nextResult = await getGamesPage(page, 48, category.slug)
-        total += nextResult.games.length
-        hasMore = nextResult.hasMore
-        if (nextResult.games.length < 48) break
-      }
-      counts[category.slug] = total
-    } catch {
-      counts[category.slug] = 0
-    }
-  }
-  return counts
-}
-
 export default async function CategoriesPage() {
-  const gameCounts = await getCategoryGameCounts()
+  const gameCounts = await getCategoryGameCounts(categories.map(category => category.slug))
   const featuredCategories = categories.filter(category => category.featured)
   const allCategories = categories
 
@@ -180,7 +157,7 @@ export default async function CategoriesPage() {
                     <h3 className="text-sm font-black text-[color:var(--text-primary)]">{category.title}</h3>
                     <p className="mt-1 line-clamp-2 text-[11px] leading-4 text-[color:var(--text-muted)]">{category.description}</p>
                     <div className="mt-2 flex items-center gap-2">
-                      <span className="text-[10px] font-bold text-nexa-violet bg-nexa-violet/10 px-2 py-0.5 rounded-full">{count > 0 ? `${count}+ games` : 'Explore'}</span>
+                      <span className="text-[10px] font-bold text-nexa-violet bg-nexa-violet/10 px-2 py-0.5 rounded-full">{count > 0 ? `${count} games` : 'Explore'}</span>
                     </div>
                     <div className="mt-3 flex items-center gap-1 text-[10px] font-bold uppercase tracking-wider text-nexa-violet opacity-0 transition-all duration-300 group-hover:translate-x-1 group-hover:opacity-100">
                       Play games <span aria-hidden="true">→</span>
@@ -212,7 +189,7 @@ export default async function CategoriesPage() {
                 </div>
                 <div className="min-w-0 flex-1">
                   <span className="block truncate text-sm font-bold text-[color:var(--text-secondary)] transition-colors group-hover:text-[color:var(--text-primary)]">{displayTitle(category.slug)}</span>
-                  <span className="mt-0.5 block truncate text-[10px] text-[color:var(--text-muted)]">{count > 0 ? `${count}+ games` : 'Explore'}</span>
+                  <span className="mt-0.5 block truncate text-[10px] text-[color:var(--text-muted)]">{count > 0 ? `${count} games` : 'Explore'}</span>
                 </div>
                 <span aria-hidden="true" className="shrink-0 text-sm text-[color:var(--text-muted)] transition-all duration-300 group-hover:translate-x-1 group-hover:text-nexa-cyan">→</span>
               </Link>

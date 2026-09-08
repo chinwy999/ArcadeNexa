@@ -1696,6 +1696,84 @@ export async function getAllGenreFilters(): Promise<string[]> {
   return Array.from(categories).sort()
 }
 
+
+const categoryCountsCache = new Map<
+  string,
+  { counts: Record<string, number>; expiresAt: number }
+>()
+
+const CATEGORY_COUNTS_CACHE_DURATION = 6 * 60 * 60 * 1000
+
+export async function getCategoryGameCounts(
+  categorySlugs: string[]
+): Promise<Record<string, number>> {
+  const cacheKey = categorySlugs
+    .map(normalizeGenre)
+    .filter(Boolean)
+    .sort()
+    .join('|')
+
+  const cached = categoryCountsCache.get(cacheKey)
+
+  if (cached && cached.expiresAt > Date.now()) {
+    return cached.counts
+  }
+
+  const persistent = loadPersistentGamePixCatalog()
+
+  if (!persistent) {
+    console.warn(
+      '[ArcadeNexa] Persistent GamePix catalog unavailable for category counts'
+    )
+
+    const emptyCounts: Record<string, number> = {}
+
+    for (const slug of categorySlugs) {
+      emptyCounts[slug] = 0
+    }
+
+    return emptyCounts
+  }
+
+  const normalizedSlugs = categorySlugs.map(normalizeGenre)
+  const counts: Record<string, number> = {}
+
+  for (const slug of normalizedSlugs) {
+    counts[slug] = 0
+  }
+
+  for (const game of persistent.catalog) {
+    for (const slug of normalizedSlugs) {
+      const isCustomCategory =
+        CUSTOM_CATALOG_CATEGORIES.has(slug)
+
+      const matches = isCustomCategory
+        ? matchesCustomCatalogCategory(slug, game)
+        : matchesGenre(
+            slug,
+            game.category,
+            game.genreFilter
+          )
+
+      if (matches) {
+        counts[slug]++
+      }
+    }
+  }
+
+  categoryCountsCache.set(cacheKey, {
+    counts,
+    expiresAt: Date.now() + CATEGORY_COUNTS_CACHE_DURATION,
+  })
+
+  console.log(
+    `[ArcadeNexa] Category counts calculated from persistent catalog: ` +
+    `categories=${normalizedSlugs.length}, games=${persistent.catalog.length}`
+  )
+
+  return counts
+}
+
 export async function getGameCount(): Promise<number> {
   const games = await loadGames()
   return games.length
