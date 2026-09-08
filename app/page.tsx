@@ -1,299 +1,287 @@
-import { Globe2, Crown, Map, Shield } from "lucide-react"
-import { getHomeGames } from '@/lib/games'
+import Link from 'next/link'
 import GameCard from '@/components/GameCard'
 import FeaturedGamesSlider from '@/components/FeaturedGamesSlider'
 import CategorySlider from '@/components/CategorySlider'
-import Link from 'next/link'
 import RecentlyPlayed from '@/components/RecentlyPlayed'
+import { getHomeGames, type Game } from '@/lib/games'
+import {
+  ArrowRight,
+  Gamepad2,
+  Star,
+  Clock,
+  Sparkles,
+  Flame,
+} from 'lucide-react'
 
+export const dynamic = 'force-dynamic'
 export const revalidate = 300
 
-export default async function HomePage() {
-  const games = await getHomeGames()
+export const metadata = {
+  title: 'ArcadeNexa - Play 15,000+ Free HTML5 Games Online',
+  description:
+    'Play 15,000+ free HTML5 games online on ArcadeNexa. No download, no registration. Action, puzzle, racing, sports and more!',
+  keywords:
+    'free HTML5 games, online games, browser games, arcade games, free games',
+  alternates: {
+    canonical: '/',
+  },
+  openGraph: {
+    title: 'ArcadeNexa - Free HTML5 Games Online',
+    description:
+      'Play 15,000+ free HTML5 games instantly in your browser. No download required.',
+    url: '/',
+    siteName: 'ArcadeNexa',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'ArcadeNexa - Free HTML5 Games',
+    description:
+      'Play 15,000+ free HTML5 games instantly. No download required.',
+  },
+}
 
-  /*
-   * Build distinct homepage sections.
-   *
-   * IMPORTANT:
-   * We deliberately prevent the same game from appearing
-   * in multiple sections.
-   *
-   * We also avoid calling the section "Trending" because
-   * ArcadeNexa does not yet have real play-count analytics.
-   */
+const categories = [
+  { name: 'Action', slug: 'action' },
+  { name: 'Adventure', slug: 'adventure' },
+  { name: 'Arcade', slug: 'arcade' },
+  { name: 'Puzzle', slug: 'puzzle' },
+  { name: 'Racing', slug: 'racing' },
+  { name: 'Sports', slug: 'sports' },
+  { name: 'Shooter', slug: 'shooter' },
+  { name: 'Strategy', slug: 'strategy' },
+  { name: 'RPG', slug: 'rpg' },
+  { name: 'Casual', slug: 'casual' },
+]
+
+export default async function HomePage() {
+  let games: Game[] = []
+
+  try {
+    games = await getHomeGames()
+  } catch (error) {
+    console.error('[HomePage] Failed to load games:', error)
+  }
+
+  const playableGames = games.filter(
+    (game) => game.playable && game.thumbnail && game.slug
+  )
 
   const usedSlugs = new Set<string>()
 
-  function takeUnique(
-    source: typeof games,
-    count: number,
-    predicate?: (game: typeof games[number]) => boolean
-  ) {
-    const result: typeof games = []
+  function takeUnique(source: Game[], count: number) {
+    const result: Game[] = []
 
     for (const game of source) {
-      if (result.length >= count) break
       if (usedSlugs.has(game.slug)) continue
-      if (predicate && !predicate(game)) continue
 
       usedSlugs.add(game.slug)
       result.push(game)
+
+      if (result.length === count) break
     }
 
     return result
   }
 
-  const byScore = [...games].sort((a, b) => b.rating - a.rating)
+  const featuredGames = takeUnique(playableGames, 8)
 
-  const byNewest = [...games].sort((a, b) => {
-    if (b.releaseYear !== a.releaseYear) {
-      return b.releaseYear - a.releaseYear
-    }
+  const popularSource = [...playableGames].sort(
+    (a, b) => (b.rating || 0) - (a.rating || 0)
+  )
 
-    return b.rating - a.rating
-  })
+  const popularGames = takeUnique(popularSource, 12)
 
-  /*
-   * Editor picks use a deterministic score based on the game
-   * identity. This gives visitors variety without pretending
-   * we have fake player analytics.
-   */
-  const editorPicks = [...games].sort((a, b) => {
-    const score = (slug: string) => {
-      let hash = 0
-
-      for (let i = 0; i < slug.length; i++) {
-        hash = ((hash << 5) - hash) + slug.charCodeAt(i)
-        hash |= 0
-      }
-
-      return Math.abs(hash) % 100
-    }
-
-    return score(b.slug) - score(a.slug)
-  })
-
-  const featuredGames = takeUnique(byScore, 8)
-  const newGames = takeUnique(byNewest, 8)
-  const editorGames = takeUnique(editorPicks, 8)
-
-  const sliderCategories = [
-    { name: 'Action', slug: 'action' },
-    { name: 'Adventure', slug: 'adventure' },
-    { name: 'Arcade', slug: 'arcade' },
-    { name: 'Casual', slug: 'casual' },
-    { name: 'Puzzle', slug: 'puzzle' },
-    { name: 'Racing', slug: 'racing' },
-    { name: 'Sports', slug: 'sports' },
-    { name: 'Shooter', slug: 'shooter' },
-    { name: 'Simulation', slug: 'simulation' },
-    { name: 'Strategy', slug: 'strategy' },
-    { name: 'Platformer', slug: 'platformer' },
-    { name: 'Fighting', slug: 'fighting' },
-    { name: 'Runner', slug: 'runner' },
-    { name: 'Battle', slug: 'battle' },
-    { name: 'Stealth', slug: 'stealth' },
-    { name: 'Survival', slug: 'survival' },
-    { name: 'RPG', slug: 'rpg' },
-    { name: 'MMORPG', slug: 'mmorpg' },
-    { name: 'IO', slug: 'io' },
-    { name: 'Open World', slug: 'open-world' },
-    { name: 'Car', slug: 'car' },
-    { name: 'Bike', slug: 'bike' },
-    { name: 'Flying', slug: 'flying' },
-    { name: 'Air Combat', slug: 'air-combat' },
-    { name: 'Boat', slug: 'boat' },
-    { name: 'Tank', slug: 'tank' },
-    { name: 'Space', slug: 'space' },
-    { name: 'Robots', slug: 'robots' },
-    { name: 'Match 3', slug: 'match-3' },
-    { name: 'Block', slug: 'block' },
-    { name: 'Board', slug: 'board' },
-    { name: 'Card', slug: 'card' },
-    { name: 'Memory', slug: 'memory' },
-    { name: 'Math', slug: 'math' },
-    { name: 'Quiz', slug: 'quiz' },
-    { name: 'Trivia', slug: 'trivia' },
-    { name: 'Word', slug: 'word' },
-    { name: 'Hidden Object', slug: 'hidden-object' },
-    { name: 'Clicker', slug: 'clicker' },
-    { name: 'Idle', slug: 'idle' },
-    { name: 'Hyper-Casual', slug: 'hyper-casual' },
-    { name: 'Time Management', slug: 'time-management' },
-    { name: 'Tycoon', slug: 'tycoon' },
-    { name: 'Building', slug: 'building' },
-    { name: 'Farming', slug: 'farming' },
-    { name: 'Cooking', slug: 'cooking' },
-    { name: 'Animal', slug: 'animal' },
-    { name: 'Cats', slug: 'cats' },
-    { name: 'Monster', slug: 'monster' },
-    { name: 'Zombie', slug: 'zombie' },
-    { name: 'Horror', slug: 'horror' },
-    { name: 'Girls', slug: 'games-for-girls' },
-    { name: 'Beauty & Dress Up', slug: 'beauty-dress-up' },
-    { name: 'Drawing', slug: 'drawing' },
-    { name: 'Educational', slug: 'educational' },
-    { name: 'Sandbox', slug: 'sandbox' },
-    { name: 'Snake', slug: 'snake' },
-    { name: 'Ball', slug: 'ball' },
-    { name: 'Basketball', slug: 'basketball' },
-    { name: 'Golf', slug: 'golf' },
-  ]
-
-  const gameCountLabel = '15,000+'
+  const moreGames = takeUnique(playableGames, 12)
 
   return (
-    <main className="min-h-screen overflow-hidden bg-transparent">
+    <main className="mx-auto max-w-7xl px-4 py-6 sm:px-6 sm:py-8">
 
-      {/* COMPACT HERO */}
-      <section className="relative px-4 pt-10 pb-6 sm:pt-14 sm:pb-8">
-        <div className="mx-auto max-w-7xl">
-          <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-[color:var(--nexa-surface)]/70 px-5 py-9 text-center shadow-[var(--shadow-card)] backdrop-blur-xl sm:px-8 sm:py-11">
-            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(34,230,255,0.14),transparent_55%)]" />
+      {/* Hero */}
+      <section className="relative mb-6 overflow-hidden rounded-2xl border border-[color:var(--white-10)] bg-gradient-to-br from-purple-600/15 via-blue-600/10 to-cyan-600/15 p-4 sm:p-6">
+        <div className="absolute right-0 top-0 h-32 w-32 -translate-y-1/2 translate-x-1/2 rounded-full bg-purple-500/10 blur-3xl animate-pulse-slow" />
+        <div className="absolute bottom-0 left-0 h-24 w-24 -translate-x-1/2 translate-y-1/2 rounded-full bg-blue-500/10 blur-3xl animate-pulse-slower" />
 
-            <div className="relative">
-              <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-nexa-emerald/20 bg-nexa-emerald/10 px-3 py-1.5 text-xs font-bold uppercase tracking-[0.18em] text-nexa-emerald">
-                <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-nexa-emerald" />
-                Free HTML5 Games
-              </div>
-
-              <h1 className="mx-auto max-w-4xl text-3xl font-black tracking-tight text-[color:var(--text-primary)] sm:text-5xl lg:text-6xl">
-                Play Free Games Online
-              </h1>
-
-              <p className="mx-auto mt-3 max-w-2xl text-sm leading-6 text-[color:var(--text-secondary)] sm:text-base">
-                15,000+ games. No downloads. No registration. Just pick a game and play instantly.
-              </p>
-
-              <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
-                <Link
-                  href="/games"
-                  className="btn-premium rounded-xl px-7 py-3 text-sm font-black"
-                >
-                  PLAY NOW →
-                </Link>
-
-                <Link
-                  href="/categories"
-                  className="rounded-xl border border-[color:var(--white-10)] bg-[color:var(--white-03)] px-7 py-3 text-sm font-bold text-[color:var(--text-primary)] transition hover:border-nexa-cyan/30 hover:bg-[color:var(--white-06)]"
-                >
-                  BROWSE CATEGORIES
-                </Link>
-              </div>
-
-              <div className="mt-6 flex flex-wrap items-center justify-center gap-5 text-xs font-semibold text-[color:var(--text-muted)]">
-                <span><strong className="text-[color:var(--text-primary)]">{gameCountLabel}</strong> Games</span>
-                <span className="h-4 w-px bg-[color:var(--white-10)]" />
-                <span><strong className="text-[color:var(--text-primary)]">{sliderCategories.length}</strong> Categories</span>
-                <span className="h-4 w-px bg-[color:var(--white-10)]" />
-                <span><strong className="text-nexa-emerald">100%</strong> Free</span>
-              </div>
+        <div className="relative flex flex-col items-start justify-between gap-3 sm:flex-row sm:items-center">
+          <div>
+            <div className="mb-1.5 inline-flex items-center gap-1.5 rounded-full border border-nexa-violet/30 bg-nexa-violet/10 px-2.5 py-0.5 text-[10px] font-bold text-nexa-violet">
+              <span aria-hidden="true">🎮</span>
+              15,000+ FREE
             </div>
+
+            <h1 className="text-xl font-black tracking-tight text-[color:var(--text-primary)] sm:text-2xl lg:text-3xl">
+              Play Free{' '}
+              <span className="bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent">
+                HTML5 Games
+              </span>
+            </h1>
+
+            <p className="mt-0.5 max-w-xl text-xs text-[color:var(--text-secondary)]">
+              No downloads. No registration. Instant play.
+            </p>
+          </div>
+
+          <div className="flex shrink-0 flex-wrap gap-1.5">
+            <Link
+              href="/games"
+              className="inline-flex items-center gap-1 rounded-xl bg-nexa-violet px-3 py-1.5 text-xs font-bold text-[color:var(--text-primary)] transition hover:brightness-110 hover:scale-105 active:scale-95"
+            >
+              <Gamepad2 size={14} />
+              All Games
+            </Link>
+
+            <Link
+              href="/categories"
+              className="inline-flex items-center gap-1 rounded-xl border border-[color:var(--white-10)] px-3 py-1.5 text-xs font-bold text-[color:var(--text-secondary)] transition hover:bg-[color:var(--white-05)] hover:scale-105 active:scale-95"
+            >
+              Categories
+            </Link>
+          </div>
+        </div>
+
+        <div className="relative mt-2 flex flex-wrap gap-3 text-[10px]">
+          <div className="flex items-center gap-1">
+            <Gamepad2 size={12} className="text-nexa-violet" />
+            <span className="text-[color:var(--text-secondary)]">
+              15,000+ Games
+            </span>
+          </div>
+
+          <div className="flex items-center gap-1">
+            <Star size={12} className="text-yellow-500" />
+            <span className="text-[color:var(--text-secondary)]">
+              Top Rated
+            </span>
+          </div>
+
+          <div className="flex items-center gap-1">
+            <Clock size={12} className="text-nexa-cyan" />
+            <span className="text-[color:var(--text-secondary)]">
+              Instant Play
+            </span>
+          </div>
+
+          <div className="flex items-center gap-1">
+            <Sparkles size={12} className="text-purple-400" />
+            <span className="text-[color:var(--text-secondary)]">
+              100% Free
+            </span>
           </div>
         </div>
       </section>
 
-      <CategorySlider categories={sliderCategories} />
+      {/* Category navigation */}
+      <div className="mb-7 -mx-4 sm:-mx-6">
+        <CategorySlider categories={categories} />
+      </div>
 
-      <section className="px-4 py-6 sm:py-10">
-        <div className="mx-auto max-w-7xl">
-          <FeaturedGamesSlider games={games} />
-        </div>
-      </section>
+      {/* Featured */}
+      {featuredGames.length > 0 && (
+        <section className="mb-8">
+          <FeaturedGamesSlider games={featuredGames} />
+        </section>
+      )}
 
+      {/* Recently Played */}
       <RecentlyPlayed />
 
+      {/* Popular Games */}
+      <section className="mb-8">
+        <div className="mb-3 flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-orange-500/10">
+              <Flame size={15} className="text-orange-500" />
+            </div>
 
-      {/* ⭐ Top Rated */}
-      <section className="px-4 py-14">
-        <div className="mx-auto max-w-7xl">
-          <div className="mb-7 flex items-end justify-between">
             <div>
-              <p className="text-xs font-bold uppercase tracking-[0.25em] text-nexa-violet">Popular</p>
-              <h2 className="mt-1 text-3xl font-black text-[color:var(--text-primary)]">⭐ Top Rated Games</h2>
-              <p className="mt-1 text-sm text-[color:var(--text-muted)]">The games players are loving right now.</p>
+              <p className="text-[9px] font-bold uppercase tracking-widest text-nexa-violet">
+                Top Rated
+              </p>
+              <h2 className="text-base font-black text-[color:var(--text-primary)] sm:text-lg">
+                Popular Games
+              </h2>
             </div>
-            <Link href="/games" className="hidden text-sm font-bold text-[color:var(--text-secondary)] hover:text-nexa-emerald sm:block">
-              View All →
-            </Link>
           </div>
 
-          {featuredGames.length > 0 ? (
-            <div className="grid grid-cols-2 gap-3 sm:grid-cols-2 sm:gap-5 lg:grid-cols-4">
-              {featuredGames.map((game) => (
-                <GameCard key={game.slug} game={game} />
-              ))}
-            </div>
-          ) : (
-            <p className="text-[color:var(--text-muted)] text-center py-10">Loading games...</p>
-          )}
+          <Link
+            href="/games"
+            className="inline-flex items-center gap-1 text-[10px] font-bold text-nexa-violet hover:underline"
+          >
+            View All
+            <ArrowRight size={12} />
+          </Link>
         </div>
+
+        {popularGames.length > 0 ? (
+          <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
+            {popularGames.map((game) => (
+              <GameCard key={game.slug} game={game} />
+            ))}
+          </div>
+        ) : (
+          <div className="rounded-xl border border-[color:var(--white-10)] bg-[color:var(--white-03)] py-8 text-center">
+            <p className="mb-1 text-2xl">🎮</p>
+            <p className="text-xs text-[color:var(--text-secondary)]">
+              Games are temporarily unavailable.
+            </p>
+          </div>
+        )}
       </section>
 
-      {/* ✨ Editor's Picks */}
-      <section className="border-y border-white/[0.06] bg-nexa-navy/60 px-4 py-16">
-        <div className="mx-auto max-w-7xl">
-          <div className="mb-7 flex items-end justify-between">
-            <div>
-              <p className="text-xs font-bold uppercase tracking-[0.25em] text-nexa-cyan">Handpicked Discovery</p>
-              <h2 className="mt-1 text-3xl font-black text-[color:var(--text-primary)]">✨ Editor's Picks</h2>
-              <p className="mt-1 text-sm text-[color:var(--text-muted)]">Fresh games worth discovering today.</p>
-            </div>
-            <Link href="/games" className="text-sm font-bold text-[color:var(--text-secondary)] hover:text-nexa-emerald">
-              See More →
-            </Link>
+      {/* More Games */}
+      <section className="mb-8">
+        <div className="mb-3 flex items-center justify-between">
+          <div>
+            <p className="text-[9px] font-bold uppercase tracking-widest text-nexa-violet">
+              Discover
+            </p>
+            <h2 className="text-base font-black text-[color:var(--text-primary)] sm:text-lg">
+              More Games
+            </h2>
           </div>
 
-          {editorGames.length > 0 ? (
-            <div className="grid grid-cols-2 gap-3 sm:grid-cols-2 sm:gap-5 lg:grid-cols-4">
-              {editorGames.map((game) => (
-                <GameCard key={game.slug} game={game} />
-              ))}
-            </div>
-          ) : (
-            <p className="text-[color:var(--text-muted)] text-center py-10">Loading games...</p>
-          )}
+          <Link
+            href="/games"
+            className="inline-flex items-center gap-1 text-[10px] font-bold text-nexa-violet hover:underline"
+          >
+            View All
+            <ArrowRight size={12} />
+          </Link>
         </div>
-      </section>
 
-      {/* 🆕 New Games */}
-      <section className="px-4 py-14">
-        <div className="mx-auto max-w-7xl">
-          <div className="mb-7 flex items-end justify-between">
-            <div>
-              <p className="text-xs font-bold uppercase tracking-[0.25em] text-nexa-emerald">Fresh Arrivals</p>
-              <h2 className="mt-1 text-3xl font-black text-[color:var(--text-primary)]">🆕 New Games</h2>
-            </div>
-            <Link href="/games" className="text-sm font-bold text-[color:var(--text-secondary)] hover:text-nexa-emerald">
-              See More →
-            </Link>
+        {moreGames.length > 0 ? (
+          <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
+            {moreGames.map((game) => (
+              <GameCard key={game.slug} game={game} />
+            ))}
           </div>
-
-          {newGames.length > 0 ? (
-            <div className="grid grid-cols-2 gap-3 sm:grid-cols-2 sm:gap-5 lg:grid-cols-4">
-              {newGames.map((game) => (
-                <GameCard key={game.slug} game={game} />
-              ))}
-            </div>
-          ) : (
-            <p className="text-[color:var(--text-muted)] text-center py-10">Loading games...</p>
-          )}
-        </div>
-      </section>
-
-      <section className="px-4 py-16">
-        <div className="mx-auto max-w-7xl overflow-hidden rounded-3xl border border-[color:var(--white-10)] bg-gradient-to-br from-nexa-violet/20 via-white/[0.03] to-nexa-emerald/10 p-8 text-center sm:p-12">
-          <div className="mx-auto max-w-2xl">
-            <p className="text-xs font-bold uppercase tracking-[0.3em] text-nexa-emerald">Your next game is waiting</p>
-            <h2 className="mt-3 text-3xl font-black text-[color:var(--text-primary)] sm:text-5xl">Find your next favorite game.</h2>
-            <p className="mt-4 text-[color:var(--text-secondary)]">Explore the full ArcadeNexa collection and start playing instantly.</p>
-            <Link href="/games" className="mt-8 inline-flex rounded-xl bg-nexa-emerald px-8 py-4 font-black text-nexa-black shadow-lg shadow-nexa-emerald/20 transition hover:-translate-y-1">
-              EXPLORE ALL GAMES →
-            </Link>
+        ) : (
+          <div className="rounded-xl border border-[color:var(--white-10)] bg-[color:var(--white-03)] py-8 text-center">
+            <p className="text-xs text-[color:var(--text-secondary)]">
+              More games are temporarily unavailable.
+            </p>
           </div>
-        </div>
+        )}
       </section>
 
+      {/* CTA */}
+      <section className="rounded-xl border border-[color:var(--white-10)] bg-gradient-to-br from-purple-600/10 to-blue-600/10 p-5 text-center">
+        <h2 className="text-base font-black text-[color:var(--text-primary)] sm:text-lg">
+          🎯 Discover Thousands More Games
+        </h2>
+
+        <p className="mx-auto mt-1 max-w-2xl text-[10px] text-[color:var(--text-secondary)] sm:text-xs">
+          Browse 15,000+ free HTML5 games across all genres.
+        </p>
+
+        <Link
+          href="/games"
+          className="mt-3 inline-flex items-center gap-1.5 rounded-xl bg-nexa-violet px-4 py-2 text-xs font-bold text-[color:var(--text-primary)] transition hover:brightness-110 hover:scale-105 active:scale-95"
+        >
+          Explore All Games
+          <ArrowRight size={14} />
+        </Link>
+      </section>
     </main>
   )
 }
