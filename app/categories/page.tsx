@@ -124,7 +124,7 @@ export default async function CategoriesPage() {
           <span aria-hidden="true">🎮</span> BROWSE GAME CATEGORIES
         </div>
         <h1 className="mt-4 text-4xl font-black tracking-tight text-[color:var(--text-primary)] sm:text-5xl">Explore Games by Category</h1>
-        <p className="mt-3 max-w-2xl text-base leading-7 text-[color:var(--text-secondary)] sm:text-lg">
+        <p className="mt-3 max-w-2xl text-base leading-7 text-[color:var(--text-secondary)] sm:text-base">
           Discover <span className="font-bold text-[color:var(--text-primary)]">15,000+ free browser games</span>{' '}
           across action, puzzle, racing, sports, adventure and many more genres.
         </p>
@@ -138,32 +138,50 @@ export default async function CategoriesPage() {
           </div>
           <span className="hidden text-sm text-[color:var(--text-secondary)] sm:block">{featuredCategories.length} featured genres</span>
         </div>
-        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
-          {featuredCategories.map((category, index) => {
+        <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3 lg:grid-cols-5">
+          {featuredCategories.map(category => {
             const Icon = getCategoryIcon(category.slug)
             const count = gameCounts[category.slug] || 0
+
             return (
-              <Link key={category.slug} href={`/games?genre=${encodeURIComponent(categoryAliases[category.slug] || category.slug)}`}
-                className="group relative min-h-[150px] overflow-hidden rounded-2xl border border-[color:var(--white-10)] bg-[color:var(--white-03)] p-4 transition-all duration-300 hover:-translate-y-1 hover:border-nexa-violet/50 hover:bg-[color:var(--white-06)] hover:shadow-[0_12px_40px_rgba(155,108,255,0.16)]">
-                <div className={`absolute -right-10 -top-10 h-28 w-28 rounded-full bg-gradient-to-br ${category.accent} opacity-20 blur-2xl transition-all duration-500 group-hover:scale-150 group-hover:opacity-40`} />
-                <div className="relative flex h-full flex-col">
-                  <div className="mb-4 flex items-start justify-between">
-                    <div className="flex h-11 w-11 items-center justify-center rounded-xl border border-[color:var(--white-10)] bg-[color:var(--white-06)] text-nexa-violet transition-all duration-300 group-hover:scale-110 group-hover:border-nexa-violet/40 group-hover:bg-nexa-violet/15">
-                      <Icon size={21} strokeWidth={2} />
+              <Link
+                key={category.slug}
+                href={`/games?genre=${encodeURIComponent(categoryAliases[category.slug] || category.slug)}`}
+                className={`group relative h-[112px] overflow-hidden rounded-xl border border-[color:var(--white-10)] bg-[color:var(--nexa-surface)] p-3 shadow-[0_8px_30px_rgba(0,0,0,0.18)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_16px_45px_rgba(0,0,0,0.3)]`}
+              >
+                <div className={`absolute -right-10 -top-10 h-28 w-28 rounded-full bg-gradient-to-br ${category.accent} opacity-20 blur-2xl transition-all duration-500 group-hover:scale-150 group-hover:opacity-35`} />
+
+                <div className={`absolute inset-x-0 bottom-0 h-1 bg-gradient-to-r ${category.accent} opacity-70 transition-all duration-300 group-hover:h-1.5 group-hover:opacity-100`} />
+
+                <div className="relative flex h-full flex-col justify-between">
+                  <div className="flex items-start justify-between gap-3">
+                    <div className={`flex h-9 w-9 items-center justify-center rounded-lg border border-white/10 bg-gradient-to-br ${category.accent} bg-opacity-10 text-white shadow-lg transition-all duration-300 group-hover:scale-105 group-hover:border-white/20`}>
+                      <Icon size={19} strokeWidth={2.2} />
                     </div>
-                    <span className="text-[10px] font-black tracking-widest text-[color:var(--text-muted)] opacity-60">{String(index + 1).padStart(2, '0')}</span>
+
+                    <span
+                      aria-hidden="true"
+                      className="flex h-7 w-7 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white/50 transition-all duration-300 group-hover:border-white/20 group-hover:bg-white/10 group-hover:text-white"
+                    >
+                      →
+                    </span>
                   </div>
-                  <div className="mt-auto">
-                    <h3 className="text-sm font-black text-[color:var(--text-primary)]">{category.title}</h3>
-                    <p className="mt-1 line-clamp-2 text-[11px] leading-4 text-[color:var(--text-muted)]">{category.description}</p>
-                    <div className="mt-2 flex items-center gap-2">
-                      <span className="text-[10px] font-bold text-nexa-violet bg-nexa-violet/10 px-2 py-0.5 rounded-full">{count > 0 ? `${count} games` : 'Explore'}</span>
-                    </div>
-                    <div className="mt-3 flex items-center gap-1 text-[10px] font-bold uppercase tracking-wider text-nexa-violet opacity-0 transition-all duration-300 group-hover:translate-x-1 group-hover:opacity-100">
-                      Play games <span aria-hidden="true">→</span>
+
+                  <div>
+                    <h3 className="truncate text-sm font-black text-[color:var(--text-primary)] transition-colors group-hover:text-white sm:text-base">
+                      {category.title}
+                    </h3>
+
+                    <div className="mt-1 flex items-center gap-1.5">
+                      <span className="text-xs font-semibold text-[color:var(--text-muted)]">
+                        {count > 0 ? `${count} games` : 'Explore'}
+                      </span>
                     </div>
                   </div>
                 </div>
+
+                <div className={`absolute inset-0 rounded-xl bg-gradient-to-br ${category.accent} opacity-0 transition-opacity duration-300 group-hover:opacity-[0.04]`} />
+                <div className="absolute inset-0 rounded-xl ring-1 ring-inset ring-white/5 transition-all duration-300 group-hover:ring-white/15" />
               </Link>
             )
           })}
@@ -176,22 +194,49 @@ export default async function CategoriesPage() {
           <h2 id="all-categories" className="mt-1 text-2xl font-black text-[color:var(--text-primary)] sm:text-3xl">All Game Categories</h2>
           <p className="mt-2 text-sm text-[color:var(--text-secondary)]">Choose a genre to find games you can play instantly in your browser.</p>
         </div>
-        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+        <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
           {allCategories.map(category => {
             const Icon = getCategoryIcon(category.slug)
             const count = gameCounts[category.slug] || 0
+
             return (
-              <Link key={category.slug} href={`/games?genre=${encodeURIComponent(categoryAliases[category.slug] || category.slug)}`}
-                className="group relative flex min-h-[82px] items-center gap-3 overflow-hidden rounded-xl border border-[color:var(--white-10)] bg-[color:var(--white-03)] px-3.5 py-3 transition-all duration-300 hover:-translate-y-0.5 hover:border-nexa-cyan/40 hover:bg-nexa-cyan/5 hover:shadow-[0_8px_30px_rgba(34,230,255,0.08)]">
-                <div className={`absolute inset-y-0 left-0 w-1 bg-gradient-to-b ${category.accent} opacity-70 transition-all duration-300 group-hover:w-1.5 group-hover:opacity-100`} />
-                <div className="relative flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-[color:var(--white-10)] bg-[color:var(--white-03)] text-[color:var(--text-muted)] transition-all duration-300 group-hover:border-nexa-cyan/30 group-hover:bg-nexa-cyan/10 group-hover:text-nexa-cyan">
-                  <Icon size={17} strokeWidth={2} />
+              <Link
+                key={category.slug}
+                href={`/games?genre=${encodeURIComponent(categoryAliases[category.slug] || category.slug)}`}
+                className="group relative flex h-[88px] items-center gap-3 overflow-hidden rounded-xl border border-[color:var(--white-10)] bg-[color:var(--nexa-surface)] px-3 transition-all duration-300 hover:-translate-y-0.5 hover:border-white/15 hover:shadow-[0_12px_32px_rgba(0,0,0,0.25)]"
+              >
+                <div
+                  className={`absolute -right-8 -top-8 h-20 w-20 rounded-full bg-gradient-to-br ${category.accent} opacity-10 blur-2xl transition-all duration-500 group-hover:scale-150 group-hover:opacity-25`}
+                />
+
+                <div
+                  className={`relative flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-white/10 bg-gradient-to-br ${category.accent} text-white shadow-md transition-all duration-300 group-hover:scale-105 group-hover:border-white/20`}
+                >
+                  <Icon size={18} strokeWidth={2.1} />
                 </div>
-                <div className="min-w-0 flex-1">
-                  <span className="block truncate text-sm font-bold text-[color:var(--text-secondary)] transition-colors group-hover:text-[color:var(--text-primary)]">{displayTitle(category.slug)}</span>
-                  <span className="mt-0.5 block truncate text-[10px] text-[color:var(--text-muted)]">{count > 0 ? `${count} games` : 'Explore'}</span>
+
+                <div className="relative min-w-0 flex-1">
+                  <span className="block truncate text-sm font-extrabold text-[color:var(--text-primary)] transition-colors group-hover:text-white">
+                    {displayTitle(category.slug)}
+                  </span>
+
+                  <span className="mt-1 block truncate text-[10px] font-semibold text-[color:var(--text-muted)]">
+                    {count > 0 ? `${count} games` : 'Explore'}
+                  </span>
                 </div>
-                <span aria-hidden="true" className="shrink-0 text-sm text-[color:var(--text-muted)] transition-all duration-300 group-hover:translate-x-1 group-hover:text-nexa-cyan">→</span>
+
+                <span
+                  aria-hidden="true"
+                  className="relative flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-white/10 bg-white/5 text-xs text-white/40 transition-all duration-300 group-hover:border-white/20 group-hover:bg-white/10 group-hover:text-white"
+                >
+                  →
+                </span>
+
+                <div
+                  className={`absolute inset-x-0 bottom-0 h-0.5 bg-gradient-to-r ${category.accent} opacity-40 transition-all duration-300 group-hover:h-1 group-hover:opacity-100`}
+                />
+
+                <div className="absolute inset-0 rounded-xl ring-1 ring-inset ring-white/5 transition-all duration-300 group-hover:ring-white/15" />
               </Link>
             )
           })}
