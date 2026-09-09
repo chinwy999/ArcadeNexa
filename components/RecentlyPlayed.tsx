@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
+import { Clock } from 'lucide-react'
 import SafeImage from './SafeImage'
 
 const STORAGE_KEY = 'arcadenexa-recently-played'
@@ -75,30 +76,39 @@ export default function RecentlyPlayed() {
   }
 
   return (
-    <section className="px-4 py-10">
+    <section className="px-4 py-8">
       <div className="mx-auto max-w-7xl">
-        <div className="mb-5 flex items-end justify-between">
-          <div>
-            <p className="text-xs font-bold uppercase tracking-[0.25em] text-nexa-cyan">
-              Continue
-            </p>
+        <div className="mb-4 flex items-end justify-between gap-3">
+          <div className="flex items-center gap-3">
+            <div className="relative flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-cyan-400/20 bg-gradient-to-br from-cyan-400/15 to-blue-500/10 shadow-[0_8px_25px_rgba(34,211,238,0.08)]">
+              <Clock size={18} className="text-nexa-cyan" />
+              <span className="absolute inset-0 rounded-xl ring-1 ring-inset ring-white/5" />
+            </div>
 
-            <h2 className="mt-1 text-2xl font-black text-[color:var(--text-primary)] sm:text-3xl">
-              ↻ Recently Played
-            </h2>
+            <div>
+              <p className="text-[9px] font-black uppercase tracking-[0.18em] text-nexa-cyan">
+                Continue
+              </p>
+
+              <h2 className="mt-0.5 text-lg font-black tracking-tight text-[color:var(--text-primary)] sm:text-xl">
+                Recently Played
+              </h2>
+            </div>
           </div>
 
-          <span className="text-xs text-[color:var(--text-muted)]">
+          <span className="hidden shrink-0 text-[10px] font-semibold text-[color:var(--text-muted)] sm:block">
             Your last games
           </span>
         </div>
 
-        <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 lg:grid-cols-8">
+        <div className="mb-4 h-px bg-gradient-to-r from-nexa-cyan/35 via-[color:var(--white-10)] to-transparent" />
+
+        <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-4 sm:gap-3 lg:grid-cols-8">
           {games.map((game) => (
             <Link
               key={game.slug}
               href={`/games/${game.slug}`}
-              className="group min-w-0 overflow-hidden rounded-xl border border-[color:var(--white-05)] bg-nexa-surface transition hover:-translate-y-1 hover:border-nexa-cyan/30"
+              className="group min-w-0 overflow-hidden rounded-xl border border-[color:var(--white-08)] bg-[color:var(--nexa-surface)] shadow-[0_8px_24px_rgba(0,0,0,0.18)] transition-all duration-300 hover:-translate-y-1 hover:border-nexa-cyan/30 hover:shadow-[0_14px_30px_rgba(0,0,0,0.28)]"
             >
               <div className="relative aspect-[4/3] overflow-hidden">
                 <SafeImage
@@ -111,8 +121,8 @@ export default function RecentlyPlayed() {
                 />
               </div>
 
-              <div className="p-2.5">
-                <p className="truncate text-xs font-bold text-[color:var(--text-primary)] group-hover:text-nexa-cyan">
+              <div className="border-t border-[color:var(--white-05)] px-2.5 py-2.5">
+                <p className="truncate text-[11px] font-extrabold text-[color:var(--text-primary)] transition-colors group-hover:text-nexa-cyan">
                   {game.title}
                 </p>
               </div>

@@ -71,33 +71,35 @@ export default function FeaturedGamesSlider({
       `}</style>
 
       {/* Header */}
-      <div className="mb-5 flex items-center justify-between gap-4">
-        <div className="flex items-center gap-2">
-          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-nexa-violet/20">
-            <Sparkles className="h-4 w-4 text-nexa-violet" />
+      <div className="mb-4 flex items-end justify-between gap-3">
+        <div className="flex items-center gap-3">
+          <div className="relative flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-nexa-violet/25 bg-gradient-to-br from-nexa-violet/20 to-cyan-500/10 shadow-[0_8px_25px_rgba(155,108,255,0.10)]">
+            <Sparkles size={18} className="text-nexa-violet" />
+            <span className="absolute inset-0 rounded-xl ring-1 ring-inset ring-white/5" />
           </div>
 
           <div>
-            <h2 className="text-xl font-black text-[color:var(--text-primary)] sm:text-2xl">
+            <p className="text-[9px] font-black uppercase tracking-[0.18em] text-nexa-violet">
+              Hand-picked
+            </p>
+            <h2 className="mt-0.5 text-lg font-black tracking-tight text-[color:var(--text-primary)] sm:text-xl">
               Featured Games
             </h2>
-
-            <p className="text-[11px] text-[color:var(--text-muted)]">
-              Hand-picked · Updated daily
-            </p>
           </div>
         </div>
 
         <Link
           href="/games"
-          className="group inline-flex items-center gap-2 rounded-full border border-[color:var(--white-10)] bg-[color:var(--white-05)] px-4 py-2 text-xs font-bold text-[color:var(--text-secondary)] transition-all hover:border-nexa-violet/50 hover:bg-nexa-violet/10 hover:text-[color:var(--text-primary)]"
+          className="group inline-flex shrink-0 items-center gap-1.5 rounded-lg border border-[color:var(--white-10)] bg-[color:var(--white-03)] px-2.5 py-1.5 text-[10px] font-extrabold text-[color:var(--text-secondary)] transition-all hover:border-nexa-violet/30 hover:bg-nexa-violet/10 hover:text-white sm:px-3 sm:py-2 sm:text-xs"
         >
           View All
-          <span className="transition-transform duration-200 group-hover:translate-x-1">
+          <span className="transition-transform duration-200 group-hover:translate-x-0.5">
             →
           </span>
         </Link>
       </div>
+
+      <div className="mb-4 h-px bg-gradient-to-r from-nexa-violet/40 via-[color:var(--white-10)] to-transparent" />
 
       {/* Edge fade */}
       <div className="pointer-events-none absolute bottom-0 left-0 top-[4.5rem] z-20 w-12 bg-gradient-to-r from-[var(--nexa-black)] via-[var(--nexa-black)]/70 to-transparent sm:w-24" />

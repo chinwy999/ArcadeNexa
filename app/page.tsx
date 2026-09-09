@@ -98,74 +98,75 @@ export default async function HomePage() {
     <main className="mx-auto max-w-7xl px-4 py-6 sm:px-6 sm:py-8">
 
       {/* Hero */}
-      <section className="relative mb-6 overflow-hidden rounded-2xl border border-[color:var(--white-10)] bg-gradient-to-br from-purple-600/15 via-blue-600/10 to-cyan-600/15 p-4 sm:p-6">
-        <div className="absolute right-0 top-0 h-32 w-32 -translate-y-1/2 translate-x-1/2 rounded-full bg-purple-500/10 blur-3xl animate-pulse-slow" />
-        <div className="absolute bottom-0 left-0 h-24 w-24 -translate-x-1/2 translate-y-1/2 rounded-full bg-blue-500/10 blur-3xl animate-pulse-slower" />
+      <section className="relative mb-6 overflow-hidden rounded-2xl border border-[color:var(--white-10)] bg-gradient-to-br from-purple-600/20 via-[color:var(--nexa-navy)] to-cyan-600/10 px-4 py-6 shadow-[0_20px_70px_rgba(0,0,0,0.28)] sm:px-7 sm:py-8">
+        <div className="pointer-events-none absolute -right-16 -top-16 h-44 w-44 rounded-full bg-purple-500/15 blur-3xl" />
+        <div className="pointer-events-none absolute -bottom-20 -left-12 h-40 w-40 rounded-full bg-cyan-500/10 blur-3xl" />
+        <div className="pointer-events-none absolute right-1/3 top-0 h-24 w-24 rounded-full bg-blue-500/10 blur-3xl" />
 
-        <div className="relative flex flex-col items-start justify-between gap-3 sm:flex-row sm:items-center">
-          <div>
-            <div className="mb-1.5 inline-flex items-center gap-1.5 rounded-full border border-nexa-violet/30 bg-nexa-violet/10 px-2.5 py-0.5 text-[10px] font-bold text-nexa-violet">
-              <span aria-hidden="true">🎮</span>
-              15,000+ FREE
+        <div className="relative flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
+          <div className="max-w-2xl">
+            <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-nexa-violet/30 bg-nexa-violet/10 px-3 py-1 text-[10px] font-black uppercase tracking-wider text-nexa-violet">
+              <Gamepad2 size={13} />
+              15,000+ Free Games
             </div>
 
-            <h1 className="text-xl font-black tracking-tight text-[color:var(--text-primary)] sm:text-2xl lg:text-3xl">
+            <h1 className="text-3xl font-black leading-[1.05] tracking-tight text-[color:var(--text-primary)] sm:text-4xl lg:text-5xl">
               Play Free{' '}
-              <span className="bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-purple-400 via-blue-400 to-cyan-400 bg-clip-text text-transparent">
                 HTML5 Games
+              </span>
+              <span className="block text-[color:var(--text-primary)]/90">
+                Instantly in Your Browser
               </span>
             </h1>
 
-            <p className="mt-0.5 max-w-xl text-xs text-[color:var(--text-secondary)]">
-              No downloads. No registration. Instant play.
+            <p className="mt-3 max-w-xl text-sm leading-6 text-[color:var(--text-secondary)] sm:text-base">
+              No downloads. No registration. Just pick a game and start playing.
             </p>
+
+            <div className="mt-5 flex flex-wrap gap-2.5">
+              <Link
+                href="/games"
+                className="inline-flex items-center gap-2 rounded-xl bg-nexa-violet px-4 py-2.5 text-xs font-black text-white shadow-[0_10px_30px_var(--nexa-violet-shadow-strong)] transition-all hover:scale-[1.03] hover:brightness-110 active:scale-95 sm:px-5 sm:py-3 sm:text-sm"
+              >
+                <Gamepad2 size={16} />
+                Play All Games
+                <ArrowRight size={14} />
+              </Link>
+
+              <Link
+                href="/categories"
+                className="inline-flex items-center gap-2 rounded-xl border border-[color:var(--white-15)] bg-[color:var(--white-05)] px-4 py-2.5 text-xs font-bold text-[color:var(--text-secondary)] backdrop-blur-sm transition-all hover:border-nexa-cyan/30 hover:bg-nexa-cyan/10 hover:text-white active:scale-95 sm:px-5 sm:py-3 sm:text-sm"
+              >
+                Explore Categories
+              </Link>
+            </div>
           </div>
 
-          <div className="flex shrink-0 flex-wrap gap-1.5">
-            <Link
-              href="/games"
-              className="inline-flex items-center gap-1 rounded-xl bg-nexa-violet px-3 py-1.5 text-xs font-bold text-[color:var(--text-primary)] transition hover:brightness-110 hover:scale-105 active:scale-95"
-            >
-              <Gamepad2 size={14} />
-              All Games
-            </Link>
+          <div className="grid grid-cols-2 gap-2 sm:grid-cols-4 lg:w-[390px] lg:grid-cols-2">
+            <div className="rounded-xl border border-[color:var(--white-10)] bg-[color:var(--white-04)] p-3 backdrop-blur-sm">
+              <Gamepad2 size={16} className="mb-2 text-nexa-violet" />
+              <p className="text-sm font-black text-white">15,000+</p>
+              <p className="mt-0.5 text-[10px] font-semibold text-[color:var(--text-muted)]">Games</p>
+            </div>
 
-            <Link
-              href="/categories"
-              className="inline-flex items-center gap-1 rounded-xl border border-[color:var(--white-10)] px-3 py-1.5 text-xs font-bold text-[color:var(--text-secondary)] transition hover:bg-[color:var(--white-05)] hover:scale-105 active:scale-95"
-            >
-              Categories
-            </Link>
-          </div>
-        </div>
+            <div className="rounded-xl border border-[color:var(--white-10)] bg-[color:var(--white-04)] p-3 backdrop-blur-sm">
+              <Star size={16} className="mb-2 text-nexa-gold" />
+              <p className="text-sm font-black text-white">Top Rated</p>
+              <p className="mt-0.5 text-[10px] font-semibold text-[color:var(--text-muted)]">Games</p>
+            </div>
 
-        <div className="relative mt-2 flex flex-wrap gap-3 text-[10px]">
-          <div className="flex items-center gap-1">
-            <Gamepad2 size={12} className="text-nexa-violet" />
-            <span className="text-[color:var(--text-secondary)]">
-              15,000+ Games
-            </span>
-          </div>
+            <div className="rounded-xl border border-[color:var(--white-10)] bg-[color:var(--white-04)] p-3 backdrop-blur-sm">
+              <Clock size={16} className="mb-2 text-nexa-cyan" />
+              <p className="text-sm font-black text-white">Instant</p>
+              <p className="mt-0.5 text-[10px] font-semibold text-[color:var(--text-muted)]">Play</p>
+            </div>
 
-          <div className="flex items-center gap-1">
-            <Star size={12} className="text-yellow-500" />
-            <span className="text-[color:var(--text-secondary)]">
-              Top Rated
-            </span>
-          </div>
-
-          <div className="flex items-center gap-1">
-            <Clock size={12} className="text-nexa-cyan" />
-            <span className="text-[color:var(--text-secondary)]">
-              Instant Play
-            </span>
-          </div>
-
-          <div className="flex items-center gap-1">
-            <Sparkles size={12} className="text-purple-400" />
-            <span className="text-[color:var(--text-secondary)]">
-              100% Free
-            </span>
+            <div className="rounded-xl border border-[color:var(--white-10)] bg-[color:var(--white-04)] p-3 backdrop-blur-sm">
+              <Sparkles size={16} className="mb-2 text-purple-400" />
+              <p className="text-sm font-black text-white">100% Free</p>
+              <p className="mt-0.5 text-[10px] font-semibold text-[color:var(--text-muted)]">Always</p>
+            </div>
           </div>
         </div>
       </section>
@@ -186,18 +187,19 @@ export default async function HomePage() {
       <RecentlyPlayed />
 
       {/* Popular Games */}
-      <section className="mb-8">
-        <div className="mb-3 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-orange-500/10">
-              <Flame size={15} className="text-orange-500" />
+      <section className="mb-9">
+        <div className="mb-4 flex items-end justify-between gap-3">
+          <div className="flex items-center gap-3">
+            <div className="relative flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-orange-400/20 bg-gradient-to-br from-orange-500/20 to-red-500/10 shadow-[0_8px_25px_rgba(249,115,22,0.10)]">
+              <Flame size={18} className="text-orange-400" />
+              <span className="absolute inset-0 rounded-xl ring-1 ring-inset ring-white/5" />
             </div>
 
             <div>
-              <p className="text-[9px] font-bold uppercase tracking-widest text-nexa-violet">
+              <p className="text-[9px] font-black uppercase tracking-[0.18em] text-nexa-violet">
                 Top Rated
               </p>
-              <h2 className="text-base font-black text-[color:var(--text-primary)] sm:text-lg">
+              <h2 className="mt-0.5 text-lg font-black tracking-tight text-[color:var(--text-primary)] sm:text-xl">
                 Popular Games
               </h2>
             </div>
@@ -205,12 +207,14 @@ export default async function HomePage() {
 
           <Link
             href="/games"
-            className="inline-flex items-center gap-1 text-[10px] font-bold text-nexa-violet hover:underline"
+            className="group inline-flex shrink-0 items-center gap-1.5 rounded-lg border border-[color:var(--white-10)] bg-[color:var(--white-03)] px-2.5 py-1.5 text-[10px] font-extrabold text-[color:var(--text-secondary)] transition-all hover:border-nexa-violet/30 hover:bg-nexa-violet/10 hover:text-white sm:px-3 sm:py-2 sm:text-xs"
           >
             View All
-            <ArrowRight size={12} />
+            <ArrowRight size={12} className="transition-transform group-hover:translate-x-0.5" />
           </Link>
         </div>
+
+        <div className="mb-4 h-px bg-gradient-to-r from-nexa-violet/40 via-[color:var(--white-10)] to-transparent" />
 
         {popularGames.length > 0 ? (
           <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
