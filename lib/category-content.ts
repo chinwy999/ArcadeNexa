@@ -376,4 +376,212 @@ If you enjoy cars and driving challenges, browse the Car Games collection. Test 
 `,
   },
 
+  bike: {
+    title: 'Bike Games',
+    metaDescription:
+      'Play free bike games online on ArcadeNexa. Race, perform stunts, explore challenging tracks, and enjoy exciting motorcycle and bicycle games.',
+    description: `
+Bike games combine speed, balance, precision, and adventurous gameplay into a variety of exciting browser experiences. ArcadeNexa brings together free bike games that let you race across challenging tracks, perform stunts, navigate obstacles, and test your riding skills directly in your browser.
+
+Some bike games focus on competitive racing, where fast reactions and accurate steering can make the difference between winning and losing. Other games are built around stunt challenges, ramps, jumps, flips, and technical courses that reward careful control and good timing. Off-road bike games can introduce rough terrain, steep slopes, and difficult obstacles that require patience and precise movement.
+
+Different riding styles create different challenges. Fast racing games encourage players to learn the track and react quickly, while obstacle-based games often require controlled acceleration and braking. Stunt games can reward experimentation, allowing players to discover creative ways to complete jumps and land safely.
+
+Browser bike games are convenient for both quick sessions and longer gameplay. You can start a short race without downloading software, or spend more time improving your performance on a difficult course. Replaying levels can also help you understand the physics, controls, and best routes.
+
+ArcadeNexa makes it easy to discover different bike experiences in one collection. Whether you enjoy racing, stunts, off-road challenges, or skill-based riding games, the category offers plenty of ways to test your control and reaction speed.
+
+If you enjoy bikes and fast-paced challenges, browse the Bike Games collection. Race against the clock, master difficult tracks, perform impressive stunts, and enjoy free bike games online in your browser.
+`,
+  },
+
+  flying: {
+    title: 'Flying Games',
+    metaDescription:
+      'Play free flying games online on ArcadeNexa. Pilot aircraft, fly through challenging environments, complete missions, and enjoy browser-based aviation games.',
+    description: `
+Flying games give players the chance to experience aviation, aircraft control, aerial exploration, and fast-paced missions directly in the browser. ArcadeNexa brings together free flying games covering different styles, from simple arcade flight challenges to aircraft missions and skill-based aerial gameplay.
+
+Some flying games focus on controlling an aircraft through obstacles, narrow routes, or changing environments. Others are built around missions, exploration, landing challenges, or competitive objectives. Players may need to maintain control at high speed, avoid hazards, collect targets, or reach a destination while managing limited space and time.
+
+Flight games can test several skills at once. Precise movement is important when navigating tight areas, while quick reactions can help players avoid obstacles or respond to sudden changes. Mission-based games may also require players to understand objectives and choose efficient routes instead of simply moving as quickly as possible.
+
+Browser flying games are useful for players who want accessible aviation-themed entertainment without installing a large game. Many experiences can be started immediately, making them suitable for short sessions as well as longer attempts to improve performance and complete difficult challenges.
+
+ArcadeNexa brings different flying experiences together so players can explore the style that suits them. Whether you prefer peaceful aerial movement, challenging flight courses, aircraft missions, or fast arcade action, there are different types of flying games to discover.
+
+If you enjoy aviation and aerial adventures, browse the Flying Games collection. Take control of aircraft, navigate challenging environments, complete missions, improve your flying skills, and enjoy free browser flying games online.
+`,
+  },
+
+  'air-combat': {
+    title: 'Air Combat Games',
+    metaDescription:
+      'Play free air combat games online on ArcadeNexa. Fly aircraft, complete aerial missions, avoid hazards, and enjoy exciting browser combat games.',
+    description: `
+Air combat games combine aircraft control, fast reactions, aerial movement, and mission-based challenges into exciting browser experiences. ArcadeNexa offers free air combat games for players who enjoy controlling aircraft, navigating dangerous environments, completing objectives, and testing their skills in fast-paced aerial gameplay.
+
+Many games in this category place players in aircraft and require them to react quickly while managing movement through open skies or challenging environments. Missions may involve reaching specific locations, avoiding hazards, surviving difficult situations, or completing objectives while maintaining control of the aircraft.
+
+Air combat gameplay can reward several different skills. Quick reactions are important when the environment changes rapidly, while accurate movement can help players navigate safely and position their aircraft effectively. Some games also encourage players to learn patterns, understand mission objectives, and improve through repeated attempts.
+
+Browser-based air combat games provide an accessible way to enjoy aviation-themed action without requiring a large installation. Players can quickly enter a mission, practice their controls, and return to a difficult challenge whenever they want. This makes the category suitable for both short gaming sessions and longer attempts at mastering challenging missions.
+
+ArcadeNexa brings aerial action and aircraft-focused gameplay together in one convenient collection. Whether you prefer arcade-style flying, mission challenges, aerial maneuvering, or fast-paced combat-inspired gameplay, you can explore different experiences and find games that match your preferred style.
+
+If you enjoy aircraft and action games, browse the Air Combat Games collection. Take to the skies, improve your control, complete challenging missions, react quickly to hazards, and enjoy free air combat games online in your browser.
+`,
+  },
+
+  boat: {
+    title: 'Boat Games',
+    metaDescription:
+      'Play free boat games online on ArcadeNexa. Race across water, navigate challenging courses, explore waterways, and enjoy browser boat games.',
+    description: `
+Boat games bring racing, navigation, exploration, and water-based challenges together in a varied collection of browser games. ArcadeNexa offers free boat games that let players control different types of watercraft, compete on waterways, avoid obstacles, and complete exciting challenges directly online.
+
+Boat racing games can focus on speed and steering, requiring players to follow courses while making quick turns and maintaining control. Other games may emphasize navigation, where players need to understand the environment and choose safe or efficient routes. Some experiences introduce obstacles, narrow waterways, missions, or time-based objectives that make every movement more important.
+
+Water-based gameplay creates challenges that feel different from traditional car or bike games. Turning, acceleration, and movement can have different characteristics, requiring players to learn how each game responds to their controls. Repeated attempts can help players become familiar with courses and improve their timing.
+
+Browser boat games are easy to access and can work well for both short sessions and longer gameplay. Players can quickly start a challenge without downloading a large application, then return later to improve their score or complete a difficult course.
+
+ArcadeNexa brings different boating experiences together in one collection. Whether you enjoy racing, navigation, exploration, obstacle courses, or arcade-style water action, there are multiple styles to explore.
+
+If you enjoy water adventures and vehicle games, browse the Boat Games collection. Race across waterways, navigate challenging courses, improve your steering, complete objectives, and enjoy free boat games online in your browser.
+`,
+  },
+
+  tank: {
+    title: 'Tank Games',
+    metaDescription:
+      'Play free tank games online on ArcadeNexa. Drive armored vehicles, complete missions, navigate obstacles, and enjoy exciting browser tank games.',
+    description: `
+Tank games combine vehicle control, tactical movement, mission challenges, and action-focused gameplay. ArcadeNexa brings together free tank games that let players operate armored vehicles, navigate challenging environments, complete objectives, and test their reactions and decision-making skills directly in the browser.
+
+Different tank games offer different styles of gameplay. Some focus on movement and survival, while others challenge players to complete missions, navigate obstacle-filled environments, or manage positioning carefully. Arena-style games may emphasize quick reactions and movement, while strategy-focused experiences can reward patience and thoughtful decisions.
+
+Tank gameplay often requires more than simply moving forward. Players may need to understand the environment, choose useful positions, avoid hazards, and react quickly to changing situations. Learning how a particular game handles movement and aiming can also make repeated attempts more successful.
+
+Browser tank games are convenient for players who want accessible vehicle-based action without a complicated installation process. You can start a short challenge quickly or spend more time learning a difficult level and improving your performance. Different game styles also make the category suitable for players with different preferences.
+
+ArcadeNexa collects tank and armored-vehicle experiences in one place, making it easier to discover new challenges. Whether you prefer fast arcade action, mission-based gameplay, tactical movement, or obstacle-focused driving, you can explore different tank games online.
+
+If you enjoy armored vehicles and action challenges, browse the Tank Games collection. Drive through difficult environments, improve your control, complete missions, react to hazards, and enjoy free tank games online in your browser.
+`,
+  },
+
+  space: {
+    title: 'Space Games',
+    metaDescription:
+      'Play free space games online on ArcadeNexa. Explore galaxies, pilot spacecraft, complete missions, avoid obstacles, and enjoy browser space games.',
+    description: `
+Space games take players beyond familiar environments and into worlds filled with spacecraft, planets, stars, exploration, and imaginative challenges. ArcadeNexa offers free space games that let players pilot vehicles, explore unusual environments, complete missions, avoid hazards, and enjoy science-fiction-inspired gameplay directly in the browser.
+
+Some space games focus on exploration and movement, allowing players to navigate large environments and discover new locations. Others emphasize fast arcade action, obstacle avoidance, missions, or skill-based challenges. The variety of gameplay makes space games suitable for players who enjoy both calm exploration and more intense action.
+
+Piloting a spacecraft can require careful control and quick reactions. Players may need to navigate narrow areas, avoid objects, follow routes, collect items, or complete objectives within a limited amount of time. Replaying levels can help players learn movement patterns and discover more efficient ways to complete challenges.
+
+Browser space games offer an accessible way to enjoy science-fiction themes without requiring large downloads. A game can often be started quickly, making it easy to play during a short break or spend more time exploring a challenging level.
+
+ArcadeNexa brings different space-themed experiences together in one collection. Whether you enjoy spacecraft, exploration, arcade missions, obstacle challenges, or futuristic environments, there are many styles of space gameplay to discover.
+
+If you enjoy science fiction and exploration, browse the Space Games collection. Pilot spacecraft, explore futuristic environments, complete challenging missions, avoid hazards, improve your skills, and enjoy free space games online in your browser.
+`,
+  },
+
+  robots: {
+    title: 'Robot Games',
+    metaDescription:
+      'Play free robot games online on ArcadeNexa. Control robots, solve challenges, explore futuristic worlds, and enjoy exciting browser robot games.',
+    description: `
+Robot games combine futuristic themes, mechanical characters, action, puzzles, and creative challenges into a diverse collection of browser games. ArcadeNexa brings together free robot games that let players control robotic characters, explore unusual environments, complete missions, and test different gaming skills.
+
+Some robot games focus on action and movement, while others emphasize puzzles, exploration, strategy, or platforming. Players may control machines through obstacle courses, navigate futuristic levels, solve mechanical challenges, or complete objectives that require careful timing and planning.
+
+Robot-themed gameplay can appeal to many different types of players because the category is not limited to one genre. Fast-paced games can test reactions and movement, while puzzle-based experiences may reward patience and logical thinking. Adventure and exploration games can encourage players to investigate environments and discover new challenges.
+
+Browser robot games are convenient because they can be played directly online without requiring a large installation. This makes them suitable for quick sessions as well as longer gameplay when players want to learn a difficult level or improve their performance.
+
+ArcadeNexa makes it easy to discover different robot experiences in one place. Whether you prefer futuristic action, mechanical puzzles, platform challenges, strategy, or exploration, the Robot Games collection offers different styles to explore.
+
+If you enjoy robots, technology, and futuristic worlds, browse the Robot Games collection. Control machines, overcome obstacles, solve challenges, explore imaginative environments, and enjoy free robot games online in your browser.
+`,
+  },
+
+  'match-3': {
+    title: 'Match 3 Games',
+    metaDescription:
+      'Play free match 3 games online on ArcadeNexa. Match colorful pieces, solve puzzles, create combinations, and enjoy relaxing browser puzzle games.',
+    description: `
+Match 3 games are popular puzzle experiences built around combining similar pieces and creating useful matches. ArcadeNexa offers free match 3 games that challenge players to think ahead, recognize patterns, create combinations, and complete levels directly in the browser.
+
+The basic idea is easy to understand, but successful play can require careful planning. Players often need to look beyond the immediate match and consider how one move can affect the rest of the board. Larger combinations, chain reactions, and special pieces can create opportunities for clearing more of the board or completing objectives more efficiently.
+
+Different match 3 games introduce their own mechanics and goals. Some levels may require players to reach a score, clear specific pieces, collect objects, or complete a challenge within a limited number of moves. These variations keep the category interesting while maintaining the familiar puzzle structure.
+
+Browser match 3 games are especially convenient for short gaming sessions because many levels can be started and completed without a long setup. Players can also return to difficult puzzles and try different strategies to improve their results.
+
+ArcadeNexa brings match 3 puzzle experiences together in one collection for players who enjoy visual pattern recognition and thoughtful gameplay. Whether you prefer relaxing puzzles, challenging objectives, colorful combinations, or quick levels, there are different experiences to explore.
+
+If you enjoy puzzle games and matching challenges, browse the Match 3 Games collection. Find useful combinations, create chain reactions, plan your moves, complete objectives, and enjoy free match 3 games online in your browser.
+`,
+  },
+
+  '2048': {
+    title: '2048 Games',
+    metaDescription:
+      'Play free 2048 games online on ArcadeNexa. Combine numbered tiles, plan your moves, build higher values, and enjoy challenging browser puzzles.',
+    description: `
+2048 games are number-based puzzle experiences that combine simple controls with strategic decision-making. ArcadeNexa offers free 2048 games that challenge players to combine matching numbered tiles, plan ahead, manage limited board space, and build increasingly higher values directly in the browser.
+
+The basic mechanics are easy to learn, but creating a successful board requires careful planning. Every move changes the position of multiple tiles, so players need to consider both immediate combinations and future opportunities. Poorly planned moves can quickly reduce the available space and make it harder to continue.
+
+Different 2048-style games can introduce variations to the familiar formula. Some may use different board sizes, themes, goals, or tile systems, while others add new mechanics that change how players approach each puzzle. These variations provide additional challenges for players who already understand the classic concept.
+
+Browser 2048 games are ideal for short sessions because the controls are usually simple and a single puzzle can be started quickly. At the same time, players who enjoy strategy can spend much longer trying to improve their score and reach higher-value tiles.
+
+ArcadeNexa makes it easy to discover number puzzle games in one convenient collection. Whether you are looking for a relaxing brain challenge or a puzzle that requires careful planning, 2048-style games offer an accessible way to test your decision-making skills.
+
+If you enjoy numbers and strategic puzzles, browse the 2048 Games collection. Combine tiles, plan several moves ahead, manage the board carefully, improve your score, and enjoy free 2048 games online in your browser.
+`,
+  },
+
+  block: {
+    title: 'Block Games',
+    metaDescription:
+      'Play free block games online on ArcadeNexa. Arrange blocks, solve puzzles, build combinations, clear boards, and enjoy browser block games.',
+    description: `
+Block games cover a wide range of puzzle, strategy, matching, building, and arcade experiences based around shapes or blocks. ArcadeNexa brings together free block games that challenge players to arrange pieces, clear spaces, create combinations, solve puzzles, and complete objectives directly in the browser.
+
+Some block games focus on arranging pieces into useful patterns, while others involve clearing rows, matching shapes, placing objects, or building structures. The simple visual concept can support many different mechanics, making block games suitable for both casual players and people who enjoy more strategic challenges.
+
+Successful block gameplay often depends on planning and spatial awareness. Players may need to consider where a piece will fit before placing it, anticipate future moves, or create combinations that produce a better result. In faster games, reaction speed can also become important as new pieces or challenges appear.
+
+Browser block games are convenient for players who want accessible puzzle gameplay. Many can be started quickly and played in short sessions, while more challenging levels can encourage longer attempts and repeated practice.
+
+ArcadeNexa collects different block-based experiences in one place so players can explore puzzles, matching games, arranging challenges, and other creative formats. Whether you enjoy relaxing gameplay or more demanding spatial puzzles, there are different styles available to discover.
+
+If you enjoy shapes, puzzles, and strategic challenges, browse the Block Games collection. Arrange pieces, clear spaces, create combinations, solve difficult boards, improve your planning skills, and enjoy free block games online in your browser.
+`,
+  },
+
+  board: {
+    title: 'Board Games',
+    metaDescription:
+      'Play free board games online on ArcadeNexa. Enjoy strategy, puzzles, cards, dice, classic-inspired gameplay, and fun browser board games.',
+    description: `
+Board games offer structured gameplay based on strategy, planning, decisions, rules, and competition. ArcadeNexa brings together free board games that recreate familiar board-style experiences and introduce new digital challenges that can be played directly in the browser.
+
+Different board games require different skills. Strategy-focused games may reward careful planning and long-term decisions, while simpler games can emphasize quick choices and accessible rules. Some experiences use cards, dice, tiles, grids, or other familiar board-game elements to create varied challenges.
+
+One of the strengths of board games is that they can be easy to learn while still offering depth. Understanding the basic rules may take only a short time, but becoming more effective can require players to recognize patterns, predict possible outcomes, and adapt their strategy.
+
+Browser board games are convenient because they remove much of the setup normally associated with physical games. Players can start a digital match quickly and practice different strategies without needing a physical board or additional equipment.
+
+ArcadeNexa makes it easy to explore different board-inspired games in one collection. Whether you enjoy strategy, puzzles, cards, dice-based mechanics, classic-style gameplay, or competitive challenges, there are many experiences to discover.
+
+If you enjoy thoughtful gameplay and classic-inspired challenges, browse the Board Games collection. Plan your moves, learn new mechanics, test different strategies, solve challenging positions, and enjoy free board games online in your browser.
+`,
+  },
 }
