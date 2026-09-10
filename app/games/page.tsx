@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import GameCard from '@/components/GameCard'
 import Link from 'next/link'
+import { categoryContent } from '@/lib/category-content'
 
 export const metadata: Metadata = {
   title: 'Free HTML5 Games - Play Online Games',
@@ -57,6 +58,9 @@ export default async function GamesPage({
   searchParams: { genre?: string; page?: string }
 }) {
   const selectedGenre = searchParams.genre || ''
+  const selectedCategoryContent = selectedGenre
+    ? categoryContent[selectedGenre]
+    : undefined
 
   const parsedPage = Number.parseInt(searchParams.page || '1', 10)
   const currentPage = Number.isFinite(parsedPage)
@@ -148,9 +152,10 @@ export default async function GamesPage({
 
       <div className="mb-8">
         <h1 className="text-4xl font-bold mb-2 text-[color:var(--text-primary)] capitalize">
-          {selectedGenre
-            ? `${selectedGenre.replace(/-/g, ' ')} Games`
-            : 'Games Arena'}
+          {selectedCategoryContent?.title ||
+            (selectedGenre
+              ? `${selectedGenre.replace(/-/g, ' ')} Games`
+              : 'Games Arena')}
         </h1>
 
         <p className="text-[color:var(--text-secondary)]">
@@ -165,6 +170,29 @@ export default async function GamesPage({
           >
             ← Back to All Games
           </Link>
+        )}
+
+        {selectedCategoryContent && (
+          <section
+            aria-labelledby="category-description"
+            className="mt-6 rounded-2xl border border-[color:var(--white-10)] bg-[color:var(--nexa-surface)] p-5 sm:p-7"
+          >
+            <h2
+              id="category-description"
+              className="text-xl sm:text-2xl font-bold text-[color:var(--text-primary)] mb-4"
+            >
+              About {selectedCategoryContent.title}
+            </h2>
+
+            <div className="space-y-4 text-sm sm:text-base leading-7 text-[color:var(--text-secondary)]">
+              {selectedCategoryContent.description
+                .trim()
+                .split(/\n\s*\n/)
+                .map((paragraph, index) => (
+                  <p key={index}>{paragraph.trim()}</p>
+                ))}
+            </div>
+          </section>
         )}
       </div>
 
