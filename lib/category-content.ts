@@ -772,4 +772,185 @@ ArcadeNexa brings these fast browser experiences together so you can move from o
 Explore Hyper Casual Games on ArcadeNexa when you want something fast, accessible, and easy to learn. Start playing immediately, practice the core mechanic, improve your timing, and see how high you can push your score.
 `,
   },
+
+  'time-management': {
+    title: 'Time Management Games',
+    metaDescription: 'Play free time management games online on ArcadeNexa. Serve customers, manage busy businesses, complete tasks, and master the clock.',
+    description: `
+Time management games challenge you to stay organized, make quick decisions, and complete several tasks before the clock runs out. These browser games often place you in busy restaurants, shops, hotels, farms, salons, workshops, or other environments where every action matters. Instead of relying only on reflexes, you need to decide what should be done first and how to use your limited time efficiently.
+
+On ArcadeNexa, time management games offer a variety of situations where planning and speed work together. You may need to take customer orders, prepare products, deliver items, clean work areas, upgrade equipment, or complete several objectives during the same level. As you progress, the pace usually increases and new tasks appear, creating a satisfying challenge for players who enjoy staying focused under pressure.
+
+The genre is easy to understand because its objectives are usually clear. You can begin with simple tasks and gradually learn how different actions affect your score, earnings, or progress. Successful play often comes from recognizing patterns, prioritizing urgent requests, and avoiding unnecessary movements.
+
+Time management games are also great for short browser sessions. Many levels can be completed in just a few minutes, making them convenient when you want a quick but engaging challenge. At the same time, improving your performance and completing levels with better results can keep you playing for much longer.
+
+ArcadeNexa brings these fast-paced management experiences together in one place. Whether you enjoy running a restaurant, helping customers, organizing a business, or handling multiple objectives at once, there is plenty to explore.
+
+Explore Time Management Games on ArcadeNexa and test how efficiently you can work. Plan your actions, stay calm when the pressure increases, serve customers, complete objectives, and see whether you can master every level.
+`,
+  },
+
+  tycoon: {
+    title: 'Tycoon Games',
+    metaDescription: 'Play free tycoon games online on ArcadeNexa. Build businesses, manage resources, expand your empire, and turn smart decisions into success.',
+    description: `
+Tycoon games let you build and manage businesses, cities, attractions, farms, companies, and other growing enterprises. The main appeal comes from starting with limited resources and gradually turning a small operation into something much larger. Instead of simply reacting to obstacles, you make decisions about money, upgrades, expansion, employees, production, and long-term growth.
+
+On ArcadeNexa, tycoon games cover many different themes and management styles. You might operate a restaurant, build a commercial empire, manage a theme park, develop a farm, expand a city, or control another type of business. Each game can introduce its own economy and progression system, giving you reasons to experiment with different strategies.
+
+Good tycoon gameplay is about balancing immediate rewards with future benefits. Spending money on an upgrade may improve production, but saving that money could allow you to unlock a more powerful improvement later. Learning how each system works is part of the fun. As your operation becomes more successful, new areas, customers, employees, equipment, or opportunities can become available.
+
+The genre is particularly rewarding for players who enjoy progression. Even when a game begins slowly, every successful decision can contribute to a larger objective. Watching a small business generate more income or a simple operation develop into a thriving empire creates a strong sense of achievement.
+
+Tycoon games also work well in browsers because many are designed around accessible controls and gradual progression. You can play for a short session, return later, and continue developing your operation.
+
+Explore Tycoon Games on ArcadeNexa when you want strategic management with satisfying progression. Build carefully, invest wisely, manage your resources, expand your operation, and see how far your virtual empire can grow.
+`,
+  },
+
+  building: {
+    title: 'Building Games',
+    metaDescription: 'Play free building games online on ArcadeNexa. Construct structures, design worlds, solve challenges, and turn creative ideas into playable environments.',
+    description: `
+Building games give players the freedom to construct structures, create environments, develop bases, and shape virtual worlds. Depending on the game, you might build a house, design a city, construct defensive structures, create a settlement, or assemble objects to solve a specific challenge. The genre combines creativity with planning and often gives you many different ways to reach your goal.
+
+On ArcadeNexa, building games can range from simple construction challenges to management and sandbox-style experiences. Some games focus on placing objects in the correct locations, while others ask you to gather resources, manage space, defend your creation, or gradually expand a larger environment. This variety makes the genre appealing to both creative players and those who enjoy strategic problem solving.
+
+Successful building often requires more than simply placing objects. You may need to think about available space, resource costs, structural layouts, timing, and future expansion. A strong design can make later challenges easier, while poor planning can create additional problems. Experimenting with different layouts is part of the experience.
+
+Building games can also provide a relaxing alternative to fast action genres. When there is less pressure to react instantly, you can concentrate on creating something useful or visually interesting. Other building games combine construction with time limits or strategic objectives, adding an extra layer of challenge.
+
+Browser-based building games are easy to access and can provide both short challenges and longer progression systems. Whether you want to create, organize, defend, or expand, there are many different experiences to discover.
+
+Explore Building Games on ArcadeNexa and put your planning skills to work. Construct useful structures, experiment with layouts, manage resources, solve construction challenges, and create something that reflects your strategy and imagination.
+`,
+  },
+
+  farming: {
+    title: 'Farming Games',
+    metaDescription: 'Play free farming games online on ArcadeNexa. Grow crops, care for animals, manage farms, sell products, and build a thriving virtual farm.',
+    description: `
+Farming games combine relaxing progression with resource management and rewarding long-term goals. These browser games often begin with a small piece of land and a few basic resources. From there, you can plant crops, harvest produce, care for animals, expand fields, improve equipment, and turn a simple farm into a successful operation.
+
+On ArcadeNexa, farming games can offer many different approaches to virtual agriculture. Some focus on planting and harvesting, while others include animals, production chains, shops, customers, upgrades, or farm expansion. You may need to decide which crops are worth growing, when to harvest them, and how to spend your earnings on improvements.
+
+Planning is an important part of the genre. Crops may require different amounts of time and resources, while available land can limit how much you can produce. Managing your space efficiently can help you increase productivity and unlock new opportunities. The gradual progression makes even small improvements feel meaningful.
+
+Farming games are also popular because they can be played at a comfortable pace. Some offer calm gameplay with little pressure, while others introduce missions, time limits, customer demands, or economic challenges. This means players can choose experiences that match their preferred style.
+
+The browser format makes farming games convenient for casual sessions. You can plant crops, complete a few tasks, make upgrades, and return later to continue developing your farm. The combination of simple controls and steady progression makes the genre accessible to many players.
+
+Explore Farming Games on ArcadeNexa when you want a mix of strategy, creativity, and relaxing progression. Plant your crops, manage your resources, care for your farm, expand your land, and discover how successful you can make your virtual agricultural business.
+`,
+  },
+
+  cooking: {
+    title: 'Cooking Games',
+    metaDescription: 'Play free cooking games online on ArcadeNexa. Prepare recipes, serve customers, manage kitchens, and improve your skills through fun food challenges.',
+    description: `
+Cooking games turn food preparation into interactive browser challenges where speed, accuracy, and organization matter. You may be asked to prepare meals, follow recipes, serve customers, decorate dishes, manage ingredients, or operate a busy virtual kitchen. The gameplay can be simple enough for beginners while still becoming challenging as more orders and ingredients are introduced.
+
+On ArcadeNexa, cooking games include restaurant challenges, baking activities, food preparation tasks, kitchen management, and other culinary experiences. Each game can use different mechanics. Some ask you to select ingredients in the correct order, while others require fast reactions as you prepare multiple dishes at once.
+
+One of the most enjoyable parts of cooking games is learning to manage several tasks simultaneously. You might need to start one recipe, monitor another dish, serve a customer, and prepare ingredients for the next order. Efficient play often depends on recognizing which task should receive attention first.
+
+Cooking games can also include progression systems. Successful levels may unlock new recipes, ingredients, kitchen equipment, customers, or locations. This gives you a reason to improve your performance instead of simply completing one round and stopping.
+
+The genre works particularly well for browser gaming because many cooking challenges have short levels and straightforward controls. You can enjoy a quick kitchen challenge during a break or spend longer trying to achieve better scores and complete more advanced recipes.
+
+Explore Cooking Games on ArcadeNexa when you want fast food preparation, creative recipes, and entertaining kitchen challenges. Follow instructions, manage your ingredients, serve customers quickly, improve your timing, and see whether you can become a virtual cooking expert.
+`,
+  },
+
+  animal: {
+    title: 'Animal Games',
+    metaDescription: 'Play free animal games online on ArcadeNexa. Explore fun games featuring pets, wildlife, creatures, adventures, puzzles, and animal-themed challenges.',
+    description: `
+Animal games bring playful creatures, pets, wildlife, and imaginative characters into a wide variety of browser experiences. The category includes adventure games, puzzles, simulation challenges, care activities, action games, and casual experiences featuring animals in different roles. This variety makes animal games suitable for players looking for something lighthearted as well as those who want more challenging gameplay.
+
+On ArcadeNexa, animal games can feature familiar pets, wild creatures, fantasy animals, and unusual characters. You might help an animal complete an obstacle course, solve puzzles, explore an environment, collect objects, care for a virtual pet, or compete in a fast-paced challenge. Every game offers its own interpretation of the theme.
+
+Some animal games emphasize exploration and discovery. Others focus on simple interactions and casual entertainment. There are also games where animals become part of strategy, racing, platforming, or puzzle mechanics. Because the category covers so many genres, players can easily find different experiences without leaving the same theme.
+
+Animal-themed games are often accessible because their characters and objectives are easy to recognize. Simple controls can make them suitable for quick browser sessions, while more advanced mechanics can provide enough depth for longer play.
+
+The browser format also makes these games convenient when you want something entertaining without complicated setup. Choose a game, learn the controls, and start exploring its world immediately.
+
+Explore Animal Games on ArcadeNexa for a collection of playful and varied experiences featuring creatures from many different settings. Discover new characters, complete challenges, solve puzzles, explore virtual environments, and enjoy animal-themed games whenever you want a fun browser experience.
+`,
+  },
+
+  cats: {
+    title: 'Cat Games',
+    metaDescription: 'Play free cat games online on ArcadeNexa. Enjoy playful cats, puzzles, adventures, simulations, platform games, and fun feline challenges.',
+    description: `
+Cat games bring one of the internet's most popular animals into playful browser adventures, puzzles, simulations, and casual challenges. These games can be funny, relaxing, competitive, or surprisingly difficult. Depending on the title, you might control a cat through an obstacle course, solve puzzles, collect objects, care for a virtual pet, or help a feline character complete a larger adventure.
+
+On ArcadeNexa, cat games cover several styles so you can choose an experience that matches your mood. Some are designed around simple movement and quick reactions, while others focus on exploration, problem solving, customization, or simulation. The common theme is the cat character, but the gameplay can be completely different from one game to another.
+
+Cat games often work well as short browser experiences because their controls tend to be easy to understand. A simple objective can make a game immediately approachable, while progressively harder levels provide enough challenge to encourage repeated attempts.
+
+Some titles also use cats as part of humorous or imaginative worlds. You may encounter unusual environments, creative obstacles, collectible items, and characters that give the game a distinct personality. This combination of familiar animals and imaginative gameplay can make the category especially entertaining.
+
+Whether you want a quick casual game or a longer challenge, browser-based cat games offer an easy way to start playing. There is no need to learn complicated systems before enjoying the main idea of the game.
+
+Explore Cat Games on ArcadeNexa when you want playful feline characters and accessible browser entertainment. Guide your cat, solve challenges, collect rewards, explore new environments, and discover which cat adventure becomes your favorite.
+`,
+  },
+
+  monster: {
+    title: 'Monster Games',
+    metaDescription: 'Play free monster games online on ArcadeNexa. Battle creatures, explore dangerous worlds, solve challenges, and face powerful monsters in your browser.',
+    description: `
+Monster games put players against strange creatures, powerful enemies, and imaginative beasts in a wide range of browser experiences. The category can include action battles, platform adventures, strategy games, puzzles, survival challenges, and fantasy experiences. Some monsters are frightening, while others are funny, colorful, or designed as friendly characters.
+
+On ArcadeNexa, monster games offer different ways to interact with these creatures. You might fight monsters using weapons or special abilities, escape dangerous enemies, solve puzzles involving creatures, collect monsters, or guide a monster character through an adventure. This variety allows the theme to work across many different game genres.
+
+Combat-focused monster games often require players to learn enemy patterns and choose the right moment to attack or defend. Other games emphasize exploration and resource management, where surviving encounters is more important than defeating every enemy. Strategy can become especially important when several types of monsters have different strengths and weaknesses.
+
+The best monster games create a sense of discovery. New enemies, environments, abilities, and challenges can appear as you progress. Learning what each creature can do and adapting your approach keeps the gameplay interesting.
+
+Browser monster games are also convenient for quick sessions. You can jump into a battle, complete a level, or attempt a difficult encounter without a lengthy setup. If you enjoy longer progression, many games provide upgrades, new areas, and increasingly difficult opponents.
+
+Explore Monster Games on ArcadeNexa and prepare for unusual creatures and unexpected challenges. Battle dangerous enemies, discover new abilities, learn monster patterns, and see how far you can progress through each exciting browser adventure.
+`,
+  },
+
+  zombie: {
+    title: 'Zombie Games',
+    metaDescription: 'Play free zombie games online on ArcadeNexa. Survive zombie attacks, defend locations, solve challenges, and battle undead enemies in your browser.',
+    description: `
+Zombie games place players in dangerous worlds filled with undead enemies and survival challenges. The genre can include shooting games, strategy, defense, action, adventure, puzzle mechanics, and resource management. Some games focus on intense combat, while others ask you to protect a location, escape danger, or carefully manage limited supplies.
+
+On ArcadeNexa, zombie games offer different approaches to surviving an undead outbreak. You might defend a base against waves of zombies, explore a dangerous environment, complete missions, collect resources, or fight through increasingly difficult levels. Different enemy types and objectives can force you to change your strategy as the game progresses.
+
+Survival is often about more than defeating enemies. You may need to manage ammunition, health, defensive positions, equipment, or available resources. Choosing when to attack and when to conserve supplies can make a major difference during difficult levels.
+
+Zombie games also frequently use progression systems. Completing missions can unlock better equipment, stronger abilities, new areas, or additional challenges. This creates a satisfying sense of improvement as you become better prepared for increasingly demanding encounters.
+
+The browser format makes zombie games easy to access when you want an immediate action experience. Short levels can provide quick entertainment, while longer progression systems give you reasons to return and improve your performance.
+
+Explore Zombie Games on ArcadeNexa when you are ready for survival, action, and undead challenges. Defend your position, manage your resources, learn enemy patterns, complete missions, upgrade your abilities, and see how long you can survive against the approaching zombie threat.
+`,
+  },
+
+  horror: {
+    title: 'Horror Games',
+    metaDescription: 'Play free horror games online on ArcadeNexa. Explore dark environments, solve mysteries, survive frightening encounters, and test your courage.',
+    description: `
+Horror games are designed to create tension, mystery, suspense, and unexpected moments through dark environments and unsettling situations. Instead of relying only on fast action, many horror browser games use atmosphere, exploration, puzzles, limited resources, and carefully timed surprises to keep players alert.
+
+On ArcadeNexa, horror games can include survival horror, mysterious adventures, escape challenges, dark puzzle games, monster encounters, and other experiences built around suspense. Some games focus on exploration and storytelling, while others challenge you to react quickly when danger appears.
+
+A major part of horror gameplay is uncertainty. You may not know what is waiting around the next corner or whether an apparently safe location will remain safe. This encourages careful exploration and makes ordinary environments feel more threatening. Sound, lighting, limited visibility, and environmental details can all contribute to the atmosphere.
+
+Many horror games also combine fear with problem solving. You may need to search rooms for clues, find keys, understand a mysterious sequence, repair equipment, or discover a way to escape. These objectives keep the experience interactive rather than simply presenting frightening scenes.
+
+Browser horror games are convenient for players who want a quick suspenseful experience without installing a large game. Short challenges can deliver an intense experience in a limited amount of time, while longer games can build a deeper sense of mystery and exploration.
+
+Explore Horror Games on ArcadeNexa if you enjoy suspense, dark environments, mysterious stories, and challenging escapes. Stay alert, investigate carefully, solve the clues, manage your resources, and find out whether you can make it through each frightening adventure.
+`,
+  },
+
 }
