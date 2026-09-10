@@ -584,4 +584,192 @@ ArcadeNexa makes it easy to explore different board-inspired games in one collec
 If you enjoy thoughtful gameplay and classic-inspired challenges, browse the Board Games collection. Plan your moves, learn new mechanics, test different strategies, solve challenging positions, and enjoy free board games online in your browser.
 `,
   },
+
+  card: {
+    title: 'Card Games',
+    metaDescription:
+      'Play free card games online on ArcadeNexa. Enjoy classic card games, strategy challenges, solitaire-style games and more directly in your browser.',
+    description: `
+Card games have been a favorite form of entertainment for generations, and ArcadeNexa brings that familiar experience to the modern browser. Our Card Games collection includes digital versions of classic card concepts, strategic challenges, solitaire-style experiences, and fast-paced games that are easy to start and enjoyable to replay. Whether you prefer thoughtful decisions, quick rounds, or relaxing solo play, you can find card games designed for different play styles.
+
+Playing card games online is about more than simply matching cards or following rules. Many games reward planning, memory, probability awareness, timing, and careful decision-making. A strong move can depend on what you have already seen, what cards may appear next, or how you manage the options available to you. That combination of simple rules and meaningful choices makes card games accessible to beginners while still giving experienced players plenty of room to improve.
+
+ArcadeNexa makes these browser card games convenient to play without complicated setup. Select a game, let it load, and start playing directly from your device. The collection is suitable for short breaks as well as longer sessions when you want something more strategic than a typical arcade game.
+
+Explore Card Games on ArcadeNexa and discover browser experiences built around strategy, logic, luck, and smart decisions. Try different styles, learn their mechanics, and find the card games that best match the way you like to play.
+`,
+  },
+
+  brain: {
+    title: 'Brain Games',
+    metaDescription:
+      'Challenge your mind with free brain games online on ArcadeNexa. Play logic puzzles, problem-solving challenges, memory tests and clever browser games.',
+    description: `
+Brain Games are designed to make you think, observe, remember, and solve problems while keeping the experience entertaining. On ArcadeNexa, this collection brings together browser games that challenge different mental skills, from logical reasoning and pattern recognition to concentration, memory, and quick decision-making. They are easy to access and suitable for players who enjoy games where the challenge comes from their own thinking.
+
+Unlike games based mainly on reflexes, brain games often ask you to slow down and analyze what is happening. You may need to identify a pattern, choose the correct sequence, remember information, solve a puzzle, or work out the most efficient solution. Some challenges are relaxing and methodical, while others introduce time limits that make every decision more important.
+
+The variety of brain games makes the category useful for different moods and skill levels. Beginners can start with simple puzzles and gradually move toward more demanding challenges. Experienced players can look for games that require several steps of reasoning or reward increasingly accurate decisions. Every completed challenge can also encourage you to try again and improve your result.
+
+ArcadeNexa lets you explore brain games directly in your browser without downloads or complicated installation. Browse the collection, choose a challenge that interests you, and start testing your skills.
+
+If you enjoy puzzles, logic, memory, observation, and problem-solving, explore the Brain Games collection on ArcadeNexa. Find a challenge that makes you think, play at your own pace, and see how quickly you can solve it.
+`,
+  },
+
+  memory: {
+    title: 'Memory Games',
+    metaDescription:
+      'Play free memory games online on ArcadeNexa. Test concentration, recall, pattern recognition and visual memory with fun browser challenges.',
+    description: `
+Memory Games turn concentration and recall into simple, engaging challenges that anyone can understand. ArcadeNexa offers browser games focused on remembering positions, matching pairs, recognizing patterns, and recalling information under different conditions. These games can be calm and relaxing or increasingly difficult as more cards, objects, or sequences are introduced.
+
+A typical memory game may look simple at first, but success depends on paying attention to details and remembering what appeared earlier. You might need to remember the location of a hidden card, identify a matching object, reproduce a sequence, or react when familiar symbols appear again. As difficulty increases, concentration becomes just as important as memory itself.
+
+Memory games are also a good choice when you want a quick browser game that does not require learning complicated controls. Most challenges can be understood within moments, allowing you to focus on the objective rather than a long tutorial. You can play a short round during a break or continue through multiple levels to see how far your recall skills can take you.
+
+ArcadeNexa makes these games easy to access across modern devices. Open a game in your browser and start testing your visual memory, attention, and pattern recognition without downloading additional software.
+
+Explore Memory Games on ArcadeNexa to discover matching challenges, recall tests, sequence puzzles, and other experiences built around concentration. Play casually, challenge yourself to improve, and see whether you can remember every important detail.
+`,
+  },
+
+  math: {
+    title: 'Math Games',
+    metaDescription:
+      'Play free math games online on ArcadeNexa. Practice arithmetic, numbers, equations and mental calculation through fun interactive challenges.',
+    description: `
+Math Games combine numbers and problem-solving with the interactive format of browser gaming. On ArcadeNexa, players can discover games built around arithmetic, equations, number recognition, calculation, and other mathematical challenges. These games can make practicing basic skills more engaging while giving players clear goals, quick feedback, and opportunities to improve their accuracy.
+
+Different math games focus on different abilities. Some ask you to solve addition, subtraction, multiplication, or division problems as quickly as possible. Others introduce number patterns, equations, comparisons, or strategic decisions where mathematical thinking helps you progress. Time-based challenges can add pressure, while puzzle-style games allow you to think carefully before making a move.
+
+The category is suitable for a wide range of players because mathematical games can be designed around simple concepts as well as more challenging problems. Players looking for a quick mental exercise can choose a short calculation game, while those who enjoy competition can try to improve their score or complete increasingly difficult levels.
+
+ArcadeNexa provides these math-focused browser games in an easy-to-use online environment. There is no complicated setup required: choose a game, wait for it to load, and begin solving problems directly in your browser.
+
+Explore the Math Games collection on ArcadeNexa for arithmetic challenges, number puzzles, calculation games, and interactive brain exercises. Whether you want to sharpen your mental math skills or simply enjoy games involving numbers, there is always another challenge to solve.
+`,
+  },
+
+  quiz: {
+    title: 'Quiz Games',
+    metaDescription:
+      'Test your knowledge with free quiz games online on ArcadeNexa. Answer questions, choose correct answers and challenge yourself across many topics.',
+    description: `
+Quiz Games combine knowledge, quick thinking, and interactive gameplay. ArcadeNexa features browser-based quiz experiences where players answer questions, choose between possible answers, recognize correct information, and try to achieve the highest possible score. Topics and mechanics can vary widely, making quiz games suitable for players who enjoy both learning and competition.
+
+Some quiz games focus on general knowledge, while others concentrate on subjects such as geography, science, history, entertainment, sports, words, numbers, or visual recognition. The variety means you can choose a challenge based on what you already know or deliberately explore topics that test areas outside your usual interests.
+
+A quiz is not only about knowing the answer. Many games introduce time limits, multiple rounds, scoring systems, streaks, or limited attempts. These mechanics can make familiar questions feel more exciting because every decision matters. Fast players may enjoy answering under pressure, while others may prefer carefully considering each option before making a choice.
+
+ArcadeNexa makes it easy to start quiz games directly in your browser. There are no complicated controls to master, so you can concentrate on the questions and the challenge. Play a short round during a break or keep going to see whether you can improve your score.
+
+Explore Quiz Games on ArcadeNexa and test your knowledge across different subjects and styles. Answer carefully, learn from mistakes, and challenge yourself to achieve a better result with every round.
+`,
+  },
+
+  trivia: {
+    title: 'Trivia Games',
+    metaDescription:
+      'Play free trivia games online on ArcadeNexa. Test your general knowledge with questions about history, science, geography, entertainment and more.',
+    description: `
+Trivia Games are perfect for players who enjoy discovering facts, testing their knowledge, and answering questions under pressure. On ArcadeNexa, the Trivia Games collection offers interactive browser challenges covering a variety of subjects and question styles. You may encounter questions about history, geography, science, entertainment, sports, culture, language, or general knowledge.
+
+Trivia games are easy to understand but can become surprisingly challenging. A question may seem familiar until several possible answers look plausible. Some games reward careful thinking, while others require quick responses before the timer reaches zero. Streaks, scores, rounds, and increasing difficulty can add another layer of competition and encourage repeated play.
+
+One of the best things about trivia is its variety. Players can choose subjects they already enjoy or use unfamiliar questions as an opportunity to learn something new. A wrong answer can be just as interesting as a correct one because it can reveal information you did not know before.
+
+ArcadeNexa provides trivia games directly through the browser, making it convenient to start a challenge whenever you have a few spare minutes. No complicated controls are necessary, and many games can be played in short sessions.
+
+Browse the Trivia Games collection on ArcadeNexa and put your knowledge to the test. Answer confidently, think carefully when the choices are close, and keep playing to discover which subjects are your strongest.
+`,
+  },
+
+  word: {
+    title: 'Word Games',
+    metaDescription:
+      'Play free word games online on ArcadeNexa. Enjoy spelling challenges, word puzzles, vocabulary games, letter matching and creative language challenges.',
+    description: `
+Word Games turn letters, spelling, vocabulary, and language into entertaining browser challenges. ArcadeNexa brings together games where players may need to form words, find hidden terms, arrange letters, identify answers, or solve puzzles based on language. Whether you prefer relaxed word puzzles or faster challenges, the category offers many different ways to play.
+
+Word games often reward several skills at once. Vocabulary helps you recognize possible answers, while spelling and pattern recognition can reveal the correct combination of letters. Some games encourage careful thinking, while others add a timer or limited attempts that make quick decisions important. Because the rules are usually easy to understand, word games can be enjoyable for both casual players and dedicated puzzle fans.
+
+The category also offers plenty of variety. You might encounter letter-matching games, anagram challenges, spelling tests, word searches, vocabulary quizzes, or games where you build words to complete objectives. Each format provides a different kind of challenge while keeping the central focus on language and problem-solving.
+
+ArcadeNexa lets you play these games directly in your browser without downloading additional software. Choose a title, learn the simple mechanics, and begin searching for the right words or letters.
+
+Explore Word Games on ArcadeNexa whenever you want a puzzle that combines language with gameplay. Challenge your vocabulary, improve your word recognition, discover clever letter combinations, and keep searching until you find the answer.
+`,
+  },
+
+  'hidden-object': {
+    title: 'Hidden Object Games',
+    metaDescription:
+      'Play free hidden object games online on ArcadeNexa. Search detailed scenes, find missing items and test your observation skills in browser games.',
+    description: `
+Hidden Object Games challenge players to carefully examine scenes and locate objects that may be easy to overlook. ArcadeNexa offers browser games built around observation, attention to detail, visual searching, and discovery. Instead of relying mainly on speed or complex controls, these games reward patience and the ability to notice small differences between objects and their surroundings.
+
+A hidden object challenge may place many items into a busy scene and ask you to locate a specific list. Some games introduce a time limit, while others allow you to search at a more relaxed pace. Objects may be partially obscured, blended into the background, or positioned where you would not immediately expect them. As levels become more difficult, careful observation becomes increasingly important.
+
+These games are a great choice for players who enjoy puzzles with a visual focus. You can zoom in mentally on different areas of a scene, scan from one side to another, and develop your own search strategy. Finding a difficult object can be especially satisfying because success comes from noticing a detail that was easy to miss.
+
+ArcadeNexa makes hidden object games accessible directly from your browser. Select a game, study the scene, and begin searching without complicated setup or controls.
+
+Explore Hidden Object Games on ArcadeNexa for visual puzzles, search challenges, detailed scenes, and observation-based gameplay. Take your time, look carefully, and see how quickly you can find every hidden item.
+`,
+  },
+
+
+  clicker: {
+    title: 'Clicker Games',
+    metaDescription:
+      'Play free clicker games online on ArcadeNexa. Tap, click, collect resources, unlock upgrades and build progress through simple addictive gameplay.',
+    description: `
+Clicker Games are built around one of the simplest actions in gaming: clicking or tapping. ArcadeNexa brings together browser games where repeated actions generate points, resources, currency, progress, or other rewards. Although the basic mechanic is easy to understand, upgrades and progression systems can turn a simple click into a longer strategic experience.
+
+Many clicker games begin with a straightforward objective. Click an object, collect a resource, earn points, or complete a basic action. As you progress, the game may introduce upgrades that increase production, automate actions, unlock new features, or improve the speed at which rewards are generated. Deciding which upgrade to choose can become an important part of the strategy.
+
+The appeal of clicker games comes from their immediate feedback and gradual progression. You can often see the results of your actions right away, while larger upgrades provide longer-term goals. Some games are designed for very short sessions, while others encourage you to keep building progress over time.
+
+ArcadeNexa lets you explore clicker games directly in your browser. The controls are usually simple enough to understand immediately, making these games convenient when you want something accessible without a long tutorial.
+
+Browse the Clicker Games collection on ArcadeNexa and discover games based on tapping, collecting, upgrading, automation, and progression. Start with a simple action, build your resources, unlock improvements, and see how far your strategy can take you.
+`,
+  },
+
+  idle: {
+    title: 'Idle Games',
+    metaDescription:
+      'Play free idle games online on ArcadeNexa. Build resources, unlock upgrades, automate production and enjoy progression-focused browser games.',
+    description: `
+Idle Games focus on gradual progression, automation, resource management, and upgrades. On ArcadeNexa, players can explore browser games where progress may continue through automated systems rather than requiring constant interaction. The result is a relaxed style of gameplay that still gives you meaningful decisions about upgrades, resources, and long-term development.
+
+An idle game often starts with a small source of production. You collect resources or currency, purchase an upgrade, and use the increased output to unlock the next improvement. As the system grows, automation can reduce the need for repeated actions while allowing you to focus on choosing efficient upgrades and reaching larger milestones.
+
+The category appeals to players who enjoy watching a simple system develop into something much larger. Progress can be satisfying because every improvement contributes to the next stage. Some games emphasize numbers and optimization, while others use themes such as businesses, farms, factories, adventures, or resource production.
+
+ArcadeNexa provides idle games directly through the browser, so you can start playing without complicated installation. Their simple controls make them suitable for short sessions, while deeper upgrade systems can provide longer-term goals for players who enjoy optimization.
+
+Explore Idle Games on ArcadeNexa to discover progression-focused experiences built around automation, upgrades, resource generation, and strategic growth. Choose your next improvement carefully, expand your production, and see how far you can take your virtual operation.
+`,
+  },
+
+  'hyper-casual': {
+    title: 'Hyper Casual Games',
+    metaDescription:
+      'Play fast, simple, and addictive hyper casual games online for free on ArcadeNexa. Quick challenges with easy controls and instant gameplay.',
+    description: `
+Hyper casual games are built around a simple idea: make the game easy to understand and quick to start, while still giving players a reason to keep playing. These browser games usually feature straightforward controls, short rounds, and mechanics that can be learned within seconds. That simplicity makes hyper casual games ideal for players who want immediate entertainment without spending a long time learning complicated rules.
+
+On ArcadeNexa, hyper casual games can include quick reaction challenges, endless movement, simple matching mechanics, obstacle courses, timing games, stacking challenges, and other experiences focused on one clear gameplay idea. Although the controls may be simple, the challenge can increase quickly. A game that seems easy during the first few attempts can become surprisingly difficult when you try to achieve a higher score or survive for a longer period.
+
+One of the biggest strengths of the genre is accessibility. You generally do not need previous gaming experience to understand what to do. Clear objectives and familiar interactions make these games suitable for a wide range of players, including people who only have a few minutes available for gaming.
+
+Hyper casual gameplay is especially suitable for short sessions. You might play for a few minutes while taking a break, then return later to try again. Quick restarts and straightforward objectives make the genre easy to pick up whenever you have spare time.
+
+ArcadeNexa brings these fast browser experiences together so you can move from one challenge to another without complicated setup. The collection includes simple games built around reflexes, timing, movement, matching, and quick decisions.
+
+Explore Hyper Casual Games on ArcadeNexa when you want something fast, accessible, and easy to learn. Start playing immediately, practice the core mechanic, improve your timing, and see how high you can push your score.
+`,
+  },
 }
