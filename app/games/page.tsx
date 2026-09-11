@@ -3,39 +3,59 @@ import GameCard from '@/components/GameCard'
 import Link from 'next/link'
 import { categoryContent } from '@/lib/category-content'
 
-export const metadata: Metadata = {
-  title: 'Free HTML5 Games - Play Online Games',
-  description:
-    'Play 15,000+ free HTML5 games online on ArcadeNexa. Discover action, puzzle, racing, sports, strategy and casual games instantly with no download or registration.',
-  keywords: [
-    'free HTML5 games',
-    'free online games',
-    'browser games',
-    'instant play games',
-    'arcade games',
-    'ArcadeNexa',
-  ],
-  alternates: {
-    canonical: '/games',
-  },
-  openGraph: {
-    type: 'website',
-    url: '/games',
-    title: 'Free HTML5 Games - Play Online Games | ArcadeNexa',
-    description:
-      'Play 15,000+ free HTML5 games online instantly. No download or registration required.',
-    siteName: 'ArcadeNexa',
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Free HTML5 Games - Play Online Games | ArcadeNexa',
-    description:
-      'Play 15,000+ free HTML5 games online instantly. No download or registration required.',
-  },
-  robots: {
-    index: true,
-    follow: true,
-  },
+export async function generateMetadata({
+  searchParams,
+}: {
+  searchParams: { genre?: string; page?: string }
+}): Promise<Metadata> {
+  const selectedGenre = searchParams.genre || ''
+  const selectedCategoryContent = selectedGenre
+    ? categoryContent[selectedGenre]
+    : undefined
+
+  const title = selectedCategoryContent
+    ? `${selectedCategoryContent.title} | ArcadeNexa`
+    : 'Free HTML5 Games - Play Online Games'
+
+  const description = selectedCategoryContent
+    ? selectedCategoryContent.metaDescription
+    : 'Play 15,000+ free HTML5 games online on ArcadeNexa. Discover action, puzzle, racing, sports, strategy and casual games instantly with no download or registration.'
+
+  const canonical = selectedCategoryContent
+    ? `/games?genre=${encodeURIComponent(selectedGenre)}`
+    : '/games'
+
+  return {
+    title,
+    description,
+    keywords: [
+      'free HTML5 games',
+      'free online games',
+      'browser games',
+      'instant play games',
+      'arcade games',
+      'ArcadeNexa',
+    ],
+    alternates: {
+      canonical,
+    },
+    openGraph: {
+      type: 'website',
+      url: canonical,
+      title,
+      description,
+      siteName: 'ArcadeNexa',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+    },
+    robots: {
+      index: true,
+      follow: true,
+    },
+  }
 }
 
 export const revalidate = 300
