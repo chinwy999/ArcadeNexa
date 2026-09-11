@@ -24,8 +24,8 @@ export async function generateMetadata({
 
   const title =
     currentPage > 1
-      ? `${titleBase} | Page ${currentPage} | ArcadeNexa`
-      : `${titleBase} | ArcadeNexa`
+      ? `${titleBase} | Page ${currentPage}`
+      : titleBase
 
   const description = selectedCategoryContent
     ? selectedCategoryContent.metaDescription
