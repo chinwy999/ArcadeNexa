@@ -6,7 +6,7 @@ export type CategoryContent = {
 
 export const categoryContent: Record<string, CategoryContent> = {
   action: {
-    title: 'Action Games',
+    title: 'Action Games – Play Free Online',
     metaDescription:
       'Play free action games online on ArcadeNexa. Enjoy fast-paced battles, challenging missions, combat, and exciting browser gameplay.',
     description: `
@@ -21,7 +21,7 @@ If you enjoy games that keep you active and engaged, this collection is a great 
   },
 
   adventure: {
-    title: 'Adventure Games',
+    title: 'Adventure Games – Explore & Play Online',
     metaDescription:
       'Explore free adventure games online on ArcadeNexa. Discover quests, exploration, challenges, stories, and exciting browser adventures.',
     description: `
@@ -38,7 +38,7 @@ Browse the Adventure collection and discover new worlds, quests, challenges, and
   },
 
   arcade: {
-    title: 'Arcade Games',
+    title: 'Arcade Games – Classic & Fun Online Games',
     metaDescription:
       'Play free arcade games online on ArcadeNexa. Enjoy quick challenges, classic gameplay, high scores, reflex tests, and instant browser fun.',
     description: `
@@ -55,7 +55,7 @@ If you enjoy games that are easy to start but rewarding to master, explore the A
   },
 
   casual: {
-    title: 'Casual Games',
+    title: 'Casual Games – Fun Free Games Online',
     metaDescription:
       'Enjoy free casual games online on ArcadeNexa. Play relaxing, simple, and entertaining browser games for quick or longer sessions.',
     description: `
@@ -72,7 +72,7 @@ If you enjoy accessible games that fit naturally into everyday breaks, the Casua
   },
 
   puzzle: {
-    title: 'Puzzle Games',
+    title: 'Puzzle Games – Free Brain Games Online',
     metaDescription:
       'Challenge yourself with free puzzle games online on ArcadeNexa. Play logic, matching, strategy, memory, and brain-teasing browser games.',
     description: `
@@ -89,7 +89,7 @@ If you enjoy logic challenges, pattern recognition, memory tests, numbers, match
   },
 
   racing: {
-    title: 'Racing Games',
+    title: 'Racing Games – Drive Fast & Play Online',
     metaDescription:
       'Play free racing games online on ArcadeNexa. Race cars, bikes, and other vehicles through fast tracks, challenging courses, and competitions.',
     description: `
@@ -106,7 +106,7 @@ If you enjoy speed and competition, explore the Racing collection and choose a c
   },
 
   sports: {
-    title: 'Sports Games',
+    title: 'Sports Games – Free Online Sports Games',
     metaDescription:
       'Play free sports games online on ArcadeNexa. Enjoy football, basketball, golf, racing, skill challenges, and more browser sports games.',
     description: `
@@ -123,7 +123,7 @@ If you enjoy competition and skill-based gameplay, browse the Sports collection 
   },
 
   shooter: {
-    title: 'Shooter Games',
+    title: 'Shooter Games – Aim & Battle Online',
     metaDescription:
       'Play free shooter games online on ArcadeNexa. Take aim, complete missions, defeat enemies, and enjoy fast-paced browser shooting games.',
     description: `
@@ -140,7 +140,7 @@ If you enjoy aiming challenges, fast reactions, combat scenarios, or tactical ga
   },
 
   simulation: {
-    title: 'Simulation Games',
+    title: 'Simulation Games – Realistic Games Online',
     metaDescription:
       'Explore free simulation games online on ArcadeNexa. Manage businesses, vehicles, farms, cities, characters, systems, and virtual worlds.',
     description: `
@@ -157,7 +157,7 @@ If you enjoy management, experimentation, virtual activities, or games that let 
   },
 
   strategy: {
-    title: 'Strategy Games',
+    title: 'Strategy Games – Think, Plan & Play Online',
     metaDescription:
       'Play free strategy games online on ArcadeNexa. Plan your moves, manage resources, build, defend, and outsmart challenging opponents.',
     description: `
@@ -174,7 +174,7 @@ If you enjoy thinking ahead, solving problems, managing resources, or competing 
   },
 
   platformer: {
-    title: 'Platformer Games',
+    title: 'Platformer Games – Jump & Run Online',
     metaDescription:
       'Play free platformer games online on ArcadeNexa. Jump, run, avoid obstacles, explore levels, and master challenging browser platform games.',
     description: `
@@ -191,7 +191,7 @@ If you enjoy jumping challenges, obstacle courses, exploration, and skill-based 
   },
 
   fighting: {
-    title: 'Fighting Games',
+    title: 'Fighting Games – Battle & Fight Online',
     metaDescription:
       'Play free fighting games online on ArcadeNexa. Battle opponents, master attacks, defend yourself, and test your timing and combat skills.',
     description: `
@@ -208,7 +208,7 @@ If you enjoy competitive combat, quick reactions, and skill-based challenges, ex
   },
 
   runner: {
-    title: 'Runner Games',
+    title: 'Runner Games – Run & Dodge Online',
     metaDescription:
       'Play free runner games online on ArcadeNexa. Run, dodge obstacles, collect rewards, and test your reactions in fast browser challenges.',
     description: `
@@ -227,7 +227,7 @@ If you enjoy fast movement, quick decisions, and chasing better scores, explore 
   },
 
   battle: {
-    title: 'Battle Games',
+    title: 'Battle Games – Fight & Compete Online',
     metaDescription:
       'Play free battle games online on ArcadeNexa. Enter intense battles, defeat opponents, survive challenges, and test your tactical skills.',
     description: `
@@ -246,7 +246,7 @@ If you enjoy competition, combat, survival, and tactical decisions, browse the B
   },
 
   stealth: {
-    title: 'Stealth Games',
+    title: 'Stealth Games – Sneak & Escape Online',
     metaDescription:
       'Play free stealth games online on ArcadeNexa. Sneak past enemies, avoid detection, plan your moves, and complete challenging missions.',
     description: `
@@ -263,7 +263,7 @@ If you enjoy tactical movement and games that reward careful thinking, explore t
   },
 
   survival: {
-    title: 'Survival Games',
+    title: 'Survival Games – Explore & Stay Alive',
     metaDescription:
       'Play free survival games online on ArcadeNexa. Gather resources, avoid danger, solve challenges, and survive demanding browser worlds.',
     description: `
@@ -282,7 +282,7 @@ If you enjoy exploration, resource management, danger, and problem solving under
   },
 
   rpg: {
-    title: 'RPG Games',
+    title: 'RPG Games – Role Playing Adventures Online',
     metaDescription:
       'Explore free RPG games online on ArcadeNexa. Build characters, complete quests, battle enemies, collect items, and explore new worlds.',
     description: `
@@ -301,7 +301,7 @@ If you enjoy character development, quests, exploration, and progression, explor
   },
 
   mmorpg: {
-    title: 'MMORPG Games',
+    title: 'MMORPG Games – Multiplayer RPGs Online',
     metaDescription:
       'Discover free MMORPG games online on ArcadeNexa. Explore persistent worlds, develop characters, complete quests, and enjoy online RPG gameplay.',
     description: `
@@ -320,7 +320,7 @@ If you enjoy character development, quests, exploration, online interaction, and
   },
 
   io: {
-    title: 'IO Games',
+    title: 'IO Games – Multiplayer Games Online',
     metaDescription:
       'Play free IO games online on ArcadeNexa. Compete, survive, grow, collect, and challenge other players in fast browser multiplayer games.',
     description: `
@@ -339,7 +339,7 @@ If you enjoy competitive browser games with simple controls and fast sessions, b
   },
 
   'open-world': {
-    title: 'Open World Games',
+    title: 'Open World Games – Explore & Play Online',
     metaDescription:
       'Explore free open world games online on ArcadeNexa. Discover large environments, missions, exploration, driving, action, and browser adventures.',
     description: `
@@ -358,7 +358,7 @@ If you enjoy exploration, freedom, missions, and discovering new locations, brow
   },
 
   car: {
-    title: 'Car Games',
+    title: 'Car Games – Drive & Race Online',
     metaDescription:
       'Play free car games online on ArcadeNexa. Race, drive, drift, park, perform stunts, and explore exciting browser driving games.',
     description: `
@@ -377,7 +377,7 @@ If you enjoy cars and driving challenges, browse the Car Games collection. Test 
   },
 
   bike: {
-    title: 'Bike Games',
+    title: 'Bike Games – Ride & Race Online',
     metaDescription:
       'Play free bike games online on ArcadeNexa. Race, perform stunts, explore challenging tracks, and enjoy exciting motorcycle and bicycle games.',
     description: `
@@ -396,7 +396,7 @@ If you enjoy bikes and fast-paced challenges, browse the Bike Games collection. 
   },
 
   flying: {
-    title: 'Flying Games',
+    title: 'Flying Games – Fly & Explore Online',
     metaDescription:
       'Play free flying games online on ArcadeNexa. Pilot aircraft, fly through challenging environments, complete missions, and enjoy browser-based aviation games.',
     description: `
@@ -415,7 +415,7 @@ If you enjoy aviation and aerial adventures, browse the Flying Games collection.
   },
 
   'air-combat': {
-    title: 'Air Combat Games',
+    title: 'Air Combat Games – Fly & Fight Online',
     metaDescription:
       'Play free air combat games online on ArcadeNexa. Fly aircraft, complete aerial missions, avoid hazards, and enjoy exciting browser combat games.',
     description: `
@@ -434,7 +434,7 @@ If you enjoy aircraft and action games, browse the Air Combat Games collection. 
   },
 
   boat: {
-    title: 'Boat Games',
+    title: 'Boat Games – Sail & Race Online',
     metaDescription:
       'Play free boat games online on ArcadeNexa. Race across water, navigate challenging courses, explore waterways, and enjoy browser boat games.',
     description: `
@@ -453,7 +453,7 @@ If you enjoy water adventures and vehicle games, browse the Boat Games collectio
   },
 
   tank: {
-    title: 'Tank Games',
+    title: 'Tank Games – Battle & Shoot Online',
     metaDescription:
       'Play free tank games online on ArcadeNexa. Drive armored vehicles, complete missions, navigate obstacles, and enjoy exciting browser tank games.',
     description: `
@@ -472,7 +472,7 @@ If you enjoy armored vehicles and action challenges, browse the Tank Games colle
   },
 
   space: {
-    title: 'Space Games',
+    title: 'Space Games – Explore the Galaxy Online',
     metaDescription:
       'Play free space games online on ArcadeNexa. Explore galaxies, pilot spacecraft, complete missions, avoid obstacles, and enjoy browser space games.',
     description: `
@@ -491,7 +491,7 @@ If you enjoy science fiction and exploration, browse the Space Games collection.
   },
 
   robots: {
-    title: 'Robot Games',
+    title: 'Robot Games – Battle & Build Online',
     metaDescription:
       'Play free robot games online on ArcadeNexa. Control robots, solve challenges, explore futuristic worlds, and enjoy exciting browser robot games.',
     description: `
@@ -510,7 +510,7 @@ If you enjoy robots, technology, and futuristic worlds, browse the Robot Games c
   },
 
   'match-3': {
-    title: 'Match 3 Games',
+    title: 'Match 3 Games – Free Puzzle Games Online',
     metaDescription:
       'Play free match 3 games online on ArcadeNexa. Match colorful pieces, solve puzzles, create combinations, and enjoy relaxing browser puzzle games.',
     description: `
@@ -529,7 +529,7 @@ If you enjoy puzzle games and matching challenges, browse the Match 3 Games coll
   },
 
   '2048': {
-    title: '2048 Games',
+    title: '2048 Games – Free Puzzle Games Online',
     metaDescription:
       'Play free 2048 games online on ArcadeNexa. Combine numbered tiles, plan your moves, build higher values, and enjoy challenging browser puzzles.',
     description: `
@@ -548,7 +548,7 @@ If you enjoy numbers and strategic puzzles, browse the 2048 Games collection. Co
   },
 
   block: {
-    title: 'Block Games',
+    title: 'Block Games – Free Puzzle Games Online',
     metaDescription:
       'Play free block games online on ArcadeNexa. Arrange blocks, solve puzzles, build combinations, clear boards, and enjoy browser block games.',
     description: `
@@ -567,7 +567,7 @@ If you enjoy shapes, puzzles, and strategic challenges, browse the Block Games c
   },
 
   board: {
-    title: 'Board Games',
+    title: 'Board Games – Classic Games to Play Online',
     metaDescription:
       'Play free board games online on ArcadeNexa. Enjoy strategy, puzzles, cards, dice, classic-inspired gameplay, and fun browser board games.',
     description: `
@@ -586,7 +586,7 @@ If you enjoy thoughtful gameplay and classic-inspired challenges, browse the Boa
   },
 
   card: {
-    title: 'Card Games',
+    title: 'Card Games – Free Classic Games Online',
     metaDescription:
       'Play free card games online on ArcadeNexa. Enjoy classic card games, strategy challenges, solitaire-style games and more directly in your browser.',
     description: `
@@ -601,7 +601,7 @@ Explore Card Games on ArcadeNexa and discover browser experiences built around s
   },
 
   brain: {
-    title: 'Brain Games',
+    title: 'Brain Games – Free Puzzles to Play Online',
     metaDescription:
       'Challenge your mind with free brain games online on ArcadeNexa. Play logic puzzles, problem-solving challenges, memory tests and clever browser games.',
     description: `
@@ -618,7 +618,7 @@ If you enjoy puzzles, logic, memory, observation, and problem-solving, explore t
   },
 
   memory: {
-    title: 'Memory Games',
+    title: 'Memory Games – Brain Training Games Online',
     metaDescription:
       'Play free memory games online on ArcadeNexa. Test concentration, recall, pattern recognition and visual memory with fun browser challenges.',
     description: `
@@ -635,7 +635,7 @@ Explore Memory Games on ArcadeNexa to discover matching challenges, recall tests
   },
 
   math: {
-    title: 'Math Games',
+    title: 'Math Games – Fun Learning Games Online',
     metaDescription:
       'Play free math games online on ArcadeNexa. Practice arithmetic, numbers, equations and mental calculation through fun interactive challenges.',
     description: `
@@ -652,7 +652,7 @@ Explore the Math Games collection on ArcadeNexa for arithmetic challenges, numbe
   },
 
   quiz: {
-    title: 'Quiz Games',
+    title: 'Quiz Games – Fun Trivia & Questions Online',
     metaDescription:
       'Test your knowledge with free quiz games online on ArcadeNexa. Answer questions, choose correct answers and challenge yourself across many topics.',
     description: `
@@ -669,7 +669,7 @@ Explore Quiz Games on ArcadeNexa and test your knowledge across different subjec
   },
 
   trivia: {
-    title: 'Trivia Games',
+    title: 'Trivia Games – Fun Questions & Answers',
     metaDescription:
       'Play free trivia games online on ArcadeNexa. Test your general knowledge with questions about history, science, geography, entertainment and more.',
     description: `
@@ -686,7 +686,7 @@ Browse the Trivia Games collection on ArcadeNexa and put your knowledge to the t
   },
 
   word: {
-    title: 'Word Games',
+    title: 'Word Games – Free Brain Games Online',
     metaDescription:
       'Play free word games online on ArcadeNexa. Enjoy spelling challenges, word puzzles, vocabulary games, letter matching and creative language challenges.',
     description: `
@@ -703,7 +703,7 @@ Explore Word Games on ArcadeNexa whenever you want a puzzle that combines langua
   },
 
   'hidden-object': {
-    title: 'Hidden Object Games',
+    title: 'Hidden Object Games – Find & Play Online',
     metaDescription:
       'Play free hidden object games online on ArcadeNexa. Search detailed scenes, find missing items and test your observation skills in browser games.',
     description: `
@@ -721,7 +721,7 @@ Explore Hidden Object Games on ArcadeNexa for visual puzzles, search challenges,
 
 
   clicker: {
-    title: 'Clicker Games',
+    title: 'Clicker Games – Fun Idle Games Online',
     metaDescription:
       'Play free clicker games online on ArcadeNexa. Tap, click, collect resources, unlock upgrades and build progress through simple addictive gameplay.',
     description: `
@@ -738,7 +738,7 @@ Browse the Clicker Games collection on ArcadeNexa and discover games based on ta
   },
 
   idle: {
-    title: 'Idle Games',
+    title: 'Idle Games – Relaxing Clicker Games Online',
     metaDescription:
       'Play free idle games online on ArcadeNexa. Build resources, unlock upgrades, automate production and enjoy progression-focused browser games.',
     description: `
@@ -755,7 +755,7 @@ Explore Idle Games on ArcadeNexa to discover progression-focused experiences bui
   },
 
   'hyper-casual': {
-    title: 'Hyper Casual Games',
+    title: 'Hyper Casual Games – Quick Fun Online',
     metaDescription:
       'Play fast, simple, and addictive hyper casual games online for free on ArcadeNexa. Quick challenges with easy controls and instant gameplay.',
     description: `
@@ -774,7 +774,7 @@ Explore Hyper Casual Games on ArcadeNexa when you want something fast, accessibl
   },
 
   'time-management': {
-    title: 'Time Management Games',
+    title: 'Time Management Games – Plan & Play Online',
     metaDescription: 'Play free time management games online on ArcadeNexa. Serve customers, manage busy businesses, complete tasks, and master the clock.',
     description: `
 Time management games challenge you to stay organized, make quick decisions, and complete several tasks before the clock runs out. These browser games often place you in busy restaurants, shops, hotels, farms, salons, workshops, or other environments where every action matters. Instead of relying only on reflexes, you need to decide what should be done first and how to use your limited time efficiently.
@@ -792,7 +792,7 @@ Explore Time Management Games on ArcadeNexa and test how efficiently you can wor
   },
 
   tycoon: {
-    title: 'Tycoon Games',
+    title: 'Tycoon Games – Build & Manage Online',
     metaDescription: 'Play free tycoon games online on ArcadeNexa. Build businesses, manage resources, expand your empire, and turn smart decisions into success.',
     description: `
 Tycoon games let you build and manage businesses, cities, attractions, farms, companies, and other growing enterprises. The main appeal comes from starting with limited resources and gradually turning a small operation into something much larger. Instead of simply reacting to obstacles, you make decisions about money, upgrades, expansion, employees, production, and long-term growth.
@@ -810,7 +810,7 @@ Explore Tycoon Games on ArcadeNexa when you want strategic management with satis
   },
 
   building: {
-    title: 'Building Games',
+    title: 'Building Games – Create & Build Online',
     metaDescription: 'Play free building games online on ArcadeNexa. Construct structures, design worlds, solve challenges, and turn creative ideas into playable environments.',
     description: `
 Building games give players the freedom to construct structures, create environments, develop bases, and shape virtual worlds. Depending on the game, you might build a house, design a city, construct defensive structures, create a settlement, or assemble objects to solve a specific challenge. The genre combines creativity with planning and often gives you many different ways to reach your goal.
@@ -828,7 +828,7 @@ Explore Building Games on ArcadeNexa and put your planning skills to work. Const
   },
 
   farming: {
-    title: 'Farming Games',
+    title: 'Farming Games – Build Your Farm Online',
     metaDescription: 'Play free farming games online on ArcadeNexa. Grow crops, care for animals, manage farms, sell products, and build a thriving virtual farm.',
     description: `
 Farming games combine relaxing progression with resource management and rewarding long-term goals. These browser games often begin with a small piece of land and a few basic resources. From there, you can plant crops, harvest produce, care for animals, expand fields, improve equipment, and turn a simple farm into a successful operation.
@@ -846,7 +846,7 @@ Explore Farming Games on ArcadeNexa when you want a mix of strategy, creativity,
   },
 
   cooking: {
-    title: 'Cooking Games',
+    title: 'Cooking Games – Fun Kitchen Games Online',
     metaDescription: 'Play free cooking games online on ArcadeNexa. Prepare recipes, serve customers, manage kitchens, and improve your skills through fun food challenges.',
     description: `
 Cooking games turn food preparation into interactive browser challenges where speed, accuracy, and organization matter. You may be asked to prepare meals, follow recipes, serve customers, decorate dishes, manage ingredients, or operate a busy virtual kitchen. The gameplay can be simple enough for beginners while still becoming challenging as more orders and ingredients are introduced.
@@ -864,7 +864,7 @@ Explore Cooking Games on ArcadeNexa when you want fast food preparation, creativ
   },
 
   animal: {
-    title: 'Animal Games',
+    title: 'Animal Games – Fun Games to Play Online',
     metaDescription: 'Play free animal games online on ArcadeNexa. Explore fun games featuring pets, wildlife, creatures, adventures, puzzles, and animal-themed challenges.',
     description: `
 Animal games bring playful creatures, pets, wildlife, and imaginative characters into a wide variety of browser experiences. The category includes adventure games, puzzles, simulation challenges, care activities, action games, and casual experiences featuring animals in different roles. This variety makes animal games suitable for players looking for something lighthearted as well as those who want more challenging gameplay.
@@ -882,7 +882,7 @@ Explore Animal Games on ArcadeNexa for a collection of playful and varied experi
   },
 
   cats: {
-    title: 'Cat Games',
+    title: 'Cat Games – Fun Games to Play Online',
     metaDescription: 'Play free cat games online on ArcadeNexa. Enjoy playful cats, puzzles, adventures, simulations, platform games, and fun feline challenges.',
     description: `
 Cat games bring one of the internet's most popular animals into playful browser adventures, puzzles, simulations, and casual challenges. These games can be funny, relaxing, competitive, or surprisingly difficult. Depending on the title, you might control a cat through an obstacle course, solve puzzles, collect objects, care for a virtual pet, or help a feline character complete a larger adventure.
@@ -900,7 +900,7 @@ Explore Cat Games on ArcadeNexa when you want playful feline characters and acce
   },
 
   monster: {
-    title: 'Monster Games',
+    title: 'Monster Games – Battle & Adventure Online',
     metaDescription: 'Play free monster games online on ArcadeNexa. Battle creatures, explore dangerous worlds, solve challenges, and face powerful monsters in your browser.',
     description: `
 Monster games put players against strange creatures, powerful enemies, and imaginative beasts in a wide range of browser experiences. The category can include action battles, platform adventures, strategy games, puzzles, survival challenges, and fantasy experiences. Some monsters are frightening, while others are funny, colorful, or designed as friendly characters.
@@ -918,7 +918,7 @@ Explore Monster Games on ArcadeNexa and prepare for unusual creatures and unexpe
   },
 
   zombie: {
-    title: 'Zombie Games',
+    title: 'Zombie Games – Survive the Undead Online',
     metaDescription: 'Play free zombie games online on ArcadeNexa. Survive zombie attacks, defend locations, solve challenges, and battle undead enemies in your browser.',
     description: `
 Zombie games place players in dangerous worlds filled with undead enemies and survival challenges. The genre can include shooting games, strategy, defense, action, adventure, puzzle mechanics, and resource management. Some games focus on intense combat, while others ask you to protect a location, escape danger, or carefully manage limited supplies.
@@ -936,7 +936,7 @@ Explore Zombie Games on ArcadeNexa when you are ready for survival, action, and 
   },
 
   horror: {
-    title: 'Horror Games',
+    title: 'Horror Games – Scary Games to Play Online',
     metaDescription: 'Play free horror games online on ArcadeNexa. Explore dark environments, solve mysteries, survive frightening encounters, and test your courage.',
     description: `
 Horror games are designed to create tension, mystery, suspense, and unexpected moments through dark environments and unsettling situations. Instead of relying only on fast action, many horror browser games use atmosphere, exploration, puzzles, limited resources, and carefully timed surprises to keep players alert.
@@ -954,7 +954,7 @@ Explore Horror Games on ArcadeNexa if you enjoy suspense, dark environments, mys
   },
 
   ball: {
-    title: 'Ball Games',
+    title: 'Ball Games – Fun Sports Games Online',
     metaDescription:
       'Play free ball games online on ArcadeNexa. Enjoy bouncing, rolling, shooting, matching and physics-based ball games instantly in your browser.',
     description: `
@@ -969,7 +969,7 @@ Whether you prefer arcade challenges, sports-inspired gameplay, puzzles, or casu
   },
 
   basketball: {
-    title: 'Basketball Games',
+    title: 'Basketball Games – Play Free Online',
     metaDescription:
       'Play free basketball games online on ArcadeNexa. Shoot hoops, score baskets, test your timing and enjoy basketball challenges in your browser.',
     description: `
@@ -984,7 +984,7 @@ Whether you are looking for a quick shooting game during a short break or a long
   },
 
   'beauty-dress-up': {
-    title: 'Beauty & Dress-Up Games',
+    title: 'Beauty & Dress-Up Games – Play Online',
     metaDescription:
       'Play free beauty and dress-up games online on ArcadeNexa. Create outfits, style characters, choose looks and explore creative fashion challenges.',
     description: `
@@ -1001,7 +1001,7 @@ If you enjoy fashion, character customization, makeovers, or casual creative gam
   },
 
   drawing: {
-    title: 'Drawing Games',
+    title: 'Drawing Games – Creative Games to Play Online',
     metaDescription:
       'Play free drawing games online on ArcadeNexa. Draw, sketch, color, solve visual challenges and express your creativity directly in your browser.',
     description: `
@@ -1018,7 +1018,7 @@ If you enjoy creative browser games, visual puzzles, sketching mechanics, or int
   },
 
   educational: {
-    title: 'Educational Games',
+    title: 'Educational Games – Learn & Play Online',
     metaDescription:
       'Play free educational games online on ArcadeNexa. Practice math, memory, words, logic, general knowledge and other useful skills while playing.',
     description: `
@@ -1035,7 +1035,7 @@ If you are looking for browser games that can challenge your memory, mathematics
   },
 
   'games-for-girls': {
-    title: 'Games for Girls',
+    title: 'Games for Girls – Fun Games to Play Online',
     metaDescription:
       'Play free games for girls online on ArcadeNexa. Explore dress-up, beauty, cooking, animals, puzzles, creativity and casual games in your browser.',
     description: `
@@ -1052,7 +1052,7 @@ If you enjoy fashion, cooking, animals, puzzles, customization, creativity, or c
   },
 
   golf: {
-    title: 'Golf Games',
+    title: 'Golf Games – Free Sports Games Online',
     metaDescription:
       'Play free golf games online on ArcadeNexa. Test your aim, power and timing with mini golf, putting, sports challenges and browser golf games.',
     description: `
@@ -1069,7 +1069,7 @@ If you enjoy sports games, mini golf, physics-based challenges, or games that re
   },
 
   sandbox: {
-    title: 'Sandbox Games',
+    title: 'Sandbox Games – Build & Create Online',
     metaDescription:
       'Play free sandbox games online on ArcadeNexa. Explore open-ended worlds, build, experiment, create and discover gameplay with fewer restrictions.',
     description: `
@@ -1086,7 +1086,7 @@ If you like building, exploration, physics, simulation, experimentation, or game
   },
 
   snake: {
-    title: 'Snake Games',
+    title: 'Snake Games – Classic & Modern Online',
     metaDescription:
       'Play free snake games online on ArcadeNexa. Grow your snake, collect food, avoid obstacles and enjoy classic and modern browser snake games.',
     description: `
