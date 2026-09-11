@@ -953,4 +953,153 @@ Explore Horror Games on ArcadeNexa if you enjoy suspense, dark environments, mys
 `,
   },
 
+  ball: {
+    title: 'Ball Games',
+    metaDescription:
+      'Play free ball games online on ArcadeNexa. Enjoy bouncing, rolling, shooting, matching and physics-based ball games instantly in your browser.',
+    description: `
+Ball games are a simple and surprisingly versatile way to enjoy quick online gameplay. This category brings together browser games built around bouncing, rolling, aiming, kicking, catching, matching, and controlling balls in different challenges. Some games are focused on accurate shots and timing, while others turn ball movement into a physics puzzle or an arcade-style obstacle course.
+
+On ArcadeNexa, ball games are designed for players who want straightforward controls and immediate action. You may need to guide a ball through narrow paths, avoid obstacles, knock down targets, score points, or keep a moving ball under control. The variety makes this genre suitable for short sessions as well as longer attempts to improve your score. Many games reward careful timing, quick reactions, and learning how the game physics behave.
+
+Ball games can also be a good choice when you want something easy to understand without sacrificing challenge. Early levels often introduce the basic mechanics quickly, while later stages can demand more precision and better planning. Physics-based games are especially enjoyable because small changes in speed, angle, or direction can completely change the result of a move.
+
+Whether you prefer arcade challenges, sports-inspired gameplay, puzzles, or casual physics experiments, this collection offers plenty of ways to play. Start a game directly in your browser, learn its controls, and see how far your timing and accuracy can take you. No complicated setup is needed, making ball games a convenient option whenever you want a fast and entertaining online game session.
+`,
+  },
+
+  basketball: {
+    title: 'Basketball Games',
+    metaDescription:
+      'Play free basketball games online on ArcadeNexa. Shoot hoops, score baskets, test your timing and enjoy basketball challenges in your browser.',
+    description: `
+Basketball games bring the excitement of shooting, scoring, timing, and competition directly to your browser. This category includes online games inspired by different parts of basketball, from simple shooting challenges and free throws to arcade matches, trick shots, and fast-paced score attacks. Whether you enjoy realistic sports gameplay or quick casual challenges, there is plenty to explore.
+
+ArcadeNexa makes it easy to jump into a basketball game without a long setup. Many games focus on a single skill, allowing you to practice your aim, release timing, movement, or ability to react quickly. Other games offer larger matches where positioning, decision-making, and scoring become more important. The controls vary from game to game, so discovering how each title handles shooting and movement can be part of the fun.
+
+Basketball games are especially good for players who enjoy chasing high scores. A shot that looks simple can become difficult when the target moves, the timer gets shorter, or obstacles are introduced. Improving your accuracy can turn a short casual session into a challenge where every point matters. Some games also add unusual courts, power-ups, special shots, or creative physics for a more arcade-focused experience.
+
+Whether you are looking for a quick shooting game during a short break or a longer sports challenge, this collection gives you different ways to enjoy basketball online. Choose a game, learn its controls, line up your first shot, and start playing instantly in your browser. With a mixture of timing, accuracy, reflexes, and score chasing, basketball games offer accessible sports entertainment for players of many skill levels.
+`,
+  },
+
+  'beauty-dress-up': {
+    title: 'Beauty & Dress-Up Games',
+    metaDescription:
+      'Play free beauty and dress-up games online on ArcadeNexa. Create outfits, style characters, choose looks and explore creative fashion challenges.',
+    description: `
+Beauty and dress-up games give players a creative space to experiment with fashion, styling, colors, accessories, and character customization. Instead of focusing on combat or competition, these browser games are often about making choices and creating a look that matches a theme, event, character, or personal style. They can range from simple outfit selection to larger makeover and styling challenges.
+
+On ArcadeNexa, you can explore dress-up games where different clothing items, hairstyles, accessories, shoes, and visual details can be combined in many ways. Some games ask you to prepare a character for a particular occasion, while others give you more freedom to create a style from scratch. The relaxed nature of many of these games makes them suitable for players who enjoy creativity and customization.
+
+Beauty games can also introduce light challenges and goals. You might need to recreate a particular appearance, choose items that match a theme, complete a makeover in a limited amount of time, or build an outfit that fits a character's personality. These mechanics add structure while keeping the focus on visual creativity and experimentation.
+
+There is no single correct way to enjoy a dress-up game. You can follow the game's objectives or simply try different combinations until you find a look you like. Changing colors, hairstyles, clothing, and accessories can make each playthrough feel different, even when the basic controls remain simple.
+
+If you enjoy fashion, character customization, makeovers, or casual creative gameplay, this category is a great place to start. Pick a beauty or dress-up game, explore the available options, create your favorite combination, and play directly in your browser with no complicated installation process.
+`,
+  },
+
+  drawing: {
+    title: 'Drawing Games',
+    metaDescription:
+      'Play free drawing games online on ArcadeNexa. Draw, sketch, color, solve visual challenges and express your creativity directly in your browser.',
+    description: `
+Drawing games turn the browser into a simple creative playground where your ideas become part of the gameplay. This category includes games based on sketching, tracing, coloring, connecting shapes, drawing objects, and solving challenges with lines or simple illustrations. Some titles are relaxed and creative, while others use drawing as an important part of a puzzle or arcade challenge.
+
+ArcadeNexa offers drawing games for players who enjoy interaction beyond traditional button-based controls. You may be asked to draw a specific shape, create a path for an object, complete an image, or use your drawing to solve a problem. The rules can be simple, but the solutions are often open to experimentation. This makes drawing games enjoyable for players who like trying different approaches.
+
+Many drawing-based games also reward precision. A line that is too short, too long, or placed in the wrong position can change the outcome. Other games are more forgiving and focus on creativity rather than accuracy. This variety means you can choose between skill-based drawing challenges and more relaxed experiences depending on your mood.
+
+Drawing games are also useful for short sessions because the core idea is usually introduced quickly. Once you understand what you need to draw or create, you can begin experimenting immediately. Some games gradually increase the difficulty by adding obstacles, targets, time limits, or more complicated objectives.
+
+If you enjoy creative browser games, visual puzzles, sketching mechanics, or interactive challenges, explore the drawing collection on ArcadeNexa. Choose a game, pick up the virtual drawing tools, and see what you can create. Every attempt can lead to a different solution, making this genre a refreshing alternative to conventional online games.
+`,
+  },
+
+  educational: {
+    title: 'Educational Games',
+    metaDescription:
+      'Play free educational games online on ArcadeNexa. Practice math, memory, words, logic, general knowledge and other useful skills while playing.',
+    description: `
+Educational games combine interactive gameplay with opportunities to practice useful skills. This category includes browser games involving mathematics, spelling, vocabulary, memory, logic, general knowledge, problem solving, and other learning-focused challenges. Instead of presenting information only through traditional exercises, these games use goals, feedback, levels, and rewards to make practice more engaging.
+
+On ArcadeNexa, educational games can be useful for players who want a more purposeful type of browser entertainment. A math game might ask you to solve calculations quickly, while a word game can help you recognize letters, build vocabulary, or complete phrases. Memory and logic games can encourage concentration and pattern recognition through short interactive challenges.
+
+The best educational games make learning feel like part of the activity rather than a separate task. Players can repeat challenges, improve their scores, and gradually become more comfortable with a particular skill. Because many games are divided into short rounds or levels, they can also fit easily into brief practice sessions.
+
+Educational games are not limited to one age group or one subject. Some are designed for younger players and use simple controls and colorful challenges, while others provide more demanding quizzes, puzzles, or strategy-based exercises. The important idea is that gameplay and practice work together.
+
+If you are looking for browser games that can challenge your memory, mathematics, language skills, reasoning, or general knowledge, this collection is a useful place to explore. Choose a game that matches the skill you want to practice, start playing, and use each round as an opportunity to improve. ArcadeNexa lets you access these learning-focused games directly in your browser without complicated installation.
+`,
+  },
+
+  'games-for-girls': {
+    title: 'Games for Girls',
+    metaDescription:
+      'Play free games for girls online on ArcadeNexa. Explore dress-up, beauty, cooking, animals, puzzles, creativity and casual games in your browser.',
+    description: `
+Games for girls is a broad collection of browser games covering many different styles, interests, and types of gameplay. Rather than limiting the category to one genre, this section brings together casual and creative experiences such as dress-up, beauty, cooking, animals, puzzles, decoration, customization, and other accessible games. Players can choose relaxed activities or more challenging games depending on what they enjoy.
+
+ArcadeNexa makes these games easy to explore directly from a web browser. Dress-up titles may focus on creating outfits and changing character appearances, while beauty games can include makeovers, hairstyles, and visual customization. Cooking games can add recipes and time-based challenges, and animal games can offer caring, collecting, matching, or adventure mechanics.
+
+The category also includes games where creativity and decision-making matter more than fast reflexes. You might decorate a room, solve a puzzle, organize objects, complete a makeover, or help a character through a series of tasks. These different mechanics mean there is no single style that defines the collection.
+
+Games in this category can be especially appealing for short play sessions because many titles use straightforward controls and introduce their main idea quickly. At the same time, score systems, levels, objectives, and timed challenges can provide additional depth for players who want something more demanding.
+
+If you enjoy fashion, cooking, animals, puzzles, customization, creativity, or casual browser entertainment, explore the games available in this collection. Pick a style that interests you, start playing instantly, and discover new titles without needing to download complicated software. ArcadeNexa brings a wide selection of accessible online games together in one convenient place.
+`,
+  },
+
+  golf: {
+    title: 'Golf Games',
+    metaDescription:
+      'Play free golf games online on ArcadeNexa. Test your aim, power and timing with mini golf, putting, sports challenges and browser golf games.',
+    description: `
+Golf games bring the challenge of aiming, controlling power, and planning each shot into an accessible online format. This category includes mini golf, putting challenges, sports simulations, obstacle courses, and arcade-style golf games. Some titles focus on realistic shot control, while others use creative courses, unusual obstacles, or simple mechanics designed for quick play.
+
+On ArcadeNexa, golf games can be enjoyed directly in the browser without a complicated setup. Many games teach the basic controls quickly: choose a direction, adjust the power, and take your shot. The challenge comes from learning how those controls interact with slopes, walls, hazards, moving objects, and other course features.
+
+Mini golf games are especially popular for their puzzle-like approach to the sport. Instead of simply hitting a ball toward a distant hole, you may need to plan a route through obstacles and use angles carefully. A strong first shot can save several moves, while a poor angle can make the next shot much harder. This combination of sports and problem solving gives golf games a distinctive style.
+
+Other titles may emphasize score chasing, timing, or competitive play. You can try to complete a course in as few shots as possible, beat a target score, or simply experiment with different approaches. The variety means golf games can appeal to both casual players and people who enjoy mastering precise mechanics.
+
+If you enjoy sports games, mini golf, physics-based challenges, or games that reward patience and accuracy, explore the golf collection on ArcadeNexa. Choose a course, line up your shot, adjust your power, and see how efficiently you can reach the hole. Each level offers another opportunity to improve your aim and strategy.
+`,
+  },
+
+  sandbox: {
+    title: 'Sandbox Games',
+    metaDescription:
+      'Play free sandbox games online on ArcadeNexa. Explore open-ended worlds, build, experiment, create and discover gameplay with fewer restrictions.',
+    description: `
+Sandbox games give players more freedom to explore, create, experiment, and decide how they want to interact with a game world. Unlike highly linear games that provide one fixed path, sandbox experiences often allow multiple approaches. You might build structures, move objects, explore an environment, combine items, experiment with physics, or simply discover what happens when you interact with the world.
+
+ArcadeNexa's sandbox collection includes browser games that emphasize experimentation and player choice. Some titles are focused on building and creation, while others use sandbox mechanics for puzzles, simulations, physics experiments, or open-ended adventures. The common idea is that the player has room to explore rather than being restricted to one exact sequence of actions.
+
+Sandbox games can be enjoyable because they encourage curiosity. A mechanic that appears simple at first may produce unexpected results when combined with other objects or systems. This makes experimentation part of the gameplay. You do not always need to follow a strict strategy; sometimes the most entertaining approach is to try something unusual and see what happens.
+
+Some sandbox games also provide clear objectives alongside their open-ended systems. You may have a building target, a challenge to complete, or a collection of tasks while still having freedom in how you approach them. Others are almost entirely focused on creative play and discovery.
+
+If you like building, exploration, physics, simulation, experimentation, or games that give you more control over what happens next, sandbox games are worth exploring. Pick a title, learn its basic mechanics, and start experimenting directly in your browser. The freedom to try different ideas is often what makes each session feel different from the last.
+`,
+  },
+
+  snake: {
+    title: 'Snake Games',
+    metaDescription:
+      'Play free snake games online on ArcadeNexa. Grow your snake, collect food, avoid obstacles and enjoy classic and modern browser snake games.',
+    description: `
+Snake games are built around a simple idea that remains fun because it combines movement, timing, planning, and increasing difficulty. The classic formula usually asks you to guide a growing snake around a play area while collecting food or other objects. As the snake becomes longer, controlling it safely becomes more difficult, turning a simple mechanic into a test of concentration and spatial awareness.
+
+ArcadeNexa brings together snake games with both classic-inspired and modern variations. Some titles stay close to the traditional experience, while others add new arenas, opponents, power-ups, obstacles, special abilities, or different scoring systems. These additions can transform the familiar concept into a faster arcade challenge or a more strategic game.
+
+The key skill in many snake games is planning ahead. It is not enough to reach the next piece of food; you also need to think about where your growing body will be afterward. A safe route now can prevent you from getting trapped later. As the play area becomes crowded, quick reactions become increasingly important.
+
+Snake games are also ideal for short sessions because the controls are usually easy to understand. You can begin playing almost immediately, while higher scores require practice and better decision-making. Each attempt gives you another chance to improve your route, react faster, and survive longer.
+
+If you enjoy classic arcade mechanics, score chasing, reflex challenges, or simple games that become harder with every successful move, explore the snake collection on ArcadeNexa. Choose a game, guide your snake carefully, collect as much as you can, and try to beat your previous best score.
+`,
+  },
+
 }
