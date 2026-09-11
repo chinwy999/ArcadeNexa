@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import { allArticles } from '@/lib/articles'
+import { categoryContent } from '@/lib/category-content'
 import { getSiteUrl } from '@/lib/site'
 import { fetchGamesPage } from '@/lib/gamepixFeed'
 import { fetchGMGamesPage } from '@/lib/gameMonetizeFeed'
@@ -166,8 +167,19 @@ export async function GET(
       priority: 0.6,
     }))
 
+    const categoryEntries = Object.keys(categoryContent).map((slug) => ({
+      url: `${base}/games?genre=${encodeURIComponent(slug)}`,
+      lastModified: now,
+      changeFrequency: 'weekly',
+      priority: 0.8,
+    }))
+
     return response(
-      buildUrlset([...staticPages, ...articleEntries])
+      buildUrlset([
+        ...staticPages,
+        ...articleEntries,
+        ...categoryEntries,
+      ])
     )
   }
 
