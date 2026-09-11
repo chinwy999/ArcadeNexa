@@ -81,6 +81,21 @@ export const revalidate = 300
 
 const GAMES_PER_PAGE = 48
 
+const popularCategories = [
+  { slug: 'action', name: 'Action Games' },
+  { slug: 'adventure', name: 'Adventure Games' },
+  { slug: 'arcade', name: 'Arcade Games' },
+  { slug: 'puzzle', name: 'Puzzle Games' },
+  { slug: 'racing', name: 'Racing Games' },
+  { slug: 'sports', name: 'Sports Games' },
+  { slug: 'shooter', name: 'Shooter Games' },
+  { slug: 'strategy', name: 'Strategy Games' },
+  { slug: 'casual', name: 'Casual Games' },
+  { slug: 'fighting', name: 'Fighting Games' },
+  { slug: 'rpg', name: 'RPG Games' },
+  { slug: 'simulation', name: 'Simulation Games' },
+]
+
 type Game = {
   slug: string
   name: string
@@ -234,6 +249,49 @@ export default async function GamesPage({
           </section>
         )}
       </div>
+
+      {!selectedGenre && (
+        <section
+          aria-labelledby="popular-categories"
+          className="mb-10"
+        >
+          <div className="flex items-end justify-between gap-4 mb-4">
+            <div>
+              <h2
+                id="popular-categories"
+                className="text-2xl font-bold text-[color:var(--text-primary)]"
+              >
+                Popular Game Categories
+              </h2>
+              <p className="mt-1 text-sm text-[color:var(--text-secondary)]">
+                Explore free games by category.
+              </p>
+            </div>
+
+            <Link
+              href="/categories"
+              className="shrink-0 text-sm font-bold text-nexa-emerald hover:underline"
+            >
+              All Categories →
+            </Link>
+          </div>
+
+          <nav
+            aria-label="Popular game categories"
+            className="flex flex-wrap gap-2"
+          >
+            {popularCategories.map((category) => (
+              <Link
+                key={category.slug}
+                href={`/games?genre=${category.slug}`}
+                className="rounded-xl border border-[color:var(--white-10)] bg-[color:var(--nexa-surface)] px-4 py-2.5 text-sm font-semibold text-[color:var(--text-primary)] transition hover:border-[color:var(--nexa-emerald)] hover:text-nexa-emerald"
+              >
+                {category.name}
+              </Link>
+            ))}
+          </nav>
+        </section>
+      )}
 
       {sortedGames.length === 0 ? (
         <div className="text-center py-20 bg-nexa-surface rounded-lg border border-[color:var(--white-05)]">
