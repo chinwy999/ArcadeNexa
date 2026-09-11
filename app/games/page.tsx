@@ -13,17 +13,36 @@ export async function generateMetadata({
     ? categoryContent[selectedGenre]
     : undefined
 
-  const title = selectedCategoryContent
-    ? `${selectedCategoryContent.title} | ArcadeNexa`
+  const parsedPage = Number.parseInt(searchParams.page || '1', 10)
+  const currentPage = Number.isFinite(parsedPage)
+    ? Math.max(1, parsedPage)
+    : 1
+
+  const titleBase = selectedCategoryContent
+    ? selectedCategoryContent.title
     : 'Free HTML5 Games - Play Online Games'
+
+  const title =
+    currentPage > 1
+      ? `${titleBase} | Page ${currentPage} | ArcadeNexa`
+      : `${titleBase} | ArcadeNexa`
 
   const description = selectedCategoryContent
     ? selectedCategoryContent.metaDescription
     : 'Play 15,000+ free HTML5 games online on ArcadeNexa. Discover action, puzzle, racing, sports, strategy and casual games instantly with no download or registration.'
 
-  const canonical = selectedCategoryContent
-    ? `/games?genre=${encodeURIComponent(selectedGenre)}`
-    : '/games'
+  const params = new URLSearchParams()
+
+  if (selectedGenre) {
+    params.set('genre', selectedGenre)
+  }
+
+  if (currentPage > 1) {
+    params.set('page', String(currentPage))
+  }
+
+  const query = params.toString()
+  const canonical = `/games${query ? `?${query}` : ''}`
 
   return {
     title,
