@@ -847,6 +847,105 @@ export async function getRealGameCount(): Promise<number> {
   }
 }
 
+/**
+ * Lightweight related-games lookup for game detail pages.
+ *
+ * Uses the persistent GamePix catalog when available so game pages
+ * do not need to run the full GamePix/GameMonetize pagination flow.
+ */
+export function getRelatedGamesFromCatalog(
+  game: Game,
+  limit = 6
+): Game[] {
+  const safeLimit = Math.max(1, Math.min(12, Math.floor(limit)))
+
+  try {
+    const persistent = loadPersistentGamePixCatalog()
+
+    if (persistent) {
+      const related = persistent.catalog.filter((item) => {
+        if (item.slug === game.slug) return false
+
+        return matchesGenre(
+          game.category,
+          item.category,
+          item.genreFilter,
+          item
+        )
+      })
+
+      if (related.length >= safeLimit) {
+        return related.slice(0, safeLimit)
+      }
+
+      /*
+       * If the persistent catalog has fewer matches, continue with
+       * the already-loaded in-memory catalog when available.
+       */
+      if (cachedGames && cachedGames.length > 0) {
+        const existingSlugs = new Set(
+          related.map((item) => item.slug)
+        )
+
+        for (const item of cachedGames) {
+          if (
+            item.slug === game.slug ||
+            existingSlugs.has(item.slug)
+          ) {
+            continue
+          }
+
+          if (
+            matchesGenre(
+              game.category,
+              item.category,
+              item.genreFilter,
+              item
+            )
+          ) {
+            related.push(item)
+            existingSlugs.add(item.slug)
+
+            if (related.length >= safeLimit) {
+              break
+            }
+          }
+        }
+      }
+
+      return related.slice(0, safeLimit)
+    }
+
+    /*
+     * No persistent catalog: use the existing memory cache only.
+     * Do not trigger loadGames() here because this helper is designed
+     * to remain lightweight on dynamic game pages.
+     */
+    if (cachedGames && cachedGames.length > 0) {
+      return cachedGames
+        .filter((item) => {
+          if (item.slug === game.slug) return false
+
+          return matchesGenre(
+            game.category,
+            item.category,
+            item.genreFilter,
+            item
+          )
+        })
+        .slice(0, safeLimit)
+    }
+  } catch (error) {
+    console.error(
+      `[ArcadeNexa] Related games catalog lookup failed ` +
+      `(slug=${game.slug}, category=${game.category}):`,
+      error
+    )
+  }
+
+  return []
+}
+
 export async function getGames(): Promise<Game[]> {
   return loadGames()
 }

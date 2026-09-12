@@ -1,4 +1,4 @@
-import { getGameBySlugFast, getGamesPage, type Game } from '@/lib/games'
+import { getGameBySlugFast, getRelatedGamesFromCatalog, type Game } from '@/lib/games'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import type { Metadata } from 'next'
@@ -259,16 +259,8 @@ function getRelatedArticles(game: {
   return selected
 }
 
-async function getRelatedGames(game: Game): Promise<Game[]> {
-  try {
-    const result = await getGamesPage(1, 48, game.category)
-
-    return result.games
-      .filter((item) => item.slug !== game.slug)
-      .slice(0, 6)
-  } catch {
-    return []
-  }
+function getRelatedGames(game: Game): Game[] {
+  return getRelatedGamesFromCatalog(game, 6)
 }
 
 export default async function GamePage({ params, searchParams }: PageParams) {
@@ -300,7 +292,7 @@ export default async function GamePage({ params, searchParams }: PageParams) {
     notFound()
   }
 
-  const relatedGames = await getRelatedGames(game)
+  const relatedGames = getRelatedGames(game)
 
   const howToPlay = getHowToPlay(game)
   const relatedArticles = getRelatedArticles(game)
