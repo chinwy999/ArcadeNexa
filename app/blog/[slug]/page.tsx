@@ -184,14 +184,217 @@ export default async function ArticlePage({ params }: Props) {
     notFound()
   }
 
-  const related = articles
-    .filter((item) => item.slug !== article.slug)
-    .filter((item) => item.category === article.category)
-    .slice(0, 3)
+  const relatedArticleMap: Record<string, string[]> = {
+    "complete-guide-to-browser-gaming": [
+      "what-are-html5-games",
+      "best-free-online-games-no-download",
+      "browser-games-vs-mobile-games",
+    ],
+    "what-are-html5-games": [
+      "complete-guide-to-browser-gaming",
+      "evolution-of-browser-gaming",
+      "browser-gaming-on-phones-and-tablets",
+    ],
+    "browser-games-vs-mobile-games": [
+      "browser-gaming-on-phones-and-tablets",
+      "best-mobile-gaming-experience-in-browser",
+      "what-are-html5-games",
+    ],
+    "how-to-choose-a-game-for-your-mood": [
+      "game-genres-explained-for-beginners",
+      "how-to-discover-new-games",
+      "casual-games-for-short-sessions",
+    ],
+    "best-puzzle-game-genres-for-beginners": [
+      "puzzle-games-from-classic-to-html5",
+      "best-puzzle-games-online-free-adults-2026",
+      "game-genres-explained-for-beginners",
+    ],
+    "improve-racing-game-skills": [
+      "arcade-racing-vs-simulation",
+      "best-car-games-online-free-no-download-2026",
+      "how-to-choose-a-game-for-your-mood",
+    ],
+    "beginner-guide-to-strategy-games": [
+      "game-genres-explained-for-beginners",
+      "how-to-choose-a-game-for-your-mood",
+      "complete-guide-to-browser-gaming",
+    ],
+    "why-instant-play-games-are-popular": [
+      "best-free-online-games-no-download",
+      "what-are-html5-games",
+      "browser-gaming-on-phones-and-tablets",
+    ],
+    "browser-gaming-on-phones-and-tablets": [
+      "best-mobile-gaming-experience-in-browser",
+      "browser-games-vs-mobile-games",
+      "what-are-html5-games",
+    ],
+    "finding-fun-games-without-downloading-apps": [
+      "best-free-online-games-no-download",
+      "how-to-discover-new-games",
+      "complete-guide-to-browser-gaming",
+    ],
+    "evolution-of-browser-gaming": [
+      "what-are-html5-games",
+      "complete-guide-to-browser-gaming",
+      "future-of-browser-gaming",
+    ],
+    "best-mobile-gaming-experience-in-browser": [
+      "browser-gaming-on-phones-and-tablets",
+      "browser-games-vs-mobile-games",
+      "complete-guide-to-browser-gaming",
+    ],
+    "puzzle-games-from-classic-to-html5": [
+      "best-puzzle-game-genres-for-beginners",
+      "best-puzzle-games-online-free-adults-2026",
+      "what-are-html5-games",
+    ],
+    "arcade-racing-vs-simulation": [
+      "improve-racing-game-skills",
+      "best-car-games-online-free-no-download-2026",
+      "game-genres-explained-for-beginners",
+    ],
+    "casual-games-for-short-sessions": [
+      "how-to-choose-a-game-for-your-mood",
+      "best-puzzle-games-online-free-adults-2026",
+      "best-free-online-games-no-download",
+    ],
+    "beginner-guide-to-sports-games": [
+      "game-genres-explained-for-beginners",
+      "how-to-choose-a-game-for-your-mood",
+      "best-free-online-games-no-download",
+    ],
+    "action-games-reflexes-timing-strategy": [
+      "best-shooting-games-online-no-download-2026",
+      "beginner-guide-to-strategy-games",
+      "game-genres-explained-for-beginners",
+    ],
+    "how-to-discover-new-games": [
+      "game-genres-explained-for-beginners",
+      "how-to-choose-a-game-for-your-mood",
+      "finding-fun-games-without-downloading-apps",
+    ],
+    "game-genres-explained-for-beginners": [
+      "complete-guide-to-browser-gaming",
+      "how-to-choose-a-game-for-your-mood",
+      "best-puzzle-game-genres-for-beginners",
+    ],
+    "future-of-browser-gaming": [
+      "evolution-of-browser-gaming",
+      "what-are-html5-games",
+      "browser-games-vs-mobile-games",
+    ],
+    "unblocked-games-for-school-2025": [
+      "games-to-play-when-bored-at-school",
+      "best-free-online-games-no-download",
+      "finding-fun-games-without-downloading-apps",
+    ],
+    "best-free-online-games-no-download": [
+      "complete-guide-to-browser-gaming",
+      "finding-fun-games-without-downloading-apps",
+      "why-instant-play-games-are-popular",
+    ],
+    "games-to-play-when-bored-at-school": [
+      "unblocked-games-for-school-2025",
+      "casual-games-for-short-sessions",
+      "best-free-online-games-no-download",
+    ],
+    "best-io-games-online-2026": [
+      "best-shooting-games-online-no-download-2026",
+      "game-genres-explained-for-beginners",
+      "best-free-online-games-no-download",
+    ],
+    "best-car-games-online-free-no-download-2026": [
+      "improve-racing-game-skills",
+      "arcade-racing-vs-simulation",
+      "best-free-online-games-no-download",
+    ],
+    "best-math-games-for-kids-online-free-2026": [
+      "best-puzzle-game-genres-for-beginners",
+      "game-genres-explained-for-beginners",
+      "best-puzzle-games-online-free-adults-2026",
+    ],
+    "best-shooting-games-online-no-download-2026": [
+      "action-games-reflexes-timing-strategy",
+      "best-io-games-online-2026",
+      "complete-guide-to-browser-gaming",
+    ],
+    "best-puzzle-games-online-free-adults-2026": [
+      "best-puzzle-game-genres-for-beginners",
+      "puzzle-games-from-classic-to-html5",
+      "casual-games-for-short-sessions",
+    ],
+  }
+
+  const relatedArticleSlugs = relatedArticleMap[article.slug] ?? []
+
+  const related = relatedArticleSlugs
+    .map((slug) => articles.find((item) => item.slug === slug))
+    .filter((item): item is (typeof articles)[number] => Boolean(item))
 
   const fallbackRelated = related.length
-    ? related
-    : articles.filter((item) => item.slug !== article.slug).slice(0, 3)
+    ? related.slice(0, 3)
+    : articles
+        .filter((item) => item.slug !== article.slug)
+        .slice(0, 3)
+
+  const categoryLinks: Record<string, { label: string; href: string }> = {
+    "best-puzzle-game-genres-for-beginners": {
+      label: "Explore Puzzle Games →",
+      href: "/games?genre=puzzle",
+    },
+    "puzzle-games-from-classic-to-html5": {
+      label: "Explore Puzzle Games →",
+      href: "/games?genre=puzzle",
+    },
+    "best-puzzle-games-online-free-adults-2026": {
+      label: "Explore Puzzle Games →",
+      href: "/games?genre=puzzle",
+    },
+    "improve-racing-game-skills": {
+      label: "Explore Racing Games →",
+      href: "/games?genre=racing",
+    },
+    "arcade-racing-vs-simulation": {
+      label: "Explore Racing Games →",
+      href: "/games?genre=racing",
+    },
+    "best-car-games-online-free-no-download-2026": {
+      label: "Explore Racing Games →",
+      href: "/games?genre=racing",
+    },
+    "beginner-guide-to-strategy-games": {
+      label: "Explore Strategy Games →",
+      href: "/games?genre=strategy",
+    },
+    "beginner-guide-to-sports-games": {
+      label: "Explore Sports Games →",
+      href: "/games?genre=sports",
+    },
+    "action-games-reflexes-timing-strategy": {
+      label: "Explore Action Games →",
+      href: "/games?genre=action",
+    },
+    "best-shooting-games-online-no-download-2026": {
+      label: "Explore Shooter Games →",
+      href: "/games?genre=shooter",
+    },
+    "best-io-games-online-2026": {
+      label: "Explore IO Games →",
+      href: "/games?genre=io",
+    },
+    "casual-games-for-short-sessions": {
+      label: "Explore Casual Games →",
+      href: "/games?genre=casual",
+    },
+    "best-math-games-for-kids-online-free-2026": {
+      label: "Explore Math Games →",
+      href: "/games?genre=math",
+    },
+  }
+
+  const categoryLink = categoryLinks[article.slug]
 
   const relatedGames = await getRelatedGamesForArticle(article)
 
@@ -358,7 +561,16 @@ export default async function ArticlePage({ params }: Props) {
           ))}
         </div>
 
-        <div className="mt-8">
+        <div className="mt-8 flex flex-wrap gap-3">
+          {categoryLink && (
+            <Link
+              href={categoryLink.href}
+              className="inline-flex rounded-xl border border-nexa-emerald/30 bg-nexa-emerald/10 px-5 py-3 font-bold text-nexa-emerald transition hover:bg-nexa-emerald/20"
+            >
+              {categoryLink.label}
+            </Link>
+          )}
+
           <Link
             href="/games"
             className="inline-flex rounded-xl bg-nexa-violet px-5 py-3 font-bold text-[color:var(--text-primary)] transition hover:opacity-90"
