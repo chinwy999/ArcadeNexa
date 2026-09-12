@@ -45,7 +45,7 @@ export const articles: Article[] = [
   },
   {
     slug: 'what-are-html5-games',
-    title: `What Are HTML5 Games? A Complete Beginner's Guide`,
+    title: `What Are HTML5 Games? A Beginner's Guide`,
     description: `Learn what HTML5 games are, how they work in modern browsers, why they are cross-platform, and what players should know before choosing one.`,
     category: 'EXPLAINER',
     date: '2026-08-12',
@@ -66,7 +66,7 @@ export const articles: Article[] = [
   },
   {
     slug: 'browser-games-vs-mobile-games',
-    title: `Browser Games vs Mobile Games: What's the Difference?`,
+    title: `Browser Games vs Mobile Games: Key Differences`,
     description: `Compare browser games and installed mobile games across convenience, storage, controls, updates, performance, privacy, and accessibility.`,
     category: 'COMPARISON',
     date: '2026-08-11',
@@ -242,7 +242,7 @@ export const articles: Article[] = [
   {
     slug: 'evolution-of-browser-gaming',
     title: `The Evolution of Browser Gaming`,
-    description: `Trace the evolution of browser gaming from simple web experiments to modern HTML5 experiences.`,
+    description: `Trace the evolution of browser gaming from simple web experiments to modern HTML5 experiences and discover how web technology changed the way people play.`,
     category: 'HISTORY',
     date: '2026-08-09',
     readTime: '7 min read',
@@ -467,31 +467,31 @@ export const articleSlugs = articles.map((article) => article.slug)
 export const seoArticles = [
   {
     slug: 'unblocked-games-for-school-2025',
-    title: 'Best Unblocked Games for School 2025 – Play Free Instantly',
-    description: 'Discover the best unblocked games for school in 2025. Play free HTML5 games that work on school networks, Chromebooks, and any browser. No download needed.',
+    title: 'Best Unblocked Games for School — Play Free',
+    description: 'Discover free browser games that can work on school networks and Chromebooks. Explore HTML5 games with no download or installation required.',
     category: 'GUIDE',
     date: '2026-08-20',
     readTime: '8 min read',
-    intro: 'Finding games that actually work on school networks can be frustrating. Most gaming sites get blocked, and Flash is gone. This guide covers the best unblocked games for school in 2025 that run on any browser, including Chromebook, with no download or login required.',
+    intro: 'Finding games that actually work on school networks can be frustrating. Most gaming sites get blocked, and Flash is gone. This guide covers browser games that may work on compatible school networks, including Chromebook, with no download or login required.',
     sections: [
       { heading: 'Why most games get blocked at school', body: 'School networks use content filters that block domains categorized as gaming or entertainment. The good news is that HTML5 games hosted on educational-friendly domains often bypass these filters. ArcadeNexa hosts 15,000+ HTML5 games that work directly in your browser without any plugin or download.' },
       { heading: 'Best unblocked game genres for school', body: 'Puzzle games are the top choice for school breaks — they are quiet, require no sound, and can be paused instantly. Casual games like match-3 and idle games also work well. Racing and action games are popular for longer breaks. All categories are available on ArcadeNexa with instant play.' },
       { heading: 'Do these games work on Chromebook?', body: 'Yes. Chromebooks are the most common school device, and HTML5 games run natively in Chrome without any installation. Every game on ArcadeNexa is Chromebook-compatible. Simply open the browser, visit the site, and start playing.' },
-      { heading: 'Top unblocked game categories in 2025', body: 'The most searched unblocked game types in 2025 include: puzzle games, .IO multiplayer games like Agar.io and Slither.io, casual clicker games, unblocked racing games, and math-based brain games. ArcadeNexa covers all of these across 47 categories.' },
+      { heading: 'Top Unblocked Game Categories', body: 'Popular unblocked game types include: puzzle games, .IO multiplayer games like Agar.io and Slither.io, casual clicker games, unblocked racing games, and math-based brain games. ArcadeNexa covers all of these across 47 categories.' },
       { heading: 'How to play without getting caught', body: 'Choose games that do not require sound — most browser games have a mute button. Pick games with a clean interface that can be minimized quickly. Puzzle and casual games are ideal because they look productive and can be paused instantly.' },
       { heading: 'ArcadeNexa vs other unblocked game sites', body: 'Unlike Unblocked Games 76 or similar sites, ArcadeNexa offers a modern interface, mobile-friendly design, and 15,000+ curated HTML5 games from trusted providers. No outdated Flash content, no broken links, and no sketchy ads.' },
     ],
     faq: [
       { question: 'Are unblocked games safe to play at school?', answer: 'HTML5 games on reputable platforms like ArcadeNexa are safe. They run inside your browser and do not require downloading any files.' },
-      { question: 'What are the most popular unblocked games in 2025?', answer: 'Popular choices include puzzle games, .IO games, casual clicker games, and arcade games. Browse ArcadeNexa categories to find trending titles.' },
+      { question: 'What Are the Most Popular Unblocked Games?', answer: 'Popular choices include puzzle games, .IO games, casual clicker games, and arcade games. Browse ArcadeNexa categories to find trending titles.' },
       { question: 'Do unblocked games work on school Wi-Fi?', answer: 'Many HTML5 game sites work on school Wi-Fi. Results depend on your school\'s specific firewall settings.' },
       { question: 'Can I play unblocked games on my phone at school?', answer: 'Yes. ArcadeNexa is fully mobile-optimized and works on any smartphone or tablet browser.' },
     ],
   },
   {
     slug: 'best-free-online-games-no-download',
-    title: 'Best Free Online Games With No Download Required in 2025',
-    description: 'Play the best free online games instantly with no download, no login, and no installation. Over 13,000 HTML5 browser games available right now.',
+    title: 'Best Free Online Games — No Download Required',
+    description: 'Play the best free online games instantly with no download, no login, and no installation. Explore 15,000+ HTML5 browser games available right now.',
     category: 'GUIDE',
     date: '2026-08-19',
     readTime: '7 min read',
@@ -513,12 +513,12 @@ export const seoArticles = [
   },
   {
     slug: 'games-to-play-when-bored-at-school',
-    title: 'Fun Games to Play When Bored at School (2025)',
+    title: 'Fun Games to Play When Bored at School',
     description: 'Bored at school? Discover the best quick browser games to play during breaks. Free, instant, no download — works on Chromebook and school computers.',
     category: 'LIFESTYLE',
     date: '2026-08-18',
     readTime: '6 min read',
-    intro: 'Every student knows the feeling — a long break, a free period, or just a slow afternoon. Browser games are the perfect solution because they start instantly, require no download, and can be closed in one click. Here are the best games to play when you are bored at school in 2025.',
+    intro: 'Every student knows the feeling — a long break, a free period, or just a slow afternoon. Browser games are the perfect solution because they start instantly, require no download, and can be closed in one click. Here are practical game ideas for playing during appropriate breaks when you are bored at school.',
     sections: [
       { heading: 'Quick games for short breaks (under 5 minutes)', body: 'Casual and arcade games are perfect for short breaks. Games like match-3 puzzles, endless runners, and clicker games provide instant entertainment that fits into a 5-minute window. They also have no complex story to follow, so you can stop and start freely.' },
       { heading: 'Brain games that look productive', body: 'Math games, word puzzles, memory challenges, and logic games are the smartest choice at school. They genuinely exercise your brain while being entertaining. If a teacher glances at your screen, a puzzle game is much harder to object to than an action game.' },
@@ -586,7 +586,7 @@ export const highTrafficArticles: Article[] = [
 
   {
     slug: "best-car-games-online-free-no-download-2026",
-    title: "Best Car Games Online Free — No Download Required (2026)",
+    title: "Best Car Games Online Free — Play in Browser (2026)",
     description: "Discover free browser car games for racing, driving, parking, and stunt challenges with no traditional installation required.",
     category: "TOP LIST",
     date: "2026-08-20",
@@ -632,7 +632,7 @@ export const highTrafficArticles: Article[] = [
 
   {
     slug: "best-math-games-for-kids-online-free-2026",
-    title: "Best Math Games for Kids Online Free — Play in Browser (2026)",
+    title: "Best Math Games for Kids — Play Free Online (2026)",
     description: "Explore browser-based math games for kids that practice arithmetic, logic, memory, and problem-solving through interactive gameplay.",
     category: "EDUCATIONAL",
     date: "2026-08-19",
