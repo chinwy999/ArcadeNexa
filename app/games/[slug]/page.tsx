@@ -309,13 +309,6 @@ export default async function GamePage({ params, searchParams }: PageParams) {
       priceCurrency: 'USD',
       availability: 'https://schema.org/InStock',
     },
-    aggregateRating: {
-      '@type': 'AggregateRating',
-      ratingValue: game.rating,
-      bestRating: '10',
-      worstRating: '1',
-      ratingCount: '100',
-    },
   }
 
   return (
@@ -381,13 +374,6 @@ export default async function GamePage({ params, searchParams }: PageParams) {
 
             <span className="bg-[color:var(--white-05)] border border-[color:var(--white-10)] text-[color:var(--text-secondary)] text-xs px-3 py-1 rounded-full capitalize">
               {game.category}
-            </span>
-
-            <span
-              className="text-nexa-gold text-sm font-bold"
-              title="ArcadeNexa Score"
-            >
-              ★ {Number(game.rating).toFixed(1)} ArcadeNexa Score
             </span>
 
             <FavoriteButton
@@ -490,16 +476,6 @@ export default async function GamePage({ params, searchParams }: PageParams) {
 
                   <span className="text-[color:var(--text-primary)] font-medium capitalize">
                     {game.category}
-                  </span>
-                </div>
-
-                <div className="flex justify-between">
-                  <span className="text-[color:var(--text-secondary)]">
-                    Rating
-                  </span>
-
-                  <span className="text-nexa-gold font-medium">
-                    ★ {Number(game.rating).toFixed(1)}/10
                   </span>
                 </div>
 
