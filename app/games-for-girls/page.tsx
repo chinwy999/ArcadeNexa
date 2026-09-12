@@ -97,7 +97,7 @@ export default async function GamesForGirlsPage() {
                 <h3 className="flex items-center gap-2 text-xl font-bold">
                   <span>{cat.icon}</span><span>Free {cat.label} Games</span>
                 </h3>
-                <Link href={`/categories/${cat.key}`} className="text-sm text-nexa-violet hover:text-nexa-violet">View all →</Link>
+                <Link href={`/games?genre=${encodeURIComponent(cat.key)}`} className="text-sm text-nexa-violet hover:text-nexa-violet">View all →</Link>
               </div>
               <div className="grid grid-cols-4 gap-3 sm:grid-cols-8">
                 {catGames.map(game => (
