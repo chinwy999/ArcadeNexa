@@ -1,4 +1,4 @@
-import { getGameBySlugFast } from '@/lib/games'
+import { getGameBySlugFast, getGamesPage, type Game } from '@/lib/games'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import type { Metadata } from 'next'
@@ -259,6 +259,18 @@ function getRelatedArticles(game: {
   return selected
 }
 
+async function getRelatedGames(game: Game): Promise<Game[]> {
+  try {
+    const result = await getGamesPage(1, 48, game.category)
+
+    return result.games
+      .filter((item) => item.slug !== game.slug)
+      .slice(0, 6)
+  } catch {
+    return []
+  }
+}
+
 export default async function GamePage({ params, searchParams }: PageParams) {
   /*
    * SINGLE SOURCE OF TRUTH FOR ROUTE VALIDATION.
@@ -287,6 +299,8 @@ export default async function GamePage({ params, searchParams }: PageParams) {
     )
     notFound()
   }
+
+  const relatedGames = await getRelatedGames(game)
 
   const howToPlay = getHowToPlay(game)
   const relatedArticles = getRelatedArticles(game)
@@ -416,6 +430,64 @@ export default async function GamePage({ params, searchParams }: PageParams) {
                 the game loads for the exact keyboard, mouse, or touch controls.
               </p>
             </div>
+
+            {relatedGames.length > 0 && (
+              <div className="glass rounded-2xl p-6 border border-[color:var(--white-05)]">
+                <div className="flex items-end justify-between gap-4 mb-4">
+                  <div>
+                    <h2 className="text-xl font-bold text-[color:var(--text-primary)]">
+                      More Games You May Like
+                    </h2>
+
+                    <p className="mt-1 text-sm text-[color:var(--text-secondary)]">
+                      More {game.category} games to play for free in your browser.
+                    </p>
+                  </div>
+
+                  <Link
+                    href={`/games?genre=${encodeURIComponent(game.category)}`}
+                    className="text-sm font-semibold text-nexa-emerald hover:underline whitespace-nowrap"
+                  >
+                    View All
+                  </Link>
+                </div>
+
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                  {relatedGames.map((relatedGame) => (
+                    <Link
+                      key={relatedGame.slug}
+                      href={`/games/${relatedGame.slug}`}
+                      className="group overflow-hidden rounded-xl border border-[color:var(--white-10)] bg-[color:var(--white-05)] transition-all duration-200 hover:border-nexa-emerald/40 hover:-translate-y-0.5"
+                    >
+                      <div className="aspect-[16/10] overflow-hidden bg-[color:var(--white-05)]">
+                        {relatedGame.thumbnail ? (
+                          <img
+                            src={relatedGame.thumbnail}
+                            alt={relatedGame.title}
+                            loading="lazy"
+                            className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                          />
+                        ) : (
+                          <div className="h-full w-full flex items-center justify-center text-2xl font-bold text-nexa-emerald">
+                            {relatedGame.initials}
+                          </div>
+                        )}
+                      </div>
+
+                      <div className="p-3">
+                        <h3 className="text-sm font-semibold text-[color:var(--text-primary)] line-clamp-2 group-hover:text-nexa-emerald transition-colors">
+                          {relatedGame.title}
+                        </h3>
+
+                        <p className="mt-1 text-xs text-[color:var(--text-secondary)] capitalize">
+                          {relatedGame.category}
+                        </p>
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            )}
 
             <div className="glass rounded-2xl p-6 border border-[color:var(--white-05)]">
               <h2 className="text-xl font-bold text-[color:var(--text-primary)] mb-4">
