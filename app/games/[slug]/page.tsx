@@ -9,9 +9,7 @@ import { allArticles } from '@/lib/articles'
 import { getSiteUrl } from '@/lib/site'
 import AdsterraBanner from '@/components/ads/AdsterraBanner'
 
-export const dynamic = 'force-dynamic'
-export const dynamicParams = true
-export const revalidate = 0
+export const revalidate = 3600
 
 type PageParams = {
   params: {
@@ -169,6 +167,26 @@ function getHowToPlay(game: {
     : 'Use the available mouse, touch, or keyboard controls to play. Follow the on-screen objective, learn the game mechanics, and complete the level or challenge.'
 }
 
+type SearchableArticle = {
+  article: (typeof allArticles)[number]
+  searchable: string
+}
+
+const searchableArticles: SearchableArticle[] = allArticles
+  .filter((article) => article.slug)
+  .map((article) => ({
+    article,
+    searchable: [
+      article.title,
+      article.description,
+      article.intro,
+      article.category,
+      ...article.sections.map((section) => section.heading),
+    ]
+      .join(' ')
+      .toLowerCase(),
+  }))
+
 function getRelatedArticles(game: {
   title: string
   category: string
@@ -198,18 +216,8 @@ function getRelatedArticles(game: {
     ...(categoryKeywords[category] || []),
   ]
 
-  const scored = allArticles
-    .map((article) => {
-      const searchable = [
-        article.title,
-        article.description,
-        article.intro,
-        article.category,
-        ...article.sections.map((section) => section.heading),
-      ]
-        .join(' ')
-        .toLowerCase()
-
+  const scored = searchableArticles
+    .map(({ article, searchable }) => {
       let score = 0
 
       for (const keyword of keywords) {
@@ -230,7 +238,6 @@ function getRelatedArticles(game: {
 
       return { article, score }
     })
-    .filter(({ article }) => article.slug)
     .sort((a, b) => b.score - a.score)
 
   const selected = scored

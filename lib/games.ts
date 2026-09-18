@@ -853,6 +853,59 @@ export async function getRealGameCount(): Promise<number> {
  * Uses the persistent GamePix catalog when available so game pages
  * do not need to run the full GamePix/GameMonetize pagination flow.
  */
+
+type RelatedGamesIndex = Map<string, Game[]>
+
+let persistentRelatedGamesIndex: RelatedGamesIndex | null = null
+
+function getPersistentRelatedGamesIndex(
+  catalog: Game[]
+): RelatedGamesIndex {
+  if (persistentRelatedGamesIndex) {
+    return persistentRelatedGamesIndex
+  }
+
+  const index: RelatedGamesIndex = new Map()
+
+  const addToIndex = (key: string, game: Game) => {
+    if (!key) return
+
+    const existing = index.get(key)
+
+    if (existing) {
+      existing.push(game)
+    } else {
+      index.set(key, [game])
+    }
+  }
+
+  for (const item of catalog) {
+    const category = normalizeGenre(item.category)
+    const genreFilter = normalizeGenre(item.genreFilter)
+
+    if (category) {
+      addToIndex(category, item)
+    }
+
+    if (genreFilter && genreFilter !== category) {
+      addToIndex(genreFilter, item)
+    }
+
+    // "space" is a custom classification based on the game content.
+    if (isSpaceGame(item)) {
+      addToIndex('space', item)
+    }
+  }
+
+  persistentRelatedGamesIndex = index
+
+  console.log(
+    `[ArcadeNexa] Related games index built: ${catalog.length} games, ${index.size} keys`
+  )
+
+  return index
+}
+
 export function getRelatedGamesFromCatalog(
   game: Game,
   limit = 6
@@ -863,19 +916,24 @@ export function getRelatedGamesFromCatalog(
     const persistent = loadPersistentGamePixCatalog()
 
     if (persistent) {
-      const related = persistent.catalog.filter((item) => {
-        if (item.slug === game.slug) return false
+      const index = getPersistentRelatedGamesIndex(persistent.catalog)
+      const requestedGenre = normalizeGenre(game.category)
+      const candidates = index.get(requestedGenre) ?? []
 
-        return matchesGenre(
-          game.category,
-          item.category,
-          item.genreFilter,
-          item
-        )
-      })
+      const related: Game[] = []
+
+      for (const item of candidates) {
+        if (item.slug === game.slug) continue
+
+        related.push(item)
+
+        if (related.length >= safeLimit) {
+          break
+        }
+      }
 
       if (related.length >= safeLimit) {
-        return related.slice(0, safeLimit)
+        return related
       }
 
       /*
