@@ -4,7 +4,7 @@ import { getCategoryGameCounts } from '@/lib/games'
 import type { LucideIcon } from 'lucide-react'
 import { Gamepad2, Swords, Compass, Joystick, Puzzle, Trophy, Zap, Crosshair, Car, Shield, Footprints, Skull, Wand2, Globe2, Rocket, Plane, Ship, Bot, Gem, Brain, Calculator, CircleHelp, Clock3, Building2, Sprout, ChefHat, PawPrint, Ghost, Heart, Pencil, GraduationCap, Box, CircleDot, Target, Dumbbell } from 'lucide-react'
 
-export const dynamic = 'force-dynamic'
+export const revalidate = 3600
 
 export const metadata: Metadata = {
   title: 'Game Categories - ArcadeNexa',
