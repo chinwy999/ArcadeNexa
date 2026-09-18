@@ -2536,30 +2536,20 @@ export async function getGameBySlugFast(
       )
     }
 
-    try {
-      const allGames = await loadGames()
-
-      const catalogGame = allGames.find(
-        game =>
-          game.slug === slug &&
-          game.provider === 'GameMonetize'
-      )
-
-      if (catalogGame) {
-        gmSlugCache.set(slug, catalogGame)
-
-        console.log(
-          `[ArcadeNexa] GM final catalog fallback HIT: ${slug}`
-        )
-
-        return catalogGame
-      }
-    } catch (error) {
-      console.error(
-        `[ArcadeNexa] GM final catalog fallback failed for ${slug}:`,
-        error
-      )
-    }
+    /*
+     * IMPORTANT:
+     * Do not fall back to loadGames() here.
+     *
+     * A single GM slug request must never trigger the full
+     * GameMonetize + GamePix catalog load. That path can scan
+     * thousands of games and consume significant server CPU.
+     *
+     * If the direct GM lookup is unavailable, return null.
+     * The normal slug cache/direct lookup remains the fast path.
+     */
+    console.warn(
+      `[ArcadeNexa] GM direct lookup MISS: ${slug}`
+    )
 
     return null
   }
