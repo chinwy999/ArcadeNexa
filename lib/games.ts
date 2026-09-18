@@ -1892,27 +1892,44 @@ export async function getCategoryGameCounts(
     return emptyCounts
   }
 
-  const normalizedSlugs = categorySlugs.map(normalizeGenre)
+  const normalizedSlugs = categorySlugs
+    .map(normalizeGenre)
+    .filter(Boolean)
+
   const counts: Record<string, number> = {}
 
   for (const slug of normalizedSlugs) {
     counts[slug] = 0
   }
 
+  const customSlugs = normalizedSlugs.filter((slug) =>
+    CUSTOM_CATALOG_CATEGORIES.has(slug)
+  )
+
+  const normalSlugs = normalizedSlugs.filter(
+    (slug) => !CUSTOM_CATALOG_CATEGORIES.has(slug)
+  )
+
+  const normalSlugSet = new Set(normalSlugs)
+
   for (const game of persistent.catalog) {
-    for (const slug of normalizedSlugs) {
-      const isCustomCategory =
-        CUSTOM_CATALOG_CATEGORIES.has(slug)
+    const category = normalizeGenre(game.category)
+    const genreFilter = normalizeGenre(game.genreFilter)
 
-      const matches = isCustomCategory
-        ? matchesCustomCatalogCategory(slug, game)
-        : matchesGenre(
-            slug,
-            game.category,
-            game.genreFilter
-          )
+    if (category && normalSlugSet.has(category)) {
+      counts[category]++
+    }
 
-      if (matches) {
+    if (
+      genreFilter &&
+      normalSlugSet.has(genreFilter) &&
+      genreFilter !== category
+    ) {
+      counts[genreFilter]++
+    }
+
+    for (const slug of customSlugs) {
+      if (matchesCustomCatalogCategory(slug, game)) {
         counts[slug]++
       }
     }
