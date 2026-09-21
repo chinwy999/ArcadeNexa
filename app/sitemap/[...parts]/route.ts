@@ -9,7 +9,9 @@ const base = getSiteUrl()
 
 const GAMEPIX_PAGES = 141
 const GAMEMONETIZE_PAGES = 9
-const GAMEMONETIZE_SITEMAP_ID = GAMEPIX_PAGES + 1
+const GAMEMONETIZE_SITEMAP_START = GAMEPIX_PAGES + 1
+const GAMEMONETIZE_SITEMAP_END =
+  GAMEPIX_PAGES + GAMEMONETIZE_PAGES
 
 function escapeXml(value: string) {
   return value
@@ -67,7 +69,7 @@ export async function GET(
   if (
     !Number.isInteger(id) ||
     id < 0 ||
-    id > GAMEMONETIZE_SITEMAP_ID
+    id > GAMEMONETIZE_SITEMAP_END
   ) {
     return new NextResponse('Not Found', { status: 404 })
   }
@@ -223,49 +225,46 @@ export async function GET(
   }
 
   /*
-   * GameMonetize: 142
+   * GameMonetize: one provider page per sitemap.
+   *
+   * 142.xml -> GM page 1
+   * 143.xml -> GM page 2
+   * ...
+   * 150.xml -> GM page 9
    */
-  if (id === GAMEMONETIZE_SITEMAP_ID) {
-    const entries: Array<{
-      url: string
-      lastModified: Date
-      changeFrequency: string
-      priority: number
-    }> = []
+  if (
+    id >= GAMEMONETIZE_SITEMAP_START &&
+    id <= GAMEMONETIZE_SITEMAP_END
+  ) {
+    const gmPage = id - GAMEMONETIZE_SITEMAP_START + 1
 
-    for (let page = 1; page <= GAMEMONETIZE_PAGES; page++) {
-      try {
-        const result = await fetchGMGamesPage(page, 200)
+    try {
+      const result = await fetchGMGamesPage(gmPage, 200)
 
-        for (const game of result.items) {
-          if (!game.id) continue
+      const entries = result.items.flatMap((game) => {
+        if (!game.id) return []
 
-          entries.push({
-            url: `${base}/games/gm-${game.id}`,
-            lastModified: now,
-            changeFrequency: 'weekly',
-            priority: 0.8,
-          })
-        }
+        return [{
+          url: `${base}/games/gm-${game.id}`,
+          lastModified: now,
+          changeFrequency: 'weekly',
+          priority: 0.8,
+        }]
+      })
 
-        if (page < GAMEMONETIZE_PAGES) {
-          await new Promise((resolve) =>
-            setTimeout(resolve, 1500)
-          )
-        }
-      } catch (error) {
-        console.error(
-          `[ArcadeNexa] GameMonetize sitemap page ${page} failed:`,
-          error
-        )
-      }
+      console.log(
+        `[ArcadeNexa] GameMonetize sitemap ${id} ready: page ${gmPage}, ${entries.length} URLs`
+      )
+
+      return response(buildUrlset(entries))
+    } catch (error) {
+      console.error(
+        `[ArcadeNexa] GameMonetize sitemap ${id} failed:`,
+        error
+      )
+
+      return response(buildUrlset([]))
     }
-
-    console.log(
-      `[ArcadeNexa] GameMonetize sitemap ready: ${entries.length} URLs`
-    )
-
-    return response(buildUrlset(entries))
   }
 
   return new NextResponse('Not Found', { status: 404 })

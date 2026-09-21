@@ -3,7 +3,7 @@ import { getSiteUrl } from '@/lib/site'
 
 const base = getSiteUrl()
 
-const TOTAL_SITEMAPS = 143
+const TOTAL_SITEMAPS = 151
 
 export async function GET() {
   const urls = Array.from(
