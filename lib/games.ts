@@ -2403,6 +2403,11 @@ function loadPersistentGamePixCatalog(): {
   }
 }
 
+export function getPersistentGamePixGames(): Game[] {
+  const persistent = loadPersistentGamePixCatalog()
+  return persistent?.catalog ?? []
+}
+
 function loadPersistentGamePixCategoryIndex(): GamePixCategoryIndex | null {
   if (persistentGamePixCategoryIndex) {
     return persistentGamePixCategoryIndex

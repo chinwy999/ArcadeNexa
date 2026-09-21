@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 export const revalidate = 3600
 import Link from 'next/link'
-import { getGames } from '@/lib/games'
+import { getPersistentGamePixGames } from '@/lib/games'
 import SafeImage from '@/components/SafeImage'
 
 export const metadata: Metadata = {
@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 }
 
 export default async function ChromebookGamesPage() {
-  const allGames = await getGames()
+  const allGames = getPersistentGamePixGames()
   const games = allGames
   const featured = games.slice(0, 18)
 
