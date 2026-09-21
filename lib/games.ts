@@ -374,6 +374,39 @@ function getCustomCatalogCategoryGames(
     return null
   }
 
+  const categoryIndex = loadPersistentGamePixCategoryIndex()
+
+  if (categoryIndex) {
+    const positions = categoryIndex[normalized] ?? []
+    const games: Game[] = []
+    const seen = new Set<string>()
+
+    for (const position of positions) {
+      if (
+        typeof position !== 'number' ||
+        position < 0 ||
+        position >= persistent.catalog.length
+      ) {
+        continue
+      }
+
+      const game = persistent.catalog[position]
+      if (!game) continue
+
+      const key = game.slug || game.id
+
+      if (!key || seen.has(key)) {
+        continue
+      }
+
+      seen.add(key)
+      games.push(game)
+    }
+
+    return games
+  }
+
+  // Backward-compatible fallback if the precomputed index is unavailable.
   const seen = new Set<string>()
 
   return persistent.catalog.filter(game => {
@@ -1190,9 +1223,34 @@ export async function getGamesPage(
       const persistent = loadPersistentGamePixCatalog()
 
       if (persistent) {
-        const spaceGames = persistent.catalog.filter(game =>
-          isSpaceGame(game)
-        )
+        const categoryIndex = loadPersistentGamePixCategoryIndex()
+
+        let spaceGames: Game[]
+
+        if (categoryIndex) {
+          const positions = categoryIndex.space ?? []
+          spaceGames = []
+
+          for (const position of positions) {
+            if (
+              typeof position !== 'number' ||
+              position < 0 ||
+              position >= persistent.catalog.length
+            ) {
+              continue
+            }
+
+            const game = persistent.catalog[position]
+            if (game) {
+              spaceGames.push(game)
+            }
+          }
+        } else {
+          // Backward-compatible fallback if the precomputed index is unavailable.
+          spaceGames = persistent.catalog.filter(game =>
+            isSpaceGame(game)
+          )
+        }
 
         const spaceOffset = (safePage - 1) * safeSize
 
@@ -2272,9 +2330,11 @@ async function loadGMGames(): Promise<Game[]> {
 // ===== PERSISTENT GAMEPIX CATALOG =====
 
 type GamePixCatalogIndex = Record<string, number>
+type GamePixCategoryIndex = Record<string, number[]>
 
 let persistentGamePixCatalog: Game[] | null = null
 let persistentGamePixIndex: GamePixCatalogIndex | null = null
+let persistentGamePixCategoryIndex: GamePixCategoryIndex | null = null
 
 function loadPersistentGamePixCatalog(): {
   catalog: Game[]
@@ -2337,6 +2397,53 @@ function loadPersistentGamePixCatalog(): {
   } catch (error) {
     console.error(
       '[ArcadeNexa] Failed to load persistent GamePix catalog:',
+      error
+    )
+    return null
+  }
+}
+
+function loadPersistentGamePixCategoryIndex(): GamePixCategoryIndex | null {
+  if (persistentGamePixCategoryIndex) {
+    return persistentGamePixCategoryIndex
+  }
+
+  try {
+    const indexPath = path.join(
+      process.cwd(),
+      'data',
+      'gamepix-category-index.json'
+    )
+
+    if (!fs.existsSync(indexPath)) {
+      console.warn(
+        '[ArcadeNexa] Persistent GamePix category index not found.'
+      )
+      return null
+    }
+
+    const index = JSON.parse(
+      fs.readFileSync(indexPath, 'utf8')
+    ) as GamePixCategoryIndex
+
+    if (!index || typeof index !== 'object' || Array.isArray(index)) {
+      console.error(
+        '[ArcadeNexa] Persistent GamePix category index validation failed.'
+      )
+      return null
+    }
+
+    persistentGamePixCategoryIndex = index
+
+    console.log(
+      `[ArcadeNexa] Persistent GamePix category index loaded: ` +
+      `${Object.keys(index).length} categories`
+    )
+
+    return index
+  } catch (error) {
+    console.error(
+      '[ArcadeNexa] Failed to load persistent GamePix category index:',
       error
     )
     return null
