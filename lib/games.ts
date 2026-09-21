@@ -437,10 +437,18 @@ function matchesGenre(
     return game ? isSpaceGame(game) : false
   }
 
-  return (
+  if (
     normalizeGenre(gameCategory) === requested ||
     normalizeGenre(gameGenreFilter) === requested
-  )
+  ) {
+    return true
+  }
+
+  if (game?.tags?.some(tag => normalizeGenre(tag) === requested)) {
+    return true
+  }
+
+  return false
 }
 
 export interface Game {
@@ -2230,7 +2238,8 @@ async function getGMCategorySnapshot(
           !matchesGenre(
             key,
             game.category,
-            game.genreFilter
+            game.genreFilter,
+            game
           )
         ) {
           continue
@@ -2251,6 +2260,18 @@ async function getGMCategorySnapshot(
       current.nextPage =
         result.nextPage ||
         providerPage + 1
+    }
+
+    /*
+     * We reached the configured GameMonetize page limit.
+     * Treat the category snapshot as ended so a later request
+     * does not try to extend the same exhausted snapshot again.
+     */
+    if (
+      !current.ended &&
+      current.nextPage > GM_PAGES
+    ) {
+      current.ended = true
     }
 
     current.expiresAt =
