@@ -2529,7 +2529,21 @@ export async function getGameBySlugFast(
    * Sitemap/pagination remain responsible for catalog discovery.
    */
 
-  if (!slug) return null
+  const normalizedSlug = String(slug || '').trim().toLowerCase()
+
+  if (
+    !normalizedSlug ||
+    normalizedSlug === 'null' ||
+    normalizedSlug === 'undefined' ||
+    normalizedSlug === '[object object]'
+  ) {
+    console.warn(
+      `[ArcadeNexa] Invalid game slug rejected: ${slug}`
+    )
+    return null
+  }
+
+  slug = normalizedSlug
 
   // ---------------------------------------------------------
   // SHARED GAMEPIX SLUG CACHE
@@ -2562,7 +2576,15 @@ export async function getGameBySlugFast(
   if (!slug.startsWith('gm-')) {
     const persistentGame = getGameFromPersistentGamePixCatalog(slug)
 
+    console.log(
+      `[ArcadeNexa] DEBUG PERSISTENT LOOKUP: slug=${slug} found=${Boolean(persistentGame)}`
+    )
+
     if (persistentGame) {
+      console.log(
+        `[ArcadeNexa] DEBUG PERSISTENT GAME: slug=${persistentGame.slug} title=${persistentGame.title}`
+      )
+
       gamePixSlugCache.set(slug, persistentGame)
 
       console.log(
