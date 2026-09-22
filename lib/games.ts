@@ -2576,15 +2576,7 @@ export async function getGameBySlugFast(
   if (!slug.startsWith('gm-')) {
     const persistentGame = getGameFromPersistentGamePixCatalog(slug)
 
-    console.log(
-      `[ArcadeNexa] DEBUG PERSISTENT LOOKUP: slug=${slug} found=${Boolean(persistentGame)}`
-    )
-
     if (persistentGame) {
-      console.log(
-        `[ArcadeNexa] DEBUG PERSISTENT GAME: slug=${persistentGame.slug} title=${persistentGame.title}`
-      )
-
       gamePixSlugCache.set(slug, persistentGame)
 
       console.log(
