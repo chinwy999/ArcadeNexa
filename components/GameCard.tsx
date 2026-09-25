@@ -15,10 +15,11 @@ interface GameCardProps {
     category?: string
     genreFilter?: string
   }
+  genre?: string
   onPlay?: () => void
 }
 
-export default function GameCard({ game, onPlay }: GameCardProps) {
+export default function GameCard({ game, genre, onPlay }: GameCardProps) {
   const rating =
     typeof game.rating === 'number' ? game.rating : 8.5
 
@@ -28,7 +29,11 @@ export default function GameCard({ game, onPlay }: GameCardProps) {
       <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
 
       <Link
-        href={`/games/${game.slug}`}
+        href={
+          genre
+            ? `/games/${game.slug}?genre=${encodeURIComponent(genre)}`
+            : `/games/${game.slug}`
+        }
         className="relative block aspect-[16/10] overflow-hidden"
         aria-label={`Play ${game.name}`}
       >

@@ -2614,6 +2614,51 @@ export async function getGameBySlugFast(
     }
 
     /*
+     * Category pages already build a GameMonetize snapshot.
+     * When the detail page comes from a category link, use that
+     * snapshot first. This prevents a temporary GM 429 from
+     * becoming a false 404.
+     */
+    const normalizedGenre = normalizeGenre(genre)
+
+    if (normalizedGenre) {
+      try {
+        const snapshot = await getGMCategorySnapshot(
+          normalizedGenre,
+          1
+        )
+
+        const categoryGame = snapshot.games.find(
+          game =>
+            game.slug === slug &&
+            game.provider === 'GameMonetize'
+        )
+
+        if (categoryGame) {
+          gmSlugCache.set(slug, categoryGame)
+
+          console.log(
+            `[ArcadeNexa] GM category lookup HIT: ` +
+            `slug=${slug} genre=${normalizedGenre}`
+          )
+
+          return categoryGame
+        }
+
+        console.log(
+          `[ArcadeNexa] GM category lookup MISS: ` +
+          `slug=${slug} genre=${normalizedGenre} ` +
+          `snapshotGames=${snapshot.games.length}`
+        )
+      } catch (error) {
+        console.warn(
+          `[ArcadeNexa] GM category lookup failed for ${slug}:`,
+          error
+        )
+      }
+    }
+
+    /*
      * GameMonetize may return HTTP 429 for direct ID requests.
      * A 429 must NEVER turn an existing game into a 404.
      */

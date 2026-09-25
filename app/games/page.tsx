@@ -317,6 +317,7 @@ export default async function GamesPage({
               <GameCard
                 key={game.slug}
                 game={game as any}
+                genre={selectedGenre}
               />
             ))}
           </div>
