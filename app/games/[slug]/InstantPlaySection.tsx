@@ -3,6 +3,7 @@
 import { useRef, useState, useEffect } from 'react'
 import { Maximize2, Minimize2, Gamepad2, ExternalLink } from 'lucide-react'
 import type { Game } from '@/lib/games'
+import AdsterraSmartLink from '@/components/AdsterraSmartLink'
 
 export default function InstantPlaySection({ game }: { game: Game }) {
   const [isFullscreen, setIsFullscreen] = useState(false)
@@ -183,6 +184,8 @@ export default function InstantPlaySection({ game }: { game: Game }) {
             </span>
 
             <div className="flex items-center gap-3">
+              <AdsterraSmartLink />
+
               {game.officialUrl && (
                 <a
                   href={game.officialUrl}
