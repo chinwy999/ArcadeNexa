@@ -38,8 +38,8 @@ for (const f of Object.values(files)) {
 const known = new Set(catalog.map((g) => g.category))
 const category = ['puzzle', 'logic', 'brain'].find((c) => known.has(c)) || 'puzzle'
 
-const thumb = '/games/laser-puzzle/thumb.png'
-const url = '/games/laser-puzzle/index.html'
+const thumb = '/local-games/laser-puzzle/thumb.png'
+const url = '/local-games/laser-puzzle/index.html'
 const game = {
   id: 'local-laser-puzzle',
   slug: SLUG,
