@@ -13,7 +13,7 @@ export default function InstantPlaySection({ game }: { game: Game }) {
   const containerRef = useRef<HTMLDivElement>(null)
   const iframeRef = useRef<HTMLIFrameElement>(null)
 
-  const providerName = 'ArcadeNexa'
+  const providerName = 'Arcadlo'
 
   const toggleFullscreen = async () => {
     if (!containerRef.current) return

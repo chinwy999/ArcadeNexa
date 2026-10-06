@@ -5,7 +5,7 @@ import { getPersistentGamePixGames } from '@/lib/games'
 import SafeImage from '@/components/SafeImage'
 
 export const metadata: Metadata = {
-  title: 'Two Player Games – Free Online 2 Player Games | ArcadeNexa',
+  title: 'Two Player Games – Free Online 2 Player Games | Arcadlo',
   description: 'Play the best two player games online free. Compete with friends on the same device. No download, no login. 15,000+ free browser games including 2 player options.',
   keywords: 'two player games, 2 player games, two player games online, 2 player games unblocked, games for two players',
   alternates: { canonical: '/two-player-games' },
@@ -50,7 +50,7 @@ export default async function TwoPlayerGamesPage() {
           </h1>
           <p className="mx-auto mb-6 max-w-2xl text-lg text-[color:var(--text-secondary)]">
             Challenge a friend on the <strong className="text-[color:var(--text-primary)]">same device</strong> or compete solo.
-            ArcadeNexa has 15,000+ free browser games including the best 2 player games — no download, no login.
+            Arcadlo has 15,000+ free browser games including the best 2 player games — no download, no login.
           </p>
           <div className="mb-8 flex flex-wrap justify-center gap-2 text-sm">
             {['2 Player Sports','Fighting Games','Racing Games','.IO Multiplayer','Same Screen','Unblocked'].map(tag => (
@@ -132,7 +132,7 @@ export default async function TwoPlayerGamesPage() {
         <div className="rounded-2xl border border-nexa-violet/20 bg-nexa-black/40 p-8">
           <h2 className="mb-4 text-2xl font-bold">Best Two Player Games Online Free</h2>
           <div className="space-y-4 text-[color:var(--text-secondary)] leading-relaxed">
-            <p>Two player games are perfect for competing with a friend or family member on the same device. ArcadeNexa offers the best selection of free 2 player browser games including sports, fighting, racing, and .IO multiplayer games.</p>
+            <p>Two player games are perfect for competing with a friend or family member on the same device. Arcadlo offers the best selection of free 2 player browser games including sports, fighting, racing, and .IO multiplayer games.</p>
             <p>All games are <strong className="text-[color:var(--text-primary)]">free to play with no download</strong> required. Simply open the game in your browser and start competing. Works on desktop, laptop, tablet, and mobile — including school Chromebooks.</p>
             <p>Popular two player game categories include <strong className="text-[color:var(--text-primary)]">sports games</strong> like soccer and basketball, <strong className="text-[color:var(--text-primary)]">fighting games</strong> for head-to-head combat, and <strong className="text-[color:var(--text-primary)]">.IO games</strong> for multiplayer competition online.</p>
           </div>

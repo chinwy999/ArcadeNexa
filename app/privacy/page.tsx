@@ -1,8 +1,8 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Privacy Policy - ArcadeNexa',
-  description: 'ArcadeNexa privacy policy',
+  title: 'Privacy Policy - Arcadlo',
+  description: 'Arcadlo privacy policy',
   alternates: { canonical: '/privacy' },
 }
 
@@ -16,7 +16,7 @@ export default function PrivacyPage() {
 
         <section className="glass p-6 rounded-xl border border-[color:var(--white-05)]">
           <h2 className="text-[color:var(--text-primary)] font-bold text-xl mb-3">1. Information We Collect</h2>
-          <p>ArcadeNexa does not require registration or login. We may automatically collect basic technical data such as browser type and device type solely to improve the platform experience. We do not collect personal information unless you contact us voluntarily.</p>
+          <p>Arcadlo does not require registration or login. We may automatically collect basic technical data such as browser type and device type solely to improve the platform experience. We do not collect personal information unless you contact us voluntarily.</p>
         </section>
 
         <section className="glass p-6 rounded-xl border border-[color:var(--white-05)]">
@@ -26,7 +26,7 @@ export default function PrivacyPage() {
 
         <section className="glass p-6 rounded-xl border border-[color:var(--white-05)]">
           <h2 className="text-[color:var(--text-primary)] font-bold text-xl mb-3">3. Third-Party Games</h2>
-          <p>Games on ArcadeNexa are provided by third-party providers such as GamePix and GameMonetize. These providers may have their own privacy policies. We encourage you to review them when playing their games.</p>
+          <p>Games on Arcadlo are provided by third-party providers such as GamePix and GameMonetize. These providers may have their own privacy policies. We encourage you to review them when playing their games.</p>
         </section>
 
         <section className="glass p-6 rounded-xl border border-[color:var(--white-05)]">
@@ -36,7 +36,7 @@ export default function PrivacyPage() {
 
         <section className="glass p-6 rounded-xl border border-[color:var(--white-05)]">
           <h2 className="text-[color:var(--text-primary)] font-bold text-xl mb-3">5. Children's Privacy</h2>
-          <p>ArcadeNexa is not directed to children under 13. We do not knowingly collect personal information from children under 13.</p>
+          <p>Arcadlo is not directed to children under 13. We do not knowingly collect personal information from children under 13.</p>
         </section>
 
         <section className="glass p-6 rounded-xl border border-[color:var(--white-05)]">

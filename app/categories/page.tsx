@@ -7,8 +7,8 @@ import { Gamepad2, Swords, Compass, Joystick, Puzzle, Trophy, Zap, Crosshair, Ca
 export const revalidate = 3600
 
 export const metadata: Metadata = {
-  title: 'Game Categories - ArcadeNexa',
-  description: 'Explore 15,000+ free browser games by category on ArcadeNexa.',
+  title: 'Game Categories - Arcadlo',
+  description: 'Explore 15,000+ free browser games by category on Arcadlo.',
   alternates: { canonical: '/categories' },
 }
 
@@ -246,7 +246,7 @@ export default async function CategoriesPage() {
       <section className="mt-12 rounded-2xl border border-[color:var(--white-10)] bg-[color:var(--white-03)] p-6 sm:p-8">
         <h2 className="text-xl font-black text-[color:var(--text-primary)]">New games added regularly</h2>
         <p className="mt-2 max-w-2xl text-sm leading-6 text-[color:var(--text-secondary)]">
-          ArcadeNexa combines games from trusted HTML5 game providers so you can discover and play thousands of games directly in your browser.
+          Arcadlo combines games from trusted HTML5 game providers so you can discover and play thousands of games directly in your browser.
         </p>
         <Link href="/games" className="mt-5 inline-flex rounded-xl bg-nexa-violet px-5 py-3 text-sm font-bold text-[color:var(--text-primary)] transition hover:brightness-110">Browse All Games</Link>
       </section>

@@ -10,16 +10,36 @@ import {
   X,
   ChevronRight,
 } from 'lucide-react'
-
-const navLinks = [
-  { href: '/games', label: 'Games' },
-  { href: '/categories', label: 'Categories' },
-  { href: '/blog', label: 'Blog' },
-]
+import en from '@/lib/i18n/en'
+import ar from '@/lib/i18n/ar'
 
 export default function Header() {
   const pathname = usePathname()
   const [mobileOpen, setMobileOpen] = useState(false)
+
+  const isArabic = pathname === '/ar' || pathname.startsWith('/ar/')
+
+  const t = isArabic ? ar : en
+
+  // Convert the current public URL to the equivalent URL
+  // in the other language while keeping the same route/slug.
+  const getLocalizedPath = (targetLocale: 'en' | 'ar') => {
+    if (targetLocale === 'ar') {
+      if (isArabic) return pathname
+      return pathname === '/' ? '/ar' : `/ar${pathname}`
+    }
+
+    if (!isArabic) return pathname
+
+    const englishPath = pathname.slice(3)
+    return englishPath || '/'
+  }
+
+  const navLinks = [
+    { href: '/games', label: t.nav.games },
+    { href: '/categories', label: t.nav.categories },
+    { href: '/blog', label: t.nav.blog },
+  ]
 
   useEffect(() => {
     setMobileOpen(false)
@@ -38,16 +58,26 @@ export default function Header() {
     }
   }, [mobileOpen])
 
-  const isActive = (href: string) =>
-    pathname === href || pathname.startsWith(`${href}/`)
+  const isActive = (href: string) => {
+    const currentPath = isArabic
+      ? pathname === '/ar'
+        ? '/'
+        : pathname.slice(3) || '/'
+      : pathname
+
+    return currentPath === href || currentPath.startsWith(`${href}/`)
+  }
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 border-b border-[color:var(--white-10)] bg-nexa-black/80 backdrop-blur-xl">
+    <header
+      dir={isArabic ? 'rtl' : 'ltr'}
+      className="fixed inset-x-0 top-0 z-50 border-b border-[color:var(--white-10)] bg-nexa-black/80 backdrop-blur-xl"
+    >
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6">
 
         <Link
-          href="/"
-          aria-label="ArcadeNexa Home"
+          href={isArabic ? '/ar' : '/'}
+          aria-label={isArabic ? 'الرئيسية - Arcadlo' : 'Arcadlo Home'}
           className="group flex items-center gap-2.5"
         >
           <div className="relative flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-nexa-violet to-nexa-emerald shadow-lg shadow-nexa-violet/20 transition-transform duration-300 group-hover:rotate-6">
@@ -60,14 +90,18 @@ export default function Header() {
           </span>
         </Link>
 
-        <nav className="hidden items-center gap-1 lg:flex" aria-label="Main navigation">
+        <nav
+          className="hidden items-center gap-1 lg:flex"
+          aria-label={isArabic ? 'التنقل الرئيسي' : 'Main navigation'}
+        >
           {navLinks.map((link) => {
             const active = isActive(link.href)
+            const href = isArabic ? `/ar${link.href}` : link.href
 
             return (
               <Link
                 key={link.href}
-                href={link.href}
+                href={href}
                 className={`rounded-lg px-3 py-2 text-xs font-bold uppercase tracking-wide transition ${
                   active
                     ? 'bg-[color:var(--white-10)] text-[color:var(--text-primary)]'
@@ -81,26 +115,46 @@ export default function Header() {
         </nav>
 
         <div className="hidden items-center gap-2 sm:flex">
+
+          {/* Language switch */}
           <Link
-            href="/search"
-            aria-label="Search games"
+            href={getLocalizedPath(isArabic ? 'en' : 'ar')}
+            aria-label={isArabic ? 'English' : 'العربية'}
+            className="flex h-10 items-center justify-center rounded-xl border border-[color:var(--white-10)] bg-[color:var(--white-05)] px-3 text-xs font-black text-[color:var(--text-secondary)] transition hover:border-[color:var(--white-20)] hover:bg-[color:var(--white-10)] hover:text-[color:var(--text-primary)]"
+          >
+            {isArabic ? 'EN' : 'ع'}
+          </Link>
+
+          <Link
+            href={isArabic ? '/ar/search' : '/search'}
+            aria-label={t.nav.search}
             className="flex h-10 w-10 items-center justify-center rounded-xl border border-[color:var(--white-10)] bg-[color:var(--white-05)] text-[color:var(--text-secondary)] transition hover:border-[color:var(--white-20)] hover:bg-[color:var(--white-10)] hover:text-[color:var(--text-primary)]"
           >
             <Search className="h-4 w-4" />
           </Link>
 
           <Link
-            href="/games"
+            href={isArabic ? '/ar/games' : '/games'}
             className="rounded-xl bg-nexa-emerald px-4 py-2.5 text-xs font-black text-nexa-black shadow-lg shadow-nexa-emerald/10 transition hover:-translate-y-0.5 hover:shadow-nexa-emerald/20"
           >
-            PLAY NOW
+            {t.nav.playNow}
           </Link>
         </div>
 
         <div className="flex items-center gap-2 sm:hidden">
+
+          {/* Mobile language switch */}
           <Link
-            href="/search"
-            aria-label="Search games"
+            href={getLocalizedPath(isArabic ? 'en' : 'ar')}
+            aria-label={isArabic ? 'English' : 'العربية'}
+            className="flex h-10 min-w-10 items-center justify-center rounded-xl border border-[color:var(--white-10)] bg-[color:var(--white-05)] px-2.5 text-xs font-black text-[color:var(--text-primary)]"
+          >
+            {isArabic ? 'EN' : 'ع'}
+          </Link>
+
+          <Link
+            href={isArabic ? '/ar/search' : '/search'}
+            aria-label={t.nav.search}
             className="flex h-10 w-10 items-center justify-center rounded-xl border border-[color:var(--white-10)] bg-[color:var(--white-05)] text-[color:var(--text-primary)]"
           >
             <Search className="h-5 w-5" />
@@ -123,31 +177,35 @@ export default function Header() {
       </div>
 
       {mobileOpen && (
-        <div className="fixed inset-x-0 top-16 z-40 border-t border-[color:var(--white-10)] bg-nexa-black px-4 pb-6 pt-4 shadow-2xl lg:hidden overflow-y-auto max-h-[calc(100vh-4rem)]">
+        <div className="fixed inset-x-0 top-16 z-40 max-h-[calc(100vh-4rem)] overflow-y-auto border-t border-[color:var(--white-10)] bg-nexa-black px-4 pb-6 pt-4 shadow-2xl lg:hidden">
           <div className="mx-auto max-w-7xl">
 
             <Link
-              href="/games"
+              href={isArabic ? '/ar/games' : '/games'}
               className="mb-4 flex items-center justify-between rounded-2xl bg-gradient-to-r from-nexa-emerald to-nexa-cyan p-4 text-nexa-black"
             >
               <div>
-                <p className="text-lg font-black">PLAY NOW</p>
+                <p className="text-lg font-black">{t.nav.playNow}</p>
                 <p className="text-xs font-semibold opacity-70">
-                  Browse all games
+                  {t.nav.browseAllGames}
                 </p>
               </div>
 
               <ChevronRight className="h-6 w-6" />
             </Link>
 
-            <nav className="grid gap-1" aria-label="Mobile navigation">
+            <nav
+              className="grid gap-1"
+              aria-label={isArabic ? 'التنقل الرئيسي' : 'Mobile navigation'}
+            >
               {navLinks.map((link) => {
                 const active = isActive(link.href)
+                const href = isArabic ? `/ar${link.href}` : link.href
 
                 return (
                   <Link
                     key={link.href}
-                    href={link.href}
+                    href={href}
                     className={`flex items-center justify-between rounded-xl px-4 py-3.5 text-sm font-bold transition ${
                       active
                         ? 'bg-nexa-violet/15 text-[color:var(--text-primary)]'
@@ -162,18 +220,19 @@ export default function Header() {
             </nav>
 
             <div className="mt-4 border-t border-[color:var(--white-10)] pt-4">
+
               <Link
-                href="/about"
+                href={isArabic ? '/ar/about' : '/about'}
                 className="block rounded-xl px-4 py-3 text-sm font-bold text-[color:var(--text-secondary)] hover:bg-[color:var(--white-05)] hover:text-[color:var(--text-primary)]"
               >
-                About ArcadeNexa
+                {t.nav.about}
               </Link>
 
               <Link
-                href="/contact"
+                href={isArabic ? '/ar/contact' : '/contact'}
                 className="block rounded-xl px-4 py-3 text-sm font-bold text-[color:var(--text-secondary)] hover:bg-[color:var(--white-05)] hover:text-[color:var(--text-primary)]"
               >
-                Contact
+                {t.nav.contact}
               </Link>
             </div>
           </div>

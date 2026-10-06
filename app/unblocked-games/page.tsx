@@ -7,16 +7,16 @@ import SafeImage from '@/components/SafeImage'
 export const dynamic = 'force-dynamic'
 
 export const metadata: Metadata = {
-  title: 'Unblocked Games – Play Free Online Games | ArcadeNexa',
+  title: 'Unblocked Games – Play Free Online Games | Arcadlo',
   description:
-    'Play free HTML5 unblocked games instantly on ArcadeNexa. No download, no login required. Action, puzzle, racing, sports, arcade and more.',
+    'Play free HTML5 unblocked games instantly on Arcadlo. No download, no login required. Action, puzzle, racing, sports, arcade and more.',
   keywords:
     'unblocked games, unblocked games for school, free unblocked games, HTML5 games, browser games',
   alternates: {
     canonical: '/unblocked-games',
   },
   openGraph: {
-    title: 'Unblocked Games – Play Free Online | ArcadeNexa',
+    title: 'Unblocked Games – Play Free Online | Arcadlo',
     description:
       'Play free unblocked HTML5 games instantly. No download and no login required.',
     url: `${getSiteUrl()}/unblocked-games`,
@@ -235,7 +235,7 @@ export default async function UnblockedGamesPage() {
             </p>
 
             <p>
-              ArcadeNexa provides free browser games across multiple
+              Arcadlo provides free browser games across multiple
               categories including action, puzzle, racing, sports, arcade,
               casual and strategy games.
             </p>
@@ -260,7 +260,7 @@ export default async function UnblockedGamesPage() {
           {[
             {
               q: 'Are the games free?',
-              a: 'Yes. ArcadeNexa provides free browser games that can be played without downloading the game files.',
+              a: 'Yes. Arcadlo provides free browser games that can be played without downloading the game files.',
             },
             {
               q: 'Do I need an account?',

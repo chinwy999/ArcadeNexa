@@ -145,7 +145,7 @@ async function getRelatedGamesForArticle(article: {
     return games
   } catch (error) {
     console.error(
-      `[ArcadeNexa] Failed to load related games for article ${article.slug}:`,
+      `[Arcadlo] Failed to load related games for article ${article.slug}:`,
       error
     )
 
@@ -172,7 +172,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description: article.description,
       url: `/blog/${article.slug}`,
       publishedTime: article.date,
-      siteName: 'ArcadeNexa',
+      siteName: 'Arcadlo',
     },
   }
 }
@@ -407,11 +407,11 @@ export default async function ArticlePage({ params }: Props) {
     dateModified: article.date,
     author: {
       '@type': 'Organization',
-      name: 'ArcadeNexa Editorial',
+      name: 'Arcadlo Editorial',
     },
     publisher: {
       '@type': 'Organization',
-      name: 'ArcadeNexa',
+      name: 'Arcadlo',
     },
     mainEntityOfPage: {
       '@type': 'WebPage',
@@ -500,11 +500,11 @@ export default async function ArticlePage({ params }: Props) {
               id="related-games-heading"
               className="mt-2 text-2xl font-black text-[color:var(--text-primary)] sm:text-3xl"
             >
-              Games You Can Play on ArcadeNexa
+              Games You Can Play on Arcadlo
             </h2>
 
             <p className="mt-2 max-w-2xl leading-7 text-[color:var(--text-secondary)]">
-              Try games related to this article directly on ArcadeNexa.
+              Try games related to this article directly on Arcadlo.
               No download is required.
             </p>
           </div>
@@ -575,7 +575,7 @@ export default async function ArticlePage({ params }: Props) {
             href="/games"
             className="inline-flex rounded-xl bg-nexa-violet px-5 py-3 font-bold text-[color:var(--text-primary)] transition hover:opacity-90"
           >
-            Explore ArcadeNexa Games →
+            Explore Arcadlo Games →
           </Link>
         </div>
       </section>

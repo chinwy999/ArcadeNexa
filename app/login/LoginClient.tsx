@@ -8,7 +8,7 @@ export default function LoginClient() {
         <span className="text-6xl mb-6 block">🎮</span>
         <h1 className="text-3xl font-black text-[color:var(--text-primary)] mb-3">No Login Needed!</h1>
         <p className="text-[color:var(--text-secondary)] mb-8">
-          ArcadeNexa is completely free and open. No account required — just pick a game and start playing instantly!
+          Arcadlo is completely free and open. No account required — just pick a game and start playing instantly!
         </p>
         <div className="space-y-3">
           <Link href="/games" className="w-full bg-nexa-cyan hover:brightness-110 text-[color:var(--text-primary)] font-bold py-3 rounded-xl transition block">

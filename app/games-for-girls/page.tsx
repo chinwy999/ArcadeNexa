@@ -5,7 +5,7 @@ import { getPersistentGamePixGames } from '@/lib/games'
 import SafeImage from '@/components/SafeImage'
 
 export const metadata: Metadata = {
-  title: 'Games for Girls – Free Online Girl Games | ArcadeNexa',
+  title: 'Games for Girls – Free Online Girl Games | Arcadlo',
   description: 'Play the best free games for girls online. Fashion, puzzle, casual, cooking and more. No download, no login. 15,000+ free browser games for girls of all ages.',
   keywords: 'games for girls, girl games, free girl games online, games for girls free, fun games for girls',
   alternates: { canonical: '/games-for-girls' },
@@ -127,7 +127,7 @@ export default async function GamesForGirlsPage() {
         <div className="rounded-2xl border border-nexa-violet/20 bg-nexa-black/40 p-8">
           <h2 className="mb-4 text-2xl font-bold">Best Free Online Games for Girls</h2>
           <div className="space-y-4 text-[color:var(--text-secondary)] leading-relaxed">
-            <p>ArcadeNexa offers a huge collection of free online games perfect for girls of all ages. From relaxing puzzle and match-3 games to brain training and educational games, there is something for everyone.</p>
+            <p>Arcadlo offers a huge collection of free online games perfect for girls of all ages. From relaxing puzzle and match-3 games to brain training and educational games, there is something for everyone.</p>
             <p>All games are <strong className="text-[color:var(--text-primary)]">completely free</strong> with no download or login required. Simply open your browser on any device — phone, tablet, laptop, or Chromebook — and start playing instantly.</p>
             <p>Popular categories include <strong className="text-[color:var(--text-primary)]">match-3 puzzle games</strong>, casual games for quick fun, memory and brain games for a mental challenge, and educational games that make learning enjoyable.</p>
           </div>

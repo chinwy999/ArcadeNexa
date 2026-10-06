@@ -7,7 +7,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
 
           <div className="space-y-4">
-            <Link href="/" className="flex items-center gap-2" aria-label="ArcadeNexa Home">
+            <Link href="/" className="flex items-center gap-2" aria-label="Arcadlo Home">
               <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-nexa-violet to-nexa-emerald flex items-center justify-center transform rotate-45">
                 <span className="text-nexa-black font-black text-sm transform -rotate-45">N</span>
               </div>
@@ -52,7 +52,7 @@ export default function Footer() {
         </div>
 
         <div className="mt-12 pt-6 border-t border-[color:var(--white-05)] flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-[color:var(--text-secondary)] text-xs">© 2026 ArcadeNexa. All rights reserved. Games powered by GamePix & GameMonetize — all trademarks belong to their respective owners.</p>
+          <p className="text-[color:var(--text-secondary)] text-xs">© 2026 Arcadlo. All rights reserved. Games powered by GamePix & GameMonetize — all trademarks belong to their respective owners.</p>
           <div className="flex items-center gap-2 text-xs text-[color:var(--text-secondary)]">
             <span>🎮</span><span>Instant Play • No Download • Free Forever</span>
           </div>

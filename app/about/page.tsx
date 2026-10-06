@@ -2,15 +2,15 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
-  title: 'About ArcadeNexa',
-  description: 'Learn about ArcadeNexa — the ultimate free HTML5 gaming platform. No download, no registration, just instant play.',
+  title: 'About Arcadlo',
+  description: 'Learn about Arcadlo — the ultimate free HTML5 gaming platform. No download, no registration, just instant play.',
   alternates: { canonical: '/about' },
 }
 
 export default function AboutPage() {
   return (
     <div className="py-20 px-4 sm:px-6 max-w-4xl mx-auto animate-fade-in">
-      <h1 className="text-5xl font-black text-[color:var(--text-primary)] mb-4">About ArcadeNexa</h1>
+      <h1 className="text-5xl font-black text-[color:var(--text-primary)] mb-4">About Arcadlo</h1>
       <p className="text-[color:var(--text-secondary)] text-lg mb-12">
         The ultimate destination for free HTML5 browser games — no download, no registration, just instant play.
       </p>
@@ -65,7 +65,7 @@ export default function AboutPage() {
 
       <div className="bg-gradient-to-r from-nexa-violet/20 to-nexa-emerald/20 border border-[color:var(--white-10)] rounded-2xl p-8 text-center mb-8">
         <h2 className="text-2xl font-black text-[color:var(--text-primary)] mb-2">Ready to Play?</h2>
-        <p className="text-[color:var(--text-secondary)] mb-6">Join thousands of players on ArcadeNexa today.</p>
+        <p className="text-[color:var(--text-secondary)] mb-6">Join thousands of players on Arcadlo today.</p>
         <Link href="/games" className="bg-nexa-emerald text-nexa-black px-8 py-3 rounded-xl font-black hover:opacity-90 transition-all hover:scale-105 inline-block">
           Browse Games →
         </Link>

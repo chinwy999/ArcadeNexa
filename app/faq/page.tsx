@@ -2,15 +2,15 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
-  title: 'FAQ - ArcadeNexa',
-  description: 'Frequently asked questions about ArcadeNexa gaming platform.',
+  title: 'FAQ - Arcadlo',
+  description: 'Frequently asked questions about Arcadlo gaming platform.',
   alternates: { canonical: '/faq' },
 }
 
 const faqs = [
   {
-    q: 'Is ArcadeNexa free?',
-    a: 'Yes! ArcadeNexa is 100% free. All games are available instantly with no payment required.'
+    q: 'Is Arcadlo free?',
+    a: 'Yes! Arcadlo is 100% free. All games are available instantly with no payment required.'
   },
   {
     q: 'Do I need to create an account to play?',
@@ -22,7 +22,7 @@ const faqs = [
   },
   {
     q: 'What devices are supported?',
-    a: 'ArcadeNexa works on all devices — mobile phones, tablets, and desktop computers. Any modern browser is supported.'
+    a: 'Arcadlo works on all devices — mobile phones, tablets, and desktop computers. Any modern browser is supported.'
   },
   {
     q: 'How many games are available?',
@@ -42,7 +42,7 @@ const faqs = [
   },
   {
     q: 'Are the games safe for kids?',
-    a: 'Most games on ArcadeNexa are family-friendly. We offer a wide range of casual and puzzle games suitable for all ages.'
+    a: 'Most games on Arcadlo are family-friendly. We offer a wide range of casual and puzzle games suitable for all ages.'
   },
   {
     q: 'Will you add more games?',
@@ -54,7 +54,7 @@ export default function FAQPage() {
   return (
     <div className="py-20 px-4 sm:px-6 max-w-4xl mx-auto animate-fade-in">
       <h1 className="text-5xl font-black text-[color:var(--text-primary)] mb-4">FAQ</h1>
-      <p className="text-[color:var(--text-secondary)] text-lg mb-12">Frequently Asked Questions about ArcadeNexa</p>
+      <p className="text-[color:var(--text-secondary)] text-lg mb-12">Frequently Asked Questions about Arcadlo</p>
 
       <div className="space-y-4 mb-12">
         {faqs.map((f, i) => (

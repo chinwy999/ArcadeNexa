@@ -53,7 +53,7 @@ export default function ArenaPlay({ game, onClose, isModal = false }: Props) {
       <div className="bg-nexa-navy/50 border border-[color:var(--white-05)] rounded-xl p-3 mb-4 flex gap-2 items-start text-xs text-[color:var(--text-secondary)]">
         <Info className="w-4 h-4 text-nexa-emerald flex-shrink-0 mt-0.5" />
         <span>
-          <strong className="text-[color:var(--text-primary)]">Disclaimer:</strong> {game.name} is a trademark of its respective owner. This is a ArcadeNexa skill trial, not the full commercial game.
+          <strong className="text-[color:var(--text-primary)]">Disclaimer:</strong> {game.name} is a trademark of its respective owner. This is a Arcadlo skill trial, not the full commercial game.
           {game.officialUrl && (
             <> Play the official game at <a href={game.officialUrl} target="_blank" rel="noopener noreferrer" className="text-nexa-violet hover:underline inline-flex items-center gap-1">{game.officialUrl} <ExternalLink className="w-3 h-3" /></a></>
           )}
@@ -110,7 +110,7 @@ export default function ArenaPlay({ game, onClose, isModal = false }: Props) {
       </div>
 
       <div className="flex items-center justify-between mt-4 text-xs text-[color:var(--text-secondary)]">
-        <span>Supported by ArcadeNexa Challenge System — Free to Play</span>
+        <span>Supported by Arcadlo Challenge System — Free to Play</span>
         <span className="flex items-center gap-1 text-nexa-emerald font-bold"><Sparkles className="w-3.5 h-3.5" /> Skill Based</span>
       </div>
     </div>

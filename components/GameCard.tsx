@@ -72,8 +72,8 @@ export default function GameCard({ game, genre, onPlay }: GameCardProps) {
 
           <span
             className="flex shrink-0 items-center gap-1 self-start rounded-full border border-nexa-gold/10 bg-nexa-gold/[0.06] px-2 py-0.5 text-[10px] font-bold text-nexa-gold"
-            title="ArcadeNexa Score"
-            aria-label={`ArcadeNexa Score ${rating.toFixed(1)} out of 10`}
+            title="Arcadlo Score"
+            aria-label={`Arcadlo Score ${rating.toFixed(1)} out of 10`}
           >
             <Star className="h-3 w-3 fill-current" />
             {rating.toFixed(1)}

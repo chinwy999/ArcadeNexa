@@ -4,24 +4,24 @@ import { allArticles as articles } from '@/lib/articles'
 
 export const metadata: Metadata = {
   title: {
-    absolute: 'ArcadeNexa Blog | Gaming Guides, Tips & Articles',
+    absolute: 'Arcadlo Blog | Gaming Guides, Tips & Articles',
   },
   description:
-    'Read original gaming guides, browser gaming explainers, genre guides, tips, and articles from ArcadeNexa.',
+    'Read original gaming guides, browser gaming explainers, genre guides, tips, and articles from Arcadlo.',
   alternates: { canonical: '/blog' },
   openGraph: {
     type: 'website',
     url: '/blog',
-    title: 'ArcadeNexa Blog | Gaming Guides, Tips & Articles',
+    title: 'Arcadlo Blog | Gaming Guides, Tips & Articles',
     description:
-      'Read original gaming guides, browser gaming explainers, genre guides, tips, and articles from ArcadeNexa.',
-    siteName: 'ArcadeNexa',
+      'Read original gaming guides, browser gaming explainers, genre guides, tips, and articles from Arcadlo.',
+    siteName: 'Arcadlo',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'ArcadeNexa Blog | Gaming Guides, Tips & Articles',
+    title: 'Arcadlo Blog | Gaming Guides, Tips & Articles',
     description:
-      'Read original gaming guides, browser gaming explainers, genre guides, tips, and articles from ArcadeNexa.',
+      'Read original gaming guides, browser gaming explainers, genre guides, tips, and articles from Arcadlo.',
   },
 }
 
@@ -30,7 +30,7 @@ export default function BlogPage() {
     <main className="mx-auto max-w-6xl px-4 py-16">
       <header className="mb-12">
         <p className="mb-3 text-sm font-bold uppercase tracking-widest text-nexa-emerald">
-          ArcadeNexa Editorial
+          Arcadlo Editorial
         </p>
         <h1 className="mb-4 text-4xl font-black text-[color:var(--text-primary)] sm:text-5xl">
           Gaming Guides & Articles

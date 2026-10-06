@@ -138,7 +138,7 @@ export default function ContactClient() {
               <span className="text-2xl">🤝</span>
               <h3 className="text-[color:var(--text-primary)] font-bold">Partnerships</h3>
             </div>
-            <p className="text-[color:var(--text-secondary)] text-sm">Interested in partnering with ArcadeNexa? We're open to game developers, sponsors, and content creators.</p>
+            <p className="text-[color:var(--text-secondary)] text-sm">Interested in partnering with Arcadlo? We're open to game developers, sponsors, and content creators.</p>
           </div>
 
           <div className="glass p-6 rounded-xl border border-[color:var(--white-05)]">

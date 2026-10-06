@@ -1,8 +1,8 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Cookie Policy - ArcadeNexa',
-  description: 'How we use cookies on ArcadeNexa',
+  title: 'Cookie Policy - Arcadlo',
+  description: 'How we use cookies on Arcadlo',
   alternates: { canonical: '/cookies' },
 }
 
@@ -10,7 +10,7 @@ export default function CookiesPage() {
   return (
     <div className="py-20 px-4 sm:px-6 max-w-4xl mx-auto animate-fade-in">
       <h1 className="text-5xl font-black text-[color:var(--text-primary)] mb-2">Cookie Policy</h1>
-      <p className="text-[color:var(--text-secondary)] mb-10">How we use cookies on ArcadeNexa</p>
+      <p className="text-[color:var(--text-secondary)] mb-10">How we use cookies on Arcadlo</p>
 
       <div className="space-y-6 text-[color:var(--text-secondary)]">
 
@@ -21,7 +21,7 @@ export default function CookiesPage() {
 
         <section className="glass p-6 rounded-xl border border-[color:var(--white-05)]">
           <h2 className="text-[color:var(--text-primary)] font-bold text-xl mb-3">How We Use Cookies</h2>
-          <p className="mb-4">ArcadeNexa uses minimal cookies to ensure the platform works correctly:</p>
+          <p className="mb-4">Arcadlo uses minimal cookies to ensure the platform works correctly:</p>
           <ul className="space-y-3">
             <li className="flex gap-3">
               <span className="text-nexa-emerald font-bold">✅</span>

@@ -2,8 +2,8 @@ import type { Metadata } from 'next'
 import SearchClient from './SearchClient'
 
 export const metadata: Metadata = {
-  title: 'Search Games - ArcadeNexa',
-  description: 'Search thousands of free HTML5 games on ArcadeNexa',
+  title: 'Search Games - Arcadlo',
+  description: 'Search thousands of free HTML5 games on Arcadlo',
   alternates: { canonical: '/search' },
 }
 

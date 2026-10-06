@@ -47,9 +47,9 @@ export async function generateMetadata(
 
   if (!game) {
     return {
-      title: 'Game Not Found - ArcadeNexa',
+      title: 'Game Not Found - Arcadlo',
       description:
-        'The requested game could not be found on ArcadeNexa.',
+        'The requested game could not be found on Arcadlo.',
       robots: {
         index: false,
         follow: false,
@@ -74,20 +74,20 @@ export async function generateMetadata(
     title: pageTitle,
     description:
       game.description ||
-      `Play ${game.title} for free online on ArcadeNexa. No download required, instant play in your browser.`,
+      `Play ${game.title} for free online on Arcadlo. No download required, instant play in your browser.`,
     keywords: [
       game.title,
       game.category,
       'free online game',
       'HTML5 game',
       'browser game',
-      'ArcadeNexa',
+      'Arcadlo',
     ],
     openGraph: {
       title: pageTitle,
       description:
         game.description ||
-        `Play ${game.title} for free on ArcadeNexa`,
+        `Play ${game.title} for free on Arcadlo`,
       images: game.thumbnail
         ? [
             {
@@ -106,7 +106,7 @@ export async function generateMetadata(
       title: pageTitle,
       description:
         game.description ||
-        `Play ${game.title} for free on ArcadeNexa`,
+        `Play ${game.title} for free on Arcadlo`,
       images: game.thumbnail ? [game.thumbnail] : [],
     },
     alternates: {
@@ -289,12 +289,12 @@ export default async function GamePage({ params, searchParams }: PageParams) {
   const game = await getGameBySlug(slug, genre)
 
   console.log(
-    `[ArcadeNexa] GAME PAGE RESOLVE: slug=${slug} found=${Boolean(game)} title=${game?.title || 'NONE'}`
+    `[Arcadlo] GAME PAGE RESOLVE: slug=${slug} found=${Boolean(game)} title=${game?.title || 'NONE'}`
   )
 
   if (!game) {
     console.log(
-      `[ArcadeNexa] GAME PAGE NOTFOUND: ${slug}`
+      `[Arcadlo] GAME PAGE NOTFOUND: ${slug}`
     )
     notFound()
   }

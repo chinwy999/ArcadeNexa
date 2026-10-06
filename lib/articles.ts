@@ -32,7 +32,7 @@ export const articles: Article[] = [
     sections: [
       { heading: `What is browser gaming?`, body: `Browser gaming means playing a game directly through a web browser rather than installing a conventional desktop or mobile application. The browser provides the environment in which the game loads its interface, assets, audio, and gameplay logic. For players, the biggest benefit is convenience: open a compatible page, wait for the game to load, and start playing.` },
       { heading: `Why HTML5 matters`, body: `HTML5 helped make modern browser gaming practical across many devices. Combined with JavaScript, Web APIs, Canvas, WebGL, Web Audio, and related browser technologies, it allows developers to build interactive experiences that work across desktop and mobile environments. The result is a much more flexible gaming ecosystem than the old plug-in era.` },
-      { heading: `Choosing a game`, body: `A useful way to discover games is to start with the type of experience you want. Puzzle games are good for short focused sessions, racing games reward timing and reaction speed, sports games offer competitive goals, while casual games are often designed for quick entertainment. ArcadeNexa's Games section can be used as a starting point for browsing different categories.` },
+      { heading: `Choosing a game`, body: `A useful way to discover games is to start with the type of experience you want. Puzzle games are good for short focused sessions, racing games reward timing and reaction speed, sports games offer competitive goals, while casual games are often designed for quick entertainment. Arcadlo's Games section can be used as a starting point for browsing different categories.` },
       { heading: `Getting better performance`, body: `Close unnecessary browser tabs, keep your browser updated, and use a stable connection when a game streams assets during play. On mobile devices, reduce background activity and avoid playing while the device is heavily throttled by heat. If a game provides quality or graphics settings, begin with a balanced setting and increase quality only when performance remains smooth.` },
       { heading: `Browser gaming on mobile`, body: `A modern smartphone can be a capable browser gaming device. Touch controls work particularly well for puzzles, casual games, card games, and many arcade experiences. For games that require precise keyboard-style input, a desktop or external controller may be more comfortable.` },
       { heading: `A smarter way to explore`, body: `Instead of judging a game only by its thumbnail, look at its genre, controls, orientation, and expected session length. A five-minute arcade game and a longer strategy game can both be excellent choices, but they serve different moments. Good discovery is about matching the game to your available time and preferred style.` }
@@ -99,7 +99,7 @@ export const articles: Article[] = [
       { heading: `When you want to relax`, body: `Casual, merge, matching, simulation, and light puzzle games can provide a calmer rhythm. Choose games that do not punish mistakes heavily if your goal is simply to unwind.` },
       { heading: `When you want competition`, body: `Sports, racing, fighting, and strategy games can create stronger competitive goals. If you prefer personal improvement, focus on score-based games rather than games that require competition with other players.` },
       { heading: `When you have more time`, body: `Longer strategy, management, simulation, and progression-based games can reward sustained attention. Before starting, check the controls and objective so that you know what the game expects from you.` },
-      { heading: `Build your own discovery routine`, body: `Start by choosing a genre, play one game for a few minutes, and then decide whether the controls and pace feel right. ArcadeNexa's game catalog can be browsed by category to make this process easier.` }
+      { heading: `Build your own discovery routine`, body: `Start by choosing a genre, play one game for a few minutes, and then decide whether the controls and pace feel right. Arcadlo's game catalog can be browsed by category to make this process easier.` }
     ],
     faq: [
       { question: `What is the best genre for a short break?`, answer: `Puzzle, arcade, casual, and simple racing games often work well because they can provide meaningful gameplay in short sessions.` },
@@ -114,7 +114,7 @@ export const articles: Article[] = [
     category: 'GUIDE',
     date: '2026-08-09',
     readTime: '7 min read',
-    intro: `Puzzle games are often approachable because their core rules can be explained quickly. Match pieces, arrange blocks, find a pattern, or solve a sequence. Beginners should choose games where the first levels teach the mechanics naturally rather than introducing many rules at once. This article brings the main ideas together in a practical format for ArcadeNexa readers.`,
+    intro: `Puzzle games are often approachable because their core rules can be explained quickly. Match pieces, arrange blocks, find a pattern, or solve a sequence. Beginners should choose games where the first levels teach the mechanics naturally rather than introducing many rules at once. This article brings the main ideas together in a practical format for Arcadlo readers.`,
     sections: [
       { heading: `Start with simple rules`, body: `Puzzle games are often approachable because their core rules can be explained quickly. Match pieces, arrange blocks, find a pattern, or solve a sequence. Beginners should choose games where the first levels teach the mechanics naturally rather than introducing many rules at once.` },
       { heading: `Match-3 and matching games`, body: `Match-3 games ask players to create groups of matching items, usually by swapping or arranging pieces. They are accessible because the visual goal is obvious. As levels become harder, players begin thinking about combinations, special pieces, and efficient moves.` },
@@ -126,7 +126,7 @@ export const articles: Article[] = [
     faq: [
       { question: `How should a beginner start?`, answer: `Choose a genre that matches your current interests, learn the basic controls, and begin with short sessions. The goal is to understand the core mechanic before worrying about advanced techniques.` },
       { question: `Can these games be played on mobile?`, answer: `Many browser games support mobile devices, but compatibility depends on the individual title. Check the controls and layout before starting a longer session.` },
-      { question: `Where can I find more games?`, answer: `Browse the ArcadeNexa Games section and use categories to explore titles that match your interests.` }
+      { question: `Where can I find more games?`, answer: `Browse the Arcadlo Games section and use categories to explore titles that match your interests.` }
     ],
   },
   {
@@ -136,7 +136,7 @@ export const articles: Article[] = [
     category: 'GUIDE',
     date: '2026-08-09',
     readTime: '7 min read',
-    intro: `Fast driving is not only about acceleration. A strong lap comes from controlling speed through corners and maintaining momentum. Spend an early session learning where the track changes direction and where braking is required. This article brings the main ideas together in a practical format for ArcadeNexa readers.`,
+    intro: `Fast driving is not only about acceleration. A strong lap comes from controlling speed through corners and maintaining momentum. Spend an early session learning where the track changes direction and where braking is required. This article brings the main ideas together in a practical format for Arcadlo readers.`,
     sections: [
       { heading: `Learn before chasing speed`, body: `Fast driving is not only about acceleration. A strong lap comes from controlling speed through corners and maintaining momentum. Spend an early session learning where the track changes direction and where braking is required.` },
       { heading: `Use braking strategically`, body: `Braking too late can ruin an entire corner. Begin braking earlier, enter the corner under control, and accelerate once the vehicle is pointed toward the exit. As you gain experience, gradually shorten your braking distance.` },
@@ -148,7 +148,7 @@ export const articles: Article[] = [
     faq: [
       { question: `How should a beginner start?`, answer: `Choose a genre that matches your current interests, learn the basic controls, and begin with short sessions. The goal is to understand the core mechanic before worrying about advanced techniques.` },
       { question: `Can these games be played on mobile?`, answer: `Many browser games support mobile devices, but compatibility depends on the individual title. Check the controls and layout before starting a longer session.` },
-      { question: `Where can I find more games?`, answer: `Browse the ArcadeNexa Games section and use categories to explore titles that match your interests.` }
+      { question: `Where can I find more games?`, answer: `Browse the Arcadlo Games section and use categories to explore titles that match your interests.` }
     ],
   },
   {
@@ -158,7 +158,7 @@ export const articles: Article[] = [
     category: 'GUIDE',
     date: '2026-08-09',
     readTime: '7 min read',
-    intro: `Strategy games reward decisions that remain useful later. Before acting, consider what the move gives you immediately and what it enables during the next few turns or stages. This article brings the main ideas together in a practical format for ArcadeNexa readers.`,
+    intro: `Strategy games reward decisions that remain useful later. Before acting, consider what the move gives you immediately and what it enables during the next few turns or stages. This article brings the main ideas together in a practical format for Arcadlo readers.`,
     sections: [
       { heading: `Think beyond the next move`, body: `Strategy games reward decisions that remain useful later. Before acting, consider what the move gives you immediately and what it enables during the next few turns or stages.` },
       { heading: `Understand resources`, body: `Many strategy games use money, energy, units, cards, territory, or another limited resource. Avoid spending everything simply because it is available. Saving resources can create options when the game becomes harder.` },
@@ -170,7 +170,7 @@ export const articles: Article[] = [
     faq: [
       { question: `How should a beginner start?`, answer: `Choose a genre that matches your current interests, learn the basic controls, and begin with short sessions. The goal is to understand the core mechanic before worrying about advanced techniques.` },
       { question: `Can these games be played on mobile?`, answer: `Many browser games support mobile devices, but compatibility depends on the individual title. Check the controls and layout before starting a longer session.` },
-      { question: `Where can I find more games?`, answer: `Browse the ArcadeNexa Games section and use categories to explore titles that match your interests.` }
+      { question: `Where can I find more games?`, answer: `Browse the Arcadlo Games section and use categories to explore titles that match your interests.` }
     ],
   },
   {
@@ -180,7 +180,7 @@ export const articles: Article[] = [
     category: 'ARTICLE',
     date: '2026-08-09',
     readTime: '7 min read',
-    intro: `The main attraction of instant-play gaming is the short path between discovering a title and trying it. Players do not need to decide whether they have enough storage or wait through a large installation before learning whether they enjoy the game. This article brings the main ideas together in a practical format for ArcadeNexa readers.`,
+    intro: `The main attraction of instant-play gaming is the short path between discovering a title and trying it. Players do not need to decide whether they have enough storage or wait through a large installation before learning whether they enjoy the game. This article brings the main ideas together in a practical format for Arcadlo readers.`,
     sections: [
       { heading: `Less friction`, body: `The main attraction of instant-play gaming is the short path between discovering a title and trying it. Players do not need to decide whether they have enough storage or wait through a large installation before learning whether they enjoy the game.` },
       { heading: `Flexible sessions`, body: `Browser games fit naturally into short sessions. A player may have ten minutes, half an hour, or longer. Many genres provide useful stopping points, making them suitable for different schedules.` },
@@ -192,7 +192,7 @@ export const articles: Article[] = [
     faq: [
       { question: `How should a beginner start?`, answer: `Choose a genre that matches your current interests, learn the basic controls, and begin with short sessions. The goal is to understand the core mechanic before worrying about advanced techniques.` },
       { question: `Can these games be played on mobile?`, answer: `Many browser games support mobile devices, but compatibility depends on the individual title. Check the controls and layout before starting a longer session.` },
-      { question: `Where can I find more games?`, answer: `Browse the ArcadeNexa Games section and use categories to explore titles that match your interests.` }
+      { question: `Where can I find more games?`, answer: `Browse the Arcadlo Games section and use categories to explore titles that match your interests.` }
     ],
   },
   {
@@ -202,7 +202,7 @@ export const articles: Article[] = [
     category: 'GUIDE',
     date: '2026-08-09',
     readTime: '7 min read',
-    intro: `A mobile-friendly game should adapt to smaller screens. Buttons need to remain large enough to tap, important information should not be hidden behind browser controls, and the game should handle portrait or landscape orientation appropriately. This article brings the main ideas together in a practical format for ArcadeNexa readers.`,
+    intro: `A mobile-friendly game should adapt to smaller screens. Buttons need to remain large enough to tap, important information should not be hidden behind browser controls, and the game should handle portrait or landscape orientation appropriately. This article brings the main ideas together in a practical format for Arcadlo readers.`,
     sections: [
       { heading: `Responsive game layouts`, body: `A mobile-friendly game should adapt to smaller screens. Buttons need to remain large enough to tap, important information should not be hidden behind browser controls, and the game should handle portrait or landscape orientation appropriately.` },
       { heading: `Touch input`, body: `Touch controls are effective when actions are simple and clearly mapped. Games with many simultaneous controls can be harder on a small screen, so players should choose titles that match their preferred input style.` },
@@ -214,7 +214,7 @@ export const articles: Article[] = [
     faq: [
       { question: `How should a beginner start?`, answer: `Choose a genre that matches your current interests, learn the basic controls, and begin with short sessions. The goal is to understand the core mechanic before worrying about advanced techniques.` },
       { question: `Can these games be played on mobile?`, answer: `Many browser games support mobile devices, but compatibility depends on the individual title. Check the controls and layout before starting a longer session.` },
-      { question: `Where can I find more games?`, answer: `Browse the ArcadeNexa Games section and use categories to explore titles that match your interests.` }
+      { question: `Where can I find more games?`, answer: `Browse the Arcadlo Games section and use categories to explore titles that match your interests.` }
     ],
   },
   {
@@ -224,7 +224,7 @@ export const articles: Article[] = [
     category: 'GUIDE',
     date: '2026-08-09',
     readTime: '7 min read',
-    intro: `Decide whether you want relaxation, competition, a mental challenge, or fast action. This immediately narrows the catalog. This article brings the main ideas together in a practical format for ArcadeNexa readers.`,
+    intro: `Decide whether you want relaxation, competition, a mental challenge, or fast action. This immediately narrows the catalog. This article brings the main ideas together in a practical format for Arcadlo readers.`,
     sections: [
       { heading: `Start with a goal`, body: `Decide whether you want relaxation, competition, a mental challenge, or fast action. This immediately narrows the catalog.` },
       { heading: `Use genres as filters`, body: `Genre labels are useful starting points. Puzzle, racing, sports, action, casual, strategy, and simulation games tend to create different styles of play.` },
@@ -236,7 +236,7 @@ export const articles: Article[] = [
     faq: [
       { question: `How should a beginner start?`, answer: `Choose a genre that matches your current interests, learn the basic controls, and begin with short sessions. The goal is to understand the core mechanic before worrying about advanced techniques.` },
       { question: `Can these games be played on mobile?`, answer: `Many browser games support mobile devices, but compatibility depends on the individual title. Check the controls and layout before starting a longer session.` },
-      { question: `Where can I find more games?`, answer: `Browse the ArcadeNexa Games section and use categories to explore titles that match your interests.` }
+      { question: `Where can I find more games?`, answer: `Browse the Arcadlo Games section and use categories to explore titles that match your interests.` }
     ],
   },
   {
@@ -246,7 +246,7 @@ export const articles: Article[] = [
     category: 'HISTORY',
     date: '2026-08-09',
     readTime: '7 min read',
-    intro: `Early browser games were limited by hardware, network speeds, and browser capabilities. Many experiences focused on simple graphics and interaction, but they established the idea that entertainment could live directly on the web. This article brings the main ideas together in a practical format for ArcadeNexa readers.`,
+    intro: `Early browser games were limited by hardware, network speeds, and browser capabilities. Many experiences focused on simple graphics and interaction, but they established the idea that entertainment could live directly on the web. This article brings the main ideas together in a practical format for Arcadlo readers.`,
     sections: [
       { heading: `The early web`, body: `Early browser games were limited by hardware, network speeds, and browser capabilities. Many experiences focused on simple graphics and interaction, but they established the idea that entertainment could live directly on the web.` },
       { heading: `The plug-in era`, body: `Browser plug-ins expanded what web games could do, enabling richer animation and interactive experiences. However, plug-ins also introduced compatibility and security challenges and eventually became less important as open web standards improved.` },
@@ -258,7 +258,7 @@ export const articles: Article[] = [
     faq: [
       { question: `How should a beginner start?`, answer: `Choose a genre that matches your current interests, learn the basic controls, and begin with short sessions. The goal is to understand the core mechanic before worrying about advanced techniques.` },
       { question: `Can these games be played on mobile?`, answer: `Many browser games support mobile devices, but compatibility depends on the individual title. Check the controls and layout before starting a longer session.` },
-      { question: `Where can I find more games?`, answer: `Browse the ArcadeNexa Games section and use categories to explore titles that match your interests.` }
+      { question: `Where can I find more games?`, answer: `Browse the Arcadlo Games section and use categories to explore titles that match your interests.` }
     ],
   },
   {
@@ -268,7 +268,7 @@ export const articles: Article[] = [
     category: 'GUIDE',
     date: '2026-08-09',
     readTime: '7 min read',
-    intro: `Updates can include performance improvements, security fixes, and compatibility changes. Using a current browser reduces avoidable problems. This article brings the main ideas together in a practical format for ArcadeNexa readers.`,
+    intro: `Updates can include performance improvements, security fixes, and compatibility changes. Using a current browser reduces avoidable problems. This article brings the main ideas together in a practical format for Arcadlo readers.`,
     sections: [
       { heading: `Keep the browser current`, body: `Updates can include performance improvements, security fixes, and compatibility changes. Using a current browser reduces avoidable problems.` },
       { heading: `Use a stable connection`, body: `If a game loads resources from the web, unstable connectivity can cause delays. A reliable Wi-Fi or mobile connection generally provides a smoother start.` },
@@ -280,7 +280,7 @@ export const articles: Article[] = [
     faq: [
       { question: `How should a beginner start?`, answer: `Choose a genre that matches your current interests, learn the basic controls, and begin with short sessions. The goal is to understand the core mechanic before worrying about advanced techniques.` },
       { question: `Can these games be played on mobile?`, answer: `Many browser games support mobile devices, but compatibility depends on the individual title. Check the controls and layout before starting a longer session.` },
-      { question: `Where can I find more games?`, answer: `Browse the ArcadeNexa Games section and use categories to explore titles that match your interests.` }
+      { question: `Where can I find more games?`, answer: `Browse the Arcadlo Games section and use categories to explore titles that match your interests.` }
     ],
   },
   {
@@ -290,7 +290,7 @@ export const articles: Article[] = [
     category: 'FEATURE',
     date: '2026-08-09',
     readTime: '7 min read',
-    intro: `Puzzle games give players a clear problem and a measurable sense of progress. Solving a level provides immediate feedback, which makes the genre accessible to both beginners and experienced players. This article brings the main ideas together in a practical format for ArcadeNexa readers.`,
+    intro: `Puzzle games give players a clear problem and a measurable sense of progress. Solving a level provides immediate feedback, which makes the genre accessible to both beginners and experienced players. This article brings the main ideas together in a practical format for Arcadlo readers.`,
     sections: [
       { heading: `The appeal of puzzles`, body: `Puzzle games give players a clear problem and a measurable sense of progress. Solving a level provides immediate feedback, which makes the genre accessible to both beginners and experienced players.` },
       { heading: `Classic foundations`, body: `Matching, word games, mazes, tile puzzles, and logic problems have existed in many forms for decades. Modern browser games reinterpret these ideas with new themes and presentation.` },
@@ -302,7 +302,7 @@ export const articles: Article[] = [
     faq: [
       { question: `How should a beginner start?`, answer: `Choose a genre that matches your current interests, learn the basic controls, and begin with short sessions. The goal is to understand the core mechanic before worrying about advanced techniques.` },
       { question: `Can these games be played on mobile?`, answer: `Many browser games support mobile devices, but compatibility depends on the individual title. Check the controls and layout before starting a longer session.` },
-      { question: `Where can I find more games?`, answer: `Browse the ArcadeNexa Games section and use categories to explore titles that match your interests.` }
+      { question: `Where can I find more games?`, answer: `Browse the Arcadlo Games section and use categories to explore titles that match your interests.` }
     ],
   },
   {
@@ -312,7 +312,7 @@ export const articles: Article[] = [
     category: 'COMPARISON',
     date: '2026-08-09',
     readTime: '7 min read',
-    intro: `Arcade racing emphasizes accessibility, immediate action, and forgiving controls. Vehicles may accelerate quickly, tracks can be visually dramatic, and the focus is often on fun rather than realism. This article brings the main ideas together in a practical format for ArcadeNexa readers.`,
+    intro: `Arcade racing emphasizes accessibility, immediate action, and forgiving controls. Vehicles may accelerate quickly, tracks can be visually dramatic, and the focus is often on fun rather than realism. This article brings the main ideas together in a practical format for Arcadlo readers.`,
     sections: [
       { heading: `Arcade racing`, body: `Arcade racing emphasizes accessibility, immediate action, and forgiving controls. Vehicles may accelerate quickly, tracks can be visually dramatic, and the focus is often on fun rather than realism.` },
       { heading: `Simulation-style racing`, body: `Simulation-oriented games attempt to model vehicle behavior more closely. Braking, traction, weight transfer, and racing lines can matter more, creating a deeper learning curve.` },
@@ -324,7 +324,7 @@ export const articles: Article[] = [
     faq: [
       { question: `How should a beginner start?`, answer: `Choose a genre that matches your current interests, learn the basic controls, and begin with short sessions. The goal is to understand the core mechanic before worrying about advanced techniques.` },
       { question: `Can these games be played on mobile?`, answer: `Many browser games support mobile devices, but compatibility depends on the individual title. Check the controls and layout before starting a longer session.` },
-      { question: `Where can I find more games?`, answer: `Browse the ArcadeNexa Games section and use categories to explore titles that match your interests.` }
+      { question: `Where can I find more games?`, answer: `Browse the Arcadlo Games section and use categories to explore titles that match your interests.` }
     ],
   },
   {
@@ -334,7 +334,7 @@ export const articles: Article[] = [
     category: 'LIFESTYLE',
     date: '2026-08-09',
     readTime: '7 min read',
-    intro: `Casual games often use simple rules and familiar interfaces. This allows players to begin quickly without reading a long manual. This article brings the main ideas together in a practical format for ArcadeNexa readers.`,
+    intro: `Casual games often use simple rules and familiar interfaces. This allows players to begin quickly without reading a long manual. This article brings the main ideas together in a practical format for Arcadlo readers.`,
     sections: [
       { heading: `Designed for accessibility`, body: `Casual games often use simple rules and familiar interfaces. This allows players to begin quickly without reading a long manual.` },
       { heading: `Short objectives`, body: `A level, puzzle, race, or challenge can provide a natural endpoint. This makes it easier to play for a few minutes without losing track of time.` },
@@ -346,7 +346,7 @@ export const articles: Article[] = [
     faq: [
       { question: `How should a beginner start?`, answer: `Choose a genre that matches your current interests, learn the basic controls, and begin with short sessions. The goal is to understand the core mechanic before worrying about advanced techniques.` },
       { question: `Can these games be played on mobile?`, answer: `Many browser games support mobile devices, but compatibility depends on the individual title. Check the controls and layout before starting a longer session.` },
-      { question: `Where can I find more games?`, answer: `Browse the ArcadeNexa Games section and use categories to explore titles that match your interests.` }
+      { question: `Where can I find more games?`, answer: `Browse the Arcadlo Games section and use categories to explore titles that match your interests.` }
     ],
   },
   {
@@ -356,7 +356,7 @@ export const articles: Article[] = [
     category: 'GUIDE',
     date: '2026-08-09',
     readTime: '7 min read',
-    intro: `Soccer titles can focus on shooting, passing, team management, or arcade challenges. Beginners should learn movement and timing before attempting advanced combinations. This article brings the main ideas together in a practical format for ArcadeNexa readers.`,
+    intro: `Soccer titles can focus on shooting, passing, team management, or arcade challenges. Beginners should learn movement and timing before attempting advanced combinations. This article brings the main ideas together in a practical format for Arcadlo readers.`,
     sections: [
       { heading: `Soccer games`, body: `Soccer titles can focus on shooting, passing, team management, or arcade challenges. Beginners should learn movement and timing before attempting advanced combinations.` },
       { heading: `Basketball games`, body: `Basketball games often reward timing and positioning. Practice basic shots first, then learn movement and defensive mechanics when available.` },
@@ -368,7 +368,7 @@ export const articles: Article[] = [
     faq: [
       { question: `How should a beginner start?`, answer: `Choose a genre that matches your current interests, learn the basic controls, and begin with short sessions. The goal is to understand the core mechanic before worrying about advanced techniques.` },
       { question: `Can these games be played on mobile?`, answer: `Many browser games support mobile devices, but compatibility depends on the individual title. Check the controls and layout before starting a longer session.` },
-      { question: `Where can I find more games?`, answer: `Browse the ArcadeNexa Games section and use categories to explore titles that match your interests.` }
+      { question: `Where can I find more games?`, answer: `Browse the Arcadlo Games section and use categories to explore titles that match your interests.` }
     ],
   },
   {
@@ -378,7 +378,7 @@ export const articles: Article[] = [
     category: 'GUIDE',
     date: '2026-08-09',
     readTime: '7 min read',
-    intro: `Fast reactions help, but strong action-game performance also depends on anticipation. Learning enemy patterns and understanding the level can reduce the number of decisions you need to make under pressure. This article brings the main ideas together in a practical format for ArcadeNexa readers.`,
+    intro: `Fast reactions help, but strong action-game performance also depends on anticipation. Learning enemy patterns and understanding the level can reduce the number of decisions you need to make under pressure. This article brings the main ideas together in a practical format for Arcadlo readers.`,
     sections: [
       { heading: `Reaction is only one skill`, body: `Fast reactions help, but strong action-game performance also depends on anticipation. Learning enemy patterns and understanding the level can reduce the number of decisions you need to make under pressure.` },
       { heading: `Master basic movement`, body: `Movement is often the foundation of action gameplay. Learn how quickly your character accelerates, turns, jumps, or changes direction before attempting difficult challenges.` },
@@ -390,7 +390,7 @@ export const articles: Article[] = [
     faq: [
       { question: `How should a beginner start?`, answer: `Choose a genre that matches your current interests, learn the basic controls, and begin with short sessions. The goal is to understand the core mechanic before worrying about advanced techniques.` },
       { question: `Can these games be played on mobile?`, answer: `Many browser games support mobile devices, but compatibility depends on the individual title. Check the controls and layout before starting a longer session.` },
-      { question: `Where can I find more games?`, answer: `Browse the ArcadeNexa Games section and use categories to explore titles that match your interests.` }
+      { question: `Where can I find more games?`, answer: `Browse the Arcadlo Games section and use categories to explore titles that match your interests.` }
     ],
   },
   {
@@ -400,7 +400,7 @@ export const articles: Article[] = [
     category: 'GUIDE',
     date: '2026-08-09',
     readTime: '7 min read',
-    intro: `If you already enjoy matching, racing, sports, or strategy games, begin with that family of mechanics. Familiarity reduces the learning curve. This article brings the main ideas together in a practical format for ArcadeNexa readers.`,
+    intro: `If you already enjoy matching, racing, sports, or strategy games, begin with that family of mechanics. Familiarity reduces the learning curve. This article brings the main ideas together in a practical format for Arcadlo readers.`,
     sections: [
       { heading: `Start with familiar mechanics`, body: `If you already enjoy matching, racing, sports, or strategy games, begin with that family of mechanics. Familiarity reduces the learning curve.` },
       { heading: `Then try one nearby genre`, body: `Once you know what you like, experiment with a related category. Racing fans might try action driving; puzzle fans might try strategy or word games.` },
@@ -412,7 +412,7 @@ export const articles: Article[] = [
     faq: [
       { question: `How should a beginner start?`, answer: `Choose a genre that matches your current interests, learn the basic controls, and begin with short sessions. The goal is to understand the core mechanic before worrying about advanced techniques.` },
       { question: `Can these games be played on mobile?`, answer: `Many browser games support mobile devices, but compatibility depends on the individual title. Check the controls and layout before starting a longer session.` },
-      { question: `Where can I find more games?`, answer: `Browse the ArcadeNexa Games section and use categories to explore titles that match your interests.` }
+      { question: `Where can I find more games?`, answer: `Browse the Arcadlo Games section and use categories to explore titles that match your interests.` }
     ],
   },
   {
@@ -422,7 +422,7 @@ export const articles: Article[] = [
     category: 'EXPLAINER',
     date: '2026-08-09',
     readTime: '7 min read',
-    intro: `Puzzle games focus on solving problems, recognizing patterns, arranging objects, or reaching a logical solution. They are often ideal for players who enjoy thinking and experimentation. This article brings the main ideas together in a practical format for ArcadeNexa readers.`,
+    intro: `Puzzle games focus on solving problems, recognizing patterns, arranging objects, or reaching a logical solution. They are often ideal for players who enjoy thinking and experimentation. This article brings the main ideas together in a practical format for Arcadlo readers.`,
     sections: [
       { heading: `Puzzle`, body: `Puzzle games focus on solving problems, recognizing patterns, arranging objects, or reaching a logical solution. They are often ideal for players who enjoy thinking and experimentation.` },
       { heading: `Action`, body: `Action games emphasize movement, timing, reactions, and immediate decisions. They can range from simple arcade challenges to more complex combat experiences.` },
@@ -434,7 +434,7 @@ export const articles: Article[] = [
     faq: [
       { question: `How should a beginner start?`, answer: `Choose a genre that matches your current interests, learn the basic controls, and begin with short sessions. The goal is to understand the core mechanic before worrying about advanced techniques.` },
       { question: `Can these games be played on mobile?`, answer: `Many browser games support mobile devices, but compatibility depends on the individual title. Check the controls and layout before starting a longer session.` },
-      { question: `Where can I find more games?`, answer: `Browse the ArcadeNexa Games section and use categories to explore titles that match your interests.` }
+      { question: `Where can I find more games?`, answer: `Browse the Arcadlo Games section and use categories to explore titles that match your interests.` }
     ],
   },
   {
@@ -444,7 +444,7 @@ export const articles: Article[] = [
     category: 'FUTURE',
     date: '2026-08-09',
     readTime: '7 min read',
-    intro: `Browser graphics capabilities continue to improve. Better rendering APIs and more capable devices allow developers to create increasingly detailed environments while retaining the convenience of web delivery. This article brings the main ideas together in a practical format for ArcadeNexa readers.`,
+    intro: `Browser graphics capabilities continue to improve. Better rendering APIs and more capable devices allow developers to create increasingly detailed environments while retaining the convenience of web delivery. This article brings the main ideas together in a practical format for Arcadlo readers.`,
     sections: [
       { heading: `Richer web graphics`, body: `Browser graphics capabilities continue to improve. Better rendering APIs and more capable devices allow developers to create increasingly detailed environments while retaining the convenience of web delivery.` },
       { heading: `Smarter asset delivery`, body: `Efficient loading is important because players expect fast access. Developers can split resources into smaller pieces and load what is needed when it is needed.` },
@@ -456,7 +456,7 @@ export const articles: Article[] = [
     faq: [
       { question: `How should a beginner start?`, answer: `Choose a genre that matches your current interests, learn the basic controls, and begin with short sessions. The goal is to understand the core mechanic before worrying about advanced techniques.` },
       { question: `Can these games be played on mobile?`, answer: `Many browser games support mobile devices, but compatibility depends on the individual title. Check the controls and layout before starting a longer session.` },
-      { question: `Where can I find more games?`, answer: `Browse the ArcadeNexa Games section and use categories to explore titles that match your interests.` }
+      { question: `Where can I find more games?`, answer: `Browse the Arcadlo Games section and use categories to explore titles that match your interests.` }
     ],
   }
 ]
@@ -474,18 +474,18 @@ export const seoArticles = [
     readTime: '8 min read',
     intro: 'Finding games that actually work on school networks can be frustrating. Most gaming sites get blocked, and Flash is gone. This guide covers browser games that may work on compatible school networks, including Chromebook, with no download or login required.',
     sections: [
-      { heading: 'Why most games get blocked at school', body: 'School networks use content filters that block domains categorized as gaming or entertainment. The good news is that HTML5 games hosted on educational-friendly domains often bypass these filters. ArcadeNexa hosts 15,000+ HTML5 games that work directly in your browser without any plugin or download.' },
-      { heading: 'Best unblocked game genres for school', body: 'Puzzle games are the top choice for school breaks — they are quiet, require no sound, and can be paused instantly. Casual games like match-3 and idle games also work well. Racing and action games are popular for longer breaks. All categories are available on ArcadeNexa with instant play.' },
-      { heading: 'Do these games work on Chromebook?', body: 'Yes. Chromebooks are the most common school device, and HTML5 games run natively in Chrome without any installation. Every game on ArcadeNexa is Chromebook-compatible. Simply open the browser, visit the site, and start playing.' },
-      { heading: 'Top Unblocked Game Categories', body: 'Popular unblocked game types include: puzzle games, .IO multiplayer games like Agar.io and Slither.io, casual clicker games, unblocked racing games, and math-based brain games. ArcadeNexa covers all of these across 47 categories.' },
+      { heading: 'Why most games get blocked at school', body: 'School networks use content filters that block domains categorized as gaming or entertainment. The good news is that HTML5 games hosted on educational-friendly domains often bypass these filters. Arcadlo hosts 15,000+ HTML5 games that work directly in your browser without any plugin or download.' },
+      { heading: 'Best unblocked game genres for school', body: 'Puzzle games are the top choice for school breaks — they are quiet, require no sound, and can be paused instantly. Casual games like match-3 and idle games also work well. Racing and action games are popular for longer breaks. All categories are available on Arcadlo with instant play.' },
+      { heading: 'Do these games work on Chromebook?', body: 'Yes. Chromebooks are the most common school device, and HTML5 games run natively in Chrome without any installation. Every game on Arcadlo is Chromebook-compatible. Simply open the browser, visit the site, and start playing.' },
+      { heading: 'Top Unblocked Game Categories', body: 'Popular unblocked game types include: puzzle games, .IO multiplayer games like Agar.io and Slither.io, casual clicker games, unblocked racing games, and math-based brain games. Arcadlo covers all of these across 47 categories.' },
       { heading: 'How to play without getting caught', body: 'Choose games that do not require sound — most browser games have a mute button. Pick games with a clean interface that can be minimized quickly. Puzzle and casual games are ideal because they look productive and can be paused instantly.' },
-      { heading: 'ArcadeNexa vs other unblocked game sites', body: 'Unlike Unblocked Games 76 or similar sites, ArcadeNexa offers a modern interface, mobile-friendly design, and 15,000+ curated HTML5 games from trusted providers. No outdated Flash content, no broken links, and no sketchy ads.' },
+      { heading: 'Arcadlo vs other unblocked game sites', body: 'Unlike Unblocked Games 76 or similar sites, Arcadlo offers a modern interface, mobile-friendly design, and 15,000+ curated HTML5 games from trusted providers. No outdated Flash content, no broken links, and no sketchy ads.' },
     ],
     faq: [
-      { question: 'Are unblocked games safe to play at school?', answer: 'HTML5 games on reputable platforms like ArcadeNexa are safe. They run inside your browser and do not require downloading any files.' },
-      { question: 'What Are the Most Popular Unblocked Games?', answer: 'Popular choices include puzzle games, .IO games, casual clicker games, and arcade games. Browse ArcadeNexa categories to find trending titles.' },
+      { question: 'Are unblocked games safe to play at school?', answer: 'HTML5 games on reputable platforms like Arcadlo are safe. They run inside your browser and do not require downloading any files.' },
+      { question: 'What Are the Most Popular Unblocked Games?', answer: 'Popular choices include puzzle games, .IO games, casual clicker games, and arcade games. Browse Arcadlo categories to find trending titles.' },
       { question: 'Do unblocked games work on school Wi-Fi?', answer: 'Many HTML5 game sites work on school Wi-Fi. Results depend on your school\'s specific firewall settings.' },
-      { question: 'Can I play unblocked games on my phone at school?', answer: 'Yes. ArcadeNexa is fully mobile-optimized and works on any smartphone or tablet browser.' },
+      { question: 'Can I play unblocked games on my phone at school?', answer: 'Yes. Arcadlo is fully mobile-optimized and works on any smartphone or tablet browser.' },
     ],
   },
   {
@@ -497,16 +497,16 @@ export const seoArticles = [
     readTime: '7 min read',
     intro: 'The best free online games are the ones you can play right now — no app store, no installation, no waiting. HTML5 browser games have made instant play a reality across every device. Here is everything you need to know about finding and playing free games with no download required.',
     sections: [
-      { heading: 'What makes a game truly free to play', body: 'A genuinely free browser game requires no purchase, no subscription, and no account creation. ArcadeNexa offers 15,000+ games that are completely free, with no login required. Simply click a game and start playing in seconds.' },
+      { heading: 'What makes a game truly free to play', body: 'A genuinely free browser game requires no purchase, no subscription, and no account creation. Arcadlo offers 15,000+ games that are completely free, with no login required. Simply click a game and start playing in seconds.' },
       { heading: 'Best free puzzle games online', body: 'Puzzle games are among the most popular free browser games. Match-3 games, block puzzles, word games, and logic challenges all run perfectly in any modern browser. They load quickly and work on both desktop and mobile.' },
-      { heading: 'Best free action games no download', body: 'Action games that run in the browser include shooters, platformers, fighting games, and endless runners. HTML5 technology delivers smooth gameplay without any installation. ArcadeNexa features hundreds of free action titles across multiple sub-genres.' },
-      { heading: 'Free multiplayer games in your browser', body: '.IO games are the kings of free multiplayer browser gaming. Games like Agar.io, Slither.io, and similar titles let you compete against real players worldwide without downloading anything. Find them all in the IO category on ArcadeNexa.' },
+      { heading: 'Best free action games no download', body: 'Action games that run in the browser include shooters, platformers, fighting games, and endless runners. HTML5 technology delivers smooth gameplay without any installation. Arcadlo features hundreds of free action titles across multiple sub-genres.' },
+      { heading: 'Free multiplayer games in your browser', body: '.IO games are the kings of free multiplayer browser gaming. Games like Agar.io, Slither.io, and similar titles let you compete against real players worldwide without downloading anything. Find them all in the IO category on Arcadlo.' },
       { heading: 'Free racing games online', body: 'Browser-based racing games offer fast action with no download. From simple arcade racers to more detailed driving games, the genre is well represented in HTML5. Many titles support both keyboard and touch controls.' },
-      { heading: 'How to find the best free games quickly', body: 'Use category filters to narrow your search. Read the game description to check controls and platform compatibility. Start with highly rated titles and explore related games from there. ArcadeNexa\'s 47 categories make discovery straightforward.' },
+      { heading: 'How to find the best free games quickly', body: 'Use category filters to narrow your search. Read the game description to check controls and platform compatibility. Start with highly rated titles and explore related games from there. Arcadlo\'s 47 categories make discovery straightforward.' },
     ],
     faq: [
-      { question: 'Are all games on ArcadeNexa really free?', answer: 'Yes. All 15,000+ games on ArcadeNexa are free to play with no login or payment required.' },
-      { question: 'Do free browser games work on mobile?', answer: 'Most HTML5 games on ArcadeNexa are mobile-optimized and work on smartphones and tablets.' },
+      { question: 'Are all games on Arcadlo really free?', answer: 'Yes. All 15,000+ games on Arcadlo are free to play with no login or payment required.' },
+      { question: 'Do free browser games work on mobile?', answer: 'Most HTML5 games on Arcadlo are mobile-optimized and work on smartphones and tablets.' },
       { question: 'Is it safe to play free online games?', answer: 'Playing games on reputable HTML5 gaming platforms is safe. No downloads means no risk of installing unwanted software.' },
       { question: 'Can I play free games offline?', answer: 'Most browser games require an internet connection to load. Some may cache assets for limited offline use depending on the title.' },
     ],
@@ -525,13 +525,13 @@ export const seoArticles = [
       { heading: 'Best .IO games for free periods', body: '.IO multiplayer games are ideal for longer free periods. You can join a game, compete for a few minutes, and leave without losing any progress. Popular .IO games include territory games, survival games, and competitive skill games.' },
       { heading: 'Games that work silently', body: 'Sound is the biggest giveaway when gaming at school. Choose games with a visible mute button and disable sound immediately. Puzzle games, strategy games, and card games all work perfectly without any audio.' },
       { heading: 'Racing and action games for lunch breaks', body: 'If you have a longer break, racing and action games provide more excitement. They are fast, engaging, and easy to understand. Most browser racing games use simple keyboard or touch controls and launch in under 10 seconds.' },
-      { heading: 'How to find new games quickly', body: 'ArcadeNexa organizes 15,000+ games across 47 categories. Browse by genre, check the trending section for popular titles, or search for a specific game type. Every game starts instantly with no account needed.' },
+      { heading: 'How to find new games quickly', body: 'Arcadlo organizes 15,000+ games across 47 categories. Browse by genre, check the trending section for popular titles, or search for a specific game type. Every game starts instantly with no account needed.' },
     ],
     faq: [
-      { question: 'What games can I play at school on a Chromebook?', answer: 'Any HTML5 game on ArcadeNexa works on Chromebook. The Chrome browser runs these games natively with no plugins required.' },
+      { question: 'What games can I play at school on a Chromebook?', answer: 'Any HTML5 game on Arcadlo works on Chromebook. The Chrome browser runs these games natively with no plugins required.' },
       { question: 'What are the quietest games to play at school?', answer: 'Puzzle, strategy, card, and casual games work best at school because they do not require sound and can be paused instantly.' },
-      { question: 'Are these games free?', answer: 'Yes. All games on ArcadeNexa are completely free with no login required.' },
-      { question: 'Can I play these games on my phone during break?', answer: 'Absolutely. ArcadeNexa is fully mobile-optimized and works on any smartphone browser.' },
+      { question: 'Are these games free?', answer: 'Yes. All games on Arcadlo are completely free with no login required.' },
+      { question: 'Can I play these games on my phone during break?', answer: 'Absolutely. Arcadlo is fully mobile-optimized and works on any smartphone browser.' },
     ],
   },
 ]
@@ -565,7 +565,7 @@ export const highTrafficArticles: Article[] = [
       },
       {
         heading: "Where to Play IO Games",
-        body: "ArcadeNexa offers browser games that can be played instantly without a traditional installation. Browse the multiplayer and action-related categories to discover titles that match your preferred style."
+        body: "Arcadlo offers browser games that can be played instantly without a traditional installation. Browse the multiplayer and action-related categories to discover titles that match your preferred style."
       }
     ],
     faq: [
@@ -610,8 +610,8 @@ export const highTrafficArticles: Article[] = [
         body: "Parking games focus on spatial awareness and precision. More advanced driving games can introduce traffic, obstacles, larger vehicles, and increasingly complex routes."
       },
       {
-        heading: "Play Car Games on ArcadeNexa",
-        body: "ArcadeNexa offers browser games across racing, driving, action, and casual categories. Games can be explored by category to find titles suited to different devices and control preferences."
+        heading: "Play Car Games on Arcadlo",
+        body: "Arcadlo offers browser games across racing, driving, action, and casual categories. Games can be explored by category to find titles suited to different devices and control preferences."
       }
     ],
     faq: [
@@ -656,8 +656,8 @@ export const highTrafficArticles: Article[] = [
         body: "Pattern recognition, sequences, spatial reasoning, and logic puzzles can develop broader mathematical thinking beyond basic arithmetic."
       },
       {
-        heading: "Finding Educational Games on ArcadeNexa",
-        body: "ArcadeNexa includes educational, puzzle, memory, and number-based browser games. Players can explore categories to find challenges appropriate for their interests and ability level."
+        heading: "Finding Educational Games on Arcadlo",
+        body: "Arcadlo includes educational, puzzle, memory, and number-based browser games. Players can explore categories to find challenges appropriate for their interests and ability level."
       }
     ],
     faq: [
@@ -702,8 +702,8 @@ export const highTrafficArticles: Article[] = [
         body: "Survival shooters add pressure through enemy waves, limited resources, and escalating difficulty. Players often need to balance movement, positioning, and ammunition management."
       },
       {
-        heading: "Play Shooting Games on ArcadeNexa",
-        body: "ArcadeNexa provides browser games across shooter and action categories. Explore available titles to find arcade challenges, survival games, and other fast-paced experiences."
+        heading: "Play Shooting Games on Arcadlo",
+        body: "Arcadlo provides browser games across shooter and action categories. Explore available titles to find arcade challenges, survival games, and other fast-paced experiences."
       }
     ],
     faq: [
@@ -748,8 +748,8 @@ export const highTrafficArticles: Article[] = [
         body: "Word games can challenge vocabulary, spelling, pattern recognition, and lateral thinking through formats such as anagrams, word building, and definition-based challenges."
       },
       {
-        heading: "Find Puzzle Games on ArcadeNexa",
-        body: "ArcadeNexa offers puzzle, brain, casual, and memory-related browser games. Browse available categories to find a challenge that suits your preferred style."
+        heading: "Find Puzzle Games on Arcadlo",
+        body: "Arcadlo offers puzzle, brain, casual, and memory-related browser games. Browse available categories to find a challenge that suits your preferred style."
       }
     ],
     faq: [

@@ -1,8 +1,8 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Terms of Service - ArcadeNexa',
-  description: 'ArcadeNexa terms of service',
+  title: 'Terms of Service - Arcadlo',
+  description: 'Arcadlo terms of service',
   alternates: { canonical: '/terms' },
 }
 
@@ -10,38 +10,38 @@ export default function TermsPage() {
   return (
     <div className="py-20 px-4 sm:px-6 max-w-4xl mx-auto animate-fade-in">
       <h1 className="text-5xl font-black text-[color:var(--text-primary)] mb-2">Terms of Service</h1>
-      <p className="text-[color:var(--text-secondary)] mb-10">Please read these terms carefully before using ArcadeNexa.</p>
+      <p className="text-[color:var(--text-secondary)] mb-10">Please read these terms carefully before using Arcadlo.</p>
 
       <div className="space-y-6 text-[color:var(--text-secondary)]">
 
         <section className="glass p-6 rounded-xl border border-[color:var(--white-05)]">
           <h2 className="text-[color:var(--text-primary)] font-bold text-xl mb-3">1. Acceptance of Terms</h2>
-          <p>By accessing and using ArcadeNexa, you agree to be bound by these Terms of Service. If you do not agree, please do not use our platform.</p>
+          <p>By accessing and using Arcadlo, you agree to be bound by these Terms of Service. If you do not agree, please do not use our platform.</p>
         </section>
 
         <section className="glass p-6 rounded-xl border border-[color:var(--white-05)]">
           <h2 className="text-[color:var(--text-primary)] font-bold text-xl mb-3">2. Use of the Platform</h2>
-          <p>ArcadeNexa is a free browser gaming platform. You may use it for personal, non-commercial purposes. You agree not to misuse the platform, attempt to hack or disrupt services, or use automated tools to access games.</p>
+          <p>Arcadlo is a free browser gaming platform. You may use it for personal, non-commercial purposes. You agree not to misuse the platform, attempt to hack or disrupt services, or use automated tools to access games.</p>
         </section>
 
         <section className="glass p-6 rounded-xl border border-[color:var(--white-05)]">
           <h2 className="text-[color:var(--text-primary)] font-bold text-xl mb-3">3. Age Requirements</h2>
-          <p>ArcadeNexa is suitable for users aged 13 and above. Users under 18 should have parental consent before using the platform.</p>
+          <p>Arcadlo is suitable for users aged 13 and above. Users under 18 should have parental consent before using the platform.</p>
         </section>
 
         <section className="glass p-6 rounded-xl border border-[color:var(--white-05)]">
           <h2 className="text-[color:var(--text-primary)] font-bold text-xl mb-3">4. Intellectual Property</h2>
-          <p>All games on ArcadeNexa are provided by third-party developers and providers such as GamePix and GameMonetize. ArcadeNexa does not claim ownership of these games. The ArcadeNexa name, logo, and design are our intellectual property.</p>
+          <p>All games on Arcadlo are provided by third-party developers and providers such as GamePix and GameMonetize. Arcadlo does not claim ownership of these games. The Arcadlo name, logo, and design are our intellectual property.</p>
         </section>
 
         <section className="glass p-6 rounded-xl border border-[color:var(--white-05)]">
           <h2 className="text-[color:var(--text-primary)] font-bold text-xl mb-3">5. Disclaimer</h2>
-          <p>ArcadeNexa is provided "as is" without warranties of any kind. We are not responsible for issues caused by third-party game providers. We reserve the right to modify or discontinue the service at any time.</p>
+          <p>Arcadlo is provided "as is" without warranties of any kind. We are not responsible for issues caused by third-party game providers. We reserve the right to modify or discontinue the service at any time.</p>
         </section>
 
         <section className="glass p-6 rounded-xl border border-[color:var(--white-05)]">
           <h2 className="text-[color:var(--text-primary)] font-bold text-xl mb-3">6. Changes to Terms</h2>
-          <p>We may update these terms from time to time. Continued use of ArcadeNexa after changes constitutes acceptance of the new terms.</p>
+          <p>We may update these terms from time to time. Continued use of Arcadlo after changes constitutes acceptance of the new terms.</p>
         </section>
 
         <section className="glass p-6 rounded-xl border border-[color:var(--white-05)]">

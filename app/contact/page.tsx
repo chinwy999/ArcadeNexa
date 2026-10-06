@@ -3,7 +3,7 @@ import ContactClient from './ContactClient'
 
 export const metadata: Metadata = {
   title: 'Contact Us',
-  description: 'Contact ArcadeNexa support',
+  description: 'Contact Arcadlo support',
   alternates: { canonical: '/contact' },
 }
 

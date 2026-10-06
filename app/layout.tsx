@@ -9,24 +9,24 @@ const siteUrl = getSiteUrl()
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: 'ArcadeNexa - Free HTML5 Games Online',
-    template: '%s | ArcadeNexa',
+    default: 'Arcadlo - Free HTML5 Games Online',
+    template: '%s | Arcadlo',
   },
-  description: 'Play 15,000+ free HTML5 games instantly on ArcadeNexa. No download, no registration required. Action, Puzzle, Racing, Sports and more!',
-  keywords: ['HTML5 games', 'free online games', 'browser games', 'instant play', 'ArcadeNexa', 'no download games'],
-  authors: [{ name: 'ArcadeNexa' }],
-  creator: 'ArcadeNexa',
+  description: 'Play 15,000+ free HTML5 games instantly on Arcadlo. No download, no registration required. Action, Puzzle, Racing, Sports and more!',
+  keywords: ['HTML5 games', 'free online games', 'browser games', 'instant play', 'Arcadlo', 'no download games'],
+  authors: [{ name: 'Arcadlo' }],
+  creator: 'Arcadlo',
   openGraph: {
     type: 'website',
     locale: 'en_US',
     url: siteUrl,
-    title: 'ArcadeNexa - Free HTML5 Games Online',
+    title: 'Arcadlo - Free HTML5 Games Online',
     description: 'Play 15,000+ free HTML5 games instantly. No download, no registration required.',
-    siteName: 'ArcadeNexa',
+    siteName: 'Arcadlo',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'ArcadeNexa - Free HTML5 Games Online',
+    title: 'Arcadlo - Free HTML5 Games Online',
     description: 'Play 15,000+ free HTML5 games instantly. No download required.',
   },
   robots: {
@@ -60,14 +60,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <script type="application/ld+json" dangerouslySetInnerHTML={{__html: JSON.stringify({
           "@context": "https://schema.org",
           "@type": "Organization",
-          "name": "ArcadeNexa",
+          "name": "Arcadlo",
           "url": siteUrl,
           "description": "Free HTML5 gaming platform with 15,000+ instant play games"
         })}} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{__html: JSON.stringify({
           "@context": "https://schema.org",
           "@type": "WebSite",
-          "name": "ArcadeNexa",
+          "name": "Arcadlo",
           "url": siteUrl,
           "potentialAction": {
             "@type": "SearchAction",

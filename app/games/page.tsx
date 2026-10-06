@@ -29,7 +29,7 @@ export async function generateMetadata({
 
   const description = selectedCategoryContent
     ? selectedCategoryContent.metaDescription
-    : 'Play 15,000+ free HTML5 games online on ArcadeNexa. Discover action, puzzle, racing, sports, strategy and casual games instantly with no download or registration.'
+    : 'Play 15,000+ free HTML5 games online on Arcadlo. Discover action, puzzle, racing, sports, strategy and casual games instantly with no download or registration.'
 
   const params = new URLSearchParams()
 
@@ -53,7 +53,7 @@ export async function generateMetadata({
       'browser games',
       'instant play games',
       'arcade games',
-      'ArcadeNexa',
+      'Arcadlo',
     ],
     alternates: {
       canonical,
@@ -63,7 +63,7 @@ export async function generateMetadata({
       url: canonical,
       title,
       description,
-      siteName: 'ArcadeNexa',
+      siteName: 'Arcadlo',
     },
     twitter: {
       card: 'summary_large_image',

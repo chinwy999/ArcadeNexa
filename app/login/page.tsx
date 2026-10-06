@@ -3,7 +3,7 @@ import LoginClient from './LoginClient'
 
 export const metadata: Metadata = {
   title: 'Login',
-  description: 'Login to ArcadeNexa — continue your journey',
+  description: 'Login to Arcadlo — continue your journey',
   alternates: { canonical: '/login' },
 }
 

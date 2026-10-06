@@ -104,7 +104,7 @@ function isSpaceGame(game: Partial<Game>): boolean {
  * CUSTOM CATEGORY STREAMS
  * ---------------------------------------------------------
  *
- * Some ArcadeNexa categories do not exist as native GamePix
+ * Some Arcadlo categories do not exist as native GamePix
  * categories. These streams classify the persistent catalog
  * locally instead of asking GamePix for a nonexistent slug.
  *
@@ -116,7 +116,7 @@ function isSpaceGame(game: Partial<Game>): boolean {
  * CUSTOM CATEGORY STREAMS
  * ---------------------------------------------------------
  *
- * Some ArcadeNexa categories do not exist as native GamePix
+ * Some Arcadlo categories do not exist as native GamePix
  * categories. These streams classify the persistent catalog
  * locally using conservative, evidence-based rules.
  *
@@ -369,7 +369,7 @@ function getCustomCatalogCategoryGames(
 
   if (!persistent) {
     console.warn(
-      `[ArcadeNexa] Persistent GamePix catalog unavailable for custom category: ${normalized}`
+      `[Arcadlo] Persistent GamePix catalog unavailable for custom category: ${normalized}`
     )
     return null
   }
@@ -542,7 +542,7 @@ function buildGameDescriptions({
       : ''
 
   const seoBase =
-    `${gameTitle} is a free ${gameCategory} browser game on ArcadeNexa. ` +
+    `${gameTitle} is a free ${gameCategory} browser game on Arcadlo. ` +
     `Play instantly with no download required.`
 
   const makeSeoDescription = (text: string) => {
@@ -559,7 +559,7 @@ function buildGameDescriptions({
     }
 
     const fallback =
-      `${normalized} Play ${gameTitle} free online on ArcadeNexa with no download required.`
+      `${normalized} Play ${gameTitle} free online on Arcadlo with no download required.`
 
     if (fallback.length <= 160) {
       return fallback
@@ -583,8 +583,8 @@ function buildGameDescriptions({
     : ' Use the on-screen instructions and controls provided by the game.'
 
   const longDescription = usefulDescription
-    ? `${usefulDescription}${tagText}${instructionText} Play ${gameTitle} for free on ArcadeNexa and enjoy an instant browser gaming experience with no download required.`
-    : `${gameTitle} is a free ${gameCategory} browser game available on ArcadeNexa. Play instantly in your browser with no download or installation required.${tagText}${instructionText} Start playing ${gameTitle} directly from its game page and discover a quick, accessible browser gaming experience.`
+    ? `${usefulDescription}${tagText}${instructionText} Play ${gameTitle} for free on Arcadlo and enjoy an instant browser gaming experience with no download required.`
+    : `${gameTitle} is a free ${gameCategory} browser game available on Arcadlo. Play instantly in your browser with no download or installation required.${tagText}${instructionText} Start playing ${gameTitle} directly from its game page and discover a quick, accessible browser gaming experience.`
 
   return {
     description: shortDescription,
@@ -614,7 +614,7 @@ export function convertGame(item: GamePixItem): Game {
 
   const category = item.category || 'arcade'
 
-  // ArcadeNexa Score:
+  // Arcadlo Score:
   // Internal quality score calculated from 5 factors.
   const rating = calculateArcadeNexaScore({
     rating: 5.5 + quality * 4.5,
@@ -707,7 +707,7 @@ async function loadGames(): Promise<Game[]> {
   if (loadingPromise) return loadingPromise
 
   loadingPromise = (async () => {
-    console.log('[ArcadeNexa] Loading GamePix catalog...')
+    console.log('[Arcadlo] Loading GamePix catalog...')
     const allItems: GamePixItem[] = []
     const seen = new Set<string>()
 
@@ -726,7 +726,7 @@ async function loadGames(): Promise<Game[]> {
         if (!result.nextPage) break
 
       } catch (error) {
-        console.error(`[ArcadeNexa] Failed page ${page}:`, error)
+        console.error(`[Arcadlo] Failed page ${page}:`, error)
         break
       }
     }
@@ -745,7 +745,7 @@ async function loadGames(): Promise<Game[]> {
     cacheTimestamp = Date.now()
     loadingPromise = null
 
-    console.log(`[ArcadeNexa] Loaded ${cachedGames.length} games`)
+    console.log(`[Arcadlo] Loaded ${cachedGames.length} games`)
     return cachedGames
   })()
 
@@ -777,13 +777,13 @@ export async function getRealGameCount(): Promise<number> {
     realGameCountCache.expiresAt > now
   ) {
     console.log(
-      `[ArcadeNexa] REAL catalog count cache HIT: ${realGameCountCache.value}`
+      `[Arcadlo] REAL catalog count cache HIT: ${realGameCountCache.value}`
     )
     return realGameCountCache.value
   }
 
   if (realGameCountInflight) {
-    console.log("[ArcadeNexa] REAL catalog count inflight JOIN")
+    console.log("[Arcadlo] REAL catalog count inflight JOIN")
     return realGameCountInflight
   }
 
@@ -844,7 +844,7 @@ export async function getRealGameCount(): Promise<number> {
       }
     } catch (error) {
       console.error(
-        '[ArcadeNexa] Failed to determine GameMonetize count:',
+        '[Arcadlo] Failed to determine GameMonetize count:',
         error
       )
     }
@@ -855,13 +855,13 @@ export async function getRealGameCount(): Promise<number> {
     realGameCountTimestamp = now
 
     console.log(
-      `[ArcadeNexa] REAL catalog count: GamePix=${gamePixCount}, GameMonetize=${gameMonetizeCount}, Total=${exactCount}`
+      `[Arcadlo] REAL catalog count: GamePix=${gamePixCount}, GameMonetize=${gameMonetizeCount}, Total=${exactCount}`
     )
 
     return exactCount
   } catch (error) {
     console.error(
-      '[ArcadeNexa] Failed to determine real catalog count:',
+      '[Arcadlo] Failed to determine real catalog count:',
       error
     )
 
@@ -879,7 +879,7 @@ export async function getRealGameCount(): Promise<number> {
     }
 
     console.log(
-      `[ArcadeNexa] REAL catalog count cached: ${value}`
+      `[Arcadlo] REAL catalog count cached: ${value}`
     )
 
     return value
@@ -941,7 +941,7 @@ function getPersistentRelatedGamesIndex(
   persistentRelatedGamesIndex = index
 
   console.log(
-    `[ArcadeNexa] Related games index built: ${catalog.length} games, ${index.size} keys`
+    `[Arcadlo] Related games index built: ${catalog.length} games, ${index.size} keys`
   )
 
   return index
@@ -1036,7 +1036,7 @@ export function getRelatedGamesFromCatalog(
     }
   } catch (error) {
     console.error(
-      `[ArcadeNexa] Related games catalog lookup failed ` +
+      `[Arcadlo] Related games catalog lookup failed ` +
       `(slug=${game.slug}, category=${game.category}):`,
       error
     )
@@ -1063,21 +1063,21 @@ export async function getHomeGames(): Promise<Game[]> {
     homeGamesCache.expiresAt > now
   ) {
     console.log(
-      `[ArcadeNexa] Home catalog cache HIT: ${homeGamesCache.value.length} games`
+      `[Arcadlo] Home catalog cache HIT: ${homeGamesCache.value.length} games`
     )
 
     return homeGamesCache.value
   }
 
   if (homeGamesInflight) {
-    console.log("[ArcadeNexa] Home catalog inflight JOIN")
+    console.log("[Arcadlo] Home catalog inflight JOIN")
 
     return homeGamesInflight
   }
 
   homeGamesInflight = (async () => {
     try {
-      console.log('[ArcadeNexa] Loading fast home catalog...')
+      console.log('[Arcadlo] Loading fast home catalog...')
 
       const [gpResult, gmResult] = await Promise.all([
         fetchGamesPage(1, 96, 'quality'),
@@ -1102,13 +1102,13 @@ export async function getHomeGames(): Promise<Game[]> {
         .slice(0, 32)
 
       console.log(
-        `[ArcadeNexa] Home catalog ready: ${result.length} games`
+        `[Arcadlo] Home catalog ready: ${result.length} games`
       )
 
       return result
     } catch (error) {
       console.error(
-        '[ArcadeNexa] Fast home catalog failed:',
+        '[Arcadlo] Fast home catalog failed:',
         error
       )
 
@@ -1131,7 +1131,7 @@ export async function getHomeGames(): Promise<Game[]> {
     }
 
     console.log(
-      `[ArcadeNexa] Home catalog cached: ${value.length} games`
+      `[Arcadlo] Home catalog cached: ${value.length} games`
     )
 
     return value
@@ -1150,9 +1150,9 @@ export async function getGamesPage(
   const normalizedGenre = normalizeGenre(genre)
 
   /*
-   * ARCADENEXA PAGINATION MODEL
+   * ARCADLO PAGINATION MODEL
    *
-   * Each ArcadeNexa page contains up to:
+   * Each Arcadlo page contains up to:
    *   24 GameMonetize + 24 GamePix
    *
    * Each provider is treated as an independent stream.
@@ -1205,7 +1205,7 @@ export async function getGamesPage(
           customGames.length > customOffset + safeSize
 
         console.log(
-          `[ArcadeNexa] Custom catalog stream: ` +
+          `[Arcadlo] Custom catalog stream: ` +
           `genre=${normalizedGenre}, ` +
           `total=${customGames.length}, ` +
           `page=${safePage}, ` +
@@ -1219,7 +1219,7 @@ export async function getGamesPage(
       }
     } catch (error) {
       console.error(
-        `[ArcadeNexa] Custom catalog stream unavailable ` +
+        `[Arcadlo] Custom catalog stream unavailable ` +
         `(genre=${normalizedGenre}):`,
         error
       )
@@ -1271,7 +1271,7 @@ export async function getGamesPage(
           spaceGames.length > spaceOffset + safeSize
 
         console.log(
-          `[ArcadeNexa] Custom Space stream: ` +
+          `[Arcadlo] Custom Space stream: ` +
           `total=${spaceGames.length}, ` +
           `page=${safePage}, ` +
           `offset=${spaceOffset}, ` +
@@ -1285,11 +1285,11 @@ export async function getGamesPage(
       }
 
       console.warn(
-        '[ArcadeNexa] Persistent GamePix catalog unavailable for Space'
+        '[Arcadlo] Persistent GamePix catalog unavailable for Space'
       )
     } catch (error) {
       console.error(
-        '[ArcadeNexa] Custom Space stream unavailable:',
+        '[Arcadlo] Custom Space stream unavailable:',
         error
       )
     }
@@ -1332,7 +1332,7 @@ export async function getGamesPage(
     )
   } catch (error) {
     console.error(
-      `[ArcadeNexa] GamePix provider page ${gpProviderPage} unavailable:`,
+      `[Arcadlo] GamePix provider page ${gpProviderPage} unavailable:`,
       error
     )
   }
@@ -1374,7 +1374,7 @@ export async function getGamesPage(
       /*
        * ALL-GAMES STREAM
        *
-       * A single ArcadeNexa page may cross a GameMonetize
+       * A single Arcadlo page may cross a GameMonetize
        * provider-page boundary.
        *
        * Example:
@@ -1386,7 +1386,7 @@ export async function getGamesPage(
        * so the remaining 16 games must come from GM page 2.
        *
        * Therefore we collect enough provider games across
-       * consecutive GM pages before slicing the ArcadeNexa
+       * consecutive GM pages before slicing the Arcadlo
        * provider window.
        */
 
@@ -1407,7 +1407,7 @@ export async function getGamesPage(
 
       /*
        * Continue across GM provider pages until we have enough
-       * games to satisfy the requested ArcadeNexa window plus
+       * games to satisfy the requested Arcadlo window plus
        * one extra game for hasMore detection.
        */
       while (
@@ -1490,7 +1490,7 @@ export async function getGamesPage(
         )
 
       console.log(
-        `[ArcadeNexa] GM all-games stream: ` +
+        `[Arcadlo] GM all-games stream: ` +
         `startProvider=${Math.floor(arcadeOffset / GM_PAGE_SIZE) + 1}, ` +
         `startOffset=${arcadeOffset % GM_PAGE_SIZE}, ` +
         `pagesScanned=${providerPage - Math.floor(arcadeOffset / GM_PAGE_SIZE)}, ` +
@@ -1502,7 +1502,7 @@ export async function getGamesPage(
        *
        * IMPORTANT:
        * GameMonetize ordering must remain stable between
-       * ArcadeNexa page requests.
+       * Arcadlo page requests.
        *
        * The filtered category stream is therefore stored
        * in a persistent in-memory snapshot instead of being
@@ -1555,7 +1555,7 @@ export async function getGamesPage(
         arcadeOffset + providerTake
 
       console.log(
-        `[ArcadeNexa] GM category stream: ` +
+        `[Arcadlo] GM category stream: ` +
         `genre=${normalizedGenre}, ` +
         `snapshotGames=${categoryGames.length}, ` +
         `offset=${arcadeOffset}`
@@ -1563,7 +1563,7 @@ export async function getGamesPage(
     }
   } catch (error) {
     console.error(
-      `[ArcadeNexa] GameMonetize stream unavailable ` +
+      `[Arcadlo] GameMonetize stream unavailable ` +
       `(genre=${normalizedGenre || 'all'}):`,
       error
     )
@@ -1603,7 +1603,7 @@ export async function getGamesPage(
    * GamePix must become the COMPLETE provider stream.
    *
    * The normal hybrid mode reserves only providerTake
-   * GamePix games (24 for a 48-game ArcadeNexa page).
+   * GamePix games (24 for a 48-game Arcadlo page).
    *
    * During GM failover we must NOT reuse gpProviderPage/gpOffset,
    * because that would cause:
@@ -1645,13 +1645,13 @@ export async function getGamesPage(
         fallbackGames.length >= GP_PAGE_SIZE
 
       console.log(
-        `[ArcadeNexa] GamePix full failover: ` +
+        `[Arcadlo] GamePix full failover: ` +
         `page=${safePage}, providerPage=${fallbackProviderPage}, ` +
         `games=${merged.length}, genre=${normalizedGenre || 'all'}`
       )
     } catch (error) {
       console.error(
-        `[ArcadeNexa] GamePix failover unavailable:`,
+        `[Arcadlo] GamePix failover unavailable:`,
         error
       )
 
@@ -1659,7 +1659,7 @@ export async function getGamesPage(
        * Do not fall back to the partial hybrid GamePix window.
        *
        * In full failover mode, a provider page failure/end means
-       * the requested ArcadeNexa page cannot be served as a
+       * the requested Arcadlo page cannot be served as a
        * complete GamePix page. Returning the previously loaded
        * 24-game hybrid slice would create incorrect pagination.
        */
@@ -1672,7 +1672,7 @@ export async function getGamesPage(
    * GamePix failed:
    *
    * GameMonetize becomes the complete source for the requested
-   * ArcadeNexa page. Category streams reuse the filtered results
+   * Arcadlo page. Category streams reuse the filtered results
    * already collected above and only continue scanning when the
    * requested failover window requires additional games.
    */
@@ -1682,7 +1682,7 @@ export async function getGamesPage(
        * FULL GM FAILOVER MODE
        *
        * GamePix is unavailable, so GameMonetize becomes
-       * the complete source for this ArcadeNexa page.
+       * the complete source for this Arcadlo page.
        *
        * Category requests reuse the persistent snapshot.
        * This guarantees:
@@ -1820,14 +1820,14 @@ export async function getGamesPage(
         )
 
       console.log(
-        `[ArcadeNexa] GameMonetize full failover: ` +
+        `[Arcadlo] GameMonetize full failover: ` +
         `page=${safePage}, ` +
         `genre=${normalizedGenre || 'all'}, ` +
         `offset=${fallbackOffset}, ` +
         `games=${merged.length}`
       )
       console.log(
-        `[ArcadeNexa] GameMonetize full failover: ` +
+        `[Arcadlo] GameMonetize full failover: ` +
         `page=${safePage}, ` +
         `genre=${normalizedGenre || 'all'}, ` +
         `offset=${fallbackOffset}, ` +
@@ -1835,7 +1835,7 @@ export async function getGamesPage(
       )
     } catch (error) {
       console.error(
-        `[ArcadeNexa] GameMonetize failover unavailable:`,
+        `[Arcadlo] GameMonetize failover unavailable:`,
         error
       )
     }
@@ -1893,7 +1893,7 @@ export async function getGamesPage(
     )
 
   console.log(
-    `[ArcadeNexa] Page ${safePage}: ${games.length} games ` +
+    `[Arcadlo] Page ${safePage}: ${games.length} games ` +
     `(GamePix provider=${gpProviderPage}, offset=${gpOffset}, ` +
     `genre=${normalizedGenre || 'all'})`
   )
@@ -1946,7 +1946,7 @@ export async function getCategoryGameCounts(
 
   if (!persistent) {
     console.warn(
-      '[ArcadeNexa] Persistent GamePix catalog unavailable for category counts'
+      '[Arcadlo] Persistent GamePix catalog unavailable for category counts'
     )
 
     const emptyCounts: Record<string, number> = {}
@@ -2007,7 +2007,7 @@ export async function getCategoryGameCounts(
   })
 
   console.log(
-    `[ArcadeNexa] Category counts calculated from persistent catalog: ` +
+    `[Arcadlo] Category counts calculated from persistent catalog: ` +
     `categories=${normalizedSlugs.length}, games=${persistent.catalog.length}`
   )
 
@@ -2067,7 +2067,7 @@ export function convertGMGame(item: GameMonetizeItem): Game {
     genre: [category, 'HTML5'],
     genreFilter: category,
     // GameMonetize does not provide a reliable user rating.
-    // ArcadeNexa calculates its own score from 5 quality factors.
+    // Arcadlo calculates its own score from 5 quality factors.
     rating: calculateArcadeNexaScore({
       rating: 7.0,
       releaseYear: new Date().getFullYear(),
@@ -2284,7 +2284,7 @@ async function getGMCategorySnapshot(
     )
 
     console.log(
-      `[ArcadeNexa] GM category snapshot: ` +
+      `[Arcadlo] GM category snapshot: ` +
       `genre=${key}, ` +
       `games=${current.games.length}, ` +
       `nextPage=${current.nextPage}, ` +
@@ -2335,14 +2335,14 @@ async function loadGMGames(): Promise<Game[]> {
         }
         if (result.items.length < GM_PAGE_SIZE) break
       } catch (err) {
-        console.error("[ArcadeNexa] GM page " + page + " failed:", err)
+        console.error("[Arcadlo] GM page " + page + " failed:", err)
         break
       }
     }
-    console.log("[ArcadeNexa] GameMonetize loaded " + allItems.length + " games")
+    console.log("[Arcadlo] GameMonetize loaded " + allItems.length + " games")
     return allItems.map(convertGMGame)
   } catch (error) {
-    console.error("[ArcadeNexa] GameMonetize failed:", error)
+    console.error("[Arcadlo] GameMonetize failed:", error)
     return []
   }
 }
@@ -2383,7 +2383,7 @@ function loadPersistentGamePixCatalog(): {
 
     if (!fs.existsSync(catalogPath) || !fs.existsSync(indexPath)) {
       console.warn(
-        '[ArcadeNexa] Persistent GamePix catalog files not found.'
+        '[Arcadlo] Persistent GamePix catalog files not found.'
       )
       return null
     }
@@ -2398,7 +2398,7 @@ function loadPersistentGamePixCatalog(): {
 
     if (!Array.isArray(catalog) || typeof index !== 'object') {
       console.error(
-        '[ArcadeNexa] Persistent GamePix catalog validation failed.'
+        '[Arcadlo] Persistent GamePix catalog validation failed.'
       )
       return null
     }
@@ -2407,7 +2407,7 @@ function loadPersistentGamePixCatalog(): {
     persistentGamePixIndex = index
 
     console.log(
-      `[ArcadeNexa] Persistent GamePix catalog loaded: ` +
+      `[Arcadlo] Persistent GamePix catalog loaded: ` +
       `${catalog.length} games, ${Object.keys(index).length} index entries`
     )
 
@@ -2417,7 +2417,7 @@ function loadPersistentGamePixCatalog(): {
     }
   } catch (error) {
     console.error(
-      '[ArcadeNexa] Failed to load persistent GamePix catalog:',
+      '[Arcadlo] Failed to load persistent GamePix catalog:',
       error
     )
     return null
@@ -2427,6 +2427,143 @@ function loadPersistentGamePixCatalog(): {
 export function getPersistentGamePixGames(): Game[] {
   const persistent = loadPersistentGamePixCatalog()
   return persistent?.catalog ?? []
+}
+
+
+type PersistentGamePixSearchRow = {
+  game: Game
+  searchable: string
+  name: string
+  title: string
+  category: string
+  genre: string
+}
+
+let persistentGamePixSearchIndex: PersistentGamePixSearchRow[] | null = null
+
+function normalizeSearchValue(value: unknown): string {
+  return String(value ?? '')
+    .toLowerCase()
+    .replace(/[-_]+/g, ' ')
+    .trim()
+}
+
+function buildPersistentGamePixSearchIndex(): PersistentGamePixSearchRow[] {
+  if (persistentGamePixSearchIndex) {
+    return persistentGamePixSearchIndex
+  }
+
+  const games = getPersistentGamePixGames()
+
+  persistentGamePixSearchIndex = games.map((game) => {
+    const values = [
+      game.name,
+      game.title,
+      game.description,
+      game.longDescription,
+      game.category,
+      game.genre,
+      game.genreFilter,
+      game.platform,
+      game.provider,
+      game.instructions,
+      game.tags,
+    ]
+
+    const searchable = values
+      .flatMap((value) =>
+        Array.isArray(value) ? value : [value]
+      )
+      .map(normalizeSearchValue)
+      .join(' ')
+
+    return {
+      game,
+      searchable,
+      name: normalizeSearchValue(game.name),
+      title: normalizeSearchValue(game.title),
+      category: normalizeSearchValue(game.category),
+      genre: normalizeSearchValue(game.genre),
+    }
+  })
+
+  console.log(
+    `[Arcadlo] Persistent GamePix search index built: ` +
+    `${persistentGamePixSearchIndex.length} games`
+  )
+
+  return persistentGamePixSearchIndex
+}
+
+export function searchPersistentGamePixGames(
+  query: string,
+  limit = 48
+): Game[] {
+  const terms = query
+    .toLowerCase()
+    .split(/\s+/)
+    .map(normalizeSearchValue)
+    .filter(Boolean)
+
+  if (!terms.length) {
+    return []
+  }
+
+  const safeLimit = Math.max(1, Math.min(100, limit))
+  const index = buildPersistentGamePixSearchIndex()
+
+  return index
+    .map((row) => {
+      const matches = terms.every((term) =>
+        row.searchable.includes(term)
+      )
+
+      if (!matches) {
+        return null
+      }
+
+      let score = 0
+
+      for (const term of terms) {
+        if (
+          row.name === term ||
+          row.title === term
+        ) {
+          score += 100
+        } else if (
+          row.name.includes(term) ||
+          row.title.includes(term)
+        ) {
+          score += 50
+        } else if (
+          row.category.includes(term)
+        ) {
+          score += 30
+        } else if (
+          row.genre.includes(term)
+        ) {
+          score += 20
+        } else {
+          score += 10
+        }
+      }
+
+      return {
+        game: row.game,
+        score,
+      }
+    })
+    .filter(
+      (
+        item
+      ): item is {
+        game: Game
+        score: number
+      } => item !== null
+    )
+    .sort((a, b) => b.score - a.score)
+    .slice(0, safeLimit)
+    .map((item) => item.game)
 }
 
 function loadPersistentGamePixCategoryIndex(): GamePixCategoryIndex | null {
@@ -2443,7 +2580,7 @@ function loadPersistentGamePixCategoryIndex(): GamePixCategoryIndex | null {
 
     if (!fs.existsSync(indexPath)) {
       console.warn(
-        '[ArcadeNexa] Persistent GamePix category index not found.'
+        '[Arcadlo] Persistent GamePix category index not found.'
       )
       return null
     }
@@ -2454,7 +2591,7 @@ function loadPersistentGamePixCategoryIndex(): GamePixCategoryIndex | null {
 
     if (!index || typeof index !== 'object' || Array.isArray(index)) {
       console.error(
-        '[ArcadeNexa] Persistent GamePix category index validation failed.'
+        '[Arcadlo] Persistent GamePix category index validation failed.'
       )
       return null
     }
@@ -2462,14 +2599,14 @@ function loadPersistentGamePixCategoryIndex(): GamePixCategoryIndex | null {
     persistentGamePixCategoryIndex = index
 
     console.log(
-      `[ArcadeNexa] Persistent GamePix category index loaded: ` +
+      `[Arcadlo] Persistent GamePix category index loaded: ` +
       `${Object.keys(index).length} categories`
     )
 
     return index
   } catch (error) {
     console.error(
-      '[ArcadeNexa] Failed to load persistent GamePix category index:',
+      '[Arcadlo] Failed to load persistent GamePix category index:',
       error
     )
     return null
@@ -2497,7 +2634,7 @@ function getGameFromPersistentGamePixCatalog(
 
   if (!game || game.slug !== slug) {
     console.warn(
-      `[ArcadeNexa] Persistent GamePix index mismatch: ${slug}`
+      `[Arcadlo] Persistent GamePix index mismatch: ${slug}`
     )
     return null
   }
@@ -2538,7 +2675,7 @@ export async function getGameBySlugFast(
     normalizedSlug === '[object object]'
   ) {
     console.warn(
-      `[ArcadeNexa] Invalid game slug rejected: ${slug}`
+      `[Arcadlo] Invalid game slug rejected: ${slug}`
     )
     return null
   }
@@ -2564,7 +2701,7 @@ export async function getGameBySlugFast(
 
   if (gamePixCached) {
     console.log(
-      `[ArcadeNexa] GamePix slug cache HIT: ${slug}`
+      `[Arcadlo] GamePix slug cache HIT: ${slug}`
     )
 
     return gamePixCached
@@ -2580,7 +2717,7 @@ export async function getGameBySlugFast(
       gamePixSlugCache.set(slug, persistentGame)
 
       console.log(
-        `[ArcadeNexa] Persistent GamePix lookup HIT: ${slug}`
+        `[Arcadlo] Persistent GamePix lookup HIT: ${slug}`
       )
 
       return persistentGame
@@ -2638,7 +2775,7 @@ export async function getGameBySlugFast(
           gmSlugCache.set(slug, categoryGame)
 
           console.log(
-            `[ArcadeNexa] GM category lookup HIT: ` +
+            `[Arcadlo] GM category lookup HIT: ` +
             `slug=${slug} genre=${normalizedGenre}`
           )
 
@@ -2646,13 +2783,13 @@ export async function getGameBySlugFast(
         }
 
         console.log(
-          `[ArcadeNexa] GM category lookup MISS: ` +
+          `[Arcadlo] GM category lookup MISS: ` +
           `slug=${slug} genre=${normalizedGenre} ` +
           `snapshotGames=${snapshot.games.length}`
         )
       } catch (error) {
         console.warn(
-          `[ArcadeNexa] GM category lookup failed for ${slug}:`,
+          `[Arcadlo] GM category lookup failed for ${slug}:`,
           error
         )
       }
@@ -2675,7 +2812,7 @@ export async function getGameBySlugFast(
           gmSlugCache.set(slug, catalogGame)
 
           console.log(
-            `[ArcadeNexa] GM catalog lookup HIT: ${slug}`
+            `[Arcadlo] GM catalog lookup HIT: ${slug}`
           )
 
           return catalogGame
@@ -2683,7 +2820,7 @@ export async function getGameBySlugFast(
       }
     } catch (error) {
       console.warn(
-        `[ArcadeNexa] GM catalog lookup failed for ${slug}:`,
+        `[Arcadlo] GM catalog lookup failed for ${slug}:`,
         error
       )
     }
@@ -2693,13 +2830,13 @@ export async function getGameBySlugFast(
         await import('./gameMonetizeFeed')
 
       console.log(
-        `[ArcadeNexa] GM direct lookup START: slug=${slug} id=${id}`
+        `[Arcadlo] GM direct lookup START: slug=${slug} id=${id}`
       )
 
       const item = await fetchGMGameById(id)
 
       console.log(
-        `[ArcadeNexa] GM direct lookup RESULT: ` +
+        `[Arcadlo] GM direct lookup RESULT: ` +
         `slug=${slug} id=${id} found=${Boolean(item)} ` +
         `title=${item?.title || 'NONE'}`
       )
@@ -2711,7 +2848,7 @@ export async function getGameBySlugFast(
         // The returned game must correspond exactly to the requested gm-* slug.
         if (game.slug !== slug) {
           console.warn(
-            `[ArcadeNexa] GM direct lookup slug mismatch: requested=${slug} returned=${game.slug}`
+            `[Arcadlo] GM direct lookup slug mismatch: requested=${slug} returned=${game.slug}`
           )
           return null
         }
@@ -2722,7 +2859,7 @@ export async function getGameBySlugFast(
       }
     } catch (error) {
       console.warn(
-        `[ArcadeNexa] GM direct lookup unavailable for ${slug}; ` +
+        `[Arcadlo] GM direct lookup unavailable for ${slug}; ` +
         `using catalog fallback`,
         error
       )
@@ -2740,7 +2877,7 @@ export async function getGameBySlugFast(
      * The normal slug cache/direct lookup remains the fast path.
      */
     console.warn(
-      `[ArcadeNexa] GM direct lookup MISS: ${slug}`
+      `[Arcadlo] GM direct lookup MISS: ${slug}`
     )
 
     return null
@@ -2770,7 +2907,7 @@ export async function getGameBySlugFast(
         gamePixSlugCache.set(slug, catalogGame)
 
         console.log(
-          `[ArcadeNexa] GamePix catalog lookup HIT: ${slug}`
+          `[Arcadlo] GamePix catalog lookup HIT: ${slug}`
         )
 
         return catalogGame
@@ -2811,7 +2948,7 @@ export async function getGameBySlugFast(
         gamePixSlugCache.set(slug, game)
 
         console.log(
-          `[ArcadeNexa] GamePix feed lookup HIT: ` +
+          `[Arcadlo] GamePix feed lookup HIT: ` +
           `slug=${slug} page=${page}`
         )
 
@@ -2824,11 +2961,11 @@ export async function getGameBySlugFast(
     }
 
     console.warn(
-      `[ArcadeNexa] GamePix limited lookup MISS: ${slug}`
+      `[Arcadlo] GamePix limited lookup MISS: ${slug}`
     )
   } catch (error) {
     console.error(
-      `[ArcadeNexa] GamePix slug lookup failed for ${slug}:`,
+      `[Arcadlo] GamePix slug lookup failed for ${slug}:`,
       error
     )
   }

@@ -16,25 +16,25 @@ import {
 export const revalidate = 300
 
 export const metadata = {
-  title: 'ArcadeNexa - Play 15,000+ Free HTML5 Games Online',
+  title: 'Arcadlo - Play 15,000+ Free HTML5 Games Online',
   description:
-    'Play 15,000+ free HTML5 games online on ArcadeNexa. No download, no registration. Action, puzzle, racing, sports and more!',
+    'Play 15,000+ free HTML5 games online on Arcadlo. No download, no registration. Action, puzzle, racing, sports and more!',
   keywords:
     'free HTML5 games, online games, browser games, arcade games, free games',
   alternates: {
     canonical: '/',
   },
   openGraph: {
-    title: 'ArcadeNexa - Free HTML5 Games Online',
+    title: 'Arcadlo - Free HTML5 Games Online',
     description:
       'Play 15,000+ free HTML5 games instantly in your browser. No download required.',
     url: '/',
-    siteName: 'ArcadeNexa',
+    siteName: 'Arcadlo',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'ArcadeNexa - Free HTML5 Games',
+    title: 'Arcadlo - Free HTML5 Games',
     description:
       'Play 15,000+ free HTML5 games instantly. No download required.',
   },

@@ -5,7 +5,7 @@ import { getPersistentGamePixGames } from '@/lib/games'
 import SafeImage from '@/components/SafeImage'
 
 export const metadata: Metadata = {
-  title: 'Chromebook Games – Free Browser Games for School | ArcadeNexa',
+  title: 'Chromebook Games – Free Browser Games for School | Arcadlo',
   description: 'Play free Chromebook games instantly. No download, no install. 15,000+ HTML5 games that work perfectly on any Chromebook at school or home.',
   keywords: 'chromebook games, games for chromebook, chromebook games unblocked, free chromebook games, school chromebook games',
   alternates: { canonical: '/chromebook-games' },
@@ -32,7 +32,7 @@ export default async function ChromebookGamesPage() {
             </span>
           </h1>
           <p className="mx-auto mb-6 max-w-2xl text-lg text-[color:var(--text-secondary)]">
-            Every game on ArcadeNexa works perfectly on Chromebook. <strong className="text-[color:var(--text-primary)]">15,000+ free HTML5 games</strong> — no download, no install, no Flash. Just open Chrome and play.
+            Every game on Arcadlo works perfectly on Chromebook. <strong className="text-[color:var(--text-primary)]">15,000+ free HTML5 games</strong> — no download, no install, no Flash. Just open Chrome and play.
           </p>
           <div className="mb-8 flex flex-wrap justify-center gap-2 text-sm">
             {['No Download','No Flash','Works on Chrome','School Safe','Free Forever','Touch Friendly'].map(tag => (
@@ -46,7 +46,7 @@ export default async function ChromebookGamesPage() {
       </section>
 
       <section className="mx-auto max-w-5xl px-4 py-12">
-        <h2 className="mb-8 text-center text-2xl font-bold">Why ArcadeNexa Works Great on Chromebook</h2>
+        <h2 className="mb-8 text-center text-2xl font-bold">Why Arcadlo Works Great on Chromebook</h2>
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
           {[
             { icon: '🌐', title: 'Chrome Native', desc: 'HTML5 runs natively in Chrome' },
@@ -90,8 +90,8 @@ export default async function ChromebookGamesPage() {
         <div className="rounded-2xl border border-nexa-violet/20 bg-nexa-black/40 p-8">
           <h2 className="mb-4 text-2xl font-bold">Can You Play Games on a Chromebook?</h2>
           <div className="space-y-4 text-[color:var(--text-secondary)] leading-relaxed">
-            <p>Yes! Chromebooks run the Chrome browser natively, which means any HTML5 game works perfectly without installation. ArcadeNexa is built entirely with HTML5 technology, making it one of the best gaming sites for Chromebook users.</p>
-            <p>Unlike Android apps that may not be available on all Chromebooks, browser games work on <strong className="text-[color:var(--text-primary)]">every Chromebook model</strong> regardless of age or specs. Simply open Chrome, visit ArcadeNexa, and start playing instantly.</p>
+            <p>Yes! Chromebooks run the Chrome browser natively, which means any HTML5 game works perfectly without installation. Arcadlo is built entirely with HTML5 technology, making it one of the best gaming sites for Chromebook users.</p>
+            <p>Unlike Android apps that may not be available on all Chromebooks, browser games work on <strong className="text-[color:var(--text-primary)]">every Chromebook model</strong> regardless of age or specs. Simply open Chrome, visit Arcadlo, and start playing instantly.</p>
             <p>School Chromebooks often have app restrictions, but browser-based HTML5 games typically bypass these limitations since they run entirely within the Chrome browser.</p>
           </div>
         </div>
