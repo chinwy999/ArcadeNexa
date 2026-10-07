@@ -12,7 +12,7 @@ export default function Footer() {
                 <span className="text-nexa-black font-black text-sm transform -rotate-45">N</span>
               </div>
               <span className="text-xl font-black tracking-wider">
-                <span className="text-[color:var(--text-primary)]">ARCADE</span><span className="gradient-text">NEXA</span>
+                <span className="text-[color:var(--text-primary)]">ARCAD</span><span className="gradient-text">LO</span>
               </span>
             </Link>
             <p className="text-[color:var(--text-secondary)] text-sm">Free HTML5 gaming platform. 15,000+ games, instant play, no download required.</p>

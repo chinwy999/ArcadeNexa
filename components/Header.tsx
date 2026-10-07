@@ -85,8 +85,8 @@ export default function Header() {
           </div>
 
           <span className="text-lg font-black tracking-tight sm:text-xl">
-            <span className="text-[color:var(--text-primary)]">ARCADE</span>
-            <span className="gradient-text">NEXA</span>
+            <span className="text-[color:var(--text-primary)]">ARCAD</span>
+            <span className="gradient-text">LO</span>
           </span>
         </Link>
 
