@@ -526,7 +526,7 @@ function buildGameDescriptions({
       .trim()
 
   const gameTitle = clean(title) || 'This game'
-  const rawDescription = clean(description)
+  const rawDescription = clean(description).replace(/ArcadeNexa/gi, 'Arcadlo')
   const gameCategory = clean(category) || 'arcade'
 
   const cleanTags = tags
