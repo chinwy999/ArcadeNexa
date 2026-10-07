@@ -13,7 +13,7 @@ export default function AdsterraSmartLink() {
       rel="nofollow sponsored noopener"
       className="inline-flex items-center gap-1 text-nexa-emerald hover:text-[color:var(--text-primary)]"
     >
-      Sponsored
+      Click here to earn
       <ExternalLink className="w-3 h-3" />
     </a>
   );

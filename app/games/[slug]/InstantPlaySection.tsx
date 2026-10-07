@@ -184,7 +184,6 @@ export default function InstantPlaySection({ game }: { game: Game }) {
             </span>
 
             <div className="flex items-center gap-3">
-              <AdsterraSmartLink />
 
               {game.officialUrl && (
                 <a
@@ -211,6 +210,10 @@ export default function InstantPlaySection({ game }: { game: Game }) {
               </p>
             </div>
           )}
+
+            <div className="flex justify-center px-4 py-3 bg-nexa-surface/30 border-t border-[color:var(--white-05)]">
+              <AdsterraSmartLink />
+            </div>
         </>
       )}
     </div>
