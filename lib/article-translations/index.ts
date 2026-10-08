@@ -12,6 +12,10 @@ export function getLocalizedArticle(
 
   const translation = arArticleTranslations[article.slug]
 
+  if (!translation) {
+    return article
+  }
+
   return {
     ...article,
     ...translation,

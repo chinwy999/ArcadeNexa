@@ -56,9 +56,9 @@ function response(xml: string) {
 
 export async function GET(
   _request: Request,
-  { params }: { params: { parts: string[] } }
+  { params }: { params: { id: string } }
 ) {
-  const raw = params.parts?.[0] || ''
+  const raw = params.id || ''
 
   if (!raw.endsWith('.xml')) {
     return new NextResponse('Not Found', { status: 404 })
