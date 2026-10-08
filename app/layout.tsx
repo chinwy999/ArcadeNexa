@@ -3,6 +3,7 @@ import './globals.css'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import { getSiteUrl } from '@/lib/site'
+import { getLocale } from '@/lib/i18n/server'
 
 const siteUrl = getSiteUrl()
 
@@ -43,8 +44,11 @@ export const metadata: Metadata = {
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+  const locale = getLocale()
+  const isArabic = locale === 'ar'
+
   return (
-    <html lang="en" dir="ltr">
+    <html lang={isArabic ? 'ar' : 'en'} dir={isArabic ? 'rtl' : 'ltr'}>
       <head>
         <link rel="icon" href="/favicon.ico" />
         <meta name="google-site-verification" content="j-iHu7oSEMHvRJt9EXUbTqBgAL71liygmOrO5HD72EU" />

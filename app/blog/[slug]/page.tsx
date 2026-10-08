@@ -4,10 +4,15 @@ import { notFound } from 'next/navigation'
 import { allArticles as articles } from '@/lib/articles'
 import { getGamesPage, type Game } from '@/lib/games'
 import GameCard from '@/components/GameCard'
+import { getLocale } from '@/lib/i18n/server'
+import { getTranslations } from '@/lib/i18n'
+import { getLocalizedArticle } from '@/lib/article-translations'
 
 type Props = {
   params: { slug: string }
 }
+
+export const dynamic = 'force-dynamic'
 
 export function generateStaticParams() {
   return articles.map((article) => ({ slug: article.slug }))
@@ -154,25 +159,32 @@ async function getRelatedGamesForArticle(article: {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const locale = getLocale()
   const article = articles.find((item) => item.slug === params.slug)
 
   if (!article) {
     return {}
   }
 
+  const localizedArticle = getLocalizedArticle(article, locale)
+  const isArabic = locale === 'ar'
+  const prefix = isArabic ? '/ar' : ''
+  const url = `${prefix}/blog/${article.slug}`
+
   return {
-    title: article.title,
-    description: article.description,
+    title: localizedArticle.title,
+    description: localizedArticle.description,
     alternates: {
-      canonical: `/blog/${article.slug}`,
+      canonical: url,
     },
     openGraph: {
       type: 'article',
-      title: article.title,
-      description: article.description,
-      url: `/blog/${article.slug}`,
-      publishedTime: article.date,
+      title: localizedArticle.title,
+      description: localizedArticle.description,
+      url,
+      publishedTime: localizedArticle.date,
       siteName: 'Arcadlo',
+      locale: isArabic ? 'ar_MA' : 'en_US',
     },
   }
 }
@@ -183,6 +195,12 @@ export default async function ArticlePage({ params }: Props) {
   if (!article) {
     notFound()
   }
+
+  const locale = getLocale()
+  const t = getTranslations(locale)
+  const isArabic = locale === 'ar'
+  const prefix = isArabic ? '/ar' : ''
+  const localizedArticle = getLocalizedArticle(article, locale)
 
   const relatedArticleMap: Record<string, string[]> = {
     "complete-guide-to-browser-gaming": [
@@ -332,12 +350,14 @@ export default async function ArticlePage({ params }: Props) {
   const related = relatedArticleSlugs
     .map((slug) => articles.find((item) => item.slug === slug))
     .filter((item): item is (typeof articles)[number] => Boolean(item))
+    .map((item) => getLocalizedArticle(item, locale))
 
   const fallbackRelated = related.length
     ? related.slice(0, 3)
     : articles
         .filter((item) => item.slug !== article.slug)
         .slice(0, 3)
+        .map((item) => getLocalizedArticle(item, locale))
 
   const categoryLinks: Record<string, { label: string; href: string }> = {
     "best-puzzle-game-genres-for-beginners": {
@@ -395,16 +415,38 @@ export default async function ArticlePage({ params }: Props) {
   }
 
   const categoryLink = categoryLinks[article.slug]
+  const categoryGenre = categoryLink?.href.match(/genre=([^&]+)/)?.[1]
+
+  const localizedCategoryLabel: Record<string, string> = {
+    puzzle: t.article.explorePuzzleGames,
+    racing: t.article.exploreRacingGames,
+    strategy: t.article.exploreStrategyGames,
+    sports: t.article.exploreSportsGames,
+    action: t.article.exploreActionGames,
+    shooter: t.article.exploreShooterGames,
+    io: t.article.exploreIOGames,
+    casual: t.article.exploreCasualGames,
+    math: t.article.exploreMathGames,
+  }
+
+  const localizedCategoryLink = categoryLink
+    ? {
+        href: `${prefix}${categoryLink.href}`,
+        label:
+          (categoryGenre && localizedCategoryLabel[categoryGenre]) ??
+          categoryLink.label,
+      }
+    : null
 
   const relatedGames = await getRelatedGamesForArticle(article)
 
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Article',
-    headline: article.title,
-    description: article.description,
-    datePublished: article.date,
-    dateModified: article.date,
+    headline: localizedArticle.title,
+    description: localizedArticle.description,
+    datePublished: localizedArticle.date,
+    dateModified: localizedArticle.date,
     author: {
       '@type': 'Organization',
       name: 'Arcadlo Editorial',
@@ -415,14 +457,14 @@ export default async function ArticlePage({ params }: Props) {
     },
     mainEntityOfPage: {
       '@type': 'WebPage',
-      '@id': `/blog/${article.slug}`,
+      '@id': `${prefix}/blog/${article.slug}`,
     },
   }
 
   const faqLd = {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
-    mainEntity: article.faq.map((item) => ({
+    mainEntity: localizedArticle.faq.map((item) => ({
       '@type': 'Question',
       name: item.question,
       acceptedAnswer: {
@@ -433,7 +475,10 @@ export default async function ArticlePage({ params }: Props) {
   }
 
   return (
-    <main className="mx-auto max-w-4xl px-4 py-16">
+    <main
+      dir={isArabic ? 'rtl' : 'ltr'}
+      className="mx-auto max-w-4xl px-4 py-16"
+    >
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -443,41 +488,50 @@ export default async function ArticlePage({ params }: Props) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }}
       />
 
-      <nav className="mb-8 text-sm text-[color:var(--text-secondary)]" aria-label="Breadcrumb">
-        <Link href="/" className="hover:text-[color:var(--text-primary)]">Home</Link>
+      <nav
+        className="mb-8 text-sm text-[color:var(--text-secondary)]"
+        aria-label={isArabic ? 'مسار التنقل' : 'Breadcrumb'}
+      >
+        <Link href={prefix || '/'} className="hover:text-[color:var(--text-primary)]">
+          {t.article.home}
+        </Link>
         <span className="mx-2">/</span>
-        <Link href="/blog" className="hover:text-[color:var(--text-primary)]">Blog</Link>
+        <Link href={`${prefix}/blog`} className="hover:text-[color:var(--text-primary)]">
+          {t.article.blog}
+        </Link>
         <span className="mx-2">/</span>
-        <span className="text-[color:var(--text-primary)]">{article.title}</span>
+        <span className="text-[color:var(--text-primary)]">{localizedArticle.title}</span>
       </nav>
 
       <header className="mb-10">
         <div className="mb-4 flex flex-wrap items-center gap-3 text-sm">
           <span className="rounded-full border border-nexa-emerald/20 bg-nexa-emerald/10 px-3 py-1 font-bold text-nexa-emerald">
-            {article.category}
+            {localizedArticle.category}
           </span>
-          <time dateTime={article.date} className="text-[color:var(--text-secondary)]">
-            {new Date(`${article.date}T00:00:00Z`).toLocaleDateString('en-US', {
+          <time dateTime={localizedArticle.date} className="text-[color:var(--text-secondary)]">
+            {new Date(`${localizedArticle.date}T00:00:00Z`).toLocaleDateString(
+              isArabic ? 'ar-MA' : 'en-US',
+              {
               year: 'numeric',
               month: 'long',
               day: 'numeric',
               timeZone: 'UTC',
             })}
           </time>
-          <span className="text-[color:var(--text-secondary)]">• {article.readTime}</span>
+          <span className="text-[color:var(--text-secondary)]">• {localizedArticle.readTime}</span>
         </div>
 
         <h1 className="mb-6 text-4xl font-black leading-tight text-[color:var(--text-primary)] sm:text-5xl">
-          {article.title}
+          {localizedArticle.title}
         </h1>
 
         <p className="text-xl leading-9 text-[color:var(--text-secondary)]">
-          {article.intro}
+          {localizedArticle.intro}
         </p>
       </header>
 
       <article className="space-y-10">
-        {article.sections.map((section) => (
+        {localizedArticle.sections.map((section) => (
           <section key={section.heading}>
             <h2 className="mb-4 text-2xl font-bold text-[color:var(--text-primary)]">
               {section.heading}
@@ -493,19 +547,18 @@ export default async function ArticlePage({ params }: Props) {
         <section className="mt-14" aria-labelledby="related-games-heading">
           <div className="mb-6">
             <span className="text-xs font-black uppercase tracking-[0.2em] text-nexa-emerald">
-              Play Related Games
+              {t.article.playRelatedGames}
             </span>
 
             <h2
               id="related-games-heading"
               className="mt-2 text-2xl font-black text-[color:var(--text-primary)] sm:text-3xl"
             >
-              Games You Can Play on Arcadlo
+              {t.article.relatedGamesTitle}
             </h2>
 
             <p className="mt-2 max-w-2xl leading-7 text-[color:var(--text-secondary)]">
-              Try games related to this article directly on Arcadlo.
-              No download is required.
+              {t.article.relatedGamesDescription}
             </p>
           </div>
 
@@ -520,10 +573,10 @@ export default async function ArticlePage({ params }: Props) {
 
           <div className="mt-6 text-center">
             <Link
-              href="/games"
+              href={`${prefix}/games`}
               className="inline-flex rounded-xl border border-nexa-emerald/30 bg-nexa-emerald/10 px-5 py-3 font-bold text-nexa-emerald transition hover:bg-nexa-emerald/20"
             >
-              Browse All Games →
+              {t.article.browseAllGames}
             </Link>
           </div>
         </section>
@@ -531,11 +584,11 @@ export default async function ArticlePage({ params }: Props) {
 
       <section className="mt-14 rounded-2xl border border-[color:var(--white-10)] bg-[color:var(--white-03)] p-6">
         <h2 className="mb-6 text-2xl font-bold text-[color:var(--text-primary)]">
-          Frequently Asked Questions
+          {t.article.frequentlyAskedQuestions}
         </h2>
 
         <div className="space-y-6">
-          {article.faq.map((item) => (
+          {localizedArticle.faq.map((item) => (
             <div key={item.question}>
               <h3 className="mb-2 font-bold text-[color:var(--text-primary)]">{item.question}</h3>
               <p className="leading-7 text-[color:var(--text-secondary)]">{item.answer}</p>
@@ -546,14 +599,14 @@ export default async function ArticlePage({ params }: Props) {
 
       <section className="mt-12 border-t border-[color:var(--white-10)] pt-10">
         <h2 className="mb-5 text-2xl font-bold text-[color:var(--text-primary)]">
-          Continue Exploring
+          {t.article.continueExploring}
         </h2>
 
         <div className="grid gap-4 sm:grid-cols-3">
           {fallbackRelated.map((item) => (
             <Link
               key={item.slug}
-              href={`/blog/${item.slug}`}
+              href={`${prefix}/blog/${item.slug}`}
               className="rounded-xl border border-[color:var(--white-10)] p-4 text-[color:var(--text-primary)] transition hover:border-nexa-violet/40 hover:bg-[color:var(--white-03)]"
             >
               <span className="text-sm font-bold">{item.title}</span>
@@ -562,20 +615,20 @@ export default async function ArticlePage({ params }: Props) {
         </div>
 
         <div className="mt-8 flex flex-wrap gap-3">
-          {categoryLink && (
+          {localizedCategoryLink && (
             <Link
-              href={categoryLink.href}
+              href={localizedCategoryLink.href}
               className="inline-flex rounded-xl border border-nexa-emerald/30 bg-nexa-emerald/10 px-5 py-3 font-bold text-nexa-emerald transition hover:bg-nexa-emerald/20"
             >
-              {categoryLink.label}
+              {localizedCategoryLink.label}
             </Link>
           )}
 
           <Link
-            href="/games"
+            href={`${prefix}/games`}
             className="inline-flex rounded-xl bg-nexa-violet px-5 py-3 font-bold text-[color:var(--text-primary)] transition hover:opacity-90"
           >
-            Explore Arcadlo Games →
+            {t.article.exploreArcadloGames}
           </Link>
         </div>
       </section>
