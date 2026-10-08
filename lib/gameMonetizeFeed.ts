@@ -33,6 +33,13 @@ type GMDirectCacheEntry = {
 
 const GM_DIRECT_CACHE_TTL = 6 * 60 * 60 * 1000
 
+/*
+ * GameMonetize may temporarily rate-limit direct ID requests.
+ * Cache a failed 429 lookup briefly so repeated page/metadata requests
+ * do not immediately hit the provider again.
+ */
+const GM_DIRECT_ERROR_CACHE_TTL = 5 * 60 * 1000
+
 const gmDirectCache =
   new Map<string, GMDirectCacheEntry>()
 
@@ -183,7 +190,7 @@ export async function fetchGMGameById(
 
       const response = await fetch(url.toString(), {
         signal: controller.signal,
-        cache: 'no-store',
+        next: { revalidate: 3600 },
         headers: {
           Accept: 'application/json',
           'User-Agent': 'ArcadeNexa/1.0',
@@ -191,6 +198,19 @@ export async function fetchGMGameById(
       })
 
       if (!response.ok) {
+        if (response.status === 429) {
+          console.warn(
+            `[ArcadeNexa] GM direct HTTP 429: ${safeId} - temporary cooldown`
+          )
+
+          gmDirectCache.set(safeId, {
+            item: null,
+            expiresAt: Date.now() + GM_DIRECT_ERROR_CACHE_TTL,
+          })
+
+          return null
+        }
+
         throw new Error(
           `GameMonetize HTTP ${response.status} for id ${safeId}`
         )
