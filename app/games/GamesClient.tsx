@@ -5,10 +5,14 @@ import { Filter, Gamepad2 } from 'lucide-react'
 import GameCard from '@/components/GameCard'
 import InstantPlayModal from '@/components/InstantPlayModal'
 import { type Game } from '@/lib/games'
+import { getLocalizedCategoryName } from '@/lib/category-translations'
+import { useClientTranslations } from '@/lib/i18n/client'
 
 const PAGE_SIZE = 24
 
 export default function GamesClient() {
+  const { locale, t } = useClientTranslations()
+
   const [games, setGames] = useState<Game[]>([])
   const [loading, setLoading] = useState(true)
   const [genre, setGenre] = useState('All')
@@ -39,6 +43,11 @@ export default function GamesClient() {
     return ['All', ...Array.from(genres)]
   }, [games])
 
+  const getGenreLabel = (value: string) => {
+    if (value === 'All') return t.games.all
+    return getLocalizedCategoryName(value, value, locale)
+  }
+
   const filtered = useMemo(() => {
     return games.filter(g => {
       if (genre !== 'All' && !g.genre.includes(genre)) return false
@@ -66,46 +75,46 @@ export default function GamesClient() {
         <div className="mb-8">
           <div className="flex items-center gap-3 mb-2">
             <Gamepad2 className="w-8 h-8 text-nexa-violet" />
-            <h1 className="text-4xl font-bold">Games Arena</h1>
+            <h1 className="text-4xl font-bold">{t.games.arena}</h1>
           </div>
           <p className="text-[color:var(--text-secondary)]">
-            {games.length} HTML5 games - instant play, no download, fullscreen support.
+            {games.length} {t.games.html5Games} - {t.games.instantPlay}
           </p>
         </div>
 
         <div className="bg-nexa-black/50 rounded-lg p-6 mb-8 border border-nexa-violet/20">
           <div className="flex items-center gap-2 mb-4">
             <Filter className="w-5 h-5" />
-            <h2 className="text-lg font-semibold">Filters</h2>
+            <h2 className="text-lg font-semibold">{t.games.filters}</h2>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
             <div>
-              <label htmlFor="games-genre" className="block text-sm font-medium text-[color:var(--text-secondary)] mb-2">Genre</label>
+              <label htmlFor="games-genre" className="block text-sm font-medium text-[color:var(--text-secondary)] mb-2">{t.games.genre}</label>
               <select id="games-genre" value={genre} onChange={e => setGenre(e.target.value)} className="w-full bg-nexa-surface border border-nexa-violet/25 rounded-lg px-4 py-2">
-                {allGenres.map(g => <option key={g} value={g}>{g}</option>)}
+                {allGenres.map(g => <option key={g} value={g}>{getGenreLabel(g)}</option>)}
               </select>
             </div>
             <div>
-              <label htmlFor="games-platform" className="block text-sm font-medium text-[color:var(--text-secondary)] mb-2">Platform</label>
+              <label htmlFor="games-platform" className="block text-sm font-medium text-[color:var(--text-secondary)] mb-2">{t.games.platform}</label>
               <select id="games-platform" value={platform} onChange={e => setPlatform(e.target.value)} className="w-full bg-nexa-surface border border-nexa-violet/25 rounded-lg px-4 py-2">
-                <option value="All">All Platforms</option>
+                <option value="All">{t.games.allPlatforms}</option>
                 <option value="PC">PC</option>
-                <option value="Multi">Multi-Platform</option>
+                <option value="Multi">{t.games.multiPlatform}</option>
               </select>
             </div>
             <div>
-              <label htmlFor="games-rating" className="block text-sm font-medium text-[color:var(--text-secondary)] mb-2">Rating</label>
+              <label htmlFor="games-rating" className="block text-sm font-medium text-[color:var(--text-secondary)] mb-2">{t.games.rating}</label>
               <select id="games-rating" value={rating} onChange={e => setRating(e.target.value)} className="w-full bg-nexa-surface border border-nexa-violet/25 rounded-lg px-4 py-2">
-                <option value="All">All Ratings</option>
-                <option value="5">5 Stars</option>
-                <option value="4">4+ Stars</option>
-                <option value="3">3+ Stars</option>
+                <option value="All">{t.games.allRatings}</option>
+                <option value="5">{t.games.fiveStars}</option>
+                <option value="4">{t.games.fourPlusStars}</option>
+                <option value="3">{t.games.threePlusStars}</option>
               </select>
             </div>
             <div>
-              <label htmlFor="games-search" className="block text-sm font-medium text-[color:var(--text-secondary)] mb-2">Search</label>
-              <input id="games-search" type="text" value={search} onChange={e => setSearch(e.target.value)} placeholder="Search games..." className="w-full bg-nexa-surface border border-nexa-violet/25 rounded-lg px-4 py-2" />
+              <label htmlFor="games-search" className="block text-sm font-medium text-[color:var(--text-secondary)] mb-2">{t.games.search}</label>
+              <input id="games-search" type="text" value={search} onChange={e => setSearch(e.target.value)} placeholder={t.games.searchPlaceholder} className="w-full bg-nexa-surface border border-nexa-violet/25 rounded-lg px-4 py-2" />
             </div>
           </div>
         </div>
@@ -121,14 +130,14 @@ export default function GamesClient() {
         {filtered.length === 0 && (
           <div className="text-center py-20">
             <Gamepad2 className="w-16 h-16 mx-auto text-[color:var(--text-muted)] mb-4" />
-            <p className="text-[color:var(--text-secondary)] text-lg">No games match your filters</p>
+            <p className="text-[color:var(--text-secondary)] text-lg">{t.games.noGamesMatch}</p>
           </div>
         )}
 
         {hasMore && (
           <div className="flex justify-center">
             <button onClick={() => setVisibleCount(v => v + PAGE_SIZE)} className="bg-gradient-to-r from-nexa-blue to-nexa-cyan hover:brightness-110 text-[color:var(--text-primary)] px-8 py-3 rounded-lg font-semibold">
-              Load More Games ({visible.length} / {filtered.length})
+              {t.games.loadMore} ({visible.length} / {filtered.length})
             </button>
           </div>
         )}

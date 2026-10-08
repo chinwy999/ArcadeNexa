@@ -4,7 +4,7 @@ import { getGamesPage, type Game } from '@/lib/games'
 import { getSiteUrl } from '@/lib/site'
 import SafeImage from '@/components/SafeImage'
 
-export const dynamic = 'force-dynamic'
+export const revalidate = 86400
 
 export const metadata: Metadata = {
   title: 'Unblocked Games – Play Free Online Games | Arcadlo',

@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import { useClientTranslations } from '@/lib/i18n/client'
 import {
   Swords,
   Compass,
@@ -40,13 +41,15 @@ const categoryStyles: Record<string, { icon: LucideIcon; accent: string }> = {
 export default function CategorySlider({
   categories,
 }: CategorySliderProps) {
+  const { locale, t } = useClientTranslations()
+
   if (categories.length === 0) return null
 
   const visibleCategories = categories.slice(0, 10)
 
   return (
     <nav
-      aria-label="Game categories"
+      aria-label={t.home.categoriesLabel}
       className="relative border-y border-[color:var(--white-10)] bg-[color:var(--nexa-surface)]/65 backdrop-blur-xl"
     >
       <div className="mx-auto max-w-7xl">
@@ -61,7 +64,7 @@ export default function CategorySlider({
             return (
               <Link
                 key={category.slug}
-                href={`/games?genre=${encodeURIComponent(category.slug)}`}
+                href={`${locale === 'ar' ? '/ar' : ''}/games?genre=${encodeURIComponent(category.slug)}`}
                 className="group relative flex shrink-0 items-center gap-2 overflow-hidden rounded-xl border border-[color:var(--white-08)] bg-[color:var(--white-03)] px-3 py-2 transition-all duration-300 hover:-translate-y-0.5 hover:border-white/15 hover:bg-[color:var(--white-06)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-nexa-cyan/60"
               >
                 <span

@@ -2,6 +2,7 @@
 import { useState, useCallback } from 'react'
 import { Play, Trophy, RefreshCw, Sparkles, ExternalLink, Info } from 'lucide-react'
 import type { Game } from '@/lib/games'
+import { useClientTranslations } from '@/lib/i18n/client'
 
 interface Props {
   game: Game
@@ -10,6 +11,8 @@ interface Props {
 }
 
 export default function ArenaPlay({ game, onClose, isModal = false }: Props) {
+  const { t } = useClientTranslations()
+
   const [isPlaying, setIsPlaying] = useState(false)
   const [score, setScore] = useState(0)
   const [isCompleted, setIsCompleted] = useState(false)
@@ -39,12 +42,12 @@ export default function ArenaPlay({ game, onClose, isModal = false }: Props) {
         <div className="flex items-center gap-4">
           <div className={`w-14 h-14 rounded-2xl flex items-center justify-center ${game.gradient} font-black text-2xl text-[color:var(--text-primary)] shadow-lg`}>{game.initials}</div>
           <div>
-            <h2 className="text-2xl font-black text-[color:var(--text-primary)]">{game.name} — Arena Trial</h2>
-            <p className="text-[color:var(--text-secondary)] text-sm">Interactive skill check — earn NexCoins for tournament credits</p>
+            <h2 className="text-2xl font-black text-[color:var(--text-primary)]">{game.name} — {t.games.arenaTrial}</h2>
+            <p className="text-[color:var(--text-secondary)] text-sm">{t.games.arenaDescription}</p>
           </div>
         </div>
         {onClose && (
-          <button onClick={onClose} className="text-[color:var(--text-secondary)] hover:text-[color:var(--text-primary)] bg-[color:var(--white-05)] p-2 rounded-full hover:bg-[color:var(--white-10)] transition" aria-label="Close trial">
+          <button onClick={onClose} className="text-[color:var(--text-secondary)] hover:text-[color:var(--text-primary)] bg-[color:var(--white-05)] p-2 rounded-full hover:bg-[color:var(--white-10)] transition" aria-label={t.games.closeTrial}>
             ✕
           </button>
         )}
@@ -53,9 +56,9 @@ export default function ArenaPlay({ game, onClose, isModal = false }: Props) {
       <div className="bg-nexa-navy/50 border border-[color:var(--white-05)] rounded-xl p-3 mb-4 flex gap-2 items-start text-xs text-[color:var(--text-secondary)]">
         <Info className="w-4 h-4 text-nexa-emerald flex-shrink-0 mt-0.5" />
         <span>
-          <strong className="text-[color:var(--text-primary)]">Disclaimer:</strong> {game.name} is a trademark of its respective owner. This is a Arcadlo skill trial, not the full commercial game.
+          <strong className="text-[color:var(--text-primary)]">{t.games.disclaimer}</strong> {game.name} {t.games.trademarkNotice}
           {game.officialUrl && (
-            <> Play the official game at <a href={game.officialUrl} target="_blank" rel="noopener noreferrer" className="text-nexa-violet hover:underline inline-flex items-center gap-1">{game.officialUrl} <ExternalLink className="w-3 h-3" /></a></>
+            <> {t.games.officialGame} <a href={game.officialUrl} target="_blank" rel="noopener noreferrer" className="text-nexa-violet hover:underline inline-flex items-center gap-1">{game.officialUrl} <ExternalLink className="w-3 h-3" /></a></>
           )}
         </span>
       </div>
@@ -66,10 +69,10 @@ export default function ArenaPlay({ game, onClose, isModal = false }: Props) {
             <div className="w-20 h-20 rounded-full bg-nexa-violet/20 text-nexa-violet flex items-center justify-center mx-auto mb-2 animate-bounce">
               <Play className="w-10 h-10 ml-1" />
             </div>
-            <h3 className="text-xl font-bold text-[color:var(--text-primary)]">Ready for Trial?</h3>
-            <p className="text-[color:var(--text-secondary)] text-sm max-w-md mx-auto">Click the glowing orb as fast as you can 15 times to prove your reflexes and unlock <span className="text-nexa-gold font-bold">+150 NexCoins</span>!</p>
+            <h3 className="text-xl font-bold text-[color:var(--text-primary)]">{t.games.readyForTrial}</h3>
+            <p className="text-[color:var(--text-secondary)] text-sm max-w-md mx-auto">{t.games.reflexChallenge} <span className="text-nexa-gold font-bold">+150 NexCoins</span>!</p>
             <button onClick={startGame} className="bg-gradient-to-r from-nexa-violet to-nexa-emerald text-nexa-black font-black px-8 py-3.5 rounded-xl text-base shadow-[0_0_20px_rgba(34,197,94,0.4)] hover:scale-105 transition-all">
-              START TRIAL NOW
+              {t.games.startTrial}
             </button>
           </div>
         )}
@@ -80,13 +83,13 @@ export default function ArenaPlay({ game, onClose, isModal = false }: Props) {
               e.preventDefault()
               handleClick()
             }
-          }} aria-label="Click to score">
-            <div className="absolute top-4 left-4 text-xs font-bold text-nexa-emerald bg-nexa-emerald/10 px-3 py-1 rounded-full border border-nexa-emerald/30">SCORE: {score} / 15</div>
-            <div className="absolute top-4 right-4 text-xs text-[color:var(--text-secondary)]">Click fast!</div>
+          }} aria-label={t.games.clickToScore}>
+            <div className="absolute top-4 left-4 text-xs font-bold text-nexa-emerald bg-nexa-emerald/10 px-3 py-1 rounded-full border border-nexa-emerald/30">{t.games.scoreLabel}: {score} / 15</div>
+            <div className="absolute top-4 right-4 text-xs text-[color:var(--text-secondary)]">{t.games.clickFast}</div>
             <div className="w-28 h-28 rounded-full bg-gradient-to-br from-nexa-violet to-nexa-cyan flex items-center justify-center text-[color:var(--text-primary)] font-black text-2xl shadow-[0_0_30px_var(--nexa-violet-shadow-strong)] animate-pulse transform active:scale-95 transition-transform">
-              CLICK!
+              {t.games.click}
             </div>
-            <p className="text-[color:var(--text-secondary)] text-xs mt-6">Aim training — rapid clicks, no purchase required</p>
+            <p className="text-[color:var(--text-secondary)] text-xs mt-6">{t.games.aimTraining}</p>
           </div>
         )}
 
@@ -95,14 +98,14 @@ export default function ArenaPlay({ game, onClose, isModal = false }: Props) {
             <div className="w-16 h-16 rounded-2xl bg-nexa-emerald/20 text-nexa-emerald flex items-center justify-center mx-auto mb-2">
               <Trophy className="w-8 h-8" />
             </div>
-            <h3 className="text-2xl font-black text-[color:var(--text-primary)]">Trial Completed!</h3>
-            <p className="text-[color:var(--text-secondary)] text-sm">You finished the {game.name} trial and earned <span className="text-nexa-gold font-bold">+{earned} NexCoins</span>!</p>
+            <h3 className="text-2xl font-black text-[color:var(--text-primary)]">{t.games.trialCompleted}</h3>
+            <p className="text-[color:var(--text-secondary)] text-sm">{t.games.trialEarned} <span className="text-nexa-gold font-bold">+{earned} NexCoins</span>!</p>
             <div className="flex items-center justify-center gap-3">
               <button onClick={startGame} className="flex items-center gap-2 bg-[color:var(--white-10)] hover:bg-[color:var(--white-20)] text-[color:var(--text-primary)] font-bold px-6 py-3 rounded-xl text-sm transition-colors">
-                <RefreshCw className="w-4 h-4" /> Play Again
+                <RefreshCw className="w-4 h-4" /> {t.games.playAgain}
               </button>
               {onClose && (
-                <button onClick={onClose} className="bg-nexa-violet hover:brightness-110 text-[color:var(--text-primary)] font-bold px-6 py-3 rounded-xl text-sm transition-colors">Collect & Close</button>
+                <button onClick={onClose} className="bg-nexa-violet hover:brightness-110 text-[color:var(--text-primary)] font-bold px-6 py-3 rounded-xl text-sm transition-colors">{t.games.collectClose}</button>
               )}
             </div>
           </div>
@@ -110,8 +113,8 @@ export default function ArenaPlay({ game, onClose, isModal = false }: Props) {
       </div>
 
       <div className="flex items-center justify-between mt-4 text-xs text-[color:var(--text-secondary)]">
-        <span>Supported by Arcadlo Challenge System — Free to Play</span>
-        <span className="flex items-center gap-1 text-nexa-emerald font-bold"><Sparkles className="w-3.5 h-3.5" /> Skill Based</span>
+        <span>{t.games.supportedBy}</span>
+        <span className="flex items-center gap-1 text-nexa-emerald font-bold"><Sparkles className="w-3.5 h-3.5" /> {t.games.skillBased}</span>
       </div>
     </div>
   )

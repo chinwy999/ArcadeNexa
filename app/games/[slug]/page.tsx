@@ -35,10 +35,10 @@ const getGameBySlug = async (
  * This guarantees that the actual route can return HTTP 404.
  */
 export async function generateMetadata(
-  { params, searchParams }: PageParams
+  { params }: PageParams
 ): Promise<Metadata> {
   const genre =
-    searchParams?.genre?.trim() || ''
+    ''
 
   const game = await getGameBySlug(
     params.slug,
@@ -270,7 +270,7 @@ function getRelatedGames(game: Game): Game[] {
   return getRelatedGamesFromCatalog(game, 6)
 }
 
-export default async function GamePage({ params, searchParams }: PageParams) {
+export default async function GamePage({ params }: PageParams) {
   /*
    * SINGLE SOURCE OF TRUTH FOR ROUTE VALIDATION.
    *
@@ -284,7 +284,7 @@ export default async function GamePage({ params, searchParams }: PageParams) {
   }
 
   const genre =
-    searchParams?.genre?.trim() || ''
+    ''
 
   const game = await getGameBySlug(slug, genre)
 

@@ -1,15 +1,26 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { getCategoryGameCounts } from '@/lib/games'
+import { getLocale } from '@/lib/i18n/server'
+import { getTranslations } from '@/lib/i18n'
+import { getCategoryTranslation } from '@/lib/category-translations'
 import type { LucideIcon } from 'lucide-react'
 import { Gamepad2, Swords, Compass, Joystick, Puzzle, Trophy, Zap, Crosshair, Car, Shield, Footprints, Skull, Wand2, Globe2, Rocket, Plane, Ship, Bot, Gem, Brain, Calculator, CircleHelp, Clock3, Building2, Sprout, ChefHat, PawPrint, Ghost, Heart, Pencil, GraduationCap, Box, CircleDot, Target, Dumbbell } from 'lucide-react'
 
 export const revalidate = 3600
 
-export const metadata: Metadata = {
-  title: 'Game Categories - Arcadlo',
-  description: 'Explore 15,000+ free browser games by category on Arcadlo.',
-  alternates: { canonical: '/categories' },
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = getLocale()
+  const t = getTranslations(locale)
+  const isArabic = locale === 'ar'
+
+  return {
+    title: `${t.categories.title} - Arcadlo`,
+    description: t.categories.description,
+    alternates: {
+      canonical: isArabic ? '/ar/categories' : '/categories',
+    },
+  }
 }
 
 type Category = {
@@ -113,6 +124,11 @@ const displayTitle = (slug: string) => {
 }
 
 export default async function CategoriesPage() {
+  const locale = getLocale()
+  const t = getTranslations(locale)
+  const isArabic = locale === 'ar'
+  const prefix = isArabic ? '/ar' : ''
+
   const gameCounts = await getCategoryGameCounts(categories.map(category => category.slug))
   const featuredCategories = categories.filter(category => category.featured)
   const allCategories = categories
@@ -121,22 +137,25 @@ export default async function CategoriesPage() {
     <main className="max-w-7xl mx-auto px-4 sm:px-6 py-10 sm:py-16">
       <header className="mb-10 sm:mb-14">
         <div className="inline-flex items-center gap-2 rounded-full border border-nexa-violet/30 bg-nexa-violet/10 px-3 py-1 text-xs font-bold text-nexa-violet">
-          <span aria-hidden="true">🎮</span> BROWSE GAME CATEGORIES
+          <span aria-hidden="true">🎮</span> {t.categories.eyebrow}
         </div>
-        <h1 className="mt-4 text-4xl font-black tracking-tight text-[color:var(--text-primary)] sm:text-5xl">Explore Games by Category</h1>
+        <h1 className="mt-4 text-4xl font-black tracking-tight text-[color:var(--text-primary)] sm:text-5xl">{t.categories.title}</h1>
         <p className="mt-3 max-w-2xl text-base leading-7 text-[color:var(--text-secondary)] sm:text-base">
-          Discover <span className="font-bold text-[color:var(--text-primary)]">15,000+ free browser games</span>{' '}
-          across action, puzzle, racing, sports, adventure and many more genres.
+          {t.categories.discover}{' '}
+          <span className="font-bold text-[color:var(--text-primary)]">
+            15,000+ {isArabic ? 'لعبة مجانية على المتصفح' : 'free browser games'}
+          </span>{' '}
+          {t.categories.acrossGenres}
         </p>
       </header>
 
       <section aria-labelledby="popular-categories">
         <div className="mb-5 flex items-end justify-between gap-4">
           <div>
-            <p className="text-sm font-bold uppercase tracking-widest text-nexa-violet">Start here</p>
-            <h2 id="popular-categories" className="mt-1 text-2xl font-black text-[color:var(--text-primary)] sm:text-3xl">Popular Categories</h2>
+            <p className="text-sm font-bold uppercase tracking-widest text-nexa-violet">{t.categories.startHere}</p>
+            <h2 id="popular-categories" className="mt-1 text-2xl font-black text-[color:var(--text-primary)] sm:text-3xl">{t.categories.popular}</h2>
           </div>
-          <span className="hidden text-sm text-[color:var(--text-secondary)] sm:block">{featuredCategories.length} featured genres</span>
+          <span className="hidden text-sm text-[color:var(--text-secondary)] sm:block">{featuredCategories.length} {t.categories.featuredGenres}</span>
         </div>
         <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3 lg:grid-cols-5">
           {featuredCategories.map(category => {
@@ -146,7 +165,7 @@ export default async function CategoriesPage() {
             return (
               <Link
                 key={category.slug}
-                href={`/games?genre=${encodeURIComponent(categoryAliases[category.slug] || category.slug)}`}
+                href={`${prefix}/games?genre=${encodeURIComponent(categoryAliases[category.slug] || category.slug)}`}
                 className={`group relative h-[112px] overflow-hidden rounded-xl border border-[color:var(--white-10)] bg-[color:var(--nexa-surface)] p-3 shadow-[0_8px_30px_rgba(0,0,0,0.18)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_16px_45px_rgba(0,0,0,0.3)]`}
               >
                 <div className={`absolute -right-10 -top-10 h-28 w-28 rounded-full bg-gradient-to-br ${category.accent} opacity-20 blur-2xl transition-all duration-500 group-hover:scale-150 group-hover:opacity-35`} />
@@ -169,12 +188,12 @@ export default async function CategoriesPage() {
 
                   <div>
                     <h3 className="truncate text-sm font-black text-[color:var(--text-primary)] transition-colors group-hover:text-white sm:text-base">
-                      {category.title}
+                      {getCategoryTranslation(category.slug, locale)?.name ?? category.title}
                     </h3>
 
                     <div className="mt-1 flex items-center gap-1.5">
                       <span className="text-xs font-semibold text-[color:var(--text-muted)]">
-                        {count > 0 ? `${count} games` : 'Explore'}
+                        {count > 0 ? `${count} ${t.categories.games}` : t.categories.explore}
                       </span>
                     </div>
                   </div>
@@ -190,9 +209,9 @@ export default async function CategoriesPage() {
 
       <section className="mt-12 sm:mt-16" aria-labelledby="all-categories">
         <div className="mb-5">
-          <p className="text-sm font-bold uppercase tracking-widest text-nexa-violet">Browse everything</p>
-          <h2 id="all-categories" className="mt-1 text-2xl font-black text-[color:var(--text-primary)] sm:text-3xl">All Game Categories</h2>
-          <p className="mt-2 text-sm text-[color:var(--text-secondary)]">Choose a genre to find games you can play instantly in your browser.</p>
+          <p className="text-sm font-bold uppercase tracking-widest text-nexa-violet">{t.categories.browseEverything}</p>
+          <h2 id="all-categories" className="mt-1 text-2xl font-black text-[color:var(--text-primary)] sm:text-3xl">{t.categories.all}</h2>
+          <p className="mt-2 text-sm text-[color:var(--text-secondary)]">{t.categories.chooseGenre}</p>
         </div>
         <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
           {allCategories.map(category => {
@@ -202,7 +221,7 @@ export default async function CategoriesPage() {
             return (
               <Link
                 key={category.slug}
-                href={`/games?genre=${encodeURIComponent(categoryAliases[category.slug] || category.slug)}`}
+                href={`${prefix}/games?genre=${encodeURIComponent(categoryAliases[category.slug] || category.slug)}`}
                 className="group relative flex h-[88px] items-center gap-3 overflow-hidden rounded-xl border border-[color:var(--white-10)] bg-[color:var(--nexa-surface)] px-3 transition-all duration-300 hover:-translate-y-0.5 hover:border-white/15 hover:shadow-[0_12px_32px_rgba(0,0,0,0.25)]"
               >
                 <div
@@ -217,11 +236,11 @@ export default async function CategoriesPage() {
 
                 <div className="relative min-w-0 flex-1">
                   <span className="block truncate text-sm font-extrabold text-[color:var(--text-primary)] transition-colors group-hover:text-white">
-                    {displayTitle(category.slug)}
+                    {getCategoryTranslation(category.slug, locale)?.name ?? displayTitle(category.slug)}
                   </span>
 
                   <span className="mt-1 block truncate text-[10px] font-semibold text-[color:var(--text-muted)]">
-                    {count > 0 ? `${count} games` : 'Explore'}
+                    {count > 0 ? `${count} ${t.categories.games}` : t.categories.explore}
                   </span>
                 </div>
 
@@ -244,11 +263,11 @@ export default async function CategoriesPage() {
       </section>
 
       <section className="mt-12 rounded-2xl border border-[color:var(--white-10)] bg-[color:var(--white-03)] p-6 sm:p-8">
-        <h2 className="text-xl font-black text-[color:var(--text-primary)]">New games added regularly</h2>
+        <h2 className="text-xl font-black text-[color:var(--text-primary)]">{t.categories.regularlyAdded}</h2>
         <p className="mt-2 max-w-2xl text-sm leading-6 text-[color:var(--text-secondary)]">
-          Arcadlo combines games from trusted HTML5 game providers so you can discover and play thousands of games directly in your browser.
+          {t.categories.providerDescription}
         </p>
-        <Link href="/games" className="mt-5 inline-flex rounded-xl bg-nexa-violet px-5 py-3 text-sm font-bold text-[color:var(--text-primary)] transition hover:brightness-110">Browse All Games</Link>
+        <Link href={`${prefix}/games`} className="mt-5 inline-flex rounded-xl bg-nexa-violet px-5 py-3 text-sm font-bold text-[color:var(--text-primary)] transition hover:brightness-110">{t.categories.browseAllGames}</Link>
       </section>
     </main>
   )

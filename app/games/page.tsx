@@ -2,99 +2,82 @@ import type { Metadata } from 'next'
 import GameCard from '@/components/GameCard'
 import Link from 'next/link'
 import { categoryContent } from '@/lib/category-content'
+import { getCategoryTranslation } from '@/lib/category-translations'
+import { getLocale } from '@/lib/i18n/server'
+import { getTranslations } from '@/lib/i18n'
 
 export async function generateMetadata({
   searchParams,
 }: {
   searchParams: { genre?: string; page?: string }
-}): Promise<Metadata> {
+}) {
+  const locale = getLocale()
+  const t = getTranslations(locale)
+  const isArabic = locale === 'ar'
+
   const selectedGenre = searchParams.genre || ''
-  const selectedCategoryContent = selectedGenre
-    ? categoryContent[selectedGenre]
-    : undefined
-
-  const parsedPage = Number.parseInt(searchParams.page || '1', 10)
-  const currentPage = Number.isFinite(parsedPage)
-    ? Math.max(1, parsedPage)
-    : 1
-
-  const titleBase = selectedCategoryContent
-    ? selectedCategoryContent.title
-    : 'Free HTML5 Games - Play Online Games'
-
-  const title =
-    currentPage > 1
-      ? `${titleBase} | Page ${currentPage}`
-      : titleBase
-
-  const description = selectedCategoryContent
-    ? selectedCategoryContent.metaDescription
-    : 'Play 15,000+ free HTML5 games online on Arcadlo. Discover action, puzzle, racing, sports, strategy and casual games instantly with no download or registration.'
-
   const params = new URLSearchParams()
 
   if (selectedGenre) {
     params.set('genre', selectedGenre)
   }
 
-  if (currentPage > 1) {
-    params.set('page', String(currentPage))
+  if (searchParams.page && searchParams.page !== '1') {
+    params.set('page', searchParams.page)
   }
 
   const query = params.toString()
-  const canonical = `/games${query ? `?${query}` : ''}`
+  const canonicalPath = `/games${query ? `?${query}` : ''}`
+  const canonical = isArabic
+    ? `/ar${canonicalPath}`
+    : canonicalPath
 
   return {
-    title,
-    description,
+    title: selectedGenre
+      ? `${selectedGenre.replace(/-/g, ' ')} ${t.games.categorySuffix} - Arcadlo`
+      : t.games.metadataTitle,
+    description: t.games.metadataDescription,
     keywords: [
       'free HTML5 games',
       'free online games',
       'browser games',
       'instant play games',
       'arcade games',
-      'Arcadlo',
     ],
     alternates: {
       canonical,
     },
     openGraph: {
-      type: 'website',
+      title: selectedGenre
+        ? `${selectedGenre.replace(/-/g, ' ')} ${t.games.categorySuffix} - Arcadlo`
+        : t.games.metadataTitle,
+      description: t.games.metadataDescription,
       url: canonical,
-      title,
-      description,
       siteName: 'Arcadlo',
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title,
-      description,
-    },
-    robots: {
-      index: true,
-      follow: true,
+      type: 'website',
     },
   }
 }
+
 
 export const revalidate = 300
 
 const GAMES_PER_PAGE = 48
 
-const popularCategories = [
-  { slug: 'action', name: 'Action Games' },
-  { slug: 'adventure', name: 'Adventure Games' },
-  { slug: 'arcade', name: 'Arcade Games' },
-  { slug: 'puzzle', name: 'Puzzle Games' },
-  { slug: 'racing', name: 'Racing Games' },
-  { slug: 'sports', name: 'Sports Games' },
-  { slug: 'shooter', name: 'Shooter Games' },
-  { slug: 'strategy', name: 'Strategy Games' },
-  { slug: 'casual', name: 'Casual Games' },
-  { slug: 'fighting', name: 'Fighting Games' },
-  { slug: 'rpg', name: 'RPG Games' },
-  { slug: 'simulation', name: 'Simulation Games' },
-]
+const popularCategorySlugs = [
+  'action',
+  'adventure',
+  'arcade',
+  'puzzle',
+  'racing',
+  'sports',
+  'shooter',
+  'strategy',
+  'casual',
+  'fighting',
+  'rpg',
+  'simulation',
+] as const
 
 type Game = {
   slug: string
@@ -111,10 +94,31 @@ export default async function GamesPage({
 }: {
   searchParams: { genre?: string; page?: string }
 }) {
+  const locale = getLocale()
+  const t = getTranslations(locale)
+  const isArabic = locale === 'ar'
+  const prefix = isArabic ? '/ar' : ''
+
   const selectedGenre = searchParams.genre || ''
   const selectedCategoryContent = selectedGenre
     ? categoryContent[selectedGenre]
     : undefined
+
+  const selectedCategoryTranslation = selectedGenre
+    ? getCategoryTranslation(selectedGenre, locale)
+    : undefined
+
+  const selectedCategoryTitle =
+    selectedCategoryTranslation?.name ||
+    selectedCategoryContent?.title ||
+    (selectedGenre
+      ? `${selectedGenre.replace(/-/g, ' ')} ${t.games.categorySuffix}`
+      : t.games.arena)
+
+  const selectedCategoryDescription =
+    selectedCategoryTranslation?.description ||
+    selectedCategoryContent?.description ||
+    ''
 
   const parsedPage = Number.parseInt(searchParams.page || '1', 10)
   const currentPage = Number.isFinite(parsedPage)
@@ -195,7 +199,7 @@ export default async function GamesPage({
 
     const query = params.toString()
 
-    return `/games${query ? `?${query}` : ''}`
+    return `${prefix}/games${query ? `?${query}` : ''}`
   }
 
   const canGoPrev = currentPage > 1
@@ -206,23 +210,20 @@ export default async function GamesPage({
 
       <div className="mb-8">
         <h1 className="text-4xl font-bold mb-2 text-[color:var(--text-primary)] capitalize">
-          {selectedCategoryContent?.title ||
-            (selectedGenre
-              ? `${selectedGenre.replace(/-/g, ' ')} Games`
-              : 'Games Arena')}
+          {selectedCategoryTitle}
         </h1>
 
         <p className="text-[color:var(--text-secondary)]">
-          {games.length} HTML5 Games — Page {currentPage}
+          {games.length} {t.games.html5Games} — {t.games.page} {currentPage}
           {totalPages ? ` of ${totalPages}` : ''}
         </p>
 
         {selectedGenre && (
           <Link
-            href="/games"
+            href={`${prefix}/games`}
             className="text-nexa-emerald text-sm mt-2 inline-block hover:underline"
           >
-            ← Back to All Games
+            ← {t.games.backToAllGames}
           </Link>
         )}
 
@@ -235,11 +236,11 @@ export default async function GamesPage({
               id="category-description"
               className="text-xl sm:text-2xl font-bold text-[color:var(--text-primary)] mb-4"
             >
-              About {selectedCategoryContent.title}
+              {t.games.about} {selectedCategoryTitle}
             </h2>
 
             <div className="space-y-4 text-sm sm:text-base leading-7 text-[color:var(--text-secondary)]">
-              {selectedCategoryContent.description
+              {selectedCategoryDescription
                 .trim()
                 .split(/\n\s*\n/)
                 .map((paragraph, index) => (
@@ -261,34 +262,39 @@ export default async function GamesPage({
                 id="popular-categories"
                 className="text-2xl font-bold text-[color:var(--text-primary)]"
               >
-                Popular Game Categories
+                {t.games.popularCategories}
               </h2>
               <p className="mt-1 text-sm text-[color:var(--text-secondary)]">
-                Explore free games by category.
+                {t.games.exploreByCategory}
               </p>
             </div>
 
             <Link
-              href="/categories"
+              href={`${prefix}/categories`}
               className="shrink-0 text-sm font-bold text-nexa-emerald hover:underline"
             >
-              All Categories →
+              {t.games.allCategories} →
             </Link>
           </div>
 
           <nav
-            aria-label="Popular game categories"
+            aria-label={t.games.ariaPopularCategories}
             className="flex flex-wrap gap-2"
           >
-            {popularCategories.map((category) => (
-              <Link
-                key={category.slug}
-                href={`/games?genre=${category.slug}`}
-                className="rounded-xl border border-[color:var(--white-10)] bg-[color:var(--nexa-surface)] px-4 py-2.5 text-sm font-semibold text-[color:var(--text-primary)] transition hover:border-[color:var(--nexa-emerald)] hover:text-nexa-emerald"
-              >
-                {category.name}
-              </Link>
-            ))}
+            {popularCategorySlugs.map((slug) => {
+              const category = getCategoryTranslation(slug, locale)
+              const fallbackName = slug.replace(/-/g, ' ')
+
+              return (
+                <Link
+                  key={slug}
+                  href={`${prefix}/games?genre=${slug}`}
+                  className="rounded-xl border border-[color:var(--white-10)] bg-[color:var(--nexa-surface)] px-4 py-2.5 text-sm font-semibold text-[color:var(--text-primary)] transition hover:border-[color:var(--nexa-emerald)] hover:text-nexa-emerald"
+                >
+                  {category?.name || fallbackName}
+                </Link>
+              )
+            })}
           </nav>
         </section>
       )}
@@ -298,15 +304,15 @@ export default async function GamesPage({
           <p className="text-6xl mb-4">🎮</p>
 
           <p className="text-xl text-[color:var(--text-secondary)]">
-            No games found
-            {selectedGenre ? ' in this category' : ''}
+            {t.games.noGamesFound}
+            {selectedGenre ? ` ${t.games.inThisCategory}` : ''}
           </p>
 
           <Link
-            href="/games"
+            href={`${prefix}/games`}
             className="inline-block mt-6 px-6 py-3 rounded-xl bg-nexa-violet text-[color:var(--text-primary)] font-bold"
           >
-            View All Games
+            {t.games.viewAllGames}
           </Link>
         </div>
       ) : (
@@ -330,12 +336,12 @@ export default async function GamesPage({
                   href={buildUrl(currentPage - 1)}
                   className="px-5 py-3 rounded-xl border border-[color:var(--white-10)] text-[color:var(--text-primary)] hover:bg-[color:var(--white-10)] transition font-bold"
                 >
-                  ← Prev
+                  ← {t.games.previous}
                 </Link>
               )}
 
               <span className="px-5 py-3 rounded-xl bg-[color:var(--white-05)] border border-[color:var(--white-10)] text-[color:var(--text-secondary)] font-bold">
-                Page {currentPage}
+                {t.games.page} {currentPage}
               </span>
 
               {canGoNext && (
@@ -343,7 +349,7 @@ export default async function GamesPage({
                   href={buildUrl(currentPage + 1)}
                   className="px-5 py-3 rounded-xl border border-[color:var(--white-10)] text-[color:var(--text-primary)] hover:bg-[color:var(--white-10)] transition font-bold"
                 >
-                  Next →
+                  {t.games.next} →
                 </Link>
               )}
 

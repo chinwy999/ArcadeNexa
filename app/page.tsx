@@ -4,6 +4,8 @@ import FeaturedGamesSlider from '@/components/FeaturedGamesSlider'
 import CategorySlider from '@/components/CategorySlider'
 import RecentlyPlayed from '@/components/RecentlyPlayed'
 import { getHomeGames, type Game } from '@/lib/games'
+import { getLocale } from '@/lib/i18n/server'
+import { getTranslations } from '@/lib/i18n'
 import {
   ArrowRight,
   Gamepad2,
@@ -15,45 +17,58 @@ import {
 
 export const revalidate = 300
 
-export const metadata = {
-  title: 'Arcadlo - Play 15,000+ Free HTML5 Games Online',
-  description:
-    'Play 15,000+ free HTML5 games online on Arcadlo. No download, no registration. Action, puzzle, racing, sports and more!',
-  keywords:
-    'free HTML5 games, online games, browser games, arcade games, free games',
-  alternates: {
-    canonical: '/',
-  },
-  openGraph: {
-    title: 'Arcadlo - Free HTML5 Games Online',
-    description:
-      'Play 15,000+ free HTML5 games instantly in your browser. No download required.',
-    url: '/',
-    siteName: 'Arcadlo',
-    type: 'website',
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Arcadlo - Free HTML5 Games',
-    description:
-      'Play 15,000+ free HTML5 games instantly. No download required.',
-  },
+export async function generateMetadata() {
+  const locale = getLocale()
+  const t = getTranslations(locale)
+  const isArabic = locale === 'ar'
+
+  return {
+    title: t.home.metadata.title,
+    description: t.home.metadata.description,
+    keywords:
+      'free HTML5 games, online games, browser games, arcade games, free games',
+    alternates: {
+      canonical: isArabic ? '/ar' : '/',
+    },
+    openGraph: {
+      title: t.home.metadata.openGraphTitle,
+      description: t.home.metadata.openGraphDescription,
+      url: isArabic ? '/ar' : '/',
+      siteName: 'Arcadlo',
+      type: 'website',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: t.home.metadata.twitterTitle,
+      description: t.home.metadata.twitterDescription,
+    },
+  }
 }
 
-const categories = [
-  { name: 'Action', slug: 'action' },
-  { name: 'Adventure', slug: 'adventure' },
-  { name: 'Arcade', slug: 'arcade' },
-  { name: 'Puzzle', slug: 'puzzle' },
-  { name: 'Racing', slug: 'racing' },
-  { name: 'Sports', slug: 'sports' },
-  { name: 'Shooter', slug: 'shooter' },
-  { name: 'Strategy', slug: 'strategy' },
-  { name: 'RPG', slug: 'rpg' },
-  { name: 'Casual', slug: 'casual' },
-]
+const categorySlugs = [
+  'action',
+  'adventure',
+  'arcade',
+  'puzzle',
+  'racing',
+  'sports',
+  'shooter',
+  'strategy',
+  'rpg',
+  'casual',
+] as const
 
 export default async function HomePage() {
+  const locale = getLocale()
+  const t = getTranslations(locale)
+  const isArabic = locale === 'ar'
+  const prefix = isArabic ? '/ar' : ''
+
+  const categories = categorySlugs.map((slug) => ({
+    name: t.home.categories[slug],
+    slug,
+  }))
+
   let games: Game[] = []
 
   try {
@@ -106,38 +121,38 @@ export default async function HomePage() {
           <div className="max-w-2xl">
             <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-nexa-violet/30 bg-nexa-violet/10 px-3 py-1 text-[10px] font-black uppercase tracking-wider text-nexa-violet">
               <Gamepad2 size={13} />
-              15,000+ Free Games
+              {t.home.gamesCount}
             </div>
 
             <h1 className="text-3xl font-black leading-[1.05] tracking-tight text-[color:var(--text-primary)] sm:text-4xl lg:text-5xl">
-              Play Free{' '}
+              {t.home.heroTitle}{' '}
               <span className="bg-gradient-to-r from-purple-400 via-blue-400 to-cyan-400 bg-clip-text text-transparent">
-                HTML5 Games
+                {t.home.heroHighlight}
               </span>
               <span className="block text-[color:var(--text-primary)]/90">
-                Instantly in Your Browser
+                {t.home.heroSubtitle}
               </span>
             </h1>
 
             <p className="mt-3 max-w-xl text-sm leading-6 text-[color:var(--text-secondary)] sm:text-base">
-              No downloads. No registration. Just pick a game and start playing.
+              {t.home.heroDescription}
             </p>
 
             <div className="mt-5 flex flex-wrap gap-2.5">
               <Link
-                href="/games"
+                href={`${prefix}/games`}
                 className="inline-flex items-center gap-2 rounded-xl bg-nexa-violet px-4 py-2.5 text-xs font-black text-white shadow-[0_10px_30px_var(--nexa-violet-shadow-strong)] transition-all hover:scale-[1.03] hover:brightness-110 active:scale-95 sm:px-5 sm:py-3 sm:text-sm"
               >
                 <Gamepad2 size={16} />
-                Play All Games
+                {t.home.playAllGames}
                 <ArrowRight size={14} />
               </Link>
 
               <Link
-                href="/categories"
+                href={`${prefix}/categories`}
                 className="inline-flex items-center gap-2 rounded-xl border border-[color:var(--white-15)] bg-[color:var(--white-05)] px-4 py-2.5 text-xs font-bold text-[color:var(--text-secondary)] backdrop-blur-sm transition-all hover:border-nexa-cyan/30 hover:bg-nexa-cyan/10 hover:text-white active:scale-95 sm:px-5 sm:py-3 sm:text-sm"
               >
-                Explore Categories
+                {t.home.exploreCategories}
               </Link>
             </div>
           </div>
@@ -146,25 +161,25 @@ export default async function HomePage() {
             <div className="rounded-xl border border-[color:var(--white-10)] bg-[color:var(--white-04)] p-3 backdrop-blur-sm">
               <Gamepad2 size={16} className="mb-2 text-nexa-violet" />
               <p className="text-sm font-black text-white">15,000+</p>
-              <p className="mt-0.5 text-[10px] font-semibold text-[color:var(--text-muted)]">Games</p>
+              <p className="mt-0.5 text-[10px] font-semibold text-[color:var(--text-muted)]">{t.home.games}</p>
             </div>
 
             <div className="rounded-xl border border-[color:var(--white-10)] bg-[color:var(--white-04)] p-3 backdrop-blur-sm">
               <Star size={16} className="mb-2 text-nexa-gold" />
-              <p className="text-sm font-black text-white">Top Rated</p>
-              <p className="mt-0.5 text-[10px] font-semibold text-[color:var(--text-muted)]">Games</p>
+              <p className="text-sm font-black text-white">{t.home.topRated}</p>
+              <p className="mt-0.5 text-[10px] font-semibold text-[color:var(--text-muted)]">{t.home.games}</p>
             </div>
 
             <div className="rounded-xl border border-[color:var(--white-10)] bg-[color:var(--white-04)] p-3 backdrop-blur-sm">
               <Clock size={16} className="mb-2 text-nexa-cyan" />
-              <p className="text-sm font-black text-white">Instant</p>
-              <p className="mt-0.5 text-[10px] font-semibold text-[color:var(--text-muted)]">Play</p>
+              <p className="text-sm font-black text-white">{t.home.instant}</p>
+              <p className="mt-0.5 text-[10px] font-semibold text-[color:var(--text-muted)]">{t.home.play}</p>
             </div>
 
             <div className="rounded-xl border border-[color:var(--white-10)] bg-[color:var(--white-04)] p-3 backdrop-blur-sm">
               <Sparkles size={16} className="mb-2 text-purple-400" />
-              <p className="text-sm font-black text-white">100% Free</p>
-              <p className="mt-0.5 text-[10px] font-semibold text-[color:var(--text-muted)]">Always</p>
+              <p className="text-sm font-black text-white">{t.home.free}</p>
+              <p className="mt-0.5 text-[10px] font-semibold text-[color:var(--text-muted)]">{t.home.always}</p>
             </div>
           </div>
         </div>
@@ -185,7 +200,7 @@ export default async function HomePage() {
       {/* Recently Played */}
       <RecentlyPlayed />
 
-      {/* Popular Games */}
+      {/* {t.home.popularGames} */}
       <section className="mb-9">
         <div className="mb-4 flex items-end justify-between gap-3">
           <div className="flex items-center gap-3">
@@ -199,16 +214,16 @@ export default async function HomePage() {
                 Top Rated
               </p>
               <h2 className="mt-0.5 text-lg font-black tracking-tight text-[color:var(--text-primary)] sm:text-xl">
-                Popular Games
+                {t.home.popularGames}
               </h2>
             </div>
           </div>
 
           <Link
-            href="/games"
+            href={`${prefix}/games`}
             className="group inline-flex shrink-0 items-center gap-1.5 rounded-lg border border-[color:var(--white-10)] bg-[color:var(--white-03)] px-2.5 py-1.5 text-[10px] font-extrabold text-[color:var(--text-secondary)] transition-all hover:border-nexa-violet/30 hover:bg-nexa-violet/10 hover:text-white sm:px-3 sm:py-2 sm:text-xs"
           >
-            View All
+            {t.home.viewAll}
             <ArrowRight size={12} className="transition-transform group-hover:translate-x-0.5" />
           </Link>
         </div>
@@ -225,7 +240,7 @@ export default async function HomePage() {
           <div className="rounded-xl border border-[color:var(--white-10)] bg-[color:var(--white-03)] py-8 text-center">
             <p className="mb-1 text-2xl">🎮</p>
             <p className="text-xs text-[color:var(--text-secondary)]">
-              Games are temporarily unavailable.
+              {t.home.unavailablePopular}
             </p>
           </div>
         )}
@@ -236,18 +251,18 @@ export default async function HomePage() {
         <div className="mb-3 flex items-center justify-between">
           <div>
             <p className="text-[9px] font-bold uppercase tracking-widest text-nexa-violet">
-              Discover
+              {t.home.discover}
             </p>
             <h2 className="text-base font-black text-[color:var(--text-primary)] sm:text-lg">
-              More Games
+              {t.home.moreGames}
             </h2>
           </div>
 
           <Link
-            href="/games"
+            href={`${prefix}/games`}
             className="inline-flex items-center gap-1 text-[10px] font-bold text-nexa-violet hover:underline"
           >
-            View All
+            {t.home.viewAll}
             <ArrowRight size={12} />
           </Link>
         </div>
@@ -261,7 +276,7 @@ export default async function HomePage() {
         ) : (
           <div className="rounded-xl border border-[color:var(--white-10)] bg-[color:var(--white-03)] py-8 text-center">
             <p className="text-xs text-[color:var(--text-secondary)]">
-              More games are temporarily unavailable.
+              {t.home.unavailableMore}
             </p>
           </div>
         )}
@@ -270,18 +285,18 @@ export default async function HomePage() {
       {/* CTA */}
       <section className="rounded-xl border border-[color:var(--white-10)] bg-gradient-to-br from-purple-600/10 to-blue-600/10 p-5 text-center">
         <h2 className="text-base font-black text-[color:var(--text-primary)] sm:text-lg">
-          🎯 Discover Thousands More Games
+          🎯 {t.home.discoverThousands}
         </h2>
 
         <p className="mx-auto mt-1 max-w-2xl text-[10px] text-[color:var(--text-secondary)] sm:text-xs">
-          Browse 15,000+ free HTML5 games across all genres.
+          {t.home.browseDescription}
         </p>
 
         <Link
-          href="/games"
+          href={`${prefix}/games`}
           className="mt-3 inline-flex items-center gap-1.5 rounded-xl bg-nexa-violet px-4 py-2 text-xs font-bold text-[color:var(--text-primary)] transition hover:brightness-110 hover:scale-105 active:scale-95"
         >
-          Explore All Games
+          {t.home.exploreAllGames}
           <ArrowRight size={14} />
         </Link>
       </section>

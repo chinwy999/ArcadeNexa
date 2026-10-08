@@ -1,6 +1,9 @@
+'use client'
+
 import Link from 'next/link'
 import { Play, Star, Zap } from 'lucide-react'
 import SafeImage from './SafeImage'
+import { useClientTranslations } from '@/lib/i18n/client'
 
 interface GameCardProps {
   game: {
@@ -20,6 +23,8 @@ interface GameCardProps {
 }
 
 export default function GameCard({ game, genre, onPlay }: GameCardProps) {
+  const { t } = useClientTranslations()
+
   const rating =
     typeof game.rating === 'number' ? game.rating : 8.5
 
@@ -35,7 +40,7 @@ export default function GameCard({ game, genre, onPlay }: GameCardProps) {
             : `/games/${game.slug}`
         }
         className="relative block aspect-[16/10] overflow-hidden"
-        aria-label={`Play ${game.name}`}
+        aria-label={`${t.games.ariaPlay} ${game.name}`}
       >
         <SafeImage
           src={game.thumbnail}
@@ -50,7 +55,7 @@ export default function GameCard({ game, genre, onPlay }: GameCardProps) {
 
         <div className="pointer-events-none absolute left-3 top-3 flex items-center gap-1.5 rounded-full border border-emerald-400/25 bg-nexa-navy/75 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide text-emerald-300 shadow-lg backdrop-blur-md">
           <Zap className="h-3 w-3 fill-current" />
-          Instant
+          {t.games.instant}
         </div>
 
         <div className="pointer-events-none absolute right-3 top-3 rounded-full border border-[color:var(--white-10)] bg-nexa-black/75 px-2.5 py-1 text-[10px] font-semibold text-[color:var(--text-primary)]/80 backdrop-blur-md">
@@ -72,8 +77,8 @@ export default function GameCard({ game, genre, onPlay }: GameCardProps) {
 
           <span
             className="flex shrink-0 items-center gap-1 self-start rounded-full border border-nexa-gold/10 bg-nexa-gold/[0.06] px-2 py-0.5 text-[10px] font-bold text-nexa-gold"
-            title="Arcadlo Score"
-            aria-label={`Arcadlo Score ${rating.toFixed(1)} out of 10`}
+            title={t.games.score}
+            aria-label={`${t.games.score} ${rating.toFixed(1)} ${t.games.outOfTen}`}
           >
             <Star className="h-3 w-3 fill-current" />
             {rating.toFixed(1)}
@@ -82,7 +87,7 @@ export default function GameCard({ game, genre, onPlay }: GameCardProps) {
 
         <div className="flex items-center justify-between gap-3">
           <span className="text-[10px] font-semibold uppercase tracking-wider text-[color:var(--text-muted)]">
-            HTML5 Game
+            {t.games.html5Game}
           </span>
 
           {onPlay ? (
@@ -90,14 +95,14 @@ export default function GameCard({ game, genre, onPlay }: GameCardProps) {
               type="button"
               onClick={onPlay}
               className="rounded-lg border border-nexa-cyan/15 bg-nexa-cyan/[0.07] px-3 py-1.5 text-[10px] font-black tracking-wider text-nexa-cyan transition-all hover:border-nexa-cyan/35 hover:bg-nexa-cyan/[0.13]"
-              aria-label={`Instant play ${game.name}`}
+              aria-label={`${t.games.ariaInstantPlay} ${game.name}`}
             >
-              PLAY NOW
+              {t.games.playNow}
             </button>
           ) : (
             <span className="flex items-center gap-1 text-[10px] font-bold uppercase tracking-wider text-emerald-400/80">
               <Play className="h-3 w-3 fill-current" />
-              Ready
+              {t.games.ready}
             </span>
           )}
         </div>
