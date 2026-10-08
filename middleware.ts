@@ -29,6 +29,17 @@ function getLocaleFromPath(pathname: string): {
 }
 
 export function middleware(request: NextRequest) {
+  const host = request.headers.get('host')?.split(':')[0]
+
+  if (host === 'arcade-nexa-3gxg.vercel.app') {
+    const redirectUrl = new URL(request.url)
+    redirectUrl.protocol = 'https:'
+    redirectUrl.hostname = 'arcadlo.com'
+    redirectUrl.port = ''
+
+    return NextResponse.redirect(redirectUrl, 301)
+  }
+
   const { pathname } = request.nextUrl
 
   const { locale, pathname: internalPathname } =
