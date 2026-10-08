@@ -118,6 +118,43 @@ const ar = {
     },
   },
 
+
+    gamePage: {
+
+      loadingGame: 'جارٍ تحميل {name}...',
+      exitFullscreen: 'الخروج من ملء الشاشة',
+      enterFullscreen: 'الدخول إلى ملء الشاشة',
+      fullscreen: 'ملء الشاشة',
+      loadError: 'تعذر تحميل اللعبة',
+      loadErrorDescription: 'تحقق من اتصالك بالإنترنت وحاول مرة أخرى.',
+      retry: 'إعادة المحاولة',
+      officialPage: 'الصفحة الرسمية',
+      howToPlayLabel: 'كيفية اللعب:',
+      instantPlayBar: 'العب مباشرة في هذه الصفحة • اضغط ESC للخروج من ملء الشاشة',
+      about: 'حول',
+      howToPlay: 'كيفية اللعب',
+      controlsNotice:
+        'قد تختلف طريقة التحكم من لعبة إلى أخرى. تحقق من التعليمات الظاهرة عند تحميل اللعبة لمعرفة أزرار لوحة المفاتيح أو عناصر التحكم بالماوس أو اللمس المتاحة.',
+      moreGames: 'ألعاب أخرى قد تعجبك',
+      moreCategoryGames:
+        'المزيد من ألعاب {category} المجانية التي يمكنك لعبها في المتصفح.',
+      viewAll: 'عرض الكل',
+      guidesTips: 'أدلة ونصائح الألعاب',
+      details: 'التفاصيل',
+      provider: 'المزوّد',
+      platform: 'المنصة',
+      category: 'التصنيف',
+      resolution: 'الدقة',
+      moreCategory: 'المزيد من ألعاب {category}',
+      home: 'الرئيسية',
+      games: 'الألعاب',
+      html5Free: 'HTML5 • مجانية',
+      notFoundTitle: 'اللعبة غير موجودة - Arcadlo',
+      notFoundDescription:
+        'تعذر العثور على اللعبة المطلوبة على Arcadlo.',
+      seoSuffix: ' - العب مجانًا',
+    },
+
   games: {
     arena: 'ساحة الألعاب',
     html5Games: 'ألعاب HTML5',

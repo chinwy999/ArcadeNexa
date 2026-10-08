@@ -118,6 +118,43 @@ const en = {
     },
   },
 
+
+    gamePage: {
+
+      loadingGame: 'Loading {name}...',
+      exitFullscreen: 'Exit fullscreen',
+      enterFullscreen: 'Enter fullscreen',
+      fullscreen: 'Fullscreen',
+      loadError: 'Game could not be loaded',
+      loadErrorDescription: 'Check your connection and try again.',
+      retry: 'Retry',
+      officialPage: 'Official Page',
+      howToPlayLabel: 'How to Play:',
+      instantPlayBar: 'Play instantly on this page • ESC to exit fullscreen',
+      about: 'About',
+      howToPlay: 'How to Play',
+      controlsNotice:
+        'Controls may vary by game. Check the on-screen instructions when the game loads for the exact keyboard, mouse, or touch controls.',
+      moreGames: 'More Games You May Like',
+      moreCategoryGames:
+        'More {category} games to play for free in your browser.',
+      viewAll: 'View All',
+      guidesTips: 'Gaming Guides & Tips',
+      details: 'Details',
+      provider: 'Provider',
+      platform: 'Platform',
+      category: 'Category',
+      resolution: 'Resolution',
+      moreCategory: 'More {category} games',
+      home: 'Home',
+      games: 'Games',
+      html5Free: 'HTML5 • Free',
+      notFoundTitle: 'Game Not Found - Arcadlo',
+      notFoundDescription:
+        'The requested game could not be found on Arcadlo.',
+      seoSuffix: ' - Play Free Online',
+    },
+
   games: {
     arena: 'Games Arena',
     html5Games: 'HTML5 games',

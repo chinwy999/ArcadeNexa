@@ -4,8 +4,16 @@ import { useRef, useState, useEffect } from 'react'
 import { Maximize2, Minimize2, Gamepad2, ExternalLink } from 'lucide-react'
 import type { Game } from '@/lib/games'
 import AdsterraSmartLink from '@/components/AdsterraSmartLink'
+import { useClientTranslations } from '@/lib/i18n/client'
 
-export default function InstantPlaySection({ game }: { game: Game }) {
+export default function InstantPlaySection({
+  game,
+  instructions,
+}: {
+  game: Game
+  instructions: string
+}) {
+  const { t } = useClientTranslations()
   const [isFullscreen, setIsFullscreen] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
   const [hasError, setHasError] = useState(false)
@@ -94,8 +102,8 @@ export default function InstantPlaySection({ game }: { game: Game }) {
           type="button"
           onClick={toggleFullscreen}
           className="w-9 h-9 shrink-0 rounded-lg bg-[color:var(--white-05)] border border-[color:var(--white-10)] hover:bg-[color:var(--white-10)] text-[color:var(--text-primary)] flex items-center justify-center transition-colors"
-          aria-label={isFullscreen ? 'Exit fullscreen' : 'Enter fullscreen'}
-          title={isFullscreen ? 'Exit fullscreen' : 'Fullscreen'}
+          aria-label={isFullscreen ? t.gamePage.exitFullscreen : t.gamePage.enterFullscreen}
+          title={isFullscreen ? t.gamePage.exitFullscreen : t.gamePage.fullscreen}
         >
           {isFullscreen ? (
             <Minimize2 className="w-4 h-4" />
@@ -128,7 +136,7 @@ export default function InstantPlaySection({ game }: { game: Game }) {
             <div className="w-10 h-10 border-4 border-nexa-violet/20 border-t-nexa-violet rounded-full animate-spin" />
 
             <p className="text-[color:var(--text-secondary)] text-sm">
-              Loading {game.name}...
+              {t.gamePage.loadingGame.replace('{name}', game.name)}
             </p>
           </div>
         )}
@@ -136,11 +144,11 @@ export default function InstantPlaySection({ game }: { game: Game }) {
         {hasError ? (
           <div className="absolute inset-0 z-20 bg-nexa-navy flex flex-col items-center justify-center p-6 text-center">
             <p className="text-[color:var(--text-primary)] font-bold mb-2">
-              Game could not be loaded
+              {t.gamePage.loadError}
             </p>
 
             <p className="text-[color:var(--text-secondary)] text-xs mb-4">
-              Check your connection and try again.
+              {t.gamePage.loadErrorDescription}
             </p>
 
             <button
@@ -148,7 +156,7 @@ export default function InstantPlaySection({ game }: { game: Game }) {
               onClick={retry}
               className="bg-nexa-violet text-[color:var(--text-primary)] px-4 py-2 rounded-lg text-sm hover:opacity-90 transition-opacity"
             >
-              Retry
+              {t.gamePage.retry}
             </button>
           </div>
         ) : (
@@ -180,7 +188,7 @@ export default function InstantPlaySection({ game }: { game: Game }) {
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 px-4 py-3 bg-nexa-surface/80 border-t border-[color:var(--white-05)] text-[11px] text-[color:var(--text-secondary)]">
             <span className="flex items-center gap-2">
               <Gamepad2 className="w-3 h-3" />
-              Play instantly on this page • ESC to exit fullscreen
+              {t.gamePage.instantPlayBar}
             </span>
 
             <div className="flex items-center gap-3">
@@ -192,7 +200,7 @@ export default function InstantPlaySection({ game }: { game: Game }) {
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-1 text-nexa-violet hover:text-[color:var(--text-primary)]"
                 >
-                  Official Page
+                  {t.gamePage.officialPage}
                   <ExternalLink className="w-3 h-3" />
                 </a>
               )}
@@ -202,11 +210,11 @@ export default function InstantPlaySection({ game }: { game: Game }) {
           {game.instructions && (
             <div className="px-4 py-3 bg-nexa-surface/50 border-t border-[color:var(--white-05)]">
               <p className="text-[color:var(--text-primary)] font-bold text-xs mb-1">
-                How to Play:
+                {t.gamePage.howToPlayLabel}
               </p>
 
               <p className="text-[color:var(--text-secondary)] text-xs leading-relaxed">
-                {game.instructions}
+                {instructions}
               </p>
             </div>
           )}

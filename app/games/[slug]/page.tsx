@@ -8,6 +8,9 @@ import FavoriteButton from '@/components/FavoriteButton'
 import { allArticles } from '@/lib/articles'
 import { getSiteUrl } from '@/lib/site'
 import AdsterraBanner from '@/components/ads/AdsterraBanner'
+import { getLocale } from '@/lib/i18n/server'
+import { getTranslations } from '@/lib/i18n'
+import { getLocalizedArticle } from '@/lib/article-translations'
 
 export const revalidate = 3600
 
@@ -34,22 +37,19 @@ const getGameBySlug = async (
  * Invalid game slugs are handled exclusively by GamePage().
  * This guarantees that the actual route can return HTTP 404.
  */
-export async function generateMetadata(
-  { params }: PageParams
-): Promise<Metadata> {
-  const genre =
-    ''
+export async function generateMetadata({
+  params,
+}: PageParams): Promise<Metadata> {
+  const locale = getLocale()
+  const t = getTranslations(locale)
 
-  const game = await getGameBySlug(
-    params.slug,
-    genre
-  )
+  const genre = ''
+  const game = await getGameBySlug(params.slug, genre)
 
   if (!game) {
     return {
-      title: 'Game Not Found - Arcadlo',
-      description:
-        'The requested game could not be found on Arcadlo.',
+      title: t.gamePage.notFoundTitle,
+      description: t.gamePage.notFoundDescription,
       robots: {
         index: false,
         follow: false,
@@ -57,37 +57,53 @@ export async function generateMetadata(
     }
   }
 
-  const titleSuffix = ' - Play Free Online'
+  const localized = getLocalizedGameContent(game, locale)
+  const categoryLabel = getGameCategoryLabel(game.category, locale)
+
+  const titleSuffix = t.gamePage.seoSuffix
   const maxTitleLength = 60
   const maxGameTitleLength = maxTitleLength - titleSuffix.length
 
   const seoTitle =
     game.title.length > maxGameTitleLength
       ? `${game.title
-          .slice(0, maxGameTitleLength - 3)
+          .slice(0, Math.max(1, maxGameTitleLength - 3))
           .trimEnd()}...`
       : game.title
 
   const pageTitle = `${seoTitle}${titleSuffix}`
 
+  const publicPath =
+    locale === 'ar'
+      ? `/ar/games/${game.slug}`
+      : `/games/${game.slug}`
+
+  const keywords =
+    locale === 'ar'
+      ? [
+          game.title,
+          categoryLabel,
+          'لعبة مجانية',
+          'ألعاب HTML5',
+          'ألعاب متصفح',
+          'Arcadlo',
+        ]
+      : [
+          game.title,
+          categoryLabel,
+          'free online game',
+          'HTML5 game',
+          'browser game',
+          'Arcadlo',
+        ]
+
   return {
     title: pageTitle,
-    description:
-      game.description ||
-      `Play ${game.title} for free online on Arcadlo. No download required, instant play in your browser.`,
-    keywords: [
-      game.title,
-      game.category,
-      'free online game',
-      'HTML5 game',
-      'browser game',
-      'Arcadlo',
-    ],
+    description: localized.description,
+    keywords,
     openGraph: {
       title: pageTitle,
-      description:
-        game.description ||
-        `Play ${game.title} for free on Arcadlo`,
+      description: localized.description,
       images: game.thumbnail
         ? [
             {
@@ -98,19 +114,21 @@ export async function generateMetadata(
             },
           ]
         : [],
-      url: `${getSiteUrl()}/games/${game.slug}`,
+      url: `${getSiteUrl()}${publicPath}`,
       type: 'website',
     },
     twitter: {
       card: 'summary_large_image',
       title: pageTitle,
-      description:
-        game.description ||
-        `Play ${game.title} for free on Arcadlo`,
+      description: localized.description,
       images: game.thumbnail ? [game.thumbnail] : [],
     },
     alternates: {
-      canonical: `/games/${game.slug}`,
+      canonical: publicPath,
+      languages: {
+        en: `/games/${game.slug}`,
+        ar: `/ar/games/${game.slug}`,
+      },
     },
   }
 }
@@ -165,6 +183,132 @@ function getHowToPlay(game: {
     game.instructions !== 'Use mouse or touch controls to play.'
     ? game.instructions
     : 'Use the available mouse, touch, or keyboard controls to play. Follow the on-screen objective, learn the game mechanics, and complete the level or challenge.'
+}
+
+
+const GAME_CATEGORY_NAMES_AR: Record<string, string> = {
+  action: 'الحركة',
+  adventure: 'المغامرات',
+  arcade: 'الأركيد',
+  puzzle: 'الألغاز',
+  racing: 'السباقات',
+  sports: 'الرياضات',
+  shooter: 'التصويب',
+  strategy: 'الاستراتيجية',
+  simulation: 'المحاكاة',
+  casual: 'الألعاب الخفيفة',
+  rpg: 'ألعاب تقمص الأدوار',
+}
+
+function getGameCategoryLabel(
+  category: string,
+  locale: 'en' | 'ar'
+) {
+  if (locale === 'en') return category
+  return GAME_CATEGORY_NAMES_AR[category.toLowerCase()] || category
+}
+
+function getLocalizedGameContent(
+  game: Game,
+  locale: 'en' | 'ar'
+) {
+  if (locale === 'en') {
+    return {
+      description:
+        game.description ||
+        `Play ${game.title} for free online on Arcadlo. No download required.`,
+      longDescription:
+        game.longDescription ||
+        `${game.title} is a free ${game.category} browser game available on Arcadlo. Play instantly in your browser.`,
+      howToPlay: getHowToPlay(game),
+      controls:
+        'Controls may vary by game. Check the on-screen instructions when the game loads for the exact keyboard, mouse, or touch controls.',
+    }
+  }
+
+  const category = game.category.toLowerCase()
+
+  const categoryName = getGameCategoryLabel(game.category, locale)
+
+  const tagNames: Record<string, string> = {
+    memory: 'الذاكرة',
+    html5: 'HTML5',
+    browser: 'المتصفح',
+    puzzle: 'الألغاز',
+    action: 'الحركة',
+    arcade: 'الأركيد',
+    racing: 'السباقات',
+    sports: 'الرياضات',
+    shooter: 'التصويب',
+    strategy: 'الاستراتيجية',
+    adventure: 'المغامرات',
+    casual: 'الألعاب الخفيفة',
+    simulation: 'المحاكاة',
+  }
+
+  const translatedTags = game.tags
+    .slice(0, 4)
+    .map((tag) => tagNames[tag.toLowerCase()] || tag)
+    .join('، ')
+
+  const tagSentence = translatedTags
+    ? ` وتندرج ضمن وسوم مثل ${translatedTags}.`
+    : ''
+
+  return {
+    description:
+      `${game.title} هي لعبة ${categoryName} مجانية يمكنك لعبها مباشرة عبر المتصفح على Arcadlo، دون الحاجة إلى تنزيل أو تثبيت.`,
+
+    longDescription:
+      `${game.title} هي لعبة ${categoryName} مجانية للمتصفح على Arcadlo. ` +
+      `ابدأ اللعب مباشرة واستكشف طريقة اللعب والتحديات التي تقدمها اللعبة.` +
+      tagSentence +
+      ` استمتع بتجربة لعب فورية من المتصفح دون الحاجة إلى تنزيل اللعبة.`,
+
+    howToPlay: getHowToPlayArabic(game),
+
+    controls:
+      'قد تختلف طريقة التحكم من لعبة إلى أخرى. تحقق من التعليمات الظاهرة عند تحميل اللعبة لمعرفة أزرار لوحة المفاتيح أو عناصر التحكم بالماوس أو اللمس المتاحة.',
+  }
+}
+
+function getHowToPlayArabic(game: {
+  title: string
+  category: string
+  instructions?: string
+}) {
+  const category = game.category.toLowerCase()
+
+  const instructions: Record<string, string> = {
+    racing:
+      'استخدم عناصر التحكم المتاحة للتوجيه والتسارع والفرملة لقيادة مركبتك على المسار. تجنب العوائق وحافظ على سرعتك وحاول تحقيق أفضل وقت ممكن.',
+    puzzle:
+      'استخدم الماوس أو شاشة اللمس أو لوحة المفاتيح للتفاعل مع عناصر اللغز. راقب اللوحة بعناية، وخطط لتحركاتك، وحاول إكمال الهدف بأقل عدد ممكن من الأخطاء.',
+    action:
+      'استخدم عناصر التحكم المتاحة للحركة وتنفيذ الإجراءات وتجاوز العقبات وإكمال المرحلة. تحرك بسرعة واستفد من آليات اللعبة للتقدم.',
+    shooter:
+      'استخدم الماوس أو عناصر التحكم باللمس أو لوحة المفاتيح للتصويب والتفاعل مع الأهداف. راقب محيطك وتحرك بسرعة وحاول إكمال الهدف قبل انتهاء المرحلة.',
+    sports:
+      'استخدم عناصر التحكم الظاهرة على الشاشة أو لوحة المفاتيح لتحريك شخصيتك وتنفيذ الحركات المطلوبة. اختر التوقيت المناسب وحاول تحقيق الهدف والفوز بالمباراة.',
+    strategy:
+      'خطط لتحركاتك قبل تنفيذها. استخدم عناصر التحكم المتاحة لإدارة وحداتك أو مواردك أو أهدافك، وعدّل استراتيجيتك مع تقدم اللعبة.',
+    simulation:
+      'استخدم عناصر التحكم المتاحة للتفاعل مع عالم اللعبة وإدارة أنظمته. اتبع الأهداف وجرب آليات اللعب المختلفة وتقدم بالسرعة التي تناسبك.',
+    adventure:
+      'استكشف عالم اللعبة وتفاعل مع العناصر والشخصيات واتبع الأهداف المطلوبة. استخدم عناصر التحكم الخاصة بالحركة والإجراءات للتقدم في المغامرة.',
+    casual:
+      'استخدم عناصر التحكم البسيطة بالماوس أو اللمس أو لوحة المفاتيح التي توفرها اللعبة. اتبع الهدف وتفاعل مع ما يظهر على الشاشة واستمتع باللعب بالوتيرة التي تناسبك.',
+    arcade:
+      'استخدم الماوس أو اللمس أو لوحة المفاتيح المتاحة للعب. تحرك بسرعة وتجنب العقبات وأكمل الهدف وحاول تحقيق أعلى نتيجة ممكنة.',
+  }
+
+  for (const key of Object.keys(instructions)) {
+    if (category.includes(key)) {
+      return instructions[key]
+    }
+  }
+
+  return 'استخدم عناصر التحكم المتاحة بالماوس أو اللمس أو لوحة المفاتيح للعب. اتبع الهدف الظاهر على الشاشة وتعرّف على آليات اللعبة وأكمل المرحلة أو التحدي.'
 }
 
 type SearchableArticle = {
@@ -299,23 +443,33 @@ export default async function GamePage({ params }: PageParams) {
     notFound()
   }
 
-  const relatedGames = getRelatedGames(game)
+  const locale = getLocale()
+  const t = getTranslations(locale)
+  const localized = getLocalizedGameContent(game, locale)
+  const categoryLabel = getGameCategoryLabel(game.category, locale)
 
-  const howToPlay = getHowToPlay(game)
-  const relatedArticles = getRelatedArticles(game)
+  const relatedGames = getRelatedGames(game)
+  const relatedArticles = getRelatedArticles(game).map((article) =>
+    getLocalizedArticle(article, locale)
+  )
+
+  const publicGamePath =
+    locale === 'ar'
+      ? `/ar/games/${game.slug}`
+      : `/games/${game.slug}`
 
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'VideoGame',
     name: game.title,
-    description:
-      game.description || `Play ${game.title} free online`,
+    description: localized.description,
     image: game.thumbnail,
-    url: `${getSiteUrl()}/games/${game.slug}`,
+    url: `${getSiteUrl()}${publicGamePath}`,
     applicationCategory: 'Game',
     operatingSystem: 'Web Browser',
     gamePlatform: 'Web Browser',
-    genre: game.category,
+    genre: categoryLabel,
+    inLanguage: locale,
     offers: {
       '@type': 'Offer',
       price: '0',
@@ -344,28 +498,28 @@ export default async function GamePage({ params }: PageParams) {
 
         <div className="flex items-center gap-2 text-sm text-[color:var(--text-secondary)] mb-6">
           <Link
-            href="/"
+            href={locale === 'ar' ? '/ar' : '/'}
             className="hover:text-[color:var(--text-primary)] transition"
           >
-            Home
+            {t.gamePage.home}
           </Link>
 
           <span>/</span>
 
           <Link
-            href="/games"
+            href={locale === 'ar' ? '/ar/games' : '/games'}
             className="hover:text-[color:var(--text-primary)] transition"
           >
-            Games
+            {t.gamePage.games}
           </Link>
 
           <span>/</span>
 
           <Link
-            href={`/games?genre=${game.category}`}
+            href={locale === 'ar' ? `/ar/games?genre=${encodeURIComponent(game.category)}` : `/games?genre=${encodeURIComponent(game.category)}`}
             className="hover:text-[color:var(--text-primary)] transition capitalize"
           >
-            {game.category}
+            {categoryLabel}
           </Link>
 
           <span>/</span>
@@ -382,11 +536,11 @@ export default async function GamePage({ params }: PageParams) {
 
           <div className="flex items-center gap-3 flex-wrap">
             <span className="bg-nexa-emerald/10 border border-nexa-emerald/20 text-nexa-emerald text-xs px-3 py-1 rounded-full font-bold">
-              HTML5 • Free
+               {t.gamePage.html5Free}
             </span>
 
             <span className="bg-[color:var(--white-05)] border border-[color:var(--white-10)] text-[color:var(--text-secondary)] text-xs px-3 py-1 rounded-full capitalize">
-              {game.category}
+              {categoryLabel}
             </span>
 
             <FavoriteButton
@@ -399,7 +553,7 @@ export default async function GamePage({ params }: PageParams) {
         <div className="mb-8">
           <AdsterraBanner />
 
-          <InstantPlaySection game={game} />
+          <InstantPlaySection game={game} instructions={localized.howToPlay} />
 
         </div>
 
@@ -407,26 +561,25 @@ export default async function GamePage({ params }: PageParams) {
           <div className="md:col-span-2 space-y-6">
             <div className="glass rounded-2xl p-6 border border-[color:var(--white-05)]">
               <h2 className="text-xl font-bold text-[color:var(--text-primary)] mb-3">
-                About {game.title}
+                 {t.gamePage.about} {game.title}
               </h2>
 
               <p className="text-[color:var(--text-secondary)] leading-relaxed">
-                {game.longDescription}
+                {localized.longDescription}
               </p>
             </div>
 
             <div className="glass rounded-2xl p-6 border border-[color:var(--white-05)]">
               <h2 className="text-xl font-bold text-[color:var(--text-primary)] mb-3">
-                How to Play {game.title}
+                 {t.gamePage.howToPlay} {game.title}
               </h2>
 
               <p className="text-[color:var(--text-secondary)] leading-relaxed">
-                {howToPlay}
+                {localized.howToPlay}
               </p>
 
               <p className="mt-4 text-sm text-[color:var(--text-secondary)]">
-                Controls may vary by game. Check the on-screen instructions when
-                the game loads for the exact keyboard, mouse, or touch controls.
+                {t.gamePage.controlsNotice}
               </p>
             </div>
 
@@ -435,19 +588,23 @@ export default async function GamePage({ params }: PageParams) {
                 <div className="flex items-end justify-between gap-4 mb-4">
                   <div>
                     <h2 className="text-xl font-bold text-[color:var(--text-primary)]">
-                      More Games You May Like
+                       {t.gamePage.moreGames}
                     </h2>
 
                     <p className="mt-1 text-sm text-[color:var(--text-secondary)]">
-                      More {game.category} games to play for free in your browser.
+                                      {t.gamePage.moreCategoryGames.replace('{category}', categoryLabel)}
                     </p>
                   </div>
 
                   <Link
-                    href={`/games?genre=${encodeURIComponent(game.category)}`}
+                    href={
+                          locale === 'ar'
+                            ? `/ar/games?genre=${encodeURIComponent(game.category)}`
+                            : `/games?genre=${encodeURIComponent(game.category)}`
+                        }
                     className="text-sm font-semibold text-nexa-emerald hover:underline whitespace-nowrap"
                   >
-                    View All
+                     {t.gamePage.viewAll}
                   </Link>
                 </div>
 
@@ -455,7 +612,7 @@ export default async function GamePage({ params }: PageParams) {
                   {relatedGames.map((relatedGame) => (
                     <Link
                       key={relatedGame.slug}
-                      href={`/games/${relatedGame.slug}`}
+                      href={locale === 'ar' ? `/ar/games/${relatedGame.slug}` : `/games/${relatedGame.slug}`}
                       className="group overflow-hidden rounded-xl border border-[color:var(--white-10)] bg-[color:var(--white-05)] transition-all duration-200 hover:border-nexa-emerald/40 hover:-translate-y-0.5"
                     >
                       <div className="aspect-[16/10] overflow-hidden bg-[color:var(--white-05)]">
@@ -479,7 +636,7 @@ export default async function GamePage({ params }: PageParams) {
                         </h3>
 
                         <p className="mt-1 text-xs text-[color:var(--text-secondary)] capitalize">
-                          {relatedGame.category}
+                          {getGameCategoryLabel(relatedGame.category, locale)}
                         </p>
                       </div>
                     </Link>
@@ -490,14 +647,14 @@ export default async function GamePage({ params }: PageParams) {
 
             <div className="glass rounded-2xl p-6 border border-[color:var(--white-05)]">
               <h2 className="text-xl font-bold text-[color:var(--text-primary)] mb-4">
-                Gaming Guides & Tips
+                 {t.gamePage.guidesTips}
               </h2>
 
               <div className="grid gap-3 sm:grid-cols-3">
                 {relatedArticles.map((article) => (
                   <Link
                     key={article.slug}
-                    href={`/blog/${article.slug}`}
+                    href={locale === 'ar' ? `/ar/blog/${article.slug}` : `/blog/${article.slug}`}
                     className="rounded-xl border border-[color:var(--white-10)] bg-[color:var(--white-02)] p-4 transition hover:border-nexa-violet/40 hover:bg-[color:var(--white-04)]"
                   >
                     <span className="mb-2 block text-xs font-bold uppercase tracking-wide text-nexa-violet">
@@ -516,13 +673,13 @@ export default async function GamePage({ params }: PageParams) {
           <div className="space-y-4">
             <div className="glass rounded-2xl p-6 border border-[color:var(--white-05)]">
               <h3 className="text-xl font-bold text-[color:var(--text-primary)] mb-4">
-                Details
+                 {t.gamePage.details}
               </h3>
 
               <div className="space-y-3">
                 <div className="flex justify-between">
                   <span className="text-[color:var(--text-secondary)]">
-                    Provider
+                     {t.gamePage.provider}
                   </span>
 
                   <span className="text-[color:var(--text-primary)] font-medium">
@@ -532,7 +689,7 @@ export default async function GamePage({ params }: PageParams) {
 
                 <div className="flex justify-between">
                   <span className="text-[color:var(--text-secondary)]">
-                    Platform
+                     {t.gamePage.platform}
                   </span>
 
                   <span className="text-[color:var(--text-primary)] font-medium">
@@ -542,17 +699,17 @@ export default async function GamePage({ params }: PageParams) {
 
                 <div className="flex justify-between">
                   <span className="text-[color:var(--text-secondary)]">
-                    Category
+                     {t.gamePage.category}
                   </span>
 
                   <span className="text-[color:var(--text-primary)] font-medium capitalize">
-                    {game.category}
+                    {categoryLabel}
                   </span>
                 </div>
 
                 <div className="flex justify-between">
                   <span className="text-[color:var(--text-secondary)]">
-                    Resolution
+                     {t.gamePage.resolution}
                   </span>
 
                   <span className="text-[color:var(--text-primary)] font-medium">
@@ -563,15 +720,11 @@ export default async function GamePage({ params }: PageParams) {
             </div>
 
             <Link
-              href={`/games?genre=${game.category}`}
+              href={`${locale === "ar" ? "/ar" : ""}/games?genre=${game.category}`}
               className="block glass rounded-2xl p-4 border border-[color:var(--white-05)] hover:border-nexa-violet/40 transition text-center"
             >
               <p className="text-[color:var(--text-secondary)] text-sm">
-                More{' '}
-                <span className="capitalize text-nexa-violet font-bold">
-                  {game.category}
-                </span>{' '}
-                games →
+                {t.gamePage.moreCategory.replace('{category}', categoryLabel)} →
               </p>
             </Link>
           </div>
