@@ -18,7 +18,7 @@ import {
 export const revalidate = 300
 
 export async function generateMetadata() {
-  const locale = getLocale()
+  const locale = await getLocale()
   const t = getTranslations(locale)
   const isArabic = locale === 'ar'
 
@@ -59,7 +59,7 @@ const categorySlugs = [
 ] as const
 
 export default async function HomePage() {
-  const locale = getLocale()
+  const locale = await getLocale()
   const t = getTranslations(locale)
   const isArabic = locale === 'ar'
   const prefix = isArabic ? '/ar' : ''

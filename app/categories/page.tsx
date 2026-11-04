@@ -10,7 +10,7 @@ import { Gamepad2, Swords, Compass, Joystick, Puzzle, Trophy, Zap, Crosshair, Ca
 export const revalidate = 3600
 
 export async function generateMetadata(): Promise<Metadata> {
-  const locale = getLocale()
+  const locale = await getLocale()
   const t = getTranslations(locale)
   const isArabic = locale === 'ar'
 
@@ -124,7 +124,7 @@ const displayTitle = (slug: string) => {
 }
 
 export default async function CategoriesPage() {
-  const locale = getLocale()
+  const locale = await getLocale()
   const t = getTranslations(locale)
   const isArabic = locale === 'ar'
   const prefix = isArabic ? '/ar' : ''

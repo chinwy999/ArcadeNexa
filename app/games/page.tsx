@@ -9,21 +9,22 @@ import { getTranslations } from '@/lib/i18n'
 export async function generateMetadata({
   searchParams,
 }: {
-  searchParams: { genre?: string; page?: string }
+  searchParams: Promise<{ genre?: string; page?: string }>
 }) {
-  const locale = getLocale()
+  const search = await searchParams
+  const locale = await getLocale()
   const t = getTranslations(locale)
   const isArabic = locale === 'ar'
 
-  const selectedGenre = searchParams.genre || ''
+  const selectedGenre = search.genre || ''
   const params = new URLSearchParams()
 
   if (selectedGenre) {
     params.set('genre', selectedGenre)
   }
 
-  if (searchParams.page && searchParams.page !== '1') {
-    params.set('page', searchParams.page)
+  if (search.page && search.page !== '1') {
+    params.set('page', search.page)
   }
 
   const query = params.toString()
@@ -92,14 +93,15 @@ type Game = {
 export default async function GamesPage({
   searchParams,
 }: {
-  searchParams: { genre?: string; page?: string }
+  searchParams: Promise<{ genre?: string; page?: string }>
 }) {
-  const locale = getLocale()
+  const search = await searchParams
+  const locale = await getLocale()
   const t = getTranslations(locale)
   const isArabic = locale === 'ar'
   const prefix = isArabic ? '/ar' : ''
 
-  const selectedGenre = searchParams.genre || ''
+  const selectedGenre = search.genre || ''
   const selectedCategoryContent = selectedGenre
     ? categoryContent[selectedGenre]
     : undefined
@@ -120,7 +122,7 @@ export default async function GamesPage({
     selectedCategoryContent?.description ||
     ''
 
-  const parsedPage = Number.parseInt(searchParams.page || '1', 10)
+  const parsedPage = Number.parseInt(search.page || '1', 10)
   const currentPage = Number.isFinite(parsedPage)
     ? Math.max(1, parsedPage)
     : 1

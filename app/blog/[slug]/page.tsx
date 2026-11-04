@@ -9,7 +9,7 @@ import { getTranslations } from '@/lib/i18n'
 import { getLocalizedArticle } from '@/lib/article-translations'
 
 type Props = {
-  params: { slug: string }
+  params: Promise<{ slug: string }>
 }
 
 export const revalidate = 86400
@@ -159,8 +159,9 @@ async function getRelatedGamesForArticle(article: {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const locale = getLocale()
-  const article = articles.find((item) => item.slug === params.slug)
+  const { slug } = await params
+  const locale = await getLocale()
+  const article = articles.find((item) => item.slug === slug)
 
   if (!article) {
     return {}
@@ -190,13 +191,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function ArticlePage({ params }: Props) {
-  const article = articles.find((item) => item.slug === params.slug)
+  const { slug } = await params
+  const article = articles.find((item) => item.slug === slug)
 
   if (!article) {
     notFound()
   }
 
-  const locale = getLocale()
+  const locale = await getLocale()
   const t = getTranslations(locale)
   const isArabic = locale === 'ar'
   const prefix = isArabic ? '/ar' : ''

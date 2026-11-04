@@ -21,3 +21,5 @@ backups/
 
 # Local UI audit backups
 .ui-backup-4e/
+.open-next
+.wrangler

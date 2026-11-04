@@ -4,7 +4,7 @@ import { getLocale } from '@/lib/i18n/server'
 import { getTranslations } from '@/lib/i18n'
 
 export async function generateMetadata(): Promise<Metadata> {
-  const locale = getLocale()
+  const locale = await getLocale()
   const t = getTranslations(locale)
 
   return {
@@ -16,8 +16,8 @@ export async function generateMetadata(): Promise<Metadata> {
   }
 }
 
-export default function FAQPage() {
-  const locale = getLocale()
+export default async function FAQPage() {
+  const locale = await getLocale()
   const t = getTranslations(locale)
   const isArabic = locale === 'ar'
 

@@ -3,10 +3,11 @@ import { getGameBySlugFast } from '@/lib/games'
 
 export async function GET(
   _request: Request,
-  { params }: { params: { slug: string } }
+  { params }: { params: Promise<{ slug: string }> }
 ) {
   try {
-    const game = await getGameBySlugFast(params.slug)
+    const { slug } = await params
+    const game = await getGameBySlugFast(slug)
 
     if (!game) {
       return NextResponse.json(

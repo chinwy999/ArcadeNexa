@@ -2,8 +2,8 @@ import Link from 'next/link'
 import { getLocale } from '@/lib/i18n/server'
 import { getTranslations } from '@/lib/i18n'
 
-export default function Footer() {
-  const locale = getLocale()
+export default async function Footer() {
+  const locale = await getLocale()
   const t = getTranslations(locale)
   const isArabic = locale === 'ar'
   const prefix = isArabic ? '/ar' : ''

@@ -43,8 +43,8 @@ export const metadata: Metadata = {
   },
 }
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
-  const locale = getLocale()
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const locale = await getLocale()
   const isArabic = locale === 'ar'
 
   return (

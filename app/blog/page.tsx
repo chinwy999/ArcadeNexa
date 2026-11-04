@@ -6,7 +6,7 @@ import { getTranslations } from '@/lib/i18n'
 import { getLocalizedArticle } from '@/lib/article-translations'
 
 export async function generateMetadata(): Promise<Metadata> {
-  const locale = getLocale()
+  const locale = await getLocale()
 
   if (locale === 'ar') {
     return {
@@ -63,8 +63,8 @@ export async function generateMetadata(): Promise<Metadata> {
   }
 }
 
-export default function BlogPage() {
-  const locale = getLocale()
+export default async function BlogPage() {
+  const locale = await getLocale()
   const t = getTranslations(locale)
   const isArabic = locale === 'ar'
   const prefix = isArabic ? '/ar' : ''

@@ -12,9 +12,14 @@ const nextConfig = {
     useWasmBinary: true,
     forceSwcTransforms: false,
 
-    outputFileTracingIncludes: {
-      "/*": ["./data/**/*"],
-    },
+  },
+
+  outputFileTracingIncludes: {
+    "/*": [
+      "./data/gamepix-catalog.json",
+      "./data/gamepix-index.json",
+      "./data/gamepix-category-index.json",
+    ],
   },
 
   async redirects() {

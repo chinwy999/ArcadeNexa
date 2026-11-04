@@ -1,8 +1,8 @@
 import { getLocale } from '@/lib/i18n/server'
 import { getTranslations } from '@/lib/i18n'
 
-export default function Loading() {
-  const locale = getLocale()
+export default async function Loading() {
+  const locale = await getLocale()
   const t = getTranslations(locale)
   const isArabic = locale === 'ar'
 

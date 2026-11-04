@@ -15,12 +15,12 @@ import { getLocalizedArticle } from '@/lib/article-translations'
 export const revalidate = 3600
 
 type PageParams = {
-  params: {
+  params: Promise<{
     slug: string
-  }
-  searchParams?: {
+  }>
+  searchParams?: Promise<{
     genre?: string
-  }
+  }>
 }
 
 const getGameBySlug = async (
@@ -40,11 +40,12 @@ const getGameBySlug = async (
 export async function generateMetadata({
   params,
 }: PageParams): Promise<Metadata> {
-  const locale = getLocale()
+  const locale = await getLocale()
   const t = getTranslations(locale)
 
+  const { slug } = await params
   const genre = ''
-  const game = await getGameBySlug(params.slug, genre)
+  const game = await getGameBySlug(slug, genre)
 
   if (!game) {
     return {
@@ -421,7 +422,8 @@ export default async function GamePage({ params }: PageParams) {
    * If the requested slug does not resolve to a real game,
    * notFound() is called here so Next.js returns HTTP 404.
    */
-  const slug = params.slug?.trim()
+  const { slug: rawSlug } = await params
+  const slug = rawSlug?.trim()
 
   if (!slug) {
     notFound()
@@ -443,7 +445,7 @@ export default async function GamePage({ params }: PageParams) {
     notFound()
   }
 
-  const locale = getLocale()
+  const locale = await getLocale()
   const t = getTranslations(locale)
   const localized = getLocalizedGameContent(game, locale)
   const categoryLabel = getGameCategoryLabel(game.category, locale)
