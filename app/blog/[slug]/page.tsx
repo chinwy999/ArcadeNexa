@@ -12,7 +12,7 @@ type Props = {
   params: { slug: string }
 }
 
-export const dynamic = 'force-dynamic'
+export const revalidate = 86400
 
 export function generateStaticParams() {
   return articles.map((article) => ({ slug: article.slug }))
